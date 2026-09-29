@@ -1,0 +1,1 @@
+export async function geocode(query){const url="https://nominatim.openstreetmap.org/search?format=json&limit=1&q="+encodeURIComponent(query);const r=await fetch(url,{headers:{"Accept":"application/json"}});if(!r.ok)throw new Error("Location search failed");const rows=await r.json();return rows[0]?{lat:Number(rows[0].lat),lng:Number(rows[0].lon),label:rows[0].display_name}:null}
