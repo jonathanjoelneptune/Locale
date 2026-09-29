@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 const waitForLocale=async page=>{
   await page.goto("/");
   await page.waitForSelector(".event-row",{timeout:15000});
-  await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-tile-pane"));
+  await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-locale-basemap-pane img.leaflet-tile"));
 };
 
 test("critical Locale interactions",async({page})=>{
@@ -21,12 +21,16 @@ test("critical Locale interactions",async({page})=>{
   await expect(page.locator(`[data-save-event="${id}"]`)).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
 
   const style=page.locator("#mapStyle");
-  const tileSrc=()=>page.locator(".leaflet-tile-pane img.leaflet-tile").first().getAttribute("src");
+  const map=page.locator("#map");
+  const tileSrc=()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
   await style.selectOption("humanitarian");
+  await expect(map).toHaveAttribute("data-map-style","humanitarian");
   await expect.poll(tileSrc).toContain("tile.openstreetmap.fr/hot");
   await style.selectOption("satellite");
+  await expect(map).toHaveAttribute("data-map-style","satellite");
   await expect.poll(tileSrc).toContain("arcgisonline.com");
   await style.selectOption("standard");
+  await expect(map).toHaveAttribute("data-map-style","standard");
   await expect.poll(tileSrc).toContain("tile.openstreetmap.org");
 
   await page.locator(".event-row").first().click();
