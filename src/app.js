@@ -67,7 +67,8 @@ function selectEvent(id){
   target?.scrollIntoView({behavior:"smooth",block:"center"});
   mapUI?.selectEvent(id);
 }
-document.querySelector("#resultsToggle").onclick=()=>document.querySelector(".shell").classList.toggle("results-collapsed");\ndocument.querySelector("#sidebar").addEventListener("click",e=>{
+document.querySelector("#resultsToggle").onclick=()=>document.querySelector(".shell").classList.toggle("results-collapsed");
+document.querySelector("#sidebar").addEventListener("click",e=>{
   const row=e.target.closest("[data-event-id]");
   if(!row)return;
   const wasSelected=row.classList.contains("selected");
