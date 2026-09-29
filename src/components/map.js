@@ -12,6 +12,11 @@ export function createMap(el,state,onCenter){
   center.bindTooltip("Search center",{direction:"top",offset:[0,-30]});
 
   const layer=L.layerGroup().addTo(map);
+  let resizeFrame=0;
+  const stabilize=()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}))};
+  const observer=new ResizeObserver(stabilize);
+  observer.observe(el);
+  requestAnimationFrame(()=>requestAnimationFrame(stabilize));
   const markers=new Map();
   const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
 
@@ -70,7 +75,8 @@ export function createMap(el,state,onCenter){
       const pts=events.map(e=>[e.lat,e.lng]);
       pts.push([state.center.lat,state.center.lng]);
       const bounds=L.latLngBounds(pts);
-      map.fitBounds(bounds,{padding:[55,55],maxZoom:13,animate:true,duration:.45});
+      map.invalidateSize({pan:false,animate:false});
+      requestAnimationFrame(()=>map.fitBounds(bounds,{padding:[55,55],maxZoom:13,animate:false}));
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
