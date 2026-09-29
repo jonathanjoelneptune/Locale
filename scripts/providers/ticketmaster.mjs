@@ -11,6 +11,7 @@ function category(event){
   return "other";
 }
 function price(event){
+  if(event.dates?.status?.code==="cancelled") return null;
   const ranges=event.priceRanges||[];
   if(!ranges.length) return null;
   const low=Math.min(...ranges.map(r=>Number(r.min)).filter(Number.isFinite));
@@ -41,7 +42,7 @@ export async function ticketmasterEvents({apiKey,days=45}){
       out.push({
         id:`ticketmaster:${e.id}`,title:e.name,category:category(e),venue:v?.name||"Location TBA",
         lat,lng,start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
-        price:price(e),url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
+        price:price(e),priceStatus:e.priceRanges?.length?"known":"unknown",url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
         featured:false,image:(e.images||[]).filter(i=>i.url).sort((a,b)=>(b.width||0)-(a.width||0))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
       });
     }
