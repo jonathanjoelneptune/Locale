@@ -7,7 +7,9 @@ export function createMap(el,state,onCenter,onMarker){
     humanitarian:["https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{maxZoom:19,subdomains:"abc",attribution:"&copy; OpenStreetMap contributors, Tiles style by HOT"}],
     satellite:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"}]
   };
-  const basePane=map.createPane("locale-basemap");\n  basePane.style.zIndex="150";\n  let base=L.tileLayer(...(styles[state.mapStyle]||styles.standard),{pane:"locale-basemap"}).addTo(map);
+  const basePane=map.createPane("locale-basemap");
+  basePane.style.zIndex="150";
+  let base=L.tileLayer(...(styles[state.mapStyle]||styles.standard),{pane:"locale-basemap"}).addTo(map);
   function setStyle(name){
     if(!styles[name])return;
     map.removeLayer(base);
