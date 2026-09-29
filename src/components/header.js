@@ -1,0 +1,1 @@
+export function Header(){return `<header class="topbar"><div class="brand">Loc<i>ale</i></div><input id="placeSearch" class="search" placeholder="Search a place or move the map…" aria-label="Search location"><div class="view-toggle"><button class="pill active">Explore</button></div></header>`}
