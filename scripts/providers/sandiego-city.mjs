@@ -3,10 +3,11 @@ const URL="https://www.sandiego.gov/specialevents-filming/calendar/printer/this_
 const strip=s=>s.replace(/<br\s*\/?\s*>/gi," ").replace(/<[^>]*>/g," ").replace(/&amp;/g,"&").replace(/&#039;/g,"'").replace(/\s+/g," ").trim();
 const cat=s=>/market|food/i.test(s)?"food":/festival|fair|oktober/i.test(s)?"festival":/run|walk|race|swim/i.test(s)?"sports":/music|concert/i.test(s)?"music":"community";
 async function geo(address){
- const q=encodeURIComponent(address);
- const r=await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q="+q,{headers:{"User-Agent":"Locale/1.0 event discovery"}});
+ const q=new URLSearchParams({address,benchmark:"Public_AR_Current",format:"json"});
+ const r=await fetch("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?"+q);
  if(!r.ok)return null;
- const a=await r.json(),x=a[0]; return x?{lat:+x.lat,lng:+x.lon}:null;
+ const a=await r.json(),x=a.result?.addressMatches?.[0]?.coordinates;
+ return x?{lat:+x.y,lng:+x.x}:null;
 }
 export async function sanDiegoCityEvents(){
  const r=await fetch(URL); if(!r.ok)throw new Error("City events "+r.status);
@@ -18,13 +19,12 @@ export async function sanDiegoCityEvents(){
   const address=(cells[2].match(/Address:\s*(.*?)(?:Details:|$)/i)||[])[1];
   if(!date||!address)continue;
   const point=await geo(address); if(!point)continue;
-  const title=cells[1].split(/\s{2,}|The |This /)[0].trim()||cells[1];
+  const title=cells[1].split(/(?=The Pacific|This weekday|San Diego\x27s|Check out|The Gaslamp|Come and)/)[0].trim()||cells[1];
   let first=date[5].split("-")[0].trim(),last=date[5].split("-").pop().trim();
   const suffix=(last.match(/(am|pm)/i)||[])[1]; if(suffix&&!/(am|pm)/i.test(first))first+=" "+suffix;
   const start=new Date(date[2]+" "+date[3]+", "+date[4]+" "+first+" PDT");
   if(Number.isNaN(+start))continue;
   out.push({id:"sd-city:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+":"+start.toISOString().slice(0,10),title,category:cat(title+" "+cells[1]),venue:address,lat:point.lat,lng:point.lng,start:start.toISOString(),end:null,price:null,url:URL,source:"City of San Diego",description:cells[1],featured:false,image:null,sourceUrl:URL,lastVerified:verified});
-  await new Promise(x=>setTimeout(x,1100));
  }
  return out;
 }
