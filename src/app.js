@@ -63,8 +63,8 @@ function renderHighlights(events){
 }
 function bindFilters(){
   document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
-  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
-  document.querySelectorAll("[data-save-event]").forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const id=b.dataset.saveEvent;if(state.saved.has(id)){state.saved.delete(id)}else{state.saved.add(id)}localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));document.querySelectorAll(`[data-save-event="${CSS.escape(id)}"]`).forEach(x=>{x.textContent=state.saved.has(id)?"♥":"♡";x.classList.toggle("is-saved",state.saved.has(id));x.setAttribute("aria-label",state.saved.has(id)?"Remove saved event":"Save event")});if(state.listMode==="saved")render()});
+  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;state.hasFit=false;render()});\n  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
+  document.querySelectorAll("[data-save-event]").forEach(b=>b.onclick=e=>{e.preventDefault();e.stopImmediatePropagation();const id=b.dataset.saveEvent;state.saved.has(id)?state.saved.delete(id):state.saved.add(id);localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));render()});
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.window=b.dataset.window;state.hasFit=false;render()});
   document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.category=b.dataset.category;state.hasFit=false;render()});
   document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
