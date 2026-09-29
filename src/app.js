@@ -99,7 +99,7 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
 });
 
 document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
-document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();
+document.querySelector("#useMapCenter").onclick=()=>{state.venueFilter=null;mapUI?.useMapCenter()};
 document.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};
 const mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);if(mapUI){mapUI.setStyle(state.mapStyle)}else{initMapLater()}};
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
