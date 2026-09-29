@@ -1,0 +1,1 @@
+import {LocalProvider} from "./local.js";import {dedupe} from "../services/events.js";const providers=[new LocalProvider()];export async function loadEvents(){const settled=await Promise.allSettled(providers.map(p=>p.getEvents()));const events=settled.flatMap(r=>r.status==="fulfilled"?r.value:[]);return dedupe(events)}
