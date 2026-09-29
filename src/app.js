@@ -40,7 +40,8 @@ function initMapLater(){
 }
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
-  const visible=filterEvents(state.events,state);\n  document.querySelector("#resultsCount").textContent=visible.length;
+  const visible=filterEvents(state.events,state);
+  document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible,selectEvent);
