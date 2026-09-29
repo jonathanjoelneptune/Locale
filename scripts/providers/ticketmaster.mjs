@@ -42,7 +42,7 @@ export async function ticketmasterEvents({apiKey,days=45}){
         id:`ticketmaster:${e.id}`,title:e.name,category:category(e),venue:v?.name||"Location TBA",
         lat,lng,start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
         price:price(e),url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
-        featured:false,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
+        featured:false,image:(e.images||[]).filter(i=>i.url).sort((a,b)=>(b.width||0)-(a.width||0))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
       });
     }
     if(page>=Number(data.page?.totalPages||1)-1) break;
