@@ -9,16 +9,21 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   };
   const basePane=map.createPane("locale-basemap");
   basePane.style.zIndex="150";
-  const basemaps=Object.fromEntries(Object.entries(styles).map(([name,[url,opts]])=>[name,L.tileLayer(url,{...opts,pane:"locale-basemap"})]));
+  const makeBase=name=>{
+    const [url,opts]=styles[name]||styles.standard;
+    return L.tileLayer(url,{...opts,pane:"locale-basemap"});
+  };
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
-  basemaps[activeStyle].addTo(map);
+  let base=makeBase(activeStyle).addTo(map);
   el.dataset.mapStyle=activeStyle;
   function setStyle(name){
-    if(!basemaps[name])return;
-    Object.values(basemaps).forEach(layer=>{if(map.hasLayer(layer))map.removeLayer(layer)});
+    if(!styles[name]||name===activeStyle)return;
+    const next=makeBase(name);
+    next.addTo(map);
+    map.removeLayer(base);
+    base=next;
     activeStyle=name;
-    basemaps[name].addTo(map);
-    basemaps[name].redraw();
+    el.dataset.mapStyle=name;
     requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
   }
 
