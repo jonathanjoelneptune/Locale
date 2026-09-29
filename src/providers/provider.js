@@ -1,0 +1,1 @@
+export class EventProvider{constructor(name){this.name=name}async getEvents(){throw new Error("Provider must implement getEvents()")}}
