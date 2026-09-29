@@ -41,3 +41,18 @@
 @media(min-width:1250px){.time-grid{flex-wrap:nowrap}.time-choice{padding-inline:9px}}
 @media(max-width:1180px) and (min-width:701px){.shell{grid-template-columns:clamp(230px,23vw,280px) minmax(390px,1fr) clamp(270px,25vw,330px)}.tagline{display:none}.event-badge{display:none}}
 @media(max-height:760px) and (min-width:701px){.locale-identity{margin-bottom:8px}.radius-panel{padding-block:6px}.radius-ticks{font-size:8px}.filter-heading{margin-top:8px}.category-choice{padding-block:2px}.highlights.is-empty{min-height:54px}.highlights.is-empty .highlight-heading{height:23px}.highlight-heading span{display:none}}
+
+/* Overflow and compactness corrections */
+.shell,.discovery-panel,.results-panel,.map-stage{min-width:0}
+.discovery-panel{overflow-y:auto;overflow-x:hidden}
+.discovery-panel>*{min-width:0;max-width:100%}
+.time-grid{width:100%;display:flex;flex-wrap:wrap;align-content:flex-start;justify-content:flex-start}
+.time-choice{flex:0 0 auto;max-width:100%;white-space:nowrap}
+.category-list,.category-choice{width:100%;min-width:0}
+.category-choice span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-wrap,.radius-panel,.filters-panel{width:100%;max-width:100%}
+.search{min-width:0}
+.highlights.is-empty{padding-block:7px;min-height:48px}
+.highlights.is-empty .highlight-heading{height:20px}
+.highlights.is-empty .highlight-empty{display:none}
+@media(min-width:1250px){.time-grid{flex-wrap:wrap}.time-choice{padding-inline:8px}}
