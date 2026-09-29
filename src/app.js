@@ -6,6 +6,11 @@ import {createMap} from "./components/map.js";
 import {loadEvents} from "./providers/index.js";
 import {filterEvents} from "./services/events.js";
 import {geocode} from "./services/geocode.js";
+import {ensureLeaflet} from "./services/leaflet.js";
+
+const bootRoot=document.querySelector("#app");
+bootRoot.innerHTML=`<div class="boot-status">Loading Locale…</div>`;
+try{await ensureLeaflet()}catch(error){bootRoot.innerHTML=`<div class="boot-error"><strong>Locale could not load the map.</strong><span>${error.message}</span><button onclick="location.reload()">Retry</button></div>`;throw error}
 
 const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[]};
 const root=document.querySelector("#app");
