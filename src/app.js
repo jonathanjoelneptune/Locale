@@ -10,7 +10,7 @@ import {geocode} from "./services/geocode.js";
 import {ensureLeaflet} from "./services/leaflet.js";
 
 const saved=new Set(JSON.parse(localStorage.getItem("locale-saved")||"[]"));
-const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false,sort:"time",listMode:"events",saved,mapStyle:localStorage.getItem("locale-map-style")||"standard"};
+const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false,sort:"time",listMode:"events",saved,mapStyle:["standard","humanitarian","satellite"].includes(localStorage.getItem("locale-map-style"))?localStorage.getItem("locale-map-style"):"standard"};
 const root=document.querySelector("#app");
 root.innerHTML=`<div id="splash" class="locale-splash"><div class="splash-mark">⌖</div><strong>Locale</strong><span>Finding what’s happening around you…</span></div><div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span>San Diego, CA</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="5" max="50" step="5" value="${state.radius}"><div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div></section><div id="filters" class="filters-panel"></div></aside><button id="discoveryToggle" class="discovery-toggle" type="button" aria-label="Toggle search filters"><span class="drawer-arrow">‹</span><span class="drawer-label">Search</span></button><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div><div class="map-style-picker"><label>MAP</label><select id="mapStyle"><option value="standard">Standard</option><option value="humanitarian">Humanitarian</option><option value="satellite">Satellite</option></select></div></main><aside id="sidebar" class="sidebar results-panel"></aside><button id="resultsToggle" class="results-toggle" type="button" aria-label="Toggle event results"><span class="drawer-arrow">›</span><span class="drawer-label">Events</span><span id="resultsCount">0</span></button><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button id="viewAllHighlights" type="button">View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
 
@@ -45,7 +45,7 @@ function render(){
   const visible=filterEvents(state.events,state);
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
-  document.querySelectorAll("[data-save-event]").forEach(b=>{b.textContent=state.saved.has(b.dataset.saveEvent)?"♥":"♡"});
+  document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.textContent=on?"♥":"♡";b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible,selectEvent);
   if(state.events.length&&!state.hasFit&&visible.length){mapUI?.fitEvents(visible);state.hasFit=true}
@@ -87,7 +87,7 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
 document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
 document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();
 document.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};
-const mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);mapUI?.setStyle(state.mapStyle)};
+const mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);if(mapUI){mapUI.setStyle(state.mapStyle)}else{initMapLater()}};
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
   if(e.key!=="Enter"||!e.target.value.trim())return;
   e.target.disabled=true;
