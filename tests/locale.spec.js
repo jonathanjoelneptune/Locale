@@ -1,0 +1,61 @@
+import { test, expect } from "@playwright/test";
+
+const waitForLocale=async page=>{
+  await page.goto("/");
+  await page.waitForSelector(".event-row",{timeout:15000});
+  await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-tile-pane"));
+};
+
+test("critical Locale interactions",async({page})=>{
+  await waitForLocale(page);
+
+  const heart=page.locator("[data-save-event]").first();
+  const id=await heart.getAttribute("data-save-event");
+  const before=await heart.getAttribute("aria-pressed");
+  await heart.click();
+  await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
+  await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);
+  await page.reload(); await page.waitForSelector(".event-row");
+  await expect(page.locator(`[data-save-event="${id}"]`)).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
+
+  const style=page.locator("#mapStyle");
+  const tileSrc=()=>page.locator(".leaflet-tile-pane img.leaflet-tile").first().getAttribute("src");
+  await style.selectOption("humanitarian");
+  await expect.poll(tileSrc).toContain("tile.openstreetmap.fr/hot");
+  await style.selectOption("satellite");
+  await expect.poll(tileSrc).toContain("arcgisonline.com");
+  await style.selectOption("standard");
+  await expect.poll(tileSrc).toContain("tile.openstreetmap.org");
+
+  await page.locator(".event-row").first().click();
+  await expect(page.locator(".event-row.selected")).toHaveCount(1);
+
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).not.toHaveClass(/results-collapsed/);
+
+  await page.locator("#discoveryToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/discovery-collapsed/);
+  await page.locator("#discoveryToggle").click();
+  await expect(page.locator(".shell")).not.toHaveClass(/discovery-collapsed/);
+
+  await page.locator('[data-window="7days"]').click();
+  await expect(page.locator('[data-window="7days"]')).toHaveClass(/active|selected/);
+  const cluster=page.locator(".event-stack").first();
+  if(await cluster.count()){
+    await cluster.click();
+    await expect(page.locator("#clearVenueFilter")).toBeVisible();
+    await page.locator("#map").click({position:{x:20,y:20}});
+    await expect(page.locator("#clearVenueFilter")).toHaveCount(0);
+  }
+});
+
+test("production-critical controls exist and links are valid",async({page})=>{
+  await waitForLocale(page);
+  await expect(page.locator("#mapStyle")).toBeVisible();
+  await expect(page.locator("#radius")).toBeVisible();
+  await expect(page.locator("#useMapCenter")).toBeVisible();
+  const hrefs=await page.locator(".event-action").evaluateAll(as=>as.map(a=>a.href));
+  for(const href of hrefs.slice(0,20)) expect(href).toMatch(/^https?:\/\//);
+});
