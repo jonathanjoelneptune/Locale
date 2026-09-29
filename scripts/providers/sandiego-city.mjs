@@ -3,14 +3,15 @@ import {readFile,writeFile} from "node:fs/promises";
 const URL="https://www.sandiego.gov/specialevents-filming/calendar/printer/this_week";
 const strip=s=>s.replace(/<br\s*\/?\s*>/gi," ").replace(/<[^>]*>/g," ").replace(/&amp;/g,"&").replace(/&#039;/g,"'").replace(/\s+/g," ").trim();
 const cat=s=>/market|food/i.test(s)?"food":/festival|fair|oktober/i.test(s)?"festival":/run|walk|race|swim/i.test(s)?"sports":/music|concert/i.test(s)?"music":"community";
-let cache={}; try{cache=JSON.parse(await readFile("src/data/geocode-cache.json","utf8"))}catch{};
+const addrKey=s=>s.replace(/\s+/g," ").replace(/\s+,/g,",").trim();
+let cache={}; try{const raw=JSON.parse(await readFile("src/data/geocode-cache.json","utf8")); for(const [k,v] of Object.entries(raw))cache[addrKey(k)]=v}catch{};
 async function geo(address){
- if(cache[address])return cache[address];
+ const key=addrKey(address); if(cache[key])return cache[key];
  const q=new URLSearchParams({address,benchmark:"Public_AR_Current",format:"json"});
  const r=await fetch("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?"+q);
  if(!r.ok)return null;
  const a=await r.json(),x=a.result?.addressMatches?.[0]?.coordinates;
- if(!x)return null; const point={lat:+x.y,lng:+x.x}; cache[address]=point; return point;
+ if(!x)return null; const point={lat:+x.y,lng:+x.x}; cache[key]=point; return point;
 }
 export async function sanDiegoCityEvents(){
  const r=await fetch(URL); if(!r.ok)throw new Error("City events "+r.status);
