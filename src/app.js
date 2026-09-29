@@ -126,7 +126,7 @@ function applyMapStyle(value){
   localStorage.setItem("locale-map-style",value);
   if(mapUI)mapUI.setStyle(value);else initMapLater();
 }
-mapStyle.addEventListener("change",e=>applyMapStyle(e.currentTarget.value));
+mapStyle.addEventListener("input",e=>applyMapStyle(e.target.value));\nmapStyle.addEventListener("change",e=>applyMapStyle(e.target.value));
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
   if(e.key!=="Enter"||!e.target.value.trim())return;
   e.target.disabled=true;
