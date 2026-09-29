@@ -1,2 +1,7 @@
 const fmt=d=>new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(new Date(d));
-export function EventCard(e){return `<article class="event-row card" data-event-id="${e.id}"><div class="event-thumb category-bg-${e.category}"><span>${e.category.slice(0,1).toUpperCase()}</span></div><div class="event-copy"><div class="event-title-line"><h2>${e.title}</h2><span class="event-badge">${e.category}</span></div><div class="event-meta"><span>⌖ ${e.venue}</span><span>◷ ${fmt(e.start)}</span></div><div class="event-foot"><strong>${e.price||"Price unavailable"}</strong><span>${e.distance.toFixed(1)} mi</span></div></div></article>`}
+const esc=s=>String(s??"").replace(/[&<>"\']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","\'":"&#39;"}[c]));
+export function EventCard(e){
+ const art=e.image?`<img src="${esc(e.image)}" alt="" loading="lazy">`:`<span>${esc(e.category.slice(0,1).toUpperCase())}</span>`;
+ const action=e.url?`<span class="event-action">View event ↗</span>`:"";
+ return `<article class="event-row card" data-event-id="${esc(e.id)}" data-event-url="${esc(e.url||"")}"><div class="event-thumb category-bg-${esc(e.category)}">${art}</div><div class="event-copy"><div class="event-title-line"><h2>${esc(e.title)}</h2><span class="event-badge">${esc(e.category)}</span></div><div class="event-meta"><span>⌖ ${esc(e.venue)}</span><span>◷ ${esc(fmt(e.start))}</span></div><div class="event-foot"><span class="event-price">${e.price?esc(e.price):action}</span><span>${e.distance.toFixed(1)} mi</span></div></div></article>`
+}
