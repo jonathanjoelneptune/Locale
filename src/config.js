@@ -1,0 +1,1 @@
+export const CONFIG={defaultCenter:{lat:32.7157,lng:-117.1611},defaultRadiusMiles:15,maxRadiusMiles:75,defaultZoom:11,locale:"en-US",timeZone:"America/Los_Angeles"};
