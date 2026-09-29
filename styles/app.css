@@ -278,3 +278,21 @@
  .shell.results-collapsed .results-toggle{right:0!important}
 }
 @media(max-width:1180px) and (min-width:701px){.results-toggle{right:calc(clamp(270px,25vw,330px) - 2px)!important}}
+
+/* Deterministic save icon and seamless right drawer handle */
+.save-event .heart-on{display:none}.save-event .heart-off{display:block}
+.save-event.is-saved .heart-off{display:none!important}.save-event.is-saved .heart-on{display:block!important}
+.save-event{font-family:Arial,sans-serif!important}
+@media(min-width:701px){
+ .results-toggle{
+   border-left:0!important;
+   border-right:1px solid rgba(120,150,158,.35)!important;
+   border-top:1px solid rgba(120,150,158,.35)!important;
+   border-bottom:1px solid rgba(120,150,158,.35)!important;
+   background:rgba(249,251,248,.48)!important;
+   right:calc(clamp(300px,26vw,410px) - 1px)!important;
+   box-shadow:-4px 4px 12px rgba(32,58,67,.07)!important;
+ }
+ .shell.results-collapsed .results-toggle{right:0!important;border-left:1px solid rgba(120,150,158,.35)!important}
+}
+@media(max-width:1180px) and (min-width:701px){.results-toggle{right:calc(clamp(270px,25vw,330px) - 1px)!important}}
