@@ -24,11 +24,18 @@ function render(){
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI.setRadius(state.radius,state.center);
   mapUI.renderEvents(visible,selectEvent);
-  renderHighlights(visible);\n  bindFilters();
+  renderHighlights(visible);
+  bindFilters();
 }
-function renderHighlights(events){\n  const el=document.querySelector("#highlightCards");\n  el.innerHTML=events.length?events.slice(0,6).map(e=>`<button class="highlight-card" data-highlight="${e.id}"><span class="highlight-art category-bg-${e.category}">${e.category.slice(0,1).toUpperCase()}</span><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;\n  el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>selectEvent(b.dataset.highlight));\n}\nfunction bindFilters(){
+function renderHighlights(events){
+  const el=document.querySelector("#highlightCards");
+  el.innerHTML=events.length?events.slice(0,6).map(e=>`<button class="highlight-card" data-highlight="${e.id}"><span class="highlight-art category-bg-${e.category}">${e.category.slice(0,1).toUpperCase()}</span><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
+  el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>selectEvent(b.dataset.highlight));
+}
+function bindFilters(){
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.window=b.dataset.window;render()});
-  document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.category=b.dataset.category;render()});\n  document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
+  document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.category=b.dataset.category;render()});
+  document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
 }
 function selectEvent(id){
   document.querySelectorAll(".card").forEach(c=>c.classList.toggle("selected",c.dataset.eventId===id));
