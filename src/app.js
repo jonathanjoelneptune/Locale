@@ -44,7 +44,8 @@ function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
   const visible=filterEvents(state.events,state);
   document.querySelector("#resultsCount").textContent=visible.length;
-  renderSidebar(document.querySelector("#sidebar"),visible,state);\n  document.querySelectorAll("[data-save-event]").forEach(b=>{b.textContent=state.saved.has(b.dataset.saveEvent)?"♥":"♡"});
+  renderSidebar(document.querySelector("#sidebar"),visible,state);
+  document.querySelectorAll("[data-save-event]").forEach(b=>{b.textContent=state.saved.has(b.dataset.saveEvent)?"♥":"♡"});
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible,selectEvent);
   if(state.events.length&&!state.hasFit&&visible.length){mapUI?.fitEvents(visible);state.hasFit=true}
@@ -59,7 +60,10 @@ function renderHighlights(events){
   el.innerHTML=highlights.length?highlights.map(e=>`<button class="highlight-card" data-highlight="${e.id}" data-url="${e.url||""}"><span class="highlight-art category-bg-${e.category}">${e.image?`<img src="${e.image}" alt="" loading="lazy">`:e.category.slice(0,1).toUpperCase()}</span><span class="highlight-copy"><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
   el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>{selectEvent(b.dataset.highlight);if(b.dataset.url)window.open(b.dataset.url,"_blank","noopener")});
 }
-function bindFilters(){\n  document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});\n  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});\n  document.querySelectorAll("[data-save-event]").forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.saveEvent;state.saved.has(id)?state.saved.delete(id):state.saved.add(id);localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));render()});
+function bindFilters(){
+  document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
+  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
+  document.querySelectorAll("[data-save-event]").forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.saveEvent;state.saved.has(id)?state.saved.delete(id):state.saved.add(id);localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));render()});
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.window=b.dataset.window;state.hasFit=false;render()});
   document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.category=b.dataset.category;state.hasFit=false;render()});
   document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
@@ -80,7 +84,9 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
 });
 
 document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
-document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();\ndocument.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};\nconst mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);mapUI?.setStyle(state.mapStyle)};
+document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();
+document.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};
+const mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);mapUI?.setStyle(state.mapStyle)};
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
   if(e.key!=="Enter"||!e.target.value.trim())return;
   e.target.disabled=true;
