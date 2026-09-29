@@ -19,7 +19,9 @@ export async function sanDiegoCityEvents(){
   if(!date||!address)continue;
   const point=await geo(address); if(!point)continue;
   const title=cells[1].split(/\s{2,}|The |This /)[0].trim()||cells[1];
-  let first=date[5].split("-")[0].trim(),last=date[5].split("-").pop().trim();\n  const suffix=(last.match(/(am|pm)/i)||[])[1]; if(suffix&&!/(am|pm)/i.test(first))first+=" "+suffix;\n  const start=new Date(date[2]+" "+date[3]+", "+date[4]+" "+first+" PDT");
+  let first=date[5].split("-")[0].trim(),last=date[5].split("-").pop().trim();
+  const suffix=(last.match(/(am|pm)/i)||[])[1]; if(suffix&&!/(am|pm)/i.test(first))first+=" "+suffix;
+  const start=new Date(date[2]+" "+date[3]+", "+date[4]+" "+first+" PDT");
   if(Number.isNaN(+start))continue;
   out.push({id:"sd-city:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+":"+start.toISOString().slice(0,10),title,category:cat(title+" "+cells[1]),venue:address,lat:point.lat,lng:point.lng,start:start.toISOString(),end:null,price:null,url:URL,source:"City of San Diego",description:cells[1],featured:false,image:null,sourceUrl:URL,lastVerified:verified});
   await new Promise(x=>setTimeout(x,1100));
