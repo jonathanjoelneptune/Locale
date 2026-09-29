@@ -63,7 +63,8 @@ function renderHighlights(events){
 }
 function bindFilters(){
   document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
-  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;state.hasFit=false;render()});\n  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
+  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;state.hasFit=false;render()});
+  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
   document.querySelectorAll("[data-save-event]").forEach(b=>b.onclick=e=>{e.preventDefault();e.stopImmediatePropagation();const id=b.dataset.saveEvent;state.saved.has(id)?state.saved.delete(id):state.saved.add(id);localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));render()});
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.window=b.dataset.window;state.hasFit=false;render()});
   document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.category=b.dataset.category;state.hasFit=false;render()});
