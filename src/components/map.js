@@ -12,6 +12,8 @@ export function createMap(el,state,onCenter){
   center.bindTooltip("Search center",{direction:"top",offset:[0,-30]});
 
   const layer=L.layerGroup().addTo(map);
+  const markers=new Map();
+  const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
 
   function commitCenter(latlng,{recenter=false}={}){
     const pos={lat:latlng.lat,lng:latlng.lng};
@@ -42,6 +44,7 @@ export function createMap(el,state,onCenter){
     },
     renderEvents(events,onSelect){
       layer.clearLayers();
+      markers.clear();
       const groups=new Map();
       events.forEach(e=>{
         const key=e.lat.toFixed(4)+"|"+e.lng.toFixed(4);
@@ -50,11 +53,24 @@ export function createMap(el,state,onCenter){
       });
       groups.forEach(group=>{
         const e=group[0],count=group.length;
-        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category} ${count>1?"event-stack":""}"><span>${count>1?count:e.category.slice(0,1).toUpperCase()}</span></div>`,iconSize:[30,34],iconAnchor:[15,17]});
+        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category} ${count>1?"event-stack":""}"><span>${count>1?count:(SYMBOLS[e.category]||"•")}</span></div>`,iconSize:[30,34],iconAnchor:[15,17]});
         const marker=L.marker([e.lat,e.lng],{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} events at ${e.venue}`:e.title,{direction:"top"});
+        group.forEach(item=>markers.set(item.id,marker));
         marker.on("click",()=>onSelect(e.id));
       });
+    },
+    selectEvent(id){
+      markers.forEach(m=>m.getElement()?.querySelector(".event-pin")?.classList.remove("selected-pin"));
+      const marker=markers.get(id);
+      marker?.getElement()?.querySelector(".event-pin")?.classList.add("selected-pin");
+    },
+    fitEvents(events){
+      if(!events.length)return;
+      const pts=events.map(e=>[e.lat,e.lng]);
+      pts.push([state.center.lat,state.center.lng]);
+      const bounds=L.latLngBounds(pts);
+      map.fitBounds(bounds,{padding:[55,55],maxZoom:13,animate:true,duration:.45});
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
