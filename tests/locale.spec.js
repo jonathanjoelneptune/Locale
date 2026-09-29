@@ -55,7 +55,8 @@ test("critical Locale interactions",async({page})=>{
   if(await cluster.count()){
     await cluster.click();
     await expect(page.locator("#clearVenueFilter")).toBeVisible();
-    const box=await page.locator("#map").boundingBox();\n    await page.mouse.click(box.x+box.width*.55,box.y+box.height*.35);
+    const box=await page.locator("#map").boundingBox();
+    await page.mouse.click(box.x+box.width*.55,box.y+box.height*.35);
     await expect(page.locator("#clearVenueFilter")).toHaveCount(0);
   }
 });
