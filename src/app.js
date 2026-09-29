@@ -93,19 +93,20 @@ document.querySelector("#resultsToggle").onclick=()=>{state.venueFilter=null;con
 document.querySelector("#discoveryToggle").onclick=()=>{const shell=document.querySelector(".shell");shell.classList.toggle("discovery-collapsed");document.querySelector("#discoveryToggle .drawer-arrow").textContent=shell.classList.contains("discovery-collapsed")?"›":"‹";setTimeout(()=>mapUI?.map.invalidateSize(),240)};
 document.querySelector("#sidebar").addEventListener("click",e=>{
   const heart=e.target.closest("[data-save-event]");
-  if(heart){
-    e.preventDefault();e.stopPropagation();
-    const id=heart.dataset.saveEvent;
-    const on=!state.saved.has(id);
-    on?state.saved.add(id):state.saved.delete(id);
-    localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
-    heart.textContent=on?"♥":"♡";
-    heart.classList.toggle("is-saved",on);
-    heart.setAttribute("aria-pressed",String(on));
-    heart.setAttribute("aria-label",on?"Remove saved event":"Save event");
-    if(state.listMode==="saved")render();
-    return;
-  }
+  if(!heart)return;
+  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+  const id=heart.dataset.saveEvent;
+  const on=!state.saved.has(id);
+  on?state.saved.add(id):state.saved.delete(id);
+  localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
+  document.querySelectorAll("[data-save-event]").forEach(btn=>{
+    if(btn.dataset.saveEvent!==id)return;
+    btn.textContent=on?"♥":"♡";btn.classList.toggle("is-saved",on);
+    btn.setAttribute("aria-pressed",String(on));btn.setAttribute("aria-label",on?"Remove saved event":"Save event");
+  });
+  if(state.listMode==="saved")requestAnimationFrame(render);
+},true);
+document.querySelector("#sidebar").addEventListener("click",e=>{
   if(e.target.closest(".event-action"))return;
   const row=e.target.closest("[data-event-id]");
   if(!row)return;
