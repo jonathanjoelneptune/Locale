@@ -9,7 +9,7 @@ permissions:
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
     environment:
@@ -21,15 +21,11 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Build immutable deployment
+      - name: Build deterministic site
         run: |
           BUILD="${GITHUB_SHA::12}"
           mkdir -p _site
           cp -R index.html styles src _site/
-          mkdir -p _site/vendor
-          curl --fail --retry 3 --location https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js -o _site/vendor/leaflet.js
-          curl --fail --retry 3 --location https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css -o _site/vendor/leaflet.css
-          sed -i "s|https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css|./vendor/leaflet.css?v=$BUILD|" _site/index.html
           sed -i "s|./styles/base.css|./styles/base.css?v=$BUILD|; s|./styles/app.css|./styles/app.css?v=$BUILD|; s|./src/app.js|./src/app.js?v=$BUILD|" _site/index.html
           sed -i "s|</head>|<meta name=\"locale-build\" content=\"$BUILD\"></head>|" _site/index.html
       - uses: actions/upload-pages-artifact@v3
