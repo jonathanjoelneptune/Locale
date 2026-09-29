@@ -1,8 +1,10 @@
 import {writeFile,mkdir} from "node:fs/promises";
 import {ticketmasterEvents} from "./providers/ticketmaster.mjs";
+import {sanDiegoCityEvents} from "./providers/sandiego-city.mjs";
 
 const providers=[
-  ["ticketmaster",()=>ticketmasterEvents({apiKey:process.env.TICKETMASTER_API_KEY})]
+  ["ticketmaster",()=>ticketmasterEvents({apiKey:process.env.TICKETMASTER_API_KEY})],
+  ["san-diego-city",()=>sanDiegoCityEvents()]
 ];
 const results=await Promise.allSettled(providers.map(([,run])=>run()));
 const events=[];
@@ -18,7 +20,8 @@ if(!events.length){
 }
 const unique=new Map();
 for(const e of events){
-  const key=`${e.title}|${e.venue}|${String(e.start).slice(0,10)}`.toLowerCase();
+  const norm=s=>String(s||"").toLowerCase().replace(/\b(202[0-9]|annual|the)\b/g,"").replace(/[^a-z0-9]+/g," ").trim();
+  const key=`${norm(e.title)}|${String(e.start).slice(0,10)}`;
   if(!unique.has(key)) unique.set(key,e);
 }
 const sorted=[...unique.values()].sort((a,b)=>new Date(a.start)-new Date(b.start));
