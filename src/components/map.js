@@ -38,6 +38,7 @@ export function createMap(el,state,onCenter,onMarker){
   observer.observe(el);
   requestAnimationFrame(()=>requestAnimationFrame(stabilize));
   const markers=new Map();
+  let lastEvents=[];
   const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -53,7 +54,7 @@ export function createMap(el,state,onCenter,onMarker){
   center.on("dragend",e=>commitCenter(e.target.getLatLng()));
   map.on("contextmenu",e=>{L.popup({closeButton:false,className:"locale-context"}).setLatLng(e.latlng).setContent(`<button class="center-here" type="button">⌖ Center marker here</button>`).openOn(map);setTimeout(()=>document.querySelector(".center-here")?.addEventListener("click",()=>{commitCenter(e.latlng,{recenter:true});map.closePopup()}),0)});
 
-  return{
+  const api={
     map,
     setStyle,
     setRadius(miles,pos){
@@ -71,26 +72,28 @@ export function createMap(el,state,onCenter,onMarker){
       commitCenter(map.getCenter());
     },
     renderEvents(events){
+      lastEvents=events;
       layer.clearLayers();
       markers.clear();
-      const groups=new Map();
+      const zoom=map.getZoom();
+      const clusterPx=zoom<=10?76:zoom===11?60:zoom===12?46:zoom===13?34:zoom===14?22:12;
+      const groups=[];
       events.forEach(e=>{
-        const key=e.lat.toFixed(4)+"|"+e.lng.toFixed(4);
-        if(!groups.has(key))groups.set(key,[]);
-        groups.get(key).push(e);
+        const p=map.project([e.lat,e.lng],zoom);
+        let g=groups.find(x=>x.events.some(v=>v.venue===e.venue)||Math.hypot(x.p.x-p.x,x.p.y-p.y)<=clusterPx);
+        if(g){const n=g.events.length;g.events.push(e);g.p=L.point((g.p.x*n+p.x)/(n+1),(g.p.y*n+p.y)/(n+1));}
+        else groups.push({events:[e],p});
       });
-      groups.forEach(group=>{
-        const e=group[0],count=group.length;
-        const face=e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${count>1?count:(SYMBOLS[e.category]||"•")}</span>`;
+      groups.forEach(g=>{
+        const group=g.events,e=group[0],count=group.length;
+        const ll=count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng);
+        const face=count>1?`<span>${count}</span>`:(e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${SYMBOLS[e.category]||"•"}</span>`);
         const label=count>1?`${count} events`:e.title;
         const icon=L.divIcon({className:"event-marker-wrap",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
-        const marker=L.marker([e.lat,e.lng],{icon}).addTo(layer);
-        marker.bindTooltip(count>1?`${count} events at ${e.venue}`:e.title,{direction:"top"});
+        const marker=L.marker(ll,{icon}).addTo(layer);
+        marker.bindTooltip(count>1?`${count} nearby events`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));
-        marker.on("click",()=>{
-          if(count>1) onMarker?.({type:"group",events:group,lat:e.lat,lng:e.lng,venue:e.venue});
-          else onMarker?.({type:"single",event:e,marker});
-        });
+        marker.on("click",()=>count>1?onMarker?.({type:"group",events:group,lat:ll.lat,lng:ll.lng,venue:group.every(x=>x.venue===e.venue)?e.venue:"Nearby events"}):onMarker?.({type:"single",event:e,marker}));
       });
     },
     selectEvent(id){
@@ -113,4 +116,6 @@ export function createMap(el,state,onCenter,onMarker){
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
+  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});
+  return api;
 }
