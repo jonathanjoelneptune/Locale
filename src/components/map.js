@@ -16,12 +16,12 @@ export function createMap(el,state,onCenter,onMarker){
   let base=makeBase(state.mapStyle).addTo(map);
   function setStyle(name){
     if(!styles[name])return;
-    const oldBase=base;
-    base=makeBase(name);
-    base.addTo(map);
-    map.removeLayer(oldBase);
+    const [url,opts]=styles[name];
+    base.options.attribution=opts.attribution;
+    base.options.maxZoom=opts.maxZoom||19;
+    base.setUrl(url,false);
     base.redraw();
-    requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
+    map.invalidateSize({pan:false,animate:false});
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
