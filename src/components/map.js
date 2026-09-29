@@ -4,7 +4,7 @@ export function createMap(el,state,onCenter){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
 
-  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:2,color:"#24a88f",opacity:.9,fillColor:"#53cbb5",fillOpacity:.10,interactive:false}).addTo(map);
+  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
   const center=L.marker([state.center.lat,state.center.lng],{
     draggable:true,
     icon:L.divIcon({className:"locale-center-icon",html:'<div class="search-pin"><span></span></div>',iconSize:[30,38],iconAnchor:[15,34]})
@@ -42,10 +42,17 @@ export function createMap(el,state,onCenter){
     },
     renderEvents(events,onSelect){
       layer.clearLayers();
+      const groups=new Map();
       events.forEach(e=>{
-        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category}"><span>${e.category.slice(0,1).toUpperCase()}</span></div>`,iconSize:[30,38],iconAnchor:[15,34]});
+        const key=e.lat.toFixed(4)+"|"+e.lng.toFixed(4);
+        if(!groups.has(key))groups.set(key,[]);
+        groups.get(key).push(e);
+      });
+      groups.forEach(group=>{
+        const e=group[0],count=group.length;
+        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category} ${count>1?"event-stack":""}"><span>${count>1?count:e.category.slice(0,1).toUpperCase()}</span></div>`,iconSize:[30,34],iconAnchor:[15,17]});
         const marker=L.marker([e.lat,e.lng],{icon}).addTo(layer);
-        marker.bindTooltip(e.title,{direction:"top"});
+        marker.bindTooltip(count>1?`${count} events at ${e.venue}`:e.title,{direction:"top"});
         marker.on("click",()=>onSelect(e.id));
       });
     },
