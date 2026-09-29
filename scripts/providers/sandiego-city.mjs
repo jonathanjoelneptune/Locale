@@ -30,7 +30,7 @@ export async function sanDiegoCityEvents(){
   const ap=(tm[3]||suffix).toLowerCase(); let hour=+tm[1]%12+(ap==="pm"?12:0);
   const iso=date[4]+"-"+MONTH[date[2].toLowerCase()]+"-"+String(+date[3]).padStart(2,"0")+"T"+String(hour).padStart(2,"0")+":"+String(+(tm[2]||0)).padStart(2,"0")+":00-07:00";
   const start=new Date(iso); if(Number.isNaN(+start))continue;
-  out.push({id:"sd-city:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+":"+start.toISOString().slice(0,10),title,category:cat(title+" "+cells[1]),venue:address,lat:point.lat,lng:point.lng,start:start.toISOString(),end:null,price:null,url:URL,source:"City of San Diego",description:cells[1],featured:false,image:null,sourceUrl:URL,lastVerified:verified});
+  out.push({id:"sd-city:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+":"+start.toISOString().slice(0,10),title,category:cat(title+" "+cells[1]),venue:address,lat:point.lat,lng:point.lng,start:start.toISOString(),end:null,price:null,priceStatus:"unknown",url:URL,source:"City of San Diego",description:cells[1],featured:false,image:null,sourceUrl:URL,lastVerified:verified});
  }
  await writeFile("src/data/geocode-cache.json",JSON.stringify(cache,null,2)+"\\n");
  return out;
