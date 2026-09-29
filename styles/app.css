@@ -180,3 +180,16 @@
 .results-head,.results-tabs{background:rgba(255,254,250,.30)}
 @media(max-width:1180px) and (min-width:701px){.discovery-toggle{left:calc(clamp(230px,23vw,280px) - 1px)}}
 @media(max-width:700px){.discovery-toggle{display:none}}
+
+/* Drawer glass and save-state refinement */
+.discovery-panel,.results-panel{background:rgba(250,251,248,.70)!important;backdrop-filter:blur(22px) saturate(1.28)!important;-webkit-backdrop-filter:blur(22px) saturate(1.28)!important}
+.discovery-panel:before,.results-panel:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.08));z-index:-1}
+.discovery-panel,.results-panel{position:relative}
+.discovery-toggle,.results-toggle{color:#0d8ba3!important;background:rgba(248,252,250,.84)!important}
+.discovery-toggle{font-size:inherit;padding:7px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.discovery-toggle .drawer-label,.results-toggle .drawer-label{color:#0d8ba3!important;font-weight:900}
+.discovery-toggle .drawer-arrow,.results-toggle .drawer-arrow{color:#0d8ba3!important}
+.discovery-toggle .drawer-label{font-size:8px;text-transform:uppercase;letter-spacing:.7px;writing-mode:vertical-rl}
+.results-toggle #resultsCount{color:#0d8ba3!important}
+.save-event{cursor:pointer;transition:transform .12s ease,color .12s ease}.save-event:hover{transform:scale(1.18)}.save-event.is-saved{color:#078aa3;font-weight:900}
+.event-price strong{color:#a66c16;font-size:10px}
