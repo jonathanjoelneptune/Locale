@@ -227,3 +227,35 @@
 
 .venue-filter-bar{display:flex;align-items:center;gap:8px;margin:7px 12px 0;padding:6px 7px;background:rgba(13,139,163,.10);border-left:3px solid #0d8ba3;font-size:9px;color:#526a73}
 .venue-filter-bar button{border:0;background:transparent;color:#087e98;font-size:9px;font-weight:900;padding:3px 5px;cursor:pointer;white-space:nowrap}.venue-filter-bar button:hover{text-decoration:underline}.venue-filter-bar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Strong selected-event state and mirrored drawer attachment */
+.results-panel .event-row.selected{
+  position:relative;
+  background:rgba(205,244,238,.88)!important;
+  border-left:6px solid #0796a5!important;
+  box-shadow:inset 0 0 0 1px rgba(7,150,165,.35),0 5px 16px rgba(25,80,88,.18);
+  transform:translateX(-4px);
+  z-index:3;
+}
+.results-panel .event-row.selected:after{
+  content:"SELECTED";position:absolute;right:6px;top:5px;
+  padding:2px 5px;background:#087f97;color:white;font-size:6px;font-weight:950;letter-spacing:.7px;
+}
+.results-panel .event-row.selected .event-title-line h2{color:#075d6c;font-weight:900}
+.results-panel .event-row.selected .event-thumb{outline:2px solid #0796a5;outline-offset:1px}
+@media(min-width:701px){
+ .results-toggle{
+   right:clamp(300px,26vw,410px)!important;
+   margin-right:-1px!important;
+   border-right:0!important;border-left:1px solid rgba(120,150,158,.4)!important;
+   background:rgba(249,251,248,.48)!important;
+   box-shadow:-8px 0 18px rgba(32,58,67,.10)!important;
+ }
+ .results-panel{border-left:1px solid rgba(120,150,158,.35)}
+ .shell.results-collapsed .results-toggle{
+   right:0!important;margin-right:0!important;border-right:0!important;
+   border-left:1px solid rgba(120,150,158,.4)!important;
+ }
+}
+@media(max-width:1180px) and (min-width:701px){.results-toggle{right:clamp(270px,25vw,330px)!important}}
+.save-event.is-saved{background:#d5f1ee!important;color:#007d91!important;border:1px solid #67bcc5!important;box-shadow:0 0 0 2px rgba(255,255,255,.65);font-size:18px!important}
