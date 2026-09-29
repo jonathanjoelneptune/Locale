@@ -1,3 +1,4 @@
+import {canonicalizeVenue} from "../venue-canonical.mjs";
 const API="https://app.ticketmaster.com/discovery/v2/events.json";
 
 function category(event){
@@ -28,7 +29,7 @@ export async function ticketmasterEvents({apiKey,days=45}){
   const start=new Date();
   const end=new Date(start.getTime()+days*86400000);
   const params=new URLSearchParams({
-    apikey:apiKey,city:"San Diego",stateCode:"CA",countryCode:"US",
+    apikey:apiKey,latlong:"32.7157,-117.1611",radius:"50",unit:"miles",countryCode:"US",
     startDateTime:start.toISOString().replace(/\.\d{3}Z$/,"Z"),
     endDateTime:end.toISOString().replace(/\.\d{3}Z$/,"Z"),
     size:"200",sort:"date,asc"
@@ -43,12 +44,11 @@ export async function ticketmasterEvents({apiKey,days=45}){
       const v=e._embedded?.venues?.[0];
       const lat=Number(v?.location?.latitude),lng=Number(v?.location?.longitude);
       if(!Number.isFinite(lat)||!Number.isFinite(lng)) continue;
-      out.push({
+      out.push(canonicalizeVenue({
         id:`ticketmaster:${e.id}`,title:e.name,category:category(e),venue:v?.name||"Location TBA",
         lat,lng,start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
         price:price(e),priceStatus:e.priceRanges?.length?"known":(price(e)?"source-text":"unknown"),url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
-        featured:false,image:(e.images||[]).filter(i=>i.url).sort((a,b)=>(b.width||0)-(a.width||0))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
-      });
+        featured:false,image:(e.images||[]).filter(i=>i.url&&(!i.ratio||i.ratio==="16_9")).sort((a,b)=>Math.abs((a.width||640)-640)-Math.abs((b.width||640)-640))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()\n      }));
     }
     if(page>=Number(data.page?.totalPages||1)-1) break;
   }
