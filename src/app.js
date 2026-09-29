@@ -8,9 +8,9 @@ import {filterEvents} from "./services/events.js";
 import {geocode} from "./services/geocode.js";
 import {ensureLeaflet} from "./services/leaflet.js";
 
-const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[]};
+const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false};
 const root=document.querySelector("#app");
-root.innerHTML=`<div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span>San Diego, CA</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="1" max="${CONFIG.maxRadiusMiles}" value="${state.radius}"><div class="radius-ticks"><span>1</span><span>15</span><span>30</span><span>50</span><span>75</span></div></section><div id="filters" class="filters-panel"></div></aside><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div></main><aside id="sidebar" class="sidebar results-panel"></aside><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button>View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
+root.innerHTML=`<div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span>San Diego, CA</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="5" max="50" step="5" value="${state.radius}"><div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div></section><div id="filters" class="filters-panel"></div></aside><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div></main><aside id="sidebar" class="sidebar results-panel"></aside><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button>View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
 
 let mapUI=null;
 const mapEl=document.querySelector("#map");
@@ -30,6 +30,7 @@ function render(){
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible,selectEvent);
+  if(state.events.length&&!state.hasFit&&visible.length){mapUI?.fitEvents(visible);state.hasFit=true}
   renderHighlights(visible);
   bindFilters();
 }
@@ -41,14 +42,15 @@ function renderHighlights(events){
   el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>{selectEvent(b.dataset.highlight);if(b.dataset.url)window.open(b.dataset.url,"_blank","noopener")});
 }
 function bindFilters(){
-  document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.window=b.dataset.window;render()});
-  document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.category=b.dataset.category;render()});
+  document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.window=b.dataset.window;state.hasFit=false;render()});
+  document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.category=b.dataset.category;state.hasFit=false;render()});
   document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
 }
 function selectEvent(id){
   const target=document.querySelector('[data-event-id="'+CSS.escape(id)+'"]');
   document.querySelectorAll(".card").forEach(c=>c.classList.toggle("selected",c.dataset.eventId===id));
   target?.scrollIntoView({behavior:"smooth",block:"center"});
+  mapUI?.selectEvent(id);
 }
 document.querySelector("#sidebar").addEventListener("click",e=>{
   const row=e.target.closest("[data-event-id]");
@@ -58,7 +60,7 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
   if(wasSelected&&row.dataset.eventUrl)window.open(row.dataset.eventUrl,"_blank","noopener");
 });
 
-document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
+document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
 document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
   if(e.key!=="Enter"||!e.target.value.trim())return;
@@ -67,7 +69,7 @@ document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
     const p=await geocode(e.target.value.trim());
     if(p){
       state.center={lat:p.lat,lng:p.lng};
-      state.zoom=11;
+      state.zoom=11;state.hasFit=false;
       mapUI?.setSearchCenter(state.center,{recenter:true,zoom:11});
       render();
     }
