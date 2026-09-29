@@ -118,7 +118,15 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
 document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
 document.querySelector("#useMapCenter").onclick=()=>{state.venueFilter=null;mapUI?.useMapCenter()};
 document.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};
-const mapStyle=document.querySelector("#mapStyle");mapStyle.value=state.mapStyle;mapStyle.onchange=e=>{state.mapStyle=e.target.value;localStorage.setItem("locale-map-style",state.mapStyle);if(mapUI){mapUI.setStyle(state.mapStyle)}else{initMapLater()}};
+const mapStyle=document.querySelector("#mapStyle");
+mapStyle.value=state.mapStyle;
+function applyMapStyle(value){
+  if(!["standard","humanitarian","satellite"].includes(value))return;
+  state.mapStyle=value;
+  localStorage.setItem("locale-map-style",value);
+  if(mapUI)mapUI.setStyle(value);else initMapLater();
+}
+mapStyle.addEventListener("change",e=>applyMapStyle(e.currentTarget.value));
 document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
   if(e.key!=="Enter"||!e.target.value.trim())return;
   e.target.disabled=true;
