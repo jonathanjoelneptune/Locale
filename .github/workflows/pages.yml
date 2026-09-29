@@ -11,7 +11,21 @@ concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
+  predeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install browser test runner
+        run: |
+          npm install --no-save @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run pre-deploy browser regression suite
+        run: npx playwright test
   deploy:
+    needs: predeploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -34,3 +48,31 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+  postdeploy:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install browser test runner
+        run: |
+          npm install --no-save @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Verify deployed build marker
+        env:
+          EXPECTED_BUILD: ${{ github.sha }}
+        run: |
+          short="${EXPECTED_BUILD:0:12}"
+          for i in {1..12}; do
+            html="$(curl -fsSL "https://jonathanjoelneptune.github.io/Locale/?smoke=$RANDOM" || true)"
+            if grep -q "locale-build.*$short" <<<"$html"; then exit 0; fi
+            sleep 5
+          done
+          echo "Deployed build marker did not reach production" >&2
+          exit 1
+      - name: Run post-deploy production smoke suite
+        env:
+          LOCALE_BASE_URL: https://jonathanjoelneptune.github.io/Locale/
+        run: npx playwright test
