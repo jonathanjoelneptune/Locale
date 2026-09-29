@@ -10,7 +10,7 @@ import {ensureLeaflet} from "./services/leaflet.js";
 
 const state={center:{...CONFIG.defaultCenter},radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false};
 const root=document.querySelector("#app");
-root.innerHTML=`<div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span>San Diego, CA</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="5" max="50" step="5" value="${state.radius}"><div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div></section><div id="filters" class="filters-panel"></div></aside><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div></main><aside id="sidebar" class="sidebar results-panel"></aside><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button>View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
+root.innerHTML=`<div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span>San Diego, CA</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="5" max="50" step="5" value="${state.radius}"><div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div></section><div id="filters" class="filters-panel"></div></aside><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div></main><aside id="sidebar" class="sidebar results-panel"></aside><button id="resultsToggle" class="results-toggle" type="button" aria-label="Toggle event results">Events <span id="resultsCount">0</span> ›</button><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button>View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
 
 let mapUI=null;
 const mapEl=document.querySelector("#map");
@@ -40,7 +40,7 @@ function initMapLater(){
 }
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
-  const visible=filterEvents(state.events,state);
+  const visible=filterEvents(state.events,state);\n  document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible,selectEvent);
@@ -66,7 +66,7 @@ function selectEvent(id){
   target?.scrollIntoView({behavior:"smooth",block:"center"});
   mapUI?.selectEvent(id);
 }
-document.querySelector("#sidebar").addEventListener("click",e=>{
+document.querySelector("#resultsToggle").onclick=()=>document.querySelector(".shell").classList.toggle("results-collapsed");\ndocument.querySelector("#sidebar").addEventListener("click",e=>{
   const row=e.target.closest("[data-event-id]");
   if(!row)return;
   const wasSelected=row.classList.contains("selected");
