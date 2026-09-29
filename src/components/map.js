@@ -9,12 +9,19 @@ export function createMap(el,state,onCenter,onMarker){
   };
   const basePane=map.createPane("locale-basemap");
   basePane.style.zIndex="150";
-  let base=L.tileLayer(...(styles[state.mapStyle]||styles.standard),{pane:"locale-basemap"}).addTo(map);
+  function makeBase(name){
+    const [url,opts]=styles[name]||styles.standard;
+    return L.tileLayer(url,{...opts,pane:"locale-basemap"});
+  }
+  let base=makeBase(state.mapStyle).addTo(map);
   function setStyle(name){
     if(!styles[name])return;
-    map.removeLayer(base);
-    base=L.tileLayer(...styles[name]).addTo(map);
-    base.bringToBack();
+    const oldBase=base;
+    base=makeBase(name);
+    base.addTo(map);
+    map.removeLayer(oldBase);
+    base.redraw();
+    requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
