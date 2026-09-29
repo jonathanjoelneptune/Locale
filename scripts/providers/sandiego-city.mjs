@@ -24,7 +24,7 @@ export async function sanDiegoCityEvents(){
   const address=(cells[2].match(/Address:\s*(.*?)(?:Details:|$)/i)||[])[1];
   if(!date||!address)continue;
   const point=await geo(address); if(!point)continue;
-  const title=cells[1].split(/(?=The Pacific|This weekday|San Diego\x27s|Check out|The Gaslamp|Come and)/)[0].trim()||cells[1];
+  const title=cells[1].split(/(?= This | The Little Italy certified| The Pacific| This weekday| San Diego\x27s| Check out| The Gaslamp| Come and)/)[0].trim()||cells[1];
   const range=date[5],suffix=(range.match(/(am|pm)\s*$/i)||[])[1],tm=range.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
   if(!tm||!suffix)continue;
   const ap=(tm[3]||suffix).toLowerCase(); let hour=+tm[1]%12+(ap==="pm"?12:0);
