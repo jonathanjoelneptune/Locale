@@ -11,7 +11,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   basePane.style.zIndex="150";
   const basemaps=Object.fromEntries(Object.entries(styles).map(([name,[url,opts]])=>[name,L.tileLayer(url,{...opts,pane:"locale-basemap"})]));
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
-  basemaps[activeStyle].addTo(map);
+  basemaps[activeStyle].addTo(map);\n  el.dataset.mapStyle=activeStyle;
   function setStyle(name){
     if(!basemaps[name])return;
     Object.values(basemaps).forEach(layer=>{if(map.hasLayer(layer))map.removeLayer(layer)});
