@@ -30,10 +30,12 @@ export function createMap(el,state,onCenter){
   }
 
   center.on("drag",e=>radius.setLatLng(e.target.getLatLng()));
-  center.on("dragend",e=>commitCenter(e.target.getLatLng()));\n  map.on("contextmenu",e=>{L.popup({closeButton:false,className:"locale-context"}).setLatLng(e.latlng).setContent(`<button class="center-here" type="button">⌖ Center marker here</button>`).openOn(map);setTimeout(()=>document.querySelector(".center-here")?.addEventListener("click",()=>{commitCenter(e.latlng,{recenter:true});map.closePopup()}),0)});
+  center.on("dragend",e=>commitCenter(e.target.getLatLng()));
+  map.on("contextmenu",e=>{L.popup({closeButton:false,className:"locale-context"}).setLatLng(e.latlng).setContent(`<button class="center-here" type="button">⌖ Center marker here</button>`).openOn(map);setTimeout(()=>document.querySelector(".center-here")?.addEventListener("click",()=>{commitCenter(e.latlng,{recenter:true});map.closePopup()}),0)});
 
   return{
-    map,\n    setStyle,
+    map,
+    setStyle,
     setRadius(miles,pos){
       const ll=[pos.lat,pos.lng];
       radius.setLatLng(ll).setRadius(meters(miles));
