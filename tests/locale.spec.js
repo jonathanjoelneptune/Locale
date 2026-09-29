@@ -23,13 +23,16 @@ test("critical Locale interactions",async({page})=>{
   const style=page.locator("#mapStyle");
   const map=page.locator("#map");
   const tileSrc=()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
-  await style.selectOption("humanitarian");\n  await expect(style).toHaveValue("humanitarian");
+  await style.selectOption("humanitarian");
+  await expect(style).toHaveValue("humanitarian");
   await expect(map).toHaveAttribute("data-map-style","humanitarian");
   await expect.poll(tileSrc).toContain("tile.openstreetmap.fr/hot");
-  await style.selectOption("satellite");\n  await expect(style).toHaveValue("satellite");
+  await style.selectOption("satellite");
+  await expect(style).toHaveValue("satellite");
   await expect(map).toHaveAttribute("data-map-style","satellite");
   await expect.poll(tileSrc).toContain("arcgisonline.com");
-  await style.selectOption("standard");\n  await expect(style).toHaveValue("standard");
+  await style.selectOption("standard");
+  await expect(style).toHaveValue("standard");
   await expect(map).toHaveAttribute("data-map-style","standard");
   await expect.poll(tileSrc).toContain("tile.openstreetmap.org");
 
