@@ -206,3 +206,21 @@
 }
 .save-event{width:24px;height:24px;display:grid;place-items:center;border:1px solid transparent!important;border-radius:50%;font-size:17px!important}
 .save-event.is-saved{background:rgba(13,139,163,.13)!important;border-color:rgba(13,139,163,.34)!important;color:#087f97!important;transform:scale(1.05)}
+
+/* Integrated drawer rails + always-visible map controls */
+@media(min-width:701px){
+ .discovery-toggle{left:clamp(245px,20vw,320px)!important;border-left:0!important;border-radius:0!important;margin-left:-1px;background:rgba(249,251,248,.58)!important;box-shadow:7px 3px 16px rgba(32,58,67,.10)!important}
+ .results-toggle{right:clamp(300px,26vw,410px)!important;border-right:0!important;border-radius:0!important;margin-right:-1px;background:rgba(249,251,248,.58)!important;box-shadow:-7px 3px 16px rgba(32,58,67,.10)!important}
+ .shell.discovery-collapsed .discovery-toggle{left:0!important;border-left:1px solid rgba(120,150,158,.4)!important}
+ .shell.results-collapsed .results-toggle{right:0!important;border-right:1px solid rgba(120,150,158,.4)!important}
+ .map-style-picker{left:calc(clamp(245px,20vw,320px) + 14px)!important;z-index:970!important}
+ .shell.discovery-collapsed .map-style-picker{left:14px!important}
+}
+@media(max-width:1180px) and (min-width:701px){
+ .discovery-toggle{left:clamp(230px,23vw,280px)!important}
+ .results-toggle{right:clamp(270px,25vw,330px)!important}
+ .map-style-picker{left:calc(clamp(230px,23vw,280px) + 14px)!important}
+}
+.event-map-popup .leaflet-popup-content-wrapper{border-radius:2px;background:rgba(255,254,250,.94);backdrop-filter:blur(14px);box-shadow:0 8px 25px rgba(25,49,58,.24)}
+.event-map-popup .leaflet-popup-content{margin:8px}.event-map-popup .leaflet-popup-tip{background:rgba(255,254,250,.94)}
+.map-event-card{display:grid;grid-template-columns:72px minmax(0,1fr);gap:9px;min-width:230px}.map-event-card>div{display:flex;flex-direction:column;gap:3px}.map-event-card b{font-size:11px;line-height:1.2;color:#17313e}.map-event-card span{font-size:9px;color:#667b84}.map-event-card a{font-size:9px;font-weight:850;color:#087e98;text-decoration:none;margin-top:4px}.map-popup-img{width:72px;height:64px;object-fit:cover}
