@@ -42,7 +42,8 @@ function initMapLater(){
 }
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
-  let visible=filterEvents(state.events,state);\n  if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
+  let visible=filterEvents(state.events,state);
+  if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.textContent=on?"♥":"♡";b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
