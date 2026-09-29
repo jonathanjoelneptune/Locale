@@ -28,7 +28,9 @@ function render(){
   bindFilters();
 }
 function renderHighlights(events){
+  const section=document.querySelector(".highlights");
   const el=document.querySelector("#highlightCards");
+  section.classList.toggle("is-empty",!events.length);
   el.innerHTML=events.length?events.slice(0,6).map(e=>`<button class="highlight-card" data-highlight="${e.id}"><span class="highlight-art category-bg-${e.category}">${e.category.slice(0,1).toUpperCase()}</span><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
   el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>selectEvent(b.dataset.highlight));
 }
