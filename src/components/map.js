@@ -113,6 +113,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
-  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});\n  map.on("click",()=>onMapBackground?.());
+  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});
+  map.on("click",()=>onMapBackground?.());
   return api;
 }
