@@ -4,7 +4,7 @@ export function createMap(el,state,onCenter){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   const styles={
     standard:["https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}],
-    light:["https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:20,subdomains:"abcd",attribution:"&copy; OpenStreetMap &copy; CARTO"],
+    light:["https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:20,subdomains:"abcd",attribution:"&copy; OpenStreetMap &copy; CARTO"}],
     voyager:["https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{maxZoom:20,subdomains:"abcd",attribution:"&copy; OpenStreetMap &copy; CARTO"]
   };
   let base=L.tileLayer(...(styles[state.mapStyle]||styles.standard)).addTo(map);
