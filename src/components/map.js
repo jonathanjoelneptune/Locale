@@ -2,9 +2,9 @@ import {meters} from "../services/geo.js";
 
 export function createMap(el,state,onCenter){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{maxZoom:20,subdomains:"abcd",attribution:"&copy; OpenStreetMap contributors &copy; CARTO"}).addTo(map);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
 
-  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:2,color:"#55e2c2",opacity:.95,fillColor:"#55e2c2",fillOpacity:.08,interactive:false}).addTo(map);
+  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:2,color:"#24a88f",opacity:.9,fillColor:"#53cbb5",fillOpacity:.10,interactive:false}).addTo(map);
   const center=L.marker([state.center.lat,state.center.lng],{
     draggable:true,
     icon:L.divIcon({className:"locale-center-icon",html:'<div class="search-pin"><span></span></div>',iconSize:[30,38],iconAnchor:[15,34]})
