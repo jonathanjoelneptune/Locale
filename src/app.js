@@ -5,6 +5,7 @@ import {renderSidebar} from "./components/sidebar.js";
 import {createMap} from "./components/map.js";
 import {loadEvents} from "./providers/index.js";
 import {filterEvents} from "./services/events.js";
+import {rankHighlights} from "./services/highlights.js";
 import {geocode} from "./services/geocode.js";
 import {ensureLeaflet} from "./services/leaflet.js";
 
@@ -53,7 +54,8 @@ function renderHighlights(events){
   const section=document.querySelector(".highlights");
   const el=document.querySelector("#highlightCards");
   section.classList.toggle("is-empty",!events.length);
-  el.innerHTML=events.length?events.slice(0,4).map(e=>`<button class="highlight-card" data-highlight="${e.id}" data-url="${e.url||""}"><span class="highlight-art category-bg-${e.category}">${e.image?`<img src="${e.image}" alt="" loading="lazy">`:e.category.slice(0,1).toUpperCase()}</span><span class="highlight-copy"><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
+  const highlights=rankHighlights(events,{limit:4});
+  el.innerHTML=highlights.length?highlights.map(e=>`<button class="highlight-card" data-highlight="${e.id}" data-url="${e.url||""}"><span class="highlight-art category-bg-${e.category}">${e.image?`<img src="${e.image}" alt="" loading="lazy">`:e.category.slice(0,1).toUpperCase()}</span><span class="highlight-copy"><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
   el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>{selectEvent(b.dataset.highlight);if(b.dataset.url)window.open(b.dataset.url,"_blank","noopener")});
 }
 function bindFilters(){
