@@ -97,6 +97,11 @@ export function createMap(el,state,onCenter,onMarker){
       map.invalidateSize({pan:false,animate:false});
       requestAnimationFrame(()=>map.fitBounds(bounds,{padding:[55,55],maxZoom:13,animate:false}));
     },
-    showEventPopup(e){\n      const price=e.price?`<strong>${esc(e.price)}</strong>`:(e.source==="Ticketmaster"?"Check price":"View event");\n      const img=e.image?`<img class="map-popup-img" src="${esc(e.image)}" alt="">`:"";\n      L.popup({className:"event-map-popup",maxWidth:290}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card">${img}<div><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);\n    },\n    flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
+    showEventPopup(e){
+      const price=e.price?`<strong>${esc(e.price)}</strong>`:(e.source==="Ticketmaster"?"Check price":"View event");
+      const img=e.image?`<img class="map-popup-img" src="${esc(e.image)}" alt="">`:"";
+      L.popup({className:"event-map-popup",maxWidth:290}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card">${img}<div><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);
+    },
+    flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
 }
