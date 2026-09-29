@@ -14,7 +14,7 @@ test("critical Locale interactions",async({page})=>{
   const before=await heart.getAttribute("aria-pressed");
   await heart.click();
   await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
-  await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);
+  await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);\n  const visibleHeart=before==="true"?heart.locator(".heart-off"):heart.locator(".heart-on");\n  await expect(visibleHeart).toBeVisible();
   await page.reload(); await page.waitForSelector(".event-row");
   await expect(page.locator(`[data-save-event="${id}"]`)).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
 
