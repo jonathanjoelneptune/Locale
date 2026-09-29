@@ -1,0 +1,1 @@
+import {EventProvider} from "./provider.js";import {normalize} from "../services/events.js";export class LocalProvider extends EventProvider{constructor(){super("Locale bootstrap")}async getEvents(){const r=await fetch("./src/data/events.json",{cache:"no-store"});if(!r.ok)throw new Error("Could not load bootstrap events");return (await r.json()).map(normalize)}}
