@@ -3,6 +3,6 @@ const esc=s=>String(s??"").replace(/[&<>"\']/g,c=>({"&":"&amp;","<":"&lt;",">":"
 export function EventCard(e){
  const art=e.image?`<img src="${esc(e.image)}" alt="" loading="lazy">`:`<span>${esc(e.category.slice(0,1).toUpperCase())}</span>`;
  const priceLabel=e.priceStatus==="free"?"<strong>Free</strong>":e.price?`<strong>${esc(e.price)}</strong>`:"";
- const action=e.url?`<a class="event-action" href="${esc(e.url)}" target="_blank" rel="noopener">View event ↗</a>`:"";
+ const action=e.url?`<a class="event-action" href="${esc(e.url)}" target="_blank" rel="noopener">${e.source==="Ticketmaster"?"Check price":"View event"} ↗</a>`:"";
  return `<article class="event-row card" data-event-id="${esc(e.id)}" data-event-url="${esc(e.url||"")}"><div class="event-thumb category-bg-${esc(e.category)}">${art}</div><div class="event-copy"><div class="event-title-line"><h2>${esc(e.title)}</h2><span class="event-badge">${esc(e.category)}</span></div><div class="event-meta"><span>⌖ ${esc(e.venue)}</span><span>◷ ${esc(fmt(e.start))}</span></div><div class="event-foot"><span class="event-price">${priceLabel||action}</span><span>${e.distance.toFixed(1)} mi</span><button class="save-event" data-save-event="${esc(e.id)}" type="button" aria-label="Save event">♡</button></div></div></article>`
 }
