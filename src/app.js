@@ -14,16 +14,30 @@ root.innerHTML=`<div class="shell"><aside class="discovery-panel">${Header()}<se
 
 let mapUI=null;
 const mapEl=document.querySelector("#map");
-mapEl.innerHTML=`<div class="map-loading">Loading map…</div>`;
-try{
-  await ensureLeaflet();
-  mapEl.innerHTML="";
-  mapUI=createMap(mapEl,state,(center,zoom)=>{state.center=center;state.zoom=zoom;render()});
-}catch(error){
-  mapEl.innerHTML=`<div class="map-error"><strong>Map unavailable</strong><span>${error.message}</span><button id="retryMap" type="button">Retry map</button></div>`;
-  document.querySelector("#retryMap")?.addEventListener("click",()=>location.reload());
-}
+mapEl.innerHTML=`<div class="map-loading">Map starting…</div>`;
 
+function initMapLater(){
+  const failTimer=setTimeout(()=>{
+    if(!mapUI)mapEl.innerHTML=`<div class="map-error"><strong>Map taking too long</strong><span>Events are still available in the list.</span><button id="retryMap" type="button">Retry map</button></div>`;
+    document.querySelector("#retryMap")?.addEventListener("click",()=>initMapLater());
+  },3500);
+  setTimeout(async()=>{
+    try{
+      await ensureLeaflet(2000);
+      clearTimeout(failTimer);
+      if(mapUI)return;
+      mapEl.innerHTML="";
+      mapUI=createMap(mapEl,state,(center,zoom)=>{state.center=center;state.zoom=zoom;render()});
+      state.hasFit=false;
+      render();
+    }catch(error){
+      clearTimeout(failTimer);
+      mapEl.innerHTML=`<div class="map-error"><strong>Map unavailable</strong><span>Events are still available in the list.</span><button id="retryMap" type="button">Retry map</button></div>`;
+      document.querySelector("#retryMap")?.addEventListener("click",()=>initMapLater());
+      console.error(error);
+    }
+  },0);
+}
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
   const visible=filterEvents(state.events,state);
@@ -77,4 +91,6 @@ document.querySelector("#placeSearch").addEventListener("keydown",async e=>{
 });
 
 render();
-loadEvents().then(events=>{state.events=events;render()}).catch(console.error);
+requestAnimationFrame(()=>document.documentElement.classList.add("locale-ready"));
+loadEvents().then(events=>{state.events=events;render()}).catch(error=>{console.error(error);render()});
+setTimeout(initMapLater,100);
