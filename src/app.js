@@ -37,8 +37,8 @@ function renderHighlights(events){
   const section=document.querySelector(".highlights");
   const el=document.querySelector("#highlightCards");
   section.classList.toggle("is-empty",!events.length);
-  el.innerHTML=events.length?events.slice(0,6).map(e=>`<button class="highlight-card" data-highlight="${e.id}"><span class="highlight-art category-bg-${e.category}">${e.category.slice(0,1).toUpperCase()}</span><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
-  el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>selectEvent(b.dataset.highlight));
+  el.innerHTML=events.length?events.slice(0,4).map(e=>`<button class="highlight-card" data-highlight="${e.id}" data-url="${e.url||""}"><span class="highlight-art category-bg-${e.category}">${e.image?`<img src="${e.image}" alt="" loading="lazy">`:e.category.slice(0,1).toUpperCase()}</span><span class="highlight-copy"><strong>${e.title}</strong><small>${e.venue} · ${e.distance.toFixed(1)} mi</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
+  el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>{selectEvent(b.dataset.highlight);if(b.dataset.url)window.open(b.dataset.url,"_blank","noopener")});
 }
 function bindFilters(){
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.window=b.dataset.window;render()});
@@ -46,9 +46,17 @@ function bindFilters(){
   document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
 }
 function selectEvent(id){
+  const target=document.querySelector('[data-event-id="'+CSS.escape(id)+'"]');
   document.querySelectorAll(".card").forEach(c=>c.classList.toggle("selected",c.dataset.eventId===id));
-  document.querySelector('[data-event-id="'+CSS.escape(id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"});
+  target?.scrollIntoView({behavior:"smooth",block:"center"});
 }
+document.querySelector("#sidebar").addEventListener("click",e=>{
+  const row=e.target.closest("[data-event-id]");
+  if(!row)return;
+  const wasSelected=row.classList.contains("selected");
+  selectEvent(row.dataset.eventId);
+  if(wasSelected&&row.dataset.eventUrl)window.open(row.dataset.eventUrl,"_blank","noopener");
+});
 
 document.querySelector("#radius").oninput=e=>{state.radius=Number(e.target.value);document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
 document.querySelector("#useMapCenter").onclick=()=>mapUI?.useMapCenter();
