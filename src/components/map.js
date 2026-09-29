@@ -19,6 +19,7 @@ export function createMap(el,state,onCenter){
   requestAnimationFrame(()=>requestAnimationFrame(stabilize));
   const markers=new Map();
   const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
+  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
   function commitCenter(latlng,{recenter=false}={}){
     const pos={lat:latlng.lat,lng:latlng.lng};
@@ -58,7 +59,9 @@ export function createMap(el,state,onCenter){
       });
       groups.forEach(group=>{
         const e=group[0],count=group.length;
-        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category} ${count>1?"event-stack":""}"><span>${count>1?count:(SYMBOLS[e.category]||"•")}</span></div>`,iconSize:[30,34],iconAnchor:[15,17]});
+        const face=e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${count>1?count:(SYMBOLS[e.category]||"•")}</span>`;
+        const label=count>1?`${count} events`:e.title;
+        const icon=L.divIcon({className:"event-marker-wrap",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
         const marker=L.marker([e.lat,e.lng],{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} events at ${e.venue}`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));
