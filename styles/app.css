@@ -68,3 +68,15 @@
 .highlight-copy strong{font-size:clamp(11px,.85vw,14px);line-height:1.2}
 .highlight-copy small{margin-top:5px;font-size:9px;color:#7b8a90;line-height:1.3}
 .highlight-copy em{margin-top:auto;padding-top:8px;font-size:9px;font-style:normal;font-weight:800;color:#147e9d;text-transform:uppercase;letter-spacing:.4px}
+
+/* UX refinement pass */
+.event-pin{width:27px;height:27px;font-size:12px;transition:transform .15s ease,filter .15s ease}.event-pin span{font-size:12px}.event-stack span{font-size:9px}
+.selected-pin{transform:scale(1.28);filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 4px 3px #254e5966);outline:2px solid #fff;outline-offset:2px;z-index:2}
+.event-row{grid-template-columns:clamp(72px,6.5vw,96px) minmax(0,1fr)}
+.event-thumb{height:clamp(62px,7.5vh,82px)}
+.event-row.selected{border-left-width:4px;background:#edf6f4}
+.event-action{display:inline-block;padding:2px 0;border-bottom:1px solid #8ec4ce;color:#126f89;font-weight:850}
+.highlight-cards{scroll-snap-type:x proximity;padding-right:12vw;scrollbar-width:thin}
+.highlight-card{scroll-snap-align:start;flex:0 0 clamp(280px,24vw,360px)}
+.highlight-heading button{font-weight:800}
+.radius-ticks{padding-inline:1px}
