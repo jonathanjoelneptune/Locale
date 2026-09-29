@@ -2,9 +2,9 @@ import {meters} from "../services/geo.js";
 
 export function createMap(el,state,onCenter){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{maxZoom:20,subdomains:"abcd",attribution:"&copy; OpenStreetMap contributors &copy; CARTO"}).addTo(map);
 
-  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:2,fillOpacity:.06,interactive:false}).addTo(map);
+  const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:2,color:"#55e2c2",opacity:.95,fillColor:"#55e2c2",fillOpacity:.08,interactive:false}).addTo(map);
   const center=L.marker([state.center.lat,state.center.lng],{
     draggable:true,
     icon:L.divIcon({className:"locale-center-icon",html:'<div class="search-pin"><span></span></div>',iconSize:[30,38],iconAnchor:[15,34]})
@@ -43,7 +43,7 @@ export function createMap(el,state,onCenter){
     renderEvents(events,onSelect){
       layer.clearLayers();
       events.forEach(e=>{
-        const icon=L.divIcon({className:"",html:'<div class="dot"></div>',iconSize:[14,14],iconAnchor:[7,7]});
+        const icon=L.divIcon({className:"",html:`<div class="event-pin pin-${e.category}"><span>${e.category.slice(0,1).toUpperCase()}</span></div>`,iconSize:[30,38],iconAnchor:[15,34]});
         const marker=L.marker([e.lat,e.lng],{icon}).addTo(layer);
         marker.bindTooltip(e.title,{direction:"top"});
         marker.on("click",()=>onSelect(e.id));
