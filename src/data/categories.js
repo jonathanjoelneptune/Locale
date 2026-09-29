@@ -1,0 +1,1 @@
+export const CATEGORIES=[["all","All"],["sports","Sports"],["music","Music"],["festival","Festivals"],["food","Food"],["theater","Theater"],["comedy","Comedy"],["family","Family"],["community","Community"],["nightlife","Nightlife"],["other","Other"]];
