@@ -29,7 +29,7 @@ function initMapLater(){
       clearTimeout(failTimer);
       if(mapUI)return;
       mapEl.innerHTML="";
-      mapUI=createMap(mapEl,state,(center,zoom)=>{state.center=center;state.zoom=zoom;state.venueFilter=null;render()},handleMapMarker);
+      mapUI=createMap(mapEl,state,(center,zoom)=>{state.center=center;state.zoom=zoom;state.venueFilter=null;render()},handleMapMarker,()=>{if(state.venueFilter){state.venueFilter=null;state.hasFit=true;render()}else{document.querySelectorAll(".card.selected").forEach(x=>x.classList.remove("selected"));mapUI?.selectEvent("__none__")}});
       state.hasFit=false;
       render();
     }catch(error){
@@ -46,7 +46,7 @@ function render(){
   if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
-  document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.textContent=on?"♥":"♡";b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
+  document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible);
   if(state.events.length&&!state.hasFit&&visible.length){mapUI?.fitEvents(visible);state.hasFit=true}
@@ -101,7 +101,7 @@ document.querySelector("#sidebar").addEventListener("click",e=>{
   localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
   document.querySelectorAll("[data-save-event]").forEach(btn=>{
     if(btn.dataset.saveEvent!==id)return;
-    btn.textContent=on?"♥":"♡";btn.classList.toggle("is-saved",on);
+    btn.classList.toggle("is-saved",on);
     btn.setAttribute("aria-pressed",String(on));btn.setAttribute("aria-label",on?"Remove saved event":"Save event");
   });
   if(state.listMode==="saved")requestAnimationFrame(render);
