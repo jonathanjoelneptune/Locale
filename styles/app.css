@@ -145,3 +145,38 @@
 .map-style-picker select{border:0;border-left:1px solid #d1dada;background:#fffefa;padding:5px 20px 5px 6px;font-size:9px;color:#274654;outline:0}
 .locale-context .leaflet-popup-content-wrapper{border-radius:0;background:#fffefa;box-shadow:2px 3px 7px #243f4850}.locale-context .leaflet-popup-content{margin:0}.center-here{border:0;background:#fffefa;padding:9px 12px;font-size:10px;font-weight:800;color:#176f88;white-space:nowrap}.locale-context .leaflet-popup-tip{background:#fffefa}
 .locale-splash{position:fixed;inset:0;z-index:99999;background:#fffefa;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .3s ease,visibility .3s ease}.locale-splash.is-done{opacity:0;visibility:hidden}.splash-mark{width:56px;height:56px;background:linear-gradient(135deg,#2b98b5,#75d4c3);clip-path:polygon(14% 0,100% 0,86% 100%,0 100%);display:grid;place-items:center;color:#fff;font-size:30px;margin-bottom:12px}.locale-splash strong{font-size:28px;letter-spacing:-1.3px;color:#10293a}.locale-splash span{font-size:10px;color:#71808c;margin-top:5px}
+
+/* Frosted overlay drawer polish */
+.discovery-panel,.results-panel{
+  background:rgba(255,254,250,.84);
+  backdrop-filter:blur(18px) saturate(1.18);
+  -webkit-backdrop-filter:blur(18px) saturate(1.18);
+  border-color:rgba(130,153,159,.35);
+}
+.discovery-panel{box-shadow:10px 0 28px rgba(32,58,67,.10)}
+.results-panel{box-shadow:-10px 0 28px rgba(32,58,67,.10)}
+.discovery-panel,.results-panel{transition:transform .24s ease,opacity .18s ease,box-shadow .2s ease}
+.discovery-toggle,.results-toggle{
+  position:absolute;z-index:960;top:50%;transform:translateY(-50%);
+  width:30px;min-height:72px;border:1px solid rgba(120,150,158,.48);
+  background:rgba(255,254,250,.90);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:#147e98;box-shadow:0 4px 14px rgba(28,55,65,.18);
+  font-weight:900;transition:left .24s ease,right .24s ease,background .15s ease,box-shadow .15s ease;
+}
+.discovery-toggle:hover,.results-toggle:hover{background:#fff;box-shadow:0 5px 18px rgba(28,55,65,.25)}
+.discovery-toggle{left:calc(clamp(245px,20vw,320px) - 1px);border-left:0;font-size:25px}
+.results-toggle{right:calc(clamp(300px,26vw,410px) - 1px);border-right:0;padding:7px 5px;writing-mode:initial;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.drawer-arrow{font-size:25px;line-height:20px}.drawer-label{font-size:8px;text-transform:uppercase;letter-spacing:.7px;writing-mode:vertical-rl}.results-toggle #resultsCount{font-size:9px}
+.shell.discovery-collapsed{grid-template-columns:0 minmax(360px,1fr) clamp(300px,26vw,410px)}
+.shell.discovery-collapsed .discovery-panel{transform:translateX(-100%);opacity:0;pointer-events:none}
+.shell.discovery-collapsed .discovery-toggle{left:0}
+.shell.results-collapsed .results-toggle{right:0}
+.shell.discovery-collapsed.results-collapsed{grid-template-columns:0 minmax(360px,1fr) 0}
+.search-wrap,.sort-button,.time-choice,.category-choice,.event-row,.highlight-card,.map-style-picker,.search-area-button{transition:background .15s ease,border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.event-row:hover{background:rgba(235,245,243,.72)}
+.highlight-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(31,55,63,.12)}
+.search-area-button{box-shadow:0 5px 18px rgba(30,64,74,.16);background:rgba(255,254,250,.92);backdrop-filter:blur(10px)}
+.map-style-picker{background:rgba(255,254,250,.88);backdrop-filter:blur(10px);box-shadow:0 4px 13px rgba(30,55,64,.13)}
+.results-head,.results-tabs{background:rgba(255,254,250,.30)}
+@media(max-width:1180px) and (min-width:701px){.discovery-toggle{left:calc(clamp(230px,23vw,280px) - 1px)}}
+@media(max-width:700px){.discovery-toggle{display:none}}
