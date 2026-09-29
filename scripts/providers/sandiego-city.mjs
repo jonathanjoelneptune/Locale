@@ -1,5 +1,5 @@
 import {readFile,writeFile} from "node:fs/promises";
-// Official rolling 7-day permitted special-events feed.
+// Official rolling 7-day permitted special-events feed. Geocodes persist between refreshes.
 const URL="https://www.sandiego.gov/specialevents-filming/calendar/printer/this_week";
 const strip=s=>s.replace(/<br\s*\/?\s*>/gi," ").replace(/<[^>]*>/g," ").replace(/&amp;/g,"&").replace(/&#039;/g,"'").replace(/\s+/g," ").trim();
 const cat=s=>/market|food/i.test(s)?"food":/festival|fair|oktober/i.test(s)?"festival":/run|walk|race|swim/i.test(s)?"sports":/music|concert/i.test(s)?"music":"community";
