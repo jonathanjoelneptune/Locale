@@ -259,3 +259,22 @@
 }
 @media(max-width:1180px) and (min-width:701px){.results-toggle{right:clamp(270px,25vw,330px)!important}}
 .save-event.is-saved{background:#d5f1ee!important;color:#007d91!important;border:1px solid #67bcc5!important;box-shadow:0 0 0 2px rgba(255,255,255,.65);font-size:18px!important}
+
+/* Final drawer seam + selected treatment */
+.results-panel .event-row.selected:after{content:none!important}
+.results-panel .event-row.selected:before{content:"";position:absolute;left:-6px;top:0;bottom:0;width:6px;background:#0796a5}
+@media(min-width:701px){
+ .results-panel,.results-toggle{
+   background:rgba(249,251,248,.48)!important;
+   backdrop-filter:blur(16px) saturate(1.18)!important;
+   -webkit-backdrop-filter:blur(16px) saturate(1.18)!important;
+   border-color:rgba(120,150,158,.35)!important;
+ }
+ .results-toggle{
+   right:calc(clamp(300px,26vw,410px) - 2px)!important;
+   margin:0!important;border-right:0!important;
+   box-shadow:-8px 0 18px rgba(32,58,67,.10)!important;
+ }
+ .shell.results-collapsed .results-toggle{right:0!important}
+}
+@media(max-width:1180px) and (min-width:701px){.results-toggle{right:calc(clamp(270px,25vw,330px) - 2px)!important}}
