@@ -1,6 +1,9 @@
 name: Refresh Locale events
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "scripts/providers/ticketmaster.mjs"
   schedule:
     - cron: "17 */6 * * *"
 permissions:
