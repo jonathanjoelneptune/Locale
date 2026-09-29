@@ -193,3 +193,16 @@
 .results-toggle #resultsCount{color:#0d8ba3!important}
 .save-event{cursor:pointer;transition:transform .12s ease,color .12s ease}.save-event:hover{transform:scale(1.18)}.save-event.is-saved{color:#078aa3;font-weight:900}
 .event-price strong{color:#a66c16;font-size:10px}
+
+/* True overlay glass: map continues beneath both drawers */
+@media(min-width:701px){
+ .map-stage{grid-column:1/4!important;grid-row:1;z-index:1}
+ .discovery-panel{grid-column:1!important;grid-row:1;z-index:800;background:rgba(249,251,248,.48)!important;backdrop-filter:blur(16px) saturate(1.18)!important;-webkit-backdrop-filter:blur(16px) saturate(1.18)!important}
+ .results-panel{grid-column:3!important;grid-row:1;z-index:800;background:rgba(249,251,248,.48)!important;backdrop-filter:blur(16px) saturate(1.18)!important;-webkit-backdrop-filter:blur(16px) saturate(1.18)!important}
+ .discovery-panel .search-wrap,.discovery-panel .radius-panel,.discovery-panel .filters-panel,.results-panel .results-tabs,.results-panel .results-head,.results-panel .cards{background:transparent!important}
+ .event-row{background:rgba(255,255,252,.24)}
+ .results-panel .event-row:hover{background:rgba(238,249,246,.56)}
+ .highlights{grid-column:1/4!important;z-index:900}
+}
+.save-event{width:24px;height:24px;display:grid;place-items:center;border:1px solid transparent!important;border-radius:50%;font-size:17px!important}
+.save-event.is-saved{background:rgba(13,139,163,.13)!important;border-color:rgba(13,139,163,.34)!important;color:#087f97!important;transform:scale(1.05)}
