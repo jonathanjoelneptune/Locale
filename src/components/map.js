@@ -1,6 +1,6 @@
 import {meters} from "../services/geo.js";
 
-export function createMap(el,state,onCenter,onMarker){
+export function createMap(el,state,onCenter,onMarker,onMapBackground){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   const styles={
     standard:["https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}],
@@ -9,19 +9,16 @@ export function createMap(el,state,onCenter,onMarker){
   };
   const basePane=map.createPane("locale-basemap");
   basePane.style.zIndex="150";
-  function makeBase(name){
-    const [url,opts]=styles[name]||styles.standard;
-    return L.tileLayer(url,{...opts,pane:"locale-basemap"});
-  }
-  let base=makeBase(state.mapStyle).addTo(map);
+  const basemaps=Object.fromEntries(Object.entries(styles).map(([name,[url,opts]])=>[name,L.tileLayer(url,{...opts,pane:"locale-basemap"})]));
+  let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
+  basemaps[activeStyle].addTo(map);
   function setStyle(name){
-    if(!styles[name])return;
-    const [url,opts]=styles[name];
-    base.options.attribution=opts.attribution;
-    base.options.maxZoom=opts.maxZoom||19;
-    base.setUrl(url,false);
-    base.redraw();
-    map.invalidateSize({pan:false,animate:false});
+    if(!basemaps[name])return;
+    Object.values(basemaps).forEach(layer=>{if(map.hasLayer(layer))map.removeLayer(layer)});
+    activeStyle=name;
+    basemaps[name].addTo(map);
+    basemaps[name].redraw();
+    requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
@@ -93,7 +90,7 @@ export function createMap(el,state,onCenter,onMarker){
         const marker=L.marker(ll,{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} nearby events`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));
-        marker.on("click",()=>count>1?onMarker?.({type:"group",events:group,lat:ll.lat,lng:ll.lng,venue:group.every(x=>x.venue===e.venue)?e.venue:"Nearby events"}):onMarker?.({type:"single",event:e,marker}));
+        marker.on("click",ev=>{L.DomEvent.stopPropagation(ev);count>1?onMarker?.({type:"group",events:group,lat:ll.lat,lng:ll.lng,venue:group.every(x=>x.venue===e.venue)?e.venue:"Nearby events"}):onMarker?.({type:"single",event:e,marker})});
       });
     },
     selectEvent(id){
@@ -116,6 +113,6 @@ export function createMap(el,state,onCenter,onMarker){
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
   };
-  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});
+  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});\n  map.on("click",()=>onMapBackground?.());
   return api;
 }
