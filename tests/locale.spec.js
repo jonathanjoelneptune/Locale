@@ -121,7 +121,7 @@ test("event groups fully expand at street-level zoom",async({page})=>{
   const zoomIn=page.locator(".leaflet-control-zoom-in");
   for(let i=0;i<12;i++){
     if(await zoomIn.getAttribute("aria-disabled")==="true")break;
-    await zoomIn.click();
+    await zoomIn.click({force:true});
     await page.waitForTimeout(80);
   }
   await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
