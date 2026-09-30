@@ -2,6 +2,7 @@ import {meters} from "../services/geo.js";
 
 export function createMap(el,state,onCenter,onMarker,onMapBackground){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
+  Object.defineProperty(el,"__localeMap",{value:map,configurable:true});
   const styles={
     standard:["https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}],
     humanitarian:["https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{maxZoom:19,subdomains:"abc",attribution:"&copy; OpenStreetMap contributors, Tiles style by HOT"}],
