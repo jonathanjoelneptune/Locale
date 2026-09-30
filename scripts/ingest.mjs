@@ -12,6 +12,7 @@ import {spinEvents} from "./providers/spin.mjs";
 import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
+import {sanDiegoFamilyEvents} from "./providers/sandiego-family.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -19,6 +20,7 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  "sandiego-family":async()=>sanDiegoFamilyEvents(),
   nova:async()=>novaEvents(),
   spin:async()=>spinEvents(),
   "comedy-store":async()=>comedyStoreEvents(),
