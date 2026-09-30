@@ -236,10 +236,14 @@ for(const region of Object.values(REGIONS)){
   const categorySourceCounts={};
   const categorySourceDiversity={};
   const locationPrecisionCounts={};
+  const approximatePrecisions=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
+  let approximateLocationCount=0;
   for(const event of regionEvents){
     const category=event.category||"other";
     categoryCounts[category]=(categoryCounts[category]||0)+1;
-    locationPrecisionCounts[event.locationPrecision||"unknown"]=(locationPrecisionCounts[event.locationPrecision||"unknown"]||0)+1;
+    const precision=event.locationPrecision||"unknown";
+    locationPrecisionCounts[precision]=(locationPrecisionCounts[precision]||0)+1;
+    if(approximatePrecisions.has(precision))approximateLocationCount++;
     if(!categorySourceCounts[category])categorySourceCounts[category]={};
     for(const source of provenance(event)){
       const key=source.id||source.name||"unknown";
@@ -259,7 +263,10 @@ for(const region of Object.values(REGIONS)){
     categorySourceCounts,
     categorySourceDiversity,
     sourceHealth:sourceStats.filter(stat=>stat.regionId===region.id),
-    locationPrecisionCounts
+    locationPrecisionCounts,
+    preciseLocationCount:regionEvents.length-approximateLocationCount,
+    approximateLocationCount,
+    preciseLocationRate:Number(((regionEvents.length-approximateLocationCount)/Math.max(1,regionEvents.length)).toFixed(3))
   };
 }
 
