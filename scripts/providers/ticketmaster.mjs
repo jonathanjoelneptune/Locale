@@ -1,15 +1,10 @@
 import {canonicalizeVenue} from "../venue-canonical.mjs";
+import {classifyEvent} from "../event-classification.mjs";
 const API="https://app.ticketmaster.com/discovery/v2/events.json";
 
 function category(event){
-  const segment=event.classifications?.[0]?.segment?.name?.toLowerCase()||"";
-  const genre=event.classifications?.[0]?.genre?.name?.toLowerCase()||"";
-  if(segment.includes("music")) return "music";
-  if(segment.includes("sports")) return "sports";
-  if(segment.includes("arts")||genre.includes("theatre")||genre.includes("theater")) return "theater";
-  if(genre.includes("comedy")) return "comedy";
-  if(segment.includes("family")) return "family";
-  return "other";
+  const classification=event.classifications?.[0]||{};
+  return classifyEvent(event.name,classification.segment?.name,classification.genre?.name,classification.subGenre?.name,event.info,event.pleaseNote);
 }
 function price(event){
   if(event.dates?.status?.code==="cancelled") return null;

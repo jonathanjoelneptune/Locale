@@ -1,3 +1,4 @@
+import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
@@ -8,14 +9,7 @@ const strip=value=>String(value||"")
   .trim();
 
 function category(event){
-  const text=[event.title,event.event_types,event.filters].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
-  if(/food|dining|culinary|coffee|tasting|pantry/.test(text))return "food";
-  if(/festival|fair|celebration|homecoming|expo/.test(text))return "festival";
-  if(/theat|play\b|dance|performance|film|cinema|exhibit|gallery|art\b/.test(text))return "theater";
-  if(/soccer|basketball|baseball|volleyball|water polo|athletic|sports?|game\b|match\b/.test(text))return "sports";
-  if(/concert|music|orchestra|choir|band|dj\b|opera/.test(text))return "music";
-  if(/family|children|kids?\b/.test(text))return "family";
-  return "community";
+  return classifyEvent(event.title,event.event_types,event.filters,event.description_text,event.location_name);
 }
 
 function price(event){

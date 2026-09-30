@@ -4,6 +4,11 @@ import {sanDiegoCityEvents} from "./providers/sandiego-city.mjs";
 import {powayEvents} from "./providers/poway.mjs";
 import {localistEvents} from "./providers/localist.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
+import {jsonLdEvents} from "./providers/jsonld.mjs";
+import {rssEvents,rssDetailEvents} from "./providers/rss.mjs";
+import {jsonLdCrawlEvents} from "./providers/jsonld-crawl.mjs";
+import {novaEvents} from "./providers/nova.mjs";
+import {spinEvents} from "./providers/spin.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -11,6 +16,8 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  nova:async()=>novaEvents(),
+  spin:async()=>spinEvents(),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
     center:region.center,
@@ -33,6 +40,32 @@ const adapters={
     sourceId:source.id,
     fallbackCenter:source.fallbackCenter,
     days:45
+  }),
+  jsonld:async (region,source)=>jsonLdEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter
+  }),
+  rss:async (region,source)=>rssEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter
+  }),
+  "rss-detail":async (region,source)=>rssDetailEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,
+    maxLinks:50
+  }),
+  "jsonld-crawl":async (region,source)=>jsonLdCrawlEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,
+    linkPattern:source.linkPattern
   })
 };
 
@@ -47,6 +80,7 @@ for(const region of Object.values(REGIONS)){
 
 const results=await Promise.allSettled(jobs.map(job=>job.run(job.region,job.source)));
 const events=[];
+const sourceStats=[];
 results.forEach((result,index)=>{
   const {region,source}=jobs[index];
   if(result.status==="fulfilled"){
@@ -54,6 +88,7 @@ results.forEach((result,index)=>{
       console.error(`${region.id}/${source.id} returned a non-array payload`);
       return;
     }
+    sourceStats.push({regionId:region.id,sourceId:source.id,count:result.value.length,status:"ok"});
     events.push(...result.value.map(event=>canonicalizeVenue({
       ...event,
       regionId:event.regionId||region.id,
@@ -63,6 +98,7 @@ results.forEach((result,index)=>{
     })));
     console.log(`${region.id}/${source.id}: ${result.value.length} events`);
   }else{
+    sourceStats.push({regionId:region.id,sourceId:source.id,count:0,status:"failed"});
     console.error(`${region.id}/${source.id} failed:`,result.reason);
   }
 });
@@ -135,10 +171,25 @@ const coverage={generatedAt:new Date().toISOString(),regions:{}};
 for(const region of Object.values(REGIONS)){
   const regionEvents=sorted.filter(event=>event.regionId===region.id);
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
+  const categoryCounts={};
+  const sourceCounts={};
+  const locationPrecisionCounts={};
+  for(const event of regionEvents){
+    categoryCounts[event.category]=(categoryCounts[event.category]||0)+1;
+    locationPrecisionCounts[event.locationPrecision||"unknown"]=(locationPrecisionCounts[event.locationPrecision||"unknown"]||0)+1;
+    for(const source of provenance(event)){
+      const key=source.id||source.name||"unknown";
+      sourceCounts[key]=(sourceCounts[key]||0)+1;
+    }
+  }
   coverage.regions[region.id]={
     eventCount:regionEvents.length,
     sourceIds,
-    cells:[...new Set(regionEvents.map(event=>event.geoCell).filter(Boolean))].length
+    cells:[...new Set(regionEvents.map(event=>event.geoCell).filter(Boolean))].length,
+    categoryCounts,
+    sourceCounts,
+    sourceHealth:sourceStats.filter(stat=>stat.regionId===region.id),
+    locationPrecisionCounts
   };
 }
 
