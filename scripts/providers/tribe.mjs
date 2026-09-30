@@ -49,7 +49,7 @@ export async function tribeEvents({endpoint,sourceName,sourceId,fallbackCenter,d
     url.searchParams.set("end_date",end.toISOString().slice(0,10));
     url.searchParams.set("per_page","50");
     url.searchParams.set("page",String(page));
-    const response=await fetch(url,{headers:{Accept:"application/json","User-Agent":"Locale-events/1.0"}});
+    const response=await fetch(url,{headers:{Accept:"application/json","User-Agent":"Locale-events/1.0"},signal:AbortSignal.timeout(10000)});
     if(!response.ok)throw new Error(`${sourceName} Tribe ${response.status}`);
     const payload=await response.json();
     const rows=Array.isArray(payload.events)?payload.events:[];
