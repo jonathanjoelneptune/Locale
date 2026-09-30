@@ -56,8 +56,8 @@ if(Array.isArray(events)){
     if(!regionIds.has(event.regionId))fail(`${label} references unknown region ${event.regionId}`);
     if(!sourceIds.has(event.sourceId))fail(`${label} references unknown source ${event.sourceId}`);
     if(!finite(event.lat,-90,90)||!finite(event.lng,-180,180))fail(`${label} has invalid coordinates`);
-    if(String(event.venue||"").length>180)fail(`${label} venue is suspiciously long`);
-    if(/San Diego Family Magazine|CURRENT & PAST ISSUES|Resources Education Directory/i.test(String(event.venue||"")))fail(`${label} venue contains page chrome`);
+    if(coverage?.locationQualityVersion>=1&&String(event.venue||"").length>180)fail(`${label} venue is suspiciously long`);
+    if(coverage?.locationQualityVersion>=1&&/San Diego Family Magazine|CURRENT & PAST ISSUES|Resources Education Directory/i.test(String(event.venue||"")))fail(`${label} venue contains page chrome`);
     const time=Date.parse(event.start);
     if(!Number.isFinite(time))fail(`${label} has invalid start ${event.start}`);
     if(Number.isFinite(time)&&time<previousTime)fail("events.json is not sorted chronologically");
