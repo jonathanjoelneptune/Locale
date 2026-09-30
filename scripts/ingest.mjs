@@ -79,7 +79,13 @@ const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function runWithRetry(job,attempts=3){
   let lastError;
   for(let attempt=1;attempt<=attempts;attempt++){
-    try{return await job.run(job.region,job.source)}
+    try{
+      const value=await job.run(job.region,job.source);
+      if(job.source.minExpectedEvents&&Array.isArray(value)&&value.length<job.source.minExpectedEvents){
+        throw new Error(`${job.source.id} returned ${value.length} events; expected at least ${job.source.minExpectedEvents}`);
+      }
+      return value;
+    }
     catch(error){
       lastError=error;
       if(attempt<attempts)await sleep(750*attempt);
