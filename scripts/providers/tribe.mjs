@@ -1,3 +1,4 @@
+import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
@@ -8,14 +9,7 @@ const strip=value=>String(value||"")
   .trim();
 
 function category(event){
-  const text=[event.title,(event.categories||[]).map(x=>x.name)].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
-  if(/food|culinary|tasting|dining|sake|tea\b/.test(text))return "food";
-  if(/festival|\bfest\b|fair|celebration|parade|expo|fete/.test(text))return "festival";
-  if(/theat|play\b|dance|performance|film|cinema|screening/.test(text))return "theater";
-  if(/soccer|basketball|baseball|volleyball|athletic|sport|game\b|race\b|run\b/.test(text))return "sports";
-  if(/concert|music|orchestra|choir|band|opera|tango/.test(text))return "music";
-  if(/family|children|kids?\b/.test(text))return "family";
-  return "community";
+  return classifyEvent(event.title,(event.categories||[]).map(x=>x.name),event.description,event.excerpt,event.venue?.venue);
 }
 
 function coordinates(event,fallback){
