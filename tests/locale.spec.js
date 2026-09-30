@@ -2,6 +2,12 @@ import { test, expect } from "@playwright/test";
 
 const waitForLocale=async page=>{
   await page.goto("/");
+  await page.waitForSelector("#sidebar",{timeout:15000});
+  await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
+  if(!(await page.locator(".event-row").count())){
+    const seven=page.locator('[data-window="7days"]');
+    if(await seven.count())await seven.click();
+  }
   await page.waitForSelector(".event-row",{timeout:15000});
   await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-locale-basemap-pane img.leaflet-tile"));
 };
