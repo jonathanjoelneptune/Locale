@@ -113,3 +113,14 @@ test("static bootstrap remains visible if the application module cannot load",as
   await expect(page.locator("#localeBoot span")).toContainText("could not finish loading",{timeout:6000});
   await expect(page.locator("#localeBoot button")).toBeVisible();
 });
+
+
+test("event groups fully expand at street-level zoom",async({page})=>{
+  await waitForLocale(page);
+  await page.locator('[data-window="7days"]').click();
+  const map=page.locator("#map");
+  await map.evaluate(el=>el.__localeMap.setZoom(17,{animate:false}));
+  await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThanOrEqual(17);
+  await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
+  await expect(page.locator(".event-pin").first()).toBeVisible();
+});
