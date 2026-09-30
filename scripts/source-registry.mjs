@@ -44,6 +44,9 @@ export const SOURCES=[
     endpoint:"https://tockify.com/api/feeds/ics/sdparkscalendar",fallbackCenter:{lat:32.85,lng:-117.05},refreshHours:12
   },
   {
+    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",minExpectedEvents:1,refreshHours:12
+  },
+  {
     id:"til-two-club",name:"Til-Two Club",scope:"local",regions:["san-diego"],adapter:"tribe",minExpectedEvents:1,
     endpoint:"https://www.tiltwoclub.com",fallbackCenter:{lat:32.7553,lng:-117.0928},refreshHours:6
   },
