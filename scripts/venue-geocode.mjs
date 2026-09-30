@@ -6,7 +6,7 @@ let cache={};
 let lastRequestAt=0;
 let dirty=false;
 let newLookups=0;
-const MAX_NEW_LOOKUPS_PER_RUN=35;
+const MAX_NEW_LOOKUPS_PER_RUN=20;
 
 const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
@@ -42,7 +42,7 @@ export async function geocodeVenue(venue,region){
   try{
     const response=await fetch(url,{
       headers:{"User-Agent":"Locale-events/1.0 (https://github.com/jonathanjoelneptune/Locale)"},
-      signal:AbortSignal.timeout(8000)
+      signal:AbortSignal.timeout(3000)
     });
     if(!response.ok)return null;
     const rows=await response.json();
