@@ -4,10 +4,39 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0b1020">
   <title>Locale — What's happening around you</title>
+  <style>
+    #localeBoot{min-height:100vh;display:grid;place-items:center;background:#f5f2e9;color:#142536;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    #localeBoot>div{display:grid;gap:8px;text-align:center}
+    #localeBoot strong{font-size:28px}
+    #localeBoot span{font-size:13px;color:#71808c}
+    #localeBoot button{display:none;margin:8px auto 0;padding:8px 14px;border:1px solid #b9c6ca;background:#fffefa;color:#142536;cursor:pointer}
+    #localeBoot.is-error button{display:block}
+  </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./styles/base.css"><link rel="stylesheet" href="./styles/app.css">
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div id="localeBoot" role="status" aria-live="polite">
+      <div><strong>Locale</strong><span>Loading events around you…</span><button type="button" onclick="location.reload()">Retry</button></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const fail = () => {
+        if (document.documentElement.classList.contains("locale-ready")) return;
+        const boot = document.querySelector("#localeBoot");
+        if (!boot) return;
+        boot.classList.add("is-error");
+        const message = boot.querySelector("span");
+        if (message) message.textContent = "Locale could not finish loading. Please retry.";
+      };
+      window.__localeBootTimer = setTimeout(fail, 4000);
+      window.addEventListener("error", event => {
+        if (event.target?.tagName === "SCRIPT") fail();
+      }, true);
+      window.addEventListener("unhandledrejection", fail);
+    })();
+  </script>
   <script type="module" src="./src/app.js"></script>
 </body></html>
