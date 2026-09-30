@@ -10,12 +10,15 @@ const MAX_NEW_LOOKUPS_PER_RUN=20;
 const EARTH_MILES=3958.8;
 
 const norm=value=>String(value||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-const keyFor=(venue,region,{sourceName,address}={})=>[
+const contextKey=(venue,region,{sourceName,address}={})=>[
   venue,
   address||sourceName,
   region?.name,
   region?.administrativeArea,
   region?.countryCode
+].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+const regionalQuery=(venue,region)=>[
+  venue,region?.name,region?.administrativeArea,region?.countryCode
 ].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
 
 const vague=/^(?:tbd|to be determined|location tba|uc san diego|balboa park|class and trip locations vary|location details to come!?|email .* location|seating is limited)/i;
@@ -42,49 +45,52 @@ async function throttle(){
   lastRequestAt=Date.now();
 }
 
-export async function geocodeVenue(venue,region,{sourceName,address,origin,maxMiles=8}={}){
-  await load();
-  const clean=norm(venue);
-  if(!clean||vague.test(clean))return null;
-  const key=keyFor(clean,region,{sourceName:sourceName&&sourceName!==clean?sourceName:null,address:norm(address)});
-  const cached=cache[key];
-  if(cached?.miss)return null;
-  if(cached?.lat!=null&&cached?.lng!=null)return cached;
-  if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;
-  newLookups++;
-
+async function search(query){
   await throttle();
   const url=new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.set("format","jsonv2");
   url.searchParams.set("limit","1");
-  url.searchParams.set("q",key);
+  url.searchParams.set("q",query);
   try{
     const response=await fetch(url,{
       headers:{"User-Agent":"Locale-events/1.0 (https://github.com/jonathanjoelneptune/Locale)"},
       signal:AbortSignal.timeout(3000)
     });
     if(!response.ok)return null;
-    const rows=await response.json();
-    const first=rows?.[0];
+    const first=(await response.json())?.[0];
     const lat=Number(first?.lat),lng=Number(first?.lon);
-    if(!Number.isFinite(lat)||!Number.isFinite(lng)){
-      cache[key]={miss:true,checkedAt:new Date().toISOString()};
-      dirty=true;
-      return null;
-    }
-    const point={lat,lng};
-    if(origin&&Number.isFinite(Number(origin.lat))&&Number.isFinite(Number(origin.lng))&&milesBetween(origin,point)>maxMiles){
-      cache[key]={miss:true,checkedAt:new Date().toISOString(),reason:"outside-source-footprint"};
-      dirty=true;
-      return null;
-    }
-    const resolved={...point,displayName:first.display_name||clean};
-    cache[key]=resolved;
-    dirty=true;
-    return resolved;
+    if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+    return {lat,lng,displayName:first.display_name||query};
   }catch{
     return null;
   }
+}
+
+export async function geocodeVenue(venue,region,{sourceName,address,origin,maxMiles=8}={}){
+  await load();
+  const clean=norm(venue);
+  if(!clean||vague.test(clean))return null;
+
+  const key=contextKey(clean,region,{sourceName:sourceName&&sourceName!==clean?sourceName:null,address:norm(address)});
+  const cached=cache[key];
+  if(cached?.miss)return null;
+  if(cached?.lat!=null&&cached?.lng!=null)return cached;
+  if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;
+  newLookups++;
+
+  const queries=[key,regionalQuery(clean,region)].filter((value,index,list)=>value&&list.indexOf(value)===index);
+  for(const query of queries){
+    const point=await search(query);
+    if(!point)continue;
+    if(origin&&Number.isFinite(Number(origin.lat))&&Number.isFinite(Number(origin.lng))&&milesBetween(origin,point)>maxMiles)continue;
+    cache[key]=point;
+    dirty=true;
+    return point;
+  }
+
+  cache[key]={miss:true,checkedAt:new Date().toISOString(),reason:"no-in-footprint-match"};
+  dirty=true;
+  return null;
 }
 
 export async function saveVenueGeocodeCache(){
