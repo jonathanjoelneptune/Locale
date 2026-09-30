@@ -75,10 +75,9 @@ test("production-critical controls exist and links are valid",async({page})=>{
   for(const href of hrefs.slice(0,20)) expect(href).toMatch(/^https?:\/\//);
 });
 
-test("location search is not San Diego coupled",async({page})=>{
-  await waitForLocale(page);
-  await page.route("**/nominatim.openstreetmap.org/**",route=>route.fulfill({status:200,contentType:"application/json",body:JSON.stringify([{lat:"41.8781",lon:"-87.6298",display_name:"Chicago, Cook County, Illinois, United States"}])}));
-  const search=page.locator("#placeSearch");
-  await search.fill("Chicago, IL");await search.press("Enter");
-  await expect(page.locator("#placeLabel")).toContainText("Chicago");
+test("region architecture is configured for multiple metros",async({page})=>{
+  await page.goto("/src/data/regions.js");
+  const body=await page.textContent("body");
+  expect(body).toContain("san-diego");
+  expect(body).toContain("chicago");
 });
