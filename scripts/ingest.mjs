@@ -1,11 +1,13 @@
 import {writeFile,mkdir} from "node:fs/promises";
 import {ticketmasterEvents} from "./providers/ticketmaster.mjs";
 import {sanDiegoCityEvents} from "./providers/sandiego-city.mjs";
+import {powayEvents} from "./providers/poway.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 
 const providers=[
   ["ticketmaster",()=>ticketmasterEvents({apiKey:process.env.TICKETMASTER_API_KEY})],
-  ["san-diego-city",()=>sanDiegoCityEvents()]
+  ["san-diego-city",()=>sanDiegoCityEvents()],
+  ["poway",()=>powayEvents()]
 ];
 const results=await Promise.allSettled(providers.map(([,run])=>run()));
 const events=[];
@@ -45,5 +47,6 @@ for(const e of events){
 }
 const sorted=unique.sort((a,b)=>new Date(a.start)-new Date(b.start));
 await mkdir("src/data",{recursive:true});
-await writeFile("src/data/events.json",JSON.stringify(sorted,null,2)+"\n");
+await writeFile("src/data/events.json",JSON.stringify(sorted,null,2)+"
+");
 console.log(`Wrote ${sorted.length} canonical events from ${events.length} provider records.`);
