@@ -1,4 +1,4 @@
-import {writeFile,mkdir} from "node:fs/promises";
+import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {ticketmasterEvents} from "./providers/ticketmaster.mjs";
 import {sanDiegoCityEvents} from "./providers/sandiego-city.mjs";
 import {powayEvents} from "./providers/poway.mjs";
@@ -69,6 +69,25 @@ const adapters={
   })
 };
 
+let previousEvents=[];
+try{
+  const prior=JSON.parse(await readFile("src/data/events.json","utf8"));
+  if(Array.isArray(prior))previousEvents=prior;
+}catch{}
+
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function runWithRetry(job,attempts=3){
+  let lastError;
+  for(let attempt=1;attempt<=attempts;attempt++){
+    try{return await job.run(job.region,job.source)}
+    catch(error){
+      lastError=error;
+      if(attempt<attempts)await sleep(750*attempt);
+    }
+  }
+  throw lastError;
+}
+
 const jobs=[];
 for(const region of Object.values(REGIONS)){
   for(const source of sourcesForRegion(region)){
@@ -78,7 +97,7 @@ for(const region of Object.values(REGIONS)){
   }
 }
 
-const results=await Promise.allSettled(jobs.map(job=>job.run(job.region,job.source)));
+const results=await Promise.allSettled(jobs.map(job=>runWithRetry(job)));
 const events=[];
 const sourceStats=[];
 results.forEach((result,index)=>{
@@ -98,8 +117,18 @@ results.forEach((result,index)=>{
     })));
     console.log(`${region.id}/${source.id}: ${result.value.length} events`);
   }else{
-    sourceStats.push({regionId:region.id,sourceId:source.id,count:0,status:"failed"});
-    console.error(`${region.id}/${source.id} failed:`,result.reason);
+    const preserved=previousEvents.filter(event=>
+      event.regionId===region.id&&(
+        event.sourceId===source.id||
+        (Array.isArray(event.sources)&&event.sources.some(item=>item?.id===source.id))
+      )
+    ).map(event=>({
+      ...event,
+      staleSourceIds:[...new Set([...(event.staleSourceIds||[]),source.id])]
+    }));
+    events.push(...preserved);
+    sourceStats.push({regionId:region.id,sourceId:source.id,count:preserved.length,status:preserved.length?"stale-preserved":"failed"});
+    console.error(`${region.id}/${source.id} failed after retries; preserved ${preserved.length} last-known-good events:`,result.reason);
   }
 });
 
