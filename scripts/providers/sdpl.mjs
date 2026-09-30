@@ -11,7 +11,7 @@ const clock=(h,m,ap)=>{let hour=Number(h),minute=Number(m||0);if(ap.toLowerCase(
 const iso=(y,m,d,h,min)=>new Date(`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}T${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}:00-07:00`).toISOString();
 
 export async function sdplEvents({days=45}={}){
-  const endpoint="https://sandiego.events.mylibrary.digital/";
+  const endpoint="https://sandiego.events.mylibrary.digital/embed/event_calendar?height=1100px&showTitle=true&view=list&width=100%25";
   const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 Locale-events/1.0"},signal:AbortSignal.timeout(12000)});
   if(!response.ok)throw new Error(`SDPL calendar ${response.status}`);
   const html=await response.text(),now=Date.now(),horizon=now+days*86400000,verified=new Date().toISOString(),out=[];
