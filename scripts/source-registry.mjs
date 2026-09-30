@@ -18,8 +18,7 @@ export const SOURCES=[
     id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",refreshHours:6
   },
   {
-    id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
-    endpoint:"https://spinnightclub.com/",linkPattern:"/event",fallbackCenter:{lat:32.7423,lng:-117.1836},refreshHours:6
+    id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"spin",refreshHours:6
   },
   {
     id:"sandiego-tourism",name:"San Diego Tourism Authority",scope:"local",regions:["san-diego"],adapter:"jsonld",
