@@ -7,6 +7,36 @@ const strip=value=>String(value||"")
 
 const MONTH={january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const GARBAGE_MARKERS=[
+  "San Diego Family Magazine","Event options","Invite Print","Menu Resources",
+  "Resources Education Directory","Search Search","CURRENT & PAST ISSUES"
+];
+const GENERIC_PLACE=/^(?:San Diego(?:,\s*CA)?|Temecula(?:,\s*CA)?|El Cajon(?:,\s*CA)?|Fallbrook(?:,\s*CA)?|La Jolla(?:,\s*CA)?|Oceanside(?:,\s*CA)?|Carlsbad(?:,\s*CA)?)$/i;
+
+function cleanVenue(value){
+  let venue=strip(value||"");
+  for(const marker of GARBAGE_MARKERS){
+    const index=venue.toLowerCase().indexOf(marker.toLowerCase());
+    if(index>0)venue=venue.slice(0,index).trim();
+  }
+  venue=venue.replace(/\s+(?:On|At)\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\b[\s\S]*$/i,"").trim();
+  if(venue.length>140)venue=venue.slice(0,140).replace(/\s+\S*$/,"").trim();
+  return venue||"San Diego, CA";
+}
+
+function extractVenue(html,text){
+  const rawPatterns=[
+    /\bAt\s+(?:<[^>]+>\s*)*([^<\r\n]{2,140})/i,
+    /class=["'][^"']*(?:location|venue)[^"']*["'][^>]*>([\s\S]*?)<\//i
+  ];
+  for(const pattern of rawPatterns){
+    const match=html.match(pattern);
+    const value=cleanVenue(match?.[1]);
+    if(value&&!/^At$/i.test(value)&&!GENERIC_PLACE.test(value))return value;
+  }
+  const flat=text.match(/\bAt\s+(.+?)(?=\s+(?:Posted by|Categories:|Event repeats|San Diego Family Magazine|Event options|Menu Resources|Search Search))/i);
+  return cleanVenue(flat?.[1]||"San Diego, CA");
+}
 
 function eventDate(text){
   const m=text.match(/\bOn\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})/i);
@@ -73,15 +103,15 @@ export async function sanDiegoFamilyEvents({days=45}={}){
       const time=eventTime(text);
       const start=toIso(date,time);
       if(!start)continue;
-      const locationMatch=text.match(/\bAt\s+(.+?)(?=\s+(?:Posted by|Categories:))/i);
-      const venue=strip(locationMatch?.[1]||"San Diego");
+      const venue=extractVenue(html,text);
+      const approximate=GENERIC_PLACE.test(venue);
       const categories=strip((text.match(/Categories:\s*(.+?)(?=\s+(?:Event repeats|\b[A-Z][a-z]+\s+[A-Z]))/i)||[])[1]||"");
       const descriptionStart=text.indexOf("Categories:");
       const description=descriptionStart>=0?text.slice(descriptionStart).replace(/^Categories:\s*[^.]*\.?/i,"").split(/Event repeats/i)[0].trim():"";
       out.push({
         id:"sandiego-family:"+url.split("/").filter(Boolean).pop(),
         title,category:"family",venue,
-        lat:32.7157,lng:-117.1611,locationPrecision:"source-center",
+        lat:32.7157,lng:-117.1611,locationPrecision:approximate?"city-only":"source-center",
         start,end:null,timeStatus:time?"known":"unknown",
         price:/\bFREE\b/.test(text)?"Free":null,priceStatus:/\bFREE\b/.test(text)?"free":"unknown",
         url,source:"San Diego Family",description:description||categories,
