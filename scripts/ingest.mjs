@@ -19,6 +19,7 @@ import {sdsuEvents} from "./providers/sdsu.mjs";
 import {icsEvents} from "./providers/ics.mjs";
 import {sdplEvents} from "./providers/sdpl.mjs";
 import {midwayEvents} from "./providers/midway.mjs";
+import {sunsetTriviaEvents} from "./providers/sunset-trivia.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -26,6 +27,7 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  "sunset-trivia":async()=>sunsetTriviaEvents(),
   midway:async()=>midwayEvents(),
   sdpl:async()=>sdplEvents(),
   "san-diego-parks":async()=>sanDiegoParksEvents(),
