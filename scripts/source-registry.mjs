@@ -46,9 +46,8 @@ export const SOURCES=[
     disabledReason:"403 from automated ingestion; keep as discovery candidate"
   },
   {
-    id:"sandiego-family",name:"San Diego Family",scope:"regional",regions:["san-diego"],adapter:"jsonld",
-    endpoint:"https://www.sandiegofamily.com/things-to-do/events-calendar",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12,enabled:false,
-    disabledReason:"No collection-level structured events exposed; needs a dedicated adapter"
+    id:"sandiego-family",name:"San Diego Family",scope:"regional",regions:["san-diego"],adapter:"sandiego-family",minExpectedEvents:1,
+    endpoint:"https://www.sandiegofamily.com/things-to-do/events-calendar",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12
   },
   {
     id:"eventbrite-san-diego",name:"Eventbrite San Diego",scope:"regional",regions:["san-diego"],adapter:"eventbrite",
