@@ -6,7 +6,7 @@ import {localistEvents} from "./providers/localist.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
-import {sourcesForRegion} from "./source-registry.mjs";
+import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
@@ -72,12 +72,19 @@ if(!events.length){
   process.exit(0);
 }
 
+const sourceById=new Map(SOURCES.map(source=>[source.id,source]));
 let enrichedLocations=0;
 for(let index=0;index<events.length;index++){
   const event=events[index];
   if(event.locationPrecision!=="source-center")continue;
   const region=REGIONS[event.regionId];
-  const point=await geocodeVenue(event.venue,region);
+  const source=sourceById.get(event.sourceId);
+  const point=await geocodeVenue(event.venue,region,{
+    sourceName:source?.name,
+    address:event.address,
+    origin:{lat:event.lat,lng:event.lng},
+    maxMiles:source?.geocodeRadiusMiles??8
+  });
   if(!point)continue;
   events[index]={...event,lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
   enrichedLocations++;

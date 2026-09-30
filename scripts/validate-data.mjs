@@ -78,6 +78,7 @@ if(geocodeCache&&typeof geocodeCache==="object"){
 }
 if(venueGeocodeCache&&typeof venueGeocodeCache==="object"){
   for(const [query,point] of Object.entries(venueGeocodeCache)){
+    if(point?.miss===true)continue;
     if(!finite(point?.lat,-90,90)||!finite(point?.lng,-180,180))fail(`venue-geocode-cache entry "${query}" has invalid coordinates`);
   }
 }
