@@ -5,6 +5,8 @@ let loaded=false;
 let cache={};
 let lastRequestAt=0;
 let dirty=false;
+let newLookups=0;
+const MAX_NEW_LOOKUPS_PER_RUN=35;
 
 const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
@@ -29,6 +31,8 @@ export async function geocodeVenue(venue,region){
   if(!clean||vague.test(clean))return null;
   const key=keyFor(clean,region);
   if(cache[key])return cache[key];
+  if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;
+  newLookups++;
 
   await throttle();
   const url=new URL("https://nominatim.openstreetmap.org/search");
