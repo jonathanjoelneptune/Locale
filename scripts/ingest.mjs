@@ -2,6 +2,8 @@ import {writeFile,mkdir} from "node:fs/promises";
 import {ticketmasterEvents} from "./providers/ticketmaster.mjs";
 import {sanDiegoCityEvents} from "./providers/sandiego-city.mjs";
 import {powayEvents} from "./providers/poway.mjs";
+import {localistEvents} from "./providers/localist.mjs";
+import {tribeEvents} from "./providers/tribe.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
 import {REGIONS} from "./regions.mjs";
@@ -16,7 +18,21 @@ const adapters={
     countryCode:region.countryCode
   }),
   "san-diego-city":async()=>sanDiegoCityEvents(),
-  poway:async()=>powayEvents()
+  poway:async()=>powayEvents(),
+  localist:async (region,source)=>localistEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,
+    days:45
+  }),
+  tribe:async (region,source)=>tribeEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,
+    days:45
+  })
 };
 
 const jobs=[];
@@ -28,7 +44,7 @@ for(const region of Object.values(REGIONS)){
   }
 }
 
-const results=await Promise.allSettled(jobs.map(job=>job.run(job.region)));
+const results=await Promise.allSettled(jobs.map(job=>job.run(job.region,job.source)));
 const events=[];
 results.forEach((result,index)=>{
   const {region,source}=jobs[index];
