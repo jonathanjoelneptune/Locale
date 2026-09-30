@@ -227,7 +227,7 @@ const sorted=unique.sort((a,b)=>{
   return timeDifference||String(a.id).localeCompare(String(b.id));
 });
 
-const coverage={generatedAt:new Date().toISOString(),regions:{}};
+const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,regions:{}};
 for(const region of Object.values(REGIONS)){
   const regionEvents=sorted.filter(event=>event.regionId===region.id);
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
