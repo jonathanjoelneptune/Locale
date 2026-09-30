@@ -46,7 +46,7 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
     url.searchParams.set("days",String(days));
     url.searchParams.set("pp","100");
     url.searchParams.set("page",String(page));
-    const response=await fetch(url,{headers:{Accept:"application/json","User-Agent":"Locale-events/1.0"}});
+    const response=await fetch(url,{headers:{Accept:"application/json","User-Agent":"Locale-events/1.0"},signal:AbortSignal.timeout(10000)});
     if(!response.ok)throw new Error(`${sourceName} Localist ${response.status}`);
     const payload=await response.json();
     const rows=Array.isArray(payload.events)?payload.events:[];
