@@ -268,6 +268,7 @@ for(const region of Object.values(REGIONS)){
     approximateLocationCount,
     preciseLocationRate:Number(((regionEvents.length-approximateLocationCount)/Math.max(1,regionEvents.length)).toFixed(3))
   };
+  console.log(`${region.id} location quality: ${regionEvents.length-approximateLocationCount}/${regionEvents.length} precise (${(coverage.regions[region.id].preciseLocationRate*100).toFixed(1)}%), ${approximateLocationCount} approximate.`);
 }
 
 await mkdir("src/data",{recursive:true});
