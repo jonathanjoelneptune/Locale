@@ -15,9 +15,7 @@ export const SOURCES=[
     endpoint:"https://www.sandiegoreader.com/rss/events/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:6
   },
   {
-    id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
-    endpoint:"https://novasd.com/",linkPattern:"/event/",fallbackCenter:{lat:32.7108,lng:-117.1596},refreshHours:6,enabled:false,
-    disabledReason:"Official listing is visible but current structured crawl returns no events; needs dedicated extraction"
+    id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",refreshHours:6
   },
   {
     id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
