@@ -60,7 +60,7 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
       const cost=price(event);
       const venue=event.location_name||event.room_number||event.address||sourceName;
       out.push({
-        id:`${sourceId}:${event.id}`,
+        id:`${sourceId}:${event.id}:${String(start).replace(/[^0-9A-Za-z]+/g,"")}`,
         title:strip(event.title),
         category:category(event),
         venue:strip(venue)||sourceName,
