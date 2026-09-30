@@ -2,21 +2,18 @@ const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
   .replace(/<[^>]+>/g," ")
-  .replace(/&nbsp;/gi," ")
-  .replace(/&amp;/gi,"&")
-  .replace(/&#39;/g,"'")
-  .replace(/&quot;/gi,'"')
+  .replace(/&#(x?[0-9a-f]+);/gi,(_,value)=>String.fromCodePoint(parseInt(value[0].toLowerCase()==="x"?value.slice(1):value,value[0].toLowerCase()==="x"?16:10)))
+  .replace(/&(nbsp|amp|quot|apos|lt|gt);/gi,(_,name)=>({nbsp:" ",amp:"&",quot:'"',apos:"'",lt:"<",gt:">"}[name.toLowerCase()]))
   .replace(/\s+/g," ")
   .trim();
 
 function category(event){
-  const text=[event.title,event.description_text,event.description,event.event_types,event.filters]
-    .flat(Infinity).filter(Boolean).join(" ").toLowerCase();
-  if(/concert|music|orchestra|choir|band|dj\b|opera/.test(text))return "music";
-  if(/soccer|basketball|baseball|volleyball|water polo|athletic|sports?|game\b|match\b/.test(text))return "sports";
-  if(/theat|play\b|dance|performance|film|cinema/.test(text))return "theater";
+  const text=[event.title,event.event_types,event.filters].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
+  if(/food|dining|culinary|coffee|tasting|pantry/.test(text))return "food";
   if(/festival|fair|celebration|homecoming|expo/.test(text))return "festival";
-  if(/food|dining|culinary|coffee|tasting/.test(text))return "food";
+  if(/theat|play\b|dance|performance|film|cinema|exhibit|gallery|art\b/.test(text))return "theater";
+  if(/soccer|basketball|baseball|volleyball|water polo|athletic|sports?|game\b|match\b/.test(text))return "sports";
+  if(/concert|music|orchestra|choir|band|dj\b|opera/.test(text))return "music";
   if(/family|children|kids?\b/.test(text))return "family";
   return "community";
 }
@@ -31,8 +28,13 @@ function price(event){
 function point(event,fallback){
   const lat=Number(event.geo?.latitude??event.latitude??event.venue?.latitude);
   const lng=Number(event.geo?.longitude??event.longitude??event.venue?.longitude);
-  if(Number.isFinite(lat)&&Number.isFinite(lng))return {lat,lng};
-  return fallback||null;
+  if(Number.isFinite(lat)&&Number.isFinite(lng))return {lat,lng,locationPrecision:"source"};
+  return fallback?{...fallback,locationPrecision:"source-center"}:null;
+}
+
+function isAdministrativeDate(event){
+  const title=strip(event?.title);
+  return /\b(?:application|registration)\s+deadline\b|\bonline registration\b|\blast day to\b|\bquarter (?:begins|ends)\b|\bfinal exams?\b/i.test(title);
 }
 
 export async function localistEvents({endpoint,sourceName,sourceId,fallbackCenter,days=45,maxPages=10}){
@@ -52,6 +54,7 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
     const rows=Array.isArray(payload.events)?payload.events:[];
     for(const wrapper of rows){
       const event=wrapper.event||wrapper;
+      if(isAdministrativeDate(event))continue;
       const instance=(event.event_instances||[]).map(item=>item.event_instance||item).find(Boolean)||{};
       const start=event.starts_at||event.start||instance.start||event.next_date||event.first_date;
       const end=event.ends_at||event.end||instance.end||null;
@@ -66,6 +69,7 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
         venue:strip(venue)||sourceName,
         lat:location.lat,
         lng:location.lng,
+        locationPrecision:location.locationPrecision,
         start,
         end,
         ...cost,

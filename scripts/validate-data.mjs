@@ -41,6 +41,7 @@ for(const region of Object.values(REGIONS)){
 const events=await parseJson("src/data/events.json");
 const coverage=await parseJson("src/data/coverage.json");
 const geocodeCache=await parseJson("src/data/geocode-cache.json");
+const venueGeocodeCache=await parseJson("src/data/venue-geocode-cache.json");
 
 if(Array.isArray(events)){
   const eventIds=new Set;
@@ -73,6 +74,11 @@ if(coverage){
 if(geocodeCache&&typeof geocodeCache==="object"){
   for(const [query,point] of Object.entries(geocodeCache)){
     if(!finite(point?.lat,-90,90)||!finite(point?.lng,-180,180))fail(`geocode-cache entry "${query}" has invalid coordinates`);
+  }
+}
+if(venueGeocodeCache&&typeof venueGeocodeCache==="object"){
+  for(const [query,point] of Object.entries(venueGeocodeCache)){
+    if(!finite(point?.lat,-90,90)||!finite(point?.lng,-180,180))fail(`venue-geocode-cache entry "${query}" has invalid coordinates`);
   }
 }
 

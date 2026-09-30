@@ -8,5 +8,5 @@ const norm=s=>String(s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
 export function canonicalizeVenue(event){
   const value=norm(event.venue);
   const hit=VENUES.find(v=>v.aliases.some(a=>value===norm(a)));
-  return hit?{...event,venue:hit.name,lat:hit.lat,lng:hit.lng,venueKey:hit.key}:event;
+  return hit?{...event,venue:hit.name,lat:hit.lat,lng:hit.lng,venueKey:hit.key,locationPrecision:"venue-canonical"}:event;
 }

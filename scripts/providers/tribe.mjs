@@ -2,20 +2,18 @@ const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
   .replace(/<[^>]+>/g," ")
-  .replace(/&nbsp;/gi," ")
-  .replace(/&amp;/gi,"&")
-  .replace(/&#39;/g,"'")
-  .replace(/&quot;/gi,'"')
+  .replace(/&#(x?[0-9a-f]+);/gi,(_,value)=>String.fromCodePoint(parseInt(value[0].toLowerCase()==="x"?value.slice(1):value,value[0].toLowerCase()==="x"?16:10)))
+  .replace(/&(nbsp|amp|quot|apos|lt|gt);/gi,(_,name)=>({nbsp:" ",amp:"&",quot:'"',apos:"'",lt:"<",gt:">"}[name.toLowerCase()]))
   .replace(/\s+/g," ")
   .trim();
 
 function category(event){
-  const text=[event.title,event.description,event.excerpt,(event.categories||[]).map(x=>x.name)].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
-  if(/concert|music|orchestra|choir|band|opera/.test(text))return "music";
+  const text=[event.title,(event.categories||[]).map(x=>x.name)].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
+  if(/food|culinary|tasting|dining|sake|tea\b/.test(text))return "food";
+  if(/festival|\bfest\b|fair|celebration|parade|expo|fete/.test(text))return "festival";
+  if(/theat|play\b|dance|performance|film|cinema|screening/.test(text))return "theater";
   if(/soccer|basketball|baseball|volleyball|athletic|sport|game\b|race\b|run\b/.test(text))return "sports";
-  if(/theat|play\b|dance|performance|film|cinema/.test(text))return "theater";
-  if(/festival|fair|celebration|parade|expo/.test(text))return "festival";
-  if(/food|culinary|tasting|dining/.test(text))return "food";
+  if(/concert|music|orchestra|choir|band|opera|tango/.test(text))return "music";
   if(/family|children|kids?\b/.test(text))return "family";
   return "community";
 }
@@ -24,8 +22,8 @@ function coordinates(event,fallback){
   const venue=event.venue||{};
   const lat=Number(venue.geo_lat??venue.latitude??event.geo_lat);
   const lng=Number(venue.geo_lng??venue.longitude??event.geo_lng);
-  if(Number.isFinite(lat)&&Number.isFinite(lng))return {lat,lng};
-  return fallback||null;
+  if(Number.isFinite(lat)&&Number.isFinite(lng))return {lat,lng,locationPrecision:"source"};
+  return fallback?{...fallback,locationPrecision:"source-center"}:null;
 }
 
 function cost(event){
@@ -64,6 +62,8 @@ export async function tribeEvents({endpoint,sourceName,sourceId,fallbackCenter,d
         venue:strip(venue)||sourceName,
         lat:location.lat,
         lng:location.lng,
+        locationPrecision:location.locationPrecision,
+        address:[event.venue?.address,event.venue?.city,event.venue?.state,event.venue?.zip].filter(Boolean).map(strip).join(", ")||null,
         start:event.start_date,
         end:event.end_date||null,
         ...cost(event),

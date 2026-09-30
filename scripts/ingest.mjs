@@ -5,6 +5,7 @@ import {powayEvents} from "./providers/poway.mjs";
 import {localistEvents} from "./providers/localist.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
+import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
@@ -70,6 +71,19 @@ if(!events.length){
   console.log("Providers returned no events; leaving current event files unchanged.");
   process.exit(0);
 }
+
+let enrichedLocations=0;
+for(let index=0;index<events.length;index++){
+  const event=events[index];
+  if(event.locationPrecision!=="source-center")continue;
+  const region=REGIONS[event.regionId];
+  const point=await geocodeVenue(event.venue,region);
+  if(!point)continue;
+  events[index]={...event,lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
+  enrichedLocations++;
+}
+await saveVenueGeocodeCache();
+console.log(`Venue enrichment: ${enrichedLocations} source-center events resolved to named venues.`);
 
 const words=value=>new Set(String(value||"").toLowerCase().replace(/\b(202[0-9]|annual|the|presented by)\b/g,"").replace(/[^a-z0-9]+/g," ").trim().split(/\s+/).filter(Boolean));
 const similarity=(a,b)=>{
