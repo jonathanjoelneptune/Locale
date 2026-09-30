@@ -77,7 +77,7 @@ test("production-critical controls exist and links are valid",async({page})=>{
 
 test("location search is not San Diego coupled",async({page})=>{
   await waitForLocale(page);
-  await page.route("https://nominatim.openstreetmap.org/**",route=>route.fulfill({status:200,contentType:"application/json",body:JSON.stringify([{lat:"41.8781",lon:"-87.6298",display_name:"Chicago, Cook County, Illinois, United States"}])}));
+  await page.route("**/nominatim.openstreetmap.org/**",route=>route.fulfill({status:200,contentType:"application/json",body:JSON.stringify([{lat:"41.8781",lon:"-87.6298",display_name:"Chicago, Cook County, Illinois, United States"}])}));
   const search=page.locator("#placeSearch");
   await search.fill("Chicago, IL");await search.press("Enter");
   await expect(page.locator("#placeLabel")).toContainText("Chicago");
