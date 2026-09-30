@@ -5,7 +5,7 @@ import {powayEvents} from "./providers/poway.mjs";
 import {localistEvents} from "./providers/localist.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {jsonLdEvents} from "./providers/jsonld.mjs";
-import {rssEvents} from "./providers/rss.mjs";
+import {rssEvents,rssDetailEvents} from "./providers/rss.mjs";
 import {jsonLdCrawlEvents} from "./providers/jsonld-crawl.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
@@ -48,6 +48,13 @@ const adapters={
     sourceName:source.name,
     sourceId:source.id,
     fallbackCenter:source.fallbackCenter
+  }),
+  "rss-detail":async (region,source)=>rssDetailEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,
+    maxLinks:50
   }),
   "jsonld-crawl":async (region,source)=>jsonLdCrawlEvents({
     endpoint:source.endpoint,
