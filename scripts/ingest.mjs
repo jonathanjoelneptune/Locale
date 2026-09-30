@@ -47,5 +47,5 @@ for(const e of events){
 }
 const sorted=unique.sort((a,b)=>new Date(a.start)-new Date(b.start));
 await mkdir("src/data",{recursive:true});
-await writeFile("src/data/events.json",JSON.stringify(sorted,null,2)+"\\n");
+await writeFile("src/data/events.json",JSON.stringify(sorted,null,2)+"\n");
 console.log(`Wrote ${sorted.length} canonical events from ${events.length} provider records.`);
