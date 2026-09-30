@@ -13,6 +13,11 @@ import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
 import {sanDiegoFamilyEvents} from "./providers/sandiego-family.mjs";
+import {sanDiegoParksEvents} from "./providers/sandiego-parks.mjs";
+import {usdEvents} from "./providers/usd.mjs";
+import {sdsuEvents} from "./providers/sdsu.mjs";
+import {icsEvents} from "./providers/ics.mjs";
+import {sdplEvents} from "./providers/sdpl.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -20,6 +25,11 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  sdpl:async()=>sdplEvents(),
+  "san-diego-parks":async()=>sanDiegoParksEvents(),
+  usd:async()=>usdEvents(),
+  sdsu:async()=>sdsuEvents(),
+  ics:async(region,source)=>icsEvents({endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,fallbackCenter:source.fallbackCenter,days:45}),
   "sandiego-family":async()=>sanDiegoFamilyEvents(),
   nova:async()=>novaEvents(),
   spin:async()=>spinEvents(),
