@@ -119,11 +119,15 @@ test("event groups fully expand at street-level zoom",async({page})=>{
   await waitForLocale(page);
   await page.locator('[data-window="7days"]').click();
   const zoomIn=page.locator(".leaflet-control-zoom-in");
-  for(let i=0;i<12;i++){
-    if(await zoomIn.getAttribute("aria-disabled")==="true")break;
+  const map=page.locator("#map");
+  let zoom=Number(await map.getAttribute("data-map-zoom")||0);
+  for(let i=0;i<12&&zoom<17;i++){
+    const before=zoom;
     await zoomIn.click({force:true});
-    await page.waitForTimeout(80);
+    await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThan(before);
+    zoom=Number(await map.getAttribute("data-map-zoom")||0);
   }
+  expect(zoom).toBeGreaterThanOrEqual(17);
   await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
   await expect(page.locator(".event-pin").first()).toBeVisible();
 });
