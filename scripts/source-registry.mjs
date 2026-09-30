@@ -10,6 +10,7 @@ export const SOURCES=[
     adapter:"localist",
     endpoint:"https://calendar.ucsd.edu",
     fallbackCenter:{lat:32.8801,lng:-117.2340},
+    geocodeRadiusMiles:6,
     refreshHours:6
   },
   {
@@ -20,6 +21,7 @@ export const SOURCES=[
     adapter:"tribe",
     endpoint:"https://balboapark.org",
     fallbackCenter:{lat:32.7311,lng:-117.1467},
+    geocodeRadiusMiles:2,
     refreshHours:6
   }
 ];
