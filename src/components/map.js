@@ -28,8 +28,11 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
+  const searchCenterPane=map.createPane("locale-search-center");
+  searchCenterPane.style.zIndex="590";
   const center=L.marker([state.center.lat,state.center.lng],{
     draggable:true,
+    pane:"locale-search-center",
     icon:L.divIcon({className:"locale-center-icon",html:'<div class="search-pin"><span></span></div>',iconSize:[30,38],iconAnchor:[15,34]})
   }).addTo(map);
   center.bindTooltip("Search center",{direction:"top",offset:[0,-30]});
