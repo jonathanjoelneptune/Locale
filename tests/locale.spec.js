@@ -84,7 +84,7 @@ test("canonical geography drives browser defaults",async({page})=>{
 
   await page.goto("./src/config.js");
   const config=await page.textContent("body");
-  expect(config).toContain('from "./data/regions.js"');
+  expect(config).toMatch(/from "\.\/data\/regions\.js(?:\?v=[^"]+)?";/);
   expect(config).not.toContain("32.7157");
 });
 
