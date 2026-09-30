@@ -32,6 +32,6 @@ export async function sanDiegoCityEvents(){
   const start=new Date(iso); if(Number.isNaN(+start))continue;
   out.push({id:"sd-city:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+":"+start.toISOString().slice(0,10),title,category:cat(title+" "+cells[1]),venue:address,lat:point.lat,lng:point.lng,start:start.toISOString(),end:null,price:null,priceStatus:"unknown",url:URL,source:"City of San Diego",description:cells[1],featured:false,image:null,sourceUrl:URL,lastVerified:verified});
  }
- await writeFile("src/data/geocode-cache.json",JSON.stringify(cache,null,2)+"\\n");
+ await writeFile("src/data/geocode-cache.json",JSON.stringify(cache,null,2)+"\n");
  return out;
 }
