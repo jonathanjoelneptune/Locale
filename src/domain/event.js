@@ -20,6 +20,7 @@ export function normalizeEvent(event={}){
     venue:event.venue||"Location TBA",
     lat:Number(event.lat),
     lng:Number(event.lng),
+    locationPrecision:event.locationPrecision||null,
     address:event.address||null,
     city:event.city||null,
     administrativeArea:event.administrativeArea||event.state||null,
