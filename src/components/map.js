@@ -82,17 +82,44 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
       layer.clearLayers();
       markers.clear();
       const zoom=map.getZoom();
+      const FULLY_EXPANDED_ZOOM=17;
       const clusterPx=zoom<=10?76:zoom===11?60:zoom===12?46:zoom===13?34:zoom===14?22:12;
       const groups=[];
-      events.forEach(e=>{
-        const p=map.project([e.lat,e.lng],zoom);
-        let g=groups.find(x=>x.events.some(v=>v.venue===e.venue)||Math.hypot(x.p.x-p.x,x.p.y-p.y)<=clusterPx);
-        if(g){const n=g.events.length;g.events.push(e);g.p=L.point((g.p.x*n+p.x)/(n+1),(g.p.y*n+p.y)/(n+1));}
-        else groups.push({events:[e],p});
-      });
+
+      if(zoom>=FULLY_EXPANDED_ZOOM){
+        const coordinateBuckets=new Map();
+        events.forEach(e=>{
+          const key=`${Number(e.lat).toFixed(5)},${Number(e.lng).toFixed(5)}`;
+          if(!coordinateBuckets.has(key))coordinateBuckets.set(key,[]);
+          coordinateBuckets.get(key).push(e);
+        });
+        coordinateBuckets.forEach(bucket=>{
+          bucket.forEach((e,index)=>{
+            const base=map.project([e.lat,e.lng],zoom);
+            let p=base;
+            if(bucket.length>1){
+              const ring=Math.floor(index/8);
+              const slot=index%8;
+              const count=Math.min(8,bucket.length-ring*8);
+              const angle=(Math.PI*2*slot)/Math.max(1,count)-(Math.PI/2);
+              const radius=18+(ring*16);
+              p=L.point(base.x+Math.cos(angle)*radius,base.y+Math.sin(angle)*radius);
+            }
+            groups.push({events:[e],p});
+          });
+        });
+      }else{
+        events.forEach(e=>{
+          const p=map.project([e.lat,e.lng],zoom);
+          let g=groups.find(x=>x.events.some(v=>v.venue===e.venue)||Math.hypot(x.p.x-p.x,x.p.y-p.y)<=clusterPx);
+          if(g){const n=g.events.length;g.events.push(e);g.p=L.point((g.p.x*n+p.x)/(n+1),(g.p.y*n+p.y)/(n+1));}
+          else groups.push({events:[e],p});
+        });
+      }
+
       groups.forEach(g=>{
         const group=g.events,e=group[0],count=group.length;
-        const ll=count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng);
+        const ll=zoom>=FULLY_EXPANDED_ZOOM?map.unproject(g.p,zoom):(count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng));
         const face=count>1?`<span>${count}</span>`:(e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${SYMBOLS[e.category]||"•"}</span>`);
         const label=count>1?`${count} events`:e.title;
         const icon=L.divIcon({className:"event-marker-wrap",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
