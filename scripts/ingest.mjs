@@ -8,6 +8,7 @@ import {jsonLdEvents} from "./providers/jsonld.mjs";
 import {rssEvents,rssDetailEvents} from "./providers/rss.mjs";
 import {jsonLdCrawlEvents} from "./providers/jsonld-crawl.mjs";
 import {novaEvents} from "./providers/nova.mjs";
+import {spinEvents} from "./providers/spin.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -16,6 +17,7 @@ import {cellFor} from "./geo-index.mjs";
 
 const adapters={
   nova:async()=>novaEvents(),
+  spin:async()=>spinEvents(),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
     center:region.center,
