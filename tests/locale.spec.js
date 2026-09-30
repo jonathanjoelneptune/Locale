@@ -124,3 +124,28 @@ test("event groups fully expand at street-level zoom",async({page})=>{
   await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
   await expect(page.locator(".event-pin").first()).toBeVisible();
 });
+
+
+test("approximate event locations do not masquerade as exact distances",async({page})=>{
+  await page.goto("./");
+  const result=await page.evaluate(async()=>{
+    const {filterEvents,hasPreciseLocation}=await import("./src/services/events.js");
+    const now=new Date();
+    const start=new Date(now.getTime()+60*60*1000).toISOString();
+    const base={id:"test",title:"Approximate event",venue:"San Diego, CA",category:"community",start,lat:32.7157,lng:-117.1611};
+    const approximate={...base,locationPrecision:"city-only"};
+    const exact={...base,id:"exact",locationPrecision:"venue-geocoded"};
+    const state={center:{lat:32.7157,lng:-117.1611},radius:15,category:"all",window:"7days"};
+    const filtered=filterEvents([approximate,exact],state);
+    return {
+      approximatePrecise:hasPreciseLocation(approximate),
+      exactPrecise:hasPreciseLocation(exact),
+      approximateDistance:filtered.find(event=>event.id==="test")?.distance,
+      exactDistance:filtered.find(event=>event.id==="exact")?.distance
+    };
+  });
+  expect(result.approximatePrecise).toBe(false);
+  expect(result.exactPrecise).toBe(true);
+  expect(result.approximateDistance).toBeNull();
+  expect(result.exactDistance).toBe(0);
+});
