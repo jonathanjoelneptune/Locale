@@ -30,6 +30,7 @@ jobs:
         run: node scripts/validate-data.mjs
       - name: Commit event changes
         id: commit
+        if: github.ref == 'refs/heads/main'
         run: |
           if git diff --quiet -- src/data/events.json src/data/coverage.json src/data/geocode-cache.json; then
             echo "No event changes."
@@ -44,7 +45,7 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Deploy refreshed event snapshot
-        if: steps.commit.outputs.changed == 'true'
+        if: github.ref == 'refs/heads/main' && steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run pages.yml --ref main
