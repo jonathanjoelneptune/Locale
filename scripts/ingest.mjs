@@ -11,6 +11,7 @@ import {novaEvents} from "./providers/nova.mjs";
 import {spinEvents} from "./providers/spin.mjs";
 import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
+import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -22,6 +23,10 @@ const adapters={
   spin:async()=>spinEvents(),
   "comedy-store":async()=>comedyStoreEvents(),
   micdrop:async()=>micDropEvents(),
+  "embedded-json":async (region,source)=>embeddedJsonEvents({
+    endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,days:45
+  }),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
     center:region.center,
