@@ -52,8 +52,11 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
     const rows=Array.isArray(payload.events)?payload.events:[];
     for(const wrapper of rows){
       const event=wrapper.event||wrapper;
+      const instance=(event.event_instances||[]).map(item=>item.event_instance||item).find(Boolean)||{};
+      const start=event.starts_at||event.start||instance.start||event.next_date||event.first_date;
+      const end=event.ends_at||event.end||instance.end||null;
       const location=point(event,fallbackCenter);
-      if(!event?.id||!event?.title||!event?.starts_at||!location)continue;
+      if(!event?.id||!event?.title||!start||!location)continue;
       const cost=price(event);
       const venue=event.location_name||event.room_number||event.address||sourceName;
       out.push({
@@ -63,8 +66,8 @@ export async function localistEvents({endpoint,sourceName,sourceId,fallbackCente
         venue:strip(venue)||sourceName,
         lat:location.lat,
         lng:location.lng,
-        start:event.starts_at,
-        end:event.ends_at||null,
+        start,
+        end,
         ...cost,
         url:event.localist_url||event.url||base,
         source:sourceName,
