@@ -15,6 +15,7 @@ export function normalizeEvent(event={}){
     tags:Array.isArray(event.tags)?event.tags:[],
     start:event.start,
     end:event.end||null,
+    timeStatus:event.timeStatus==="unknown"?"unknown":"known",
     timeZone:event.timeZone||null,
     venueId:event.venueId||null,
     venue:event.venue||"Location TBA",
