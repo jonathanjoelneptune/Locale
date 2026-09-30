@@ -21,6 +21,22 @@ export const SOURCES=[
     id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"spin",minExpectedEvents:1,refreshHours:6
   },
   {
+    id:"comedy-store-la-jolla",name:"The Comedy Store La Jolla",scope:"local",regions:["san-diego"],adapter:"comedy-store",minExpectedEvents:1,refreshHours:6
+  },
+  {
+    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",minExpectedEvents:1,
+    endpoint:"https://www.sandiego.edu/events/",linkPattern:"/events/detail",fallbackCenter:{lat:32.7717,lng:-117.1883},refreshHours:6
+  },
+  {
+    id:"sdsu-alumni",name:"SDSU",scope:"local",regions:["san-diego"],adapter:"jsonld",minExpectedEvents:1,
+    endpoint:"https://alumni.sdsu.edu/events",fallbackCenter:{lat:32.7757,lng:-117.0719},refreshHours:6
+  },
+  {
+    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
+    endpoint:"https://www.sandiego.gov/public-library/news-events",linkPattern:"event",fallbackCenter:{lat:32.7084,lng:-117.1541},refreshHours:12,enabled:false,
+    disabledReason:"Candidate pending stable event-detail discovery path"
+  },
+  {
     id:"sandiego-tourism",name:"San Diego Tourism Authority",scope:"local",regions:["san-diego"],adapter:"jsonld",
     endpoint:"https://www.sandiego.org/events-festivals",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12,enabled:false,
     disabledReason:"403 from automated ingestion; keep as discovery candidate"
