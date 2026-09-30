@@ -27,9 +27,15 @@ export function dedupe(events){
   return [...unique.values()];
 }
 
+const APPROXIMATE_PRECISIONS=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
+export const hasPreciseLocation=event=>!APPROXIMATE_PRECISIONS.has(event.locationPrecision||"")&&Number.isFinite(Number(event.lat))&&Number.isFinite(Number(event.lng));
+
 export function filterEvents(events,state){
   return events
-    .map(event=>({...event,distance:milesBetween(state.center,event)}))
-    .filter(event=>event.distance<=state.radius&&(state.category==="all"||event.category===state.category)&&inWindow(event,state.window))
-    .sort((a,b)=>new Date(a.start)-new Date(b.start)||a.distance-b.distance);
+    .map(event=>{
+      const filterDistance=milesBetween(state.center,event);
+      return {...event,_filterDistance:filterDistance,distance:hasPreciseLocation(event)?filterDistance:null};
+    })
+    .filter(event=>event._filterDistance<=state.radius&&(state.category==="all"||event.category===state.category)&&inWindow(event,state.window))
+    .sort((a,b)=>new Date(a.start)-new Date(b.start)||(a.distance??Infinity)-(b.distance??Infinity));
 }
