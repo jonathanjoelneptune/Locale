@@ -159,7 +159,7 @@ for(let index=0;index<events.length;index++){
   const event=events[index];
   if(event.locationPrecision!=="source-center")continue;
   const region=REGIONS[event.regionId];
-  const point=await geocodeVenue(event.venue,region);
+  const point=await geocodeVenue(event.address||event.venue,region);
   if(!point)continue;
   events[index]={...event,lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
   enrichedLocations++;
