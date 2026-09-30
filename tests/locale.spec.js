@@ -1,6 +1,13 @@
 import { test, expect } from "@playwright/test";
 
+const mockLeaflet=async page=>{
+  const fulfill=route=>route.fulfill({path:"node_modules/leaflet/dist/leaflet.js",contentType:"application/javascript"});
+  await page.route("https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js",fulfill);
+  await page.route("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",fulfill);
+};
+
 const waitForLocale=async page=>{
+  await mockLeaflet(page);
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
@@ -98,6 +105,7 @@ test("canonical event contract is deployed",async({page})=>{
 
 test("event list remains usable when map library fails",async({page})=>{
   await page.route("https://cdn.jsdelivr.net/**",route=>route.abort());
+  await page.route("https://unpkg.com/**",route=>route.abort());
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
