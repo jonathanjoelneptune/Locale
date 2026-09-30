@@ -82,6 +82,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
       layer.clearLayers();
       markers.clear();
       const zoom=map.getZoom();
+      el.dataset.mapZoom=String(zoom);
       const FULLY_EXPANDED_ZOOM=17;
       const clusterPx=zoom<=10?76:zoom===11?60:zoom===12?46:zoom===13?34:zoom===14?22:12;
       const groups=[];
