@@ -12,6 +12,16 @@ const GARBAGE_MARKERS=[
   "Resources Education Directory","Search Search","CURRENT & PAST ISSUES"
 ];
 const GENERIC_PLACE=/^(?:San Diego(?:,\s*CA)?|Temecula(?:,\s*CA)?|El Cajon(?:,\s*CA)?|Fallbrook(?:,\s*CA)?|La Jolla(?:,\s*CA)?|Oceanside(?:,\s*CA)?|Carlsbad(?:,\s*CA)?)$/i;
+const COARSE_PLACES=[
+  [/^San Diego(?:,\s*CA)?$/i,{lat:32.7157,lng:-117.1611}],
+  [/^Temecula(?:,\s*CA)?$/i,{lat:33.4936,lng:-117.1484}],
+  [/^El Cajon(?:,\s*CA)?$/i,{lat:32.7948,lng:-116.9625}],
+  [/^Fallbrook(?:,\s*CA)?$/i,{lat:33.3764,lng:-117.2511}],
+  [/^La Jolla(?:,\s*CA)?$/i,{lat:32.8328,lng:-117.2713}],
+  [/^Oceanside(?:,\s*CA)?$/i,{lat:33.1959,lng:-117.3795}],
+  [/^Carlsbad(?:,\s*CA)?$/i,{lat:33.1581,lng:-117.3506}]
+];
+const coarsePoint=venue=>COARSE_PLACES.find(([re])=>re.test(venue))?.[1]||{lat:32.7157,lng:-117.1611};
 
 function cleanVenue(value){
   let venue=strip(value||"");
@@ -105,13 +115,14 @@ export async function sanDiegoFamilyEvents({days=45}={}){
       if(!start)continue;
       const venue=extractVenue(html,text);
       const approximate=GENERIC_PLACE.test(venue);
+      const point=approximate?coarsePoint(venue):{lat:32.7157,lng:-117.1611};
       const categories=strip((text.match(/Categories:\s*(.+?)(?=\s+(?:Event repeats|\b[A-Z][a-z]+\s+[A-Z]))/i)||[])[1]||"");
       const descriptionStart=text.indexOf("Categories:");
       const description=descriptionStart>=0?text.slice(descriptionStart).replace(/^Categories:\s*[^.]*\.?/i,"").split(/Event repeats/i)[0].trim():"";
       out.push({
         id:"sandiego-family:"+url.split("/").filter(Boolean).pop(),
         title,category:"family",venue,
-        lat:32.7157,lng:-117.1611,locationPrecision:approximate?"city-only":"source-center",
+        lat:point.lat,lng:point.lng,locationPrecision:approximate?"city-only":"source-center",
         start,end:null,timeStatus:time?"known":"unknown",
         price:/\bFREE\b/.test(text)?"Free":null,priceStatus:/\bFREE\b/.test(text)?"free":"unknown",
         url,source:"San Diego Family",description:description||categories,
