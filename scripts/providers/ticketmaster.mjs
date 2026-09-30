@@ -24,12 +24,12 @@ function price(event){
   if(!Number.isFinite(low)) return null;
   return Number.isFinite(high)&&high>low ? `$${low.toFixed(0)}–$${high.toFixed(0)}` : `$${low.toFixed(0)}+`;
 }
-export async function ticketmasterEvents({apiKey,days=45}){
+export async function ticketmasterEvents({apiKey,center={lat:32.7157,lng:-117.1611},radiusMiles=50,regionId=null,days=45}){
   if(!apiKey) return [];
   const start=new Date();
   const end=new Date(start.getTime()+days*86400000);
   const params=new URLSearchParams({
-    apikey:apiKey,latlong:"32.7157,-117.1611",radius:"50",unit:"miles",countryCode:"US",
+    apikey:apiKey,latlong:`${center.lat},${center.lng}`,radius:String(radiusMiles),unit:"miles",countryCode:"US",
     startDateTime:start.toISOString().replace(/\.\d{3}Z$/,"Z"),
     endDateTime:end.toISOString().replace(/\.\d{3}Z$/,"Z"),
     size:"200",sort:"date,asc"
@@ -45,7 +45,7 @@ export async function ticketmasterEvents({apiKey,days=45}){
       const lat=Number(v?.location?.latitude),lng=Number(v?.location?.longitude);
       if(!Number.isFinite(lat)||!Number.isFinite(lng)) continue;
       out.push(canonicalizeVenue({
-        id:`ticketmaster:${e.id}`,title:e.name,category:category(e),venue:v?.name||"Location TBA",
+        id:`ticketmaster:${e.id}`,regionId,title:e.name,category:category(e),venue:v?.name||"Location TBA",
         lat,lng,start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
         price:price(e),priceStatus:e.priceRanges?.length?"known":(price(e)?"source-text":"unknown"),url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
         featured:false,image:(e.images||[]).filter(i=>i.url&&(!i.ratio||i.ratio==="16_9")).sort((a,b)=>Math.abs((a.width||640)-640)-Math.abs((b.width||640)-640))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
