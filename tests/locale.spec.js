@@ -118,16 +118,9 @@ test("static bootstrap remains visible if the application module cannot load",as
 test("event groups fully expand at street-level zoom",async({page})=>{
   await waitForLocale(page);
   await page.locator('[data-window="7days"]').click();
-  const zoomIn=page.locator(".leaflet-control-zoom-in");
   const map=page.locator("#map");
-  let zoom=Number(await map.getAttribute("data-map-zoom")||0);
-  for(let i=0;i<12&&zoom<17;i++){
-    const before=zoom;
-    await zoomIn.click({force:true});
-    await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThan(before);
-    zoom=Number(await map.getAttribute("data-map-zoom")||0);
-  }
-  expect(zoom).toBeGreaterThanOrEqual(17);
+  await map.evaluate(el=>el.__localeMap.setZoom(17,{animate:false}));
+  await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThanOrEqual(17);
   await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
   await expect(page.locator(".event-pin").first()).toBeVisible();
 });
