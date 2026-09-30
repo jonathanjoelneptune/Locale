@@ -104,3 +104,12 @@ test("event list remains usable when map library fails",async({page})=>{
   await expect(page.locator("#sidebar")).toBeVisible();
   await expect(page.locator("#map .map-error")).toBeVisible({timeout:5000});
 });
+
+
+test("static bootstrap remains visible if the application module cannot load",async({page})=>{
+  await page.route("**/src/app.js*",route=>route.abort());
+  await page.goto("./");
+  await expect(page.locator("#localeBoot")).toBeVisible();
+  await expect(page.locator("#localeBoot span")).toContainText("could not finish loading",{timeout:6000});
+  await expect(page.locator("#localeBoot button")).toBeVisible();
+});
