@@ -210,14 +210,22 @@ for(const region of Object.values(REGIONS)){
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
   const categoryCounts={};
   const sourceCounts={};
+  const categorySourceCounts={};
+  const categorySourceDiversity={};
   const locationPrecisionCounts={};
   for(const event of regionEvents){
-    categoryCounts[event.category]=(categoryCounts[event.category]||0)+1;
+    const category=event.category||"other";
+    categoryCounts[category]=(categoryCounts[category]||0)+1;
     locationPrecisionCounts[event.locationPrecision||"unknown"]=(locationPrecisionCounts[event.locationPrecision||"unknown"]||0)+1;
+    if(!categorySourceCounts[category])categorySourceCounts[category]={};
     for(const source of provenance(event)){
       const key=source.id||source.name||"unknown";
       sourceCounts[key]=(sourceCounts[key]||0)+1;
+      categorySourceCounts[category][key]=(categorySourceCounts[category][key]||0)+1;
     }
+  }
+  for(const [category,counts] of Object.entries(categorySourceCounts)){
+    categorySourceDiversity[category]=Object.keys(counts).length;
   }
   coverage.regions[region.id]={
     eventCount:regionEvents.length,
@@ -225,6 +233,8 @@ for(const region of Object.values(REGIONS)){
     cells:[...new Set(regionEvents.map(event=>event.geoCell).filter(Boolean))].length,
     categoryCounts,
     sourceCounts,
+    categorySourceCounts,
+    categorySourceDiversity,
     sourceHealth:sourceStats.filter(stat=>stat.regionId===region.id),
     locationPrecisionCounts
   };
