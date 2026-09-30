@@ -28,16 +28,19 @@ export const SOURCES=[
     disabledReason:"Calendar is useful but automated fetches from GitHub Actions are blocked/intermittent; requires a stable adapter path"
   },
   {
-    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"usd",minExpectedEvents:1,refreshHours:6
+    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"usd",refreshHours:6,enabled:false,
+    disabledReason:"Official calendar is public but dedicated parser still returns no canonical events in GitHub Actions"
   },
   {
     id:"sdsu-as",name:"SDSU Associated Students",scope:"local",regions:["san-diego"],adapter:"sdsu",minExpectedEvents:1,refreshHours:6
   },
   {
-    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",minExpectedEvents:1,refreshHours:12
+    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",refreshHours:12,enabled:false,
+    disabledReason:"Official MyLibrary calendar is visible publicly but automated GitHub Actions requests are blocked or return no parseable event payload"
   },
   {
-    id:"san-diego-parks",name:"City of San Diego Parks & Recreation",scope:"local",regions:["san-diego"],adapter:"san-diego-parks",minExpectedEvents:1,refreshHours:12
+    id:"san-diego-parks",name:"City of San Diego Parks & Recreation",scope:"local",regions:["san-diego"],adapter:"san-diego-parks",refreshHours:12,enabled:false,
+    disabledReason:"Official calendar is public but event detail discovery remains incompatible with the automated ingestion response"
   },
   {
     id:"county-parks",name:"San Diego County Parks",scope:"regional",regions:["san-diego"],adapter:"ics",minExpectedEvents:1,
