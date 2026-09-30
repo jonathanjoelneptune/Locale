@@ -28,14 +28,12 @@ export const SOURCES=[
     disabledReason:"Calendar is useful but automated fetches from GitHub Actions are blocked/intermittent; requires a stable adapter path"
   },
   {
-    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
-    endpoint:"https://www.sandiego.edu/events/",linkPattern:"/events/detail",fallbackCenter:{lat:32.7717,lng:-117.1883},refreshHours:6,enabled:false,
-    disabledReason:"Public calendar is active but current structured crawl yields no canonical events; dedicated parser required"
+    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"embedded-json",minExpectedEvents:1,
+    endpoint:"https://www.sandiego.edu/events/",fallbackCenter:{lat:32.7717,lng:-117.1883},refreshHours:6
   },
   {
-    id:"sdsu-alumni",name:"SDSU",scope:"local",regions:["san-diego"],adapter:"jsonld",
-    endpoint:"https://alumni.sdsu.edu/events",fallbackCenter:{lat:32.7757,lng:-117.0719},refreshHours:6,enabled:false,
-    disabledReason:"Public event calendar is active but exposes no usable JSON-LD event collection; dedicated parser required"
+    id:"sdsu-alumni",name:"SDSU",scope:"local",regions:["san-diego"],adapter:"embedded-json",minExpectedEvents:1,
+    endpoint:"https://alumni.sdsu.edu/events",fallbackCenter:{lat:32.7757,lng:-117.0719},refreshHours:6
   },
   {
     id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
