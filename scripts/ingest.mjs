@@ -7,6 +7,7 @@ import {tribeEvents} from "./providers/tribe.mjs";
 import {jsonLdEvents} from "./providers/jsonld.mjs";
 import {rssEvents,rssDetailEvents} from "./providers/rss.mjs";
 import {jsonLdCrawlEvents} from "./providers/jsonld-crawl.mjs";
+import {novaEvents} from "./providers/nova.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -14,6 +15,7 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  nova:async()=>novaEvents(),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
     center:region.center,
