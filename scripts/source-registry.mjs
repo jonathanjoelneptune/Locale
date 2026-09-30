@@ -48,12 +48,12 @@ export const SOURCES=[
     endpoint:"https://www.tiltwoclub.com",fallbackCenter:{lat:32.7553,lng:-117.0928},refreshHours:6
   },
   {
-    id:"uss-midway",name:"USS Midway Museum",scope:"local",regions:["san-diego"],adapter:"tribe",minExpectedEvents:1,
-    endpoint:"https://www.midway.org",fallbackCenter:{lat:32.7137,lng:-117.1751},refreshHours:12
+    id:"uss-midway",name:"USS Midway Museum",scope:"local",regions:["san-diego"],adapter:"midway",minExpectedEvents:1,refreshHours:12
   },
   {
-    id:"birch-aquarium",name:"Birch Aquarium at Scripps",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",minExpectedEvents:1,
-    endpoint:"https://aquarium.ucsd.edu/events/all",linkPattern:"/events/",fallbackCenter:{lat:32.8658,lng:-117.2505},refreshHours:12
+    id:"birch-aquarium",name:"Birch Aquarium at Scripps",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
+    endpoint:"https://aquarium.ucsd.edu/events/all",linkPattern:"/events/",fallbackCenter:{lat:32.8658,lng:-117.2505},refreshHours:12,enabled:false,
+    disabledReason:"Generic structured crawl returned no canonical events; dedicated recurrence-aware adapter still needed"
   },
   {
     id:"sandiego-tourism",name:"San Diego Tourism Authority",scope:"local",regions:["san-diego"],adapter:"jsonld",
