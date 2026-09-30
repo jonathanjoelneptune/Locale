@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const waitForLocale=async page=>{
-  await page.goto("/");
+  await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
   if(!(await page.locator(".event-row").count())){
@@ -76,20 +76,20 @@ test("production-critical controls exist and links are valid",async({page})=>{
 });
 
 test("canonical geography drives browser defaults",async({page})=>{
-  await page.goto("/src/data/regions.js");
+  await page.goto("./src/data/regions.js");
   const regions=await page.textContent("body");
   expect(regions).toContain('DEFAULT_REGION_ID="san-diego"');
   expect(regions).toContain('"chicago"');
   expect(regions).toContain('countryCode:"US"');
 
-  await page.goto("/src/config.js");
+  await page.goto("./src/config.js");
   const config=await page.textContent("body");
   expect(config).toContain('from "./data/regions.js"');
   expect(config).not.toContain("32.7157");
 });
 
 test("canonical event contract is deployed",async({page})=>{
-  await page.goto("/src/domain/event.js");
+  await page.goto("./src/domain/event.js");
   const body=await page.textContent("body");
   expect(body).toContain("EVENT_CONTRACT_VERSION=1");
   expect(body).toContain("canonicalEventId");
@@ -98,7 +98,7 @@ test("canonical event contract is deployed",async({page})=>{
 
 test("event list remains usable when map library fails",async({page})=>{
   await page.route("https://cdn.jsdelivr.net/**",route=>route.abort());
-  await page.goto("/");
+  await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
   await expect(page.locator("#sidebar")).toBeVisible();
