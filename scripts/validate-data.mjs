@@ -172,6 +172,10 @@ if(geocodeCache&&typeof geocodeCache==="object"){
 }
 if(venueGeocodeCache&&typeof venueGeocodeCache==="object"){
   for(const [query,point] of Object.entries(venueGeocodeCache)){
+    if(point?.miss){
+      if(point.checkedAt&&!Number.isFinite(Date.parse(point.checkedAt)))fail(`venue-geocode-cache miss "${query}" has invalid checkedAt`);
+      continue;
+    }
     if(!finite(point?.lat,-90,90)||!finite(point?.lng,-180,180))fail(`venue-geocode-cache entry "${query}" has invalid coordinates`);
   }
 }
