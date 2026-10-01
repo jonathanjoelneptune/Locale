@@ -1,3 +1,4 @@
+import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
@@ -121,7 +122,7 @@ export async function sanDiegoFamilyEvents({days=45}={}){
       const description=descriptionStart>=0?text.slice(descriptionStart).replace(/^Categories:\s*[^.]*\.?/i,"").split(/Event repeats/i)[0].trim():"";
       out.push({
         id:"sandiego-family:"+url.split("/").filter(Boolean).pop(),
-        title,category:"family",venue,
+        title,category:classifyEvent(title,categories,description,venue),venue,
         lat:point.lat,lng:point.lng,locationPrecision:approximate?"city-only":"source-center",
         start,end:null,timeStatus:time?"known":"unknown",
         price:/\bFREE\b/.test(text)?"Free":null,priceStatus:/\bFREE\b/.test(text)?"free":"unknown",
