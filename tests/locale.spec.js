@@ -219,8 +219,38 @@ test("event rail stays compact and highlights remain well formed when collapsed"
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
     const box=await highlight.boundingBox();
-    expect(box?.width||0).toBeGreaterThanOrEqual(220);
+    expect(box?.width||0).toBeGreaterThanOrEqual(200);
     expect(box?.height||0).toBeGreaterThanOrEqual(60);
     await expect(highlight.locator(".highlight-copy")).toBeVisible();
   }
+});
+
+
+test("premium event surfaces keep dense cards and intentional fallbacks",async({page})=>{
+  await waitForLocale(page);
+  await page.locator('[data-window="7days"]').click();
+
+  const row=page.locator(".event-row").first();
+  await expect(row).toHaveClass(/event-surface/);
+  const rowBox=await row.boundingBox();
+  expect(rowBox?.height||999).toBeLessThanOrEqual(68);
+
+  const fallback=page.locator(".event-thumb.is-fallback").first();
+  if(await fallback.count()){
+    await expect(fallback.locator(".category-art-symbol")).toBeVisible();
+    await expect(fallback.locator("small")).toBeVisible();
+  }
+
+  await page.locator("#resultsToggle").click();
+  const highlight=page.locator(".highlight-card").first();
+  if(await highlight.count()){
+    await expect(highlight).toHaveClass(/event-surface/);
+    const box=await highlight.boundingBox();
+    expect(box?.width||999).toBeLessThanOrEqual(225);
+  }
+
+  const mapSource=await (await page.request.get("./src/components/map.js")).text();
+  expect(mapSource).toContain("event-map-popup popup-");
+  expect(mapSource).toContain('e.image?"has-image":"no-image"');
+  expect(mapSource).toContain('category-art-symbol');
 });

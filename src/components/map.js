@@ -179,8 +179,12 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     showEventPopup(e){
       if(!hasPreciseLocation(e))return;
       const price=e.price?`<strong>${esc(e.price)}</strong>`:(e.source==="Ticketmaster"?"Check price":"View event");
-      const img=e.image?`<img class="map-popup-img" src="${esc(e.image)}" alt="">`:"";
-      L.popup({className:"event-map-popup",maxWidth:290}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card">${img}<div><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);
+      const symbol=SYMBOLS[e.category]||"✦";
+      const art=e.image
+        ?`<div class="map-popup-art has-image"><img class="map-popup-img" src="${esc(e.image)}" alt=""></div>`
+        :`<div class="map-popup-art category-art category-bg-${esc(e.category)} is-fallback"><span class="category-art-symbol" aria-hidden="true">${symbol}</span><small>${esc(e.category)}</small></div>`;
+      const layout=e.image?"has-image":"no-image";
+      L.popup({className:`event-map-popup popup-${e.category}`,maxWidth:300}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card event-surface category-surface-${esc(e.category)} ${layout}">${art}<div class="map-popup-copy"><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);
     },
     flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})},
     getViewport(){
