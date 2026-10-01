@@ -201,7 +201,8 @@ export function buildRegistry(events,sources=[]){
 
   const annotated=events.map(event=>{
     const venueId=placeIdByEventId.get(event.id)||null;
-    const organizerId=organizerIdBySourceRegion.get(`${event.regionId}|${event.sourceId}`)||null;
+    const organizerSource=provenance(event).find(source=>organizerIdBySourceRegion.has(`${event.regionId}|${source.id}`));
+    const organizerId=organizerSource?organizerIdBySourceRegion.get(`${event.regionId}|${organizerSource.id}`):null;
     return {...event,venueId,organizerId,seriesId:null};
   });
 
@@ -267,10 +268,17 @@ export function buildRegistry(events,sources=[]){
     }
   }
   for(const source of sources){
-    if(source.ownerEntityKind!=="organizer"||!source.ownerName)continue;
-    for(const regionId of source.regions||[]){
-      const organizerId=organizerIdBySourceRegion.get(`${regionId}|${source.id}`);
-      if(organizerId)addLink("organizer",organizerId,source.id,{role:"official"});
+    if(source.ownerEntityKind==="organizer"&&source.ownerName){
+      for(const regionId of source.regions||[]){
+        const organizerId=organizerIdBySourceRegion.get(`${regionId}|${source.id}`);
+        if(organizerId)addLink("organizer",organizerId,source.id,{role:"official"});
+      }
+    }
+    if(source.ownerEntityKind==="place"&&source.ownerName){
+      for(const regionId of source.regions||[]){
+        const place=places.find(candidate=>candidate.regionId===regionId&&norm(candidate.name)===norm(source.ownerName));
+        if(place)addLink("place",place.id,source.id,{role:"official"});
+      }
     }
   }
 
