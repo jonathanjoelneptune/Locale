@@ -28,7 +28,7 @@ function textLines(html){
 
 export function extractSinghubVenueLinks(html){
   const links=[];
-  for(const match of String(html||"").matchAll(/href=["'](\/venues\/[^"'?#]+)["']/gi)){
+  for(const match of String(html||"").matchAll(/href=["'](\/venues\/[^"'?#]+)(?:[?#][^"']*)?["']/gi)){
     links.push(new URL(match[1],"https://singhub.app").href);
   }
   return [...new Set(links)];
