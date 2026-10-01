@@ -56,16 +56,10 @@ jobs:
         with:
           node-version: 24
       - name: Build deterministic site
-        run: |
-          BUILD="${GITHUB_SHA::12}"
-          rm -rf _site
-          mkdir -p _site
-          cp -R index.html styles src _site/
-          sed -i "s|./styles/base.css|./styles/base.css?v=$BUILD|; s|./styles/app.css|./styles/app.css?v=$BUILD|; s|./src/app.js|./src/app.js?v=$BUILD|" _site/index.html
-          sed -i "s|</head>|<meta name=\"locale-build\" content=\"$BUILD\"></head>|" _site/index.html
-          node scripts/version-site-modules.mjs _site "$BUILD"
-          cp _site/index.html _site/404.html
-          find _site/src -name '*.js' -print0 | xargs -0 -n1 node --check
+        env:
+          LOCALE_OUT_DIR: _site
+          LOCALE_BUILD_ID: ${{ github.sha }}
+        run: node scripts/build-site.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
