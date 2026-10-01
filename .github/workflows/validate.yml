@@ -24,6 +24,8 @@ jobs:
         run: node scripts/validate-data.mjs
       - name: Validate delivery architecture
         run: node scripts/validate-delivery.mjs
+      - name: Build production artifact
+        run: LOCALE_BUILD_ID=ci-test node scripts/build-site.mjs
       - name: Test registry domain
         run: node --test scripts/registry.test.mjs
       - name: Test event classification

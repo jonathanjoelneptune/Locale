@@ -1,10 +1,12 @@
 import {readFile} from "node:fs/promises";
 
-const [pages,refresh,provider,index]=await Promise.all([
+const [pages,refresh,provider,index,buildSite,vercel]=await Promise.all([
   readFile(".github/workflows/pages.yml","utf8"),
   readFile(".github/workflows/refresh-events.yml","utf8"),
   readFile("src/providers/local.js","utf8"),
-  readFile("index.html","utf8")
+  readFile("index.html","utf8"),
+  readFile("scripts/build-site.mjs","utf8"),
+  readFile("vercel.json","utf8")
 ]);
 
 const failures=[];
@@ -38,7 +40,10 @@ requireText(index,'name="locale-shell" content="1"',"index.html");
 requireText(index,"<noscript>","index.html");
 
 requireText(pages,"Verify document shell stays available","pages.yml");
-requireText(pages,"cp _site/index.html _site/404.html","pages.yml");
+requireText(pages,"node scripts/build-site.mjs","pages.yml");
+requireText(buildSite,'await writeFile(`${outDir}/404.html`,html)',"build-site.mjs");
+requireText(vercel,'"outputDirectory": "dist"',"vercel.json");
+requireText(vercel,'"Cache-Control"',"vercel.json");
 
 if(failures.length){
   console.error("Locale delivery validation failed:");
