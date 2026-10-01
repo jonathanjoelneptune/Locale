@@ -765,27 +765,18 @@
 .results-panel .save-event{position:relative;z-index:2}
 
 
-/* Single-glyph saved-state rendering avoids stale dual-heart paint states. */
-.save-event .heart-glyph{
-  display:block;
-  line-height:1;
-  transform:translateY(-.25px);
-}
-
-
-/* Saved-heart visual is derived directly from aria-pressed so it cannot lag state. */
+/* Saved-heart paint state lives in a real DOM glyph, not generated content. */
 .save-event .heart-off,
-.save-event .heart-on,
-.save-event .heart-glyph{display:none!important}
-.save-event::before{
-  content:"♡";
-  display:block;
+.save-event .heart-on{display:none!important}
+.save-event::before{content:none!important;display:none!important}
+.save-event .heart-glyph{
+  display:block!important;
   font-family:Arial,sans-serif;
   font-size:15px;
   line-height:1;
   color:currentColor;
+  transform:translateY(-.25px);
 }
-.save-event[aria-pressed="true"]::before{content:"♥"}
 .save-event[aria-pressed="true"]{
   background:rgba(13,139,163,.13)!important;
   border-color:rgba(13,139,163,.34)!important;
