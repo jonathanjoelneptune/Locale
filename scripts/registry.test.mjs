@@ -172,3 +172,34 @@ test("page chrome and pricing fragments never become canonical places",()=>{
   assert.equal(registry.places.length,0);
   assert.ok(registry.events.every(event=>event.venueId===null));
 });
+
+
+test("one prior place ID cannot be assigned to two split locations",()=>{
+  const previous={places:[{
+    id:"place_shared_previous",
+    regionId:"san-diego",
+    name:"Shared Venue",
+    canonicalName:"Shared Venue",
+    address:null,
+    lat:32.7157,
+    lng:-117.1611,
+    monitorTier:"B",
+    sourceIds:[]
+  }]};
+  const events=[
+    {
+      id:"split:1",regionId:"san-diego",title:"Event One",category:"community",venue:"Shared Venue",
+      address:"100 First St, San Diego, CA",lat:32.7158,lng:-117.1612,locationPrecision:"venue-geocoded",
+      start:"2026-10-10T18:00:00.000Z",sourceId:"example",source:"Example",sources:[{id:"example",name:"Example"}],lastVerified:verified
+    },
+    {
+      id:"split:2",regionId:"san-diego",title:"Event Two",category:"community",venue:"Shared Venue",
+      address:"900 Second St, San Diego, CA",lat:32.7358,lng:-117.1812,locationPrecision:"venue-geocoded",
+      start:"2026-10-11T18:00:00.000Z",sourceId:"example",source:"Example",sources:[{id:"example",name:"Example"}],lastVerified:verified
+    }
+  ];
+  const registry=buildRegistry(events,[],previous);
+  assert.equal(registry.places.length,2);
+  assert.equal(new Set(registry.places.map(place=>place.id)).size,2);
+  assert.equal(registry.places.filter(place=>place.id==="place_shared_previous").length,1);
+});

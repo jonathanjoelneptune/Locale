@@ -114,6 +114,7 @@ function inferRecurrence(events){
 export function buildRegistry(events,sources=[],previousRegistry={}){
   const sourceById=new Map(sources.map(source=>[source.id,source]));
   const previousPlaces=Array.isArray(previousRegistry.places)?previousRegistry.places:[];
+  const claimedPreviousPlaceIds=new Set;
   const previousPlacesByName=new Map();
   for(const place of previousPlaces){
     const key=`${place.regionId}|${norm(place.name)}`;
@@ -121,7 +122,7 @@ export function buildRegistry(events,sources=[],previousRegistry={}){
     previousPlacesByName.get(key).push(place);
   }
   const previousPlaceFor=(sample,group)=>{
-    const candidates=previousPlacesByName.get(`${sample.regionId}|${norm(sample.venue)}`)||[];
+    const candidates=(previousPlacesByName.get(`${sample.regionId}|${norm(sample.venue)}`)||[]).filter(place=>!claimedPreviousPlaceIds.has(place.id));
     if(!candidates.length)return null;
     if(sample.venueKey){
       const hit=candidates.find(place=>place.venueKey===sample.venueKey);
@@ -168,6 +169,7 @@ export function buildRegistry(events,sources=[],previousRegistry={}){
     const sample=bestLocation(group);
     const name=clean(sample.venue||group[0].venue);
     const previous=previousPlaceFor(sample,group);
+    if(previous)claimedPreviousPlaceIds.add(previous.id);
     const id=previous?.id||stableId("place",name,key);
     const sourceIds=[...new Set(group.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
     const directSource=sourceIds.some(sourceId=>sourceById.get(sourceId)?.ownerEntityKind==="place");
