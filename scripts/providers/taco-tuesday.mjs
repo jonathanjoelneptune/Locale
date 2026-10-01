@@ -14,7 +14,7 @@ const decode=value=>String(value||"")
 
 const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));
 
-function venueBlocks(html){
+export function parseTacoTuesdayVenueBlocks(html){
   const out=[];
   const regex=/<h3\b[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h[23]\b|$)/gi;
   for(const match of String(html||"").matchAll(regex)){
@@ -36,7 +36,7 @@ export async function tacoTuesdayEvents({days=45}={}){
   const verified=new Date().toISOString();
   const out=[];
 
-  for(const item of venueBlocks(html)){
+  for(const item of parseTacoTuesdayVenueBlocks(html)){
     const clock=item.clock||{hour:12,minute:0};
     const address=item.address&& !/\bCA\b/i.test(item.address)
       ?`${item.address}, San Diego, CA`
