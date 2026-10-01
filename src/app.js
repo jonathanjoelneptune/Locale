@@ -21,6 +21,7 @@ const state={
   dateStart:today,
   dateEnd:today,
   dateMode:"single",
+  quickPreset:null,
   calendarOpen:false,
   calendarMonth:today.slice(0,7),
   rangeAnchor:null,
@@ -200,6 +201,7 @@ function resetMapScope(){
 
 function chooseDate(key){
   resetMapScope();
+  state.quickPreset=null;
   state.calendarMonth=key.slice(0,7);
   if(state.dateMode==="single"){
     state.dateStart=key;
@@ -219,6 +221,44 @@ function chooseDate(key){
   render();
 }
 
+function weekendRange(base=todayKey()){
+  const date=new Date(base+"T12:00:00");
+  const dow=date.getDay();
+  const daysUntilFriday=dow===0?5:dow<=5?5-dow:6;
+  const start=addDays(base,daysUntilFriday);
+  return [start,addDays(start,2)];
+}
+
+function applyQuickPreset(preset){
+  const today=todayKey();
+  state.quickPreset=preset;
+  state.rangeAnchor=null;
+  state.calendarOpen=false;
+  if(preset==="tomorrow"){
+    state.dateMode="single";
+    state.dateStart=addDays(today,1);
+    state.dateEnd=state.dateStart;
+  }else if(preset==="weekend"){
+    state.dateMode="range";
+    [state.dateStart,state.dateEnd]=weekendRange(today);
+  }else if(preset==="7days"){
+    state.dateMode="range";
+    state.dateStart=today;
+    state.dateEnd=addDays(today,6);
+  }else if(preset==="30days"){
+    state.dateMode="range";
+    state.dateStart=today;
+    state.dateEnd=addDays(today,29);
+  }else{
+    state.dateMode="single";
+    state.dateStart=today;
+    state.dateEnd=today;
+  }
+  state.calendarMonth=state.dateStart.slice(0,7);
+  resetMapScope();
+  render();
+}
+
 function bindDiscoveryFilters(){
   document.querySelectorAll("#filters [data-category]").forEach(button=>button.onclick=()=>{
     const category=button.dataset.category;
@@ -232,6 +272,8 @@ function bindDiscoveryFilters(){
     render();
   });
 
+  document.querySelectorAll("[data-date-preset]").forEach(button=>button.onclick=()=>applyQuickPreset(button.dataset.datePreset));
+
   document.querySelector("#dateSummary")?.addEventListener("click",()=>{
     state.calendarOpen=!state.calendarOpen;
     render();
@@ -239,6 +281,7 @@ function bindDiscoveryFilters(){
   document.querySelector("#todayDate")?.addEventListener("click",()=>{
     const key=todayKey();
     resetMapScope();
+    state.quickPreset="today";
     state.dateMode="single";
     state.dateStart=key;
     state.dateEnd=key;
@@ -247,12 +290,14 @@ function bindDiscoveryFilters(){
     render();
   });
   document.querySelectorAll("[data-date-mode]").forEach(button=>button.onclick=()=>{
+    state.quickPreset=null;
     state.dateMode=button.dataset.dateMode;
     state.rangeAnchor=null;
     if(state.dateMode==="single")state.dateEnd=state.dateStart;
     render();
   });
   document.querySelectorAll("[data-date-shift]").forEach(button=>button.onclick=()=>{
+    state.quickPreset=null;
     const amount=Number(button.dataset.dateShift);
     resetMapScope();
     state.dateStart=addDays(state.dateStart,amount);
