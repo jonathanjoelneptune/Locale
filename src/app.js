@@ -87,38 +87,27 @@ function inViewport(event,bounds){
   return latitudeOk&&longitudeOk;
 }
 
-function syncSaveButton(button,on){
-  button.classList.toggle("is-saved",on);
-  button.setAttribute("aria-pressed",String(on));
-  button.setAttribute("aria-label",on?"Remove saved event":"Save event");
-  button.dataset.saved=String(on);
-  const glyph=button.querySelector(".heart-glyph");
-  if(glyph)glyph.textContent=on?"♥":"♡";
-  const label=button.querySelector(".sr-only");
-  if(label)label.textContent=on?"Saved":"Save event";
-}
-
-function toggleSaved(id){
-  const on=!state.saved.has(id);
-  on?state.saved.add(id):state.saved.delete(id);
-  localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
-  document.querySelectorAll("[data-save-event]").forEach(button=>{
-    if(button.dataset.saveEvent===id)syncSaveButton(button,on);
-  });
-  if(state.listMode==="saved")requestAnimationFrame(render);
-}
-
-function render(){
-  document.querySelector("#filters").innerHTML=Filters(state);
-  document.querySelector("#placeLabel").textContent=state.placeLabel;
+function currentEventView(){
   const nearby=filterEvents(state.events,state);
   let visible=state.resultScope==="viewport"&&state.viewport
     ?nearby.filter(event=>inViewport(event,state.viewport))
     :nearby;
   if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
+  return {nearby,visible};
+}
+
+function renderSidebarFromState(){
+  const {visible}=currentEventView();
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
-  document.querySelectorAll("[data-save-event]").forEach(button=>syncSaveButton(button,state.saved.has(button.dataset.saveEvent)));
+}
+
+function render(){
+  document.querySelector("#filters").innerHTML=Filters(state);
+  document.querySelector("#placeLabel").textContent=state.placeLabel;
+  const {nearby,visible}=currentEventView();
+  document.querySelector("#resultsCount").textContent=visible.length;
+  renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible);
   if(state.events.length&&!state.hasFit&&nearby.length){
@@ -126,7 +115,7 @@ function render(){
     state.hasFit=true;
   }
   renderHighlights(nearby);
-  bindFilters();
+  bindDiscoveryFilters();
 }
 
 function renderHighlights(events){
@@ -139,26 +128,23 @@ function renderHighlights(events){
   el.querySelectorAll("[data-highlight]").forEach(b=>b.onclick=()=>{selectEvent(b.dataset.highlight);openEventDetail(b.dataset.highlight)});
 }
 
-function bindFilters(){
-  document.querySelectorAll("#sidebar [data-save-event]").forEach(button=>{
-    button.onclick=event=>{
-      event.preventDefault();
-      event.stopPropagation();
-      toggleSaved(button.dataset.saveEvent);
-    };
-  });
-  document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
-  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;render()});
-  document.querySelector("#showAllNearby")?.addEventListener("click",()=>{
-    state.resultScope="nearby";
-    state.viewport=null;
+function bindDiscoveryFilters(){
+  document.querySelectorAll("#filters [data-window]").forEach(button=>button.onclick=()=>{
     state.venueFilter=null;
+    state.window=button.dataset.window;
+    state.hasFit=false;
     render();
   });
-  document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
-  document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.window=b.dataset.window;state.hasFit=false;render()});
-  document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.category=b.dataset.category;state.hasFit=false;render()});
-  document.querySelector("#clearCategory")?.addEventListener("click",()=>{state.category="all";render()});
+  document.querySelectorAll("#filters [data-category]").forEach(button=>button.onclick=()=>{
+    state.venueFilter=null;
+    state.category=button.dataset.category;
+    state.hasFit=false;
+    render();
+  });
+  document.querySelector("#clearCategory")?.addEventListener("click",()=>{
+    state.category="all";
+    render();
+  });
 }
 
 function handleMapMarker(hit){
@@ -193,13 +179,52 @@ function selectEvent(id){
 
 document.querySelector("#resultsToggle").onclick=()=>{state.venueFilter=null;const shell=document.querySelector(".shell");shell.classList.toggle("results-collapsed");document.querySelector("#resultsToggle .drawer-arrow").textContent=shell.classList.contains("results-collapsed")?"‹":"›";setTimeout(()=>mapUI?.map.invalidateSize(),240)};
 document.querySelector("#discoveryToggle").onclick=()=>{const shell=document.querySelector(".shell");shell.classList.toggle("discovery-collapsed");document.querySelector("#discoveryToggle .drawer-arrow").textContent=shell.classList.contains("discovery-collapsed")?"›":"‹";setTimeout(()=>mapUI?.map.invalidateSize(),240)};
-document.querySelector("#sidebar").addEventListener("click",event=>{
-  if(event.target.closest("[data-save-event],.event-action"))return;
+const sidebar=document.querySelector("#sidebar");
+sidebar.addEventListener("click",event=>{
+  const saveButton=event.target.closest("[data-save-event]");
+  if(saveButton){
+    event.preventDefault();
+    event.stopPropagation();
+    const id=saveButton.dataset.saveEvent;
+    state.saved.has(id)?state.saved.delete(id):state.saved.add(id);
+    localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
+    renderSidebarFromState();
+    return;
+  }
+
+  if(event.target.closest(".event-action"))return;
+
+  const listMode=event.target.closest("[data-list-mode]");
+  if(listMode){
+    state.listMode=listMode.dataset.listMode;
+    renderSidebarFromState();
+    return;
+  }
+
+  if(event.target.closest("#clearVenueFilter")){
+    state.venueFilter=null;
+    render();
+    return;
+  }
+
+  if(event.target.closest("#showAllNearby")){
+    state.resultScope="nearby";
+    state.viewport=null;
+    state.venueFilter=null;
+    render();
+    return;
+  }
+
   const row=event.target.closest("[data-event-id]");
   if(!row)return;
   const wasSelected=row.classList.contains("selected");
   selectEvent(row.dataset.eventId);
   if(wasSelected)openEventDetail(row.dataset.eventId);
+});
+sidebar.addEventListener("change",event=>{
+  if(!event.target.matches("#sortEvents"))return;
+  state.sort=event.target.value;
+  renderSidebarFromState();
 });
 
 document.querySelector("#radius").oninput=event=>{
