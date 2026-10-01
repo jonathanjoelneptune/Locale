@@ -2,6 +2,15 @@ name: Deploy Locale to GitHub Pages
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "src/data/events.json"
+      - "src/data/places.json"
+      - "src/data/organizers.json"
+      - "src/data/series.json"
+      - "src/data/entity-source-links.json"
+      - "src/data/coverage.json"
+      - "src/data/geocode-cache.json"
+      - "src/data/venue-geocode-cache.json"
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +33,8 @@ jobs:
           find scripts -name '*.mjs' -print0 | xargs -0 -n1 node --check
       - name: Validate architecture and generated data
         run: node scripts/validate-data.mjs
+      - name: Validate delivery architecture
+        run: node scripts/validate-delivery.mjs
       - name: Install browser test runner
         run: |
           npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4
@@ -53,6 +64,7 @@ jobs:
           sed -i "s|./styles/base.css|./styles/base.css?v=$BUILD|; s|./styles/app.css|./styles/app.css?v=$BUILD|; s|./src/app.js|./src/app.js?v=$BUILD|" _site/index.html
           sed -i "s|</head>|<meta name=\"locale-build\" content=\"$BUILD\"></head>|" _site/index.html
           node scripts/version-site-modules.mjs _site "$BUILD"
+          cp _site/index.html _site/404.html
           find _site/src -name '*.js' -print0 | xargs -0 -n1 node --check
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -84,6 +96,15 @@ jobs:
           done
           echo "Deployed build marker did not reach production" >&2
           exit 1
+      - name: Verify document shell stays available
+        run: |
+          for i in {1..6}; do
+            url="https://jonathanjoelneptune.github.io/Locale/?availability=$RANDOM"
+            html="$(curl --connect-timeout 5 --max-time 12 -fsSL "$url")"
+            grep -q 'id="localeBoot"' <<<"$html"
+            grep -q 'Locale' <<<"$html"
+            sleep 5
+          done
       - name: Run focused post-deploy smoke test
         env:
           LOCALE_BASE_URL: https://jonathanjoelneptune.github.io/Locale/

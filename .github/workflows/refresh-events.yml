@@ -11,7 +11,6 @@ on:
     - cron: "17 */6 * * *"
 permissions:
   contents: write
-  actions: write
 concurrency:
   group: locale-event-refresh
   cancel-in-progress: true
@@ -45,8 +44,3 @@ jobs:
           git pull --rebase origin main
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
-      - name: Deploy refreshed event snapshot
-        if: github.ref == 'refs/heads/main' && steps.commit.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run pages.yml --ref main

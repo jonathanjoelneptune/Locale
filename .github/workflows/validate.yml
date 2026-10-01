@@ -22,6 +22,8 @@ jobs:
           find scripts -name '*.mjs' -print0 | xargs -0 -n1 node --check
       - name: Validate architecture and generated data
         run: node scripts/validate-data.mjs
+      - name: Validate delivery architecture
+        run: node scripts/validate-delivery.mjs
       - name: Test registry domain
         run: node --test scripts/registry.test.mjs
       - name: Install browser test runner

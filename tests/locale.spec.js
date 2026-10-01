@@ -130,6 +130,16 @@ test("canonical event contract is deployed",async({page})=>{
   expect(body).toContain("sources:");
 });
 
+test("application shell survives event snapshot failure",async({page})=>{
+  await mockLeaflet(page);
+  await page.route("**/src/data/events.json*",route=>route.abort());
+  await page.goto("./");
+  await page.waitForSelector("#sidebar",{timeout:15000});
+  await expect(page.locator(".shell")).toBeVisible();
+  await expect(page.locator("#splash")).toBeHidden({timeout:6000});
+  await expect(page.locator("#sidebar")).toBeVisible();
+});
+
 test("event list remains usable when map library fails",async({page})=>{
   await page.route("https://cdn.jsdelivr.net/**",route=>route.abort());
   await page.route("https://unpkg.com/**",route=>route.abort());
