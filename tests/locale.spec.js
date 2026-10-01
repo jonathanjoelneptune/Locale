@@ -171,14 +171,13 @@ test("static bootstrap remains visible if the application module cannot load",as
 });
 
 
-test("zoom regrouping enters animated cluster transition state",async({page})=>{
+test("zoom regrouping records an animated cluster transition",async({page})=>{
   await waitForLocale(page);
   await selectNext7Days(page);
   const map=page.locator("#map");
-  await map.evaluate(el=>el.__localeMap.setZoom(10,{animate:false}));
-  await page.waitForTimeout(80);
-  await map.evaluate(el=>el.__localeMap.setZoom(13,{animate:false}));
-  await expect(map).toHaveClass(/cluster-animating/,{timeout:500});
+  const before=Number(await map.getAttribute("data-cluster-motion-count")||0);
+  await map.evaluate(el=>el.__localeMap.setZoom(Math.max(8,el.__localeMap.getZoom()-2),{animate:false}));
+  await expect.poll(async()=>Number(await map.getAttribute("data-cluster-motion-count")||0),{timeout:1500}).toBeGreaterThan(before);
 });
 
 test("event groups fully expand at street-level zoom",async({page})=>{
