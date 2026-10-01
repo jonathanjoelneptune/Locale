@@ -33,6 +33,8 @@ jobs:
           find scripts -name '*.mjs' -print0 | xargs -0 -n1 node --check
       - name: Validate architecture and generated data
         run: node scripts/validate-data.mjs
+      - name: Validate delivery architecture
+        run: node scripts/validate-delivery.mjs
       - name: Install browser test runner
         run: |
           npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4
