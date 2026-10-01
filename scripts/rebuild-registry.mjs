@@ -1,8 +1,10 @@
 import {readFile,writeFile} from "node:fs/promises";
 import {buildRegistry} from "./registry.mjs";
-import {SOURCES} from "./source-registry.mjs";
+import {loadAllSources} from "./source-catalog.mjs";
 
 const readJson=async path=>JSON.parse(await readFile(path,"utf8"));
+
+const SOURCES=await loadAllSources();
 
 const events=await readJson("src/data/events.json");
 const coverage=await readJson("src/data/coverage.json");
