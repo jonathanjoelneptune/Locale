@@ -6,7 +6,8 @@ let cache={};
 let lastRequestAt=0;
 let dirty=false;
 let newLookups=0;
-const MAX_NEW_LOOKUPS_PER_RUN=35;
+const MAX_NEW_LOOKUPS_PER_RUN=120;
+const NEGATIVE_CACHE_MS=7*86400000;
 
 const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
@@ -30,7 +31,13 @@ export async function geocodeVenue(venue,region){
   const clean=String(venue||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
   if(!clean||clean.length>180||vague.test(clean))return null;
   const key=keyFor(clean,region);
-  if(cache[key])return cache[key];
+  const cached=cache[key];
+  if(cached?.miss){
+    const checked=Date.parse(cached.checkedAt||"");
+    if(Number.isFinite(checked)&&Date.now()-checked<NEGATIVE_CACHE_MS)return null;
+  }else if(cached&&Number.isFinite(Number(cached.lat))&&Number.isFinite(Number(cached.lng))){
+    return cached;
+  }
   if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;
   newLookups++;
 
@@ -48,7 +55,11 @@ export async function geocodeVenue(venue,region){
     const rows=await response.json();
     const first=rows?.[0];
     const lat=Number(first?.lat),lng=Number(first?.lon);
-    if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+    if(!Number.isFinite(lat)||!Number.isFinite(lng)){
+      cache[key]={miss:true,checkedAt:new Date().toISOString()};
+      dirty=true;
+      return null;
+    }
     const point={lat,lng,displayName:first.display_name||clean};
     cache[key]=point;
     dirty=true;
