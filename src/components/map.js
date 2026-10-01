@@ -46,6 +46,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
   requestAnimationFrame(()=>requestAnimationFrame(stabilize));
   const markers=new Map();
   let lastEvents=[];
+  let lastRenderZoom=map.getZoom();
   let userViewportIntent=false;
   let viewportNotifyTimer=0;
   const markUserViewportIntent=()=>{userViewportIntent=true};
@@ -110,9 +111,14 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     renderEvents(events){
       lastEvents=events;
       const mappableEvents=events.filter(hasPreciseLocation);
+      const previousPositions=new Map;
+      markers.forEach((marker,id)=>previousPositions.set(id,marker.getLatLng()));
+      const previousZoom=lastRenderZoom;
       layer.clearLayers();
       markers.clear();
       const zoom=map.getZoom();
+      const animateFromPrevious=previousPositions.size>0&&zoom!==previousZoom;
+      lastRenderZoom=zoom;
       el.dataset.mapZoom=String(zoom);
       const FULLY_EXPANDED_ZOOM=17;
       const clusterPx=zoom<=10?76:zoom===11?60:zoom===12?46:zoom===13?34:zoom===14?22:12;
@@ -151,20 +157,46 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
 
       groups.forEach(g=>{
         const group=g.events,e=group[0],count=group.length;
-        const ll=zoom>=FULLY_EXPANDED_ZOOM?map.unproject(g.p,zoom):(count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng));
+        const target=zoom>=FULLY_EXPANDED_ZOOM?map.unproject(g.p,zoom):(count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng));
+        const prior=group.map(item=>previousPositions.get(item.id)).filter(Boolean);
+        const origin=animateFromPrevious&&prior.length
+          ?L.latLng(prior.reduce((sum,pos)=>sum+pos.lat,0)/prior.length,prior.reduce((sum,pos)=>sum+pos.lng,0)/prior.length)
+          :target;
         const face=count>1?`<span>${count}</span>`:(e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${SYMBOLS[e.category]||"•"}</span>`);
         const label=count>1?`${count} events`:e.title;
-        const icon=L.divIcon({className:"event-marker-wrap",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
-        const marker=L.marker(ll,{icon}).addTo(layer);
+        const icon=L.divIcon({className:"event-marker-wrap locale-event-marker-icon",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
+        const marker=L.marker(origin,{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} nearby events`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));
-        marker.on("click",ev=>{L.DomEvent.stopPropagation(ev);count>1?onMarker?.({type:"group",events:group,lat:ll.lat,lng:ll.lng,venue:group.every(x=>x.venue===e.venue)?e.venue:"Nearby events"}):onMarker?.({type:"single",event:e,marker})});
+        marker.on("click",ev=>{L.DomEvent.stopPropagation(ev);count>1?onMarker?.({type:"group",events:group,lat:target.lat,lng:target.lng,venue:group.every(x=>x.venue===e.venue)?e.venue:"Nearby events"}):onMarker?.({type:"single",event:e,marker})});
+
+        if(animateFromPrevious&&origin.distanceTo(target)>1){
+          requestAnimationFrame(()=>requestAnimationFrame(()=>{
+            const node=marker.getElement();
+            if(node){
+              node.classList.add("cluster-motion");
+              node.style.transition="transform 320ms cubic-bezier(.2,.8,.2,1)";
+            }
+            marker.setLatLng(target);
+            setTimeout(()=>{
+              const current=marker.getElement();
+              if(current){
+                current.classList.remove("cluster-motion");
+                current.style.transition="";
+              }
+            },360);
+          }));
+        }
       });
     },
     selectEvent(id){
-      markers.forEach(m=>m.getElement()?.querySelector(".event-pin")?.classList.remove("selected-pin"));
+      markers.forEach(marker=>marker.getElement()?.querySelector(".event-pin")?.classList.remove("selected-pin"));
       const marker=markers.get(id);
       marker?.getElement()?.querySelector(".event-pin")?.classList.add("selected-pin");
+    },
+    hoverEvent(id,on=true){
+      const marker=markers.get(id);
+      marker?.getElement()?.querySelector(".event-pin")?.classList.toggle("hover-pulse",!!on);
     },
     fitEvents(events){
       const precise=events.filter(hasPreciseLocation);
