@@ -377,7 +377,8 @@ test("unified rail supports date ranges, day stepping, and category pills",async
 
 test("hovering an event row pulses its map marker",async({page})=>{
   await waitForLocale(page);
-  const row=page.locator(".event-row").first();
+  const row=page.locator('.event-row[data-mappable="true"]').first();
+  await expect(row).toBeVisible();
   await row.hover();
   await expect(page.locator(".event-pin.hover-pulse")).toHaveCount(1);
   await page.locator(".results-head").hover();
