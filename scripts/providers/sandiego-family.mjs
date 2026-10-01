@@ -26,6 +26,7 @@ const coarsePoint=venue=>COARSE_PLACES.find(([re])=>re.test(venue))?.[1]||{lat:3
 
 function cleanVenue(value){
   let venue=strip(value||"");
+  if(/^\s*\$/.test(venue)||/class\s*=|aria-label\s*=|thumbnail|\.png\b|\.jpe?g\b|\.webp\b|https?:\/\/|www\.|<[^>]+>/i.test(venue))return "San Diego, CA";
   for(const marker of GARBAGE_MARKERS){
     const index=venue.toLowerCase().indexOf(marker.toLowerCase());
     if(index>0)venue=venue.slice(0,index).trim();
