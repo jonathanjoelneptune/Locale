@@ -120,6 +120,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
       const animateFromPrevious=previousPositions.size>0&&zoom!==previousZoom;
       lastRenderZoom=zoom;
       if(animateFromPrevious){
+        el.dataset.clusterMotionCount=String(Number(el.dataset.clusterMotionCount||0)+1);
         el.classList.add("cluster-animating");
         setTimeout(()=>el.classList.remove("cluster-animating"),520);
       }
