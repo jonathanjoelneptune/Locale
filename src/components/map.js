@@ -25,10 +25,13 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     if(!styles[name])return;
     const previous=base;
     if(previous&&map.hasLayer(previous))map.removeLayer(previous);
+    previous?.off?.();
     previous?.getContainer?.()?.remove();
+    basePane.replaceChildren();
     base=makeBase(name);
     base.options.localeBasemap=true;
     base.addTo(map);
+    base.bringToFront?.();
     activeStyle=name;
     el.dataset.mapStyle=name;
     requestAnimationFrame(()=>{

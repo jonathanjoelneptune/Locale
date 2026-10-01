@@ -178,8 +178,8 @@ document.querySelector("#sidebar").addEventListener("click",event=>{
     button.classList.toggle("is-saved",on);
     button.setAttribute("aria-pressed",String(on));
     button.setAttribute("aria-label",on?"Remove saved event":"Save event");
-    const glyph=button.querySelector(".heart-glyph");
-    if(glyph)glyph.textContent=on?"♥":"♡";
+    const label=button.querySelector(".sr-only");
+    if(label)label.textContent=on?"Saved":"Save event";
   });
   if(state.listMode==="saved")requestAnimationFrame(render);
 },true);

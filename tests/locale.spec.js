@@ -37,9 +37,8 @@ test("critical Locale interactions",async({page})=>{
   await heart.click();
   await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
   await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);
-  const expectedGlyph=before==="true"?"♡":"♥";
-  await expect(heart.locator(".heart-glyph")).toHaveText(expectedGlyph);
-  await expect(heart.locator(".heart-glyph")).toBeVisible();
+  const expectedGlyph=before==="true"?"\"♡\"":"\"♥\"";
+  await expect.poll(async()=>heart.evaluate(el=>getComputedStyle(el,"::before").content)).toBe(expectedGlyph);
   await page.reload(); await page.waitForSelector(".event-row");
   await expect(page.locator(`[data-save-event="${id}"]`)).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
 
@@ -267,9 +266,9 @@ test("heart fills immediately without changing tabs",async({page})=>{
   const heart=page.locator("[data-save-event]").first();
   const before=await heart.getAttribute("aria-pressed");
   await heart.click();
-  const expected=before==="true"?"♡":"♥";
-  await expect(heart.locator(".heart-glyph")).toHaveText(expected);
+  const expected=before==="true"?"\"♡\"":"\"♥\"";
   await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
+  await expect.poll(async()=>heart.evaluate(el=>getComputedStyle(el,"::before").content)).toBe(expected);
 });
 
 test("map style swaps the actual visible tile layer",async({page})=>{
@@ -279,9 +278,11 @@ test("map style swaps the actual visible tile layer",async({page})=>{
 
   await style.selectOption("satellite");
   await expect.poll(visible,{timeout:5000}).toContain("arcgisonline.com");
+  await expect.poll(async()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").evaluateAll(imgs=>imgs.every(img=>img.src.includes("arcgisonline.com")))).toBe(true);
 
   await style.selectOption("humanitarian");
   await expect.poll(visible,{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
+  await expect.poll(async()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").evaluateAll(imgs=>imgs.every(img=>img.src.includes("tile.openstreetmap.fr/hot")))).toBe(true);
 
   const layerCount=await page.locator("#map").evaluate(el=>{
     let count=0;
