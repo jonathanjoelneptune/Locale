@@ -224,9 +224,9 @@ function chooseDate(key){
 function weekendRange(base=todayKey()){
   const date=new Date(base+"T12:00:00");
   const dow=date.getDay();
-  const daysUntilFriday=dow===0?5:dow<=5?5-dow:6;
-  const start=addDays(base,daysUntilFriday);
-  return [start,addDays(start,2)];
+  const daysUntilSaturday=(6-dow+7)%7;
+  const start=addDays(base,daysUntilSaturday);
+  return [start,addDays(start,1)];
 }
 
 function applyQuickPreset(preset){
