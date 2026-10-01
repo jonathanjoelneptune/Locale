@@ -64,6 +64,7 @@ if(Array.isArray(places)){
     placeIds.add(place.id);
     if(!regionIds.has(place.regionId))fail(`${label} references unknown region ${place.regionId}`);
     if(!["A","B","C"].includes(place.monitorTier))fail(`${label} has invalid monitorTier ${place.monitorTier}`);
+    if(coverage?.registryPlaceQualityVersion>=1&&(String(place.name||"").length>110||/^\s*\$/.test(String(place.name||""))||/class\s*=|aria-label\s*=|thumbnail|\.png\b|\.jpe?g\b|\.webp\b|https?:\/\/|www\.|<[^>]+>/i.test(String(place.name||""))))fail(`${label} contains page chrome instead of a canonical place name`);
     if(place.lat!==null&&!finite(place.lat,-90,90))fail(`${label} has invalid latitude`);
     if(place.lng!==null&&!finite(place.lng,-180,180))fail(`${label} has invalid longitude`);
     if(!Array.isArray(place.sourceIds))fail(`${label} sourceIds must be an array`);

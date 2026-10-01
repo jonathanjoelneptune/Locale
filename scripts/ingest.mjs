@@ -236,7 +236,7 @@ const sorted=unique.sort((a,b)=>{
 const registry=buildRegistry(sorted,SOURCES,previousRegistry);
 const canonicalEvents=registry.events;
 
-const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,registryContractVersion:registry.coverage.contractVersion,regions:{}};
+const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,registryContractVersion:registry.coverage.contractVersion,registryPlaceQualityVersion:1,regions:{}};
 for(const region of Object.values(REGIONS)){
   const regionEvents=canonicalEvents.filter(event=>event.regionId===region.id);
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
