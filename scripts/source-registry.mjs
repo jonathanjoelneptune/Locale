@@ -19,6 +19,10 @@ export const SOURCES=[
     endpoint:"https://singhub.app/find-karaoke?type=live",refreshHours:12
   },
   {
+    id:"taco-tuesday-sd",name:"TacoTuesday.com San Diego",scope:"regional",regions:["san-diego"],adapter:"taco-tuesday",sourceKind:"aggregator",minExpectedEvents:1,
+    endpoint:"https://tacotuesday.com/san-diego-taco-tuesday-the-best-taco-deals-every-tuesday/",refreshHours:24
+  },
+  {
     id:"north-park-noise",name:"North Park Noise",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"aggregator",minExpectedEvents:1,
     endpoint:"https://northparknoise.com",fallbackCenter:{lat:32.7470,lng:-117.1290},refreshHours:12
   },
