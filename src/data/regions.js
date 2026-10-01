@@ -9,6 +9,8 @@ export const REGIONS={
     center:{lat:32.7157,lng:-117.1611},
     defaultRadiusMiles:15,
     ingestRadiusMiles:50,
+    discoveryRadiusMiles:35,
+    discoveryDiningRadiusMiles:20,
     timeZone:"America/Los_Angeles",
     locale:"en-US",
     currency:"USD"
@@ -21,6 +23,8 @@ export const REGIONS={
     center:{lat:41.8781,lng:-87.6298},
     defaultRadiusMiles:15,
     ingestRadiusMiles:50,
+    discoveryRadiusMiles:30,
+    discoveryDiningRadiusMiles:18,
     timeZone:"America/Chicago",
     locale:"en-US",
     currency:"USD"
