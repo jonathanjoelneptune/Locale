@@ -1,3 +1,4 @@
+import {classifyEvent} from "../event-classification.mjs";
 import {readFile,writeFile} from "node:fs/promises";
 const URL="https://www.poway.org/m/calendar?cat=0";
 const CACHE="src/data/geocode-cache.json";
@@ -26,7 +27,7 @@ export async function powayEvents(){
   const venue=(body.match(/(?:at|@)\s+([^.!]+?)(?:\.|$)/i)?.[1]||"Poway, CA").trim();
   const pos=await geocode(venue,cache);if(!pos)continue;
   const start=new Date(year,mon,day,hour,min).toISOString();
-  out.push({id:"poway:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"+start.slice(0,10),title,category:/concert|music|festival/i.test(title)?"music":/movie|family|kid/i.test(title)?"family":/run|fishing|sport/i.test(title)?"sports":"community",venue,...pos,start,end:null,price:/\bfree\b/i.test(body)?"Free":null,priceStatus:/\bfree\b/i.test(body)?"free":"unknown",url:url,source:"City of Poway",description:body,featured:false,image:null,sourceUrl:url,lastVerified:new Date().toISOString()});
+  out.push({id:"poway:"+title.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"+start.slice(0,10),title,category:classifyEvent(title,body,venue),venue,...pos,start,end:null,price:/\bfree\b/i.test(body)?"Free":null,priceStatus:/\bfree\b/i.test(body)?"free":"unknown",url:url,source:"City of Poway",description:body,featured:false,image:null,sourceUrl:url,lastVerified:new Date().toISOString()});
  }
  await writeFile(CACHE,JSON.stringify(cache,null,2)+"\n");
  return out;
