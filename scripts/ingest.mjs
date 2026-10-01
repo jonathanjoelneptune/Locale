@@ -13,6 +13,13 @@ import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
 import {sanDiegoFamilyEvents} from "./providers/sandiego-family.mjs";
+import {sanDiegoParksEvents} from "./providers/sandiego-parks.mjs";
+import {usdEvents} from "./providers/usd.mjs";
+import {sdsuEvents} from "./providers/sdsu.mjs";
+import {icsEvents} from "./providers/ics.mjs";
+import {sdplEvents} from "./providers/sdpl.mjs";
+import {midwayEvents} from "./providers/midway.mjs";
+import {sunsetTriviaEvents} from "./providers/sunset-trivia.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {sourcesForRegion} from "./source-registry.mjs";
@@ -20,6 +27,13 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
 const adapters={
+  "sunset-trivia":async()=>sunsetTriviaEvents(),
+  midway:async()=>midwayEvents(),
+  sdpl:async()=>sdplEvents(),
+  "san-diego-parks":async()=>sanDiegoParksEvents(),
+  usd:async()=>usdEvents(),
+  sdsu:async()=>sdsuEvents(),
+  ics:async(region,source)=>icsEvents({endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,fallbackCenter:source.fallbackCenter,days:45}),
   "sandiego-family":async()=>sanDiegoFamilyEvents(),
   nova:async()=>novaEvents(),
   spin:async()=>spinEvents(),
@@ -159,7 +173,7 @@ for(let index=0;index<events.length;index++){
   const event=events[index];
   if(event.locationPrecision!=="source-center")continue;
   const region=REGIONS[event.regionId];
-  const point=await geocodeVenue(event.venue,region);
+  const point=await geocodeVenue(event.address||event.venue,region);
   if(!point)continue;
   events[index]={...event,lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
   enrichedLocations++;
@@ -213,7 +227,7 @@ const sorted=unique.sort((a,b)=>{
   return timeDifference||String(a.id).localeCompare(String(b.id));
 });
 
-const coverage={generatedAt:new Date().toISOString(),regions:{}};
+const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,regions:{}};
 for(const region of Object.values(REGIONS)){
   const regionEvents=sorted.filter(event=>event.regionId===region.id);
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
@@ -222,10 +236,14 @@ for(const region of Object.values(REGIONS)){
   const categorySourceCounts={};
   const categorySourceDiversity={};
   const locationPrecisionCounts={};
+  const approximatePrecisions=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
+  let approximateLocationCount=0;
   for(const event of regionEvents){
     const category=event.category||"other";
     categoryCounts[category]=(categoryCounts[category]||0)+1;
-    locationPrecisionCounts[event.locationPrecision||"unknown"]=(locationPrecisionCounts[event.locationPrecision||"unknown"]||0)+1;
+    const precision=event.locationPrecision||"unknown";
+    locationPrecisionCounts[precision]=(locationPrecisionCounts[precision]||0)+1;
+    if(approximatePrecisions.has(precision))approximateLocationCount++;
     if(!categorySourceCounts[category])categorySourceCounts[category]={};
     for(const source of provenance(event)){
       const key=source.id||source.name||"unknown";
@@ -245,8 +263,12 @@ for(const region of Object.values(REGIONS)){
     categorySourceCounts,
     categorySourceDiversity,
     sourceHealth:sourceStats.filter(stat=>stat.regionId===region.id),
-    locationPrecisionCounts
+    locationPrecisionCounts,
+    preciseLocationCount:regionEvents.length-approximateLocationCount,
+    approximateLocationCount,
+    preciseLocationRate:Number(((regionEvents.length-approximateLocationCount)/Math.max(1,regionEvents.length)).toFixed(3))
   };
+  console.log(`${region.id} location quality: ${regionEvents.length-approximateLocationCount}/${regionEvents.length} precise (${(coverage.regions[region.id].preciseLocationRate*100).toFixed(1)}%), ${approximateLocationCount} approximate.`);
 }
 
 await mkdir("src/data",{recursive:true});

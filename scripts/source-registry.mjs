@@ -28,19 +28,38 @@ export const SOURCES=[
     disabledReason:"Calendar is useful but automated fetches from GitHub Actions are blocked/intermittent; requires a stable adapter path"
   },
   {
-    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"embedded-json",
-    endpoint:"https://www.sandiego.edu/events/",fallbackCenter:{lat:32.7717,lng:-117.1883},refreshHours:6,enabled:false,
-    disabledReason:"Public calendar is active but current structured and embedded-data extraction paths return no canonical events; dedicated parser required"
+    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"usd",refreshHours:6,enabled:false,
+    disabledReason:"Official calendar is public but dedicated parser still returns no canonical events in GitHub Actions"
   },
   {
-    id:"sdsu-alumni",name:"SDSU",scope:"local",regions:["san-diego"],adapter:"embedded-json",
-    endpoint:"https://alumni.sdsu.edu/events",fallbackCenter:{lat:32.7757,lng:-117.0719},refreshHours:6,enabled:false,
-    disabledReason:"Public event calendar is active but current structured and embedded-data extraction paths return no canonical events; dedicated parser required"
+    id:"sdsu-as",name:"SDSU Associated Students",scope:"local",regions:["san-diego"],adapter:"sdsu",minExpectedEvents:1,refreshHours:6
   },
   {
-    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
-    endpoint:"https://www.sandiego.gov/public-library/news-events",linkPattern:"event",fallbackCenter:{lat:32.7084,lng:-117.1541},refreshHours:12,enabled:false,
-    disabledReason:"Candidate pending stable event-detail discovery path"
+    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",refreshHours:12,enabled:false,
+    disabledReason:"Official MyLibrary calendar is visible publicly but automated GitHub Actions requests are blocked or return no parseable event payload"
+  },
+  {
+    id:"san-diego-parks",name:"City of San Diego Parks & Recreation",scope:"local",regions:["san-diego"],adapter:"san-diego-parks",refreshHours:12,enabled:false,
+    disabledReason:"Official calendar is public but event detail discovery remains incompatible with the automated ingestion response"
+  },
+  {
+    id:"county-parks",name:"San Diego County Parks",scope:"regional",regions:["san-diego"],adapter:"ics",minExpectedEvents:1,
+    endpoint:"https://tockify.com/api/feeds/ics/sdparkscalendar",fallbackCenter:{lat:32.85,lng:-117.05},refreshHours:12
+  },
+  {
+    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",minExpectedEvents:1,refreshHours:12
+  },
+  {
+    id:"til-two-club",name:"Til-Two Club",scope:"local",regions:["san-diego"],adapter:"tribe",minExpectedEvents:1,
+    endpoint:"https://www.tiltwoclub.com",fallbackCenter:{lat:32.7553,lng:-117.0928},refreshHours:6
+  },
+  {
+    id:"uss-midway",name:"USS Midway Museum",scope:"local",regions:["san-diego"],adapter:"midway",minExpectedEvents:1,refreshHours:12
+  },
+  {
+    id:"birch-aquarium",name:"Birch Aquarium at Scripps",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
+    endpoint:"https://aquarium.ucsd.edu/events/all",linkPattern:"/events/",fallbackCenter:{lat:32.8658,lng:-117.2505},refreshHours:12,enabled:false,
+    disabledReason:"Generic structured crawl returned no canonical events; dedicated recurrence-aware adapter still needed"
   },
   {
     id:"sandiego-tourism",name:"San Diego Tourism Authority",scope:"local",regions:["san-diego"],adapter:"jsonld",

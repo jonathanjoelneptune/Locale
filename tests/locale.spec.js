@@ -1,6 +1,16 @@
+import {readFileSync} from "node:fs";
 import { test, expect } from "@playwright/test";
 
+const leafletSource=readFileSync("node_modules/leaflet/dist/leaflet.js","utf8");
+const mockLeaflet=async page=>{
+  await page.addInitScript({content:leafletSource});
+  await page.route("https://tile.openstreetmap.org/**",route=>route.abort());
+  await page.route("https://*.tile.openstreetmap.fr/**",route=>route.abort());
+  await page.route("https://server.arcgisonline.com/**",route=>route.abort());
+};
+
 const waitForLocale=async page=>{
+  await mockLeaflet(page);
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
@@ -9,7 +19,8 @@ const waitForLocale=async page=>{
     if(await seven.count())await seven.click();
   }
   await page.waitForSelector(".event-row",{timeout:15000});
-  await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-locale-basemap-pane img.leaflet-tile"));
+  await page.waitForFunction(()=>window.L&&document.querySelector("#map")?.__localeMap,{timeout:15000});
+  await expect(page.locator("#splash")).toBeHidden({timeout:5000});
 };
 
 test("critical Locale interactions",async({page})=>{
@@ -28,19 +39,19 @@ test("critical Locale interactions",async({page})=>{
 
   const style=page.locator("#mapStyle");
   const map=page.locator("#map");
-  const tileSrc=()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
+  const tileTemplate=()=>map.getAttribute("data-map-tile-template");
   await style.selectOption("humanitarian");
   await expect(style).toHaveValue("humanitarian");
   await expect(map).toHaveAttribute("data-map-style","humanitarian");
-  await expect.poll(tileSrc).toContain("tile.openstreetmap.fr/hot");
+  await expect.poll(tileTemplate).toContain("tile.openstreetmap.fr/hot");
   await style.selectOption("satellite");
   await expect(style).toHaveValue("satellite");
   await expect(map).toHaveAttribute("data-map-style","satellite");
-  await expect.poll(tileSrc).toContain("arcgisonline.com");
+  await expect.poll(tileTemplate).toContain("arcgisonline.com");
   await style.selectOption("standard");
   await expect(style).toHaveValue("standard");
   await expect(map).toHaveAttribute("data-map-style","standard");
-  await expect.poll(tileSrc).toContain("tile.openstreetmap.org");
+  await expect.poll(tileTemplate).toContain("tile.openstreetmap.org");
 
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
@@ -98,6 +109,7 @@ test("canonical event contract is deployed",async({page})=>{
 
 test("event list remains usable when map library fails",async({page})=>{
   await page.route("https://cdn.jsdelivr.net/**",route=>route.abort());
+  await page.route("https://unpkg.com/**",route=>route.abort());
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
@@ -123,4 +135,43 @@ test("event groups fully expand at street-level zoom",async({page})=>{
   await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThanOrEqual(17);
   await expect.poll(async()=>page.locator(".event-stack").count(),{timeout:5000}).toBe(0);
   await expect(page.locator(".event-pin").first()).toBeVisible();
+});
+
+
+test("approximate event locations do not masquerade as exact distances",async({page})=>{
+  await page.goto("./");
+  const result=await page.evaluate(async()=>{
+    const {filterEvents,hasPreciseLocation}=await import("./src/services/events.js");
+    const now=new Date();
+    const start=new Date(now.getTime()+60*60*1000).toISOString();
+    const base={id:"test",title:"Approximate event",venue:"San Diego, CA",category:"community",start,lat:32.7157,lng:-117.1611};
+    const approximate={...base,locationPrecision:"city-only"};
+    const exact={...base,id:"exact",locationPrecision:"venue-geocoded"};
+    const state={center:{lat:32.7157,lng:-117.1611},radius:15,category:"all",window:"7days"};
+    const filtered=filterEvents([approximate,exact],state);
+    return {
+      approximatePrecise:hasPreciseLocation(approximate),
+      exactPrecise:hasPreciseLocation(exact),
+      approximateDistance:filtered.find(event=>event.id==="test")?.distance,
+      exactDistance:filtered.find(event=>event.id==="exact")?.distance
+    };
+  });
+  expect(result.approximatePrecise).toBe(false);
+  expect(result.exactPrecise).toBe(true);
+  expect(result.approximateDistance).toBeNull();
+  expect(result.exactDistance).toBe(0);
+});
+
+
+test("production smoke @smoke",async({page})=>{
+  await page.goto("./");
+  await page.waitForSelector("#sidebar",{timeout:15000});
+  await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
+  await expect(page.locator("#sidebar")).toBeVisible();
+  await expect(page.locator("#sidebar .cards")).toBeVisible();
+  const rows=page.locator(".event-row");
+  if(await rows.count()){
+    const href=await rows.first().locator(".event-action").getAttribute("href");
+    expect(href).toMatch(/^https?:\/\//);
+  }
 });

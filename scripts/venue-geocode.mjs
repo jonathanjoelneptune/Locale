@@ -6,7 +6,7 @@ let cache={};
 let lastRequestAt=0;
 let dirty=false;
 let newLookups=0;
-const MAX_NEW_LOOKUPS_PER_RUN=20;
+const MAX_NEW_LOOKUPS_PER_RUN=35;
 
 const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
@@ -28,7 +28,7 @@ async function throttle(){
 export async function geocodeVenue(venue,region){
   await load();
   const clean=String(venue||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-  if(!clean||vague.test(clean))return null;
+  if(!clean||clean.length>180||vague.test(clean))return null;
   const key=keyFor(clean,region);
   if(cache[key])return cache[key];
   if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;

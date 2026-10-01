@@ -1,3 +1,4 @@
+import {hasPreciseLocation} from "../services/events.js";
 import {meters} from "../services/geo.js";
 
 export function createMap(el,state,onCenter,onMarker,onMapBackground){
@@ -12,6 +13,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   basePane.style.zIndex="150";
   const makeBase=name=>{
     const [url,opts]=styles[name]||styles.standard;
+    el.dataset.mapTileTemplate=url;
     return L.tileLayer(url,{...opts,pane:"locale-basemap"});
   };
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
@@ -80,6 +82,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
     },
     renderEvents(events){
       lastEvents=events;
+      const mappableEvents=events.filter(hasPreciseLocation);
       layer.clearLayers();
       markers.clear();
       const zoom=map.getZoom();
@@ -90,7 +93,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
 
       if(zoom>=FULLY_EXPANDED_ZOOM){
         const coordinateBuckets=new Map();
-        events.forEach(e=>{
+        mappableEvents.forEach(e=>{
           const key=`${Number(e.lat).toFixed(5)},${Number(e.lng).toFixed(5)}`;
           if(!coordinateBuckets.has(key))coordinateBuckets.set(key,[]);
           coordinateBuckets.get(key).push(e);
@@ -111,7 +114,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
           });
         });
       }else{
-        events.forEach(e=>{
+        mappableEvents.forEach(e=>{
           const p=map.project([e.lat,e.lng],zoom);
           let g=groups.find(x=>x.events.some(v=>v.venue===e.venue)||Math.hypot(x.p.x-p.x,x.p.y-p.y)<=clusterPx);
           if(g){const n=g.events.length;g.events.push(e);g.p=L.point((g.p.x*n+p.x)/(n+1),(g.p.y*n+p.y)/(n+1));}
@@ -137,14 +140,16 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
       marker?.getElement()?.querySelector(".event-pin")?.classList.add("selected-pin");
     },
     fitEvents(events){
-      if(!events.length)return;
-      const pts=events.map(e=>[e.lat,e.lng]);
+      const precise=events.filter(hasPreciseLocation);
+      if(!precise.length)return;
+      const pts=precise.map(e=>[e.lat,e.lng]);
       pts.push([state.center.lat,state.center.lng]);
       const bounds=L.latLngBounds(pts);
       map.invalidateSize({pan:false,animate:false});
       requestAnimationFrame(()=>map.fitBounds(bounds,{padding:[55,55],maxZoom:13,animate:false}));
     },
     showEventPopup(e){
+      if(!hasPreciseLocation(e))return;
       const price=e.price?`<strong>${esc(e.price)}</strong>`:(e.source==="Ticketmaster"?"Check price":"View event");
       const img=e.image?`<img class="map-popup-img" src="${esc(e.image)}" alt="">`:"";
       L.popup({className:"event-map-popup",maxWidth:290}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card">${img}<div><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);
