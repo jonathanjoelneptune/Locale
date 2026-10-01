@@ -5,13 +5,13 @@ import {renderSidebar} from "./components/sidebar.js";
 import {createMap} from "./components/map.js";
 import {EventDetail} from "./components/eventDetail.js";
 import {loadEvents} from "./providers/index.js";
-import {filterEvents} from "./services/events.js";
+import {filterEvents,hasPreciseLocation} from "./services/events.js";
 import {rankHighlights} from "./services/highlights.js";
 import {geocode} from "./services/geocode.js";
 import {ensureLeaflet} from "./services/leaflet.js";
 
 const saved=new Set(JSON.parse(localStorage.getItem("locale-saved")||"[]"));
-const state={center:{...CONFIG.defaultCenter},placeLabel:CONFIG.defaultPlaceLabel,radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false,sort:"time",listMode:"events",saved,venueFilter:null,mapStyle:["standard","humanitarian","satellite"].includes(localStorage.getItem("locale-map-style"))?localStorage.getItem("locale-map-style"):"standard"};
+const state={center:{...CONFIG.defaultCenter},placeLabel:CONFIG.defaultPlaceLabel,radius:CONFIG.defaultRadiusMiles,zoom:CONFIG.defaultZoom,window:"today",category:"all",events:[],hasFit:false,sort:"time",listMode:"events",saved,venueFilter:null,resultScope:"nearby",viewport:null,mapStyle:["standard","humanitarian","satellite"].includes(localStorage.getItem("locale-map-style"))?localStorage.getItem("locale-map-style"):"standard"};
 const root=document.querySelector("#app");
 root.innerHTML=`<div id="eventDetailRoot"></div><div id="splash" class="locale-splash"><div class="splash-mark">⌖</div><strong>Locale</strong><span>Finding what’s happening around you…</span></div><div class="shell"><aside class="discovery-panel">${Header()}<section class="radius-panel"><div class="radius-title"><span id="placeLabel">${state.placeLabel}</span><strong id="radiusLabel">${state.radius} miles</strong></div><input id="radius" type="range" min="5" max="50" step="5" value="${state.radius}"><div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div></section><div id="filters" class="filters-panel"></div></aside><button id="discoveryToggle" class="discovery-toggle" type="button" aria-label="Toggle search filters"><span class="drawer-arrow">‹</span><span class="drawer-label">Search</span></button><main class="map-stage"><div id="map" class="map"></div><button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button><div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div><div class="map-style-picker"><label>MAP</label><select id="mapStyle"><option value="standard">Standard</option><option value="humanitarian">Humanitarian</option><option value="satellite">Satellite</option></select></div></main><aside id="sidebar" class="sidebar results-panel"></aside><button id="resultsToggle" class="results-toggle" type="button" aria-label="Toggle event results"><span class="drawer-arrow">›</span><span class="drawer-label">Events</span><span id="resultsCount">0</span></button><section class="highlights"><div class="highlight-heading"><div><strong>Today's Highlights</strong><span>Top events happening around your search area</span></div><button id="viewAllHighlights" type="button">View All →</button></div><div id="highlightCards" class="highlight-cards"></div></section></div>`;
 
@@ -36,7 +36,36 @@ function initMapLater(){
       clearTimeout(failTimer);
       if(mapUI)return;
       mapEl.innerHTML="";
-      mapUI=createMap(mapEl,state,(center,zoom)=>{state.center=center;state.zoom=zoom;state.venueFilter=null;render()},handleMapMarker,()=>{if(state.venueFilter){state.venueFilter=null;state.hasFit=true;render()}else{document.querySelectorAll(".card.selected").forEach(x=>x.classList.remove("selected"));mapUI?.selectEvent("__none__")}});
+      mapUI=createMap(
+        mapEl,
+        state,
+        (center,zoom)=>{
+          state.center=center;
+          state.zoom=zoom;
+          state.venueFilter=null;
+          state.resultScope="nearby";
+          state.viewport=null;
+          render();
+        },
+        handleMapMarker,
+        ()=>{
+          if(state.venueFilter){
+            state.venueFilter=null;
+            state.hasFit=true;
+            render();
+          }else{
+            document.querySelectorAll(".card.selected").forEach(x=>x.classList.remove("selected"));
+            mapUI?.selectEvent("__none__");
+          }
+        },
+        viewport=>{
+          state.zoom=viewport.zoom;
+          state.viewport=viewport.bounds;
+          state.resultScope="viewport";
+          state.venueFilter=null;
+          render();
+        }
+      );
       state.hasFit=false;
       render();
     }catch(error){
@@ -48,18 +77,34 @@ function initMapLater(){
   },0);
 }
 
+function inViewport(event,bounds){
+  if(!bounds||!hasPreciseLocation(event))return false;
+  const lat=Number(event.lat),lng=Number(event.lng);
+  const latitudeOk=lat>=bounds.south&&lat<=bounds.north;
+  const longitudeOk=bounds.west<=bounds.east
+    ?lng>=bounds.west&&lng<=bounds.east
+    :lng>=bounds.west||lng<=bounds.east;
+  return latitudeOk&&longitudeOk;
+}
+
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
   document.querySelector("#placeLabel").textContent=state.placeLabel;
-  let visible=filterEvents(state.events,state);
+  const nearby=filterEvents(state.events,state);
+  let visible=state.resultScope==="viewport"&&state.viewport
+    ?nearby.filter(event=>inViewport(event,state.viewport))
+    :nearby;
   if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible);
-  if(state.events.length&&!state.hasFit&&visible.length){mapUI?.fitEvents(visible);state.hasFit=true}
-  renderHighlights(visible);
+  if(state.events.length&&!state.hasFit&&nearby.length){
+    mapUI?.fitEvents(nearby);
+    state.hasFit=true;
+  }
+  renderHighlights(nearby);
   bindFilters();
 }
 
@@ -74,7 +119,13 @@ function renderHighlights(events){
 
 function bindFilters(){
   document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
-  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;state.hasFit=false;render()});
+  document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;render()});
+  document.querySelector("#showAllNearby")?.addEventListener("click",()=>{
+    state.resultScope="nearby";
+    state.viewport=null;
+    state.venueFilter=null;
+    render();
+  });
   document.querySelector("#sortEvents")?.addEventListener("change",e=>{state.sort=e.target.value;render()});
   document.querySelectorAll("[data-window]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.window=b.dataset.window;state.hasFit=false;render()});
   document.querySelectorAll("[data-category]").forEach(b=>b.onclick=()=>{state.venueFilter=null;state.category=b.dataset.category;state.hasFit=false;render()});
@@ -137,9 +188,30 @@ document.querySelector("#sidebar").addEventListener("click",event=>{
   if(wasSelected)openEventDetail(row.dataset.eventId);
 });
 
-document.querySelector("#radius").oninput=event=>{state.radius=Number(event.target.value);state.hasFit=false;document.querySelector("#radiusLabel").textContent=state.radius+" miles";document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";render()};
-document.querySelector("#useMapCenter").onclick=()=>{state.venueFilter=null;mapUI?.useMapCenter()};
-document.querySelector("#viewAllHighlights").onclick=()=>{state.listMode="events";document.querySelector(".shell").classList.remove("results-collapsed");render()};
+document.querySelector("#radius").oninput=event=>{
+  state.radius=Number(event.target.value);
+  state.hasFit=false;
+  state.resultScope="nearby";
+  state.viewport=null;
+  state.venueFilter=null;
+  document.querySelector("#radiusLabel").textContent=state.radius+" miles";
+  document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";
+  render();
+};
+document.querySelector("#useMapCenter").onclick=()=>{
+  state.venueFilter=null;
+  state.resultScope="nearby";
+  state.viewport=null;
+  mapUI?.useMapCenter();
+};
+document.querySelector("#viewAllHighlights").onclick=()=>{
+  state.listMode="events";
+  state.resultScope="nearby";
+  state.viewport=null;
+  state.venueFilter=null;
+  document.querySelector(".shell").classList.remove("results-collapsed");
+  render();
+};
 const mapStyle=document.querySelector("#mapStyle");
 mapStyle.value=state.mapStyle;
 function applyMapStyle(value){
@@ -161,6 +233,8 @@ document.querySelector("#placeSearch").addEventListener("keydown",async event=>{
       state.zoom=11;
       state.hasFit=false;
       state.venueFilter=null;
+      state.resultScope="nearby";
+      state.viewport=null;
       mapUI?.setSearchCenter(state.center,{recenter:true,zoom:11});
       render();
     }
