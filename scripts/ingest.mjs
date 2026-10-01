@@ -22,7 +22,8 @@ import {midwayEvents} from "./providers/midway.mjs";
 import {sunsetTriviaEvents} from "./providers/sunset-trivia.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
-import {sourcesForRegion} from "./source-registry.mjs";
+import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
+import {buildRegistry} from "./registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 
@@ -95,9 +96,14 @@ const adapters={
 };
 
 let previousEvents=[];
+let previousRegistry={places:[]};
 try{
   const prior=JSON.parse(await readFile("src/data/events.json","utf8"));
   if(Array.isArray(prior))previousEvents=prior;
+}catch{}
+try{
+  const priorPlaces=JSON.parse(await readFile("src/data/places.json","utf8"));
+  if(Array.isArray(priorPlaces))previousRegistry.places=priorPlaces;
 }catch{}
 
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -227,9 +233,12 @@ const sorted=unique.sort((a,b)=>{
   return timeDifference||String(a.id).localeCompare(String(b.id));
 });
 
-const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,regions:{}};
+const registry=buildRegistry(sorted,SOURCES,previousRegistry);
+const canonicalEvents=registry.events;
+
+const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,registryContractVersion:registry.coverage.contractVersion,regions:{}};
 for(const region of Object.values(REGIONS)){
-  const regionEvents=sorted.filter(event=>event.regionId===region.id);
+  const regionEvents=canonicalEvents.filter(event=>event.regionId===region.id);
   const sourceIds=[...new Set(regionEvents.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
   const categoryCounts={};
   const sourceCounts={};
@@ -266,12 +275,22 @@ for(const region of Object.values(REGIONS)){
     locationPrecisionCounts,
     preciseLocationCount:regionEvents.length-approximateLocationCount,
     approximateLocationCount,
-    preciseLocationRate:Number(((regionEvents.length-approximateLocationCount)/Math.max(1,regionEvents.length)).toFixed(3))
+    preciseLocationRate:Number(((regionEvents.length-approximateLocationCount)/Math.max(1,regionEvents.length)).toFixed(3)),
+    registry:registry.coverage.regions[region.id]||{
+      placeCount:0,organizerCount:0,seriesCount:0,entitySourceLinkCount:0,
+      monitorTierCounts:{A:0,B:0,C:0,D:0},multiSourcePlaceCount:0,
+      recurringEventCount:0,eventsWithVenueId:0,eventsWithOrganizerId:0
+    }
   };
   console.log(`${region.id} location quality: ${regionEvents.length-approximateLocationCount}/${regionEvents.length} precise (${(coverage.regions[region.id].preciseLocationRate*100).toFixed(1)}%), ${approximateLocationCount} approximate.`);
 }
 
 await mkdir("src/data",{recursive:true});
-await writeFile("src/data/events.json",JSON.stringify(sorted,null,2)+"\n");
+await writeFile("src/data/events.json",JSON.stringify(canonicalEvents,null,2)+"\n");
+await writeFile("src/data/places.json",JSON.stringify(registry.places,null,2)+"\n");
+await writeFile("src/data/organizers.json",JSON.stringify(registry.organizers,null,2)+"\n");
+await writeFile("src/data/series.json",JSON.stringify(registry.series,null,2)+"\n");
+await writeFile("src/data/entity-source-links.json",JSON.stringify(registry.entitySources,null,2)+"\n");
 await writeFile("src/data/coverage.json",JSON.stringify(coverage,null,2)+"\n");
-console.log(`Wrote ${sorted.length} canonical events from ${events.length} provider records across ${Object.keys(REGIONS).length} regions.`);
+console.log(`Registry: ${registry.places.length} places, ${registry.organizers.length} organizers, ${registry.series.length} recurring series, ${registry.entitySources.length} entity/source links.`);
+console.log(`Wrote ${canonicalEvents.length} canonical events from ${events.length} provider records across ${Object.keys(REGIONS).length} regions.`);

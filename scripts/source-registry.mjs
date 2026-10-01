@@ -1,38 +1,39 @@
 export const SOURCES=[
-  {id:"ticketmaster",name:"Ticketmaster",scope:"country",countries:["US"],adapter:"ticketmaster",discovery:"geographic",refreshHours:6},
-  {id:"san-diego-city",name:"City of San Diego",scope:"local",regions:["san-diego"],adapter:"san-diego-city",refreshHours:6},
-  {id:"poway",name:"City of Poway",scope:"local",regions:["san-diego"],adapter:"poway",refreshHours:6},
+  {id:"ticketmaster",name:"Ticketmaster",scope:"country",countries:["US"],adapter:"ticketmaster",sourceKind:"platform",discovery:"geographic",refreshHours:6},
+  {id:"san-diego-city",name:"City of San Diego",scope:"local",regions:["san-diego"],adapter:"san-diego-city",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"City of San Diego",refreshHours:6},
+  {id:"poway",name:"City of Poway",scope:"local",regions:["san-diego"],adapter:"poway",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"City of Poway",refreshHours:6},
   {
-    id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",minExpectedEvents:1,
-    endpoint:"https://calendar.ucsd.edu",fallbackCenter:{lat:32.8801,lng:-117.2340},refreshHours:6
+    id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,
+    excludedReason:"College campus calendars are outside Locale scope",endpoint:"https://calendar.ucsd.edu",fallbackCenter:{lat:32.8801,lng:-117.2340},refreshHours:6
   },
   {
-    id:"balboa-park",name:"Balboa Park",scope:"local",regions:["san-diego"],adapter:"tribe",minExpectedEvents:1,
+    id:"balboa-park",name:"Balboa Park",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"official",ownerEntityKind:"organizer",ownerName:"Balboa Park",minExpectedEvents:1,
     endpoint:"https://balboapark.org",fallbackCenter:{lat:32.7311,lng:-117.1467},refreshHours:6
   },
   {
-    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"rss-detail",minExpectedEvents:1,
+    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"rss-detail",sourceKind:"aggregator",minExpectedEvents:1,
     endpoint:"https://www.sandiegoreader.com/rss/events/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:6
   },
   {
-    id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",minExpectedEvents:1,refreshHours:6
+    id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",sourceKind:"official",ownerEntityKind:"place",ownerName:"NOVA SD",minExpectedEvents:1,refreshHours:6
   },
   {
-    id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"spin",minExpectedEvents:1,refreshHours:6
+    id:"spin-nightclub",name:"Spin Nightclub",scope:"local",regions:["san-diego"],adapter:"spin",sourceKind:"official",ownerEntityKind:"place",ownerName:"Spin Nightclub",minExpectedEvents:1,refreshHours:6
   },
   {
-    id:"mic-drop-comedy",name:"Mic Drop Comedy",scope:"local",regions:["san-diego"],adapter:"micdrop",minExpectedEvents:1,refreshHours:6
+    id:"mic-drop-comedy",name:"Mic Drop Comedy",scope:"local",regions:["san-diego"],adapter:"micdrop",sourceKind:"official",ownerEntityKind:"place",ownerName:"Mic Drop Comedy",minExpectedEvents:1,refreshHours:6
   },
   {
     id:"comedy-store-la-jolla",name:"The Comedy Store La Jolla",scope:"local",regions:["san-diego"],adapter:"comedy-store",refreshHours:6,enabled:false,
     disabledReason:"Calendar is useful but automated fetches from GitHub Actions are blocked/intermittent; requires a stable adapter path"
   },
   {
-    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"usd",refreshHours:6,enabled:false,
-    disabledReason:"Official calendar is public but dedicated parser still returns no canonical events in GitHub Actions"
+    id:"usd",name:"University of San Diego",scope:"local",regions:["san-diego"],adapter:"usd",sourceKind:"college",refreshHours:6,enabled:false,excludedFromLocale:true,
+    excludedReason:"College campus calendars are outside Locale scope",disabledReason:"Excluded from Locale scope"
   },
   {
-    id:"sdsu-as",name:"SDSU Associated Students",scope:"local",regions:["san-diego"],adapter:"sdsu",minExpectedEvents:1,refreshHours:6
+    id:"sdsu-as",name:"SDSU Associated Students",scope:"local",regions:["san-diego"],adapter:"sdsu",sourceKind:"college",enabled:false,excludedFromLocale:true,
+    excludedReason:"College campus calendars are outside Locale scope",refreshHours:6
   },
   {
     id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",refreshHours:12,enabled:false,
@@ -43,18 +44,18 @@ export const SOURCES=[
     disabledReason:"Official calendar is public but event detail discovery remains incompatible with the automated ingestion response"
   },
   {
-    id:"county-parks",name:"San Diego County Parks",scope:"regional",regions:["san-diego"],adapter:"ics",minExpectedEvents:1,
+    id:"county-parks",name:"San Diego County Parks",scope:"regional",regions:["san-diego"],adapter:"ics",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"San Diego County Parks",minExpectedEvents:1,
     endpoint:"https://tockify.com/api/feeds/ics/sdparkscalendar",fallbackCenter:{lat:32.85,lng:-117.05},refreshHours:12
   },
   {
-    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",minExpectedEvents:1,refreshHours:12
+    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",sourceKind:"organizer",ownerEntityKind:"organizer",ownerName:"Sunset Trivia",minExpectedEvents:1,refreshHours:12
   },
   {
-    id:"til-two-club",name:"Til-Two Club",scope:"local",regions:["san-diego"],adapter:"tribe",minExpectedEvents:1,
+    id:"til-two-club",name:"Til-Two Club",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"official",ownerEntityKind:"place",ownerName:"Til-Two Club",minExpectedEvents:1,
     endpoint:"https://www.tiltwoclub.com",fallbackCenter:{lat:32.7553,lng:-117.0928},refreshHours:6
   },
   {
-    id:"uss-midway",name:"USS Midway Museum",scope:"local",regions:["san-diego"],adapter:"midway",minExpectedEvents:1,refreshHours:12
+    id:"uss-midway",name:"USS Midway Museum",scope:"local",regions:["san-diego"],adapter:"midway",sourceKind:"official",ownerEntityKind:"place",ownerName:"USS Midway Museum",minExpectedEvents:1,refreshHours:12
   },
   {
     id:"birch-aquarium",name:"Birch Aquarium at Scripps",scope:"local",regions:["san-diego"],adapter:"jsonld-crawl",
@@ -67,11 +68,11 @@ export const SOURCES=[
     disabledReason:"403 from automated ingestion; keep as discovery candidate"
   },
   {
-    id:"sandiego-family",name:"San Diego Family",scope:"regional",regions:["san-diego"],adapter:"sandiego-family",minExpectedEvents:1,
+    id:"sandiego-family",name:"San Diego Family",scope:"regional",regions:["san-diego"],adapter:"sandiego-family",sourceKind:"aggregator",minExpectedEvents:1,
     endpoint:"https://www.sandiegofamily.com/things-to-do/events-calendar",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12
   },
   {
-    id:"eventbrite-san-diego",name:"Eventbrite San Diego",scope:"regional",regions:["san-diego"],adapter:"eventbrite",
+    id:"eventbrite-san-diego",name:"Eventbrite San Diego",scope:"regional",regions:["san-diego"],adapter:"eventbrite",sourceKind:"platform",
     endpoint:"https://www.eventbrite.com/d/ca--san-diego/events/",refreshHours:6,enabled:false,
     disabledReason:"Needs a stable/authorized ingestion path; do not scrape brittle search HTML"
   }
