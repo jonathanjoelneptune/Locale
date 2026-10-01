@@ -1,6 +1,8 @@
 import {readFile} from "node:fs/promises";
 import {DEFAULT_REGION_ID,REGIONS} from "./regions.mjs";
-import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
+import {loadAllSources,sourcesForRegionFrom} from "./source-catalog.mjs";
+
+const SOURCES=await loadAllSources();
 
 const failures=[];
 const fail=message=>failures.push(message);
@@ -36,7 +38,7 @@ for(const source of SOURCES){
   }
 }
 for(const region of Object.values(REGIONS)){
-  for(const source of sourcesForRegion(region)){
+  for(const source of sourcesForRegionFrom(SOURCES,region)){
     if(!sourceIds.has(source.id))fail(`Region ${region.id} resolved unknown source ${source.id}`);
   }
 }
