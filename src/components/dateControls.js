@@ -31,6 +31,16 @@ function summary(state){
 export function todayKey(now=new Date()){return keyFor(now)}
 export {addDays};
 
+const QUICK_PRESETS=[
+  ["now","Now"],
+  ["today","Today"],
+  ["tonight","Tonight"],
+  ["tomorrow","Tomorrow"],
+  ["weekend","This Weekend"],
+  ["7days","7 Days"],
+  ["30days","30 Days"]
+];
+
 export function DateControls(state){
   const calendarMonth=state.calendarMonth||monthKey(state.dateStart);
   const first=monthStart(calendarMonth);
@@ -57,6 +67,9 @@ export function DateControls(state){
     <div class="date-mode">
       <button id="dateModeSingle" type="button" data-date-mode="single" class="${state.dateMode==="single"?"active":""}">Single day</button>
       <button id="dateModeRange" type="button" data-date-mode="range" class="${state.dateMode==="range"?"active":""}">Date range</button>
+    </div>
+    <div class="quick-date-presets" aria-label="Quick date selections">
+      ${QUICK_PRESETS.map(([value,label])=>`<button type="button" data-date-preset="${value}" class="${state.quickPreset===value?"active":""}" aria-pressed="${state.quickPreset===value}">${label}</button>`).join("")}
     </div>
     <div class="calendar-popover ${state.calendarOpen?"open":""}">
       <div class="calendar-head">

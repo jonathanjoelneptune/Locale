@@ -1,5 +1,5 @@
 import {milesBetween} from "./geo.js";
-import {inDateRange} from "./time.js";
+import {inDateRange,inWindow} from "./time.js";
 import {eventIdentityKey,normalizeEvent} from "../domain/event.js";
 
 const VENUES=[
@@ -39,7 +39,8 @@ export function filterEvents(events,state){
     .filter(event=>{
       const categories=state.categories instanceof Set?state.categories:new Set;
       const categoryOk=!categories.size||categories.has(event.category);
-      return event._filterDistance<=state.radius&&categoryOk&&inDateRange(event,state.dateStart,state.dateEnd);
+      const dateOk=state.quickPreset?inWindow(event,state.quickPreset):inDateRange(event,state.dateStart,state.dateEnd);
+      return event._filterDistance<=state.radius&&categoryOk&&dateOk;
     })
     .sort((a,b)=>new Date(a.start)-new Date(b.start)||(a.distance??Infinity)-(b.distance??Infinity));
 }

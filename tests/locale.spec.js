@@ -247,6 +247,8 @@ test("save and basemap controls keep the simple architecture",async({page})=>{
   expect(cssSource).not.toContain("heart-glyph");
   expect(cssSource).not.toContain("heart-on");
   expect(cssSource).not.toContain("heart-off");
+  expect(cssSource).toContain("transform:rotate(-45deg) scale(1.34)");
+  expect(cssSource).toContain(".quick-date-presets");
 });
 
 test("production smoke @smoke",async({page})=>{
@@ -405,6 +407,27 @@ test("dual rails keep search left and event filters with events right",async({pa
     expect(box.height).toBeLessThanOrEqual(130);
     await expect(highlights.locator(".highlight-title-row")).toBeVisible();
   }
+});
+
+test("quick date shortcuts coexist with explicit calendar controls",async({page})=>{
+  await waitForLocale(page);
+  const presets=page.locator("[data-date-preset]");
+  await expect(presets).toHaveCount(7);
+
+  await page.locator('[data-date-preset="tonight"]').click();
+  await expect(page.locator('[data-date-preset="tonight"]')).toHaveClass(/active/);
+
+  await page.locator('[data-date-preset="tomorrow"]').click();
+  await expect(page.locator('[data-date-preset="tomorrow"]')).toHaveClass(/active/);
+
+  await page.locator('[data-date-preset="weekend"]').click();
+  await expect(page.locator("#dateModeRange")).toHaveClass(/active/);
+
+  await page.locator("#dateSummary").click();
+  await expect(page.locator(".calendar-popover")).toHaveClass(/open/);
+  const selected=page.locator(".calendar-day.selected").first();
+  await selected.click();
+  await expect(page.locator('[data-date-preset].active')).toHaveCount(0);
 });
 
 test("hovering an event row pulses its map marker",async({page})=>{

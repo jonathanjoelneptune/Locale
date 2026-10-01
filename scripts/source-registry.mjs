@@ -11,8 +11,20 @@ export const SOURCES=[
     endpoint:"https://balboapark.org",fallbackCenter:{lat:32.7311,lng:-117.1467},refreshHours:6
   },
   {
-    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"rss-detail",sourceKind:"aggregator",minExpectedEvents:1,
-    endpoint:"https://www.sandiegoreader.com/rss/events/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:6
+    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"sandiego-reader-calendar",sourceKind:"aggregator",minExpectedEvents:1,
+    endpoint:"https://www.sandiegoreader.com/events/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12
+  },
+  {
+    id:"singhub-karaoke",name:"SingHUB",scope:"regional",regions:["san-diego"],adapter:"singhub-karaoke",sourceKind:"aggregator",minExpectedEvents:1,
+    endpoint:"https://singhub.app/find-karaoke?type=live",refreshHours:12
+  },
+  {
+    id:"taco-tuesday-sd",name:"TacoTuesday.com San Diego",scope:"regional",regions:["san-diego"],adapter:"taco-tuesday",sourceKind:"aggregator",minExpectedEvents:1,
+    endpoint:"https://tacotuesday.com/san-diego-taco-tuesday-the-best-taco-deals-every-tuesday/",refreshHours:24
+  },
+  {
+    id:"north-park-noise",name:"North Park Noise",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"aggregator",minExpectedEvents:1,
+    endpoint:"https://northparknoise.com",fallbackCenter:{lat:32.7470,lng:-117.1290},refreshHours:12
   },
   {
     id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",sourceKind:"official",ownerEntityKind:"place",ownerName:"NOVA SD",minExpectedEvents:1,refreshHours:6
