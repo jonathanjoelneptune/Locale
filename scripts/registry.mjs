@@ -106,8 +106,34 @@ function inferRecurrence(events){
   return null;
 }
 
-export function buildRegistry(events,sources=[]){
+export function buildRegistry(events,sources=[],previousRegistry={}){
   const sourceById=new Map(sources.map(source=>[source.id,source]));
+  const previousPlaces=Array.isArray(previousRegistry.places)?previousRegistry.places:[];
+  const previousPlacesByName=new Map();
+  for(const place of previousPlaces){
+    const key=`${place.regionId}|${norm(place.name)}`;
+    if(!previousPlacesByName.has(key))previousPlacesByName.set(key,[]);
+    previousPlacesByName.get(key).push(place);
+  }
+  const previousPlaceFor=(sample,group)=>{
+    const candidates=previousPlacesByName.get(`${sample.regionId}|${norm(sample.venue)}`)||[];
+    if(!candidates.length)return null;
+    if(sample.venueKey){
+      const hit=candidates.find(place=>place.venueKey===sample.venueKey);
+      if(hit)return hit;
+    }
+    const address=norm(sample.address);
+    if(address){
+      const hit=candidates.find(place=>norm(place.address)===address);
+      if(hit)return hit;
+    }
+    const lat=Number(sample.lat),lng=Number(sample.lng);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)){
+      const hit=candidates.find(place=>Number.isFinite(Number(place.lat))&&Number.isFinite(Number(place.lng))&&Math.abs(Number(place.lat)-lat)<.003&&Math.abs(Number(place.lng)-lng)<.003);
+      if(hit)return hit;
+    }
+    return candidates.length===1?candidates[0]:null;
+  };
   const placeGroups=new Map();
   const specificKeysByName=new Map();
   const vagueEvents=[];
@@ -136,7 +162,8 @@ export function buildRegistry(events,sources=[]){
   for(const [key,group] of placeGroups){
     const sample=bestLocation(group);
     const name=clean(sample.venue||group[0].venue);
-    const id=stableId("place",name,key);
+    const previous=previousPlaceFor(sample,group);
+    const id=previous?.id||stableId("place",name,key);
     const sourceIds=[...new Set(group.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
     const directSource=sourceIds.some(sourceId=>sourceById.get(sourceId)?.ownerEntityKind==="place");
     const starts=group.map(event=>event.start).filter(Boolean);
