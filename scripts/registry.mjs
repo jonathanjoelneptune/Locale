@@ -35,7 +35,7 @@ function meaningfulVenue(event){
   return !!name&&!GENERIC_VENUES.has(name);
 }
 
-function placeKey(event){
+function specificPlaceKey(event){
   if(event.venueKey)return `${event.regionId}|venue-key|${event.venueKey}`;
   const address=norm(event.address);
   if(address)return `${event.regionId}|name-address|${norm(event.venue)}|${address}`;
@@ -43,8 +43,10 @@ function placeKey(event){
   if(precise&&Number.isFinite(Number(event.lat))&&Number.isFinite(Number(event.lng))){
     return `${event.regionId}|name-point|${norm(event.venue)}|${Number(event.lat).toFixed(4)}|${Number(event.lng).toFixed(4)}`;
   }
-  return `${event.regionId}|name|${norm(event.venue)}`;
+  return null;
 }
+
+const venueNameKey=event=>`${event.regionId}|${norm(event.venue)}`;
 
 function bestLocation(events){
   return [...events].sort((a,b)=>(PRECISION_RANK[b.locationPrecision||"unknown"]??0)-(PRECISION_RANK[a.locationPrecision||"unknown"]??0))[0]||{};
@@ -107,10 +109,23 @@ function inferRecurrence(events){
 export function buildRegistry(events,sources=[]){
   const sourceById=new Map(sources.map(source=>[source.id,source]));
   const placeGroups=new Map();
+  const specificKeysByName=new Map();
+  const vagueEvents=[];
 
   for(const event of events){
     if(!event?.regionId||!meaningfulVenue(event))continue;
-    const key=placeKey(event);
+    const key=specificPlaceKey(event);
+    if(!key){vagueEvents.push(event);continue;}
+    if(!placeGroups.has(key))placeGroups.set(key,[]);
+    placeGroups.get(key).push(event);
+    const nameKey=venueNameKey(event);
+    if(!specificKeysByName.has(nameKey))specificKeysByName.set(nameKey,new Set);
+    specificKeysByName.get(nameKey).add(key);
+  }
+
+  for(const event of vagueEvents){
+    const candidates=[...(specificKeysByName.get(venueNameKey(event))||[])];
+    const key=candidates.length===1?candidates[0]:`${event.regionId}|name|${norm(event.venue)}`;
     if(!placeGroups.has(key))placeGroups.set(key,[]);
     placeGroups.get(key).push(event);
   }
@@ -123,10 +138,7 @@ export function buildRegistry(events,sources=[]){
     const name=clean(sample.venue||group[0].venue);
     const id=stableId("place",name,key);
     const sourceIds=[...new Set(group.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
-    const directSource=sourceIds.some(sourceId=>{
-      const source=sourceById.get(sourceId);
-      return source?.ownerEntityKind==="place"||source?.sourceKind==="official";
-    });
+    const directSource=sourceIds.some(sourceId=>sourceById.get(sourceId)?.ownerEntityKind==="place");
     const starts=group.map(event=>event.start).filter(Boolean);
     const verified=group.map(event=>event.lastVerified).filter(Boolean);
     const place=normalizePlace({
