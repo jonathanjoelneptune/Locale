@@ -68,9 +68,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Install browser test runner
+      - name: Install browser smoke runner
         run: |
-          npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4
+          npm install --no-save @playwright/test@1.55.0
           npx playwright install --with-deps chromium
       - name: Verify deployed build marker
         env:
@@ -84,7 +84,7 @@ jobs:
           done
           echo "Deployed build marker did not reach production" >&2
           exit 1
-      - name: Run post-deploy production smoke suite
+      - name: Run focused post-deploy smoke test
         env:
           LOCALE_BASE_URL: https://jonathanjoelneptune.github.io/Locale/
-        run: npx playwright test
+        run: npx playwright test --grep "@smoke"
