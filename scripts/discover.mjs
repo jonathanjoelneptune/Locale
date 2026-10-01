@@ -73,6 +73,7 @@ function mergeCandidate(queue,candidate){
     priority:Math.max(Number(existing.priority||0),Number(candidate.priority||0)),
     monitorTier:existing.monitorTier||candidate.monitorTier||"C",
     externalId:candidate.externalId||existing.externalId,
+    discoveryCellId:candidate.discoveryCellId||existing.discoveryCellId||null,
     osmTags:candidate.osmTags||existing.osmTags,
     discoveryMethod:[...new Set(String(existing.discoveryMethod||"").split("+").filter(Boolean).concat(candidate.discoveryMethod||[]))].join("+"),
     updatedAt:nowIso()
@@ -232,7 +233,7 @@ const regionWork=Object.values(REGIONS)
     };
   })
   .filter(item=>item.next)
-  .sort((a,b)=>a.last-b.last||a.region.id.localeCompare(b.region.id))[0];
+  .sort((a,b)=>a.last-b.last||Number(b.region.discoveryPriority||0)-Number(a.region.discoveryPriority||0)||a.region.id.localeCompare(b.region.id))[0];
 
 if(regionWork){
   const {region,regionState}=regionWork;
