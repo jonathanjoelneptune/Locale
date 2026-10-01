@@ -1,5 +1,5 @@
 import {milesBetween} from "./geo.js";
-import {inWindow} from "./time.js";
+import {inDateRange} from "./time.js";
 import {eventIdentityKey,normalizeEvent} from "../domain/event.js";
 
 const VENUES=[
@@ -36,6 +36,10 @@ export function filterEvents(events,state){
       const filterDistance=milesBetween(state.center,event);
       return {...event,_filterDistance:filterDistance,distance:hasPreciseLocation(event)?filterDistance:null};
     })
-    .filter(event=>event._filterDistance<=state.radius&&(state.category==="all"||event.category===state.category)&&inWindow(event,state.window))
+    .filter(event=>{
+      const categories=state.categories instanceof Set?state.categories:new Set;
+      const categoryOk=!categories.size||categories.has(event.category);
+      return event._filterDistance<=state.radius&&categoryOk&&inDateRange(event,state.dateStart,state.dateEnd);
+    })
     .sort((a,b)=>new Date(a.start)-new Date(b.start)||(a.distance??Infinity)-(b.distance??Infinity));
 }
