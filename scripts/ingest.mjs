@@ -25,11 +25,13 @@ import {sanDiegoReaderCalendarEvents} from "./providers/sandiego-reader-calendar
 import {tacoTuesdayEvents} from "./providers/taco-tuesday.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
-import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
+import {loadAllSources,sourcesForRegionFrom} from "./source-catalog.mjs";
 import {buildRegistry} from "./registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 import {refineEventCategory} from "./event-classification.mjs";
+
+const SOURCES=await loadAllSources();
 
 const adapters={
   "sunset-trivia":async()=>sunsetTriviaEvents(),
@@ -134,7 +136,7 @@ async function runWithRetry(job,attempts=3){
 
 const jobs=[];
 for(const region of Object.values(REGIONS)){
-  for(const source of sourcesForRegion(region)){
+  for(const source of sourcesForRegionFrom(SOURCES,region)){
     const run=adapters[source.adapter];
     if(run)jobs.push({region,source,run});
     else console.warn(`No adapter registered for source ${source.id}`);
