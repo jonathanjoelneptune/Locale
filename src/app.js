@@ -87,6 +87,27 @@ function inViewport(event,bounds){
   return latitudeOk&&longitudeOk;
 }
 
+function syncSaveButton(button,on){
+  button.classList.toggle("is-saved",on);
+  button.setAttribute("aria-pressed",String(on));
+  button.setAttribute("aria-label",on?"Remove saved event":"Save event");
+  button.dataset.saved=String(on);
+  const glyph=button.querySelector(".heart-glyph");
+  if(glyph)glyph.textContent=on?"♥":"♡";
+  const label=button.querySelector(".sr-only");
+  if(label)label.textContent=on?"Saved":"Save event";
+}
+
+function toggleSaved(id){
+  const on=!state.saved.has(id);
+  on?state.saved.add(id):state.saved.delete(id);
+  localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
+  document.querySelectorAll("[data-save-event]").forEach(button=>{
+    if(button.dataset.saveEvent===id)syncSaveButton(button,on);
+  });
+  if(state.listMode==="saved")requestAnimationFrame(render);
+}
+
 function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
   document.querySelector("#placeLabel").textContent=state.placeLabel;
@@ -97,7 +118,7 @@ function render(){
   if(state.venueFilter)visible=visible.filter(e=>state.venueFilter.ids.includes(e.id));
   document.querySelector("#resultsCount").textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
-  document.querySelectorAll("[data-save-event]").forEach(b=>{const on=state.saved.has(b.dataset.saveEvent);b.classList.toggle("is-saved",on);b.setAttribute("aria-pressed",String(on))});
+  document.querySelectorAll("[data-save-event]").forEach(button=>syncSaveButton(button,state.saved.has(button.dataset.saveEvent)));
   mapUI?.setRadius(state.radius,state.center);
   mapUI?.renderEvents(visible);
   if(state.events.length&&!state.hasFit&&nearby.length){
@@ -119,6 +140,13 @@ function renderHighlights(events){
 }
 
 function bindFilters(){
+  document.querySelectorAll("#sidebar [data-save-event]").forEach(button=>{
+    button.onclick=event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSaved(button.dataset.saveEvent);
+    };
+  });
   document.querySelectorAll("[data-list-mode]").forEach(b=>b.onclick=()=>{state.listMode=b.dataset.listMode;render()});
   document.querySelector("#clearVenueFilter")?.addEventListener("click",()=>{state.venueFilter=null;render()});
   document.querySelector("#showAllNearby")?.addEventListener("click",()=>{
@@ -166,25 +194,7 @@ function selectEvent(id){
 document.querySelector("#resultsToggle").onclick=()=>{state.venueFilter=null;const shell=document.querySelector(".shell");shell.classList.toggle("results-collapsed");document.querySelector("#resultsToggle .drawer-arrow").textContent=shell.classList.contains("results-collapsed")?"‹":"›";setTimeout(()=>mapUI?.map.invalidateSize(),240)};
 document.querySelector("#discoveryToggle").onclick=()=>{const shell=document.querySelector(".shell");shell.classList.toggle("discovery-collapsed");document.querySelector("#discoveryToggle .drawer-arrow").textContent=shell.classList.contains("discovery-collapsed")?"›":"‹";setTimeout(()=>mapUI?.map.invalidateSize(),240)};
 document.querySelector("#sidebar").addEventListener("click",event=>{
-  const heart=event.target.closest("[data-save-event]");
-  if(!heart)return;
-  event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
-  const id=heart.dataset.saveEvent;
-  const on=!state.saved.has(id);
-  on?state.saved.add(id):state.saved.delete(id);
-  localStorage.setItem("locale-saved",JSON.stringify([...state.saved]));
-  document.querySelectorAll("[data-save-event]").forEach(button=>{
-    if(button.dataset.saveEvent!==id)return;
-    button.classList.toggle("is-saved",on);
-    button.setAttribute("aria-pressed",String(on));
-    button.setAttribute("aria-label",on?"Remove saved event":"Save event");
-    const label=button.querySelector(".sr-only");
-    if(label)label.textContent=on?"Saved":"Save event";
-  });
-  if(state.listMode==="saved")requestAnimationFrame(render);
-},true);
-document.querySelector("#sidebar").addEventListener("click",event=>{
-  if(event.target.closest(".event-action"))return;
+  if(event.target.closest("[data-save-event],.event-action"))return;
   const row=event.target.closest("[data-event-id]");
   if(!row)return;
   const wasSelected=row.classList.contains("selected");
@@ -224,7 +234,6 @@ function applyMapStyle(value){
   localStorage.setItem("locale-map-style",value);
   if(mapUI)mapUI.setStyle(value);else initMapLater();
 }
-mapStyle.addEventListener("input",event=>applyMapStyle(event.target.value));
 mapStyle.addEventListener("change",event=>applyMapStyle(event.target.value));
 document.querySelector("#placeSearch").addEventListener("keydown",async event=>{
   if(event.key!=="Enter"||!event.target.value.trim())return;
