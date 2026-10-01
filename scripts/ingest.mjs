@@ -26,6 +26,7 @@ import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
 import {buildRegistry} from "./registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
+import {refineEventCategory} from "./event-classification.mjs";
 
 const adapters={
   "sunset-trivia":async()=>sunsetTriviaEvents(),
@@ -219,7 +220,7 @@ const merge=(a,b)=>{
 
 const unique=[];
 for(const raw of events){
-  const event={...raw,geoCell:cellFor(raw.lat,raw.lng)};
+  const event={...raw,category:refineEventCategory(raw),geoCell:cellFor(raw.lat,raw.lng)};
   const matchIndex=unique.findIndex(candidate=>sameEvent(candidate,event));
   if(matchIndex<0){
     unique.push({...event,sources:provenance(event),sourceCount:1});
