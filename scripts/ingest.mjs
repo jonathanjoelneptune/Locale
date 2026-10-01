@@ -20,6 +20,8 @@ import {icsEvents} from "./providers/ics.mjs";
 import {sdplEvents} from "./providers/sdpl.mjs";
 import {midwayEvents} from "./providers/midway.mjs";
 import {sunsetTriviaEvents} from "./providers/sunset-trivia.mjs";
+import {singhubKaraokeEvents} from "./providers/singhub-karaoke.mjs";
+import {sanDiegoReaderCalendarEvents} from "./providers/sandiego-reader-calendar.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {SOURCES,sourcesForRegion} from "./source-registry.mjs";
@@ -30,6 +32,8 @@ import {refineEventCategory} from "./event-classification.mjs";
 
 const adapters={
   "sunset-trivia":async()=>sunsetTriviaEvents(),
+  "singhub-karaoke":async()=>singhubKaraokeEvents(),
+  "sandiego-reader-calendar":async region=>sanDiegoReaderCalendarEvents({fallbackCenter:region.center}),
   midway:async()=>midwayEvents(),
   sdpl:async()=>sdplEvents(),
   "san-diego-parks":async()=>sanDiegoParksEvents(),
