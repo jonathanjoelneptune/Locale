@@ -46,16 +46,28 @@ const normalizeUrl=value=>{
   }catch{return null}
 };
 
-export function buildOverpassQuery(region){
-  const radius=Math.round(Math.min(Number(region.discoveryRadiusMiles||region.ingestRadiusMiles||35),50)*1609.344);
+export function buildOverpassQueries(region){
+  const fullRadius=Math.round(Math.min(Number(region.discoveryRadiusMiles||region.ingestRadiusMiles||35),50)*1609.344);
+  const diningRadius=Math.round(Math.min(Number(region.discoveryDiningRadiusMiles||20),25)*1609.344);
   const {lat,lng}=region.center;
-  const selectors=[];
-  for(const [key,value] of relevantTags){
-    for(const websiteKey of ["website","contact:website"]){
-      selectors.push(`nwr(around:${radius},${lat},${lng})["name"]["${websiteKey}"]["${key}"="${value}"];`);
-    }
-  }
-  return `[out:json][timeout:45];(${selectors.join("")});out center tags;`;
+  const core=`[out:json][timeout:35];(
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["leisure"="stadium"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["leisure"="stadium"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["craft"="brewery"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["craft"="brewery"];
+  );out center tags;`;
+  const dining=`[out:json][timeout:30];(
+    nwr(around:${diningRadius},${lat},${lng})["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
+    nwr(around:${diningRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
+  );out center tags;`;
+  return [
+    {id:"core-venues",query:core},
+    {id:"dining-venues",query:dining}
+  ];
 }
 
 async function fetchOverpass(query){
@@ -111,13 +123,26 @@ export function candidateFromOverpassElement(row,region){
 }
 
 export async function discoverRegionalPlaces(region){
-  const payload=await fetchOverpass(buildOverpassQuery(region));
-  const rows=Array.isArray(payload?.elements)?payload.elements:[];
   const out=[];
-  for(const row of rows){
-    const candidate=candidateFromOverpassElement(row,region);
-    if(candidate)out.push(candidate);
+  const errors=[];
+  let successfulBatches=0;
+  for(const batch of buildOverpassQueries(region)){
+    try{
+      const payload=await fetchOverpass(batch.query);
+      successfulBatches++;
+      const rows=Array.isArray(payload?.elements)?payload.elements:[];
+      for(const row of rows){
+        const candidate=candidateFromOverpassElement(row,region);
+        if(candidate)out.push(candidate);
+      }
+    }catch(error){
+      errors.push(`${batch.id}: ${error?.message||error}`);
+      console.warn(`Overpass batch ${batch.id} failed for ${region.id}: ${error?.message||error}`);
+    }
   }
-  return [...new Map(out.map(item=>[item.key,item])).values()]
+  if(!successfulBatches)throw new Error(errors.join("; ")||"All Overpass discovery batches failed");
+  const candidates=[...new Map(out.map(item=>[item.key,item])).values()]
     .sort((a,b)=>b.priority-a.priority||a.name.localeCompare(b.name));
+  candidates.discoveryWarnings=errors;
+  return candidates;
 }
