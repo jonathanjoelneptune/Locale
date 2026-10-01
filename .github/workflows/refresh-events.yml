@@ -5,7 +5,7 @@ on:
     paths:
       - "scripts/**"
       - "src/data/regions.js"
-      - "src/domain/event.js"
+      - "src/domain/**"
   schedule:
     - cron: "17 */6 * * *"
 permissions:
@@ -32,14 +32,14 @@ jobs:
         id: commit
         if: github.ref == 'refs/heads/main'
         run: |
-          if git diff --quiet -- src/data/events.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json; then
+          if git diff --quiet -- src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json; then
             echo "No event changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "locale-events[bot]"
           git config user.email "locale-events[bot]@users.noreply.github.com"
-          git add src/data/events.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json
+          git add src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json
           git commit -m "Refresh event data"
           git pull --rebase origin main
           git push
