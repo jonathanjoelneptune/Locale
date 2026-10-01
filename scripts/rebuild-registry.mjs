@@ -6,9 +6,11 @@ const readJson=async path=>JSON.parse(await readFile(path,"utf8"));
 
 const events=await readJson("src/data/events.json");
 const coverage=await readJson("src/data/coverage.json");
+let previousPlaces=[];
+try{previousPlaces=await readJson("src/data/places.json")}catch{}
 if(!Array.isArray(events))throw new Error("src/data/events.json must contain an array");
 
-const registry=buildRegistry(events,SOURCES);
+const registry=buildRegistry(events,SOURCES,{places:Array.isArray(previousPlaces)?previousPlaces:[]});
 coverage.registryContractVersion=registry.coverage.contractVersion;
 for(const [regionId,summary] of Object.entries(registry.coverage.regions)){
   if(!coverage.regions?.[regionId])continue;
