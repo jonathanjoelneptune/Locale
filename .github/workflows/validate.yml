@@ -26,6 +26,8 @@ jobs:
         run: node scripts/validate-delivery.mjs
       - name: Test registry domain
         run: node --test scripts/registry.test.mjs
+      - name: Test event classification
+        run: node --test scripts/event-classification.test.mjs
       - name: Install browser test runner
         run: |
           npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4
