@@ -1,7 +1,7 @@
 import {hasPreciseLocation} from "../services/events.js";
 import {meters} from "../services/geo.js";
 
-export function createMap(el,state,onCenter,onMarker,onMapBackground){
+export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportChange){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   Object.defineProperty(el,"__localeMap",{value:map,configurable:true});
   const styles={
@@ -48,6 +48,34 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   requestAnimationFrame(()=>requestAnimationFrame(stabilize));
   const markers=new Map();
   let lastEvents=[];
+  let userViewportIntent=false;
+  let viewportNotifyTimer=0;
+  const markUserViewportIntent=()=>{userViewportIntent=true};
+  el.addEventListener("wheel",markUserViewportIntent,{passive:true});
+  el.addEventListener("touchstart",markUserViewportIntent,{passive:true});
+  el.addEventListener("dblclick",markUserViewportIntent);
+  el.addEventListener("click",event=>{
+    if(event.target.closest(".leaflet-control-zoom-in,.leaflet-control-zoom-out"))markUserViewportIntent();
+  },true);
+  map.on("dragstart",markUserViewportIntent);
+  const notifyViewport=()=>{
+    if(!userViewportIntent)return;
+    clearTimeout(viewportNotifyTimer);
+    viewportNotifyTimer=setTimeout(()=>{
+      if(!userViewportIntent)return;
+      userViewportIntent=false;
+      const bounds=map.getBounds();
+      onViewportChange?.({
+        zoom:map.getZoom(),
+        bounds:{
+          south:bounds.getSouth(),
+          west:bounds.getWest(),
+          north:bounds.getNorth(),
+          east:bounds.getEast()
+        }
+      });
+    },80);
+  };
   const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -154,9 +182,22 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
       const img=e.image?`<img class="map-popup-img" src="${esc(e.image)}" alt="">`:"";
       L.popup({className:"event-map-popup",maxWidth:290}).setLatLng([e.lat,e.lng]).setContent(`<div class="map-event-card">${img}<div><b>${esc(e.title)}</b><span>${esc(e.venue)}</span><span>${esc(new Date(e.start).toLocaleString([], {weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${price} ↗</a>`:""}</div></div>`).openOn(map);
     },
-    flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})}
+    flyTo(pos,zoom=12){map.flyTo([pos.lat,pos.lng],zoom,{duration:.7})},
+    getViewport(){
+      const bounds=map.getBounds();
+      return {
+        zoom:map.getZoom(),
+        bounds:{
+          south:bounds.getSouth(),
+          west:bounds.getWest(),
+          north:bounds.getNorth(),
+          east:bounds.getEast()
+        }
+      };
+    }
   };
-  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents)});
+  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents);notifyViewport()});
+  map.on("moveend",notifyViewport);
   map.on("click",()=>onMapBackground?.());
   el.addEventListener("click",e=>{if(e.target.closest(".leaflet-marker-icon,.leaflet-popup,.leaflet-control"))return;onMapBackground?.()});
   return api;

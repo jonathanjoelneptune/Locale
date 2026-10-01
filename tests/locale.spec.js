@@ -175,3 +175,30 @@ test("production smoke @smoke",async({page})=>{
     expect(href).toMatch(/^https?:\/\//);
   }
 });
+
+
+test("manual map navigation scopes results to the visible viewport",async({page})=>{
+  await waitForLocale(page);
+  await page.locator('[data-window="7days"]').click();
+  await expect(page.locator(".results-head h1")).toContainText("Events Nearby");
+
+  const map=page.locator("#map");
+  const before=await page.locator(".event-row").count();
+  await map.dispatchEvent("wheel");
+  await map.evaluate(el=>{
+    const current=el.__localeMap.getZoom();
+    el.__localeMap.setZoom(Math.min(current+1,17),{animate:false});
+  });
+
+  await expect(page.locator("#showAllNearby")).toBeVisible({timeout:5000});
+  await expect(page.locator(".results-head h1")).toContainText("Events in Map View");
+  await expect(page.locator(".results-head p")).toContainText("Current visible map area");
+
+  const inView=await page.locator(".event-row").count();
+  expect(inView).toBeLessThanOrEqual(before);
+
+  await page.locator("#showAllNearby").click();
+  await expect(page.locator("#showAllNearby")).toHaveCount(0);
+  await expect(page.locator(".results-head h1")).toContainText("Events Nearby");
+  await expect.poll(async()=>page.locator(".event-row").count()).toBe(before);
+});
