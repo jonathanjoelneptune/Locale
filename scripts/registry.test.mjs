@@ -114,3 +114,34 @@ test("generic locations do not become monitored places",()=>{
   assert.equal(registry.places.length,0);
   assert.equal(registry.events[0].venueId,null);
 });
+
+
+test("place IDs survive later address and coordinate enrichment",()=>{
+  const initialEvent={
+    id:"venue:1",
+    regionId:"san-diego",
+    title:"Weekly Game Night",
+    category:"community",
+    venue:"Neighborhood Cafe",
+    lat:32.7157,
+    lng:-117.1611,
+    locationPrecision:"source-center",
+    start:"2026-10-10T18:00:00.000Z",
+    sourceId:"example",
+    source:"Example",
+    sources:[{id:"example",name:"Example"}],
+    lastVerified:verified
+  };
+  const initial=buildRegistry([initialEvent],[]);
+  const originalId=initial.places[0].id;
+
+  const enrichedEvent={
+    ...initialEvent,
+    address:"456 Market St, San Diego, CA 92101",
+    lat:32.7192,
+    lng:-117.1581,
+    locationPrecision:"venue-geocoded"
+  };
+  const enriched=buildRegistry([enrichedEvent],[],{places:initial.places});
+  assert.equal(enriched.places[0].id,originalId);
+});
