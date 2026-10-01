@@ -96,9 +96,14 @@ const adapters={
 };
 
 let previousEvents=[];
+let previousRegistry={places:[]};
 try{
   const prior=JSON.parse(await readFile("src/data/events.json","utf8"));
   if(Array.isArray(prior))previousEvents=prior;
+}catch{}
+try{
+  const priorPlaces=JSON.parse(await readFile("src/data/places.json","utf8"));
+  if(Array.isArray(priorPlaces))previousRegistry.places=priorPlaces;
 }catch{}
 
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -228,7 +233,7 @@ const sorted=unique.sort((a,b)=>{
   return timeDifference||String(a.id).localeCompare(String(b.id));
 });
 
-const registry=buildRegistry(sorted,SOURCES);
+const registry=buildRegistry(sorted,SOURCES,previousRegistry);
 const canonicalEvents=registry.events;
 
 const coverage={generatedAt:new Date().toISOString(),locationQualityVersion:1,registryContractVersion:registry.coverage.contractVersion,regions:{}};
