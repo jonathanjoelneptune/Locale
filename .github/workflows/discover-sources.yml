@@ -26,6 +26,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Sync latest discovery state
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          echo "DISCOVERY_BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
       - name: Run discovery queue
         id: discover
         run: |
@@ -47,15 +52,29 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
+          git fetch origin main
+          REMOTE_SHA="$(git rev-parse origin/main)"
+          if [ "$REMOTE_SHA" != "$DISCOVERY_BASE_SHA" ]; then
+            UPSTREAM_DISCOVERY_CHANGES="$(git diff --name-only "$DISCOVERY_BASE_SHA" "$REMOTE_SHA" -- $FILES || true)"
+            if [ -n "$UPSTREAM_DISCOVERY_CHANGES" ]; then
+              echo "Discovery state changed upstream while this run was working:"
+              echo "$UPSTREAM_DISCOVERY_CHANGES"
+              echo "Discarding stale run output; the next hourly run will continue from the newer state."
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
           git config user.name "locale-discovery[bot]"
           git config user.email "locale-discovery[bot]@users.noreply.github.com"
           git add $FILES
           git commit -m "Advance source discovery queue"
-          git pull --rebase origin main
+          git rebase origin/main
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Refresh events from newly promoted sources
-        if: steps.discover.outputs.promoted != '0'
+        if: steps.commit.outputs.changed == 'true' && steps.discover.outputs.promoted != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run refresh-events.yml --ref main

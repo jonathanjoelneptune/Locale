@@ -73,6 +73,14 @@ if(coverage?.regions){
     if(!summary)continue;
     const expected=queue.filter(item=>item.regionId===regionId).length;
     if(summary.candidateCount!==expected)fail(`Discovery coverage candidateCount mismatch for ${regionId}`);
+    if(summary.discoveryCells){
+      const cells=summary.discoveryCells;
+      for(const field of ["total","high","dining","completed","failed","remaining"]){
+        if(!Number.isInteger(Number(cells[field]))||Number(cells[field])<0)fail(`Discovery coverage ${regionId} has invalid cell count ${field}`);
+      }
+      if(Number(cells.high)+Number(cells.dining)!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
+      if(Number(cells.completed)>Number(cells.total))fail(`Discovery coverage ${regionId} completed cells exceed total`);
+    }
   }
 }
 if(state&&typeof state!=="object")fail("discovery-state.json must contain an object");

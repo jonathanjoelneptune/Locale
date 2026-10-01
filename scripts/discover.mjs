@@ -1,6 +1,7 @@
 import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
-import {discoverRegionalPlaces} from "./discovery-overpass.mjs";
+import {discoverCellPlaces} from "./discovery-overpass.mjs";
+import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
@@ -8,9 +9,9 @@ const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
 const MAX_PROBES_PER_RUN=8;
-const DISCOVERY_SWEEP_VERSION=2;
-const SWEEP_INTERVAL_MS=24*60*60*1000;
-const PARTIAL_RETRY_MS=55*60*1000;
+const DISCOVERY_SWEEP_VERSION=3;
+const CELLS_PER_RUN=2;
+const CELL_RETRY_MS=2*60*60*1000;
 const MAX_QUEUE=6000;
 
 const readJson=async(path,fallback)=>{
@@ -72,6 +73,7 @@ function mergeCandidate(queue,candidate){
     priority:Math.max(Number(existing.priority||0),Number(candidate.priority||0)),
     monitorTier:existing.monitorTier||candidate.monitorTier||"C",
     externalId:candidate.externalId||existing.externalId,
+    discoveryCellId:candidate.discoveryCellId||existing.discoveryCellId||null,
     osmTags:candidate.osmTags||existing.osmTags,
     discoveryMethod:[...new Set(String(existing.discoveryMethod||"").split("+").filter(Boolean).concat(candidate.discoveryMethod||[]))].join("+"),
     updatedAt:nowIso()
@@ -140,6 +142,8 @@ function buildCoverage(queue,sources,runStats){
       statusCounts[row.status]=(statusCounts[row.status]||0)+1;
       categoryCounts[row.category||"unknown"]=(categoryCounts[row.category||"unknown"]||0)+1;
     }
+    const regionState=state?.regions?.[region.id]||{};
+    const cellSummary=regionState.cellSummary||discoveryCellSummary(region);
     regions[region.id]={
       candidateCount:rows.length,
       withWebsiteCount:rows.filter(row=>!!row.website).length,
@@ -148,7 +152,16 @@ function buildCoverage(queue,sources,runStats){
       dueCount:rows.filter(row=>row.website&&row.status!=="qualified"&&due(row)).length,
       statusCounts,
       categoryCounts,
-      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length
+      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length,
+      discoveryCells:{
+        version:regionState.cellSweepVersion||DISCOVERY_SWEEP_VERSION,
+        total:cellSummary.total,
+        high:cellSummary.high,
+        dining:cellSummary.dining,
+        completed:Number(regionState.completedCellCount||regionState.completedCells?.length||0),
+        failed:Object.keys(regionState.failedCells||{}).length,
+        remaining:Number(regionState.remainingCellCount??cellSummary.total)
+      }
     };
   }
   return {generatedAt:nowIso(),run:runStats,regions};
@@ -174,46 +187,91 @@ const stats={
 
 stats.seededFromRegistry=seedObservedPlaces(queue,places,entityLinks);
 
-const sweepRegion=Object.values(REGIONS)
-  .map(region=>{
-    const regionState=state.regions?.[region.id]||{};
-    const last=Date.parse(regionState.lastSweepAt||0)||0;
-    const attempt=Date.parse(regionState.lastSweepAttemptAt||0)||0;
-    const versionMismatch=regionState.lastSweepVersion!==DISCOVERY_SWEEP_VERSION;
-    const partialOrFailed=["partial","failed"].includes(regionState.lastSweepStatus);
-    const isDue=versionMismatch||(partialOrFailed?Date.now()-attempt>=PARTIAL_RETRY_MS:Date.now()-last>=SWEEP_INTERVAL_MS);
-    return {region,last,attempt,isDue};
-  })
-  .filter(item=>item.isDue)
-  .sort((a,b)=>(a.attempt||a.last)-(b.attempt||b.last))[0];
-
-if(sweepRegion){
-  const {region}=sweepRegion;
-  stats.sweptRegionId=region.id;
-  try{
-    const candidates=await discoverRegionalPlaces(region);
-    for(const candidate of candidates){
-      if(mergeCandidate(queue,candidate).added)stats.seededFromRegionalSweep++;
-    }
-    state.regions=state.regions||{};
-    const warnings=Array.isArray(candidates.discoveryWarnings)?candidates.discoveryWarnings:[];
-    const stamp=nowIso();
+function ensureCellSweep(region){
+  state.regions=state.regions||{};
+  const current=state.regions[region.id]||{};
+  if(current.cellSweepVersion!==DISCOVERY_SWEEP_VERSION){
     state.regions[region.id]={
-      ...(state.regions[region.id]||{}),
-      lastSweepAttemptAt:stamp,
-      lastSweepVersion:DISCOVERY_SWEEP_VERSION,
-      lastSweepStatus:warnings.length?"partial":"ok",
-      lastSweepCandidateCount:candidates.length,
-      lastSweepWarnings:warnings
+      ...current,
+      cellSweepVersion:DISCOVERY_SWEEP_VERSION,
+      cellSweepStartedAt:nowIso(),
+      completedCells:[],
+      failedCells:{},
+      lastCellRunAt:null
     };
-    if(!warnings.length)state.regions[region.id].lastSweepAt=stamp;
-    delete state.regions[region.id].lastSweepError;
-    console.log(`${region.id}: regional discovery found ${candidates.length} website-backed venue candidates; ${stats.seededFromRegionalSweep} were new; status=${warnings.length?"partial":"ok"}.`);
-  }catch(error){
-    state.regions=state.regions||{};
-    state.regions[region.id]={...(state.regions[region.id]||{}),lastSweepAttemptAt:nowIso(),lastSweepVersion:DISCOVERY_SWEEP_VERSION,lastSweepStatus:"failed",lastSweepError:String(error?.message||error)};
-    console.error(`${region.id}: regional discovery failed:`,error);
+  }else{
+    state.regions[region.id]=current;
+    current.completedCells=Array.isArray(current.completedCells)?current.completedCells:[];
+    current.failedCells=current.failedCells&&typeof current.failedCells==="object"?current.failedCells:{};
   }
+  return state.regions[region.id];
+}
+
+function nextDueCell(region,regionState){
+  const completed=new Set(regionState.completedCells||[]);
+  const failed=regionState.failedCells||{};
+  for(const phase of ["high","dining"]){
+    const cells=buildDiscoveryCells(region,phase);
+    for(const cell of cells){
+      if(completed.has(cell.id))continue;
+      const retryAt=Date.parse(failed[cell.id]?.nextAttemptAt||0)||0;
+      if(retryAt>Date.now())continue;
+      return cell;
+    }
+  }
+  return null;
+}
+
+const regionWork=Object.values(REGIONS)
+  .map(region=>{
+    const regionState=ensureCellSweep(region);
+    return {
+      region,
+      regionState,
+      next:nextDueCell(region,regionState),
+      last:Date.parse(regionState.lastCellRunAt||0)||0
+    };
+  })
+  .filter(item=>item.next)
+  .sort((a,b)=>a.last-b.last||Number(b.region.discoveryPriority||0)-Number(a.region.discoveryPriority||0)||a.region.id.localeCompare(b.region.id))[0];
+
+if(regionWork){
+  const {region,regionState}=regionWork;
+  stats.sweptRegionId=region.id;
+  stats.discoveryCells=[];
+  for(let index=0;index<CELLS_PER_RUN;index++){
+    const cell=nextDueCell(region,regionState);
+    if(!cell)break;
+    const attemptAt=nowIso();
+    regionState.lastCellRunAt=attemptAt;
+    try{
+      const cellCandidates=await discoverCellPlaces(region,cell);
+      let added=0;
+      for(const candidate of cellCandidates){
+        if(mergeCandidate(queue,candidate).added){stats.seededFromRegionalSweep++;added++}
+      }
+      if(!regionState.completedCells.includes(cell.id))regionState.completedCells.push(cell.id);
+      delete regionState.failedCells[cell.id];
+      stats.discoveryCells.push({id:cell.id,phase:cell.phase,status:"ok",candidateCount:cellCandidates.length,newCount:added});
+      console.log(`${region.id}/${cell.id}: discovered ${cellCandidates.length} website-backed venues; ${added} new.`);
+    }catch(error){
+      const previous=regionState.failedCells[cell.id]||{attempts:0};
+      const attempts=Number(previous.attempts||0)+1;
+      regionState.failedCells[cell.id]={
+        attempts,
+        lastAttemptAt:attemptAt,
+        nextAttemptAt:new Date(Date.now()+Math.min(CELL_RETRY_MS*attempts,12*60*60*1000)).toISOString(),
+        error:String(error?.message||error)
+      };
+      stats.discoveryCells.push({id:cell.id,phase:cell.phase,status:"failed",error:String(error?.message||error)});
+      console.error(`${region.id}/${cell.id}: discovery failed:`,error);
+    }
+  }
+  const summary=discoveryCellSummary(region);
+  regionState.cellSummary=summary;
+  regionState.completedCellCount=(regionState.completedCells||[]).length;
+  regionState.remainingCellCount=Math.max(0,summary.total-regionState.completedCellCount);
+  if(regionState.remainingCellCount===0&&!regionState.cellSweepCompletedAt)regionState.cellSweepCompletedAt=nowIso();
 }
 
 const candidates=queue

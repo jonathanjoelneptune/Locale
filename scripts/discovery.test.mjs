@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {buildOverpassQueries,candidateFromOverpassElement} from "./discovery-overpass.mjs";
+import {buildCellOverpassQuery,candidateFromOverpassElement} from "./discovery-overpass.mjs";
+import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
 
 const region={
@@ -9,19 +10,30 @@ const region={
   ingestRadiusMiles:50
 };
 
-test("regional discovery query targets event-capable venue categories with websites",()=>{
-  const batches=buildOverpassQueries(region);
-  assert.equal(batches.length,3);
-  const nightlife=batches.find(batch=>batch.id==="nightlife-venues").query;
-  const culture=batches.find(batch=>batch.id==="culture-venues").query;
-  const dining=batches.find(batch=>batch.id==="dining-venues").query;
-  assert.match(nightlife,/around:56327,32\.7157,-117\.1611/);
-  assert.match(nightlife,/amenity"~"\^\(nightclub\|bar\|pub\|music_venue\)\$"/);
-  assert.match(nightlife,/craft"="brewery"/);
-  assert.match(culture,/theatre\|cinema\|arts_centre\|community_centre/);
-  assert.match(dining,/amenity"~"\^\(restaurant\|cafe\)\$"/);
-  assert.doesNotMatch(nightlife,/university|school/);
-  assert.doesNotMatch(culture,/university|school/);
+test("discovery grid covers a region in bounded center-first cells",()=>{
+  const high=buildDiscoveryCells({...region,discoveryRadiusMiles:35},"high");
+  const dining=buildDiscoveryCells({...region,discoveryDiningRadiusMiles:20},"dining");
+  assert.ok(high.length>20);
+  assert.ok(dining.length>10);
+  assert.equal(high[0].distanceMiles,0);
+  assert.equal(high[0].phase,"high");
+  const summary=discoveryCellSummary({...region,discoveryRadiusMiles:35,discoveryDiningRadiusMiles:20});
+  assert.equal(summary.total,high.length+dining.length);
+});
+
+test("cell queries prioritize local nightlife/culture and keep dining separate",()=>{
+  const highCell=buildDiscoveryCells({...region,discoveryRadiusMiles:35},"high")[0];
+  const diningCell=buildDiscoveryCells({...region,discoveryDiningRadiusMiles:20},"dining")[0];
+  const highQuery=buildCellOverpassQuery(highCell);
+  const diningQuery=buildCellOverpassQuery(diningCell);
+  assert.match(highQuery,/around:8047,32\.7157,-117\.1611/);
+  assert.match(highQuery,/nightclub\|bar\|pub\|music_venue/);
+  assert.match(highQuery,/theatre\|cinema\|arts_centre\|community_centre/);
+  assert.match(highQuery,/craft"="brewery"/);
+  assert.doesNotMatch(highQuery,/restaurant\|cafe/);
+  assert.match(diningQuery,/restaurant\|cafe/);
+  assert.doesNotMatch(diningQuery,/nightclub\|bar/);
+  assert.doesNotMatch(highQuery,/university|school/);
 });
 
 test("OpenStreetMap venue candidates become Tier C queue entries",()=>{
