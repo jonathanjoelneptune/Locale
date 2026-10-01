@@ -7,7 +7,7 @@ const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
-const MAX_PROBES_PER_RUN=12;
+const MAX_PROBES_PER_RUN=8;
 const SWEEP_INTERVAL_MS=24*60*60*1000;
 const MAX_QUEUE=6000;
 
