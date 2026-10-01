@@ -33,7 +33,7 @@ async function fetchHtml(url){
   return {html:await response.text(),url:response.url||url};
 }
 
-function sameSiteLinks(html,base){
+export function discoveryEventLinks(html,base){
   let origin;
   try{origin=new URL(base).origin}catch{return []}
   const scored=[];
@@ -55,7 +55,7 @@ function sameSiteLinks(html,base){
     .slice(0,6);
 }
 
-function icsLinks(html,base){
+export function discoveryIcsLinks(html,base){
   const out=[];
   for(const match of String(html||"").matchAll(/href=["']([^"']+(?:\.ics(?:\?[^"']*)?|ical[^"']*|calendar[^"']*\.ics[^"']*))["']/gi)){
     try{
@@ -119,7 +119,7 @@ export async function qualifyDiscoveryCandidate(candidate){
     evidence:{kind:"tribe",eventCount:tribe.length,url:origin}
   };
 
-  const pages=[baseUrl,...sameSiteLinks(root.html,baseUrl)];
+  const pages=[baseUrl,...discoveryEventLinks(root.html,baseUrl)];
   const seen=new Set;
   for(const page of pages){
     if(seen.has(page))continue;
@@ -129,7 +129,7 @@ export async function qualifyDiscoveryCandidate(candidate){
       try{fetched=await fetchHtml(page)}catch{continue}
     }
 
-    for(const ics of icsLinks(fetched.html,fetched.url)){
+    for(const ics of discoveryIcsLinks(fetched.html,fetched.url)){
       const events=await tryProvider(()=>icsEvents({
         endpoint:ics,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
       }),1);
