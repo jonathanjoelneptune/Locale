@@ -262,6 +262,15 @@ for(const region of Object.values(REGIONS)){
   const sourceCounts={};
   const categorySourceCounts={};
   const categorySourceDiversity={};
+  const recurringActivityCounts={trivia:0,karaoke:0,"taco-tuesday":0,"open-mic":0,bingo:0,"happy-hour":0};
+  const recurringActivityPatterns={
+    trivia:/\btrivia\b/i,
+    karaoke:/\bkaraoke\b/i,
+    "taco-tuesday":/\btaco\s+tuesday\b/i,
+    "open-mic":/\bopen\s+mic\b/i,
+    bingo:/\bbingo\b/i,
+    "happy-hour":/\bhappy\s+hour\b/i
+  };
   const locationPrecisionCounts={};
   const approximatePrecisions=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
   let approximateLocationCount=0;
@@ -271,6 +280,10 @@ for(const region of Object.values(REGIONS)){
     const precision=event.locationPrecision||"unknown";
     locationPrecisionCounts[precision]=(locationPrecisionCounts[precision]||0)+1;
     if(approximatePrecisions.has(precision))approximateLocationCount++;
+    const activityText=`${event.title||""} ${event.description||""}`;
+    for(const [activity,pattern] of Object.entries(recurringActivityPatterns)){
+      if(pattern.test(activityText))recurringActivityCounts[activity]++;
+    }
     if(!categorySourceCounts[category])categorySourceCounts[category]={};
     for(const source of provenance(event)){
       const key=source.id||source.name||"unknown";
@@ -289,6 +302,7 @@ for(const region of Object.values(REGIONS)){
     sourceCounts,
     categorySourceCounts,
     categorySourceDiversity,
+    recurringActivityCounts,
     sourceHealth:sourceStats.filter(stat=>stat.regionId===region.id),
     locationPrecisionCounts,
     preciseLocationCount:regionEvents.length-approximateLocationCount,
