@@ -46,7 +46,7 @@ const normalizeUrl=value=>{
   }catch{return null}
 };
 
-function queryFor(region){
+export function buildOverpassQuery(region){
   const radius=Math.round(Math.min(Number(region.discoveryRadiusMiles||region.ingestRadiusMiles||35),50)*1609.344);
   const {lat,lng}=region.center;
   const selectors=[];
@@ -76,42 +76,47 @@ async function fetchOverpass(query){
   throw lastError||new Error("All Overpass endpoints failed");
 }
 
+export function candidateFromOverpassElement(row,region){
+  const tags=row?.tags||{};
+  const name=String(tags.name||"").trim();
+  if(!name)return null;
+  const website=normalizeUrl(tags.website||tags["contact:website"]);
+  if(!website)return null;
+  const lat=Number(row.lat??row.center?.lat),lng=Number(row.lon??row.center?.lon);
+  if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+  const address=[
+    [tags["addr:housenumber"],tags["addr:street"]].filter(Boolean).join(" "),
+    tags["addr:city"],tags["addr:state"],tags["addr:postcode"]
+  ].filter(Boolean).join(", ")||null;
+  return {
+    key:`${region.id}|osm|${row.type}|${row.id}`,
+    regionId:region.id,
+    discoveryMethod:"overpass",
+    externalId:`${row.type}/${row.id}`,
+    name,
+    category:categoryFor(tags),
+    website,
+    socialUrl:normalizeUrl(tags["contact:instagram"]||tags.instagram||tags["contact:facebook"]||tags.facebook),
+    address,
+    lat,lng,
+    priority:priorityFor(tags),
+    monitorTier:"C",
+    osmTags:{
+      amenity:tags.amenity||null,
+      tourism:tags.tourism||null,
+      leisure:tags.leisure||null,
+      craft:tags.craft||null
+    }
+  };
+}
+
 export async function discoverRegionalPlaces(region){
-  const payload=await fetchOverpass(queryFor(region));
+  const payload=await fetchOverpass(buildOverpassQuery(region));
   const rows=Array.isArray(payload?.elements)?payload.elements:[];
   const out=[];
   for(const row of rows){
-    const tags=row.tags||{};
-    const name=String(tags.name||"").trim();
-    if(!name)continue;
-    const website=normalizeUrl(tags.website||tags["contact:website"]);
-    if(!website)continue;
-    const lat=Number(row.lat??row.center?.lat),lng=Number(row.lon??row.center?.lon);
-    if(!Number.isFinite(lat)||!Number.isFinite(lng))continue;
-    const address=[
-      [tags["addr:housenumber"],tags["addr:street"]].filter(Boolean).join(" "),
-      tags["addr:city"],tags["addr:state"],tags["addr:postcode"]
-    ].filter(Boolean).join(", ")||null;
-    out.push({
-      key:`${region.id}|osm|${row.type}|${row.id}`,
-      regionId:region.id,
-      discoveryMethod:"overpass",
-      externalId:`${row.type}/${row.id}`,
-      name,
-      category:categoryFor(tags),
-      website,
-      socialUrl:normalizeUrl(tags["contact:instagram"]||tags.instagram||tags["contact:facebook"]||tags.facebook),
-      address,
-      lat,lng,
-      priority:priorityFor(tags),
-      monitorTier:"C",
-      osmTags:{
-        amenity:tags.amenity||null,
-        tourism:tags.tourism||null,
-        leisure:tags.leisure||null,
-        craft:tags.craft||null
-      }
-    });
+    const candidate=candidateFromOverpassElement(row,region);
+    if(candidate)out.push(candidate);
   }
   return [...new Map(out.map(item=>[item.key,item])).values()]
     .sort((a,b)=>b.priority-a.priority||a.name.localeCompare(b.name));
