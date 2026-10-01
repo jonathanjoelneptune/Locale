@@ -12,6 +12,7 @@ if(!Array.isArray(events))throw new Error("src/data/events.json must contain an 
 
 const registry=buildRegistry(events,SOURCES,{places:Array.isArray(previousPlaces)?previousPlaces:[]});
 coverage.registryContractVersion=registry.coverage.contractVersion;
+coverage.registryPlaceQualityVersion=1;
 for(const [regionId,summary] of Object.entries(registry.coverage.regions)){
   if(!coverage.regions?.[regionId])continue;
   coverage.regions[regionId].registry=summary;
