@@ -20,7 +20,7 @@ const waitForLocale=async page=>{
   }
   await page.waitForSelector(".event-row",{timeout:15000});
   await page.waitForFunction(()=>window.L&&document.querySelector("#map")?.__localeMap,{timeout:15000});
-  await page.waitForFunction(()=>!document.querySelector("#splash"),null,{timeout:5000});
+  await expect(page.locator("#splash")).toBeHidden({timeout:5000});
 };
 
 test("critical Locale interactions",async({page})=>{
