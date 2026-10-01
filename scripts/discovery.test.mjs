@@ -11,15 +11,17 @@ const region={
 
 test("regional discovery query targets event-capable venue categories with websites",()=>{
   const batches=buildOverpassQueries(region);
-  assert.equal(batches.length,2);
-  const core=batches.find(batch=>batch.id==="core-venues").query;
+  assert.equal(batches.length,3);
+  const nightlife=batches.find(batch=>batch.id==="nightlife-venues").query;
+  const culture=batches.find(batch=>batch.id==="culture-venues").query;
   const dining=batches.find(batch=>batch.id==="dining-venues").query;
-  assert.match(core,/around:80467,32\.7157,-117\.1611/);
-  assert.match(core,/amenity"~"\^\(nightclub\|bar\|pub/);
-  assert.match(core,/craft"="brewery"/);
+  assert.match(nightlife,/around:56327,32\.7157,-117\.1611/);
+  assert.match(nightlife,/amenity"~"\^\(nightclub\|bar\|pub\|music_venue\)\$"/);
+  assert.match(nightlife,/craft"="brewery"/);
+  assert.match(culture,/theatre\|cinema\|arts_centre\|community_centre/);
   assert.match(dining,/amenity"~"\^\(restaurant\|cafe\)\$"/);
-  assert.doesNotMatch(core,/university|school/);
-  assert.doesNotMatch(dining,/university|school/);
+  assert.doesNotMatch(nightlife,/university|school/);
+  assert.doesNotMatch(culture,/university|school/);
 });
 
 test("OpenStreetMap venue candidates become Tier C queue entries",()=>{

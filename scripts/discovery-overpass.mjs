@@ -47,25 +47,30 @@ const normalizeUrl=value=>{
 };
 
 export function buildOverpassQueries(region){
-  const fullRadius=Math.round(Math.min(Number(region.discoveryRadiusMiles||region.ingestRadiusMiles||35),50)*1609.344);
+  const fullRadius=Math.round(Math.min(Number(region.discoveryRadiusMiles||35),40)*1609.344);
   const diningRadius=Math.round(Math.min(Number(region.discoveryDiningRadiusMiles||20),25)*1609.344);
   const {lat,lng}=region.center;
-  const core=`[out:json][timeout:35];(
-    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
-    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
+  const nightlife=`[out:json][timeout:28];(
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["craft"="brewery"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["craft"="brewery"];
+  );out center tags;`;
+  const culture=`[out:json][timeout:28];(
+    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["amenity"~"^(theatre|cinema|arts_centre|community_centre)$"];
+    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(theatre|cinema|arts_centre|community_centre)$"];
     nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction)$"];
     nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction)$"];
     nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["leisure"="stadium"];
     nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["leisure"="stadium"];
-    nwr(around:${fullRadius},${lat},${lng})["name"]["website"]["craft"="brewery"];
-    nwr(around:${fullRadius},${lat},${lng})["name"]["contact:website"]["craft"="brewery"];
   );out center tags;`;
-  const dining=`[out:json][timeout:30];(
+  const dining=`[out:json][timeout:24];(
     nwr(around:${diningRadius},${lat},${lng})["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
     nwr(around:${diningRadius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
   );out center tags;`;
   return [
-    {id:"core-venues",query:core},
+    {id:"nightlife-venues",query:nightlife},
+    {id:"culture-venues",query:culture},
     {id:"dining-venues",query:dining}
   ];
 }
@@ -79,7 +84,7 @@ async function fetchOverpass(query){
         method:"POST",
         headers:{"Content-Type":"application/x-www-form-urlencoded","User-Agent":"Locale-discovery/1.0"},
         body,
-        signal:AbortSignal.timeout(55000)
+        signal:AbortSignal.timeout(38000)
       });
       if(!response.ok)throw new Error(`${endpoint} returned ${response.status}`);
       return await response.json();
