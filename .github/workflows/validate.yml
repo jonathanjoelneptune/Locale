@@ -30,6 +30,8 @@ jobs:
         run: node --test scripts/registry.test.mjs
       - name: Test event classification
         run: node --test scripts/event-classification.test.mjs
+      - name: Test recurring local happenings
+        run: node --test scripts/recurring-happenings.test.mjs
       - name: Install browser test runner
         run: |
           npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4
