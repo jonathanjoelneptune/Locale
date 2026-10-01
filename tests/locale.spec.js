@@ -4,9 +4,14 @@ import { test, expect } from "@playwright/test";
 const leafletSource=readFileSync("node_modules/leaflet/dist/leaflet.js","utf8");
 const mockLeaflet=async page=>{
   await page.addInitScript({content:leafletSource});
-  await page.route("https://tile.openstreetmap.org/**",route=>route.abort());
-  await page.route("https://*.tile.openstreetmap.fr/**",route=>route.abort());
-  await page.route("https://server.arcgisonline.com/**",route=>route.abort());
+  const tile=(route,label,color)=>route.fulfill({
+    status:200,
+    contentType:"image/svg+xml",
+    body:`<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="${color}"/><text x="16" y="32" font-size="18" fill="white">${label}</text></svg>`
+  });
+  await page.route("https://tile.openstreetmap.org/**",route=>tile(route,"standard","#758b94"));
+  await page.route("https://*.tile.openstreetmap.fr/**",route=>tile(route,"humanitarian","#b77a63"));
+  await page.route("https://server.arcgisonline.com/**",route=>tile(route,"satellite","#354b3d"));
 };
 
 const waitForLocale=async page=>{
@@ -32,26 +37,27 @@ test("critical Locale interactions",async({page})=>{
   await heart.click();
   await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
   await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);
-  const visibleHeart=before==="true"?heart.locator(".heart-off"):heart.locator(".heart-on");
-  await expect(visibleHeart).toBeVisible();
+  const expectedGlyph=before==="true"?"♡":"♥";
+  await expect(heart.locator(".heart-glyph")).toHaveText(expectedGlyph);
+  await expect(heart.locator(".heart-glyph")).toBeVisible();
   await page.reload(); await page.waitForSelector(".event-row");
   await expect(page.locator(`[data-save-event="${id}"]`)).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
 
   const style=page.locator("#mapStyle");
   const map=page.locator("#map");
-  const tileTemplate=()=>map.getAttribute("data-map-tile-template");
+  const visibleTileSrc=async()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
   await style.selectOption("humanitarian");
   await expect(style).toHaveValue("humanitarian");
   await expect(map).toHaveAttribute("data-map-style","humanitarian");
-  await expect.poll(tileTemplate).toContain("tile.openstreetmap.fr/hot");
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
   await style.selectOption("satellite");
   await expect(style).toHaveValue("satellite");
   await expect(map).toHaveAttribute("data-map-style","satellite");
-  await expect.poll(tileTemplate).toContain("arcgisonline.com");
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("arcgisonline.com");
   await style.selectOption("standard");
   await expect(style).toHaveValue("standard");
   await expect(map).toHaveAttribute("data-map-style","standard");
-  await expect.poll(tileTemplate).toContain("tile.openstreetmap.org");
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("tile.openstreetmap.org");
 
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
@@ -253,4 +259,34 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
   expect(mapSource).toContain("event-map-popup popup-");
   expect(mapSource).toContain('e.image?"has-image":"no-image"');
   expect(mapSource).toContain('category-art-symbol');
+});
+
+
+test("heart fills immediately without changing tabs",async({page})=>{
+  await waitForLocale(page);
+  const heart=page.locator("[data-save-event]").first();
+  const before=await heart.getAttribute("aria-pressed");
+  await heart.click();
+  const expected=before==="true"?"♡":"♥";
+  await expect(heart.locator(".heart-glyph")).toHaveText(expected);
+  await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
+});
+
+test("map style swaps the actual visible tile layer",async({page})=>{
+  await waitForLocale(page);
+  const style=page.locator("#mapStyle");
+  const visible=()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
+
+  await style.selectOption("satellite");
+  await expect.poll(visible,{timeout:5000}).toContain("arcgisonline.com");
+
+  await style.selectOption("humanitarian");
+  await expect.poll(visible,{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
+
+  const layerCount=await page.locator("#map").evaluate(el=>{
+    let count=0;
+    el.__localeMap.eachLayer(layer=>{if(layer?.options?.localeBasemap)count++});
+    return count;
+  });
+  expect(layerCount).toBe(1);
 });
