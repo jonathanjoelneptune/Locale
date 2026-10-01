@@ -1,0 +1,85 @@
+import {readFile} from "node:fs/promises";
+import {REGIONS} from "./regions.mjs";
+import {STATIC_SOURCES} from "./source-catalog.mjs";
+
+const failures=[];
+const fail=message=>failures.push(message);
+const read=async(path,fallback)=>{
+  try{return JSON.parse(await readFile(path,"utf8"))}
+  catch(error){fail(`${path}: invalid JSON (${error.message})`);return fallback}
+};
+const validUrl=value=>{
+  try{
+    const url=new URL(value);
+    return ["http:","https:"].includes(url.protocol);
+  }catch{return false}
+};
+
+const queue=await read("src/data/discovery-queue.json",[]);
+const sources=await read("src/data/discovered-sources.json",[]);
+const state=await read("src/data/discovery-state.json",{});
+const coverage=await read("src/data/discovery-coverage.json",{});
+
+if(!Array.isArray(queue))fail("discovery-queue.json must contain an array");
+if(!Array.isArray(sources))fail("discovered-sources.json must contain an array");
+
+const regionIds=new Set(Object.keys(REGIONS));
+const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
+const sourceIds=new Set;
+const sourceEndpointKeys=new Set;
+const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json"]);
+
+for(const [index,source] of (sources||[]).entries()){
+  const label=`discovered-sources[${index}]`;
+  for(const field of ["id","name","adapter","endpoint"]){
+    if(!source?.[field])fail(`${label} missing ${field}`);
+  }
+  if(staticIds.has(source.id))fail(`${label} collides with static source ${source.id}`);
+  if(sourceIds.has(source.id))fail(`Duplicate discovered source id ${source.id}`);
+  sourceIds.add(source.id);
+  if(!allowedAdapters.has(source.adapter))fail(`${label} uses unsupported adapter ${source.adapter}`);
+  if(!validUrl(source.endpoint))fail(`${label} has invalid endpoint ${source.endpoint}`);
+  if(source.scope!=="local")fail(`${label} must have local scope`);
+  if(!Array.isArray(source.regions)||source.regions.length!==1||!regionIds.has(source.regions[0]))fail(`${label} must reference exactly one known region`);
+  if(source.ownerEntityKind!=="place"||!source.ownerName)fail(`${label} must identify its owning place`);
+  if(!source.discoveryCandidateKey)fail(`${label} missing discoveryCandidateKey`);
+  const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
+  if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
+  sourceEndpointKeys.add(endpointKey);
+}
+
+const queueKeys=new Set;
+const validStatuses=new Set(["candidate","needs-website","retry","qualified"]);
+for(const [index,item] of (queue||[]).entries()){
+  const label=`discovery-queue[${index}]`;
+  for(const field of ["key","regionId","name","status","monitorTier"]){
+    if(item?.[field]===undefined||item?.[field]===null||item?.[field]==="")fail(`${label} missing ${field}`);
+  }
+  if(queueKeys.has(item.key))fail(`Duplicate discovery queue key ${item.key}`);
+  queueKeys.add(item.key);
+  if(!regionIds.has(item.regionId))fail(`${label} references unknown region ${item.regionId}`);
+  if(!validStatuses.has(item.status))fail(`${label} has invalid status ${item.status}`);
+  if(item.monitorTier!=="C")fail(`${label} must use monitorTier C`);
+  if(item.website&&!validUrl(item.website))fail(`${label} has invalid website ${item.website}`);
+  if(item.status==="qualified"){
+    if(!item.sourceId)fail(`${label} is qualified without sourceId`);
+    if(item.sourceId&&!sourceIds.has(item.sourceId))fail(`${label} references unknown discovered source ${item.sourceId}`);
+  }
+}
+
+if(coverage?.regions){
+  for(const regionId of regionIds){
+    const summary=coverage.regions[regionId];
+    if(!summary)continue;
+    const expected=queue.filter(item=>item.regionId===regionId).length;
+    if(summary.candidateCount!==expected)fail(`Discovery coverage candidateCount mismatch for ${regionId}`);
+  }
+}
+if(state&&typeof state!=="object")fail("discovery-state.json must contain an object");
+
+if(failures.length){
+  console.error("Locale discovery validation failed:");
+  for(const failure of failures)console.error(" - "+failure);
+  process.exit(1);
+}
+console.log(`Locale discovery validation passed: ${queue.length} candidates, ${sources.length} auto-discovered sources.`);
