@@ -145,3 +145,30 @@ test("place IDs survive later address and coordinate enrichment",()=>{
   const enriched=buildRegistry([enrichedEvent],[],{places:initial.places});
   assert.equal(enriched.places[0].id,originalId);
 });
+
+
+test("page chrome and pricing fragments never become canonical places",()=>{
+  const badNames=[
+    "$205. Safari Park, 15500 San Pasqual Valley Rd., Escondido. www.example.org",
+    "1.16.32 PM132.png');\" class=\"thumbnail\" aria-label=\"Oktoberfest\">",
+    "<span class=\"venue\">Not a parsed venue</span>"
+  ];
+  const events=badNames.map((venue,index)=>({
+    id:`bad:${index}`,
+    regionId:"san-diego",
+    title:"Example Event",
+    category:"family",
+    venue,
+    lat:32.7157,
+    lng:-117.1611,
+    locationPrecision:"source-center",
+    start:`2026-10-${String(10+index).padStart(2,"0")}T12:00:00.000Z`,
+    sourceId:"sandiego-family",
+    source:"San Diego Family",
+    sources:[{id:"sandiego-family",name:"San Diego Family"}],
+    lastVerified:verified
+  }));
+  const registry=buildRegistry(events,[]);
+  assert.equal(registry.places.length,0);
+  assert.ok(registry.events.every(event=>event.venueId===null));
+});
