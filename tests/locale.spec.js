@@ -34,39 +34,47 @@ test("critical Locale interactions",async({page})=>{
   const heart=page.locator("[data-save-event]").first();
   const id=await heart.getAttribute("data-save-event");
   const before=await heart.getAttribute("aria-pressed");
+  const beforeHeartImage=await heart.screenshot();
   await heart.click();
-  await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
-  await expect(heart).toHaveClass(before==="true"?/^(?!.*is-saved)/:/is-saved/);
-  const expectedGlyph=before==="true"?"♡":"♥";
-  await expect(heart.locator(".heart-glyph")).toHaveText(expectedGlyph);
-  await expect(heart.locator(".heart-glyph")).toBeVisible();
-  await page.reload(); await page.waitForSelector(".event-row");
+  const updatedHeart=page.locator(`[data-save-event="${id}"]`);
+  const expectedSaved=before!=="true";
+  await expect(updatedHeart).toHaveAttribute("aria-pressed",String(expectedSaved));
+  await expect(updatedHeart.locator(".save-heart")).toHaveText(expectedSaved?"♥":"♡");
+  const afterHeartImage=await updatedHeart.screenshot();
+  expect(Buffer.compare(beforeHeartImage,afterHeartImage)).not.toBe(0);
+
+  await page.reload();
+  await page.waitForSelector(".event-row");
   const persistedHeart=page.locator(`[data-save-event="${id}"]`);
-  await expect(persistedHeart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
-  await expect(persistedHeart.locator(".heart-glyph")).toHaveText(expectedGlyph);
+  await expect(persistedHeart).toHaveAttribute("aria-pressed",String(expectedSaved));
+  await expect(persistedHeart.locator(".save-heart")).toHaveText(expectedSaved?"♥":"♡");
 
   const style=page.locator("#mapStyle");
   const map=page.locator("#map");
-  const pane=name=>page.locator(`.leaflet-locale-basemap-${name}-pane`);
-  const visibleTileSrc=async name=>pane(name).locator("img.leaflet-tile").first().getAttribute("src");
+  const basemapUrls=()=>map.evaluate(el=>{
+    const urls=[];
+    el.__localeMap.eachLayer(layer=>{if(layer?.options?.localeBasemap)urls.push(layer._url)});
+    return urls;
+  });
+  const visibleTileSrc=()=>page.locator(".leaflet-tile-pane img.leaflet-tile").first().getAttribute("src");
+
   await style.selectOption("humanitarian");
   await expect(style).toHaveValue("humanitarian");
   await expect(map).toHaveAttribute("data-map-style","humanitarian");
-  await expect(pane("humanitarian")).toHaveCSS("display","block");
-  await expect(pane("standard")).toHaveCSS("display","none");
-  await expect.poll(()=>visibleTileSrc("humanitarian"),{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
+  await expect.poll(basemapUrls).toEqual(["https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"]);
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
+
   await style.selectOption("satellite");
   await expect(style).toHaveValue("satellite");
   await expect(map).toHaveAttribute("data-map-style","satellite");
-  await expect(pane("satellite")).toHaveCSS("display","block");
-  await expect(pane("humanitarian")).toHaveCSS("display","none");
-  await expect.poll(()=>visibleTileSrc("satellite"),{timeout:5000}).toContain("arcgisonline.com");
+  await expect.poll(basemapUrls).toEqual(["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"]);
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("arcgisonline.com");
+
   await style.selectOption("standard");
   await expect(style).toHaveValue("standard");
   await expect(map).toHaveAttribute("data-map-style","standard");
-  await expect(pane("standard")).toHaveCSS("display","block");
-  await expect(pane("satellite")).toHaveCSS("display","none");
-  await expect.poll(()=>visibleTileSrc("standard"),{timeout:5000}).toContain("tile.openstreetmap.org");
+  await expect.poll(basemapUrls).toEqual(["https://tile.openstreetmap.org/{z}/{x}/{y}.png"]);
+  await expect.poll(visibleTileSrc,{timeout:5000}).toContain("tile.openstreetmap.org");
 
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
@@ -178,21 +186,57 @@ test("approximate event locations do not masquerade as exact distances",async({p
 });
 
 
+test("save and basemap controls keep the simple architecture",async({page})=>{
+  const appSource=await (await page.request.get("./src/app.js")).text();
+  const mapSource=await (await page.request.get("./src/components/map.js")).text();
+  const cardSource=await (await page.request.get("./src/components/eventCard.js")).text();
+  const cssSource=await (await page.request.get("./styles/app.css")).text();
+
+  expect(appSource).toContain("renderSidebarFromState");
+  expect(appSource).not.toContain("syncSaveButton");
+  expect(appSource).not.toContain("toggleSaved(");
+
+  expect(mapSource).toContain("base.setUrl(styles[name])");
+  expect(mapSource).not.toContain("baseLayers");
+  expect(mapSource).not.toContain("locale-basemap-");
+
+  expect(cardSource).toContain('class="save-heart"');
+  expect(cardSource).not.toContain("heart-glyph");
+  expect(cssSource).not.toContain("heart-glyph");
+  expect(cssSource).not.toContain("heart-on");
+  expect(cssSource).not.toContain("heart-off");
+});
+
 test("production smoke @smoke",async({page})=>{
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
   await expect(page.locator("#sidebar")).toBeVisible();
   await expect(page.locator("#sidebar .cards")).toBeVisible();
+
   const rows=page.locator(".event-row");
   if(await rows.count()){
-    const href=await rows.first().locator(".event-action").getAttribute("href");
+    const firstRow=rows.first();
+    const href=await firstRow.locator(".event-action").getAttribute("href");
     expect(href).toMatch(/^https?:\/\//);
-    const heart=rows.first().locator("[data-save-event]");
+
+    const heart=firstRow.locator("[data-save-event]");
+    const id=await heart.getAttribute("data-save-event");
     const before=await heart.getAttribute("aria-pressed");
     await heart.click();
-    await expect(heart.locator(".heart-glyph")).toHaveText(before==="true"?"♡":"♥");
+    const updated=page.locator(`[data-save-event="${id}"]`);
+    await expect(updated.locator(".save-heart")).toHaveText(before==="true"?"♡":"♥");
   }
+
+  await page.waitForFunction(()=>window.L&&document.querySelector("#map")?.__localeMap,{timeout:15000});
+  const style=page.locator("#mapStyle");
+  await style.selectOption("satellite");
+  const urls=await page.locator("#map").evaluate(el=>{
+    const result=[];
+    el.__localeMap.eachLayer(layer=>{if(layer?.options?.localeBasemap)result.push(layer._url)});
+    return result;
+  });
+  expect(urls).toEqual(["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"]);
 });
 
 
@@ -275,42 +319,48 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
 });
 
 
-test("heart fills immediately without changing tabs",async({page})=>{
+test("heart visibly changes immediately without changing tabs",async({page})=>{
   await waitForLocale(page);
   const heart=page.locator("[data-save-event]").first();
+  const id=await heart.getAttribute("data-save-event");
   const before=await heart.getAttribute("aria-pressed");
-  const expected=before==="true"?"♡":"♥";
+  const beforeImage=await heart.screenshot();
+
   await heart.click();
-  await expect(heart).toHaveAttribute("aria-pressed",before==="true"?"false":"true");
-  await expect(heart).toHaveAttribute("data-saved",before==="true"?"false":"true");
-  await expect(heart.locator(".heart-glyph")).toHaveText(expected);
-  await expect(heart.locator(".heart-glyph")).toBeVisible();
+
+  const updated=page.locator(`[data-save-event="${id}"]`);
+  const expectedSaved=before!=="true";
+  await expect(updated).toHaveAttribute("aria-pressed",String(expectedSaved));
+  await expect(updated.locator(".save-heart")).toHaveText(expectedSaved?"♥":"♡");
+  await expect(updated.locator(".save-heart")).toBeVisible();
+
+  const afterImage=await updated.screenshot();
+  expect(Buffer.compare(beforeImage,afterImage)).not.toBe(0);
 });
 
-test("map style swaps the actual visible tile layer",async({page})=>{
+test("map style changes one visible Leaflet tile layer",async({page})=>{
   await waitForLocale(page);
   const style=page.locator("#mapStyle");
-  const pane=name=>page.locator(`.leaflet-locale-basemap-${name}-pane`);
-  const tile=name=>pane(name).locator("img.leaflet-tile").first();
+  const map=page.locator("#map");
+  const layerState=()=>map.evaluate(el=>{
+    const layers=[];
+    el.__localeMap.eachLayer(layer=>{
+      if(layer?.options?.localeBasemap)layers.push({url:layer._url});
+    });
+    return layers;
+  });
+  const visibleTiles=()=>page.locator(".leaflet-tile-pane img.leaflet-tile");
+  const standardImage=await map.screenshot();
 
   await style.selectOption("satellite");
-  await expect(pane("satellite")).toHaveCSS("display","block");
-  await expect(pane("standard")).toHaveCSS("display","none");
-  await expect.poll(()=>tile("satellite").getAttribute("src"),{timeout:5000}).toContain("arcgisonline.com");
-  await expect(tile("satellite")).toBeVisible();
-  await expect.poll(()=>tile("satellite").evaluate(img=>img.complete&&img.naturalWidth>0),{timeout:5000}).toBe(true);
+  await expect.poll(layerState).toEqual([{url:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"}]);
+  await expect.poll(async()=>visibleTiles().evaluateAll(imgs=>imgs.length>0&&imgs.every(img=>img.src.includes("arcgisonline.com"))),{timeout:5000}).toBe(true);
+  const satelliteImage=await map.screenshot();
+  expect(Buffer.compare(standardImage,satelliteImage)).not.toBe(0);
 
   await style.selectOption("humanitarian");
-  await expect(pane("humanitarian")).toHaveCSS("display","block");
-  await expect(pane("satellite")).toHaveCSS("display","none");
-  await expect.poll(()=>tile("humanitarian").getAttribute("src"),{timeout:5000}).toContain("tile.openstreetmap.fr/hot");
-  await expect(tile("humanitarian")).toBeVisible();
-  await expect.poll(()=>tile("humanitarian").evaluate(img=>img.complete&&img.naturalWidth>0),{timeout:5000}).toBe(true);
-
-  const state=await page.locator("#map").evaluate(el=>{
-    const panes=[...el.querySelectorAll('[data-locale-basemap]')].map(p=>({name:p.dataset.localeBasemap,display:getComputedStyle(p).display}));
-    return {api:el.__localeMap?true:false,panes};
-  });
-  expect(state.api).toBe(true);
-  expect(state.panes.filter(p=>p.display!=="none")).toEqual([{name:"humanitarian",display:"block"}]);
+  await expect.poll(layerState).toEqual([{url:"https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"}]);
+  await expect.poll(async()=>visibleTiles().evaluateAll(imgs=>imgs.length>0&&imgs.every(img=>img.src.includes("tile.openstreetmap.fr/hot"))),{timeout:5000}).toBe(true);
+  const humanitarianImage=await map.screenshot();
+  expect(Buffer.compare(satelliteImage,humanitarianImage)).not.toBe(0);
 });
