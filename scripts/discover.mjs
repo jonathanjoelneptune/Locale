@@ -141,6 +141,8 @@ function buildCoverage(queue,sources,runStats){
       statusCounts[row.status]=(statusCounts[row.status]||0)+1;
       categoryCounts[row.category||"unknown"]=(categoryCounts[row.category||"unknown"]||0)+1;
     }
+    const regionState=state?.regions?.[region.id]||{};
+    const cellSummary=regionState.cellSummary||discoveryCellSummary(region);
     regions[region.id]={
       candidateCount:rows.length,
       withWebsiteCount:rows.filter(row=>!!row.website).length,
@@ -149,7 +151,16 @@ function buildCoverage(queue,sources,runStats){
       dueCount:rows.filter(row=>row.website&&row.status!=="qualified"&&due(row)).length,
       statusCounts,
       categoryCounts,
-      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length
+      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length,
+      discoveryCells:{
+        version:regionState.cellSweepVersion||DISCOVERY_SWEEP_VERSION,
+        total:cellSummary.total,
+        high:cellSummary.high,
+        dining:cellSummary.dining,
+        completed:Number(regionState.completedCellCount||regionState.completedCells?.length||0),
+        failed:Object.keys(regionState.failedCells||{}).length,
+        remaining:Number(regionState.remainingCellCount??cellSummary.total)
+      }
     };
   }
   return {generatedAt:nowIso(),run:runStats,regions};
