@@ -31,8 +31,13 @@ const isoMin=values=>values.filter(Boolean).sort()[0]||null;
 const isoMax=values=>values.filter(Boolean).sort().at(-1)||null;
 
 function meaningfulVenue(event){
-  const name=norm(event.venue);
-  return !!name&&!GENERIC_VENUES.has(name);
+  const raw=clean(event.venue);
+  const name=norm(raw);
+  if(!name||GENERIC_VENUES.has(name))return false;
+  if(raw.length>110)return false;
+  if(/^\s*\$/.test(raw))return false;
+  if(/class\s*=|aria-label\s*=|thumbnail|\.png\b|\.jpe?g\b|\.webp\b|https?:\/\/|www\.|<[^>]+>/i.test(raw))return false;
+  return true;
 }
 
 function specificPlaceKey(event){
