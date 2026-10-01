@@ -17,17 +17,24 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     return L.tileLayer(url,{...opts,pane:"locale-basemap"});
   };
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
-  let base=makeBase(activeStyle).addTo(map);
+  let base=makeBase(activeStyle);
+  base.options.localeBasemap=true;
+  base.addTo(map);
   el.dataset.mapStyle=activeStyle;
   function setStyle(name){
-    if(!styles[name]||name===activeStyle)return;
-    const next=makeBase(name);
-    next.addTo(map);
-    map.removeLayer(base);
-    base=next;
+    if(!styles[name])return;
+    const previous=base;
+    if(previous&&map.hasLayer(previous))map.removeLayer(previous);
+    previous?.getContainer?.()?.remove();
+    base=makeBase(name);
+    base.options.localeBasemap=true;
+    base.addTo(map);
     activeStyle=name;
     el.dataset.mapStyle=name;
-    requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
+    requestAnimationFrame(()=>{
+      base.redraw?.();
+      map.invalidateSize({pan:false,animate:false});
+    });
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
