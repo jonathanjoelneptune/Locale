@@ -176,7 +176,10 @@ document.querySelector("#sidebar").addEventListener("click",event=>{
   document.querySelectorAll("[data-save-event]").forEach(button=>{
     if(button.dataset.saveEvent!==id)return;
     button.classList.toggle("is-saved",on);
-    button.setAttribute("aria-pressed",String(on));button.setAttribute("aria-label",on?"Remove saved event":"Save event");
+    button.setAttribute("aria-pressed",String(on));
+    button.setAttribute("aria-label",on?"Remove saved event":"Save event");
+    const glyph=button.querySelector(".heart-glyph");
+    if(glyph)glyph.textContent=on?"♥":"♡";
   });
   if(state.listMode==="saved")requestAnimationFrame(render);
 },true);
