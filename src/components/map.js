@@ -5,58 +5,27 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   Object.defineProperty(el,"__localeMap",{value:map,configurable:true});
   const styles={
-    standard:["https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}],
-    humanitarian:["https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{maxZoom:19,subdomains:"abc",attribution:"&copy; OpenStreetMap contributors, Tiles style by HOT"}],
-    satellite:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"}]
+    standard:"https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    humanitarian:"https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+    satellite:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
   };
-  const styleNames=Object.keys(styles);
-  const paneName=name=>`locale-basemap-${name}`;
-  const baseLayers=new Map();
-
-  styleNames.forEach(name=>{
-    const pane=map.createPane(paneName(name));
-    pane.style.zIndex="150";
-    pane.style.pointerEvents="none";
-    pane.style.display="none";
-    pane.dataset.localeBasemap=name;
-  });
-
-  const ensureBase=name=>{
-    if(baseLayers.has(name))return baseLayers.get(name);
-    const [url,opts]=styles[name]||styles.standard;
-    const layer=L.tileLayer(url,{
-      ...opts,
-      pane:paneName(name),
-      className:`locale-basemap-tile locale-basemap-tile-${name}`
-    });
-    layer.options.localeBasemap=true;
-    layer.options.localeBasemapName=name;
-    baseLayers.set(name,layer);
-    layer.addTo(map);
-    return layer;
-  };
-
+  const attribution="&copy; OpenStreetMap contributors · HOT map style · Tiles &copy; Esri";
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
-  const showBase=name=>{
-    styleNames.forEach(style=>{
-      const pane=map.getPane(paneName(style));
-      if(pane)pane.style.display=style===name?"block":"none";
-    });
-    const layer=ensureBase(name);
-    el.dataset.mapStyle=name;
-    el.dataset.mapLayerProvider=name;
-    el.dataset.mapTileTemplate=styles[name][0];
-    requestAnimationFrame(()=>{
-      layer.redraw?.();
-      map.invalidateSize({pan:false,animate:false});
-    });
-  };
-  showBase(activeStyle);
+  const base=L.tileLayer(styles[activeStyle],{
+    maxZoom:19,
+    subdomains:"abc",
+    attribution
+  }).addTo(map);
+  base.options.localeBasemap=true;
+  el.dataset.mapStyle=activeStyle;
+  el.dataset.mapTileTemplate=styles[activeStyle];
 
   function setStyle(name){
     if(!styles[name]||name===activeStyle)return;
     activeStyle=name;
-    showBase(name);
+    base.setUrl(styles[name]);
+    el.dataset.mapStyle=name;
+    el.dataset.mapTileTemplate=styles[name];
   }
 
   const radius=L.circle([state.center.lat,state.center.lng],{radius:meters(state.radius),weight:1.25,color:"#159d8a",opacity:.65,fillColor:"#53cbb5",fillOpacity:.035,interactive:false}).addTo(map);
@@ -123,7 +92,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
   const api={
     map,
     setStyle,
-    getBasemapState(){return {activeStyle,loaded:[...baseLayers.keys()]};},
+    getBasemapState(){return {activeStyle,url:base._url};},
     setRadius(miles,pos){
       const ll=[pos.lat,pos.lng];
       radius.setLatLng(ll).setRadius(meters(miles));
