@@ -14,15 +14,27 @@ const mockLeaflet=async page=>{
   await page.route("https://server.arcgisonline.com/**",route=>tile(route,"satellite","#354b3d"));
 };
 
+const addDaysKey=(key,days)=>{
+  const [year,month,day]=key.split("-").map(Number);
+  const date=new Date(year,month-1,day+days);
+  return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-");
+};
+
+const selectNext7Days=async page=>{
+  await page.locator("#dateModeRange").click();
+  await page.locator("#dateSummary").click();
+  const start=await page.locator(".calendar-day.selected").first().getAttribute("data-date");
+  const end=addDaysKey(start,6);
+  await page.locator(`[data-date="${start}"]`).first().click();
+  await page.locator(`[data-date="${end}"]`).first().click();
+};
+
 const waitForLocale=async page=>{
   await mockLeaflet(page);
   await page.goto("./");
   await page.waitForSelector("#sidebar",{timeout:15000});
   await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
-  if(!(await page.locator(".event-row").count())){
-    const seven=page.locator('[data-window="7days"]');
-    if(await seven.count())await seven.click();
-  }
+  if(!(await page.locator(".event-row").count()))await selectNext7Days(page);
   await page.waitForSelector(".event-row",{timeout:15000});
   await page.waitForFunction(()=>window.L&&document.querySelector("#map")?.__localeMap,{timeout:15000});
   await expect(page.locator("#splash")).toBeHidden({timeout:5000});
@@ -79,18 +91,17 @@ test("critical Locale interactions",async({page})=>{
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
 
-  await page.locator("#resultsToggle").click();
-  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
-  await page.locator("#resultsToggle").click();
-  await expect(page.locator(".shell")).not.toHaveClass(/results-collapsed/);
+  await page.locator("#railToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/rail-collapsed/);
+  await page.locator("#railToggle").click();
+  await expect(page.locator(".shell")).not.toHaveClass(/rail-collapsed/);
 
-  await page.locator("#discoveryToggle").click();
-  await expect(page.locator(".shell")).toHaveClass(/discovery-collapsed/);
-  await page.locator("#discoveryToggle").click();
-  await expect(page.locator(".shell")).not.toHaveClass(/discovery-collapsed/);
-
-  await page.locator('[data-window="7days"]').click();
-  await expect(page.locator('[data-window="7days"]')).toHaveClass(/active|selected/);
+  const dateBefore=await page.locator("#dateSummary span").textContent();
+  await page.locator('[data-date-shift="1"]').click();
+  await expect(page.locator("#dateSummary span")).not.toHaveText(dateBefore);
+  await page.locator('[data-date-shift="-1"]').click();
+  await selectNext7Days(page);
+  await expect(page.locator("#dateModeRange")).toHaveClass(/active/);
   const cluster=page.locator(".event-stack").first();
   if(await cluster.count()){
     await cluster.click();
@@ -162,7 +173,7 @@ test("static bootstrap remains visible if the application module cannot load",as
 
 test("event groups fully expand at street-level zoom",async({page})=>{
   await waitForLocale(page);
-  await page.locator('[data-window="7days"]').click();
+  await selectNext7Days(page);
   const map=page.locator("#map");
   await map.evaluate(el=>el.__localeMap.setZoom(17,{animate:false}));
   await expect.poll(async()=>Number(await map.getAttribute("data-map-zoom")||0),{timeout:3000}).toBeGreaterThanOrEqual(17);
@@ -203,6 +214,10 @@ test("save and basemap controls keep the simple architecture",async({page})=>{
   const cssSource=await (await page.request.get("./styles/app.css")).text();
 
   expect(appSource).toContain("renderSidebarFromState");
+  expect(appSource).toContain("DateControls(state)");
+  expect(appSource).toContain("hoverEvent(row.dataset.eventId,true)");
+  expect(appSource).not.toContain("resultsToggle");
+  expect(appSource).not.toContain("discoveryToggle");
   expect(appSource).not.toContain("syncSaveButton");
   expect(appSource).not.toContain("toggleSaved(");
 
@@ -252,7 +267,7 @@ test("production smoke @smoke",async({page})=>{
 
 test("manual map navigation scopes results to the visible viewport",async({page})=>{
   await waitForLocale(page);
-  await page.locator('[data-window="7days"]').click();
+  await selectNext7Days(page);
   await expect(page.locator(".results-head h1")).toContainText("Events Nearby");
 
   const map=page.locator("#map");
@@ -279,15 +294,15 @@ test("manual map navigation scopes results to the visible viewport",async({page}
 
 test("event rail stays compact and highlights remain well formed when collapsed",async({page})=>{
   await waitForLocale(page);
-  await page.locator('[data-window="7days"]').click();
+  await selectNext7Days(page);
 
   const firstRow=page.locator(".event-row").first();
   await expect(firstRow).toBeVisible();
   const rowBox=await firstRow.boundingBox();
   expect(rowBox?.height||999).toBeLessThanOrEqual(64);
 
-  await page.locator("#resultsToggle").click();
-  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
+  await page.locator("#railToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/rail-collapsed/);
 
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
@@ -301,7 +316,7 @@ test("event rail stays compact and highlights remain well formed when collapsed"
 
 test("premium event surfaces keep dense cards and intentional fallbacks",async({page})=>{
   await waitForLocale(page);
-  await page.locator('[data-window="7days"]').click();
+  await selectNext7Days(page);
 
   const row=page.locator(".event-row").first();
   await expect(row).toHaveClass(/event-surface/);
@@ -314,7 +329,7 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
     await expect(fallback.locator("small")).toBeVisible();
   }
 
-  await page.locator("#resultsToggle").click();
+  await page.locator("#railToggle").click();
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
     await expect(highlight).toHaveClass(/event-surface/);
@@ -328,6 +343,36 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
   expect(mapSource).toContain('category-art-symbol');
 });
 
+
+test("unified rail supports date ranges, day stepping, and category pills",async({page})=>{
+  await waitForLocale(page);
+  await expect(page.locator(".unified-panel")).toBeVisible();
+  await expect(page.locator(".category-pill")).toHaveCount(10);
+
+  const initial=await page.locator("#dateSummary span").textContent();
+  await page.locator('[data-date-shift="1"]').click();
+  await expect(page.locator("#dateSummary span")).not.toHaveText(initial);
+  await page.locator('[data-date-shift="-1"]').click();
+
+  await selectNext7Days(page);
+  await expect(page.locator("#dateModeRange")).toHaveClass(/active/);
+
+  const music=page.locator('[data-category="music"]');
+  await music.click();
+  await expect(music).toHaveAttribute("aria-pressed","true");
+  const visibleCategories=await page.locator(".event-badge").allTextContents();
+  expect(visibleCategories.every(value=>value.trim().toLowerCase()==="music")).toBe(true);
+  await page.locator("#clearCategory").click();
+});
+
+test("hovering an event row pulses its map marker",async({page})=>{
+  await waitForLocale(page);
+  const row=page.locator(".event-row").first();
+  await row.hover();
+  await expect(page.locator(".event-pin.hover-pulse")).toHaveCount(1);
+  await page.locator(".results-head").hover();
+  await expect(page.locator(".event-pin.hover-pulse")).toHaveCount(0);
+});
 
 test("heart visibly changes immediately without changing tabs",async({page})=>{
   await waitForLocale(page);
