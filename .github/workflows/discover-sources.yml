@@ -74,7 +74,7 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Refresh events from newly promoted sources
-        if: steps.discover.outputs.promoted != '0'
+        if: steps.commit.outputs.changed == 'true' && steps.discover.outputs.promoted != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run refresh-events.yml --ref main
