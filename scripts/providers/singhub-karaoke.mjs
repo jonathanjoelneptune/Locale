@@ -26,7 +26,7 @@ function textLines(html){
     .filter(Boolean);
 }
 
-function venueLinks(html){
+export function extractSinghubVenueLinks(html){
   const links=[];
   for(const match of String(html||"").matchAll(/href=["'](\/venues\/[^"'?#]+)["']/gi)){
     links.push(new URL(match[1],"https://singhub.app").href);
@@ -34,7 +34,7 @@ function venueLinks(html){
   return [...new Set(links)];
 }
 
-function parseVenuePage(html,url){
+export function parseSinghubVenuePage(html,url){
   const name=strip(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||"");
   if(!name)return null;
   const lines=textLines(html);
@@ -80,11 +80,11 @@ async function fetchHtml(url){
 
 export async function singhubKaraokeEvents({days=45,maxVenues=100}={}){
   const finderHtml=await fetchHtml(FINDER);
-  const links=venueLinks(finderHtml).slice(0,maxVenues);
+  const links=extractSinghubVenueLinks(finderHtml).slice(0,maxVenues);
   const venues=[];
   for(let index=0;index<links.length;index+=8){
     const batch=links.slice(index,index+8);
-    const settled=await Promise.allSettled(batch.map(async url=>parseVenuePage(await fetchHtml(url),url)));
+    const settled=await Promise.allSettled(batch.map(async url=>parseSinghubVenuePage(await fetchHtml(url),url)));
     for(const result of settled)if(result.status==="fulfilled"&&result.value)venues.push(result.value);
   }
 
