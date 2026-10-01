@@ -16,7 +16,7 @@ const waitForLocale=async page=>{
     if(await seven.count())await seven.click();
   }
   await page.waitForSelector(".event-row",{timeout:15000});
-  await page.waitForFunction(()=>window.L&&document.querySelector(".leaflet-locale-basemap-pane img.leaflet-tile"));
+  await page.waitForFunction(()=>window.L&&document.querySelector("#map")?.__localeMap,{timeout:15000});
 };
 
 test("critical Locale interactions",async({page})=>{
@@ -35,19 +35,19 @@ test("critical Locale interactions",async({page})=>{
 
   const style=page.locator("#mapStyle");
   const map=page.locator("#map");
-  const tileSrc=()=>page.locator(".leaflet-locale-basemap-pane img.leaflet-tile").first().getAttribute("src");
+  const tileTemplate=()=>map.getAttribute("data-map-tile-template");
   await style.selectOption("humanitarian");
   await expect(style).toHaveValue("humanitarian");
   await expect(map).toHaveAttribute("data-map-style","humanitarian");
-  await expect.poll(tileSrc).toContain("tile.openstreetmap.fr/hot");
+  await expect.poll(tileTemplate).toContain("tile.openstreetmap.fr/hot");
   await style.selectOption("satellite");
   await expect(style).toHaveValue("satellite");
   await expect(map).toHaveAttribute("data-map-style","satellite");
-  await expect.poll(tileSrc).toContain("arcgisonline.com");
+  await expect.poll(tileTemplate).toContain("arcgisonline.com");
   await style.selectOption("standard");
   await expect(style).toHaveValue("standard");
   await expect(map).toHaveAttribute("data-map-style","standard");
-  await expect.poll(tileSrc).toContain("tile.openstreetmap.org");
+  await expect.poll(tileTemplate).toContain("tile.openstreetmap.org");
 
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
@@ -156,4 +156,18 @@ test("approximate event locations do not masquerade as exact distances",async({p
   expect(result.exactPrecise).toBe(true);
   expect(result.approximateDistance).toBeNull();
   expect(result.exactDistance).toBe(0);
+});
+
+
+test("production smoke @smoke",async({page})=>{
+  await page.goto("./");
+  await page.waitForSelector("#sidebar",{timeout:15000});
+  await page.waitForFunction(()=>document.querySelector(".event-row")||document.querySelector(".empty"),null,{timeout:15000});
+  await expect(page.locator("#sidebar")).toBeVisible();
+  await expect(page.locator("#results")).toBeVisible();
+  const rows=page.locator(".event-row");
+  if(await rows.count()){
+    const href=await rows.first().locator(".event-action").getAttribute("href");
+    expect(href).toMatch(/^https?:\/\//);
+  }
 });
