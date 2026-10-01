@@ -4,6 +4,9 @@ import { test, expect } from "@playwright/test";
 const leafletSource=readFileSync("node_modules/leaflet/dist/leaflet.js","utf8");
 const mockLeaflet=async page=>{
   await page.addInitScript({content:leafletSource});
+  await page.route("https://tile.openstreetmap.org/**",route=>route.abort());
+  await page.route("https://*.tile.openstreetmap.fr/**",route=>route.abort());
+  await page.route("https://server.arcgisonline.com/**",route=>route.abort());
 };
 
 const waitForLocale=async page=>{
