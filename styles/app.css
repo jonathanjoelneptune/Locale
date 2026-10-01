@@ -138,7 +138,6 @@
 .event-row:has(.category-bg-community),.event-row:has(.category-bg-family),.highlight-card:has(.category-bg-community),.highlight-card:has(.category-bg-family){--cat:#4c9d89}
 .event-row:has(.category-bg-theater),.highlight-card:has(.category-bg-theater){--cat:#8568a7}
 .highlight-card{border-top:2px solid color-mix(in srgb,var(--cat,#8aa0a8) 55%,#fff)}
-.save-event{border:0;background:transparent;color:#258598;font-size:14px;line-height:1;padding:0 2px}
 .event-action{text-decoration:none}
 .map-style-picker{position:absolute;z-index:650;left:10px;bottom:12px;display:flex;align-items:center;background:#fffefae8;border:1px solid #b9c8ca;box-shadow:2px 3px 3px #334c5525}
 .map-style-picker label{font-size:8px;font-weight:900;letter-spacing:.7px;color:#6b8088;padding:0 6px}
@@ -191,7 +190,6 @@
 .discovery-toggle .drawer-arrow,.results-toggle .drawer-arrow{color:#0d8ba3!important}
 .discovery-toggle .drawer-label{font-size:8px;text-transform:uppercase;letter-spacing:.7px;writing-mode:vertical-rl}
 .results-toggle #resultsCount{color:#0d8ba3!important}
-.save-event{cursor:pointer;transition:transform .12s ease,color .12s ease}.save-event:hover{transform:scale(1.18)}.save-event.is-saved{color:#078aa3;font-weight:900}
 .event-price strong{color:#a66c16;font-size:10px}
 
 /* True overlay glass: map continues beneath both drawers */
@@ -204,8 +202,6 @@
  .results-panel .event-row:hover{background:rgba(238,249,246,.56)}
  .highlights{grid-column:1/4!important;z-index:900}
 }
-.save-event{width:24px;height:24px;display:grid;place-items:center;border:1px solid transparent!important;border-radius:50%;font-size:17px!important}
-.save-event.is-saved{background:rgba(13,139,163,.13)!important;border-color:rgba(13,139,163,.34)!important;color:#087f97!important;transform:scale(1.05)}
 
 /* Integrated drawer rails + always-visible map controls */
 @media(min-width:701px){
@@ -258,7 +254,6 @@
  }
 }
 @media(max-width:1180px) and (min-width:701px){.results-toggle{right:clamp(270px,25vw,330px)!important}}
-.save-event.is-saved{background:#d5f1ee!important;color:#007d91!important;border:1px solid #67bcc5!important;box-shadow:0 0 0 2px rgba(255,255,255,.65);font-size:18px!important}
 
 /* Final drawer seam + selected treatment */
 .results-panel .event-row.selected:after{content:none!important}
@@ -278,11 +273,6 @@
  .shell.results-collapsed .results-toggle{right:0!important}
 }
 @media(max-width:1180px) and (min-width:701px){.results-toggle{right:calc(clamp(270px,25vw,330px) - 2px)!important}}
-
-/* Deterministic save icon and seamless right drawer handle */
-.save-event .heart-on{display:none}.save-event .heart-off{display:block}
-.save-event.is-saved .heart-off{display:none!important}.save-event.is-saved .heart-on{display:block!important}
-.save-event{font-family:Arial,sans-serif!important}
 @media(min-width:701px){
  .results-toggle{
    border-left:0!important;
@@ -392,11 +382,6 @@
 .results-panel .event-distance{
   white-space:nowrap;
   color:#7c8b92;
-}
-.results-panel .save-event{
-  width:20px;
-  height:20px;
-  font-size:14px!important;
 }
 .results-panel .event-row.selected{
   margin:0 -5px;
@@ -762,30 +747,38 @@
   align-self:center;
 }
 .results-panel .event-foot{min-height:20px}
-.results-panel .save-event{position:relative;z-index:2}
-
-
-/* Saved-heart paint state lives in a real DOM glyph, not generated content. */
-.save-event .heart-off,
-.save-event .heart-on{display:none!important}
-.save-event::before{content:none!important;display:none!important}
-.save-event .heart-glyph{
-  display:block!important;
-  font-family:Arial,sans-serif;
-  font-size:15px;
-  line-height:1;
-  color:currentColor;
-  transform:translateY(-.25px);
-}
-.save-event[aria-pressed="true"]{
-  background:rgba(13,139,163,.13)!important;
-  border-color:rgba(13,139,163,.34)!important;
-  color:#087f97!important;
-}
 .sr-only{
   position:absolute!important;
   width:1px!important;height:1px!important;
   padding:0!important;margin:-1px!important;
   overflow:hidden!important;clip:rect(0,0,0,0)!important;
   white-space:nowrap!important;border:0!important;
+}
+
+
+/* Save control: single canonical implementation. */
+.save-event{
+  width:20px;
+  height:20px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:1px solid transparent;
+  border-radius:50%;
+  background:transparent;
+  color:#258598;
+  font-family:Arial,sans-serif;
+  line-height:1;
+  cursor:pointer;
+}
+.save-event .save-heart{
+  display:block;
+  font-size:15px;
+  line-height:1;
+}
+.save-event:hover{transform:scale(1.08)}
+.save-event[aria-pressed="true"]{
+  background:#d5f1ee;
+  border-color:#67bcc5;
+  color:#007d91;
 }
