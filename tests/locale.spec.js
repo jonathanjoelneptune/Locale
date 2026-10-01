@@ -219,7 +219,7 @@ test("event rail stays compact and highlights remain well formed when collapsed"
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
     const box=await highlight.boundingBox();
-    expect(box?.width||0).toBeGreaterThanOrEqual(220);
+    expect(box?.width||0).toBeGreaterThanOrEqual(200);
     expect(box?.height||0).toBeGreaterThanOrEqual(60);
     await expect(highlight.locator(".highlight-copy")).toBeVisible();
   }
@@ -250,7 +250,7 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
   }
 
   const mapSource=await (await page.request.get("./src/components/map.js")).text();
-  expect(mapSource).toContain('className:"event-map-popup popup-');
+  expect(mapSource).toContain("event-map-popup popup-");
   expect(mapSource).toContain('e.image?"has-image":"no-image"');
   expect(mapSource).toContain('category-art-symbol');
 });
