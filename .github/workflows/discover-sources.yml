@@ -1,0 +1,53 @@
+name: Discover Locale sources
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "43 * * * *"
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: locale-source-discovery
+  cancel-in-progress: true
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run discovery queue
+        id: discover
+        run: |
+          BEFORE="$(node -e "const fs=require('fs');try{const x=JSON.parse(fs.readFileSync('src/data/discovered-sources.json','utf8'));process.stdout.write(String(Array.isArray(x)?x.length:0))}catch{process.stdout.write('0')}")"
+          node scripts/discover.mjs
+          AFTER="$(node -e "const fs=require('fs');const x=JSON.parse(fs.readFileSync('src/data/discovered-sources.json','utf8'));process.stdout.write(String(Array.isArray(x)?x.length:0))")"
+          PROMOTED=$((AFTER-BEFORE))
+          if [ "$PROMOTED" -lt 0 ]; then PROMOTED=0; fi
+          echo "promoted=$PROMOTED" >> "$GITHUB_OUTPUT"
+          echo "Discovered sources: $BEFORE -> $AFTER ($PROMOTED promoted)"
+      - name: Validate discovery data
+        run: node scripts/validate-discovery.mjs
+      - name: Commit discovery progress
+        id: commit
+        run: |
+          FILES="src/data/discovery-queue.json src/data/discovered-sources.json src/data/discovery-state.json src/data/discovery-coverage.json"
+          if git diff --quiet -- $FILES; then
+            echo "No discovery changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "locale-discovery[bot]"
+          git config user.email "locale-discovery[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "Advance source discovery queue"
+          git pull --rebase origin main
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Refresh events from newly promoted sources
+        if: steps.discover.outputs.promoted != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh-events.yml --ref main
