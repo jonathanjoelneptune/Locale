@@ -176,17 +176,28 @@ if(!events.length){
 }
 
 let enrichedLocations=0;
+const locationGroups=new Map();
 for(let index=0;index<events.length;index++){
   const event=events[index];
   if(event.locationPrecision!=="source-center")continue;
-  const region=REGIONS[event.regionId];
-  const point=await geocodeVenue(event.address||event.venue,region);
+  const query=String(event.address||event.venue||"").trim();
+  if(!query)continue;
+  const key=`${event.regionId}|${query.toLowerCase().replace(/\s+/g," ")}`;
+  if(!locationGroups.has(key))locationGroups.set(key,{eventIndexes:[],query,regionId:event.regionId,hasAddress:!!event.address});
+  locationGroups.get(key).eventIndexes.push(index);
+}
+const orderedLocationGroups=[...locationGroups.values()].sort((a,b)=>Number(b.hasAddress)-Number(a.hasAddress)||b.eventIndexes.length-a.eventIndexes.length);
+for(const group of orderedLocationGroups){
+  const region=REGIONS[group.regionId];
+  const point=await geocodeVenue(group.query,region);
   if(!point)continue;
-  events[index]={...event,lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
-  enrichedLocations++;
+  for(const index of group.eventIndexes){
+    events[index]={...events[index],lat:point.lat,lng:point.lng,locationPrecision:"venue-geocoded"};
+    enrichedLocations++;
+  }
 }
 await saveVenueGeocodeCache();
-console.log(`Venue enrichment: ${enrichedLocations} source-center events resolved to named venues.`);
+console.log(`Venue enrichment: ${enrichedLocations} source-center events resolved across ${locationGroups.size} unique venue/location queries.`);
 
 const words=value=>new Set(String(value||"").toLowerCase().replace(/\b(202[0-9]|annual|the|presented by)\b/g,"").replace(/[^a-z0-9]+/g," ").trim().split(/\s+/).filter(Boolean));
 const similarity=(a,b)=>{
