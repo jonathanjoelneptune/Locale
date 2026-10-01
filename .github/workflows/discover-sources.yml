@@ -1,6 +1,14 @@
 name: Discover Locale sources
 on:
   workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/discover.mjs"
+      - "scripts/discovery-*.mjs"
+      - "scripts/source-catalog.mjs"
+      - "src/data/regions.js"
+      - ".github/workflows/discover-sources.yml"
   schedule:
     - cron: "43 * * * *"
 permissions:
