@@ -227,6 +227,10 @@ test("save and basemap controls keep the simple architecture",async({page})=>{
   expect(appSource).toContain("hoverEvent(row.dataset.eventId,true)");
   expect(appSource).toContain('id="resultsToggle"');
   expect(appSource).toContain('id="discoveryToggle"');
+  expect(appSource).toContain("discovery-left");
+  expect(appSource).toContain("event-right");
+  expect(appSource).toContain("results-right");
+  expect(appSource).toContain("event-filters");
   expect(appSource).toContain("results-collapsed");
   expect(appSource).toContain("discovery-collapsed");
   expect(appSource).not.toContain("unified-panel");
@@ -357,17 +361,21 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
 });
 
 
-test("dual rails keep events left and compact discovery controls right",async({page})=>{
+test("dual rails keep search left and event filters with events right",async({page})=>{
   await waitForLocale(page);
-  await expect(page.locator(".results-left")).toBeVisible();
-  await expect(page.locator(".discovery-right")).toBeVisible();
-  const resultsBox=await page.locator(".results-left").boundingBox();
-  const discoveryBox=await page.locator(".discovery-right").boundingBox();
+  await expect(page.locator(".discovery-left")).toBeVisible();
+  await expect(page.locator(".event-right")).toBeVisible();
+  await expect(page.locator(".results-right")).toBeVisible();
+
+  const discoveryBox=await page.locator(".discovery-left").boundingBox();
   const mapBox=await page.locator(".map-stage").boundingBox();
-  expect(resultsBox.x).toBeLessThan(mapBox.x);
-  expect(discoveryBox.x).toBeGreaterThan(mapBox.x);
-  await expect(page.locator(".category-pill")).toHaveCount(10);
-  const categoriesBox=await page.locator(".category-pills").boundingBox();
+  const eventsBox=await page.locator(".event-right").boundingBox();
+  expect(discoveryBox.x).toBeLessThan(mapBox.x);
+  expect(eventsBox.x).toBeGreaterThan(mapBox.x);
+
+  await expect(page.locator(".event-right .category-pill")).toHaveCount(10);
+  await expect(page.locator(".discovery-left .category-pill")).toHaveCount(0);
+  const categoriesBox=await page.locator(".event-right .category-pills").boundingBox();
   expect(categoriesBox.height).toBeLessThanOrEqual(60);
 
   const initial=await page.locator("#dateSummary span").textContent();
@@ -380,7 +388,7 @@ test("dual rails keep events left and compact discovery controls right",async({p
 
   await page.locator("#discoveryToggle").click();
   await expect(page.locator(".shell")).toHaveClass(/discovery-collapsed/);
-  await expect(page.locator(".results-left")).toBeVisible();
+  await expect(page.locator(".event-right")).toBeVisible();
   await page.locator("#discoveryToggle").click();
   await expect(page.locator(".shell")).not.toHaveClass(/discovery-collapsed/);
 
@@ -390,6 +398,13 @@ test("dual rails keep events left and compact discovery controls right",async({p
   const visibleCategories=await page.locator(".event-badge").allTextContents();
   expect(visibleCategories.every(value=>value.trim().toLowerCase()==="music")).toBe(true);
   await page.locator("#clearCategory").click();
+
+  const highlights=page.locator(".compact-highlights");
+  if(await highlights.count()){
+    const box=await highlights.boundingBox();
+    expect(box.height).toBeLessThanOrEqual(130);
+    await expect(highlights.locator(".highlight-title-row")).toBeVisible();
+  }
 });
 
 test("hovering an event row pulses its map marker",async({page})=>{
