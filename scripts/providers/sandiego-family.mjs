@@ -1,3 +1,4 @@
+import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
   .replace(/<style[\s\S]*?<\/style>/gi," ")
@@ -25,6 +26,7 @@ const coarsePoint=venue=>COARSE_PLACES.find(([re])=>re.test(venue))?.[1]||{lat:3
 
 function cleanVenue(value){
   let venue=strip(value||"");
+  if(/^\s*\$/.test(venue)||/class\s*=|aria-label\s*=|thumbnail|\.png\b|\.jpe?g\b|\.webp\b|https?:\/\/|www\.|<[^>]+>/i.test(venue))return "San Diego, CA";
   for(const marker of GARBAGE_MARKERS){
     const index=venue.toLowerCase().indexOf(marker.toLowerCase());
     if(index>0)venue=venue.slice(0,index).trim();
@@ -121,7 +123,7 @@ export async function sanDiegoFamilyEvents({days=45}={}){
       const description=descriptionStart>=0?text.slice(descriptionStart).replace(/^Categories:\s*[^.]*\.?/i,"").split(/Event repeats/i)[0].trim():"";
       out.push({
         id:"sandiego-family:"+url.split("/").filter(Boolean).pop(),
-        title,category:"family",venue,
+        title,category:classifyEvent(title,categories,description,venue),venue,
         lat:point.lat,lng:point.lng,locationPrecision:approximate?"city-only":"source-center",
         start,end:null,timeStatus:time?"known":"unknown",
         price:/\bFREE\b/.test(text)?"Free":null,priceStatus:/\bFREE\b/.test(text)?"free":"unknown",

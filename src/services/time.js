@@ -13,3 +13,18 @@ export function inWindow(event,windowName,now=new Date()){
  if(windowName==="30days")return start<add(today,30)&&end>=today;
  return true;
 }
+
+function localDateFromKey(key){
+  const [year,month,day]=String(key||"").split("-").map(Number);
+  return new Date(year,month-1,day);
+}
+
+export function inDateRange(event,startKey,endKey){
+  if(!startKey||!endKey)return true;
+  const startBoundary=localDateFromKey(startKey);
+  const endBoundary=localDateFromKey(endKey);
+  endBoundary.setDate(endBoundary.getDate()+1);
+  const eventStart=new Date(event.start);
+  const eventEnd=event.end?new Date(event.end):eventStart;
+  return eventStart<endBoundary&&eventEnd>=startBoundary;
+}
