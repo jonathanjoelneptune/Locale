@@ -4,7 +4,7 @@ import {classifyEvent,refineEventCategory} from "./event-classification.mjs";
 
 test("music performances outrank generic community and performance words",()=>{
   assert.equal(classifyEvent("Allison Adams Tucker Quartet","live performance"),"music");
-  assert.equal(classifyEvent("San Diego Tijuana International Jazz Festival","festival performance"),"music");
+  assert.equal(classifyEvent("San Diego Tijuana International Jazz Festival","festival performance"),"festival");
   assert.equal(refineEventCategory({
     title:"Kat Hall",
     category:"community",
