@@ -203,3 +203,21 @@ test("one prior place ID cannot be assigned to two split locations",()=>{
   assert.equal(new Set(registry.places.map(place=>place.id)).size,2);
   assert.equal(registry.places.filter(place=>place.id==="place_shared_previous").length,1);
 });
+
+
+test("generated place IDs cannot collide with a loosely inherited prior ID",()=>{
+  const first={
+    id:"collision:1",regionId:"san-diego",title:"Event One",category:"community",venue:"Collision Hall",
+    address:"100 First St, San Diego, CA",lat:32.7158,lng:-117.1612,locationPrecision:"venue-geocoded",
+    start:"2026-10-10T18:00:00.000Z",sourceId:"example",source:"Example",sources:[{id:"example",name:"Example"}],lastVerified:verified
+  };
+  const second={
+    ...first,id:"collision:2",title:"Event Two",address:"900 Second St, San Diego, CA",lat:32.7358,lng:-117.1812,
+    start:"2026-10-11T18:00:00.000Z"
+  };
+  const baseline=buildRegistry([second],[]);
+  const previous={places:[{...baseline.places[0],address:null,lat:null,lng:null}]};
+  const registry=buildRegistry([first,second],[],previous);
+  assert.equal(registry.places.length,2);
+  assert.equal(new Set(registry.places.map(place=>place.id)).size,2);
+});

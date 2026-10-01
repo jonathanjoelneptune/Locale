@@ -163,6 +163,7 @@ export function buildRegistry(events,sources=[],previousRegistry={}){
   }
 
   const places=[];
+  const usedPlaceIds=new Set;
   const placeIdByEventId=new Map();
   const placeIdByKey=new Map();
   for(const [key,group] of placeGroups){
@@ -170,7 +171,12 @@ export function buildRegistry(events,sources=[],previousRegistry={}){
     const name=clean(sample.venue||group[0].venue);
     const previous=previousPlaceFor(sample,group);
     if(previous)claimedPreviousPlaceIds.add(previous.id);
-    const id=previous?.id||stableId("place",name,key);
+    let id=previous?.id||stableId("place",name,key);
+    if(usedPlaceIds.has(id)){
+      let suffix=1;
+      do{id=stableId("place",name,`${key}|split|${suffix++}`)}while(usedPlaceIds.has(id));
+    }
+    usedPlaceIds.add(id);
     const sourceIds=[...new Set(group.flatMap(event=>provenance(event).map(source=>source.id)).filter(Boolean))].sort();
     const directSource=sourceIds.some(sourceId=>sourceById.get(sourceId)?.ownerEntityKind==="place");
     const starts=group.map(event=>event.start).filter(Boolean);
