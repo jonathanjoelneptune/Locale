@@ -763,3 +763,11 @@
 }
 .results-panel .event-foot{min-height:20px}
 .results-panel .save-event{position:relative;z-index:2}
+
+
+/* Single-glyph saved-state rendering avoids stale dual-heart paint states. */
+.save-event .heart-glyph{
+  display:block;
+  line-height:1;
+  transform:translateY(-.25px);
+}
