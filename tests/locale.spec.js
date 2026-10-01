@@ -202,3 +202,25 @@ test("manual map navigation scopes results to the visible viewport",async({page}
   await expect(page.locator(".results-head h1")).toContainText("Events Nearby");
   await expect.poll(async()=>page.locator(".event-row").count()).toBe(before);
 });
+
+
+test("event rail stays compact and highlights remain well formed when collapsed",async({page})=>{
+  await waitForLocale(page);
+  await page.locator('[data-window="7days"]').click();
+
+  const firstRow=page.locator(".event-row").first();
+  await expect(firstRow).toBeVisible();
+  const rowBox=await firstRow.boundingBox();
+  expect(rowBox?.height||999).toBeLessThanOrEqual(64);
+
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
+
+  const highlight=page.locator(".highlight-card").first();
+  if(await highlight.count()){
+    const box=await highlight.boundingBox();
+    expect(box?.width||0).toBeGreaterThanOrEqual(220);
+    expect(box?.height||0).toBeGreaterThanOrEqual(60);
+    await expect(highlight.locator(".highlight-copy")).toBeVisible();
+  }
+});
