@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {buildOverpassQuery,candidateFromOverpassElement} from "./discovery-overpass.mjs";
+import {buildOverpassQueries,candidateFromOverpassElement} from "./discovery-overpass.mjs";
 import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
 
 const region={
@@ -10,12 +10,16 @@ const region={
 };
 
 test("regional discovery query targets event-capable venue categories with websites",()=>{
-  const query=buildOverpassQuery(region);
-  assert.match(query,/around:80467,32\.7157,-117\.1611/);
-  assert.match(query,/\["website"\]\["amenity"="bar"\]/);
-  assert.match(query,/\["contact:website"\]\["craft"="brewery"\]/);
-  assert.doesNotMatch(query,/amenity"="university/);
-  assert.doesNotMatch(query,/amenity"="school/);
+  const batches=buildOverpassQueries(region);
+  assert.equal(batches.length,2);
+  const core=batches.find(batch=>batch.id==="core-venues").query;
+  const dining=batches.find(batch=>batch.id==="dining-venues").query;
+  assert.match(core,/around:80467,32\.7157,-117\.1611/);
+  assert.match(core,/amenity"~"\^\(nightclub\|bar\|pub/);
+  assert.match(core,/craft"="brewery"/);
+  assert.match(dining,/amenity"~"\^\(restaurant\|cafe\)\$"/);
+  assert.doesNotMatch(core,/university|school/);
+  assert.doesNotMatch(dining,/university|school/);
 });
 
 test("OpenStreetMap venue candidates become Tier C queue entries",()=>{
