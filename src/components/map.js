@@ -13,6 +13,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground){
   basePane.style.zIndex="150";
   const makeBase=name=>{
     const [url,opts]=styles[name]||styles.standard;
+    el.dataset.mapTileTemplate=url;
     return L.tileLayer(url,{...opts,pane:"locale-basemap"});
   };
   let activeStyle=styles[state.mapStyle]?state.mapStyle:"standard";
