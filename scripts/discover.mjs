@@ -8,7 +8,9 @@ const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
 const MAX_PROBES_PER_RUN=8;
+const DISCOVERY_SWEEP_VERSION=2;
 const SWEEP_INTERVAL_MS=24*60*60*1000;
+const PARTIAL_RETRY_MS=55*60*1000;
 const MAX_QUEUE=6000;
 
 const readJson=async(path,fallback)=>{
@@ -173,9 +175,17 @@ const stats={
 stats.seededFromRegistry=seedObservedPlaces(queue,places,entityLinks);
 
 const sweepRegion=Object.values(REGIONS)
-  .map(region=>({region,last:Date.parse(state.regions?.[region.id]?.lastSweepAt||0)||0}))
-  .filter(item=>Date.now()-item.last>=SWEEP_INTERVAL_MS)
-  .sort((a,b)=>a.last-b.last)[0];
+  .map(region=>{
+    const regionState=state.regions?.[region.id]||{};
+    const last=Date.parse(regionState.lastSweepAt||0)||0;
+    const attempt=Date.parse(regionState.lastSweepAttemptAt||0)||0;
+    const versionMismatch=regionState.lastSweepVersion!==DISCOVERY_SWEEP_VERSION;
+    const partialOrFailed=["partial","failed"].includes(regionState.lastSweepStatus);
+    const isDue=versionMismatch||(partialOrFailed?Date.now()-attempt>=PARTIAL_RETRY_MS:Date.now()-last>=SWEEP_INTERVAL_MS);
+    return {region,last,attempt,isDue};
+  })
+  .filter(item=>item.isDue)
+  .sort((a,b)=>(a.attempt||a.last)-(b.attempt||b.last))[0];
 
 if(sweepRegion){
   const {region}=sweepRegion;
@@ -186,11 +196,22 @@ if(sweepRegion){
       if(mergeCandidate(queue,candidate).added)stats.seededFromRegionalSweep++;
     }
     state.regions=state.regions||{};
-    state.regions[region.id]={...(state.regions[region.id]||{}),lastSweepAt:nowIso(),lastSweepStatus:"ok",lastSweepCandidateCount:candidates.length};
-    console.log(`${region.id}: regional discovery found ${candidates.length} website-backed venue candidates; ${stats.seededFromRegionalSweep} were new.`);
+    const warnings=Array.isArray(candidates.discoveryWarnings)?candidates.discoveryWarnings:[];
+    const stamp=nowIso();
+    state.regions[region.id]={
+      ...(state.regions[region.id]||{}),
+      lastSweepAttemptAt:stamp,
+      lastSweepVersion:DISCOVERY_SWEEP_VERSION,
+      lastSweepStatus:warnings.length?"partial":"ok",
+      lastSweepCandidateCount:candidates.length,
+      lastSweepWarnings:warnings
+    };
+    if(!warnings.length)state.regions[region.id].lastSweepAt=stamp;
+    delete state.regions[region.id].lastSweepError;
+    console.log(`${region.id}: regional discovery found ${candidates.length} website-backed venue candidates; ${stats.seededFromRegionalSweep} were new; status=${warnings.length?"partial":"ok"}.`);
   }catch(error){
     state.regions=state.regions||{};
-    state.regions[region.id]={...(state.regions[region.id]||{}),lastSweepAttemptAt:nowIso(),lastSweepStatus:"failed",lastSweepError:String(error?.message||error)};
+    state.regions[region.id]={...(state.regions[region.id]||{}),lastSweepAttemptAt:nowIso(),lastSweepVersion:DISCOVERY_SWEEP_VERSION,lastSweepStatus:"failed",lastSweepError:String(error?.message||error)};
     console.error(`${region.id}: regional discovery failed:`,error);
   }
 }
