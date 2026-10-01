@@ -91,10 +91,10 @@ test("critical Locale interactions",async({page})=>{
   await page.locator(".event-row").first().click();
   await expect(page.locator(".event-row.selected")).toHaveCount(1);
 
-  await page.locator("#railToggle").click();
-  await expect(page.locator(".shell")).toHaveClass(/rail-collapsed/);
-  await page.locator("#railToggle").click();
-  await expect(page.locator(".shell")).not.toHaveClass(/rail-collapsed/);
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).not.toHaveClass(/results-collapsed/);
 
   const dateBefore=await page.locator("#dateSummary span").textContent();
   await page.locator('[data-date-shift="1"]').click();
@@ -225,8 +225,12 @@ test("save and basemap controls keep the simple architecture",async({page})=>{
   expect(appSource).toContain("renderSidebarFromState");
   expect(appSource).toContain("DateControls(state)");
   expect(appSource).toContain("hoverEvent(row.dataset.eventId,true)");
-  expect(appSource).not.toContain("resultsToggle");
-  expect(appSource).not.toContain("discoveryToggle");
+  expect(appSource).toContain('id="resultsToggle"');
+  expect(appSource).toContain('id="discoveryToggle"');
+  expect(appSource).toContain("results-collapsed");
+  expect(appSource).toContain("discovery-collapsed");
+  expect(appSource).not.toContain("unified-panel");
+  expect(appSource).not.toContain("railToggle");
   expect(appSource).not.toContain("syncSaveButton");
   expect(appSource).not.toContain("toggleSaved(");
 
@@ -310,8 +314,8 @@ test("event rail stays compact and highlights remain well formed when collapsed"
   const rowBox=await firstRow.boundingBox();
   expect(rowBox?.height||999).toBeLessThanOrEqual(64);
 
-  await page.locator("#railToggle").click();
-  await expect(page.locator(".shell")).toHaveClass(/rail-collapsed/);
+  await page.locator("#resultsToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
 
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
@@ -338,7 +342,7 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
     await expect(fallback.locator("small")).toBeVisible();
   }
 
-  await page.locator("#railToggle").click();
+  await page.locator("#resultsToggle").click();
   const highlight=page.locator(".highlight-card").first();
   if(await highlight.count()){
     await expect(highlight).toHaveClass(/event-surface/);
@@ -353,10 +357,18 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
 });
 
 
-test("unified rail supports date ranges, day stepping, and category pills",async({page})=>{
+test("dual rails keep events left and compact discovery controls right",async({page})=>{
   await waitForLocale(page);
-  await expect(page.locator(".unified-panel")).toBeVisible();
+  await expect(page.locator(".results-left")).toBeVisible();
+  await expect(page.locator(".discovery-right")).toBeVisible();
+  const resultsBox=await page.locator(".results-left").boundingBox();
+  const discoveryBox=await page.locator(".discovery-right").boundingBox();
+  const mapBox=await page.locator(".map-stage").boundingBox();
+  expect(resultsBox.x).toBeLessThan(mapBox.x);
+  expect(discoveryBox.x).toBeGreaterThan(mapBox.x);
   await expect(page.locator(".category-pill")).toHaveCount(10);
+  const categoriesBox=await page.locator(".category-pills").boundingBox();
+  expect(categoriesBox.height).toBeLessThanOrEqual(60);
 
   const initial=await page.locator("#dateSummary span").textContent();
   await page.locator('[data-date-shift="1"]').click();
@@ -365,6 +377,12 @@ test("unified rail supports date ranges, day stepping, and category pills",async
 
   await selectNext7Days(page);
   await expect(page.locator("#dateModeRange")).toHaveClass(/active/);
+
+  await page.locator("#discoveryToggle").click();
+  await expect(page.locator(".shell")).toHaveClass(/discovery-collapsed/);
+  await expect(page.locator(".results-left")).toBeVisible();
+  await page.locator("#discoveryToggle").click();
+  await expect(page.locator(".shell")).not.toHaveClass(/discovery-collapsed/);
 
   const music=page.locator('[data-category="music"]');
   await music.click();

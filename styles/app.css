@@ -960,3 +960,287 @@
   .unified-shell.rail-collapsed .unified-panel{transform:none;opacity:1;pointer-events:auto}
   .category-pills{max-height:none}
 }
+
+
+/* Dual-rail layout: events left, discovery controls right ------------------ */
+.dual-shell{
+  --events-rail:clamp(330px,24vw,390px);
+  --discovery-rail:clamp(285px,21vw,335px);
+  position:relative;
+  grid-template-columns:var(--events-rail) minmax(360px,1fr) var(--discovery-rail)!important;
+  grid-template-rows:minmax(0,1fr) auto!important;
+  transition:grid-template-columns .22s ease;
+}
+.dual-shell .results-left{
+  grid-column:1!important;
+  grid-row:1!important;
+  display:flex!important;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+  border-left:0!important;
+  border-right:1px solid rgba(120,150,158,.34)!important;
+  background:rgba(249,251,248,.82)!important;
+  box-shadow:10px 0 28px rgba(32,58,67,.09)!important;
+  z-index:800;
+  transition:transform .22s ease,opacity .18s ease;
+}
+.dual-shell .results-left .results-tabs{margin:0 14px}
+.dual-shell .results-left .results-tabs button{padding:13px 8px 10px;font-size:10px}
+.dual-shell .results-left .results-head{padding:12px 12px 8px}
+.dual-shell .results-left .results-head h1{font-size:14px}
+.dual-shell .results-left .results-head h1 em{font-size:20px}
+.dual-shell .results-left .results-head p{font-size:9px}
+.dual-shell .results-left .sort-button{padding:6px 8px;font-size:8px}
+.dual-shell .results-left .cards{min-height:0;overflow:auto;padding:2px 8px 10px}
+
+.dual-shell .map-stage{
+  grid-column:2!important;
+  grid-row:1!important;
+}
+.dual-shell .discovery-right{
+  grid-column:3!important;
+  grid-row:1!important;
+  min-width:0;
+  min-height:0;
+  padding:0!important;
+  overflow:visible!important;
+  border-right:0!important;
+  border-left:1px solid rgba(120,150,158,.34)!important;
+  background:rgba(249,251,248,.82)!important;
+  box-shadow:-10px 0 28px rgba(32,58,67,.09)!important;
+  z-index:800;
+  transition:transform .22s ease,opacity .18s ease;
+}
+.discovery-controls{
+  height:100%;
+  padding:12px 13px 10px;
+  overflow:visible;
+}
+.discovery-controls .locale-identity{
+  margin-bottom:9px!important;
+  gap:8px!important;
+}
+.discovery-controls .locale-mark{
+  width:35px!important;
+  height:35px!important;
+  font-size:21px!important;
+}
+.discovery-controls .brand{font-size:22px!important}
+.discovery-controls .tagline{font-size:8.5px!important}
+.discovery-controls .location-block label{font-size:8px!important}
+.discovery-controls .search-wrap{
+  height:31px!important;
+  margin-top:5px!important;
+  padding-inline:9px!important;
+}
+.discovery-controls .search{font-size:11px}
+.discovery-controls .radius-panel{
+  padding:8px 0 6px!important;
+  border-bottom:1px solid rgba(120,150,158,.18)!important;
+}
+.discovery-controls .radius-title,
+.discovery-controls .radius-title strong{font-size:10px!important}
+.discovery-controls .radius-panel input{margin:5px 0 1px!important}
+.discovery-controls .radius-ticks{font-size:7px!important}
+.discovery-controls .filters-panel{padding-top:4px!important}
+
+.dual-shell .highlights{
+  grid-column:1/4!important;
+  grid-row:2!important;
+}
+
+/* Compact right-side date controls. Calendar floats instead of stretching rail. */
+.discovery-right .date-filter{
+  position:relative;
+  padding:6px 0 5px!important;
+  border-top:0!important;
+  border-bottom:1px solid rgba(120,150,158,.18);
+}
+.discovery-right .date-filter-label,
+.discovery-right .filter-heading{
+  margin:0 1px 4px!important;
+  font-size:7.5px!important;
+}
+.discovery-right .date-filter-label button,
+.discovery-right .filter-heading button{font-size:8px!important}
+.discovery-right .date-navigator{
+  grid-template-columns:27px minmax(0,1fr) 27px!important;
+  gap:4px!important;
+}
+.discovery-right .date-step{height:28px!important;font-size:16px!important}
+.discovery-right .date-summary{
+  height:28px!important;
+  padding:0 8px!important;
+  font-size:9px!important;
+}
+.discovery-right .date-mode{gap:4px!important;margin-top:4px!important}
+.discovery-right .date-mode button{
+  padding:3px 6px!important;
+  font-size:7.5px!important;
+}
+.discovery-right .calendar-popover{
+  position:absolute!important;
+  z-index:1200;
+  top:58px;
+  left:0;
+  right:0;
+  margin-top:4px!important;
+  padding:8px!important;
+  box-shadow:0 14px 34px rgba(28,54,63,.20)!important;
+}
+.discovery-right .calendar-day{font-size:8px!important}
+
+/* Event types stay to two compact rows. */
+.discovery-right .category-filter{padding-top:4px!important}
+.discovery-right .category-pills{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:4px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:0!important;
+}
+.discovery-right .category-pill{
+  min-width:0;
+  height:24px;
+  justify-content:center;
+  gap:2px!important;
+  padding:2px 3px!important;
+  border-radius:7px!important;
+  font-size:6.8px!important;
+  overflow:hidden;
+}
+.discovery-right .category-pill > span:last-child{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.discovery-right .category-pill .category-icon{
+  flex:0 0 12px;
+  width:12px!important;
+  height:12px!important;
+  font-size:5.5px!important;
+}
+
+/* Independent left/right drawers. */
+.edge-toggle{
+  position:absolute;
+  z-index:960;
+  top:47%;
+  transform:translateY(-50%);
+  width:28px;
+  min-height:88px;
+  display:grid;
+  justify-items:center;
+  align-content:center;
+  gap:4px;
+  padding:7px 3px;
+  border:1px solid rgba(120,150,158,.40);
+  background:rgba(249,251,248,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 4px 14px rgba(28,55,65,.14);
+  color:#0d839b;
+  transition:left .22s ease,right .22s ease,background .15s ease;
+}
+.edge-toggle:hover{background:#fff}
+.edge-toggle .drawer-arrow{font-size:21px;line-height:18px}
+.edge-toggle .drawer-label{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.results-toggle-left{
+  left:calc(var(--events-rail) - 1px);
+  border-left:0;
+  border-radius:0 8px 8px 0;
+}
+.results-toggle-left #resultsRailCount{font-size:7px;font-weight:900;color:#0b8098}
+.discovery-toggle-right{
+  right:calc(var(--discovery-rail) - 1px);
+  border-right:0;
+  border-radius:8px 0 0 8px;
+}
+.dual-shell.results-collapsed{
+  grid-template-columns:0 minmax(360px,1fr) var(--discovery-rail)!important;
+}
+.dual-shell.results-collapsed .results-left{
+  transform:translateX(-100%);
+  opacity:0;
+  pointer-events:none;
+}
+.dual-shell.results-collapsed .results-toggle-left{left:0}
+.dual-shell.discovery-collapsed{
+  grid-template-columns:var(--events-rail) minmax(360px,1fr) 0!important;
+}
+.dual-shell.discovery-collapsed .discovery-right{
+  transform:translateX(100%);
+  opacity:0;
+  pointer-events:none;
+}
+.dual-shell.discovery-collapsed .discovery-toggle-right{right:0}
+.dual-shell.results-collapsed.discovery-collapsed{
+  grid-template-columns:0 minmax(360px,1fr) 0!important;
+}
+
+/* Map controls stay centered in the map cell. */
+.dual-shell .map-style-picker{left:14px!important}
+
+@media(max-width:1180px) and (min-width:851px){
+  .dual-shell{
+    --events-rail:300px;
+    --discovery-rail:275px;
+    grid-template-columns:var(--events-rail) minmax(330px,1fr) var(--discovery-rail)!important;
+  }
+  .discovery-controls .tagline{display:none}
+  .discovery-right .category-pill{font-size:6.3px!important}
+}
+@media(max-height:760px) and (min-width:851px){
+  .discovery-controls{padding-top:8px}
+  .discovery-controls .locale-identity{margin-bottom:6px!important}
+  .discovery-controls .radius-panel{padding-block:5px!important}
+  .discovery-right .date-filter{padding-block:4px!important}
+  .discovery-right .category-pill{height:22px}
+}
+@media(max-width:850px){
+  body{overflow:auto}
+  .dual-shell{
+    height:auto;
+    min-height:100%;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(390px,56vh) 52vh auto!important;
+  }
+  .dual-shell .results-left{
+    grid-column:1!important;
+    grid-row:1!important;
+    min-height:390px;
+    border-right:0!important;
+    border-bottom:1px solid var(--line)!important;
+  }
+  .dual-shell .map-stage{grid-column:1!important;grid-row:2!important}
+  .dual-shell .discovery-right{
+    grid-column:1!important;
+    grid-row:3!important;
+    border-left:0!important;
+    border-top:1px solid var(--line)!important;
+  }
+  .dual-shell .highlights{display:none!important}
+  .edge-toggle{display:none!important}
+  .dual-shell.results-collapsed,
+  .dual-shell.discovery-collapsed,
+  .dual-shell.results-collapsed.discovery-collapsed{
+    grid-template-columns:1fr!important;
+  }
+  .dual-shell.results-collapsed .results-left,
+  .dual-shell.discovery-collapsed .discovery-right{
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .discovery-controls{overflow:visible}
+}

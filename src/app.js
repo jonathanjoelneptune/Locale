@@ -39,9 +39,18 @@ const state={
 const root=document.querySelector("#app");
 root.innerHTML=`<div id="eventDetailRoot"></div>
 <div id="splash" class="locale-splash"><div class="splash-mark">⌖</div><strong>Locale</strong><span>Finding what’s happening around you…</span></div>
-<div class="shell unified-shell">
-  <aside class="unified-panel">
-    <div class="unified-controls">
+<div class="shell dual-shell">
+  <aside id="sidebar" class="sidebar results-panel results-left"></aside>
+  <button id="resultsToggle" class="edge-toggle results-toggle-left" type="button" aria-label="Toggle event panel"><span class="drawer-arrow">‹</span><span class="drawer-label">Events</span><span id="resultsRailCount">0</span></button>
+  <main class="map-stage">
+    <div id="map" class="map"></div>
+    <button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button>
+    <div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div>
+    <div class="map-style-picker"><label>MAP</label><select id="mapStyle"><option value="standard">Standard</option><option value="humanitarian">Humanitarian</option><option value="satellite">Satellite</option></select></div>
+  </main>
+  <button id="discoveryToggle" class="edge-toggle discovery-toggle-right" type="button" aria-label="Toggle search controls"><span class="drawer-arrow">›</span><span class="drawer-label">Search</span></button>
+  <aside class="discovery-panel discovery-right">
+    <div class="discovery-controls">
       ${Header()}
       <section class="radius-panel">
         <div class="radius-title"><span id="placeLabel">${state.placeLabel}</span><strong id="radiusLabel">${state.radius} miles</strong></div>
@@ -51,15 +60,7 @@ root.innerHTML=`<div id="eventDetailRoot"></div>
       <div id="dateControls"></div>
       <div id="filters" class="filters-panel"></div>
     </div>
-    <aside id="sidebar" class="sidebar results-panel"></aside>
   </aside>
-  <button id="railToggle" class="rail-toggle" type="button" aria-label="Toggle event panel"><span class="drawer-arrow">‹</span><span class="drawer-label">Events</span><span id="railCount">0</span></button>
-  <main class="map-stage">
-    <div id="map" class="map"></div>
-    <button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button>
-    <div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div>
-    <div class="map-style-picker"><label>MAP</label><select id="mapStyle"><option value="standard">Standard</option><option value="humanitarian">Humanitarian</option><option value="satellite">Satellite</option></select></div>
-  </main>
   <section class="highlights">
     <div class="highlight-heading"><div><strong>Highlights</strong><span>Top events in your selected dates and search area</span></div><button id="viewAllHighlights" type="button">View All →</button></div>
     <div id="highlightCards" class="highlight-cards"></div>
@@ -149,7 +150,7 @@ function currentEventView(){
 
 function renderSidebarFromState(){
   const {visible}=currentEventView();
-  const count=document.querySelector("#railCount");
+  const count=document.querySelector("#resultsRailCount");
   if(count)count.textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
 }
@@ -159,7 +160,7 @@ function render(){
   document.querySelector("#filters").innerHTML=Filters(state);
   document.querySelector("#placeLabel").textContent=state.placeLabel;
   const {nearby,visible}=currentEventView();
-  const count=document.querySelector("#railCount");
+  const count=document.querySelector("#resultsRailCount");
   if(count)count.textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
   mapUI?.setRadius(state.radius,state.center);
@@ -271,13 +272,13 @@ function handleMapMarker(hit){
   if(hit.type==="group"){
     state.venueFilter={ids:hit.events.map(event=>event.id),venue:hit.venue};
     state.listMode="events";
-    shell.classList.remove("rail-collapsed");
-    document.querySelector("#railToggle .drawer-arrow").textContent="‹";
+    shell.classList.remove("results-collapsed");
+    document.querySelector("#resultsToggle .drawer-arrow").textContent="‹";
     render();
     setTimeout(()=>mapUI?.map.invalidateSize(),240);
     return;
   }
-  if(shell.classList.contains("rail-collapsed"))mapUI?.showEventPopup(hit.event);
+  if(shell.classList.contains("results-collapsed"))mapUI?.showEventPopup(hit.event);
   else selectEvent(hit.event.id);
 }
 
@@ -300,11 +301,17 @@ function selectEvent(id){
   mapUI?.selectEvent(id);
 }
 
-document.querySelector("#railToggle").onclick=()=>{
+document.querySelector("#resultsToggle").onclick=()=>{
   state.venueFilter=null;
   const shell=document.querySelector(".shell");
-  shell.classList.toggle("rail-collapsed");
-  document.querySelector("#railToggle .drawer-arrow").textContent=shell.classList.contains("rail-collapsed")?"›":"‹";
+  shell.classList.toggle("results-collapsed");
+  document.querySelector("#resultsToggle .drawer-arrow").textContent=shell.classList.contains("results-collapsed")?"›":"‹";
+  setTimeout(()=>mapUI?.map.invalidateSize(),240);
+};
+document.querySelector("#discoveryToggle").onclick=()=>{
+  const shell=document.querySelector(".shell");
+  shell.classList.toggle("discovery-collapsed");
+  document.querySelector("#discoveryToggle .drawer-arrow").textContent=shell.classList.contains("discovery-collapsed")?"‹":"›";
   setTimeout(()=>mapUI?.map.invalidateSize(),240);
 };
 
@@ -384,8 +391,8 @@ document.querySelector("#viewAllHighlights").onclick=()=>{
   state.resultScope="nearby";
   state.viewport=null;
   state.venueFilter=null;
-  document.querySelector(".shell").classList.remove("rail-collapsed");
-  document.querySelector("#railToggle .drawer-arrow").textContent="‹";
+  document.querySelector(".shell").classList.remove("results-collapsed");
+  document.querySelector("#resultsToggle .drawer-arrow").textContent="‹";
   render();
 };
 
