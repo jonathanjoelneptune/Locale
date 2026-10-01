@@ -1,5 +1,12 @@
 import {CATEGORIES} from "../data/categories.js";
 const ICONS={all:"◉",sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"☻",family:"●",community:"✺",nightlife:"☾",other:"＋"};
+
 export function Filters(state){
- const times=[["now","Now"],["today","Today"],["tonight","Tonight"],["tomorrow","Tomorrow"],["weekend","This Weekend"],["7days","7 Days"],["30days","30 Days"]];
- return `<div class="time-grid">${times.map(([v,l])=>`<button class="time-choice ${state.window===v?"active":""}" data-window="${v}">${l}</button>`).join("")}</div><div class="filter-heading"><span>EVENT TYPES</span><button id="clearCategory" type="button">Clear</button></div><div class="category-list">${CATEGORIES.map(([v,l])=>`<button class="category-choice ${state.category===v?"active":""}" data-category="${v}"><span class="category-icon category-${v}">${ICONS[v]||"•"}</span><span>${l==="All"?"All Events":l}</span><b>${state.category===v?"✓":""}</b></button>`).join("")}</div>`}
+  const selected=state.categories instanceof Set?state.categories:new Set;
+  return `<section class="category-filter">
+    <div class="filter-heading"><span>EVENT TYPES</span><button id="clearCategory" type="button">All</button></div>
+    <div class="category-pills">
+      ${CATEGORIES.filter(([value])=>value!=="all").map(([value,label])=>`<button type="button" class="category-pill ${selected.has(value)?"active":""}" data-category="${value}" aria-pressed="${selected.has(value)}"><span class="category-icon category-${value}">${ICONS[value]||"•"}</span><span>${label}</span></button>`).join("")}
+    </div>
+  </section>`;
+}
