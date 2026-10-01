@@ -11,6 +11,7 @@ export const REGIONS={
     ingestRadiusMiles:50,
     discoveryRadiusMiles:35,
     discoveryDiningRadiusMiles:20,
+    discoveryPriority:100,
     timeZone:"America/Los_Angeles",
     locale:"en-US",
     currency:"USD"
@@ -25,6 +26,7 @@ export const REGIONS={
     ingestRadiusMiles:50,
     discoveryRadiusMiles:30,
     discoveryDiningRadiusMiles:18,
+    discoveryPriority:80,
     timeZone:"America/Chicago",
     locale:"en-US",
     currency:"USD"
