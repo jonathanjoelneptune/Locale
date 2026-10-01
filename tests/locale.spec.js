@@ -1,9 +1,9 @@
+import {readFileSync} from "node:fs";
 import { test, expect } from "@playwright/test";
 
+const leafletSource=readFileSync("node_modules/leaflet/dist/leaflet.js","utf8");
 const mockLeaflet=async page=>{
-  const fulfill=route=>route.fulfill({path:"node_modules/leaflet/dist/leaflet.js",contentType:"application/javascript"});
-  await page.route("https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js",fulfill);
-  await page.route("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",fulfill);
+  await page.addInitScript({content:leafletSource});
 };
 
 const waitForLocale=async page=>{
