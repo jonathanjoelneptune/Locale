@@ -4,7 +4,7 @@ import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from 
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,coldStorageDays,shouldColdStore} from "./discovery-priority.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
-import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
+import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 
 const region={
@@ -101,6 +101,7 @@ test("generic calendar-link adapter follows same-site and trusted ticketing even
     <a href="/events/friday-show">Friday Show</a>
     <a href="https://www.eventbrite.com/e/example-event-123">Tickets</a>
     <a href="https://dice.fm/event/abc">Live music tickets</a>
+    <a href="https://www.tickettailor.com/events/example/123">Tickets</a>
     <a href="https://random.example/events/other">Other site</a>
     <a href="/about">About</a>
   `;
@@ -108,6 +109,7 @@ test("generic calendar-link adapter follows same-site and trusted ticketing even
   assert.ok(links.includes("https://venue.example/events/friday-show"));
   assert.ok(links.includes("https://www.eventbrite.com/e/example-event-123"));
   assert.ok(links.includes("https://dice.fm/event/abc"));
+  assert.ok(links.includes("https://www.tickettailor.com/events/example/123"));
   assert.ok(!links.includes("https://random.example/events/other"));
 });
 
@@ -251,4 +253,36 @@ test("cold candidates are sampled without taking over the hot queue",()=>{
   for(let i=0;i<10;i++)rows.push({key:"cold-"+i,category:"restaurant",name:"Cold "+i,website:"https://cold"+i+".example/",priority:200,status:"cold"});
   const result=selectProbeCandidates(rows,30,{hostFn:item=>new URL(item.website).hostname});
   assert.equal(result.selected.filter(item=>item.status==="cold").length,1);
+});
+
+
+test("discovery retries compatible website variants and root URLs",()=>{
+  assert.deepEqual(discoveryWebsiteAlternates("https://venue.example/deep/events?x=1"),[
+    "https://venue.example/deep/events?x=1",
+    "https://venue.example/",
+    "https://www.venue.example/deep/events?x=1",
+    "https://www.venue.example/"
+  ]);
+});
+
+test("high-confidence venue lanes can qualify from one future structured event",()=>{
+  assert.equal(discoveryMinimumEvents({category:"theatre",name:"Example Theatre"}),1);
+  assert.equal(discoveryMinimumEvents({category:"restaurant",name:"Example Brew Pub"}),1);
+  assert.equal(discoveryMinimumEvents({category:"observed-venue",name:"Unknown Venue"}),2);
+});
+
+test("high-confidence venues get bounded common event-page fallbacks",()=>{
+  assert.deepEqual(
+    discoveryCommonEventPages("https://venue.example/about",{category:"music-venue",name:"Venue"}),
+    [
+      "https://venue.example/events/",
+      "https://venue.example/calendar/",
+      "https://venue.example/live-music/",
+      "https://venue.example/shows/"
+    ]
+  );
+  assert.deepEqual(
+    discoveryCommonEventPages("https://food.example/",{category:"restaurant",name:"Plain Restaurant"}),
+    []
+  );
 });
