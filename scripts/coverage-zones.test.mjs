@@ -6,7 +6,7 @@ import {COVERAGE_CLASS_TARGETS,containingCoverageZones,areaGapScore} from "./cov
 const zones=JSON.parse(await readFile("src/data/coverage-zones.json","utf8"));
 
 test("San Diego coverage grid preserves broad and granular geography",()=>{
-  assert.ok(zones.length>=150);
+  assert.ok(zones.length>=185);
   const ids=new Set(zones.map(zone=>zone.id));
   for(const id of [
     "north-park","hillcrest","pacific-beach","kearny-mesa","convoy","mira-mesa",
@@ -14,7 +14,9 @@ test("San Diego coverage grid preserves broad and granular geography",()=>{
     "university-heights","barrio-logan","coronado","balboa-park","santee",
     "blossom-valley","lakeside","mission-valley","fashion-valley","normal-heights",
     "el-cajon","la-mesa","otay-mesa","otay-ranch","chula-vista","national-city",
-    "carlsbad","oceanside","encinitas","escondido","san-marcos","vista"
+    "carlsbad","oceanside","encinitas","escondido","san-marcos","vista",
+    "campo","rainbow","warner-springs","mount-laguna","pala","camp-pendleton-mainside",
+    "lake-san-marcos","hidden-meadows","dulzura","palomar-mountain","viejas-reservation"
   ])assert.ok(ids.has(id),`missing required coverage area ${id}`);
 });
 
