@@ -208,6 +208,7 @@ function renderLatestRun(id){
       ${kv("Focused areas",n(regionFocus.length),regionFocus.map(item=>item.name).slice(0,3).join(", ")||"none this run")}
       ${kv("Moved to cold",n(run.coldMigrated||0),"low-value failures deferred 45–180 days")}
       ${kv("Probe lanes",Object.entries(run.probeLaneCounts||{}).filter(([,v])=>v).map(([k,v])=>`${k} ${v}`).join(" · ")||"—","actual selected lane mix")}
+      ${kv("Global queue",run.queueAfter?`${n(run.queueAfter.due)} due / ${n(run.queueAfter.total)} total`:"—","all configured regions; regional queue is shown separately below")}
     </div>`;
 }
 

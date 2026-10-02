@@ -1,7 +1,7 @@
 import {jsonLdEvents} from "./jsonld.mjs";
 import {embeddedJsonEvents} from "./embedded-json.mjs";
 
-const USER_AGENT="Locale-events/1.0";
+const USER_AGENT="Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)";
 const EVENT_PATH=/\b(event|events|calendar|whats-on|whatson|happenings|live-music|music|shows?|schedule|entertainment|trivia|karaoke|bingo|open-mic|openmic|specials?|lineup|tickets?|event-details?|experience)\b/i;
 const TRUSTED_EXTERNAL=[
   "eventbrite.com","www.eventbrite.com",
@@ -10,7 +10,16 @@ const TRUSTED_EXTERNAL=[
   "seetickets.us","www.seetickets.us",
   "bandsintown.com","www.bandsintown.com",
   "ticketleap.events","www.ticketleap.events",
-  "tockhq.com","www.exploretock.com","exploretock.com"
+  "tockhq.com","www.exploretock.com","exploretock.com",
+  "tickettailor.com","www.tickettailor.com",
+  "tixr.com","www.tixr.com",
+  "axs.com","www.axs.com",
+  "simpletix.com","www.simpletix.com",
+  "humanitix.com","events.humanitix.com",
+  "universe.com","www.universe.com",
+  "posh.vip","www.posh.vip",
+  "shotgun.live","www.shotgun.live",
+  "feverup.com","m.feverup.com"
 ];
 
 const futureEvents=events=>{
@@ -23,7 +32,7 @@ const futureEvents=events=>{
 
 async function fetchHtml(url){
   const response=await fetch(url,{
-    headers:{"User-Agent":USER_AGENT,Accept:"text/html,application/xhtml+xml"},
+    headers:{"User-Agent":USER_AGENT,Accept:"text/html,application/xhtml+xml","Accept-Language":"en-US,en;q=0.9"},
     redirect:"follow",
     signal:AbortSignal.timeout(10000)
   });

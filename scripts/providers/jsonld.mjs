@@ -29,7 +29,7 @@ function price(event){
 }
 
 export async function jsonLdEvents({endpoint,sourceName,sourceId,fallbackCenter}){
-  const response=await fetch(endpoint,{headers:{"User-Agent":"Locale-events/1.0",Accept:"text/html"},signal:AbortSignal.timeout(10000)});
+  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",Accept:"text/html,application/xhtml+xml","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(10000)});
   if(!response.ok)throw new Error(`${sourceName} page ${response.status}`);
   const html=await response.text();
   const scripts=[...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
