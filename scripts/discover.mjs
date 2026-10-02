@@ -4,17 +4,14 @@ import {discoverCellPlaces} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
+import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
-const MAX_PROBES_PER_RUN=12;
 const DISCOVERY_SWEEP_VERSION=4;
-const CELLS_PER_RUN=2;
-const AREA_SWEEPS_PER_RUN=2;
 const AREA_SWEEP_VERSION=1;
-const CELL_RETRY_MS=2*60*60*1000;
 const MAX_QUEUE=6000;
 
 const readJson=async(path,fallback)=>{
@@ -173,6 +170,13 @@ function buildCoverage(queue,sources,runStats){
         completed:Object.values(regionState.coverageAreaSweeps||{}).filter(item=>!!item.lastCompletedAt).length,
         failed:Object.values(regionState.coverageAreaSweeps||{}).filter(item=>!!item.error&&!item.lastCompletedAt).length,
         sweptThisRun:(runStats.focusAreas||[]).filter(item=>item.regionId===region.id).length
+      },
+      adaptiveDiscovery:{
+        ...discoveryPlan.profiles?.[region.id],
+        activeMode:discoveryPlan.mode,
+        probeLimit:discoveryBudget.probeLimit,
+        probeConcurrency:discoveryBudget.probeConcurrency,
+        overpassMinIntervalMinutes:discoveryBudget.overpassMinIntervalMinutes
       }
     };
   }
@@ -189,6 +193,17 @@ const coverageDashboard=await readJson("src/data/coverage-dashboard.json",{regio
 
 if(!Array.isArray(queue)||!Array.isArray(discoveredSources))throw new Error("Discovery data files must contain arrays");
 
+const discoveryPlan=adaptiveDiscoveryPlan(
+  coverageDashboard,
+  coverageAreas,
+  Object.keys(REGIONS)
+);
+const discoveryBudget=discoveryPlan.budget;
+const runOverpass=isOverpassDue(
+  state.lastOverpassRunAt,
+  discoveryBudget.overpassMinIntervalMinutes
+);
+
 const stats={
   startedAt:nowIso(),
   seededFromRegistry:0,
@@ -196,6 +211,10 @@ const stats={
   seededFromAreaSweep:0,
   sweptRegionId:null,
   focusAreas:[],
+  discoveryMode:discoveryPlan.mode,
+  discoveryBudget,
+  regionProfiles:discoveryPlan.profiles,
+  overpassRun:runOverpass,
   probed:0,
   promoted:0,
   failed:0
@@ -282,7 +301,8 @@ function nextCoverageAreaSweep(){
     .sort((a,b)=>b.score-a.score||a.completedAt-b.completedAt||a.zone.name.localeCompare(b.zone.name))[0]||null;
 }
 
-for(let index=0;index<AREA_SWEEPS_PER_RUN;index++){
+if(runOverpass){
+for(let index=0;index<discoveryBudget.areaSweeps;index++){
   const work=nextCoverageAreaSweep();
   if(!work)break;
   const {zone,region,regionState,sweep,row}=work;
@@ -318,7 +338,7 @@ for(let index=0;index<AREA_SWEEPS_PER_RUN;index++){
       ...sweep,
       attempts,
       lastAttemptAt:attemptAt,
-      nextAttemptAt:new Date(Date.now()+Math.min(CELL_RETRY_MS*attempts,12*60*60*1000)).toISOString(),
+      nextAttemptAt:new Date(Date.now()+Math.min(discoveryBudget.failedSweepRetryMinutes*60000*attempts,12*60*60*1000)).toISOString(),
       error:String(error?.message||error)
     };
     stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
@@ -343,7 +363,7 @@ if(regionWork){
   const {region,regionState}=regionWork;
   stats.sweptRegionId=region.id;
   stats.discoveryCells=[];
-  for(let index=0;index<CELLS_PER_RUN;index++){
+  for(let index=0;index<discoveryBudget.regionalCells;index++){
     const cell=nextDueCell(region,regionState);
     if(!cell)break;
     const attemptAt=nowIso();
@@ -364,7 +384,7 @@ if(regionWork){
       regionState.failedCells[cell.id]={
         attempts,
         lastAttemptAt:attemptAt,
-        nextAttemptAt:new Date(Date.now()+Math.min(CELL_RETRY_MS*attempts,12*60*60*1000)).toISOString(),
+        nextAttemptAt:new Date(Date.now()+Math.min(discoveryBudget.failedSweepRetryMinutes*60000*attempts,12*60*60*1000)).toISOString(),
         error:String(error?.message||error)
       };
       stats.discoveryCells.push({id:cell.id,phase:cell.phase,status:"failed",error:String(error?.message||error)});
@@ -376,6 +396,8 @@ if(regionWork){
   regionState.completedCellCount=(regionState.completedCells||[]).length;
   regionState.remainingCellCount=Math.max(0,summary.total-regionState.completedCellCount);
   if(regionState.remainingCellCount===0&&!regionState.cellSweepCompletedAt)regionState.cellSweepCompletedAt=nowIso();
+}
+state.lastOverpassRunAt=nowIso();
 }
 
 const producerSignal=item=>/\b(bar|pub|brew|music|theat|club|comedy|museum|gallery|arts|community|stadium|karaoke|trivia|live|concert|taproom|tavern|lounge)\b/i.test(
@@ -396,12 +418,26 @@ const coverageGapBoost=item=>{
 
 const probeScore=item=>Number(item.priority||0)+producerSignal(item)+coverageGapBoost(item)-Math.min(20,Number(item.attempts||0)*3);
 
-const candidates=queue
-  .filter(item=>item.website&&item.status!=="qualified"&&due(item))
-  .sort((a,b)=>probeScore(b)-probeScore(a)||String(a.discoveredAt).localeCompare(String(b.discoveredAt)))
-  .slice(0,MAX_PROBES_PER_RUN);
+const probeHost=item=>{
+  try{return new URL(item.website).hostname.toLowerCase().replace(/^www\./,"")}
+  catch{return null}
+};
 
-for(const item of candidates){
+const rankedCandidates=queue
+  .filter(item=>item.website&&item.status!=="qualified"&&due(item))
+  .sort((a,b)=>probeScore(b)-probeScore(a)||String(a.discoveredAt).localeCompare(String(b.discoveredAt)));
+
+const candidates=[];
+const selectedHosts=new Set;
+for(const item of rankedCandidates){
+  const host=probeHost(item);
+  if(host&&selectedHosts.has(host))continue;
+  if(host)selectedHosts.add(host);
+  candidates.push(item);
+  if(candidates.length>=discoveryBudget.probeLimit)break;
+}
+
+async function probeCandidate(item){
   stats.probed++;
   item.lastCheckedAt=nowIso();
   item.attempts=Number(item.attempts||0)+1;
@@ -438,6 +474,19 @@ for(const item of candidates){
   item.updatedAt=nowIso();
 }
 
+let probeCursor=0;
+async function probeWorker(){
+  while(true){
+    const index=probeCursor++;
+    if(index>=candidates.length)return;
+    await probeCandidate(candidates[index]);
+  }
+}
+const workerCount=Math.min(discoveryBudget.probeConcurrency,candidates.length);
+if(workerCount>0){
+  await Promise.all(Array.from({length:workerCount},()=>probeWorker()));
+}
+
 queue.sort((a,b)=>a.regionId.localeCompare(b.regionId)||Number(b.priority||0)-Number(a.priority||0)||a.name.localeCompare(b.name));
 if(queue.length>MAX_QUEUE){
   const keep=queue.filter(item=>item.status==="qualified"||item.website);
@@ -455,4 +504,4 @@ await writeFile(SOURCES_PATH,JSON.stringify(discoveredSources.sort((a,b)=>a.id.l
 await writeFile(STATE_PATH,JSON.stringify(state,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify(buildCoverage(queue,discoveredSources,stats),null,2)+"\n");
 
-console.log(`Discovery run complete: ${queue.length} queued places, ${stats.probed} probed, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total.`);
+console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed at concurrency ${discoveryBudget.probeConcurrency}, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total. Overpass ${runOverpass?"ran":"deferred"}.`);
