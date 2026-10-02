@@ -11,7 +11,7 @@ const decode=value=>String(value||"")
   .replace(/&[^;]+;/g," ").replace(/\s+/g," ").trim();
 const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));
 
-const escapeRegExp=value=>String(value||"").replace(/[.*+?^${}()|[\]\\]/g,"\\const escapeRegExp=value=>String(value||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");");
+const escapeRegExp=value=>String(value||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 const idPart=value=>String(value||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)||"location";
 
 export function biblioCommonsLocationNames(html){
