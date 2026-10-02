@@ -7,6 +7,7 @@ import {icsEvents} from "./providers/ics.mjs";
 import {calendarLinksEvents} from "./providers/calendar-links.mjs";
 import {probeLane} from "./discovery-priority.mjs";
 
+export const DISCOVERY_QUALIFIER_VERSION=4;
 const USER_AGENT="Mozilla/5.0 (compatible; LocaleDiscovery/1.2; +https://jonathanjoelneptune.github.io/Locale/)";
 const EVENT_PATH=/\b(event|events|calendar|whats-on|whatson|happenings|live-music|music|shows?|schedule|entertainment|trivia|karaoke|bingo|open-mic|openmic|specials?|lineup|tickets?|event-details?|experience)\b/i;
 
@@ -79,6 +80,14 @@ export function discoveryCommonEventPages(base,candidate){
   return paths.map(path=>new URL(path,origin).href);
 }
 
+export function discoveryIsNonPublicEventUrl(value){
+  try{
+    const url=new URL(value);
+    const text=decodeURIComponent(url.pathname).replace(/[-_/]+/g," ").toLowerCase();
+    return /\b(private events?|corporate events?|weddings?|venue rentals?|event rentals?|book (?:an )?event|host (?:an )?event|event planning)\b/i.test(text);
+  }catch{return false}
+}
+
 export function discoveryEventLinks(html,base){
   let origin;
   try{origin=new URL(base).origin}catch{return []}
@@ -87,6 +96,7 @@ export function discoveryEventLinks(html,base){
     try{
       const url=new URL(match[1],base);
       if(url.origin!==origin||!["http:","https:"].includes(url.protocol))continue;
+      if(discoveryIsNonPublicEventUrl(url.href))continue;
       if(!EVENT_PATH.test(url.pathname+" "+url.search))continue;
       url.hash="";
       const href=url.href;
@@ -135,42 +145,83 @@ function candidateWebsiteIsSpecific(candidate){
   }catch{return false}
 }
 function tribeEventMatchesCandidate(event,candidate){
-  if(event?.locationPrecision!=="source")return false;
-  if(pointMiles(event,candidate)<=0.75)return true;
+  if(event?.locationPrecision==="source"&&pointMiles(event,candidate)<=0.75)return true;
   const candidateTokens=meaningfulTokens(candidate.name);
   const venueTokens=new Set(meaningfulTokens(event.venue));
   if(!candidateTokens.length||!venueTokens.size)return false;
   const matches=candidateTokens.filter(token=>venueTokens.has(token)).length;
   return matches>=Math.min(2,Math.ceil(candidateTokens.length*.6));
 }
-export function discoveryScopedTribeEvents(candidate,events){
-  if(!candidateWebsiteIsSpecific(candidate))return events||[];
+export function discoveryTribeScope(candidate,events){
   const rows=events||[];
-  if(!rows.length)return [];
+  if(!rows.length)return {mode:"reject",events:[]};
   const relevant=rows.filter(event=>tribeEventMatchesCandidate(event,candidate));
-  return relevant.length/rows.length>=.75?relevant:[];
+  const ratio=relevant.length/rows.length;
+  const venueNames=new Set(
+    rows.map(event=>normName(event?.venue)).filter(Boolean)
+  );
+
+  if(candidateWebsiteIsSpecific(candidate)){
+    return ratio>=.75
+      ? {mode:"venue",events:relevant}
+      : {mode:"reject",events:[]};
+  }
+
+  if(ratio>=.75)return {mode:"venue",events:relevant.length?relevant:rows};
+  if(rows.length>=3&&venueNames.size>=2)return {mode:"organizer",events:rows};
+  return {mode:"venue",events:rows};
 }
 
-function buildSource(candidate,{adapter,endpoint,eventCount,linkPattern=null}){
+export function discoveryScopedTribeEvents(candidate,events){
+  const scoped=discoveryTribeScope(candidate,events);
+  return scoped.mode==="venue"?scoped.events:[];
+}
+
+export function discoverySiteBrand(html,fallback=""){
+  const text=String(html||"");
+  const metaPatterns=[
+    /<meta[^>]+property=["']og:site_name["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:site_name["']/i,
+    /<meta[^>]+name=["']application-name["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']application-name["']/i
+  ];
+  for(const pattern of metaPatterns){
+    const match=text.match(pattern);
+    if(match?.[1])return esc(match[1]);
+  }
+  const title=esc(text.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]||"");
+  if(title){
+    const first=title.split(/\s+[|–—]\s+|\s+-\s+/)[0]?.trim();
+    if(first&&first.length<=80)return first;
+  }
+  return esc(fallback);
+}
+
+function buildSource(candidate,{
+  adapter,endpoint,eventCount,linkPattern=null,
+  name=candidate.name,ownerEntityKind="place",ownerName=name,
+  sourceKind="discovered",sourceFallbackCenter=fallbackCenter(candidate)
+}){
   const source={
     id:sourceIdFor(candidate,adapter,endpoint),
-    name:candidate.name,
+    name,
     scope:"local",
     regions:[candidate.regionId],
     adapter,
-    sourceKind:"discovered",
-    ownerEntityKind:"place",
-    ownerName:candidate.name,
+    sourceKind,
+    ownerEntityKind,
+    ownerName,
     endpoint,
-    fallbackCenter:fallbackCenter(candidate),
     refreshHours:12,
     minExpectedEvents:1,
     discoveredBy:candidate.discoveryMethod||"queue",
     discoveryCandidateKey:candidate.key,
     discoveredAt:new Date().toISOString(),
     discoveryEventCount:eventCount,
+    qualifierVersion:DISCOVERY_QUALIFIER_VERSION,
     enabled:true
   };
+  if(sourceFallbackCenter)source.fallbackCenter=sourceFallbackCenter;
   if(linkPattern)source.linkPattern=linkPattern;
   return source;
 }
@@ -200,12 +251,26 @@ export async function qualifyDiscoveryCandidate(candidate){
   const tribe=await tryProvider(()=>tribeEvents({
     endpoint:origin,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60,maxPages:2
   }),1);
-  const scopedTribe=tribe?discoveryScopedTribeEvents(candidate,tribe):null;
-  if(scopedTribe?.length)return {
-    qualified:true,
-    source:buildSource(candidate,{adapter:"tribe",endpoint:origin,eventCount:scopedTribe.length}),
-    evidence:{kind:"tribe",eventCount:scopedTribe.length,url:origin}
-  };
+  const tribeScope=tribe?discoveryTribeScope(candidate,tribe):{mode:"reject",events:[]};
+  if(tribeScope.events.length){
+    if(tribeScope.mode==="organizer"){
+      const brand=discoverySiteBrand(root.html,candidate.name);
+      return {
+        qualified:true,
+        source:buildSource(candidate,{
+          adapter:"tribe",endpoint:origin,eventCount:tribeScope.events.length,
+          name:brand,ownerEntityKind:"organizer",ownerName:brand,
+          sourceKind:"discovered-organizer",sourceFallbackCenter:null
+        }),
+        evidence:{kind:"tribe-organizer",eventCount:tribeScope.events.length,url:origin}
+      };
+    }
+    return {
+      qualified:true,
+      source:buildSource(candidate,{adapter:"tribe",endpoint:origin,eventCount:tribeScope.events.length}),
+      evidence:{kind:"tribe",eventCount:tribeScope.events.length,url:origin}
+    };
+  }
 
   const lane=probeLane(candidate);
   const structuredMin=discoveryMinimumEvents(candidate);
@@ -250,7 +315,7 @@ export async function qualifyDiscoveryCandidate(candidate){
       evidence:{kind:"embedded-json",eventCount:embedded.length,url:fetched.url}
     };
 
-    if(EVENT_PATH.test(new URL(fetched.url).pathname)){
+    if(!discoveryIsNonPublicEventUrl(fetched.url)&&EVENT_PATH.test(new URL(fetched.url).pathname)){
       for(const linkPattern of ["/event/","/events/"]){
         const crawled=await tryProvider(()=>jsonLdCrawlEvents({
           endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",
