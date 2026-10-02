@@ -10,6 +10,7 @@ const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
+const LIVE_DIAGNOSTICS_PATH="src/data/discovery-live.json";
 const DISCOVERY_SWEEP_VERSION=4;
 const AREA_SWEEP_VERSION=1;
 const MAX_QUEUE=6000;
@@ -546,10 +547,50 @@ const compactRun={
 };
 state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
 
+const recentProbeResults=queue
+  .filter(item=>item.lastCheckedAt)
+  .sort((a,b)=>String(b.lastCheckedAt).localeCompare(String(a.lastCheckedAt)))
+  .slice(0,60)
+  .map(item=>({
+    regionId:item.regionId,
+    key:item.key,
+    name:item.name,
+    category:item.category||null,
+    website:item.website||null,
+    status:item.status,
+    attempts:item.attempts||0,
+    lastCheckedAt:item.lastCheckedAt,
+    nextCheckAt:item.nextCheckAt||null,
+    sourceId:item.sourceId||null,
+    lastResult:item.lastResult||null
+  }));
+const recentPromotions=[...discoveredSources]
+  .sort((a,b)=>String(b.discoveredAt||"").localeCompare(String(a.discoveredAt||"")))
+  .slice(0,30)
+  .map(source=>({
+    id:source.id,
+    name:source.name,
+    regions:source.regions,
+    adapter:source.adapter,
+    endpoint:source.endpoint,
+    discoveredAt:source.discoveredAt,
+    discoveryEventCount:source.discoveryEventCount||0
+  }));
+const liveDiagnostics={
+  generatedAt:stats.finishedAt,
+  lastRun:stats,
+  runHistory:state.runHistory,
+  lastOverpassRunAt:state.lastOverpassRunAt||null,
+  regions:state.regions||{},
+  recentProbeResults,
+  recentPromotions
+};
+
 await mkdir("src/data",{recursive:true});
 await writeFile(QUEUE_PATH,JSON.stringify(queue,null,2)+"\n");
 await writeFile(SOURCES_PATH,JSON.stringify(discoveredSources.sort((a,b)=>a.id.localeCompare(b.id)),null,2)+"\n");
 await writeFile(STATE_PATH,JSON.stringify(state,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify(buildCoverage(queue,discoveredSources,stats),null,2)+"\n");
+await writeFile(LIVE_DIAGNOSTICS_PATH,JSON.stringify(liveDiagnostics,null,2)+"\n");
 
 console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed at concurrency ${discoveryBudget.probeConcurrency}, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total. Overpass ${runOverpass?"ran":"deferred"}.`);
