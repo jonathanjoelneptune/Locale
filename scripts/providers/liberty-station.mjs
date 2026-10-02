@@ -40,10 +40,35 @@ const MONTH="Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(
 const WEEKDAY="Mon(?:day)?|Tue(?:sday)?|Wed(?:nesday)?|Thu(?:rsday)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?";
 const DATE_RE=new RegExp(`(?:${WEEKDAY}),?\\s+(${MONTH})\\s+(\\d{1,2}),\\s+(\\d{4})\\s+(\\d{1,2}(?::\\d{2})?\\s*(?:am|pm))\\s*-\\s*(\\d{1,2}(?::\\d{2})?\\s*(?:am|pm))`,"ig");
 
+const MONTH_INDEX={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+const clockParts=value=>{
+  const match=String(value||"").trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i);
+  if(!match)return null;
+  let hour=Number(match[1]),minute=Number(match[2]||0);
+  const meridiem=match[3].toLowerCase();
+  if(hour===12)hour=0;
+  if(meridiem==="pm")hour+=12;
+  return {hour,minute};
+};
+const zonedIso=(year,monthIndex,day,hour,minute,timeZone="America/Los_Angeles")=>{
+  let utc=Date.UTC(year,monthIndex,day,hour,minute);
+  const formatter=new Intl.DateTimeFormat("en-US",{
+    timeZone,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"
+  });
+  for(let pass=0;pass<2;pass++){
+    const parts=Object.fromEntries(formatter.formatToParts(new Date(utc))
+      .filter(part=>part.type!=="literal").map(part=>[part.type,Number(part.value)]));
+    const represented=Date.UTC(parts.year,parts.month-1,parts.day,parts.hour,parts.minute);
+    const desired=Date.UTC(year,monthIndex,day,hour,minute);
+    utc+=desired-represented;
+  }
+  return new Date(utc).toISOString();
+};
 const parseTime=(month,day,year,time)=>{
-  const value=`${month} ${day}, ${year} ${String(time).replace(/\s+/g," ")}`;
-  const ms=Date.parse(value);
-  return Number.isFinite(ms)?new Date(ms).toISOString():null;
+  const clock=clockParts(time);
+  const monthIndex=MONTH_INDEX[String(month).slice(0,3).toLowerCase()];
+  if(!clock||monthIndex===undefined)return null;
+  return zonedIso(Number(year),monthIndex,Number(day),clock.hour,clock.minute);
 };
 
 function fallbackEvents({html,url,sourceName,sourceId,fallbackCenter}){
