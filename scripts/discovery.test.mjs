@@ -8,6 +8,7 @@ import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discove
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {mergeSourceCatalog,sourceEndpointKey} from "./source-catalog.mjs";
+import {libertyStationEvents} from "./providers/liberty-station.mjs";
 
 const region={
   id:"san-diego",
@@ -529,6 +530,43 @@ test("qualification reports a scope mismatch for a branch backed by a broad orga
     });
     assert.equal(result.qualified,false);
     assert.equal(result.reason,"candidate-scope-mismatch");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+
+test("Liberty Station district calendar expands listing links into dated events",async()=>{
+  const originalFetch=globalThis.fetch;
+  const listing=`
+    <a href="/do/first-friday">First Friday Open Studio</a>
+    <a href="/do/trivia-tuesday">Trivia Tuesday</a>
+  `;
+  const details={
+    "https://libertystation.com/do/first-friday":`
+      <h1>First Friday Open Studio</h1>
+      <h2>Dates and Times</h2>
+      <li>Friday, Oct 2, 2026 5pm - 7pm</li>
+      <h2>Location</h2><div>Example Gallery</div><div>2800 Historic Decatur Rd</div>
+    `,
+    "https://libertystation.com/do/trivia-tuesday":`
+      <h1>Trivia Tuesday</h1>
+      <h2>Dates and Times</h2>
+      <li>Tuesday, Oct 6, 2026 6pm - 8pm</li>
+      <h2>Location</h2><div>Moniker General</div><div>2860 Sims Rd</div>
+    `
+  };
+  globalThis.fetch=async input=>{
+    const url=String(input);
+    if(url==="https://libertystation.com/events/calendar")return {ok:true,status:200,url,text:async()=>listing};
+    if(details[url])return {ok:true,status:200,url,text:async()=>details[url]};
+    throw new Error("unexpected URL "+url);
+  };
+  try{
+    const events=await libertyStationEvents({maxLinks:10});
+    assert.equal(events.length,2);
+    assert.ok(events.some(event=>event.title==="First Friday Open Studio"));
+    assert.ok(events.some(event=>event.title==="Trivia Tuesday"));
   }finally{
     globalThis.fetch=originalFetch;
   }
