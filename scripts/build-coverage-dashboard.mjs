@@ -1,7 +1,7 @@
 import {readFile,writeFile} from "node:fs/promises";
 import {isPreciseLocation} from "./location-quality.mjs";
 import {REGIONS} from "./regions.mjs";
-import {coverageTargets,milesBetween,areaGapScore} from "./coverage-zones.mjs";
+import {COVERAGE_CLASS_TARGETS,coverageTargets,milesBetween,areaGapScore} from "./coverage-zones.mjs";
 
 const OUT="src/data/coverage-dashboard.json";
 const readJson=async(path,fallback)=>{
@@ -47,7 +47,7 @@ export function coverageAreaMetrics(events,area,region,{now=new Date(),days=28}=
   let recurring30d=0;
   for(const event of relevant){
     venues.add(event.venueId||event.venue||event.id);
-    if(recurringPattern.test(`${event.title||""} ${event.description||""}`))recurring30d++;
+    if(event.seriesId||event.recurring||recurringPattern.test(`${event.title||""} ${event.description||""}`))recurring30d++;
     const date=new Date(event.start);
     const p=localParts(date,region.timeZone);
     const hour=Number(p.hour);
@@ -209,14 +209,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     metricVersion:2,
     targets:{
       regionPreciseLocationRate:0.9,
-      coverageClasses:{
-        "entertainment-core":{fridaySaturdayNightAverage:8,recurringLocalOccurrences30d:5},
-        urban:{fridaySaturdayNightAverage:5,recurringLocalOccurrences30d:4},
-        mixed:{fridaySaturdayNightAverage:4,recurringLocalOccurrences30d:3},
-        suburban:{fridaySaturdayNightAverage:3,recurringLocalOccurrences30d:2},
-        outer:{fridaySaturdayNightAverage:2,recurringLocalOccurrences30d:1},
-        rural:{fridaySaturdayNightAverage:1,recurringLocalOccurrences30d:1}
-      }
+      coverageClasses:COVERAGE_CLASS_TARGETS
     },
     regions
   };
