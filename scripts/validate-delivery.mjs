@@ -44,6 +44,7 @@ for(const [label,text] of [
 }
 requireText(refresh,"gh workflow run reconcile-state.yml --ref main","refresh-events.yml");
 requireText(refresh,'cron: "11 * * * *"',"refresh-events.yml");
+requireText(refresh,"src/data/reader-place-cache.json","refresh-events.yml");
 requireText(discover,"gh workflow run reconcile-state.yml --ref main","discover-sources.yml");
 requireText(discover,'cron: "7,37 * * * *"',"discover-sources.yml");
 requireText(resolve,"gh workflow run reconcile-state.yml --ref main","resolve-locations.yml");
@@ -60,6 +61,8 @@ requireText(watchdog,'- "Reconcile Locale state"',"living-watchdog.yml");
 requireText(watchdog,'- "Resolve Locale locations"',"living-watchdog.yml");
 requireText(watchdog,'LOCATIONS_CATCHUP',"living-watchdog.yml");
 requireText(watchdog,'lowestLocationRate<0.90',"living-watchdog.yml");
+requireText(watchdog,"dueLocationCount>0","living-watchdog.yml");
+requireText(watchdog,'LOCATION_DUE',"living-watchdog.yml");
 requireText(watchdog,'recover "$DISCOVERY_STALE" "discover-sources.yml" "discovery"',"living-watchdog.yml");
 requireText(watchdog,'recover "$RECONCILE_STALE" "reconcile-state.yml" "reconciliation"',"living-watchdog.yml");
 requireText(watchdog,'recover "$EVENTS_STALE" "refresh-events.yml" "event refresh"',"living-watchdog.yml");
