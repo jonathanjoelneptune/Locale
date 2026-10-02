@@ -44,6 +44,8 @@ jobs:
         run: node --test scripts/discovery.test.mjs
       - name: Test workbook acquisition registry
         run: node --test scripts/acquisition.test.mjs
+      - name: Test venue geocoder failover
+        run: node --test scripts/geocode.test.mjs
       - name: Test coverage metrics
         run: node --test scripts/coverage-dashboard.test.mjs
       - name: Test coverage-area grid
