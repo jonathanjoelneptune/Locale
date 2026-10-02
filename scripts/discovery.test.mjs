@@ -12,6 +12,7 @@ import {libertyStationEvents} from "./providers/liberty-station.mjs";
 
 const region={
   id:"san-diego",
+  countryCode:"US",
   center:{lat:32.7157,lng:-117.1611},
   ingestRadiusMiles:50
 };
