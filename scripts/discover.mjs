@@ -421,7 +421,7 @@ function ensureCellSweep(region){
 function nextDueCell(region,regionState){
   const completed=new Set(regionState.completedCells||[]);
   const failed=regionState.failedCells||{};
-  for(const phase of ["core","high","dining"]){
+  for(const phase of ["core","high","outer","dining"]){
     const cells=buildDiscoveryCells(region,phase);
     for(const cell of cells){
       if(completed.has(cell.id))continue;
@@ -490,7 +490,8 @@ for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
     phase:"focus",
     lat:Number(zone.lat),
     lng:Number(zone.lng),
-    queryRadiusMiles:Math.min(3.2,Math.max(1.2,Number(zone.radiusMiles||1)+0.45))
+    queryRadiusMiles:Math.min(3.2,Math.max(1.2,Number(zone.radiusMiles||1)+0.45)),
+    countryCode:region.countryCode||null
   };
   try{
     const cellCandidates=await discoverCellPlaces(region,cell);
