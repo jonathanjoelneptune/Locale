@@ -5,9 +5,10 @@ const strict=process.argv.includes("--strict")||process.env.LOCALE_COVERAGE_STRI
 let gaps=0,measured=0;
 
 for(const [regionId,region] of Object.entries(dashboard.regions||{})){
-  if(!(region.neighborhoods||[]).length)continue;
-  console.log(`\n${region.name||regionId} neighborhood coverage:`);
-  for(const row of region.neighborhoods){
+  const rows=region.coverageAreas||region.neighborhoods||[];
+  if(!rows.length)continue;
+  console.log(`\n${region.name||regionId} area coverage:`);
+  for(const row of rows){
     measured++;
     const pass=!!row.acceptance?.pass;
     if(!pass)gaps++;
@@ -19,8 +20,8 @@ for(const [regionId,region] of Object.entries(dashboard.regions||{})){
     );
   }
 }
-console.log(`\nNeighborhood acceptance: ${measured-gaps}/${measured} passing.`);
+console.log(`\nArea acceptance: ${measured-gaps}/${measured} passing.`);
 if(strict&&gaps){
-  console.error(`${gaps} neighborhood coverage target${gaps===1?"":"s"} not met.`);
+  console.error(`${gaps} area coverage target${gaps===1?"":"s"} not met.`);
   process.exit(1);
 }
