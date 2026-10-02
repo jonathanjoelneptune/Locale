@@ -517,3 +517,78 @@ test("diagnostics exposes live discovery operations console",async({page})=>{
   await expect(page.locator("#cellRows")).toBeVisible();
   await expect(page.locator("#neighborhoodRows tr")).toHaveCount(configuredSanDiegoAreaCount);
 });
+
+
+test("area geometry is a reusable data layer independent of Leaflet",async({page})=>{
+  await page.goto("./");
+  const result=await page.evaluate(async()=>{
+    const data=await import("./src/data/areaGeometry.js");
+    const service=await import("./src/services/areas.js");
+    const collection=await data.loadAreaGeometry({regionId:"san-diego"});
+    const northPark=collection.features.find(feature=>feature.properties.id==="north-park");
+    const index=service.createAreaSpatialIndex(collection);
+    const memberships=index.areasForPoint({lat:northPark.properties.labelPoint.lat,lng:northPark.properties.labelPoint.lng}).map(feature=>feature.properties.id);
+    return {
+      schemaVersion:collection.schemaVersion,
+      count:collection.features.length,
+      northParkGeometry:northPark.geometry.type,
+      northParkSource:northPark.properties.geometrySource,
+      northParkFound:memberships.includes("north-park")
+    };
+  });
+  expect(result.schemaVersion).toBe(1);
+  expect(result.count).toBe(configuredSanDiegoAreaCount);
+  expect(result.northParkGeometry).toBe("Polygon");
+  expect(result.northParkSource).toBe("coverage-radius");
+  expect(result.northParkFound).toBe(true);
+
+  const mapSource=await (await page.request.get("./src/components/map.js")).text();
+  const dataSource=await (await page.request.get("./src/data/areaGeometry.js")).text();
+  const serviceSource=await (await page.request.get("./src/services/areas.js")).text();
+  expect(mapSource).not.toContain("coverage-zones.json");
+  expect(mapSource).not.toContain("geography-catalog.json");
+  expect(dataSource).toContain("loadAreaGeometry");
+  expect(serviceSource).toContain("createAreaSpatialIndex");
+  expect(serviceSource).toContain("pointInArea");
+});
+
+test("users can multi-select areas and see the same scope on the map and results",async({page})=>{
+  await waitForLocale(page);
+  await expect(page.locator("#areaSearch")).toBeVisible();
+
+  await page.locator("#areaSearch").fill("North Park");
+  await page.locator('[data-area-id="north-park"]').click();
+
+  await expect(page.locator(".radius-panel")).toHaveClass(/area-mode/);
+  await expect(page.locator("#clearAreaSelectionMap")).toBeVisible();
+  await expect(page.locator("#map")).toHaveAttribute("data-selected-area-count","1");
+  await expect(page.locator(".selected-area-boundary")).toHaveCount(1);
+  await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
+  await expect(page.locator(".area-result-bar")).toContainText("North Park");
+  await expect(page.locator(".results-head h1")).toContainText("Events in Selected Areas");
+
+  await page.locator("#areaSearch").fill("Hillcrest");
+  await page.locator('[data-area-id="hillcrest"]').click();
+
+  await expect(page.locator("#map")).toHaveAttribute("data-selected-area-count","2");
+  await expect(page.locator(".selected-area-boundary")).toHaveCount(2);
+  await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
+  await expect(page.locator('.area-chip[data-remove-area="hillcrest"]')).toBeVisible();
+  await expect(page.locator(".area-result-bar")).toContainText("North Park");
+  await expect(page.locator(".area-result-bar")).toContainText("Hillcrest");
+
+  await page.locator("#clearAreaSelectionMap").click();
+  await expect(page.locator("#map")).toHaveAttribute("data-selected-area-count","0");
+  await expect(page.locator(".radius-panel")).not.toHaveClass(/area-mode/);
+  await expect(page.locator("#clearAreaSelectionMap")).toBeHidden();
+});
+
+test("clicking a neighborhood label on the map selects and focuses that area",async({page})=>{
+  await waitForLocale(page);
+  const map=page.locator("#map");
+  await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],11,{animate:false}));
+  await expect(page.locator('[data-area-label="north-park"]')).toBeVisible({timeout:5000});
+  await page.locator('[data-area-label="north-park"]').click();
+  await expect(map).toHaveAttribute("data-selected-area-count","1");
+  await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
+});
