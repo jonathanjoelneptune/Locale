@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T23:10:35.162Z",
+  "generatedAt": "2026-10-02T23:12:21.130Z",
   "metricVersion": 2,
   "targets": {
     "regionPreciseLocationRate": 0.9,
@@ -37,24 +37,24 @@
   "regions": {
     "san-diego": {
       "name": "San Diego",
-      "eventCount": 12071,
-      "preciseLocationCount": 11010,
-      "preciseLocationRate": 0.912,
+      "eventCount": 12054,
+      "preciseLocationCount": 11401,
+      "preciseLocationRate": 0.946,
       "preciseLocationTarget": 0.9,
       "preciseLocationTargetMet": true,
-      "placeCount": 772,
+      "placeCount": 773,
       "sourceCount": 45,
       "dynamicSourceCount": 14,
       "categoryCounts": {
-        "community": 1750,
-        "food": 6601,
-        "family": 461,
+        "community": 1749,
+        "food": 6590,
+        "comedy": 177,
+        "family": 458,
         "theater": 584,
-        "festival": 72,
         "sports": 76,
-        "music": 747,
-        "nightlife": 1603,
-        "comedy": 177
+        "music": 746,
+        "festival": 71,
+        "nightlife": 1603
       },
       "recurringActivityCounts": {
         "trivia": 653,
@@ -62,7 +62,7 @@
         "taco-tuesday": 138,
         "open-mic": 18,
         "bingo": 19,
-        "happy-hour": 6329
+        "happy-hour": 6318
       },
       "sourceHealth": [
         {
@@ -70,6 +70,12 @@
           "sourceId": "north-park-noise",
           "count": 0,
           "status": "failed"
+        },
+        {
+          "regionId": "san-diego",
+          "sourceId": "spin-nightclub",
+          "count": 18,
+          "status": "stale-preserved"
         },
         {
           "regionId": "san-diego",
@@ -145,13 +151,13 @@
         },
         {
           "regionId": "san-diego",
-          "sourceId": "coronado-calendar",
-          "count": 6,
+          "sourceId": "discovered-san-diego-c39647815396",
+          "count": 5,
           "status": "ok"
         },
         {
           "regionId": "san-diego",
-          "sourceId": "discovered-san-diego-c39647815396",
+          "sourceId": "coronado-calendar",
           "count": 6,
           "status": "ok"
         },
@@ -199,12 +205,6 @@
         },
         {
           "regionId": "san-diego",
-          "sourceId": "spin-nightclub",
-          "count": 18,
-          "status": "ok"
-        },
-        {
-          "regionId": "san-diego",
           "sourceId": "discovered-san-diego-f22dfba5136c",
           "count": 23,
           "status": "ok"
@@ -224,7 +224,7 @@
         {
           "regionId": "san-diego",
           "sourceId": "sd-public-library",
-          "count": 40,
+          "count": 38,
           "status": "ok"
         },
         {
@@ -338,13 +338,13 @@
         {
           "regionId": "san-diego",
           "sourceId": "sd-county-library",
-          "count": 1390,
+          "count": 1389,
           "status": "ok"
         },
         {
           "regionId": "san-diego",
           "sourceId": "sandiego-reader-happy-hours",
-          "count": 6490,
+          "count": 6478,
           "status": "ok"
         }
       ],
@@ -6154,68 +6154,6 @@
           }
         },
         {
-          "id": "rancho-san-diego",
-          "name": "Rancho San Diego",
-          "group": "east-county",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 78,
-          "lat": 32.7476,
-          "lng": -116.9359,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 25,
-          "uniqueVenuesNext28d": 2,
-          "fridaySaturdayNightAverage": 0.5,
-          "fridaySaturdayNightMax": 1,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 24,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 0,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 62,
-          "acquisition": {
-            "coverageGroup": "East County",
-            "primarySources": [
-              "San Diego County Library"
-            ],
-            "umbrellaSources": [
-              "County Parks",
-              "Reader",
-              "relevant city/community organization"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
-          },
-          "discovery": {
-            "candidateCount": 21,
-            "withWebsiteCount": 19,
-            "qualifiedCount": 0,
-            "retryCount": 3
-          }
-        },
-        {
           "id": "allied-gardens",
           "name": "Allied Gardens",
           "group": "north-central",
@@ -6404,6 +6342,68 @@
           }
         },
         {
+          "id": "rancho-san-diego",
+          "name": "Rancho San Diego",
+          "group": "east-county",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 78,
+          "lat": 32.7476,
+          "lng": -116.9359,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 41,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 0.5,
+          "fridaySaturdayNightMax": 1,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 40,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 0,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 60,
+          "acquisition": {
+            "coverageGroup": "East County",
+            "primarySources": [
+              "San Diego County Library"
+            ],
+            "umbrellaSources": [
+              "County Parks",
+              "Reader",
+              "relevant city/community organization"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
+          },
+          "discovery": {
+            "candidateCount": 21,
+            "withWebsiteCount": 19,
+            "qualifiedCount": 0,
+            "retryCount": 3
+          }
+        },
+        {
           "id": "el-cerrito",
           "name": "El Cerrito",
           "group": "uptown-midcity",
@@ -6528,6 +6528,68 @@
           }
         },
         {
+          "id": "la-jolla-shores",
+          "name": "La Jolla Shores",
+          "group": "north-central",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 88,
+          "lat": 32.8575,
+          "lng": -117.2562,
+          "radiusMiles": 0.9,
+          "preciseEventsNext28d": 19,
+          "uniqueVenuesNext28d": 4,
+          "fridaySaturdayNightAverage": 0.5,
+          "fridaySaturdayNightMax": 1,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 8,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 1,
+            "2026-10-09": 0,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 1,
+            "2026-10-23": 0,
+            "2026-10-24": 0
+          },
+          "gapScore": 59,
+          "acquisition": {
+            "coverageGroup": "North Central",
+            "primarySources": [
+              "La Jolla by the Sea Events"
+            ],
+            "umbrellaSources": [
+              "UC San Diego",
+              "Reader",
+              "Comedy Store / venue sources"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 8,
+            "withWebsiteCount": 4,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "granite-hills",
           "name": "Granite Hills",
           "group": "east-county",
@@ -6585,68 +6647,6 @@
           "discovery": {
             "candidateCount": 4,
             "withWebsiteCount": 3,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "mission-beach",
-          "name": "Mission Beach",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.771,
-          "lng": -117.252,
-          "radiusMiles": 1.05,
-          "preciseEventsNext28d": 70,
-          "uniqueVenuesNext28d": 9,
-          "fridaySaturdayNightAverage": 0.6,
-          "fridaySaturdayNightMax": 2,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 52,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 2,
-            "2026-10-03": 0,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 57,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "City of San Diego Events",
-              "City Parks"
-            ],
-            "umbrellaSources": [
-              "Discover PB",
-              "Volo"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 18,
-            "withWebsiteCount": 8,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -6894,68 +6894,6 @@
           },
           "discovery": {
             "candidateCount": 6,
-            "withWebsiteCount": 4,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "la-jolla-shores",
-          "name": "La Jolla Shores",
-          "group": "north-central",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 88,
-          "lat": 32.8575,
-          "lng": -117.2562,
-          "radiusMiles": 0.9,
-          "preciseEventsNext28d": 27,
-          "uniqueVenuesNext28d": 5,
-          "fridaySaturdayNightAverage": 0.5,
-          "fridaySaturdayNightMax": 1,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 16,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 1,
-            "2026-10-09": 0,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 1,
-            "2026-10-23": 0,
-            "2026-10-24": 0
-          },
-          "gapScore": 57,
-          "acquisition": {
-            "coverageGroup": "North Central",
-            "primarySources": [
-              "La Jolla by the Sea Events"
-            ],
-            "umbrellaSources": [
-              "UC San Diego",
-              "Reader",
-              "Comedy Store / venue sources"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 8,
             "withWebsiteCount": 4,
             "qualifiedCount": 0,
             "retryCount": 0
@@ -7901,6 +7839,194 @@
           }
         },
         {
+          "id": "mission-beach",
+          "name": "Mission Beach",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.771,
+          "lng": -117.252,
+          "radiusMiles": 1.05,
+          "preciseEventsNext28d": 98,
+          "uniqueVenuesNext28d": 10,
+          "fridaySaturdayNightAverage": 1.6,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 80,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 3,
+            "2026-10-03": 1,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 2,
+            "2026-10-24": 1
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "City of San Diego Events",
+              "City Parks"
+            ],
+            "umbrellaSources": [
+              "Discover PB",
+              "Volo"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 18,
+            "withWebsiteCount": 8,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "downtown-escondido",
+          "name": "Downtown Escondido",
+          "group": "north-county-inland",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 92,
+          "lat": 33.121,
+          "lng": -117.081,
+          "radiusMiles": 1.1,
+          "preciseEventsNext28d": 68,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 1.3,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 49,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 5,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "North County Inland",
+            "primarySources": [
+              "City of Escondido Calendar",
+              "Downtown Escondido"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "SD Vintners",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 14,
+            "withWebsiteCount": 0,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "escondido",
+          "name": "Escondido",
+          "group": "north-county-inland",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 90,
+          "lat": 33.1192,
+          "lng": -117.0864,
+          "radiusMiles": 2.8,
+          "preciseEventsNext28d": 68,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 1.3,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 49,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 5,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "North County Inland",
+            "primarySources": [
+              "City of Escondido Calendar",
+              "Downtown Escondido"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "SD Vintners",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 14,
+            "withWebsiteCount": 0,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "cardiff",
           "name": "Cardiff-by-the-Sea",
           "group": "north-county-coast",
@@ -8025,69 +8151,6 @@
           }
         },
         {
-          "id": "downtown-escondido",
-          "name": "Downtown Escondido",
-          "group": "north-county-inland",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 92,
-          "lat": 33.121,
-          "lng": -117.081,
-          "radiusMiles": 1.1,
-          "preciseEventsNext28d": 69,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 1.4,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 50,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 5,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 49,
-          "acquisition": {
-            "coverageGroup": "North County Inland",
-            "primarySources": [
-              "City of Escondido Calendar",
-              "Downtown Escondido"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "SD Vintners",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 14,
-            "withWebsiteCount": 0,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "del-mar",
           "name": "Del Mar",
           "group": "north-county-coast",
@@ -8145,69 +8208,6 @@
           "discovery": {
             "candidateCount": 24,
             "withWebsiteCount": 8,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "escondido",
-          "name": "Escondido",
-          "group": "north-county-inland",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 90,
-          "lat": 33.1192,
-          "lng": -117.0864,
-          "radiusMiles": 2.8,
-          "preciseEventsNext28d": 69,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 1.4,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 50,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 5,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 49,
-          "acquisition": {
-            "coverageGroup": "North County Inland",
-            "primarySources": [
-              "City of Escondido Calendar",
-              "Downtown Escondido"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "SD Vintners",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 14,
-            "withWebsiteCount": 0,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -8463,6 +8463,68 @@
           }
         },
         {
+          "id": "lincoln-acres",
+          "name": "Lincoln Acres",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "suburban",
+          "discoveryPriority": 58,
+          "lat": 32.6675,
+          "lng": -117.072,
+          "radiusMiles": 0.9,
+          "preciseEventsNext28d": 28,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 0.8,
+          "fridaySaturdayNightMax": 2,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 24,
+          "targets": {
+            "fridaySaturdayNightAverage": 3,
+            "recurringLocalOccurrences30d": 2
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 0,
+            "2026-10-03": 0,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 2,
+            "2026-10-24": 0
+          },
+          "gapScore": 48,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of San Diego Events or relevant municipal calendar"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "Reader",
+              "parks"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 11,
+            "withWebsiteCount": 8,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "fashion-valley",
           "name": "Fashion Valley",
           "group": "central-west",
@@ -8594,13 +8656,13 @@
           "lat": 32.786,
           "lng": -117.205,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 39,
-          "uniqueVenuesNext28d": 11,
+          "preciseEventsNext28d": 47,
+          "uniqueVenuesNext28d": 12,
           "fridaySaturdayNightAverage": 0.6,
           "fridaySaturdayNightMax": 1,
           "activeFridaySaturdayNights": 5,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 20,
+          "recurringLocalOccurrences30d": 28,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -8763,68 +8825,6 @@
           "discovery": {
             "candidateCount": 18,
             "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "lincoln-acres",
-          "name": "Lincoln Acres",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "suburban",
-          "discoveryPriority": 58,
-          "lat": 32.6675,
-          "lng": -117.072,
-          "radiusMiles": 0.9,
-          "preciseEventsNext28d": 29,
-          "uniqueVenuesNext28d": 3,
-          "fridaySaturdayNightAverage": 0.9,
-          "fridaySaturdayNightMax": 2,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 25,
-          "targets": {
-            "fridaySaturdayNightAverage": 3,
-            "recurringLocalOccurrences30d": 2
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 0,
-            "2026-10-09": 2,
-            "2026-10-10": 1,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 2,
-            "2026-10-24": 0
-          },
-          "gapScore": 46,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of San Diego Events or relevant municipal calendar"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "Reader",
-              "parks"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 11,
-            "withWebsiteCount": 8,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -9151,13 +9151,13 @@
           "lat": 33.0651,
           "lng": -117.304,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 44,
+          "preciseEventsNext28d": 56,
           "uniqueVenuesNext28d": 3,
           "fridaySaturdayNightAverage": 2,
           "fridaySaturdayNightMax": 2,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
+          "recurringLocalOccurrences30d": 56,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -9274,13 +9274,13 @@
           "lat": 32.7847,
           "lng": -117.2022,
           "radiusMiles": 1,
-          "preciseEventsNext28d": 63,
-          "uniqueVenuesNext28d": 12,
+          "preciseEventsNext28d": 71,
+          "uniqueVenuesNext28d": 13,
           "fridaySaturdayNightAverage": 1.1,
           "fridaySaturdayNightMax": 2,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
+          "recurringLocalOccurrences30d": 52,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -9324,68 +9324,6 @@
             "withWebsiteCount": 2,
             "qualifiedCount": 0,
             "retryCount": 0
-          }
-        },
-        {
-          "id": "university-city-utc",
-          "name": "University City / UTC",
-          "group": "north-central",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 100,
-          "lat": 32.8703,
-          "lng": -117.2146,
-          "radiusMiles": 1.7,
-          "preciseEventsNext28d": 43,
-          "uniqueVenuesNext28d": 9,
-          "fridaySaturdayNightAverage": 1.3,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 36,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 1,
-            "2026-10-09": 1,
-            "2026-10-10": 1,
-            "2026-10-16": 1,
-            "2026-10-17": 1,
-            "2026-10-23": 1,
-            "2026-10-24": 1
-          },
-          "gapScore": 42,
-          "acquisition": {
-            "coverageGroup": "North Central",
-            "primarySources": [
-              "UC San Diego public events",
-              "City of San Diego Events"
-            ],
-            "umbrellaSources": [
-              "Volo",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 68,
-            "withWebsiteCount": 55,
-            "qualifiedCount": 0,
-            "retryCount": 8
           }
         },
         {
@@ -9451,127 +9389,6 @@
           }
         },
         {
-          "id": "coronado",
-          "name": "Coronado",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.6859,
-          "lng": -117.1831,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 131,
-          "uniqueVenuesNext28d": 8,
-          "fridaySaturdayNightAverage": 3.3,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 127,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 5,
-            "2026-10-03": 3,
-            "2026-10-09": 4,
-            "2026-10-10": 2,
-            "2026-10-16": 4,
-            "2026-10-17": 2,
-            "2026-10-23": 4,
-            "2026-10-24": 2
-          },
-          "gapScore": 40,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Coronado Calendar"
-            ],
-            "umbrellaSources": [
-              "Reader",
-              "Ticketmaster"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 22,
-            "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 6
-          }
-        },
-        {
-          "id": "grantville",
-          "name": "Grantville",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 82,
-          "lat": 32.7807,
-          "lng": -117.1042,
-          "radiusMiles": 1,
-          "preciseEventsNext28d": 45,
-          "uniqueVenuesNext28d": 5,
-          "fridaySaturdayNightAverage": 2.1,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 3,
-            "2026-10-09": 2,
-            "2026-10-10": 3,
-            "2026-10-16": 1,
-            "2026-10-17": 3,
-            "2026-10-23": 1,
-            "2026-10-24": 3
-          },
-          "gapScore": 39,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "City of San Diego Events"
-            ],
-            "umbrellaSources": [
-              "Explore Clairemont / venue sources / libraries as relevant"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 10,
-            "withWebsiteCount": 5,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "crest",
           "name": "Crest",
           "group": "east-county",
@@ -9634,6 +9451,66 @@
           }
         },
         {
+          "id": "grantville",
+          "name": "Grantville",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 82,
+          "lat": 32.7807,
+          "lng": -117.1042,
+          "radiusMiles": 1,
+          "preciseEventsNext28d": 57,
+          "uniqueVenuesNext28d": 6,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 56,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 3,
+            "2026-10-09": 2,
+            "2026-10-10": 3,
+            "2026-10-16": 1,
+            "2026-10-17": 3,
+            "2026-10-23": 1,
+            "2026-10-24": 3
+          },
+          "gapScore": 38,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "City of San Diego Events"
+            ],
+            "umbrellaSources": [
+              "Explore Clairemont / venue sources / libraries as relevant"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 10,
+            "withWebsiteCount": 5,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "downtown-la-mesa",
           "name": "La Mesa Village",
           "group": "east-county",
@@ -9643,13 +9520,13 @@
           "lat": 32.7655,
           "lng": -117.0189,
           "radiusMiles": 0.8,
-          "preciseEventsNext28d": 126,
+          "preciseEventsNext28d": 125,
           "uniqueVenuesNext28d": 13,
-          "fridaySaturdayNightAverage": 3.1,
-          "fridaySaturdayNightMax": 6,
+          "fridaySaturdayNightAverage": 3,
+          "fridaySaturdayNightMax": 5,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 121,
+          "recurringLocalOccurrences30d": 120,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -9660,7 +9537,7 @@
             "pass": false
           },
           "nightCounts": {
-            "2026-10-02": 6,
+            "2026-10-02": 5,
             "2026-10-03": 1,
             "2026-10-09": 5,
             "2026-10-10": 1,
@@ -9693,6 +9570,67 @@
             "withWebsiteCount": 19,
             "qualifiedCount": 0,
             "retryCount": 2
+          }
+        },
+        {
+          "id": "coronado",
+          "name": "Coronado",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.6859,
+          "lng": -117.1831,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 154,
+          "uniqueVenuesNext28d": 9,
+          "fridaySaturdayNightAverage": 3.6,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 150,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 5,
+            "2026-10-03": 3,
+            "2026-10-09": 5,
+            "2026-10-10": 2,
+            "2026-10-16": 5,
+            "2026-10-17": 2,
+            "2026-10-23": 5,
+            "2026-10-24": 2
+          },
+          "gapScore": 37,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Coronado Calendar"
+            ],
+            "umbrellaSources": [
+              "Reader",
+              "Ticketmaster"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 22,
+            "withWebsiteCount": 13,
+            "qualifiedCount": 0,
+            "retryCount": 6
           }
         },
         {
@@ -9755,6 +9693,68 @@
             "withWebsiteCount": 4,
             "qualifiedCount": 0,
             "retryCount": 0
+          }
+        },
+        {
+          "id": "university-city-utc",
+          "name": "University City / UTC",
+          "group": "north-central",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 100,
+          "lat": 32.8703,
+          "lng": -117.2146,
+          "radiusMiles": 1.7,
+          "preciseEventsNext28d": 67,
+          "uniqueVenuesNext28d": 10,
+          "fridaySaturdayNightAverage": 1.8,
+          "fridaySaturdayNightMax": 4,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 60,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 4,
+            "2026-10-03": 1,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 2,
+            "2026-10-24": 1
+          },
+          "gapScore": 35,
+          "acquisition": {
+            "coverageGroup": "North Central",
+            "primarySources": [
+              "UC San Diego public events",
+              "City of San Diego Events"
+            ],
+            "umbrellaSources": [
+              "Volo",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 68,
+            "withWebsiteCount": 55,
+            "qualifiedCount": 0,
+            "retryCount": 8
           }
         },
         {
@@ -9828,7 +9828,7 @@
           "lng": -117.1971,
           "radiusMiles": 0.9,
           "preciseEventsNext28d": 91,
-          "uniqueVenuesNext28d": 12,
+          "uniqueVenuesNext28d": 13,
           "fridaySaturdayNightAverage": 1.8,
           "fridaySaturdayNightMax": 4,
           "activeFridaySaturdayNights": 6,
@@ -9939,6 +9939,67 @@
             "withWebsiteCount": 18,
             "qualifiedCount": 0,
             "retryCount": 1
+          }
+        },
+        {
+          "id": "chula-vista",
+          "name": "Chula Vista",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 94,
+          "lat": 32.6401,
+          "lng": -117.0842,
+          "radiusMiles": 3,
+          "preciseEventsNext28d": 80,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 72,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 2,
+            "2026-10-09": 3,
+            "2026-10-10": 2,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 3,
+            "2026-10-24": 2
+          },
+          "gapScore": 32,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Chula Vista Calendar"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 67,
+            "withWebsiteCount": 55,
+            "qualifiedCount": 0,
+            "retryCount": 4
           }
         },
         {
@@ -10127,67 +10188,6 @@
           }
         },
         {
-          "id": "chula-vista",
-          "name": "Chula Vista",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 94,
-          "lat": 32.6401,
-          "lng": -117.0842,
-          "radiusMiles": 3,
-          "preciseEventsNext28d": 81,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 2.3,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 73,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 2,
-            "2026-10-09": 3,
-            "2026-10-10": 2,
-            "2026-10-16": 2,
-            "2026-10-17": 1,
-            "2026-10-23": 3,
-            "2026-10-24": 2
-          },
-          "gapScore": 30,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Chula Vista Calendar"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 67,
-            "withWebsiteCount": 55,
-            "qualifiedCount": 0,
-            "retryCount": 4
-          }
-        },
-        {
           "id": "eastern-area",
           "name": "Eastern Area",
           "group": "uptown-midcity",
@@ -10261,7 +10261,7 @@
           "lng": -117.251,
           "radiusMiles": 1.15,
           "preciseEventsNext28d": 216,
-          "uniqueVenuesNext28d": 19,
+          "uniqueVenuesNext28d": 20,
           "fridaySaturdayNightAverage": 3.9,
           "fridaySaturdayNightMax": 6,
           "activeFridaySaturdayNights": 8,
@@ -10437,6 +10437,129 @@
           }
         },
         {
+          "id": "liberty-station",
+          "name": "Liberty Station",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.7353,
+          "lng": -117.213,
+          "radiusMiles": 0.95,
+          "preciseEventsNext28d": 246,
+          "uniqueVenuesNext28d": 37,
+          "fridaySaturdayNightAverage": 4.3,
+          "fridaySaturdayNightMax": 16,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 128,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 16,
+            "2026-10-03": 3,
+            "2026-10-09": 3,
+            "2026-10-10": 2,
+            "2026-10-16": 3,
+            "2026-10-17": 2,
+            "2026-10-23": 3,
+            "2026-10-24": 2
+          },
+          "gapScore": 25,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "Liberty Station Events",
+              "Liberty Station Classes"
+            ],
+            "umbrellaSources": [
+              "City of San Diego Events"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 53,
+            "withWebsiteCount": 10,
+            "qualifiedCount": 1,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "casa-de-oro",
+          "name": "Casa de Oro",
+          "group": "east-county",
+          "kind": "coverage-area",
+          "coverageClass": "suburban",
+          "discoveryPriority": 68,
+          "lat": 32.7495,
+          "lng": -116.9813,
+          "radiusMiles": 1.2,
+          "preciseEventsNext28d": 1301,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 6,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 518,
+          "targets": {
+            "fridaySaturdayNightAverage": 3,
+            "recurringLocalOccurrences30d": 2
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 3,
+            "2026-10-03": 1,
+            "2026-10-09": 4,
+            "2026-10-10": 0,
+            "2026-10-16": 3,
+            "2026-10-17": 0,
+            "2026-10-23": 6,
+            "2026-10-24": 0
+          },
+          "gapScore": 24,
+          "acquisition": {
+            "coverageGroup": "East County",
+            "primarySources": [
+              "San Diego County Library"
+            ],
+            "umbrellaSources": [
+              "County Parks",
+              "Reader",
+              "relevant city/community organization"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
+          },
+          "discovery": {
+            "candidateCount": 9,
+            "withWebsiteCount": 6,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "clairemont",
           "name": "Clairemont Mesa",
           "group": "central-west",
@@ -10499,68 +10622,6 @@
           }
         },
         {
-          "id": "casa-de-oro",
-          "name": "Casa de Oro",
-          "group": "east-county",
-          "kind": "coverage-area",
-          "coverageClass": "suburban",
-          "discoveryPriority": 68,
-          "lat": 32.7495,
-          "lng": -116.9813,
-          "radiusMiles": 1.2,
-          "preciseEventsNext28d": 1300,
-          "uniqueVenuesNext28d": 3,
-          "fridaySaturdayNightAverage": 2.3,
-          "fridaySaturdayNightMax": 6,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 515,
-          "targets": {
-            "fridaySaturdayNightAverage": 3,
-            "recurringLocalOccurrences30d": 2
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 4,
-            "2026-10-03": 1,
-            "2026-10-09": 4,
-            "2026-10-10": 0,
-            "2026-10-16": 3,
-            "2026-10-17": 0,
-            "2026-10-23": 6,
-            "2026-10-24": 0
-          },
-          "gapScore": 20,
-          "acquisition": {
-            "coverageGroup": "East County",
-            "primarySources": [
-              "San Diego County Library"
-            ],
-            "umbrellaSources": [
-              "County Parks",
-              "Reader",
-              "relevant city/community organization"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
-          },
-          "discovery": {
-            "candidateCount": 9,
-            "withWebsiteCount": 6,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "la-mesa",
           "name": "La Mesa",
           "group": "east-county",
@@ -10570,13 +10631,13 @@
           "lat": 32.7678,
           "lng": -117.0231,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 208,
-          "uniqueVenuesNext28d": 22,
-          "fridaySaturdayNightAverage": 5.3,
-          "fridaySaturdayNightMax": 8,
+          "preciseEventsNext28d": 223,
+          "uniqueVenuesNext28d": 23,
+          "fridaySaturdayNightAverage": 5.1,
+          "fridaySaturdayNightMax": 7,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 201,
+          "recurringLocalOccurrences30d": 216,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -10587,7 +10648,7 @@
             "pass": false
           },
           "nightCounts": {
-            "2026-10-02": 8,
+            "2026-10-02": 7,
             "2026-10-03": 4,
             "2026-10-09": 7,
             "2026-10-10": 3,
@@ -10596,7 +10657,7 @@
             "2026-10-23": 7,
             "2026-10-24": 3
           },
-          "gapScore": 19,
+          "gapScore": 20,
           "acquisition": {
             "coverageGroup": "East County",
             "primarySources": [
@@ -10685,67 +10746,6 @@
           }
         },
         {
-          "id": "liberty-station",
-          "name": "Liberty Station",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.7353,
-          "lng": -117.213,
-          "radiusMiles": 0.95,
-          "preciseEventsNext28d": 264,
-          "uniqueVenuesNext28d": 39,
-          "fridaySaturdayNightAverage": 6,
-          "fridaySaturdayNightMax": 19,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 141,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 19,
-            "2026-10-03": 6,
-            "2026-10-09": 3,
-            "2026-10-10": 4,
-            "2026-10-16": 4,
-            "2026-10-17": 5,
-            "2026-10-23": 3,
-            "2026-10-24": 4
-          },
-          "gapScore": 14,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "Liberty Station Events",
-              "Liberty Station Classes"
-            ],
-            "umbrellaSources": [
-              "City of San Diego Events"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 53,
-            "withWebsiteCount": 10,
-            "qualifiedCount": 1,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "pacific-beach",
           "name": "Pacific Beach",
           "group": "central-west",
@@ -10756,7 +10756,7 @@
           "lng": -117.2403,
           "radiusMiles": 1.35,
           "preciseEventsNext28d": 277,
-          "uniqueVenuesNext28d": 27,
+          "uniqueVenuesNext28d": 28,
           "fridaySaturdayNightAverage": 6.6,
           "fridaySaturdayNightMax": 11,
           "activeFridaySaturdayNights": 8,
@@ -10818,7 +10818,7 @@
           "lng": -117.182,
           "radiusMiles": 1,
           "preciseEventsNext28d": 184,
-          "uniqueVenuesNext28d": 14,
+          "uniqueVenuesNext28d": 15,
           "fridaySaturdayNightAverage": 4.4,
           "fridaySaturdayNightMax": 7,
           "activeFridaySaturdayNights": 8,
@@ -10878,13 +10878,13 @@
           "lat": 32.7157,
           "lng": -117.1611,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 1313,
-          "uniqueVenuesNext28d": 116,
-          "fridaySaturdayNightAverage": 37.4,
-          "fridaySaturdayNightMax": 53,
+          "preciseEventsNext28d": 1391,
+          "uniqueVenuesNext28d": 119,
+          "fridaySaturdayNightAverage": 39.8,
+          "fridaySaturdayNightMax": 56,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 941,
+          "recurringLocalOccurrences30d": 1021,
           "targets": {
             "fridaySaturdayNightAverage": 6,
             "recurringLocalOccurrences30d": 4
@@ -10895,14 +10895,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 53,
-            "2026-10-03": 37,
-            "2026-10-09": 41,
-            "2026-10-10": 25,
-            "2026-10-16": 42,
-            "2026-10-17": 32,
-            "2026-10-23": 39,
-            "2026-10-24": 30
+            "2026-10-02": 56,
+            "2026-10-03": 38,
+            "2026-10-09": 44,
+            "2026-10-10": 27,
+            "2026-10-16": 45,
+            "2026-10-17": 34,
+            "2026-10-23": 42,
+            "2026-10-24": 32
           },
           "gapScore": 0,
           "acquisition": {
@@ -10941,9 +10941,9 @@
           "lat": 32.7107,
           "lng": -117.1536,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 876,
+          "preciseEventsNext28d": 875,
           "uniqueVenuesNext28d": 63,
-          "fridaySaturdayNightAverage": 24.4,
+          "fridaySaturdayNightAverage": 24.3,
           "fridaySaturdayNightMax": 31,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
@@ -10959,7 +10959,7 @@
           },
           "nightCounts": {
             "2026-10-02": 31,
-            "2026-10-03": 23,
+            "2026-10-03": 22,
             "2026-10-09": 28,
             "2026-10-10": 16,
             "2026-10-16": 29,
@@ -11003,13 +11003,13 @@
           "lat": 32.7117,
           "lng": -117.1602,
           "radiusMiles": 0.85,
-          "preciseEventsNext28d": 966,
-          "uniqueVenuesNext28d": 74,
-          "fridaySaturdayNightAverage": 26.6,
-          "fridaySaturdayNightMax": 36,
+          "preciseEventsNext28d": 1017,
+          "uniqueVenuesNext28d": 76,
+          "fridaySaturdayNightAverage": 28,
+          "fridaySaturdayNightMax": 38,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 728,
+          "recurringLocalOccurrences30d": 780,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11020,14 +11020,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 36,
+            "2026-10-02": 38,
             "2026-10-03": 26,
-            "2026-10-09": 30,
-            "2026-10-10": 17,
-            "2026-10-16": 32,
-            "2026-10-17": 20,
-            "2026-10-23": 30,
-            "2026-10-24": 22
+            "2026-10-09": 32,
+            "2026-10-10": 18,
+            "2026-10-16": 34,
+            "2026-10-17": 21,
+            "2026-10-23": 32,
+            "2026-10-24": 23
           },
           "gapScore": 0,
           "acquisition": {
@@ -11066,13 +11066,13 @@
           "lat": 32.748,
           "lng": -117.162,
           "radiusMiles": 1.15,
-          "preciseEventsNext28d": 656,
-          "uniqueVenuesNext28d": 27,
-          "fridaySaturdayNightAverage": 12.1,
-          "fridaySaturdayNightMax": 16,
+          "preciseEventsNext28d": 684,
+          "uniqueVenuesNext28d": 28,
+          "fridaySaturdayNightAverage": 13.1,
+          "fridaySaturdayNightMax": 17,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 459,
+          "recurringLocalOccurrences30d": 487,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11083,14 +11083,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 16,
-            "2026-10-03": 10,
-            "2026-10-09": 13,
-            "2026-10-10": 10,
-            "2026-10-16": 14,
-            "2026-10-17": 10,
-            "2026-10-23": 14,
-            "2026-10-24": 10
+            "2026-10-02": 17,
+            "2026-10-03": 11,
+            "2026-10-09": 14,
+            "2026-10-10": 11,
+            "2026-10-16": 15,
+            "2026-10-17": 11,
+            "2026-10-23": 15,
+            "2026-10-24": 11
           },
           "gapScore": 0,
           "acquisition": {
@@ -11129,13 +11129,13 @@
           "lat": 32.724,
           "lng": -117.1687,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 622,
-          "uniqueVenuesNext28d": 55,
-          "fridaySaturdayNightAverage": 19.9,
-          "fridaySaturdayNightMax": 30,
+          "preciseEventsNext28d": 728,
+          "uniqueVenuesNext28d": 59,
+          "fridaySaturdayNightAverage": 23.3,
+          "fridaySaturdayNightMax": 34,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 412,
+          "recurringLocalOccurrences30d": 520,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11146,14 +11146,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 30,
-            "2026-10-03": 22,
-            "2026-10-09": 20,
-            "2026-10-10": 15,
-            "2026-10-16": 20,
-            "2026-10-17": 19,
-            "2026-10-23": 17,
-            "2026-10-24": 16
+            "2026-10-02": 34,
+            "2026-10-03": 24,
+            "2026-10-09": 24,
+            "2026-10-10": 18,
+            "2026-10-16": 24,
+            "2026-10-17": 22,
+            "2026-10-23": 21,
+            "2026-10-24": 19
           },
           "gapScore": 0,
           "acquisition": {
@@ -11191,13 +11191,13 @@
           "lat": 32.7475,
           "lng": -117.1297,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 722,
-          "uniqueVenuesNext28d": 43,
-          "fridaySaturdayNightAverage": 11,
-          "fridaySaturdayNightMax": 19,
+          "preciseEventsNext28d": 750,
+          "uniqueVenuesNext28d": 44,
+          "fridaySaturdayNightAverage": 12,
+          "fridaySaturdayNightMax": 20,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 472,
+          "recurringLocalOccurrences30d": 500,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11208,14 +11208,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 19,
-            "2026-10-03": 7,
-            "2026-10-09": 14,
-            "2026-10-10": 5,
-            "2026-10-16": 16,
-            "2026-10-17": 5,
-            "2026-10-23": 16,
-            "2026-10-24": 6
+            "2026-10-02": 20,
+            "2026-10-03": 8,
+            "2026-10-09": 15,
+            "2026-10-10": 6,
+            "2026-10-16": 17,
+            "2026-10-17": 6,
+            "2026-10-23": 17,
+            "2026-10-24": 7
           },
           "gapScore": 0,
           "acquisition": {
@@ -11254,13 +11254,13 @@
           "lat": 32.7096,
           "lng": -117.171,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 897,
-          "uniqueVenuesNext28d": 62,
-          "fridaySaturdayNightAverage": 24.9,
-          "fridaySaturdayNightMax": 32,
+          "preciseEventsNext28d": 948,
+          "uniqueVenuesNext28d": 64,
+          "fridaySaturdayNightAverage": 26.3,
+          "fridaySaturdayNightMax": 34,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 668,
+          "recurringLocalOccurrences30d": 720,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11271,14 +11271,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 32,
+            "2026-10-02": 34,
             "2026-10-03": 23,
-            "2026-10-09": 28,
-            "2026-10-10": 17,
-            "2026-10-16": 30,
-            "2026-10-17": 20,
-            "2026-10-23": 28,
-            "2026-10-24": 21
+            "2026-10-09": 30,
+            "2026-10-10": 18,
+            "2026-10-16": 32,
+            "2026-10-17": 21,
+            "2026-10-23": 30,
+            "2026-10-24": 22
           },
           "gapScore": 0,
           "acquisition": {
@@ -11317,13 +11317,13 @@
           "lat": 32.7673,
           "lng": -117.1518,
           "radiusMiles": 2.1,
-          "preciseEventsNext28d": 1029,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 20,
-          "fridaySaturdayNightMax": 29,
+          "preciseEventsNext28d": 1057,
+          "uniqueVenuesNext28d": 66,
+          "fridaySaturdayNightAverage": 21,
+          "fridaySaturdayNightMax": 30,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 748,
+          "recurringLocalOccurrences30d": 776,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11334,14 +11334,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 29,
-            "2026-10-03": 16,
-            "2026-10-09": 24,
-            "2026-10-10": 13,
-            "2026-10-16": 25,
-            "2026-10-17": 14,
-            "2026-10-23": 26,
-            "2026-10-24": 13
+            "2026-10-02": 30,
+            "2026-10-03": 17,
+            "2026-10-09": 25,
+            "2026-10-10": 14,
+            "2026-10-16": 26,
+            "2026-10-17": 15,
+            "2026-10-23": 27,
+            "2026-10-24": 14
           },
           "gapScore": 0,
           "acquisition": {
@@ -11379,13 +11379,13 @@
           "lat": 32.7637,
           "lng": -117.1179,
           "radiusMiles": 1,
-          "preciseEventsNext28d": 163,
-          "uniqueVenuesNext28d": 13,
-          "fridaySaturdayNightAverage": 5,
-          "fridaySaturdayNightMax": 9,
+          "preciseEventsNext28d": 191,
+          "uniqueVenuesNext28d": 14,
+          "fridaySaturdayNightAverage": 6,
+          "fridaySaturdayNightMax": 10,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 109,
+          "recurringLocalOccurrences30d": 137,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11396,14 +11396,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 9,
-            "2026-10-03": 4,
-            "2026-10-09": 6,
-            "2026-10-10": 2,
-            "2026-10-16": 7,
-            "2026-10-17": 2,
-            "2026-10-23": 7,
-            "2026-10-24": 3
+            "2026-10-02": 10,
+            "2026-10-03": 5,
+            "2026-10-09": 7,
+            "2026-10-10": 3,
+            "2026-10-16": 8,
+            "2026-10-17": 3,
+            "2026-10-23": 8,
+            "2026-10-24": 4
           },
           "gapScore": 0,
           "acquisition": {
@@ -11502,13 +11502,13 @@
           "lat": 32.7341,
           "lng": -117.1446,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 804,
-          "uniqueVenuesNext28d": 80,
-          "fridaySaturdayNightAverage": 12.9,
-          "fridaySaturdayNightMax": 21,
+          "preciseEventsNext28d": 831,
+          "uniqueVenuesNext28d": 81,
+          "fridaySaturdayNightAverage": 13.9,
+          "fridaySaturdayNightMax": 22,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 474,
+          "recurringLocalOccurrences30d": 502,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11519,14 +11519,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 21,
-            "2026-10-03": 12,
-            "2026-10-09": 14,
-            "2026-10-10": 9,
-            "2026-10-16": 16,
-            "2026-10-17": 10,
-            "2026-10-23": 14,
-            "2026-10-24": 7
+            "2026-10-02": 22,
+            "2026-10-03": 13,
+            "2026-10-09": 15,
+            "2026-10-10": 10,
+            "2026-10-16": 17,
+            "2026-10-17": 11,
+            "2026-10-23": 15,
+            "2026-10-24": 8
           },
           "gapScore": 0,
           "acquisition": {
@@ -11563,13 +11563,13 @@
           "lat": 32.7318,
           "lng": -117.1611,
           "radiusMiles": 0.95,
-          "preciseEventsNext28d": 441,
-          "uniqueVenuesNext28d": 66,
-          "fridaySaturdayNightAverage": 12.1,
-          "fridaySaturdayNightMax": 22,
+          "preciseEventsNext28d": 520,
+          "uniqueVenuesNext28d": 69,
+          "fridaySaturdayNightAverage": 14.6,
+          "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 223,
+          "recurringLocalOccurrences30d": 303,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11580,14 +11580,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 22,
-            "2026-10-03": 14,
-            "2026-10-09": 11,
-            "2026-10-10": 8,
-            "2026-10-16": 13,
-            "2026-10-17": 12,
-            "2026-10-23": 9,
-            "2026-10-24": 8
+            "2026-10-02": 25,
+            "2026-10-03": 16,
+            "2026-10-09": 14,
+            "2026-10-10": 10,
+            "2026-10-16": 16,
+            "2026-10-17": 14,
+            "2026-10-23": 12,
+            "2026-10-24": 10
           },
           "gapScore": 0,
           "acquisition": {
@@ -11623,13 +11623,13 @@
           "lat": 32.7488,
           "lng": -117.164,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 1333,
-          "uniqueVenuesNext28d": 106,
-          "fridaySaturdayNightAverage": 28.5,
-          "fridaySaturdayNightMax": 43,
+          "preciseEventsNext28d": 1388,
+          "uniqueVenuesNext28d": 109,
+          "fridaySaturdayNightAverage": 30.5,
+          "fridaySaturdayNightMax": 45,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 914,
+          "recurringLocalOccurrences30d": 970,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11640,14 +11640,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 43,
-            "2026-10-03": 25,
-            "2026-10-09": 32,
-            "2026-10-10": 20,
-            "2026-10-16": 34,
-            "2026-10-17": 23,
-            "2026-10-23": 32,
-            "2026-10-24": 19
+            "2026-10-02": 45,
+            "2026-10-03": 27,
+            "2026-10-09": 34,
+            "2026-10-10": 22,
+            "2026-10-16": 36,
+            "2026-10-17": 25,
+            "2026-10-23": 34,
+            "2026-10-24": 21
           },
           "gapScore": 0,
           "acquisition": {
@@ -11749,13 +11749,13 @@
           "lat": 32.7177,
           "lng": -117.1677,
           "radiusMiles": 0.75,
-          "preciseEventsNext28d": 935,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 27.6,
-          "fridaySaturdayNightMax": 36,
+          "preciseEventsNext28d": 1014,
+          "uniqueVenuesNext28d": 68,
+          "fridaySaturdayNightAverage": 30,
+          "fridaySaturdayNightMax": 39,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 676,
+          "recurringLocalOccurrences30d": 756,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11766,14 +11766,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 36,
-            "2026-10-03": 27,
-            "2026-10-09": 30,
-            "2026-10-10": 20,
-            "2026-10-16": 31,
-            "2026-10-17": 25,
-            "2026-10-23": 28,
-            "2026-10-24": 24
+            "2026-10-02": 39,
+            "2026-10-03": 28,
+            "2026-10-09": 33,
+            "2026-10-10": 22,
+            "2026-10-16": 34,
+            "2026-10-17": 27,
+            "2026-10-23": 31,
+            "2026-10-24": 26
           },
           "gapScore": 0,
           "acquisition": {
@@ -11809,13 +11809,13 @@
           "lat": 32.7218,
           "lng": -117.1572,
           "radiusMiles": 0.7,
-          "preciseEventsNext28d": 559,
-          "uniqueVenuesNext28d": 54,
-          "fridaySaturdayNightAverage": 16.1,
-          "fridaySaturdayNightMax": 24,
+          "preciseEventsNext28d": 613,
+          "uniqueVenuesNext28d": 56,
+          "fridaySaturdayNightAverage": 18,
+          "fridaySaturdayNightMax": 26,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 409,
+          "recurringLocalOccurrences30d": 465,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11826,14 +11826,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 24,
-            "2026-10-03": 17,
-            "2026-10-09": 18,
-            "2026-10-10": 12,
-            "2026-10-16": 18,
-            "2026-10-17": 14,
-            "2026-10-23": 15,
-            "2026-10-24": 11
+            "2026-10-02": 26,
+            "2026-10-03": 18,
+            "2026-10-09": 20,
+            "2026-10-10": 14,
+            "2026-10-16": 20,
+            "2026-10-17": 16,
+            "2026-10-23": 17,
+            "2026-10-24": 13
           },
           "gapScore": 0,
           "acquisition": {
@@ -11869,13 +11869,13 @@
           "lat": 32.7542,
           "lng": -117.211,
           "radiusMiles": 1.2,
-          "preciseEventsNext28d": 341,
-          "uniqueVenuesNext28d": 49,
-          "fridaySaturdayNightAverage": 7.3,
-          "fridaySaturdayNightMax": 21,
+          "preciseEventsNext28d": 323,
+          "uniqueVenuesNext28d": 48,
+          "fridaySaturdayNightAverage": 5.5,
+          "fridaySaturdayNightMax": 18,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 205,
+          "recurringLocalOccurrences30d": 192,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11886,14 +11886,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 21,
-            "2026-10-03": 5,
+            "2026-10-02": 18,
+            "2026-10-03": 2,
             "2026-10-09": 5,
-            "2026-10-10": 4,
-            "2026-10-16": 7,
-            "2026-10-17": 6,
+            "2026-10-10": 2,
+            "2026-10-16": 6,
+            "2026-10-17": 3,
             "2026-10-23": 7,
-            "2026-10-24": 3
+            "2026-10-24": 1
           },
           "gapScore": 0,
           "acquisition": {
@@ -11929,13 +11929,13 @@
           "lat": 32.7448,
           "lng": -116.9989,
           "radiusMiles": 2,
-          "preciseEventsNext28d": 1414,
+          "preciseEventsNext28d": 1415,
           "uniqueVenuesNext28d": 17,
-          "fridaySaturdayNightAverage": 5.4,
+          "fridaySaturdayNightAverage": 5.3,
           "fridaySaturdayNightMax": 10,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 623,
+          "recurringLocalOccurrences30d": 626,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11946,7 +11946,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 9,
+            "2026-10-02": 8,
             "2026-10-03": 3,
             "2026-10-09": 8,
             "2026-10-10": 2,
@@ -11991,13 +11991,13 @@
           "lat": 32.7757,
           "lng": -117.2264,
           "radiusMiles": 2.2,
-          "preciseEventsNext28d": 409,
-          "uniqueVenuesNext28d": 52,
-          "fridaySaturdayNightAverage": 7.9,
-          "fridaySaturdayNightMax": 13,
+          "preciseEventsNext28d": 445,
+          "uniqueVenuesNext28d": 55,
+          "fridaySaturdayNightAverage": 8.9,
+          "fridaySaturdayNightMax": 14,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 340,
+          "recurringLocalOccurrences30d": 376,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -12008,14 +12008,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 13,
-            "2026-10-03": 6,
-            "2026-10-09": 10,
-            "2026-10-10": 4,
-            "2026-10-16": 11,
-            "2026-10-17": 5,
-            "2026-10-23": 11,
-            "2026-10-24": 3
+            "2026-10-02": 14,
+            "2026-10-03": 7,
+            "2026-10-09": 11,
+            "2026-10-10": 5,
+            "2026-10-16": 12,
+            "2026-10-17": 6,
+            "2026-10-23": 12,
+            "2026-10-24": 4
           },
           "gapScore": 0,
           "acquisition": {
@@ -12053,13 +12053,13 @@
           "lat": 32.7318,
           "lng": -117.242,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 526,
-          "uniqueVenuesNext28d": 58,
-          "fridaySaturdayNightAverage": 11.9,
-          "fridaySaturdayNightMax": 27,
+          "preciseEventsNext28d": 508,
+          "uniqueVenuesNext28d": 57,
+          "fridaySaturdayNightAverage": 10.1,
+          "fridaySaturdayNightMax": 24,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 389,
+          "recurringLocalOccurrences30d": 376,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -12070,14 +12070,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 27,
-            "2026-10-03": 12,
+            "2026-10-02": 24,
+            "2026-10-03": 9,
             "2026-10-09": 10,
-            "2026-10-10": 7,
-            "2026-10-16": 11,
-            "2026-10-17": 9,
+            "2026-10-10": 5,
+            "2026-10-16": 10,
+            "2026-10-17": 6,
             "2026-10-23": 11,
-            "2026-10-24": 8
+            "2026-10-24": 6
           },
           "gapScore": 0,
           "acquisition": {
@@ -12116,13 +12116,13 @@
           "lat": 32.7275,
           "lng": -117.2315,
           "radiusMiles": 2,
-          "preciseEventsNext28d": 550,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 12,
-          "fridaySaturdayNightMax": 28,
+          "preciseEventsNext28d": 532,
+          "uniqueVenuesNext28d": 64,
+          "fridaySaturdayNightAverage": 10.3,
+          "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 407,
+          "recurringLocalOccurrences30d": 394,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -12133,14 +12133,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 28,
-            "2026-10-03": 12,
+            "2026-10-02": 25,
+            "2026-10-03": 9,
             "2026-10-09": 10,
-            "2026-10-10": 7,
-            "2026-10-16": 11,
-            "2026-10-17": 9,
+            "2026-10-10": 5,
+            "2026-10-16": 10,
+            "2026-10-17": 6,
             "2026-10-23": 11,
-            "2026-10-24": 8
+            "2026-10-24": 6
           },
           "gapScore": 0,
           "acquisition": {
@@ -12187,12 +12187,12 @@
           "north-central": {
             "measured": 26,
             "passing": 0,
-            "averageGapScore": 64.3
+            "averageGapScore": 64.1
           },
           "east-county": {
             "measured": 40,
             "passing": 1,
-            "averageGapScore": 72.6
+            "averageGapScore": 72.7
           },
           "uptown-midcity": {
             "measured": 18,
@@ -12202,12 +12202,12 @@
           "central-west": {
             "measured": 19,
             "passing": 5,
-            "averageGapScore": 34.3
+            "averageGapScore": 34.5
           },
           "north-county-inland": {
             "measured": 22,
             "passing": 0,
-            "averageGapScore": 87.9
+            "averageGapScore": 88
           },
           "north-county-coast": {
             "measured": 12,
@@ -17859,68 +17859,6 @@
           }
         },
         {
-          "id": "rancho-san-diego",
-          "name": "Rancho San Diego",
-          "group": "east-county",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 78,
-          "lat": 32.7476,
-          "lng": -116.9359,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 25,
-          "uniqueVenuesNext28d": 2,
-          "fridaySaturdayNightAverage": 0.5,
-          "fridaySaturdayNightMax": 1,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 24,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 0,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 62,
-          "acquisition": {
-            "coverageGroup": "East County",
-            "primarySources": [
-              "San Diego County Library"
-            ],
-            "umbrellaSources": [
-              "County Parks",
-              "Reader",
-              "relevant city/community organization"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
-          },
-          "discovery": {
-            "candidateCount": 21,
-            "withWebsiteCount": 19,
-            "qualifiedCount": 0,
-            "retryCount": 3
-          }
-        },
-        {
           "id": "allied-gardens",
           "name": "Allied Gardens",
           "group": "north-central",
@@ -18109,6 +18047,68 @@
           }
         },
         {
+          "id": "rancho-san-diego",
+          "name": "Rancho San Diego",
+          "group": "east-county",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 78,
+          "lat": 32.7476,
+          "lng": -116.9359,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 41,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 0.5,
+          "fridaySaturdayNightMax": 1,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 40,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 0,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 60,
+          "acquisition": {
+            "coverageGroup": "East County",
+            "primarySources": [
+              "San Diego County Library"
+            ],
+            "umbrellaSources": [
+              "County Parks",
+              "Reader",
+              "relevant city/community organization"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
+          },
+          "discovery": {
+            "candidateCount": 21,
+            "withWebsiteCount": 19,
+            "qualifiedCount": 0,
+            "retryCount": 3
+          }
+        },
+        {
           "id": "el-cerrito",
           "name": "El Cerrito",
           "group": "uptown-midcity",
@@ -18233,6 +18233,68 @@
           }
         },
         {
+          "id": "la-jolla-shores",
+          "name": "La Jolla Shores",
+          "group": "north-central",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 88,
+          "lat": 32.8575,
+          "lng": -117.2562,
+          "radiusMiles": 0.9,
+          "preciseEventsNext28d": 19,
+          "uniqueVenuesNext28d": 4,
+          "fridaySaturdayNightAverage": 0.5,
+          "fridaySaturdayNightMax": 1,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 8,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 1,
+            "2026-10-09": 0,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 1,
+            "2026-10-23": 0,
+            "2026-10-24": 0
+          },
+          "gapScore": 59,
+          "acquisition": {
+            "coverageGroup": "North Central",
+            "primarySources": [
+              "La Jolla by the Sea Events"
+            ],
+            "umbrellaSources": [
+              "UC San Diego",
+              "Reader",
+              "Comedy Store / venue sources"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 8,
+            "withWebsiteCount": 4,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "granite-hills",
           "name": "Granite Hills",
           "group": "east-county",
@@ -18290,68 +18352,6 @@
           "discovery": {
             "candidateCount": 4,
             "withWebsiteCount": 3,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "mission-beach",
-          "name": "Mission Beach",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.771,
-          "lng": -117.252,
-          "radiusMiles": 1.05,
-          "preciseEventsNext28d": 70,
-          "uniqueVenuesNext28d": 9,
-          "fridaySaturdayNightAverage": 0.6,
-          "fridaySaturdayNightMax": 2,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 52,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 2,
-            "2026-10-03": 0,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 57,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "City of San Diego Events",
-              "City Parks"
-            ],
-            "umbrellaSources": [
-              "Discover PB",
-              "Volo"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 18,
-            "withWebsiteCount": 8,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -18599,68 +18599,6 @@
           },
           "discovery": {
             "candidateCount": 6,
-            "withWebsiteCount": 4,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "la-jolla-shores",
-          "name": "La Jolla Shores",
-          "group": "north-central",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 88,
-          "lat": 32.8575,
-          "lng": -117.2562,
-          "radiusMiles": 0.9,
-          "preciseEventsNext28d": 27,
-          "uniqueVenuesNext28d": 5,
-          "fridaySaturdayNightAverage": 0.5,
-          "fridaySaturdayNightMax": 1,
-          "activeFridaySaturdayNights": 4,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 16,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 1,
-            "2026-10-09": 0,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 1,
-            "2026-10-23": 0,
-            "2026-10-24": 0
-          },
-          "gapScore": 57,
-          "acquisition": {
-            "coverageGroup": "North Central",
-            "primarySources": [
-              "La Jolla by the Sea Events"
-            ],
-            "umbrellaSources": [
-              "UC San Diego",
-              "Reader",
-              "Comedy Store / venue sources"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 8,
             "withWebsiteCount": 4,
             "qualifiedCount": 0,
             "retryCount": 0
@@ -19606,6 +19544,194 @@
           }
         },
         {
+          "id": "mission-beach",
+          "name": "Mission Beach",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.771,
+          "lng": -117.252,
+          "radiusMiles": 1.05,
+          "preciseEventsNext28d": 98,
+          "uniqueVenuesNext28d": 10,
+          "fridaySaturdayNightAverage": 1.6,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 80,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 3,
+            "2026-10-03": 1,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 2,
+            "2026-10-24": 1
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "City of San Diego Events",
+              "City Parks"
+            ],
+            "umbrellaSources": [
+              "Discover PB",
+              "Volo"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 18,
+            "withWebsiteCount": 8,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "downtown-escondido",
+          "name": "Downtown Escondido",
+          "group": "north-county-inland",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 92,
+          "lat": 33.121,
+          "lng": -117.081,
+          "radiusMiles": 1.1,
+          "preciseEventsNext28d": 68,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 1.3,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 49,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 5,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "North County Inland",
+            "primarySources": [
+              "City of Escondido Calendar",
+              "Downtown Escondido"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "SD Vintners",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 14,
+            "withWebsiteCount": 0,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "escondido",
+          "name": "Escondido",
+          "group": "north-county-inland",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 90,
+          "lat": 33.1192,
+          "lng": -117.0864,
+          "radiusMiles": 2.8,
+          "preciseEventsNext28d": 68,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 1.3,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 49,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 5,
+            "2026-10-09": 1,
+            "2026-10-10": 0,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 1,
+            "2026-10-24": 0
+          },
+          "gapScore": 50,
+          "acquisition": {
+            "coverageGroup": "North County Inland",
+            "primarySources": [
+              "City of Escondido Calendar",
+              "Downtown Escondido"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "SD Vintners",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 14,
+            "withWebsiteCount": 0,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "cardiff",
           "name": "Cardiff-by-the-Sea",
           "group": "north-county-coast",
@@ -19730,69 +19856,6 @@
           }
         },
         {
-          "id": "downtown-escondido",
-          "name": "Downtown Escondido",
-          "group": "north-county-inland",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 92,
-          "lat": 33.121,
-          "lng": -117.081,
-          "radiusMiles": 1.1,
-          "preciseEventsNext28d": 69,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 1.4,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 50,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 5,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 49,
-          "acquisition": {
-            "coverageGroup": "North County Inland",
-            "primarySources": [
-              "City of Escondido Calendar",
-              "Downtown Escondido"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "SD Vintners",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 14,
-            "withWebsiteCount": 0,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "del-mar",
           "name": "Del Mar",
           "group": "north-county-coast",
@@ -19850,69 +19913,6 @@
           "discovery": {
             "candidateCount": 24,
             "withWebsiteCount": 8,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "escondido",
-          "name": "Escondido",
-          "group": "north-county-inland",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 90,
-          "lat": 33.1192,
-          "lng": -117.0864,
-          "radiusMiles": 2.8,
-          "preciseEventsNext28d": 69,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 1.4,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 50,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 5,
-            "2026-10-09": 1,
-            "2026-10-10": 0,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 1,
-            "2026-10-24": 0
-          },
-          "gapScore": 49,
-          "acquisition": {
-            "coverageGroup": "North County Inland",
-            "primarySources": [
-              "City of Escondido Calendar",
-              "Downtown Escondido"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "SD Vintners",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 14,
-            "withWebsiteCount": 0,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -20168,6 +20168,68 @@
           }
         },
         {
+          "id": "lincoln-acres",
+          "name": "Lincoln Acres",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "suburban",
+          "discoveryPriority": 58,
+          "lat": 32.6675,
+          "lng": -117.072,
+          "radiusMiles": 0.9,
+          "preciseEventsNext28d": 28,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 0.8,
+          "fridaySaturdayNightMax": 2,
+          "activeFridaySaturdayNights": 4,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 24,
+          "targets": {
+            "fridaySaturdayNightAverage": 3,
+            "recurringLocalOccurrences30d": 2
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 0,
+            "2026-10-03": 0,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 1,
+            "2026-10-17": 0,
+            "2026-10-23": 2,
+            "2026-10-24": 0
+          },
+          "gapScore": 48,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of San Diego Events or relevant municipal calendar"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "Reader",
+              "parks"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 11,
+            "withWebsiteCount": 8,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "fashion-valley",
           "name": "Fashion Valley",
           "group": "central-west",
@@ -20299,13 +20361,13 @@
           "lat": 32.786,
           "lng": -117.205,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 39,
-          "uniqueVenuesNext28d": 11,
+          "preciseEventsNext28d": 47,
+          "uniqueVenuesNext28d": 12,
           "fridaySaturdayNightAverage": 0.6,
           "fridaySaturdayNightMax": 1,
           "activeFridaySaturdayNights": 5,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 20,
+          "recurringLocalOccurrences30d": 28,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -20468,68 +20530,6 @@
           "discovery": {
             "candidateCount": 18,
             "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
-          "id": "lincoln-acres",
-          "name": "Lincoln Acres",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "suburban",
-          "discoveryPriority": 58,
-          "lat": 32.6675,
-          "lng": -117.072,
-          "radiusMiles": 0.9,
-          "preciseEventsNext28d": 29,
-          "uniqueVenuesNext28d": 3,
-          "fridaySaturdayNightAverage": 0.9,
-          "fridaySaturdayNightMax": 2,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 25,
-          "targets": {
-            "fridaySaturdayNightAverage": 3,
-            "recurringLocalOccurrences30d": 2
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 0,
-            "2026-10-09": 2,
-            "2026-10-10": 1,
-            "2026-10-16": 1,
-            "2026-10-17": 0,
-            "2026-10-23": 2,
-            "2026-10-24": 0
-          },
-          "gapScore": 46,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of San Diego Events or relevant municipal calendar"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "Reader",
-              "parks"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 11,
-            "withWebsiteCount": 8,
             "qualifiedCount": 0,
             "retryCount": 0
           }
@@ -20856,13 +20856,13 @@
           "lat": 33.0651,
           "lng": -117.304,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 44,
+          "preciseEventsNext28d": 56,
           "uniqueVenuesNext28d": 3,
           "fridaySaturdayNightAverage": 2,
           "fridaySaturdayNightMax": 2,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
+          "recurringLocalOccurrences30d": 56,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -20979,13 +20979,13 @@
           "lat": 32.7847,
           "lng": -117.2022,
           "radiusMiles": 1,
-          "preciseEventsNext28d": 63,
-          "uniqueVenuesNext28d": 12,
+          "preciseEventsNext28d": 71,
+          "uniqueVenuesNext28d": 13,
           "fridaySaturdayNightAverage": 1.1,
           "fridaySaturdayNightMax": 2,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
+          "recurringLocalOccurrences30d": 52,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -21029,68 +21029,6 @@
             "withWebsiteCount": 2,
             "qualifiedCount": 0,
             "retryCount": 0
-          }
-        },
-        {
-          "id": "university-city-utc",
-          "name": "University City / UTC",
-          "group": "north-central",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 100,
-          "lat": 32.8703,
-          "lng": -117.2146,
-          "radiusMiles": 1.7,
-          "preciseEventsNext28d": 43,
-          "uniqueVenuesNext28d": 9,
-          "fridaySaturdayNightAverage": 1.3,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 36,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 1,
-            "2026-10-09": 1,
-            "2026-10-10": 1,
-            "2026-10-16": 1,
-            "2026-10-17": 1,
-            "2026-10-23": 1,
-            "2026-10-24": 1
-          },
-          "gapScore": 42,
-          "acquisition": {
-            "coverageGroup": "North Central",
-            "primarySources": [
-              "UC San Diego public events",
-              "City of San Diego Events"
-            ],
-            "umbrellaSources": [
-              "Volo",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 68,
-            "withWebsiteCount": 55,
-            "qualifiedCount": 0,
-            "retryCount": 8
           }
         },
         {
@@ -21156,127 +21094,6 @@
           }
         },
         {
-          "id": "coronado",
-          "name": "Coronado",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.6859,
-          "lng": -117.1831,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 131,
-          "uniqueVenuesNext28d": 8,
-          "fridaySaturdayNightAverage": 3.3,
-          "fridaySaturdayNightMax": 5,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 127,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 5,
-            "2026-10-03": 3,
-            "2026-10-09": 4,
-            "2026-10-10": 2,
-            "2026-10-16": 4,
-            "2026-10-17": 2,
-            "2026-10-23": 4,
-            "2026-10-24": 2
-          },
-          "gapScore": 40,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Coronado Calendar"
-            ],
-            "umbrellaSources": [
-              "Reader",
-              "Ticketmaster"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 22,
-            "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 6
-          }
-        },
-        {
-          "id": "grantville",
-          "name": "Grantville",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 82,
-          "lat": 32.7807,
-          "lng": -117.1042,
-          "radiusMiles": 1,
-          "preciseEventsNext28d": 45,
-          "uniqueVenuesNext28d": 5,
-          "fridaySaturdayNightAverage": 2.1,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 44,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 1,
-            "2026-10-03": 3,
-            "2026-10-09": 2,
-            "2026-10-10": 3,
-            "2026-10-16": 1,
-            "2026-10-17": 3,
-            "2026-10-23": 1,
-            "2026-10-24": 3
-          },
-          "gapScore": 39,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "City of San Diego Events"
-            ],
-            "umbrellaSources": [
-              "Explore Clairemont / venue sources / libraries as relevant"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 10,
-            "withWebsiteCount": 5,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "crest",
           "name": "Crest",
           "group": "east-county",
@@ -21339,6 +21156,66 @@
           }
         },
         {
+          "id": "grantville",
+          "name": "Grantville",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 82,
+          "lat": 32.7807,
+          "lng": -117.1042,
+          "radiusMiles": 1,
+          "preciseEventsNext28d": 57,
+          "uniqueVenuesNext28d": 6,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 56,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 1,
+            "2026-10-03": 3,
+            "2026-10-09": 2,
+            "2026-10-10": 3,
+            "2026-10-16": 1,
+            "2026-10-17": 3,
+            "2026-10-23": 1,
+            "2026-10-24": 3
+          },
+          "gapScore": 38,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "City of San Diego Events"
+            ],
+            "umbrellaSources": [
+              "Explore Clairemont / venue sources / libraries as relevant"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 10,
+            "withWebsiteCount": 5,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "downtown-la-mesa",
           "name": "La Mesa Village",
           "group": "east-county",
@@ -21348,13 +21225,13 @@
           "lat": 32.7655,
           "lng": -117.0189,
           "radiusMiles": 0.8,
-          "preciseEventsNext28d": 126,
+          "preciseEventsNext28d": 125,
           "uniqueVenuesNext28d": 13,
-          "fridaySaturdayNightAverage": 3.1,
-          "fridaySaturdayNightMax": 6,
+          "fridaySaturdayNightAverage": 3,
+          "fridaySaturdayNightMax": 5,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 121,
+          "recurringLocalOccurrences30d": 120,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -21365,7 +21242,7 @@
             "pass": false
           },
           "nightCounts": {
-            "2026-10-02": 6,
+            "2026-10-02": 5,
             "2026-10-03": 1,
             "2026-10-09": 5,
             "2026-10-10": 1,
@@ -21398,6 +21275,67 @@
             "withWebsiteCount": 19,
             "qualifiedCount": 0,
             "retryCount": 2
+          }
+        },
+        {
+          "id": "coronado",
+          "name": "Coronado",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.6859,
+          "lng": -117.1831,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 154,
+          "uniqueVenuesNext28d": 9,
+          "fridaySaturdayNightAverage": 3.6,
+          "fridaySaturdayNightMax": 5,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 150,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 5,
+            "2026-10-03": 3,
+            "2026-10-09": 5,
+            "2026-10-10": 2,
+            "2026-10-16": 5,
+            "2026-10-17": 2,
+            "2026-10-23": 5,
+            "2026-10-24": 2
+          },
+          "gapScore": 37,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Coronado Calendar"
+            ],
+            "umbrellaSources": [
+              "Reader",
+              "Ticketmaster"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 22,
+            "withWebsiteCount": 13,
+            "qualifiedCount": 0,
+            "retryCount": 6
           }
         },
         {
@@ -21460,6 +21398,68 @@
             "withWebsiteCount": 4,
             "qualifiedCount": 0,
             "retryCount": 0
+          }
+        },
+        {
+          "id": "university-city-utc",
+          "name": "University City / UTC",
+          "group": "north-central",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 100,
+          "lat": 32.8703,
+          "lng": -117.2146,
+          "radiusMiles": 1.7,
+          "preciseEventsNext28d": 67,
+          "uniqueVenuesNext28d": 10,
+          "fridaySaturdayNightAverage": 1.8,
+          "fridaySaturdayNightMax": 4,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 60,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 4,
+            "2026-10-03": 1,
+            "2026-10-09": 2,
+            "2026-10-10": 1,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 2,
+            "2026-10-24": 1
+          },
+          "gapScore": 35,
+          "acquisition": {
+            "coverageGroup": "North Central",
+            "primarySources": [
+              "UC San Diego public events",
+              "City of San Diego Events"
+            ],
+            "umbrellaSources": [
+              "Volo",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 68,
+            "withWebsiteCount": 55,
+            "qualifiedCount": 0,
+            "retryCount": 8
           }
         },
         {
@@ -21533,7 +21533,7 @@
           "lng": -117.1971,
           "radiusMiles": 0.9,
           "preciseEventsNext28d": 91,
-          "uniqueVenuesNext28d": 12,
+          "uniqueVenuesNext28d": 13,
           "fridaySaturdayNightAverage": 1.8,
           "fridaySaturdayNightMax": 4,
           "activeFridaySaturdayNights": 6,
@@ -21644,6 +21644,67 @@
             "withWebsiteCount": 18,
             "qualifiedCount": 0,
             "retryCount": 1
+          }
+        },
+        {
+          "id": "chula-vista",
+          "name": "Chula Vista",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "urban",
+          "discoveryPriority": 94,
+          "lat": 32.6401,
+          "lng": -117.0842,
+          "radiusMiles": 3,
+          "preciseEventsNext28d": 80,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 3,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 72,
+          "targets": {
+            "fridaySaturdayNightAverage": 5,
+            "recurringLocalOccurrences30d": 4
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 2,
+            "2026-10-03": 2,
+            "2026-10-09": 3,
+            "2026-10-10": 2,
+            "2026-10-16": 2,
+            "2026-10-17": 1,
+            "2026-10-23": 3,
+            "2026-10-24": 2
+          },
+          "gapScore": 32,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Chula Vista Calendar"
+            ],
+            "umbrellaSources": [
+              "County Library",
+              "Reader"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 67,
+            "withWebsiteCount": 55,
+            "qualifiedCount": 0,
+            "retryCount": 4
           }
         },
         {
@@ -21832,67 +21893,6 @@
           }
         },
         {
-          "id": "chula-vista",
-          "name": "Chula Vista",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "urban",
-          "discoveryPriority": 94,
-          "lat": 32.6401,
-          "lng": -117.0842,
-          "radiusMiles": 3,
-          "preciseEventsNext28d": 81,
-          "uniqueVenuesNext28d": 12,
-          "fridaySaturdayNightAverage": 2.3,
-          "fridaySaturdayNightMax": 3,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 73,
-          "targets": {
-            "fridaySaturdayNightAverage": 5,
-            "recurringLocalOccurrences30d": 4
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 3,
-            "2026-10-03": 2,
-            "2026-10-09": 3,
-            "2026-10-10": 2,
-            "2026-10-16": 2,
-            "2026-10-17": 1,
-            "2026-10-23": 3,
-            "2026-10-24": 2
-          },
-          "gapScore": 30,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Chula Vista Calendar"
-            ],
-            "umbrellaSources": [
-              "County Library",
-              "Reader"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 67,
-            "withWebsiteCount": 55,
-            "qualifiedCount": 0,
-            "retryCount": 4
-          }
-        },
-        {
           "id": "eastern-area",
           "name": "Eastern Area",
           "group": "uptown-midcity",
@@ -21966,7 +21966,7 @@
           "lng": -117.251,
           "radiusMiles": 1.15,
           "preciseEventsNext28d": 216,
-          "uniqueVenuesNext28d": 19,
+          "uniqueVenuesNext28d": 20,
           "fridaySaturdayNightAverage": 3.9,
           "fridaySaturdayNightMax": 6,
           "activeFridaySaturdayNights": 8,
@@ -22142,6 +22142,129 @@
           }
         },
         {
+          "id": "liberty-station",
+          "name": "Liberty Station",
+          "group": "central-west",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.7353,
+          "lng": -117.213,
+          "radiusMiles": 0.95,
+          "preciseEventsNext28d": 246,
+          "uniqueVenuesNext28d": 37,
+          "fridaySaturdayNightAverage": 4.3,
+          "fridaySaturdayNightMax": 16,
+          "activeFridaySaturdayNights": 8,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 128,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 16,
+            "2026-10-03": 3,
+            "2026-10-09": 3,
+            "2026-10-10": 2,
+            "2026-10-16": 3,
+            "2026-10-17": 2,
+            "2026-10-23": 3,
+            "2026-10-24": 2
+          },
+          "gapScore": 25,
+          "acquisition": {
+            "coverageGroup": "Central West",
+            "primarySources": [
+              "Liberty Station Events",
+              "Liberty Station Classes"
+            ],
+            "umbrellaSources": [
+              "City of San Diego Events"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 53,
+            "withWebsiteCount": 10,
+            "qualifiedCount": 1,
+            "retryCount": 0
+          }
+        },
+        {
+          "id": "casa-de-oro",
+          "name": "Casa de Oro",
+          "group": "east-county",
+          "kind": "coverage-area",
+          "coverageClass": "suburban",
+          "discoveryPriority": 68,
+          "lat": 32.7495,
+          "lng": -116.9813,
+          "radiusMiles": 1.2,
+          "preciseEventsNext28d": 1301,
+          "uniqueVenuesNext28d": 3,
+          "fridaySaturdayNightAverage": 2.1,
+          "fridaySaturdayNightMax": 6,
+          "activeFridaySaturdayNights": 5,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 518,
+          "targets": {
+            "fridaySaturdayNightAverage": 3,
+            "recurringLocalOccurrences30d": 2
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 3,
+            "2026-10-03": 1,
+            "2026-10-09": 4,
+            "2026-10-10": 0,
+            "2026-10-16": 3,
+            "2026-10-17": 0,
+            "2026-10-23": 6,
+            "2026-10-24": 0
+          },
+          "gapScore": 24,
+          "acquisition": {
+            "coverageGroup": "East County",
+            "primarySources": [
+              "San Diego County Library"
+            ],
+            "umbrellaSources": [
+              "County Parks",
+              "Reader",
+              "relevant city/community organization"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "Medium",
+            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
+          },
+          "discovery": {
+            "candidateCount": 9,
+            "withWebsiteCount": 6,
+            "qualifiedCount": 0,
+            "retryCount": 0
+          }
+        },
+        {
           "id": "clairemont",
           "name": "Clairemont Mesa",
           "group": "central-west",
@@ -22204,68 +22327,6 @@
           }
         },
         {
-          "id": "casa-de-oro",
-          "name": "Casa de Oro",
-          "group": "east-county",
-          "kind": "coverage-area",
-          "coverageClass": "suburban",
-          "discoveryPriority": 68,
-          "lat": 32.7495,
-          "lng": -116.9813,
-          "radiusMiles": 1.2,
-          "preciseEventsNext28d": 1300,
-          "uniqueVenuesNext28d": 3,
-          "fridaySaturdayNightAverage": 2.3,
-          "fridaySaturdayNightMax": 6,
-          "activeFridaySaturdayNights": 5,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 515,
-          "targets": {
-            "fridaySaturdayNightAverage": 3,
-            "recurringLocalOccurrences30d": 2
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 4,
-            "2026-10-03": 1,
-            "2026-10-09": 4,
-            "2026-10-10": 0,
-            "2026-10-16": 3,
-            "2026-10-17": 0,
-            "2026-10-23": 6,
-            "2026-10-24": 0
-          },
-          "gapScore": 20,
-          "acquisition": {
-            "coverageGroup": "East County",
-            "primarySources": [
-              "San Diego County Library"
-            ],
-            "umbrellaSources": [
-              "County Parks",
-              "Reader",
-              "relevant city/community organization"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "Medium",
-            "notes": "Use branch/location mapping for Alpine, Lakeside, Ramona, Spring Valley, Rancho San Diego, Julian and other unincorporated areas."
-          },
-          "discovery": {
-            "candidateCount": 9,
-            "withWebsiteCount": 6,
-            "qualifiedCount": 0,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "la-mesa",
           "name": "La Mesa",
           "group": "east-county",
@@ -22275,13 +22336,13 @@
           "lat": 32.7678,
           "lng": -117.0231,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 208,
-          "uniqueVenuesNext28d": 22,
-          "fridaySaturdayNightAverage": 5.3,
-          "fridaySaturdayNightMax": 8,
+          "preciseEventsNext28d": 223,
+          "uniqueVenuesNext28d": 23,
+          "fridaySaturdayNightAverage": 5.1,
+          "fridaySaturdayNightMax": 7,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 201,
+          "recurringLocalOccurrences30d": 216,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22292,7 +22353,7 @@
             "pass": false
           },
           "nightCounts": {
-            "2026-10-02": 8,
+            "2026-10-02": 7,
             "2026-10-03": 4,
             "2026-10-09": 7,
             "2026-10-10": 3,
@@ -22301,7 +22362,7 @@
             "2026-10-23": 7,
             "2026-10-24": 3
           },
-          "gapScore": 19,
+          "gapScore": 20,
           "acquisition": {
             "coverageGroup": "East County",
             "primarySources": [
@@ -22390,67 +22451,6 @@
           }
         },
         {
-          "id": "liberty-station",
-          "name": "Liberty Station",
-          "group": "central-west",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.7353,
-          "lng": -117.213,
-          "radiusMiles": 0.95,
-          "preciseEventsNext28d": 264,
-          "uniqueVenuesNext28d": 39,
-          "fridaySaturdayNightAverage": 6,
-          "fridaySaturdayNightMax": 19,
-          "activeFridaySaturdayNights": 8,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 141,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 19,
-            "2026-10-03": 6,
-            "2026-10-09": 3,
-            "2026-10-10": 4,
-            "2026-10-16": 4,
-            "2026-10-17": 5,
-            "2026-10-23": 3,
-            "2026-10-24": 4
-          },
-          "gapScore": 14,
-          "acquisition": {
-            "coverageGroup": "Central West",
-            "primarySources": [
-              "Liberty Station Events",
-              "Liberty Station Classes"
-            ],
-            "umbrellaSources": [
-              "City of San Diego Events"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 53,
-            "withWebsiteCount": 10,
-            "qualifiedCount": 1,
-            "retryCount": 0
-          }
-        },
-        {
           "id": "pacific-beach",
           "name": "Pacific Beach",
           "group": "central-west",
@@ -22461,7 +22461,7 @@
           "lng": -117.2403,
           "radiusMiles": 1.35,
           "preciseEventsNext28d": 277,
-          "uniqueVenuesNext28d": 27,
+          "uniqueVenuesNext28d": 28,
           "fridaySaturdayNightAverage": 6.6,
           "fridaySaturdayNightMax": 11,
           "activeFridaySaturdayNights": 8,
@@ -22523,7 +22523,7 @@
           "lng": -117.182,
           "radiusMiles": 1,
           "preciseEventsNext28d": 184,
-          "uniqueVenuesNext28d": 14,
+          "uniqueVenuesNext28d": 15,
           "fridaySaturdayNightAverage": 4.4,
           "fridaySaturdayNightMax": 7,
           "activeFridaySaturdayNights": 8,
@@ -22583,13 +22583,13 @@
           "lat": 32.7157,
           "lng": -117.1611,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 1313,
-          "uniqueVenuesNext28d": 116,
-          "fridaySaturdayNightAverage": 37.4,
-          "fridaySaturdayNightMax": 53,
+          "preciseEventsNext28d": 1391,
+          "uniqueVenuesNext28d": 119,
+          "fridaySaturdayNightAverage": 39.8,
+          "fridaySaturdayNightMax": 56,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 941,
+          "recurringLocalOccurrences30d": 1021,
           "targets": {
             "fridaySaturdayNightAverage": 6,
             "recurringLocalOccurrences30d": 4
@@ -22600,14 +22600,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 53,
-            "2026-10-03": 37,
-            "2026-10-09": 41,
-            "2026-10-10": 25,
-            "2026-10-16": 42,
-            "2026-10-17": 32,
-            "2026-10-23": 39,
-            "2026-10-24": 30
+            "2026-10-02": 56,
+            "2026-10-03": 38,
+            "2026-10-09": 44,
+            "2026-10-10": 27,
+            "2026-10-16": 45,
+            "2026-10-17": 34,
+            "2026-10-23": 42,
+            "2026-10-24": 32
           },
           "gapScore": 0,
           "acquisition": {
@@ -22646,9 +22646,9 @@
           "lat": 32.7107,
           "lng": -117.1536,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 876,
+          "preciseEventsNext28d": 875,
           "uniqueVenuesNext28d": 63,
-          "fridaySaturdayNightAverage": 24.4,
+          "fridaySaturdayNightAverage": 24.3,
           "fridaySaturdayNightMax": 31,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
@@ -22664,7 +22664,7 @@
           },
           "nightCounts": {
             "2026-10-02": 31,
-            "2026-10-03": 23,
+            "2026-10-03": 22,
             "2026-10-09": 28,
             "2026-10-10": 16,
             "2026-10-16": 29,
@@ -22708,13 +22708,13 @@
           "lat": 32.7117,
           "lng": -117.1602,
           "radiusMiles": 0.85,
-          "preciseEventsNext28d": 966,
-          "uniqueVenuesNext28d": 74,
-          "fridaySaturdayNightAverage": 26.6,
-          "fridaySaturdayNightMax": 36,
+          "preciseEventsNext28d": 1017,
+          "uniqueVenuesNext28d": 76,
+          "fridaySaturdayNightAverage": 28,
+          "fridaySaturdayNightMax": 38,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 728,
+          "recurringLocalOccurrences30d": 780,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22725,14 +22725,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 36,
+            "2026-10-02": 38,
             "2026-10-03": 26,
-            "2026-10-09": 30,
-            "2026-10-10": 17,
-            "2026-10-16": 32,
-            "2026-10-17": 20,
-            "2026-10-23": 30,
-            "2026-10-24": 22
+            "2026-10-09": 32,
+            "2026-10-10": 18,
+            "2026-10-16": 34,
+            "2026-10-17": 21,
+            "2026-10-23": 32,
+            "2026-10-24": 23
           },
           "gapScore": 0,
           "acquisition": {
@@ -22771,13 +22771,13 @@
           "lat": 32.748,
           "lng": -117.162,
           "radiusMiles": 1.15,
-          "preciseEventsNext28d": 656,
-          "uniqueVenuesNext28d": 27,
-          "fridaySaturdayNightAverage": 12.1,
-          "fridaySaturdayNightMax": 16,
+          "preciseEventsNext28d": 684,
+          "uniqueVenuesNext28d": 28,
+          "fridaySaturdayNightAverage": 13.1,
+          "fridaySaturdayNightMax": 17,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 459,
+          "recurringLocalOccurrences30d": 487,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22788,14 +22788,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 16,
-            "2026-10-03": 10,
-            "2026-10-09": 13,
-            "2026-10-10": 10,
-            "2026-10-16": 14,
-            "2026-10-17": 10,
-            "2026-10-23": 14,
-            "2026-10-24": 10
+            "2026-10-02": 17,
+            "2026-10-03": 11,
+            "2026-10-09": 14,
+            "2026-10-10": 11,
+            "2026-10-16": 15,
+            "2026-10-17": 11,
+            "2026-10-23": 15,
+            "2026-10-24": 11
           },
           "gapScore": 0,
           "acquisition": {
@@ -22834,13 +22834,13 @@
           "lat": 32.724,
           "lng": -117.1687,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 622,
-          "uniqueVenuesNext28d": 55,
-          "fridaySaturdayNightAverage": 19.9,
-          "fridaySaturdayNightMax": 30,
+          "preciseEventsNext28d": 728,
+          "uniqueVenuesNext28d": 59,
+          "fridaySaturdayNightAverage": 23.3,
+          "fridaySaturdayNightMax": 34,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 412,
+          "recurringLocalOccurrences30d": 520,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22851,14 +22851,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 30,
-            "2026-10-03": 22,
-            "2026-10-09": 20,
-            "2026-10-10": 15,
-            "2026-10-16": 20,
-            "2026-10-17": 19,
-            "2026-10-23": 17,
-            "2026-10-24": 16
+            "2026-10-02": 34,
+            "2026-10-03": 24,
+            "2026-10-09": 24,
+            "2026-10-10": 18,
+            "2026-10-16": 24,
+            "2026-10-17": 22,
+            "2026-10-23": 21,
+            "2026-10-24": 19
           },
           "gapScore": 0,
           "acquisition": {
@@ -22896,13 +22896,13 @@
           "lat": 32.7475,
           "lng": -117.1297,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 722,
-          "uniqueVenuesNext28d": 43,
-          "fridaySaturdayNightAverage": 11,
-          "fridaySaturdayNightMax": 19,
+          "preciseEventsNext28d": 750,
+          "uniqueVenuesNext28d": 44,
+          "fridaySaturdayNightAverage": 12,
+          "fridaySaturdayNightMax": 20,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 472,
+          "recurringLocalOccurrences30d": 500,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22913,14 +22913,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 19,
-            "2026-10-03": 7,
-            "2026-10-09": 14,
-            "2026-10-10": 5,
-            "2026-10-16": 16,
-            "2026-10-17": 5,
-            "2026-10-23": 16,
-            "2026-10-24": 6
+            "2026-10-02": 20,
+            "2026-10-03": 8,
+            "2026-10-09": 15,
+            "2026-10-10": 6,
+            "2026-10-16": 17,
+            "2026-10-17": 6,
+            "2026-10-23": 17,
+            "2026-10-24": 7
           },
           "gapScore": 0,
           "acquisition": {
@@ -22959,13 +22959,13 @@
           "lat": 32.7096,
           "lng": -117.171,
           "radiusMiles": 0.9,
-          "preciseEventsNext28d": 897,
-          "uniqueVenuesNext28d": 62,
-          "fridaySaturdayNightAverage": 24.9,
-          "fridaySaturdayNightMax": 32,
+          "preciseEventsNext28d": 948,
+          "uniqueVenuesNext28d": 64,
+          "fridaySaturdayNightAverage": 26.3,
+          "fridaySaturdayNightMax": 34,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 668,
+          "recurringLocalOccurrences30d": 720,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22976,14 +22976,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 32,
+            "2026-10-02": 34,
             "2026-10-03": 23,
-            "2026-10-09": 28,
-            "2026-10-10": 17,
-            "2026-10-16": 30,
-            "2026-10-17": 20,
-            "2026-10-23": 28,
-            "2026-10-24": 21
+            "2026-10-09": 30,
+            "2026-10-10": 18,
+            "2026-10-16": 32,
+            "2026-10-17": 21,
+            "2026-10-23": 30,
+            "2026-10-24": 22
           },
           "gapScore": 0,
           "acquisition": {
@@ -23022,13 +23022,13 @@
           "lat": 32.7673,
           "lng": -117.1518,
           "radiusMiles": 2.1,
-          "preciseEventsNext28d": 1029,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 20,
-          "fridaySaturdayNightMax": 29,
+          "preciseEventsNext28d": 1057,
+          "uniqueVenuesNext28d": 66,
+          "fridaySaturdayNightAverage": 21,
+          "fridaySaturdayNightMax": 30,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 748,
+          "recurringLocalOccurrences30d": 776,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23039,14 +23039,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 29,
-            "2026-10-03": 16,
-            "2026-10-09": 24,
-            "2026-10-10": 13,
-            "2026-10-16": 25,
-            "2026-10-17": 14,
-            "2026-10-23": 26,
-            "2026-10-24": 13
+            "2026-10-02": 30,
+            "2026-10-03": 17,
+            "2026-10-09": 25,
+            "2026-10-10": 14,
+            "2026-10-16": 26,
+            "2026-10-17": 15,
+            "2026-10-23": 27,
+            "2026-10-24": 14
           },
           "gapScore": 0,
           "acquisition": {
@@ -23084,13 +23084,13 @@
           "lat": 32.7637,
           "lng": -117.1179,
           "radiusMiles": 1,
-          "preciseEventsNext28d": 163,
-          "uniqueVenuesNext28d": 13,
-          "fridaySaturdayNightAverage": 5,
-          "fridaySaturdayNightMax": 9,
+          "preciseEventsNext28d": 191,
+          "uniqueVenuesNext28d": 14,
+          "fridaySaturdayNightAverage": 6,
+          "fridaySaturdayNightMax": 10,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 109,
+          "recurringLocalOccurrences30d": 137,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23101,14 +23101,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 9,
-            "2026-10-03": 4,
-            "2026-10-09": 6,
-            "2026-10-10": 2,
-            "2026-10-16": 7,
-            "2026-10-17": 2,
-            "2026-10-23": 7,
-            "2026-10-24": 3
+            "2026-10-02": 10,
+            "2026-10-03": 5,
+            "2026-10-09": 7,
+            "2026-10-10": 3,
+            "2026-10-16": 8,
+            "2026-10-17": 3,
+            "2026-10-23": 8,
+            "2026-10-24": 4
           },
           "gapScore": 0,
           "acquisition": {
@@ -23207,13 +23207,13 @@
           "lat": 32.7341,
           "lng": -117.1446,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 804,
-          "uniqueVenuesNext28d": 80,
-          "fridaySaturdayNightAverage": 12.9,
-          "fridaySaturdayNightMax": 21,
+          "preciseEventsNext28d": 831,
+          "uniqueVenuesNext28d": 81,
+          "fridaySaturdayNightAverage": 13.9,
+          "fridaySaturdayNightMax": 22,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 474,
+          "recurringLocalOccurrences30d": 502,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23224,14 +23224,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 21,
-            "2026-10-03": 12,
-            "2026-10-09": 14,
-            "2026-10-10": 9,
-            "2026-10-16": 16,
-            "2026-10-17": 10,
-            "2026-10-23": 14,
-            "2026-10-24": 7
+            "2026-10-02": 22,
+            "2026-10-03": 13,
+            "2026-10-09": 15,
+            "2026-10-10": 10,
+            "2026-10-16": 17,
+            "2026-10-17": 11,
+            "2026-10-23": 15,
+            "2026-10-24": 8
           },
           "gapScore": 0,
           "acquisition": {
@@ -23268,13 +23268,13 @@
           "lat": 32.7318,
           "lng": -117.1611,
           "radiusMiles": 0.95,
-          "preciseEventsNext28d": 441,
-          "uniqueVenuesNext28d": 66,
-          "fridaySaturdayNightAverage": 12.1,
-          "fridaySaturdayNightMax": 22,
+          "preciseEventsNext28d": 520,
+          "uniqueVenuesNext28d": 69,
+          "fridaySaturdayNightAverage": 14.6,
+          "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 223,
+          "recurringLocalOccurrences30d": 303,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23285,14 +23285,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 22,
-            "2026-10-03": 14,
-            "2026-10-09": 11,
-            "2026-10-10": 8,
-            "2026-10-16": 13,
-            "2026-10-17": 12,
-            "2026-10-23": 9,
-            "2026-10-24": 8
+            "2026-10-02": 25,
+            "2026-10-03": 16,
+            "2026-10-09": 14,
+            "2026-10-10": 10,
+            "2026-10-16": 16,
+            "2026-10-17": 14,
+            "2026-10-23": 12,
+            "2026-10-24": 10
           },
           "gapScore": 0,
           "acquisition": {
@@ -23328,13 +23328,13 @@
           "lat": 32.7488,
           "lng": -117.164,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 1333,
-          "uniqueVenuesNext28d": 106,
-          "fridaySaturdayNightAverage": 28.5,
-          "fridaySaturdayNightMax": 43,
+          "preciseEventsNext28d": 1388,
+          "uniqueVenuesNext28d": 109,
+          "fridaySaturdayNightAverage": 30.5,
+          "fridaySaturdayNightMax": 45,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 914,
+          "recurringLocalOccurrences30d": 970,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23345,14 +23345,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 43,
-            "2026-10-03": 25,
-            "2026-10-09": 32,
-            "2026-10-10": 20,
-            "2026-10-16": 34,
-            "2026-10-17": 23,
-            "2026-10-23": 32,
-            "2026-10-24": 19
+            "2026-10-02": 45,
+            "2026-10-03": 27,
+            "2026-10-09": 34,
+            "2026-10-10": 22,
+            "2026-10-16": 36,
+            "2026-10-17": 25,
+            "2026-10-23": 34,
+            "2026-10-24": 21
           },
           "gapScore": 0,
           "acquisition": {
@@ -23454,13 +23454,13 @@
           "lat": 32.7177,
           "lng": -117.1677,
           "radiusMiles": 0.75,
-          "preciseEventsNext28d": 935,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 27.6,
-          "fridaySaturdayNightMax": 36,
+          "preciseEventsNext28d": 1014,
+          "uniqueVenuesNext28d": 68,
+          "fridaySaturdayNightAverage": 30,
+          "fridaySaturdayNightMax": 39,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 676,
+          "recurringLocalOccurrences30d": 756,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23471,14 +23471,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 36,
-            "2026-10-03": 27,
-            "2026-10-09": 30,
-            "2026-10-10": 20,
-            "2026-10-16": 31,
-            "2026-10-17": 25,
-            "2026-10-23": 28,
-            "2026-10-24": 24
+            "2026-10-02": 39,
+            "2026-10-03": 28,
+            "2026-10-09": 33,
+            "2026-10-10": 22,
+            "2026-10-16": 34,
+            "2026-10-17": 27,
+            "2026-10-23": 31,
+            "2026-10-24": 26
           },
           "gapScore": 0,
           "acquisition": {
@@ -23514,13 +23514,13 @@
           "lat": 32.7218,
           "lng": -117.1572,
           "radiusMiles": 0.7,
-          "preciseEventsNext28d": 559,
-          "uniqueVenuesNext28d": 54,
-          "fridaySaturdayNightAverage": 16.1,
-          "fridaySaturdayNightMax": 24,
+          "preciseEventsNext28d": 613,
+          "uniqueVenuesNext28d": 56,
+          "fridaySaturdayNightAverage": 18,
+          "fridaySaturdayNightMax": 26,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 409,
+          "recurringLocalOccurrences30d": 465,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23531,14 +23531,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 24,
-            "2026-10-03": 17,
-            "2026-10-09": 18,
-            "2026-10-10": 12,
-            "2026-10-16": 18,
-            "2026-10-17": 14,
-            "2026-10-23": 15,
-            "2026-10-24": 11
+            "2026-10-02": 26,
+            "2026-10-03": 18,
+            "2026-10-09": 20,
+            "2026-10-10": 14,
+            "2026-10-16": 20,
+            "2026-10-17": 16,
+            "2026-10-23": 17,
+            "2026-10-24": 13
           },
           "gapScore": 0,
           "acquisition": {
@@ -23574,13 +23574,13 @@
           "lat": 32.7542,
           "lng": -117.211,
           "radiusMiles": 1.2,
-          "preciseEventsNext28d": 341,
-          "uniqueVenuesNext28d": 49,
-          "fridaySaturdayNightAverage": 7.3,
-          "fridaySaturdayNightMax": 21,
+          "preciseEventsNext28d": 323,
+          "uniqueVenuesNext28d": 48,
+          "fridaySaturdayNightAverage": 5.5,
+          "fridaySaturdayNightMax": 18,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 205,
+          "recurringLocalOccurrences30d": 192,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23591,14 +23591,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 21,
-            "2026-10-03": 5,
+            "2026-10-02": 18,
+            "2026-10-03": 2,
             "2026-10-09": 5,
-            "2026-10-10": 4,
-            "2026-10-16": 7,
-            "2026-10-17": 6,
+            "2026-10-10": 2,
+            "2026-10-16": 6,
+            "2026-10-17": 3,
             "2026-10-23": 7,
-            "2026-10-24": 3
+            "2026-10-24": 1
           },
           "gapScore": 0,
           "acquisition": {
@@ -23634,13 +23634,13 @@
           "lat": 32.7448,
           "lng": -116.9989,
           "radiusMiles": 2,
-          "preciseEventsNext28d": 1414,
+          "preciseEventsNext28d": 1415,
           "uniqueVenuesNext28d": 17,
-          "fridaySaturdayNightAverage": 5.4,
+          "fridaySaturdayNightAverage": 5.3,
           "fridaySaturdayNightMax": 10,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 623,
+          "recurringLocalOccurrences30d": 626,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23651,7 +23651,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 9,
+            "2026-10-02": 8,
             "2026-10-03": 3,
             "2026-10-09": 8,
             "2026-10-10": 2,
@@ -23696,13 +23696,13 @@
           "lat": 32.7757,
           "lng": -117.2264,
           "radiusMiles": 2.2,
-          "preciseEventsNext28d": 409,
-          "uniqueVenuesNext28d": 52,
-          "fridaySaturdayNightAverage": 7.9,
-          "fridaySaturdayNightMax": 13,
+          "preciseEventsNext28d": 445,
+          "uniqueVenuesNext28d": 55,
+          "fridaySaturdayNightAverage": 8.9,
+          "fridaySaturdayNightMax": 14,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 340,
+          "recurringLocalOccurrences30d": 376,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -23713,14 +23713,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 13,
-            "2026-10-03": 6,
-            "2026-10-09": 10,
-            "2026-10-10": 4,
-            "2026-10-16": 11,
-            "2026-10-17": 5,
-            "2026-10-23": 11,
-            "2026-10-24": 3
+            "2026-10-02": 14,
+            "2026-10-03": 7,
+            "2026-10-09": 11,
+            "2026-10-10": 5,
+            "2026-10-16": 12,
+            "2026-10-17": 6,
+            "2026-10-23": 12,
+            "2026-10-24": 4
           },
           "gapScore": 0,
           "acquisition": {
@@ -23758,13 +23758,13 @@
           "lat": 32.7318,
           "lng": -117.242,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 526,
-          "uniqueVenuesNext28d": 58,
-          "fridaySaturdayNightAverage": 11.9,
-          "fridaySaturdayNightMax": 27,
+          "preciseEventsNext28d": 508,
+          "uniqueVenuesNext28d": 57,
+          "fridaySaturdayNightAverage": 10.1,
+          "fridaySaturdayNightMax": 24,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 389,
+          "recurringLocalOccurrences30d": 376,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -23775,14 +23775,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 27,
-            "2026-10-03": 12,
+            "2026-10-02": 24,
+            "2026-10-03": 9,
             "2026-10-09": 10,
-            "2026-10-10": 7,
-            "2026-10-16": 11,
-            "2026-10-17": 9,
+            "2026-10-10": 5,
+            "2026-10-16": 10,
+            "2026-10-17": 6,
             "2026-10-23": 11,
-            "2026-10-24": 8
+            "2026-10-24": 6
           },
           "gapScore": 0,
           "acquisition": {
@@ -23821,13 +23821,13 @@
           "lat": 32.7275,
           "lng": -117.2315,
           "radiusMiles": 2,
-          "preciseEventsNext28d": 550,
-          "uniqueVenuesNext28d": 65,
-          "fridaySaturdayNightAverage": 12,
-          "fridaySaturdayNightMax": 28,
+          "preciseEventsNext28d": 532,
+          "uniqueVenuesNext28d": 64,
+          "fridaySaturdayNightAverage": 10.3,
+          "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 407,
+          "recurringLocalOccurrences30d": 394,
           "targets": {
             "fridaySaturdayNightAverage": 4,
             "recurringLocalOccurrences30d": 3
@@ -23838,14 +23838,14 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 28,
-            "2026-10-03": 12,
+            "2026-10-02": 25,
+            "2026-10-03": 9,
             "2026-10-09": 10,
-            "2026-10-10": 7,
-            "2026-10-16": 11,
-            "2026-10-17": 9,
+            "2026-10-10": 5,
+            "2026-10-16": 10,
+            "2026-10-17": 6,
             "2026-10-23": 11,
-            "2026-10-24": 8
+            "2026-10-24": 6
           },
           "gapScore": 0,
           "acquisition": {
@@ -23882,8 +23882,8 @@
     },
     "chicago": {
       "name": "Chicago",
-      "eventCount": 514,
-      "preciseLocationCount": 514,
+      "eventCount": 522,
+      "preciseLocationCount": 522,
       "preciseLocationRate": 1,
       "preciseLocationTarget": 0.9,
       "preciseLocationTargetMet": true,
@@ -23891,14 +23891,14 @@
       "sourceCount": 1,
       "dynamicSourceCount": 0,
       "categoryCounts": {
-        "theater": 148,
-        "community": 61,
-        "music": 236,
+        "theater": 152,
+        "community": 63,
+        "music": 237,
         "food": 8,
         "comedy": 22,
         "festival": 5,
         "nightlife": 8,
-        "sports": 25,
+        "sports": 26,
         "family": 1
       },
       "recurringActivityCounts": {
@@ -23907,7 +23907,7 @@
         "taco-tuesday": 0,
         "open-mic": 0,
         "bingo": 0,
-        "happy-hour": 2
+        "happy-hour": 1
       },
       "sourceHealth": [
         {
