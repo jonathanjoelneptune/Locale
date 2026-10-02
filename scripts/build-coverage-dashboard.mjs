@@ -181,6 +181,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
         dueCount:discovery.dueCount||0,
         promotionRate:Number((regionDiscovery.filter(item=>item.status==="qualified").length/Math.max(1,regionDiscovery.filter(item=>!!item.website).length)).toFixed(3)),
         cells:discovery.discoveryCells||null,
+        areaSweeps:discovery.coverageAreaSweeps||null,
         failureReasons:reasonCounts(regionDiscovery.filter(item=>item.status!=="qualified"))
       },
       locationResolution:{
