@@ -3,14 +3,17 @@ import {REGIONS} from "./regions.mjs";
 import {discoverCellPlaces} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
+import {containingCoverageZones} from "./coverage-zones.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
-const MAX_PROBES_PER_RUN=8;
+const MAX_PROBES_PER_RUN=12;
 const DISCOVERY_SWEEP_VERSION=4;
 const CELLS_PER_RUN=2;
+const AREA_SWEEPS_PER_RUN=2;
+const AREA_SWEEP_VERSION=1;
 const CELL_RETRY_MS=2*60*60*1000;
 const MAX_QUEUE=6000;
 
@@ -74,6 +77,7 @@ function mergeCandidate(queue,candidate){
     monitorTier:existing.monitorTier||candidate.monitorTier||"C",
     externalId:candidate.externalId||existing.externalId,
     discoveryCellId:candidate.discoveryCellId||existing.discoveryCellId||null,
+    coverageAreaIds:[...new Set([...(existing.coverageAreaIds||[]),...(candidate.coverageAreaIds||[])])],
     osmTags:candidate.osmTags||existing.osmTags,
     discoveryMethod:[...new Set(String(existing.discoveryMethod||"").split("+").filter(Boolean).concat(candidate.discoveryMethod||[]))].join("+"),
     updatedAt:nowIso()
@@ -173,6 +177,8 @@ const discoveredSources=await readJson(SOURCES_PATH,[]);
 const state=await readJson(STATE_PATH,{});
 const places=await readJson("src/data/places.json",[]);
 const entityLinks=await readJson("src/data/entity-source-links.json",[]);
+const coverageAreas=await readJson("src/data/coverage-zones.json",[]);
+const coverageDashboard=await readJson("src/data/coverage-dashboard.json",{regions:{}});
 
 if(!Array.isArray(queue)||!Array.isArray(discoveredSources))throw new Error("Discovery data files must contain arrays");
 
@@ -180,7 +186,9 @@ const stats={
   startedAt:nowIso(),
   seededFromRegistry:0,
   seededFromRegionalSweep:0,
+  seededFromAreaSweep:0,
   sweptRegionId:null,
+  focusAreas:[],
   probed:0,
   promoted:0,
   failed:0
@@ -221,6 +229,94 @@ function nextDueCell(region,regionState){
     }
   }
   return null;
+}
+
+function ensureAreaSweepState(region){
+  const regionState=ensureCellSweep(region);
+  if(regionState.coverageAreaSweepVersion!==AREA_SWEEP_VERSION){
+    regionState.coverageAreaSweepVersion=AREA_SWEEP_VERSION;
+    regionState.coverageAreaSweeps={};
+  }
+  regionState.coverageAreaSweeps=regionState.coverageAreaSweeps&&typeof regionState.coverageAreaSweeps==="object"?regionState.coverageAreaSweeps:{};
+  return regionState;
+}
+
+function areaMetric(zone){
+  const rows=coverageDashboard.regions?.[zone.regionId]?.coverageAreas||coverageDashboard.regions?.[zone.regionId]?.neighborhoods||[];
+  return rows.find(row=>row.id===zone.id)||null;
+}
+
+function areaSweepIntervalMs(zone,row){
+  if(row?.acceptance?.pass)return 14*86400000;
+  const gap=Number(row?.gapScore||50);
+  if(gap>=70||Number(zone.discoveryPriority||0)>=95)return 2*86400000;
+  if(gap>=45)return 4*86400000;
+  return 7*86400000;
+}
+
+function nextCoverageAreaSweep(){
+  const now=Date.now();
+  return coverageAreas
+    .map(zone=>{
+      const region=REGIONS[zone.regionId];
+      if(!region)return null;
+      const regionState=ensureAreaSweepState(region);
+      const sweep=regionState.coverageAreaSweeps[zone.id]||{};
+      const retryAt=Date.parse(sweep.nextAttemptAt||0)||0;
+      const completedAt=Date.parse(sweep.lastCompletedAt||0)||0;
+      const row=areaMetric(zone);
+      const dueAt=completedAt+areaSweepIntervalMs(zone,row);
+      if(retryAt>now||completedAt&&dueAt>now)return null;
+      const gap=Number(row?.gapScore||50);
+      const score=Number(zone.discoveryPriority||50)+gap*.8-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
+      return {zone,region,regionState,sweep,row,score,completedAt};
+    })
+    .filter(Boolean)
+    .sort((a,b)=>b.score-a.score||a.completedAt-b.completedAt||a.zone.name.localeCompare(b.zone.name))[0]||null;
+}
+
+for(let index=0;index<AREA_SWEEPS_PER_RUN;index++){
+  const work=nextCoverageAreaSweep();
+  if(!work)break;
+  const {zone,region,regionState,sweep,row}=work;
+  const attemptAt=nowIso();
+  regionState.coverageAreaSweeps[zone.id]={...sweep,lastAttemptAt:attemptAt};
+  const cell={
+    id:`area:${zone.id}`,
+    phase:"focus",
+    lat:Number(zone.lat),
+    lng:Number(zone.lng),
+    queryRadiusMiles:Math.min(3.2,Math.max(1.2,Number(zone.radiusMiles||1)+0.45))
+  };
+  try{
+    const cellCandidates=await discoverCellPlaces(region,cell);
+    let added=0;
+    for(const raw of cellCandidates){
+      const candidate={...raw,coverageAreaIds:[zone.id],discoveryCellId:cell.id};
+      if(mergeCandidate(queue,candidate).added){stats.seededFromAreaSweep++;added++}
+    }
+    regionState.coverageAreaSweeps[zone.id]={
+      lastAttemptAt:attemptAt,
+      lastCompletedAt:nowIso(),
+      candidateCount:cellCandidates.length,
+      newCount:added,
+      attempts:0,
+      nextAttemptAt:null
+    };
+    stats.focusAreas.push({id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"ok",candidateCount:cellCandidates.length,newCount:added});
+    console.log(`${region.id}/area:${zone.id}: discovered ${cellCandidates.length} focused venues; ${added} new.`);
+  }catch(error){
+    const attempts=Number(sweep.attempts||0)+1;
+    regionState.coverageAreaSweeps[zone.id]={
+      ...sweep,
+      attempts,
+      lastAttemptAt:attemptAt,
+      nextAttemptAt:new Date(Date.now()+Math.min(CELL_RETRY_MS*attempts,12*60*60*1000)).toISOString(),
+      error:String(error?.message||error)
+    };
+    stats.focusAreas.push({id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
+    console.error(`${region.id}/area:${zone.id}: focused discovery failed:`,error);
+  }
 }
 
 const regionWork=Object.values(REGIONS)
@@ -278,7 +374,20 @@ if(regionWork){
 const producerSignal=item=>/\b(bar|pub|brew|music|theat|club|comedy|museum|gallery|arts|community|stadium|karaoke|trivia|live|concert|taproom|tavern|lounge)\b/i.test(
   [item.name,item.category,item.website,item.lastResult?.detail].filter(Boolean).join(" ")
 )?18:0;
-const probeScore=item=>Number(item.priority||0)+producerSignal(item)-Math.min(20,Number(item.attempts||0)*3);
+
+const coverageGapBoost=item=>{
+  const zones=containingCoverageZones(item,coverageAreas,{regionId:item.regionId});
+  let best=0;
+  for(const zone of zones){
+    const row=areaMetric(zone);
+    const gap=Number(row?.gapScore||0);
+    const boost=gap*.45+Number(zone.discoveryPriority||0)*.12+(row?.acceptance?.pass?0:8);
+    if(boost>best)best=boost;
+  }
+  return Math.round(best);
+};
+
+const probeScore=item=>Number(item.priority||0)+producerSignal(item)+coverageGapBoost(item)-Math.min(20,Number(item.attempts||0)*3);
 
 const candidates=queue
   .filter(item=>item.website&&item.status!=="qualified"&&due(item))
