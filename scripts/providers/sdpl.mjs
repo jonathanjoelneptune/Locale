@@ -56,7 +56,7 @@ function venueFrom(lines,index){
   for(let offset=1;offset<=5;offset++){
     const line=lines[index+offset];
     if(!line)continue;
-    const match=line.match(/^(.+?(?:Library|Central Library|Performance Annex(?:\s*&\s*IDEA Lab)?))(?:\s*\|.*)?$/i);
+    const match=line.match(/^(.+?(?:Library|Performance Annex(?:\s*&\s*IDEA Lab)?)(?:\s*-\s*[^|]+)?)(?:\s*\|.*)?$/i);
     if(match)return decode(match[1]);
   }
   return null;
