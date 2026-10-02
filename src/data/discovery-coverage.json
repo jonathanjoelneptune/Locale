@@ -1,30 +1,48 @@
 {
-  "generatedAt": "2026-10-02T20:38:42.413Z",
+  "generatedAt": "2026-10-02T22:35:43.468Z",
   "run": {
-    "startedAt": "2026-10-02T20:38:32.019Z",
+    "startedAt": "2026-10-02T22:34:37.633Z",
     "queueBefore": {
-      "total": 2192,
+      "total": 2193,
       "withWebsite": 1318,
-      "due": 8,
-      "retry": 160,
-      "cold": 123,
-      "lowValue": 1038,
+      "due": 7,
+      "retry": 161,
+      "cold": 124,
+      "lowValue": 1037,
       "qualified": 16,
-      "needsWebsite": 874,
+      "needsWebsite": 875,
       "lanes": {
-        "exploratory": 672,
+        "exploratory": 673,
         "event-evidence": 230,
         "event-likely": 116,
-        "cold-sample": 123,
-        "low-value": 1038,
+        "cold-sample": 124,
+        "low-value": 1037,
         "food-evidence": 13
       }
     },
-    "seededFromRegistry": 1,
+    "seededFromRegistry": 17,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "otay-mesa",
+        "name": "Otay Mesa",
+        "gapScore": 100,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "gapScore": 99,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -41,8 +59,8 @@
         "measured": 188,
         "passing": 21,
         "passRate": 0.11170212765957446,
-        "severeGapCount": 77,
-        "mediumGapCount": 138
+        "severeGapCount": 76,
+        "mediumGapCount": 137
       },
       "chicago": {
         "mode": "unmeasured",
@@ -54,45 +72,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11206804937",
-        "name": "Island Spice Jamaican Restaurant",
+        "key": "san-diego|osm|way|218923462",
+        "name": "Jalisco Cafe",
         "category": "restaurant",
-        "website": "http://islandspicesandiego.com/",
+        "website": "http://www.jaliscocafe.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Island Spice Jamaican Restaurant (low-value)",
+          "detail": "Checked 1 page on Jalisco Cafe (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T20:38:39.257Z",
-        "checkedAt": "2026-10-02T20:38:32.847Z"
+        "nextCheckAt": "2026-11-16T22:35:36.279Z",
+        "checkedAt": "2026-10-02T22:35:35.328Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31803256",
-        "name": "Logan Heights Branch San Diego Public Library",
+        "key": "san-diego|osm|way|31840107",
+        "name": "City Heights-Weingart Branch San Diego City Library",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/logan-heights-library",
+        "website": "https://www.sandiego.gov/public-library/locations/city-heights-weingart-library-and-performance-annex",
         "attempts": 1,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Logan Heights Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on City Heights-Weingart Branch San Diego City Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-05T20:38:42.363Z",
-        "checkedAt": "2026-10-02T20:38:32.675Z"
+        "nextCheckAt": "2026-10-05T22:35:43.428Z",
+        "checkedAt": "2026-10-02T22:35:35.326Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -122,95 +140,95 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-02T20:38:42.371Z",
-    "durationMs": 10352,
+    "finishedAt": "2026-10-02T22:35:43.435Z",
+    "durationMs": 65802,
     "queueAfter": {
-      "total": 2193,
+      "total": 2210,
       "withWebsite": 1318,
-      "due": 7,
-      "retry": 161,
-      "cold": 124,
-      "lowValue": 1037,
+      "due": 6,
+      "retry": 162,
+      "cold": 125,
+      "lowValue": 1036,
       "qualified": 16,
-      "needsWebsite": 875,
+      "needsWebsite": 892,
       "lanes": {
-        "exploratory": 673,
-        "event-evidence": 230,
+        "exploratory": 689,
+        "event-evidence": 231,
         "event-likely": 116,
-        "cold-sample": 124,
-        "low-value": 1037,
+        "cold-sample": 125,
+        "low-value": 1036,
         "food-evidence": 13
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 2,
+        "successes": 1,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-02T22:35:20.016Z",
+        "lastFinishedAt": "2026-10-02T22:35:35.017Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1790980565017,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-02T22:34:50.014Z",
+        "lastFinishedAt": "2026-10-02T22:35:05.016Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1790980535016,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-02T22:35:05.016Z",
+        "lastFinishedAt": "2026-10-02T22:35:20.016Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1790980550016,
+        "consecutiveFailures": 1
       }
     ]
   },
   "regions": {
     "san-diego": {
-      "candidateCount": 2093,
+      "candidateCount": 2110,
       "withWebsiteCount": 1318,
       "qualifiedCount": 16,
-      "needsWebsiteCount": 775,
-      "dueCount": 7,
-      "coldCount": 124,
-      "lowValueCount": 1037,
+      "needsWebsiteCount": 792,
+      "dueCount": 6,
+      "coldCount": 125,
+      "lowValueCount": 1036,
       "laneCounts": {
-        "cold-sample": 124,
-        "event-evidence": 196,
+        "cold-sample": 125,
+        "event-evidence": 197,
         "event-likely": 116,
-        "exploratory": 607,
+        "exploratory": 623,
         "food-evidence": 13,
-        "low-value": 1037
+        "low-value": 1036
       },
       "statusCounts": {
         "qualified": 16,
-        "retry": 161,
-        "needs-website": 775,
-        "candidate": 1017,
-        "cold": 124
+        "retry": 162,
+        "needs-website": 792,
+        "candidate": 1015,
+        "cold": 125
       },
       "categoryCounts": {
         "nightclub": 8,
-        "observed-venue": 803,
+        "observed-venue": 820,
         "bar": 39,
         "theatre": 5,
         "arts-centre": 2,
@@ -243,10 +261,10 @@
       },
       "coverageAreaSweeps": {
         "version": 1,
-        "tracked": 4,
-        "completed": 4,
-        "failed": 0,
-        "sweptThisRun": 0
+        "tracked": 6,
+        "completed": 5,
+        "failed": 1,
+        "sweptThisRun": 2
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
@@ -254,8 +272,8 @@
         "measured": 188,
         "passing": 21,
         "passRate": 0.11170212765957446,
-        "severeGapCount": 77,
-        "mediumGapCount": 138,
+        "severeGapCount": 76,
+        "mediumGapCount": 137,
         "activeMode": "bootstrap",
         "probeLimit": 12,
         "probeConcurrency": 2,
