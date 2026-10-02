@@ -58,9 +58,11 @@ export function neighborhoodCoverage(events,neighborhood,region,{now=new Date(),
     if(recurringPattern.test(`${event.title||""} ${event.description||""}`))recurring30d++;
     const date=new Date(event.start);
     const p=localParts(date,region.timeZone);
-    const key=localDateKey(date,region.timeZone);
     const hour=Number(p.hour);
-    if((p.weekday==="Fri"||p.weekday==="Sat")&&hour>=16&&nightCounts[key]!==undefined)nightCounts[key]++;
+    const nightDate=(hour<3)?new Date(date.getTime()-6*3600000):date;
+    const nightParts=localParts(nightDate,region.timeZone);
+    const key=localDateKey(nightDate,region.timeZone);
+    if((nightParts.weekday==="Fri"||nightParts.weekday==="Sat")&&(hour>=16||hour<3)&&nightCounts[key]!==undefined)nightCounts[key]++;
   }
   const counts=Object.values(nightCounts);
   const avg=counts.length?counts.reduce((sum,value)=>sum+value,0)/counts.length:0;
