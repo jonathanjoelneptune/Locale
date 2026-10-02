@@ -117,8 +117,11 @@ export async function granicusMunicipalEvents({
   const endpointList=(Array.isArray(endpoints)?endpoints:[endpoints]).filter(Boolean);
   if(!endpointList.length)throw new Error(`${sourceName} Granicus adapter requires endpoint`);
   const listingRows=[];
+  const endpointErrors=[];
   for(const endpoint of endpointList){
-    const first=await fetchHtml(endpoint);
+    let first;
+    try{first=await fetchHtml(endpoint)}
+    catch(error){endpointErrors.push(String(error?.message||error));continue}
     listingRows.push(...parseGranicusListRows(first.html,first.url));
     const pages=totalPages(first.html,maxPages);
     for(let page=2;page<=pages;page++){
@@ -127,6 +130,9 @@ export async function granicusMunicipalEvents({
         listingRows.push(...parseGranicusListRows(next.html,next.url));
       }catch{}
     }
+  }
+  if(!listingRows.length&&endpointErrors.length){
+    throw new Error(`${sourceName} Granicus endpoints failed: ${endpointErrors.join(" | ")}`);
   }
 
   const uniqueRows=[...new Map(listingRows.map(row=>[`${row.title}|${row.start}|${row.url}`,row])).values()]
