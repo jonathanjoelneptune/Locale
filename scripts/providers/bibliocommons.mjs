@@ -49,6 +49,23 @@ export function biblioCommonsEventLocation(html,title,knownLocations=biblioCommo
   return null;
 }
 
+function biblioCommonsFragmentLocation(fragment,knownLocations=[]){
+  const text=strip(fragment);
+  for(const location of knownLocations){
+    const escaped=escapeRegExp(location);
+    if(new RegExp(`(?:^|\\s)${escaped}\\s*Event location:\\s*${escaped}(?:\\s|$)`,"i").test(text)
+      ||new RegExp(`Event location:\\s*${escaped}(?:\\s|$)`,"i").test(text)){
+      return {name:location,kind:"library"};
+    }
+  }
+  const repeated=text.match(/([A-Za-z0-9][A-Za-z0-9 &'’().\/-]{2,100}?)\s*Event location:\s*\1(?:\s|$)/i);
+  if(repeated?.[1]){
+    const name=repeated[1].trim();
+    if(name&&name.length<=100)return {name,kind:"offsite"};
+  }
+  return null;
+}
+
 function libraryVenue(location){
   if(!location)return null;
   if(location.kind==="library")return {
@@ -97,7 +114,7 @@ export function parseBiblioCommonsPage(html){
     const text=strip(fragment);
     const eventStart=parseStart(text);
     if(!eventStart)continue;
-    const contextual=libraryVenue(biblioCommonsEventLocation(html,title,knownLocations));
+    const contextual=libraryVenue(biblioCommonsFragmentLocation(fragment,knownLocations));
     const location=contextual?.venue
       ||text.match(/Event location:\s*(.+?)(?=\s+Find more events in:|\s+View event|\s+Audience:|\s+Program:|$)/i)?.[1]?.trim()
       ||fragment.match(/Event location:\s*<[^>]+>\s*([^<]{2,140})/i)?.[1]?.trim()
@@ -149,18 +166,15 @@ export async function biblioCommonsEvents({
 
   const out=[];
   for(const page of htmlPages){
-    const knownLocations=biblioCommonsLocationNames(page.html);
+    const parsedItems=parseBiblioCommonsPage(page.html);
+    const parsedKeys=new Set(parsedItems.map(item=>`${item.title}|${item.start}`));
     try{
       const embedded=embeddedJsonEventsFromHtml({
         html:page.html,endpoint:page.url,sourceName,sourceId,fallbackCenter,days
-      }).map(event=>{
-        if(event.locationPrecision!=="source-center"||event.venue!==sourceName)return event;
-        const context=libraryVenue(biblioCommonsEventLocation(page.html,event.title,knownLocations));
-        return context?{...event,...context}:event;
-      });
+      }).filter(event=>!parsedKeys.has(`${event.title}|${event.start}`));
       out.push(...embedded);
     }catch{}
-    for(const item of parseBiblioCommonsPage(page.html)){
+    for(const item of parsedItems){
       let url=page.url;
       try{if(item.link)url=new URL(item.link,page.url).href}catch{}
       out.push({
