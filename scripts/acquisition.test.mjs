@@ -371,7 +371,10 @@ test("municipal workbook candidates are active only with dedicated adapters",()=
   const national=SOURCES.find(source=>source.id==="national-city-calendar");
   const chula=SOURCES.find(source=>source.id==="chula-vista-calendar");
   const sanMarcos=SOURCES.find(source=>source.id==="san-marcos-calendar");
-  assert.equal(national.enabled,false);
-  assert.equal(chula.enabled,false);
-  assert.equal(sanMarcos.enabled,false);
+  assert.equal(national.adapter,"granicus-calendar");
+  assert.equal(chula.adapter,"granicus-calendar");
+  assert.equal(sanMarcos.adapter,"san-marcos-calendar");
+  assert.notEqual(national.enabled,false);
+  assert.notEqual(chula.enabled,false);
+  assert.notEqual(sanMarcos.enabled,false);
 });
