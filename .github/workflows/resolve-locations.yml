@@ -1,6 +1,14 @@
 name: Resolve Locale locations
 on:
   workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/resolve-locations.mjs"
+      - "scripts/location-quality.mjs"
+      - "scripts/venue-geocode.mjs"
+      - "src/data/regions.js"
+      - ".github/workflows/resolve-locations.yml"
   schedule:
     - cron: "7 * * * *"
 permissions:
@@ -18,6 +26,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Sync latest location state
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          echo "LOCATION_BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
       - name: Resolve queued venue locations
         id: resolve
         run: |
@@ -40,11 +53,24 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          git fetch origin main
+          REMOTE_SHA="$(git rev-parse origin/main)"
+          if [ "$REMOTE_SHA" != "$LOCATION_BASE_SHA" ]; then
+            UPSTREAM_LOCATION_CHANGES="$(git diff --name-only "$LOCATION_BASE_SHA" "$REMOTE_SHA" -- $FILES || true)"
+            if [ -n "$UPSTREAM_LOCATION_CHANGES" ]; then
+              echo "Location state changed upstream while this run was working:"
+              echo "$UPSTREAM_LOCATION_CHANGES"
+              echo "Discarding stale resolver output; the next hourly run will continue from newer state."
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
           git config user.name "locale-locations[bot]"
           git config user.email "locale-locations[bot]@users.noreply.github.com"
           git add $FILES
           git commit -m "Advance venue location resolution"
-          git pull --rebase origin main
+          git rebase origin/main
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Refresh events with newly resolved locations
