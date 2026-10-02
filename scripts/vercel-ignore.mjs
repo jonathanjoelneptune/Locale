@@ -20,6 +20,7 @@ const backgroundOnly=new Set([
   "src/data/discovered-sources.json",
   "src/data/discovery-state.json",
   "src/data/discovery-coverage.json",
+  "src/data/discovery-live.json",
   "src/data/location-resolution-queue.json",
   "src/data/location-resolution-coverage.json",
   "src/data/venue-geocode-cache.json",

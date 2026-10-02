@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
-import {discoverCellPlaces} from "./discovery-overpass.mjs";
+import {discoverCellPlaces,overpassTelemetrySnapshot} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
@@ -10,6 +10,7 @@ const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
+const LIVE_DIAGNOSTICS_PATH="src/data/discovery-live.json";
 const DISCOVERY_SWEEP_VERSION=4;
 const AREA_SWEEP_VERSION=1;
 const MAX_QUEUE=6000;
@@ -204,8 +205,18 @@ const runOverpass=isOverpassDue(
   discoveryBudget.overpassMinIntervalMinutes
 );
 
+const queueSnapshot=()=>({
+  total:queue.length,
+  withWebsite:queue.filter(item=>!!item.website).length,
+  due:queue.filter(item=>item.website&&item.status!=="qualified"&&due(item)).length,
+  retry:queue.filter(item=>item.status==="retry").length,
+  qualified:queue.filter(item=>item.status==="qualified").length,
+  needsWebsite:queue.filter(item=>item.status==="needs-website").length
+});
+
 const stats={
   startedAt:nowIso(),
+  queueBefore:queueSnapshot(),
   seededFromRegistry:0,
   seededFromRegionalSweep:0,
   seededFromAreaSweep:0,
@@ -215,6 +226,7 @@ const stats={
   discoveryBudget,
   regionProfiles:discoveryPlan.profiles,
   overpassRun:runOverpass,
+  probeResults:[],
   probed:0,
   promoted:0,
   failed:0
@@ -474,6 +486,19 @@ async function probeCandidate(item){
     console.error(`Probe failed for ${item.name}:`,error);
   }
   item.updatedAt=nowIso();
+  stats.probeResults.push({
+    regionId:item.regionId,
+    key:item.key,
+    name:item.name,
+    category:item.category||null,
+    website:item.website||null,
+    attempts:item.attempts,
+    status:item.status,
+    result:item.lastResult||null,
+    sourceId:item.sourceId||null,
+    nextCheckAt:item.nextCheckAt||null,
+    checkedAt:item.lastCheckedAt||null
+  });
 }
 
 let probeCursor=0;
@@ -497,13 +522,75 @@ if(queue.length>MAX_QUEUE){
 }
 
 stats.finishedAt=nowIso();
+stats.durationMs=Math.max(0,Date.parse(stats.finishedAt)-Date.parse(stats.startedAt));
+stats.queueAfter=queueSnapshot();
+stats.overpassEndpoints=overpassTelemetrySnapshot();
 state.lastRunAt=stats.finishedAt;
 state.lastRun=stats;
+const compactRun={
+  startedAt:stats.startedAt,
+  finishedAt:stats.finishedAt,
+  durationMs:stats.durationMs,
+  discoveryMode:stats.discoveryMode,
+  probed:stats.probed,
+  promoted:stats.promoted,
+  failed:stats.failed,
+  overpassRun:stats.overpassRun,
+  overpassEndpoints:stats.overpassEndpoints,
+  seededFromRegistry:stats.seededFromRegistry,
+  seededFromRegionalSweep:stats.seededFromRegionalSweep,
+  seededFromAreaSweep:stats.seededFromAreaSweep,
+  focusAreas:stats.focusAreas,
+  discoveryCells:stats.discoveryCells||[],
+  queueBefore:stats.queueBefore,
+  queueAfter:stats.queueAfter
+};
+state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
+
+const recentProbeResults=queue
+  .filter(item=>item.lastCheckedAt)
+  .sort((a,b)=>String(b.lastCheckedAt).localeCompare(String(a.lastCheckedAt)))
+  .slice(0,60)
+  .map(item=>({
+    regionId:item.regionId,
+    key:item.key,
+    name:item.name,
+    category:item.category||null,
+    website:item.website||null,
+    status:item.status,
+    attempts:item.attempts||0,
+    lastCheckedAt:item.lastCheckedAt,
+    nextCheckAt:item.nextCheckAt||null,
+    sourceId:item.sourceId||null,
+    lastResult:item.lastResult||null
+  }));
+const recentPromotions=[...discoveredSources]
+  .sort((a,b)=>String(b.discoveredAt||"").localeCompare(String(a.discoveredAt||"")))
+  .slice(0,30)
+  .map(source=>({
+    id:source.id,
+    name:source.name,
+    regions:source.regions,
+    adapter:source.adapter,
+    endpoint:source.endpoint,
+    discoveredAt:source.discoveredAt,
+    discoveryEventCount:source.discoveryEventCount||0
+  }));
+const liveDiagnostics={
+  generatedAt:stats.finishedAt,
+  lastRun:stats,
+  runHistory:state.runHistory,
+  lastOverpassRunAt:state.lastOverpassRunAt||null,
+  regions:state.regions||{},
+  recentProbeResults,
+  recentPromotions
+};
 
 await mkdir("src/data",{recursive:true});
 await writeFile(QUEUE_PATH,JSON.stringify(queue,null,2)+"\n");
 await writeFile(SOURCES_PATH,JSON.stringify(discoveredSources.sort((a,b)=>a.id.localeCompare(b.id)),null,2)+"\n");
 await writeFile(STATE_PATH,JSON.stringify(state,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify(buildCoverage(queue,discoveredSources,stats),null,2)+"\n");
+await writeFile(LIVE_DIAGNOSTICS_PATH,JSON.stringify(liveDiagnostics,null,2)+"\n");
 
 console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed at concurrency ${discoveryBudget.probeConcurrency}, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total. Overpass ${runOverpass?"ran":"deferred"}.`);

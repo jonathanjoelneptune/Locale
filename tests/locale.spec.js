@@ -489,12 +489,28 @@ test("map style changes one visible Leaflet tile layer",async({page})=>{
 
 test("coverage diagnostics renders comprehensive area and discovery metrics",async({page})=>{
   await page.goto("./diagnostics.html");
-  await expect(page.locator("h1")).toHaveText("Coverage Diagnostics");
+  await expect(page.locator("h1")).toHaveText("Operations & Coverage Diagnostics");
   await expect(page.locator("#regionSelect option")).toHaveCount(2);
   await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6);
   await page.locator("#regionSelect").selectOption("san-diego");
   await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
   await expect(page.locator("#areaGroupSelect option").first()).toHaveText("All areas");
   await expect(page.locator("#areaGroupSelect option")).toHaveCount(10);
-  await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(5);
+  await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(6);
+});
+
+
+test("diagnostics exposes live discovery operations console",async({page})=>{
+  await page.goto("./diagnostics.html");
+  await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6,{timeout:10000});
+  await expect(page.locator("#workerStatus")).toContainText("No live Actions status available");
+  await expect(page.locator("#adaptiveControl")).toContainText(/BOOTSTRAP|ACCELERATED|CONVERGENCE|MAINTENANCE|UNMEASURED/i);
+  await expect(page.locator("#queueThroughput")).toContainText("Candidates");
+  await expect(page.locator("#latestRun")).toContainText("Probed");
+  await expect(page.locator("#overpassHealth")).toBeVisible();
+  await expect(page.locator("#probeRows")).toBeVisible();
+  await expect(page.locator("#runHistoryRows")).toBeVisible();
+  await expect(page.locator("#areaSweepRows")).toBeVisible();
+  await expect(page.locator("#cellRows")).toBeVisible();
+  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
 });

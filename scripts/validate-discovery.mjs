@@ -8,6 +8,14 @@ const read=async(path,fallback)=>{
   try{return JSON.parse(await readFile(path,"utf8"))}
   catch(error){fail(`${path}: invalid JSON (${error.message})`);return fallback}
 };
+const readOptional=async path=>{
+  try{return JSON.parse(await readFile(path,"utf8"))}
+  catch(error){
+    if(error?.code==="ENOENT")return null;
+    fail(`${path}: invalid JSON (${error.message})`);
+    return null;
+  }
+};
 const validUrl=value=>{
   try{
     const url=new URL(value);
@@ -20,6 +28,7 @@ const sources=await read("src/data/discovered-sources.json",[]);
 const state=await read("src/data/discovery-state.json",{});
 const coverage=await read("src/data/discovery-coverage.json",{});
 const coverageAreas=await read("src/data/coverage-zones.json",[]);
+const live=await readOptional("src/data/discovery-live.json");
 
 if(!Array.isArray(queue))fail("discovery-queue.json must contain an array");
 if(!Array.isArray(sources))fail("discovered-sources.json must contain an array");
@@ -93,6 +102,18 @@ if(coverage?.regions){
   }
 }
 if(state&&typeof state!=="object")fail("discovery-state.json must contain an object");
+if(live){
+  if(!live.generatedAt||!Number.isFinite(Date.parse(live.generatedAt)))fail("discovery-live.json missing valid generatedAt");
+  if(!live.lastRun||typeof live.lastRun!=="object")fail("discovery-live.json missing lastRun");
+  if(!Array.isArray(live.runHistory))fail("discovery-live.json runHistory must be an array");
+  if(!Array.isArray(live.recentProbeResults))fail("discovery-live.json recentProbeResults must be an array");
+  if(!Array.isArray(live.recentPromotions))fail("discovery-live.json recentPromotions must be an array");
+  if(!live.regions||typeof live.regions!=="object")fail("discovery-live.json regions must be an object");
+  for(const [index,item] of (live.recentProbeResults||[]).entries()){
+    if(!regionIds.has(item.regionId))fail(`discovery-live recentProbeResults[${index}] references unknown region ${item.regionId}`);
+    if(!item.name||!item.status)fail(`discovery-live recentProbeResults[${index}] missing name/status`);
+  }
+}
 
 if(failures.length){
   console.error("Locale discovery validation failed:");
