@@ -20,7 +20,7 @@ if(!Array.isArray(coverageAreas))fail("coverage-zones.json must contain an array
 if(!Array.isArray(queue))fail("location-resolution-queue.json must contain an array");
 
 const areaIds=new Set;
-const allowedClasses=new Set(["entertainment-core","urban","mixed","suburban","outer","rural"]);
+const allowedClasses=new Set(["entertainment-core","urban-core","urban","mixed","suburban","outer","rural"]);
 for(const [index,row] of coverageAreas.entries()){
   const label=`coverage-zones[${index}]`;
   for(const field of ["id","name","regionId","group","coverageClass"])if(!row?.[field])fail(`${label} missing ${field}`);
