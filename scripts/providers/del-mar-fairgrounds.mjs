@@ -9,35 +9,48 @@ const decode=value=>String(value||"").replace(/&nbsp;|&#160;/gi," ").replace(/&a
 const localYear=(month,now)=>month<now.getMonth()+1-2?now.getFullYear()+1:now.getFullYear();
 
 export function parseFairgroundsPrint(html,{now=new Date(),days=75}={}){
-  const lines=String(html||"")
-    .replace(/<script[\s\S]*?<\/script>/gi,"")
-    .replace(/<style[\s\S]*?<\/style>/gi,"")
-    .replace(/<(?:br\s*\/?|\/div|\/p|\/li|\/tr|\/td|\/h[1-6])>/gi,"\n")
-    .split(/\n+/).map(decode).filter(Boolean);
-  const out=[];
-  let currentDate=null,currentTime=null;
-  const horizon=now.getTime()+days*86400000;
-  for(const line of lines){
-    const dm=line.match(/^(?:TODAY\s*-\s*)?(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),?\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+(\d{1,2})$/i);
-    if(dm){
-      const month=MONTHS[dm[1].toLowerCase()],day=Number(dm[2]);
-      currentDate={year:localYear(month,now),month,day};
-      currentTime=null;
-      continue;
+  const text=decode(
+    String(html||"")
+      .replace(/<script[\s\S]*?<\/script>/gi," ")
+      .replace(/<style[\s\S]*?<\/style>/gi," ")
+      .replace(/<[^>]+>/g," ")
+  );
+  const dateRe=/(?:TODAY\s*-\s*)?(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),?\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+(\d{1,2})/gi;
+  const dateMatches=[...text.matchAll(dateRe)];
+  const out=[],horizon=now.getTime()+days*86400000;
+
+  for(let dateIndex=0;dateIndex<dateMatches.length;dateIndex++){
+    const dateMatch=dateMatches[dateIndex];
+    const month=MONTHS[dateMatch[1].toLowerCase()],day=Number(dateMatch[2]);
+    const year=localYear(month,now);
+    const chunkStart=dateMatch.index+dateMatch[0].length;
+    const chunkEnd=dateIndex+1<dateMatches.length?dateMatches[dateIndex+1].index:text.length;
+    const chunk=text.slice(chunkStart,chunkEnd);
+    const timeRe=/(\d{1,2}(?::\d{2})?\s*(?:AM|PM))/gi;
+    const timeMatches=[...chunk.matchAll(timeRe)];
+
+    for(let timeIndex=0;timeIndex<timeMatches.length;timeIndex++){
+      const timeMatch=timeMatches[timeIndex];
+      const time=parseClock(timeMatch[1]);
+      if(!time)continue;
+      const eventStart=timeMatch.index+timeMatch[0].length;
+      const eventEnd=timeIndex+1<timeMatches.length?timeMatches[timeIndex+1].index:chunk.length;
+      const eventChunk=chunk.slice(eventStart,eventEnd);
+      const eventRe=/([^|]{2,220}?)\s+-\s+Location:\s*([^|]{2,140}?)\s*\|\s*([1-7])\b/gi;
+
+      for(const match of eventChunk.matchAll(eventRe)){
+        const title=decode(match[1]).replace(/(?:\s+-\s*)+$/,"").replace(/^[-–—\s]+/,"").trim();
+        const venue=decode(match[2]);
+        const categoryCode=match[3];
+        if(!title||!venue||categoryCode==="5")continue;
+        const startIso=zonedLocalIso({year,month,day,hour:time.hour,minute:time.minute,timeZone:"America/Los_Angeles"});
+        const ms=Date.parse(startIso);
+        if(ms<now.getTime()-86400000||ms>horizon)continue;
+        out.push({title,venue,start:startIso,categoryCode});
+      }
     }
-    const t=parseClock(line);
-    if(t&&/^\d{1,2}(?::\d{2})?\s*(?:AM|PM)$/i.test(line)){currentTime=t;continue}
-    if(!currentDate||!currentTime||/^(ALL UPCOMING|\d+\s*-\s*)/i.test(line))continue;
-    const m=line.match(/^(.+?)(?:\s+-\s+.*)?\s+-\s+Location:\s*([^|]+?)(?:\s*\|\s*(\d+))?$/i)
-      ||line.match(/^(.+?)\s+-\s+Location:\s*([^|]+?)(?:\s*\|\s*(\d+))?$/i);
-    if(!m)continue;
-    const title=m[1].replace(/\s+-\s*$/,"").trim(),venue=m[2].trim(),categoryCode=m[3]||null;
-    const start=zonedLocalIso({...currentDate,hour:currentTime.hour,minute:currentTime.minute,timeZone:"America/Los_Angeles"});
-    const ms=Date.parse(start);
-    if(ms<now.getTime()-86400000||ms>horizon)continue;
-    out.push({title,venue,start,categoryCode});
   }
-  return out;
+  return [...new Map(out.map(item=>[`${item.title}|${item.start}|${item.venue}`,item])).values()];
 }
 
 export async function delMarFairgroundsEvents(){

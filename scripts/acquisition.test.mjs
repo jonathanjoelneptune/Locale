@@ -9,6 +9,7 @@ import {parseMuseumCouncil} from "./providers/museum-council.mjs";
 import {parseConventionCenter} from "./providers/convention-center.mjs";
 import {parseFairgroundsPrint} from "./providers/del-mar-fairgrounds.mjs";
 import {parseSanteeCalendar} from "./providers/santee-calendar.mjs";
+import {SOURCES} from "./source-registry.mjs";
 
 test("workbook acquisition registry preserves the complete source, area, and taxonomy inventory",async()=>{
   const registry=await loadAcquisitionRegistry();
@@ -129,16 +130,25 @@ test("Convention Center parser excludes private events and keeps public date ran
   assert.equal(rows[0].attendance,"5,000");
 });
 
-test("Fairgrounds print parser extracts dated sub-venue events",()=>{
+test("Fairgrounds print parser extracts flattened calendar events and skips public meetings",()=>{
   const html=`
-    <div>Friday, Oct. 9</div>
-    <div>7:00 PM</div>
-    <div>Example Concert - Location: The Sound | 4</div>
+    <div><strong>Friday, Oct. 9</strong></div>
+    <section><span>9:30 AM</span><span>22nd DAA Board Meeting</span><span> - Location: Del Mar Fairgrounds | 5</span></section>
+    <section><span>10:00 AM</span><span>Pumpkin Station</span><span> - Location: East Parking Lot | 2</span></section>
+    <section><span>8:00 PM</span><span>Example Concert -</span><span> - Location: The Sound | 4</span></section>
   `;
   const rows=parseFairgroundsPrint(html,{now:new Date("2026-10-02T12:00:00Z")});
-  assert.equal(rows.length,1);
-  assert.equal(rows[0].title,"Example Concert");
-  assert.equal(rows[0].venue,"The Sound");
+  assert.equal(rows.length,2);
+  assert.ok(rows.some(row=>row.title==="Pumpkin Station"&&row.venue==="East Parking Lot"));
+  assert.ok(rows.some(row=>row.title==="Example Concert"&&row.venue==="The Sound"));
+  assert.ok(!rows.some(row=>/Board Meeting/i.test(row.title)));
+});
+
+test("Escondido municipal source treats an empty valid City Events feed as healthy",()=>{
+  const source=SOURCES.find(item=>item.id==="escondido-calendar");
+  assert.ok(source);
+  assert.equal(source.adapter,"multi-ics");
+  assert.equal(source.minExpectedEvents,undefined);
 });
 
 test("Santee parser extracts community activities while preserving address",()=>{
