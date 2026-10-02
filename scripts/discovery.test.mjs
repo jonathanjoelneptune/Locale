@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from "./discovery-overpass.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
+import {probeLane,selectProbeCandidates,coldStorageDays,shouldColdStore} from "./discovery-priority.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
@@ -210,4 +211,44 @@ test("Overpass cadence is independent from the faster discovery worker cadence",
   assert.equal(isOverpassDue(null,60,now),true);
   assert.equal(isOverpassDue("2026-10-01T19:30:01Z",60,now),false);
   assert.equal(isOverpassDue("2026-10-01T18:59:59Z",60,now),true);
+});
+
+
+test("probe lanes prioritize event-producing venues ahead of ordinary dining",()=>{
+  assert.equal(probeLane({category:"music-venue",name:"The Sound"}),"event-likely");
+  assert.equal(probeLane({category:"restaurant",name:"Oggi's Pizza and Brewing Co."}),"food-evidence");
+  assert.equal(probeLane({category:"observed-venue",name:"Neighborhood Hall Events"}),"event-evidence");
+  assert.equal(probeLane({category:"observed-venue",name:"Unknown Venue"}),"exploratory");
+  assert.equal(probeLane({category:"restaurant",name:"Denny's"}),"low-value");
+});
+
+test("priority lane selection does not let ordinary restaurants consume bootstrap probes",()=>{
+  const rows=[];
+  for(let i=0;i<30;i++)rows.push({key:"music-"+i,category:"music-venue",name:"Music "+i,website:"https://music"+i+".example/",priority:100,discoveredAt:"2026-10-01T00:00:00Z"});
+  for(let i=0;i<50;i++)rows.push({key:"food-"+i,category:"restaurant",name:"Restaurant "+i,website:"https://food"+i+".example/",priority:120,discoveredAt:"2026-10-01T00:00:00Z"});
+  const result=selectProbeCandidates(rows,30,{
+    scoreFn:item=>item.priority,
+    hostFn:item=>new URL(item.website).hostname
+  });
+  assert.equal(result.selected.length,30);
+  assert.equal(result.selected.filter(item=>item.category==="restaurant").length,1);
+  assert.equal(result.selected.filter(item=>probeLane(item)==="low-value").length,1);
+});
+
+test("low-value calendar misses move to long-lived cold storage",()=>{
+  const item={category:"restaurant",name:"Plain Restaurant",attempts:1,status:"retry"};
+  const result={reason:"no-supported-calendar"};
+  assert.equal(shouldColdStore(item,result),true);
+  assert.equal(coldStorageDays(item,result),45);
+  assert.equal(coldStorageDays({...item,attempts:2},result),90);
+  assert.equal(coldStorageDays({...item,attempts:3},result),180);
+  assert.equal(shouldColdStore({category:"bar",name:"Live Bar",attempts:1,status:"retry"},result),false);
+});
+
+test("cold candidates are sampled without taking over the hot queue",()=>{
+  const rows=[];
+  for(let i=0;i<20;i++)rows.push({key:"event-"+i,category:"bar",name:"Bar "+i,website:"https://bar"+i+".example/",priority:100,status:"candidate"});
+  for(let i=0;i<10;i++)rows.push({key:"cold-"+i,category:"restaurant",name:"Cold "+i,website:"https://cold"+i+".example/",priority:200,status:"cold"});
+  const result=selectProbeCandidates(rows,30,{hostFn:item=>new URL(item.website).hostname});
+  assert.equal(result.selected.filter(item=>item.status==="cold").length,1);
 });

@@ -45,14 +45,10 @@ jobs:
           echo "Discovered sources: $BEFORE -> $AFTER ($PROMOTED promoted)"
       - name: Validate discovery data
         run: node scripts/validate-discovery.mjs
-      - name: Rebuild coverage diagnostics
-        run: node scripts/build-coverage-dashboard.mjs
-      - name: Validate coverage diagnostics
-        run: node scripts/validate-coverage.mjs
       - name: Commit discovery progress
         id: commit
         run: |
-          FILES="src/data/discovery-queue.json src/data/discovered-sources.json src/data/discovery-state.json src/data/discovery-coverage.json src/data/discovery-live.json src/data/coverage-dashboard.json"
+          FILES="src/data/discovery-queue.json src/data/discovered-sources.json src/data/discovery-state.json src/data/discovery-coverage.json"
           if git diff --quiet -- $FILES; then
             echo "No discovery changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -79,6 +75,11 @@ jobs:
           git rebase origin/main
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Reconcile derived state
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run reconcile-state.yml --ref main
       - name: Refresh events from newly promoted sources
         if: steps.commit.outputs.changed == 'true' && steps.discover.outputs.promoted != '0'
         env:

@@ -26,8 +26,8 @@ jobs:
         run: node scripts/validate-delivery.mjs
       - name: Validate discovery architecture
         run: node scripts/validate-discovery.mjs
-      - name: Build coverage diagnostics
-        run: node scripts/build-coverage-dashboard.mjs
+      - name: Reconcile derived diagnostics
+        run: node scripts/reconcile-state.mjs
       - name: Validate coverage architecture
         run: node scripts/validate-coverage.mjs
       - name: Report neighborhood density

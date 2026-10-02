@@ -24,7 +24,8 @@ const backgroundOnly=new Set([
   "src/data/location-resolution-queue.json",
   "src/data/location-resolution-coverage.json",
   "src/data/venue-geocode-cache.json",
-  "src/data/coverage-dashboard.json"
+  "src/data/coverage-dashboard.json",
+  "src/data/system-health.json"
 ]);
 
 if(files.length&&files.every(file=>backgroundOnly.has(file))){
