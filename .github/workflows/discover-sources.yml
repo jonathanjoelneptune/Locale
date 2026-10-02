@@ -37,12 +37,16 @@ jobs:
         id: discover
         run: |
           BEFORE="$(node -e "const fs=require('fs');try{const x=JSON.parse(fs.readFileSync('src/data/discovered-sources.json','utf8'));process.stdout.write(String(Array.isArray(x)?x.length:0))}catch{process.stdout.write('0')}")"
+          BEFORE_HASH="$(sha256sum src/data/discovered-sources.json | cut -d' ' -f1)"
           node scripts/discover.mjs
           AFTER="$(node -e "const fs=require('fs');const x=JSON.parse(fs.readFileSync('src/data/discovered-sources.json','utf8'));process.stdout.write(String(Array.isArray(x)?x.length:0))")"
+          AFTER_HASH="$(sha256sum src/data/discovered-sources.json | cut -d' ' -f1)"
           PROMOTED=$((AFTER-BEFORE))
           if [ "$PROMOTED" -lt 0 ]; then PROMOTED=0; fi
+          if [ "$BEFORE_HASH" != "$AFTER_HASH" ]; then SOURCES_CHANGED=true; else SOURCES_CHANGED=false; fi
           echo "promoted=$PROMOTED" >> "$GITHUB_OUTPUT"
-          echo "Discovered sources: $BEFORE -> $AFTER ($PROMOTED promoted)"
+          echo "sources_changed=$SOURCES_CHANGED" >> "$GITHUB_OUTPUT"
+          echo "Discovered sources: $BEFORE -> $AFTER ($PROMOTED added); catalog changed=$SOURCES_CHANGED"
       - name: Validate discovery data
         run: node scripts/validate-discovery.mjs
       - name: Commit discovery progress
@@ -80,8 +84,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run reconcile-state.yml --ref main
-      - name: Refresh events from newly promoted sources
-        if: steps.commit.outputs.changed == 'true' && steps.discover.outputs.promoted != '0'
+      - name: Refresh events after source catalog changes
+        if: steps.commit.outputs.changed == 'true' && steps.discover.outputs.sources_changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run refresh-events.yml --ref main
