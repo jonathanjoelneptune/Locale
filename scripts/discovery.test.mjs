@@ -20,14 +20,18 @@ test("discovery grid covers a region in bounded center-first cells",()=>{
   const core=buildDiscoveryCells({...region,discoveryCoreRadiusMiles:15},"core");
   const high=buildDiscoveryCells({...region,discoveryRadiusMiles:35},"high");
   const dining=buildDiscoveryCells({...region,discoveryDiningRadiusMiles:20},"dining");
+  const outer=buildDiscoveryCells({...region,discoveryRadiusMiles:35,discoveryOuterRadiusMiles:50},"outer");
   assert.ok(core.length>20);
   assert.ok(high.length>20);
   assert.ok(dining.length>10);
+  assert.ok(outer.length>10);
+  assert.ok(outer.every(cell=>cell.distanceMiles>=31));
   assert.equal(core[0].distanceMiles,0);
   assert.equal(core[0].phase,"core");
   assert.ok(core[0].queryRadiusMiles<high[0].queryRadiusMiles);
-  const summary=discoveryCellSummary({...region,discoveryCoreRadiusMiles:15,discoveryRadiusMiles:35,discoveryDiningRadiusMiles:20});
-  assert.equal(summary.total,core.length+high.length+dining.length);
+  const summary=discoveryCellSummary({...region,discoveryCoreRadiusMiles:15,discoveryRadiusMiles:35,discoveryOuterRadiusMiles:50,discoveryDiningRadiusMiles:20});
+  assert.equal(summary.total,core.length+high.length+dining.length+outer.length);
+  assert.equal(summary.outer,outer.length);
 });
 
 test("cell queries prioritize local nightlife/culture and keep dining separate",()=>{
@@ -47,6 +51,8 @@ test("cell queries prioritize local nightlife/culture and keep dining separate",
   assert.doesNotMatch(highQuery,/around:/);
   assert.doesNotMatch(diningQuery,/nightclub\|bar/);
   assert.doesNotMatch(highQuery,/university|school/);
+  assert.match(highQuery,/ISO3166-1"="US"/);
+  assert.match(highQuery,/nwr\(area\.localeCountry\)/);
 });
 
 test("OpenStreetMap venue candidates become Tier C queue entries",()=>{
@@ -71,6 +77,14 @@ test("OpenStreetMap venue candidates become Tier C queue entries",()=>{
   assert.equal(candidate.monitorTier,"C");
   assert.equal(candidate.priority,110);
   assert.match(candidate.address,/123 Main St/);
+});
+
+test("OpenStreetMap candidates outside the exact ingest radius are rejected",()=>{
+  const candidate=candidateFromOverpassElement({
+    type:"node",id:999,lat:33.60,lon:-117.16,
+    tags:{name:"Outside Venue",amenity:"bar",website:"https://outside.example"}
+  },region);
+  assert.equal(candidate,null);
 });
 
 test("discovery probe only follows same-site event/calendar links",()=>{
