@@ -28,6 +28,8 @@ jobs:
         run: node scripts/ingest.mjs
       - name: Build coverage diagnostics
         run: node scripts/build-coverage-dashboard.mjs
+      - name: Validate coverage diagnostics
+        run: node scripts/validate-coverage.mjs
       - name: Validate generated event data
         run: node scripts/validate-data.mjs
       - name: Commit event changes
