@@ -10,6 +10,7 @@ import {parseConventionCenter} from "./providers/convention-center.mjs";
 import {parseFairgroundsPrint} from "./providers/del-mar-fairgrounds.mjs";
 import {parseSanteeCalendar} from "./providers/santee-calendar.mjs";
 import {SOURCES} from "./source-registry.mjs";
+import {venueGeocodeKey} from "./venue-geocode.mjs";
 
 test("workbook acquisition registry preserves the complete source, area, and taxonomy inventory",async()=>{
   const registry=await loadAcquisitionRegistry();
@@ -113,6 +114,49 @@ test("BiblioCommons ingestion parses already-fetched HTML without refetching det
   }finally{
     globalThis.fetch=originalFetch;
   }
+});
+
+test("County Library IDs stay unique when the same program occurs at different branches",async()=>{
+  const originalFetch=globalThis.fetch;
+  const makePage=branch=>`
+    <div>1 to 20 of 1 items</div>
+    <div>Location Locations Alpine (383) Poway (221) Audience Adults (100)</div>
+    <div>Event items</div>
+    <script type="application/ld+json">
+      {"@type":"Event","name":"Family Storytime","startDate":"2026-10-09T10:30:00-07:00"}
+    </script>
+    <h3>Family Storytime</h3>
+    <div>Friday, October 9, 2026, 10:30am ${branch} Event location: ${branch}</div>
+  `;
+  let call=0;
+  globalThis.fetch=async input=>({ok:true,status:200,url:String(input),text:async()=>makePage(call++===0?"Alpine":"Poway")});
+  try{
+    const alpine=await biblioCommonsEvents({
+      endpoint:"https://library.example/v2/events",sourceName:"San Diego County Library Events",
+      sourceId:"sd-county-library",fallbackCenter:{lat:32.85,lng:-117.05},days:45,maxPages:1
+    });
+    const poway=await biblioCommonsEvents({
+      endpoint:"https://library.example/v2/events",sourceName:"San Diego County Library Events",
+      sourceId:"sd-county-library",fallbackCenter:{lat:32.85,lng:-117.05},days:45,maxPages:1
+    });
+    assert.equal(alpine[0].venue,"Alpine Library");
+    assert.equal(poway[0].venue,"Poway Library");
+    assert.notEqual(alpine[0].id,poway[0].id);
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+test("qualified geocoder hints do not append the metro name twice",()=>{
+  const region={name:"San Diego",administrativeArea:"CA",countryCode:"US"};
+  assert.equal(
+    venueGeocodeKey("Alpine Library, San Diego County, CA",region),
+    "Alpine Library, San Diego County, CA, US"
+  );
+  assert.equal(
+    venueGeocodeKey("Example Bar",region),
+    "Example Bar, San Diego, CA, US"
+  );
 });
 
 test("Reader specials parser keeps neighborhood, venue, and deal text",()=>{

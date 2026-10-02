@@ -12,6 +12,7 @@ const decode=value=>String(value||"")
 const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));
 
 const escapeRegExp=value=>String(value||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const idPart=value=>String(value||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)||"location";
 
 export function biblioCommonsLocationNames(html){
   const text=strip(html);
@@ -156,7 +157,7 @@ export async function biblioCommonsEvents({
       }).map(event=>{
         if(event.locationPrecision!=="source-center"||event.venue!==sourceName)return event;
         const context=libraryVenue(biblioCommonsEventLocation(page.html,event.title,knownLocations));
-        return context?{...event,...context}:event;
+        return context?{...event,...context,id:`${event.id}:${idPart(context.venue)}`}:event;
       });
       out.push(...embedded);
     }catch{}
@@ -164,7 +165,7 @@ export async function biblioCommonsEvents({
       let url=page.url;
       try{if(item.link)url=new URL(item.link,page.url).href}catch{}
       out.push({
-        id:`${sourceId}:${item.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,70)}:${item.start}`,
+        id:`${sourceId}:${item.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,70)}:${item.start}:${idPart(item.venue)}`,
         title:item.title,
         category:classifyEvent(item.title,item.description,item.tags),
         subcategories:item.tags.map(value=>value.toLowerCase().replace(/[^a-z0-9]+/g,"-")).filter(Boolean),
