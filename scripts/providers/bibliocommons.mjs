@@ -1,4 +1,4 @@
-import {embeddedJsonEvents} from "./embedded-json.mjs";
+import {embeddedJsonEventsFromHtml} from "./embedded-json.mjs";
 import {classifyEvent} from "../event-classification.mjs";
 import {zonedLocalIso} from "../weekly-recurrence.mjs";
 
@@ -90,7 +90,9 @@ export async function biblioCommonsEvents({
   const out=[];
   for(const page of htmlPages){
     try{
-      const embedded=await embeddedJsonEvents({endpoint:page.url,sourceName,sourceId,fallbackCenter,days});
+      const embedded=embeddedJsonEventsFromHtml({
+        html:page.html,endpoint:page.url,sourceName,sourceId,fallbackCenter,days
+      });
       out.push(...embedded);
     }catch{}
     for(const item of parseBiblioCommonsPage(page.html)){
