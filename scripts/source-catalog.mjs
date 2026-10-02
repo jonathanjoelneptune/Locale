@@ -41,7 +41,13 @@ export function mergeSourceCatalog(staticSources,discoveredSources){
       });
       continue;
     }
-    if(source.enabled===false)continue;
+    if(source.enabled===false){
+      // Keep disabled discovered-source tombstones in the catalog so historical
+      // events/entity links remain referentially valid, while sourceCoversRegion
+      // prevents them from being ingested again.
+      byId.set(source.id,source);
+      continue;
+    }
 
     byId.set(source.id,source);
     if(key)canonicalByEndpoint.set(key,source);
