@@ -1,1 +1,77 @@
-:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#142536;background:#f5f2e9;--ink:#142536;--muted:#71808c;--line:#cfd7d9;--paper:#fffefa;--paper2:#f4f1e8;--accent:#187f9f;--mint:#35bfa5;--gold:#dc9b32}*{box-sizing:border-box}html,body,#app{height:100%;margin:0}button,input,select{font:inherit}button{cursor:pointer;color:inherit}a{color:inherit}body{overflow:hidden;background:#f5f2e9}
+:root{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#1b313b;
+  background:#f3f4f0;
+
+  /* Locale Design System v1: color */
+  --ink:#1b313b;
+  --text-primary:#1b313b;
+  --text-secondary:#58707a;
+  --text-muted:#7d8d93;
+  --text-faint:#9aa8ad;
+  --paper:#fffefa;
+  --paper2:#f4f5f1;
+  --surface-0:#f3f4f0;
+  --surface-1:rgba(255,254,250,.90);
+  --surface-2:rgba(248,250,247,.82);
+  --surface-raised:#fffefa;
+  --surface-selected:#edf7f5;
+  --border-subtle:rgba(102,132,141,.20);
+  --border-default:rgba(102,132,141,.34);
+  --border-strong:rgba(69,106,117,.50);
+  --accent:#14879f;
+  --accent-strong:#0d7188;
+  --accent-soft:#dff2f1;
+  --mint:#35bfa5;
+  --gold:#c98a2e;
+  --line:rgba(102,132,141,.28);
+
+  /* Locale Design System v1: shape */
+  --radius-xs:4px;
+  --radius-sm:7px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --radius-pill:999px;
+
+  /* Locale Design System v1: spacing */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+
+  /* Locale Design System v1: elevation */
+  --shadow-xs:0 1px 2px rgba(24,48,58,.07);
+  --shadow-sm:0 4px 12px rgba(24,48,58,.09);
+  --shadow-md:0 10px 28px rgba(24,48,58,.12);
+  --shadow-focus:0 0 0 3px rgba(20,135,159,.16);
+
+  /* Locale Design System v1: motion */
+  --motion-fast:120ms;
+  --motion-base:170ms;
+  --motion-slow:240ms;
+  --ease-standard:cubic-bezier(.2,.75,.25,1);
+
+  /* Type scale */
+  --type-micro:8px;
+  --type-caption:9px;
+  --type-meta:10px;
+  --type-body:11px;
+  --type-card:12px;
+  --type-section:14px;
+  --type-title:20px;
+}
+*{box-sizing:border-box}
+html,body,#app{height:100%;margin:0}
+button,input,select{font:inherit}
+button{cursor:pointer;color:inherit}
+a{color:inherit}
+body{overflow:hidden;background:var(--surface-0);color:var(--text-primary)}
+button,input,select,a{transition:border-color var(--motion-fast) var(--ease-standard),background-color var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard),opacity var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
+:where(button,input,select,a):focus-visible{outline:0;box-shadow:var(--shadow-focus)}
+::selection{background:rgba(20,135,159,.18)}
+*{scrollbar-color:rgba(79,111,120,.34) transparent;scrollbar-width:thin}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
