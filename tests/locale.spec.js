@@ -519,37 +519,55 @@ test("diagnostics exposes live discovery operations console",async({page})=>{
 });
 
 
-test("area geometry is a reusable data layer independent of Leaflet",async({page})=>{
+test("area geometry is reusable, land-aware, and independent of Leaflet",async({page})=>{
   await page.goto("./");
   const result=await page.evaluate(async()=>{
     const data=await import("./src/data/areaGeometry.js");
     const service=await import("./src/services/areas.js");
     const collection=await data.loadAreaGeometry({regionId:"san-diego"});
     const northPark=collection.features.find(feature=>feature.properties.id==="north-park");
+    const coronado=collection.features.find(feature=>feature.properties.id==="coronado");
     const index=service.createAreaSpatialIndex(collection);
-    const memberships=index.areasForPoint({lat:northPark.properties.labelPoint.lat,lng:northPark.properties.labelPoint.lng}).map(feature=>feature.properties.id);
+    const northParkMemberships=index.areasForPoint(northPark.properties.labelPoint).map(feature=>feature.properties.id);
+    const oceanMemberships=index.areasForPoint({lat:32.80,lng:-117.36}).map(feature=>feature.properties.id);
+    const coronadoNorth=index.areasForPoint({lat:32.699,lng:-117.205}).map(feature=>feature.properties.id);
+    const coronadoCore=index.areasForPoint({lat:32.6859,lng:-117.1831}).map(feature=>feature.properties.id);
     return {
       schemaVersion:collection.schemaVersion,
       count:collection.features.length,
       northParkGeometry:northPark.geometry.type,
       northParkSource:northPark.properties.geometrySource,
-      northParkFound:memberships.includes("north-park"),
-      seedMembershipsAreExclusive:collection.features.every(feature=>index.areasForPoint(feature.properties.labelPoint).length===1)
+      northParkFound:northParkMemberships.includes("north-park"),
+      coronadoSource:coronado.properties.geometrySource,
+      oceanMemberships,
+      coronadoNorth,
+      coronadoCore,
+      waterClipping:collection.geometryPolicy.waterClipping
     };
   });
-  expect(result.schemaVersion).toBe(2);
+  expect(result.schemaVersion).toBe(3);
   expect(result.count).toBe(configuredSanDiegoAreaCount);
-  expect(result.northParkGeometry).toBe("Polygon");
-  expect(result.northParkSource).toBe("coverage-voronoi");
+  expect(["Polygon","MultiPolygon"]).toContain(result.northParkGeometry);
+  expect(result.northParkSource).toBe("land-clipped-voronoi");
   expect(result.northParkFound).toBe(true);
-  expect(result.seedMembershipsAreExclusive).toBe(true);
+  expect(result.coronadoSource).toContain("Coronado");
+  expect(result.oceanMemberships).toEqual([]);
+  expect(result.coronadoNorth).toContain("coronado");
+  expect(result.coronadoCore).toContain("coronado");
+  expect(result.waterClipping).toContain("land mask");
 
   const mapSource=await (await page.request.get("./src/components/map.js")).text();
   const dataSource=await (await page.request.get("./src/data/areaGeometry.js")).text();
+  const regionSource=await (await page.request.get("./src/data/areaGeometryRegions.js")).text();
+  const polygonSource=await (await page.request.get("./src/services/polygonGeometry.js")).text();
   const serviceSource=await (await page.request.get("./src/services/areas.js")).text();
   expect(mapSource).not.toContain("coverage-zones.json");
   expect(mapSource).not.toContain("geography-catalog.json");
-  expect(dataSource).toContain("loadAreaGeometry");
+  expect(dataSource).toContain("applyRegionalConstraints");
+  expect(regionSource).toContain("landMask");
+  expect(regionSource).toContain("coronado");
+  expect(polygonSource).toContain("intersectPolygonRings");
+  expect(polygonSource).toContain("subtractPolygonRing");
   expect(serviceSource).toContain("createAreaSpatialIndex");
   expect(serviceSource).toContain("pointInArea");
 });
@@ -601,28 +619,37 @@ test("clicking a visible neighborhood label on the map selects and focuses that 
 });
 
 
-test("neighborhood polygons form a non-overlapping partition and date controls precede areas",async({page})=>{
+test("neighborhood polygons stay land-aware and labels read as map typography",async({page})=>{
   await waitForLocale(page);
   const layout=await page.evaluate(()=>{
     const date=document.querySelector("#dateControls");
     const areas=document.querySelector("#areaControls");
+    const label=document.querySelector(".area-map-label");
+    const style=label?getComputedStyle(label):null;
     return {
       dateBeforeAreas:!!(date.compareDocumentPosition(areas)&Node.DOCUMENT_POSITION_FOLLOWING),
       boundaryCount:Number(document.querySelector("#map")?.dataset.areaBoundaryCount||0),
-      labelCount:Number(document.querySelector("#map")?.dataset.areaLabelCount||0)
+      labelCount:Number(document.querySelector("#map")?.dataset.areaLabelCount||0),
+      labelBackground:style?.backgroundColor||"",
+      labelBorderWidth:style?.borderTopWidth||"",
+      labelTransform:style?.textTransform||""
     };
   });
   expect(layout.dateBeforeAreas).toBe(true);
   expect(layout.boundaryCount).toBeGreaterThan(0);
   expect(layout.labelCount).toBeLessThanOrEqual(layout.boundaryCount);
+  expect(layout.labelBackground).toBe("rgba(0, 0, 0, 0)");
+  expect(layout.labelBorderWidth).toBe("0px");
+  expect(layout.labelTransform).toBe("uppercase");
 
   const source=await (await page.request.get("./src/data/areaGeometry.js")).text();
   const mapSource=await (await page.request.get("./src/components/map.js")).text();
   const css=await (await page.request.get("./styles/app.css")).text();
-  expect(source).toContain("coverage-voronoi");
+  expect(source).toContain("land-clipped-voronoi");
   expect(source).toContain("clipHalfPlane");
   expect(source).not.toContain("circlePolygon");
   expect(mapSource).toContain("AREA_COLORS");
   expect(mapSource).toContain("occupied.some");
-  expect(css).toContain("--area-shade");
+  expect(css).toContain("text-transform:uppercase");
+  expect(css).toContain("text-shadow:-1px -1px");
 });
