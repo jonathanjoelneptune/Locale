@@ -35,12 +35,20 @@ jobs:
           const dashboard=read("src/data/coverage-dashboard.json");
           const events=read("src/data/coverage.json");
           const locations=read("src/data/location-resolution-coverage.json");
+          const dashboardTime=Date.parse(dashboard.generatedAt||"")||0;
+          const latestFact=Math.max(
+            Date.parse(discovery.lastRunAt||"")||0,
+            Date.parse(events.generatedAt||"")||0,
+            Date.parse(locations.generatedAt||"")||0
+          );
+          const reconcileLagging=latestFact>dashboardTime+1000;
           console.log("DISCOVERY_STALE="+(age(discovery.lastRunAt)>20));
-          console.log("RECONCILE_STALE="+(age(dashboard.generatedAt)>30));
+          console.log("RECONCILE_STALE="+(reconcileLagging||age(dashboard.generatedAt)>360));
           console.log("EVENTS_STALE="+(age(events.generatedAt)>420));
           console.log("LOCATIONS_STALE="+(age(locations.generatedAt)>120));
           console.log("DISCOVERY_AGE="+Math.round(age(discovery.lastRunAt)));
           console.log("RECONCILE_AGE="+Math.round(age(dashboard.generatedAt)));
+          console.log("RECONCILE_LAGGING="+reconcileLagging);
           NODE
           cat /tmp/locale-watchdog.env
           source /tmp/locale-watchdog.env
