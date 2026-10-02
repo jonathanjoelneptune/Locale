@@ -20,16 +20,31 @@ export const sourceEndpointKey=source=>{
 
 export function mergeSourceCatalog(staticSources,discoveredSources){
   const byId=new Map((staticSources||[]).map(source=>[source.id,source]));
-  const endpointKeys=new Set(
-    (staticSources||[]).filter(source=>source.enabled!==false).map(sourceEndpointKey).filter(Boolean)
+  const canonicalByEndpoint=new Map(
+    (staticSources||[])
+      .filter(source=>source.enabled!==false)
+      .map(source=>[sourceEndpointKey(source),source])
+      .filter(([key])=>!!key)
   );
+
   for(const source of discoveredSources||[]){
-    if(!source?.id||source.enabled===false)continue;
-    if(byId.has(source.id))continue;
+    if(!source?.id||byId.has(source.id))continue;
     const key=sourceEndpointKey(source);
-    if(key&&endpointKeys.has(key))continue;
+    const canonical=key?canonicalByEndpoint.get(key):null;
+
+    if(source.aliasOf||canonical){
+      byId.set(source.id,{
+        ...source,
+        enabled:false,
+        sourceKind:"alias",
+        aliasOf:source.aliasOf||canonical.id
+      });
+      continue;
+    }
+    if(source.enabled===false)continue;
+
     byId.set(source.id,source);
-    if(key)endpointKeys.add(key);
+    if(key)canonicalByEndpoint.set(key,source);
   }
   return [...byId.values()];
 }
