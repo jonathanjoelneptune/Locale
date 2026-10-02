@@ -168,7 +168,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
       preciseLocationTargetMet:precise/Math.max(1,regionEvents.length)>=0.9,
       placeCount:regionPlaces.length,
       sourceCount:(eventCoverage.sourceIds||[]).length,
-      dynamicSourceCount:discoveredSources.filter(source=>source.regions?.includes(region.id)).length,
+      dynamicSourceCount:discoveredSources.filter(source=>source.enabled!==false&&source.regions?.includes(region.id)).length,
       categoryCounts:eventCoverage.categoryCounts||{},
       recurringActivityCounts:eventCoverage.recurringActivityCounts||{},
       sourceHealth:sourceSummary(eventCoverage.sourceHealth||[]),

@@ -44,13 +44,14 @@ for(const [label,text] of [
 }
 requireText(refresh,"gh workflow run reconcile-state.yml --ref main","refresh-events.yml");
 requireText(discover,"gh workflow run reconcile-state.yml --ref main","discover-sources.yml");
+requireText(discover,'cron: "3,13,23,33,43,53 * * * *"',"discover-sources.yml");
 requireText(resolve,"gh workflow run reconcile-state.yml --ref main","resolve-locations.yml");
 
 requireText(reconcile,"node scripts/reconcile-state.mjs","reconcile-state.yml");
 requireText(reconcile,'FILES="src/data/coverage-dashboard.json src/data/discovery-live.json src/data/system-health.json"',"reconcile-state.yml");
 requireText(reconcile,"locale-state-reconcile","reconcile-state.yml");
 
-requireText(watchdog,'cron: "5,20,35,50 * * * *"',"living-watchdog.yml");
+requireText(watchdog,'cron: "6,21,36,51 * * * *"',"living-watchdog.yml");
 requireText(watchdog,'recover "$DISCOVERY_STALE" "discover-sources.yml" "discovery"',"living-watchdog.yml");
 requireText(watchdog,'recover "$RECONCILE_STALE" "reconcile-state.yml" "reconciliation"',"living-watchdog.yml");
 requireText(watchdog,'recover "$EVENTS_STALE" "refresh-events.yml" "event refresh"',"living-watchdog.yml");

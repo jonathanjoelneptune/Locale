@@ -6,6 +6,7 @@ import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
+import {STATIC_SOURCES,sourceEndpointKey} from "./source-catalog.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
@@ -166,14 +167,45 @@ function migrateLowValueRetriesToCold(queue){
 }
 
 function sourceDuplicate(sources,source){
-  let endpoint;
-  try{endpoint=new URL(source.endpoint).href.replace(/\/$/,"")}catch{endpoint=source.endpoint}
-  return sources.find(existing=>{
-    if(existing.id===source.id)return true;
-    let other;
-    try{other=new URL(existing.endpoint).href.replace(/\/$/,"")}catch{other=existing.endpoint}
-    return existing.adapter===source.adapter&&other===endpoint;
-  });
+  const key=sourceEndpointKey(source);
+  return [...STATIC_SOURCES.filter(item=>item.enabled!==false),...sources].find(existing=>
+    existing.id===source.id||(key&&sourceEndpointKey(existing)===key)
+  );
+}
+
+function reconcileStaticSourceDuplicates(queue,sources){
+  const staticByEndpoint=new Map(
+    STATIC_SOURCES
+      .filter(source=>source.enabled!==false&&sourceEndpointKey(source))
+      .map(source=>[sourceEndpointKey(source),source])
+  );
+  let aliased=0,remapped=0;
+  for(const duplicate of sources){
+    const existing=staticByEndpoint.get(sourceEndpointKey(duplicate));
+    if(!existing||duplicate.aliasOf===existing.id)continue;
+    duplicate.enabled=false;
+    duplicate.sourceKind="alias";
+    duplicate.aliasOf=existing.id;
+    duplicate.aliasedAt=nowIso();
+    aliased++;
+    for(const item of queue){
+      if(item.sourceId!==duplicate.id)continue;
+      item.sourceId=existing.id;
+      item.status="qualified";
+      item.nextCheckAt=null;
+      item.coldUntil=null;
+      item.lastResult={
+        kind:"existing-source",
+        eventCount:Number(duplicate.discoveryEventCount||0),
+        url:existing.endpoint||duplicate.endpoint,
+        detail:`Covered by existing source ${existing.id}`
+      };
+      item.updatedAt=nowIso();
+      remapped++;
+    }
+  }
+  if(aliased)console.log(`Aliased ${aliased} dynamic source duplicate(s) to existing catalog sources; remapped ${remapped} queue item(s).`);
+  return {aliased,remapped};
 }
 
 function buildCoverage(queue,sources,runStats){
@@ -201,7 +233,7 @@ function buildCoverage(queue,sources,runStats){
       ),
       statusCounts,
       categoryCounts,
-      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length,
+      discoveredSourceCount:sources.filter(source=>source.enabled!==false&&source.regions?.includes(region.id)).length,
       discoveryCells:{
         version:regionState.cellSweepVersion||DISCOVERY_SWEEP_VERSION,
         total:cellSummary.total,
@@ -240,6 +272,7 @@ const coverageAreas=await readJson("src/data/coverage-zones.json",[]);
 const coverageDashboard=await readJson("src/data/coverage-dashboard.json",{regions:{}});
 
 if(!Array.isArray(queue)||!Array.isArray(discoveredSources))throw new Error("Discovery data files must contain arrays");
+const duplicateReconciliation=reconcileStaticSourceDuplicates(queue,discoveredSources);
 
 const discoveryPlan=adaptiveDiscoveryPlan(
   coverageDashboard,
@@ -283,6 +316,8 @@ const stats={
   regionProfiles:discoveryPlan.profiles,
   overpassRun:runOverpass,
   probeResults:[],
+  sourceDuplicatesAliased:duplicateReconciliation.aliased,
+  sourceReferencesRemapped:duplicateReconciliation.remapped,
   coldMigrated:0,
   probeLaneCounts:{},
   probeLaneTargets:{},
@@ -616,7 +651,9 @@ const compactRun={
   queueAfter:stats.queueAfter,
   coldMigrated:stats.coldMigrated,
   probeLaneCounts:stats.probeLaneCounts,
-  probeLaneTargets:stats.probeLaneTargets
+  probeLaneTargets:stats.probeLaneTargets,
+  sourceDuplicatesAliased:stats.sourceDuplicatesAliased,
+  sourceReferencesRemapped:stats.sourceReferencesRemapped
 };
 state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
 
@@ -626,4 +663,5 @@ await writeFile(SOURCES_PATH,JSON.stringify(discoveredSources.sort((a,b)=>a.id.l
 await writeFile(STATE_PATH,JSON.stringify(state,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify(buildCoverage(queue,discoveredSources,stats),null,2)+"\n");
 
-console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed across priority lanes, ${stats.coldMigrated} moved to cold storage, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total. Overpass ${runOverpass?"ran":"deferred"}.`);
+const activeDynamicSources=discoveredSources.filter(source=>source.enabled!==false&&!source.aliasOf).length;
+console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed across priority lanes, ${stats.coldMigrated} moved to cold storage, ${stats.promoted} promoted, ${activeDynamicSources} active dynamic sources. Overpass ${runOverpass?"ran":"deferred"}.`);

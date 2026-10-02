@@ -36,6 +36,7 @@ if(!Array.isArray(sources))fail("discovered-sources.json must contain an array")
 const regionIds=new Set(Object.keys(REGIONS));
 const coverageAreaIds=new Set((coverageAreas||[]).map(item=>item.id));
 const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
+const discoveredIds=new Set((sources||[]).map(source=>source?.id).filter(Boolean));
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
 const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json","calendar-links"]);
@@ -54,9 +55,14 @@ for(const [index,source] of (sources||[]).entries()){
   if(!Array.isArray(source.regions)||source.regions.length!==1||!regionIds.has(source.regions[0]))fail(`${label} must reference exactly one known region`);
   if(source.ownerEntityKind!=="place"||!source.ownerName)fail(`${label} must identify its owning place`);
   if(!source.discoveryCandidateKey)fail(`${label} missing discoveryCandidateKey`);
-  const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
-  if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
-  sourceEndpointKeys.add(endpointKey);
+  if(source.aliasOf){
+    if(source.enabled!==false)fail(`${label} alias must be disabled`);
+    if(!staticIds.has(source.aliasOf)&&!discoveredIds.has(source.aliasOf))fail(`${label} references unknown aliasOf ${source.aliasOf}`);
+  }else{
+    const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
+    if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
+    sourceEndpointKeys.add(endpointKey);
+  }
 }
 
 const queueKeys=new Set;
@@ -84,7 +90,7 @@ for(const [index,item] of (queue||[]).entries()){
   }
   if(item.status==="qualified"){
     if(!item.sourceId)fail(`${label} is qualified without sourceId`);
-    if(item.sourceId&&!sourceIds.has(item.sourceId))fail(`${label} references unknown discovered source ${item.sourceId}`);
+    if(item.sourceId&&!sourceIds.has(item.sourceId)&&!staticIds.has(item.sourceId))fail(`${label} references unknown source ${item.sourceId}`);
   }
 }
 

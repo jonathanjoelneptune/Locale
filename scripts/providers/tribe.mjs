@@ -1,4 +1,5 @@
 import {jsonLdCrawlEvents} from "./jsonld-crawl.mjs";
+import {icsEvents} from "./ics.mjs";
 import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
@@ -28,7 +29,14 @@ function cost(event){
   return match?{price:text,priceStatus:"source-text"}:{price:null,priceStatus:"unknown"};
 }
 
-async function tribeHtmlFallback({base,sourceName,sourceId,fallbackCenter}){
+async function tribeFallback({base,sourceName,sourceId,fallbackCenter,days}){
+  try{
+    const events=await icsEvents({
+      endpoint:base+"/events/?ical=1",sourceName,sourceId,fallbackCenter,days
+    });
+    if(events.length)return events;
+  }catch{}
+
   for(const listing of [base+"/events/",base+"/events/list/"]){
     try{
       const events=await jsonLdCrawlEvents({
@@ -61,7 +69,7 @@ export async function tribeEvents({endpoint,sourceName,sourceId,fallbackCenter,d
     },signal:AbortSignal.timeout(10000)});
     if(!response.ok){
       if(page===1&&[401,403,404,429].includes(response.status)){
-        const fallback=await tribeHtmlFallback({base,sourceName,sourceId,fallbackCenter});
+        const fallback=await tribeFallback({base,sourceName,sourceId,fallbackCenter,days});
         if(fallback.length)return fallback;
       }
       throw new Error(`${sourceName} Tribe ${response.status}`);

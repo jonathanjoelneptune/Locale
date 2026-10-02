@@ -11,15 +11,47 @@ export async function loadDiscoveredSources(){
   return Array.isArray(sources)?sources:[];
 }
 
-export async function loadAllSources(){
-  const discovered=await loadDiscoveredSources();
-  const byId=new Map(STATIC_SOURCES.map(source=>[source.id,source]));
-  for(const source of discovered){
-    if(!source?.id||source.enabled===false)continue;
-    if(byId.has(source.id))continue;
+export const sourceEndpointKey=source=>{
+  if(!source?.adapter||!source?.endpoint)return null;
+  let endpoint;
+  try{endpoint=new URL(source.endpoint).href.replace(/\/$/,"")}catch{endpoint=String(source.endpoint).replace(/\/$/,"")}
+  return `${source.adapter}|${endpoint}`;
+};
+
+export function mergeSourceCatalog(staticSources,discoveredSources){
+  const byId=new Map((staticSources||[]).map(source=>[source.id,source]));
+  const canonicalByEndpoint=new Map(
+    (staticSources||[])
+      .filter(source=>source.enabled!==false)
+      .map(source=>[sourceEndpointKey(source),source])
+      .filter(([key])=>!!key)
+  );
+
+  for(const source of discoveredSources||[]){
+    if(!source?.id||byId.has(source.id))continue;
+    const key=sourceEndpointKey(source);
+    const canonical=key?canonicalByEndpoint.get(key):null;
+
+    if(source.aliasOf||canonical){
+      byId.set(source.id,{
+        ...source,
+        enabled:false,
+        sourceKind:"alias",
+        aliasOf:source.aliasOf||canonical.id
+      });
+      continue;
+    }
+    if(source.enabled===false)continue;
+
     byId.set(source.id,source);
+    if(key)canonicalByEndpoint.set(key,source);
   }
   return [...byId.values()];
+}
+
+export async function loadAllSources(){
+  const discovered=await loadDiscoveredSources();
+  return mergeSourceCatalog(STATIC_SOURCES,discovered);
 }
 
 export const sourcesForRegionFrom=(sources,region)=>

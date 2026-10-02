@@ -4,9 +4,10 @@ import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from 
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,coldStorageDays,shouldColdStore} from "./discovery-priority.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
-import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents} from "./discovery-probe.mjs";
+import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents,discoveryScopedTribeEvents} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
+import {mergeSourceCatalog,sourceEndpointKey} from "./source-catalog.mjs";
 
 const region={
   id:"san-diego",
@@ -318,4 +319,102 @@ test("Tribe provider falls back to public HTML event pages when REST is blocked"
   }finally{
     globalThis.fetch=originalFetch;
   }
+});
+
+
+test("Tribe provider prefers a public iCalendar feed when REST is blocked",async()=>{
+  const originalFetch=globalThis.fetch;
+  const calls=[];
+  globalThis.fetch=async input=>{
+    const url=String(input);
+    calls.push(url);
+    if(url.includes("/wp-json/tribe/events/v1/events"))return {ok:false,status:403};
+    if(url==="https://venue.example/events/?ical=1")return {
+      ok:true,status:200,
+      text:async()=>[
+        "BEGIN:VCALENDAR",
+        "BEGIN:VEVENT",
+        "UID:fall-show@example",
+        "DTSTART:20261015T190000",
+        "DTEND:20261015T210000",
+        "SUMMARY:Fall Show",
+        "LOCATION:Example Venue",
+        "URL:https://venue.example/event/fall-show",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n")
+    };
+    throw new Error("unexpected URL "+url);
+  };
+  try{
+    const events=await tribeEvents({
+      endpoint:"https://venue.example",
+      sourceName:"Example Venue",
+      sourceId:"example",
+      fallbackCenter:{lat:32.7,lng:-117.1},
+      days:45,
+      maxPages:1
+    });
+    assert.equal(events.length,1);
+    assert.equal(events[0].title,"Fall Show");
+    assert.ok(calls.includes("https://venue.example/events/?ical=1"));
+    assert.ok(!calls.includes("https://venue.example/events/"));
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+test("deep branch pages reject broad organization-wide Tribe calendars",()=>{
+  const candidate={
+    name:"Copley-Price Family YMCA",
+    website:"https://www.ymcasd.org/locations/copley-price-family-ymca",
+    lat:32.7556,lng:-117.1014
+  };
+  const events=[
+    {venue:"Copley-Price Family YMCA",lat:32.7557,lng:-117.1013,locationPrecision:"source"},
+    {venue:"Toby Wells YMCA",lat:32.8320,lng:-117.1570,locationPrecision:"source"},
+    {venue:"McGrath Family YMCA",lat:32.7810,lng:-116.9630,locationPrecision:"source"},
+    {venue:"Ryan Family YMCA",lat:32.8140,lng:-117.2160,locationPrecision:"source"}
+  ];
+  assert.deepEqual(discoveryScopedTribeEvents(candidate,events),[]);
+});
+
+test("deep venue pages can use Tribe calendars when events are scoped to that venue",()=>{
+  const candidate={
+    name:"Example Theatre",
+    website:"https://example.org/venues/example-theatre",
+    lat:32.75,lng:-117.13
+  };
+  const events=[
+    {venue:"Example Theatre",lat:32.7501,lng:-117.1301,locationPrecision:"source"},
+    {venue:"Example Theatre",lat:32.7502,lng:-117.1300,locationPrecision:"source"},
+    {venue:"Example Theatre",lat:32.7499,lng:-117.1299,locationPrecision:"source"}
+  ];
+  assert.equal(discoveryScopedTribeEvents(candidate,events).length,3);
+});
+
+test("root venue sites can use site-wide Tribe calendars",()=>{
+  const candidate={name:"Example Venue",website:"https://example.org/",lat:32.75,lng:-117.13};
+  const events=[
+    {venue:"Room A",lat:32.75,lng:-117.13,locationPrecision:"source"},
+    {venue:"Room B",lat:32.75,lng:-117.13,locationPrecision:"source"}
+  ];
+  assert.equal(discoveryScopedTribeEvents(candidate,events).length,2);
+});
+
+test("static sources win over rediscovered dynamic copies of the same endpoint",()=>{
+  const staticSources=[
+    {id:"balboa-park",adapter:"tribe",endpoint:"https://balboapark.org",enabled:true}
+  ];
+  const discovered=[
+    {id:"dynamic-balboa",adapter:"tribe",endpoint:"https://balboapark.org/",enabled:true},
+    {id:"new-theatre",adapter:"jsonld",endpoint:"https://theatre.example/events",enabled:true}
+  ];
+  const merged=mergeSourceCatalog(staticSources,discovered);
+  assert.deepEqual(merged.map(source=>source.id),["balboa-park","dynamic-balboa","new-theatre"]);
+  const alias=merged.find(source=>source.id==="dynamic-balboa");
+  assert.equal(alias.enabled,false);
+  assert.equal(alias.sourceKind,"alias");
+  assert.equal(alias.aliasOf,"balboa-park");
+  assert.equal(sourceEndpointKey(staticSources[0]),sourceEndpointKey(discovered[0]));
 });
