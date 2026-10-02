@@ -12,6 +12,7 @@ import {spinEvents} from "./providers/spin.mjs";
 import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
+import {calendarLinksEvents} from "./providers/calendar-links.mjs";
 import {sanDiegoFamilyEvents} from "./providers/sandiego-family.mjs";
 import {sanDiegoParksEvents} from "./providers/sandiego-parks.mjs";
 import {usdEvents} from "./providers/usd.mjs";
@@ -52,6 +53,10 @@ const adapters={
   "embedded-json":async (region,source)=>embeddedJsonEvents({
     endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
     fallbackCenter:source.fallbackCenter,days:45
+  }),
+  "calendar-links":async (region,source)=>calendarLinksEvents({
+    endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,maxLinks:30
   }),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
