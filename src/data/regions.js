@@ -11,6 +11,7 @@ export const REGIONS={
     ingestRadiusMiles:50,
     discoveryCoreRadiusMiles:15,
     discoveryRadiusMiles:35,
+    discoveryOuterRadiusMiles:50,
     discoveryDiningRadiusMiles:20,
     discoveryPriority:100,
     timeZone:"America/Los_Angeles",
