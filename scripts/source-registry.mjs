@@ -1,7 +1,72 @@
 export const SOURCES=[
   {id:"ticketmaster",name:"Ticketmaster",scope:"country",countries:["US"],adapter:"ticketmaster",sourceKind:"platform",acquisitionTier:"A",coverageLayer:"platform",discovery:"geographic",refreshHours:1},
   {id:"san-diego-city",name:"City of San Diego",scope:"local",regions:["san-diego"],adapter:"san-diego-city",sourceKind:"government",acquisitionTier:"A",coverageLayer:"citywide",ownerEntityKind:"organizer",ownerName:"City of San Diego",refreshHours:2},
+  {
+    id:"sd-county-library",name:"San Diego County Library Events",scope:"regional",regions:["san-diego"],adapter:"sd-county-library",
+    sourceKind:"government",acquisitionTier:"A",coverageLayer:"regional-public",ownerEntityKind:"organizer",ownerName:"San Diego County Library",minExpectedEvents:10,
+    endpoint:"https://sdcl.bibliocommons.com/v2/events",fallbackCenter:{lat:32.85,lng:-117.05},refreshHours:2
+  },
+  {
+    id:"sd-museum-council",name:"San Diego Museum Council",scope:"regional",regions:["san-diego"],adapter:"sd-museum-council",
+    sourceKind:"aggregator",acquisitionTier:"A",coverageLayer:"category",ownerEntityKind:"organizer",ownerName:"San Diego Museum Council",minExpectedEvents:1,
+    endpoint:"https://sandiegomuseumcouncil.org/events/",fallbackCenter:{lat:32.7311,lng:-117.1467},refreshHours:3
+  },
+  {
+    id:"sandiego-reader-happy-hours",name:"San Diego Reader Happy Hours",scope:"regional",regions:["san-diego"],adapter:"sandiego-reader-happy-hours",
+    sourceKind:"aggregator",acquisitionTier:"A",coverageLayer:"deals",ownerEntityKind:"organizer",ownerName:"San Diego Reader",minExpectedEvents:20,
+    endpoint:"https://www.sandiegoreader.com/specials/tuesday/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12
+  },
+  {
+    id:"casbah-presents",name:"Casbah Presents",scope:"regional",regions:["san-diego"],adapter:"casbah-presents",
+    sourceKind:"promoter",acquisitionTier:"A",coverageLayer:"music-umbrella",ownerEntityKind:"organizer",ownerName:"Casbah Presents",minExpectedEvents:5,
+    endpoint:"https://www.casbahmusic.com/calendar/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:3
+  },
+  {
+    id:"san-diego-convention-center",name:"San Diego Convention Center",scope:"local",regions:["san-diego"],adapter:"convention-center",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"venue-umbrella",ownerEntityKind:"place",ownerName:"San Diego Convention Center",minExpectedEvents:1,
+    endpoint:"https://www.visitsandiego.com/calendar",fallbackCenter:{lat:32.7068,lng:-117.1624},refreshHours:6
+  },
+  {
+    id:"del-mar-fairgrounds",name:"Del Mar Fairgrounds",scope:"local",regions:["san-diego"],adapter:"del-mar-fairgrounds",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"venue-umbrella",ownerEntityKind:"organizer",ownerName:"Del Mar Fairgrounds",minExpectedEvents:1,
+    endpoint:"https://www.delmarfairgrounds.com/events",fallbackCenter:{lat:32.9736,lng:-117.2618},refreshHours:3
+  },
   {id:"poway",name:"City of Poway",scope:"local",regions:["san-diego"],adapter:"poway",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"City of Poway",refreshHours:6},
+  {
+    id:"santee-calendar",name:"City of Santee Calendar",scope:"local",regions:["san-diego"],adapter:"santee-calendar",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Santee",minExpectedEvents:1,
+    endpoint:"https://www.cityofsanteeca.gov/calendar/events",fallbackCenter:{lat:32.8384,lng:-116.9739},refreshHours:6
+  },
+  {
+    id:"escondido-calendar",name:"City of Escondido Calendar",scope:"local",regions:["san-diego"],adapter:"multi-ics",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Escondido",minExpectedEvents:1,
+    endpoints:["https://escondido.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"],fallbackCenter:{lat:33.1192,lng:-117.0864},refreshHours:6
+  },
+  {
+    id:"imperial-beach-calendar",name:"City of Imperial Beach Calendar",scope:"local",regions:["san-diego"],adapter:"multi-ics",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Imperial Beach",minExpectedEvents:1,
+    endpoints:[
+      "https://www.imperialbeachca.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "https://www.imperialbeachca.gov/common/modules/iCalendar/iCalendar.aspx?catID=30&feed=calendar",
+      "https://www.imperialbeachca.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "https://www.imperialbeachca.gov/common/modules/iCalendar/iCalendar.aspx?catID=32&feed=calendar"
+    ],fallbackCenter:{lat:32.5839,lng:-117.1131},refreshHours:6
+  },
+  {
+    id:"coronado-calendar",name:"City of Coronado Calendar",scope:"local",regions:["san-diego"],adapter:"multi-ics",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Coronado",minExpectedEvents:1,
+    endpoints:[
+      "https://www.coronado.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=31&feed=calendar",
+      "https://www.coronado.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "https://www.coronado.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar",
+      "https://www.coronado.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar"
+    ],fallbackCenter:{lat:32.6859,lng:-117.1831},refreshHours:6
+  },
+  {
+    id:"del-mar-calendar",name:"City of Del Mar Community Calendar",scope:"local",regions:["san-diego"],adapter:"multi-ics",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Del Mar",minExpectedEvents:1,
+    endpoints:["https://www.delmar.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar"],fallbackCenter:{lat:32.9595,lng:-117.2653},refreshHours:6
+  },
   {
     id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,
     excludedReason:"College campus calendars are outside Locale scope",endpoint:"https://calendar.ucsd.edu",fallbackCenter:{lat:32.8801,lng:-117.2340},refreshHours:6
