@@ -1,0 +1,52 @@
+name: Resolve Locale locations
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 * * * *"
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: locale-location-resolution
+  cancel-in-progress: true
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Resolve queued venue locations
+        id: resolve
+        run: |
+          BEFORE="$(git hash-object src/data/venue-geocode-cache.json 2>/dev/null || echo none)"
+          node scripts/resolve-locations.mjs
+          AFTER="$(git hash-object src/data/venue-geocode-cache.json 2>/dev/null || echo none)"
+          if [ "$BEFORE" != "$AFTER" ]; then
+            echo "resolved=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "resolved=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Commit location progress
+        id: commit
+        run: |
+          FILES="src/data/venue-geocode-cache.json src/data/location-resolution-queue.json src/data/location-resolution-coverage.json"
+          if git diff --quiet -- $FILES; then
+            echo "No location-resolution changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "locale-locations[bot]"
+          git config user.email "locale-locations[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "Advance venue location resolution"
+          git pull --rebase origin main
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Refresh events with newly resolved locations
+        if: steps.resolve.outputs.resolved == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh-events.yml --ref main
