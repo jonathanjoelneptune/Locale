@@ -170,7 +170,7 @@ if(coverage?.regions){
       for(const field of required){
         if(!Number.isInteger(Number(cells[field]))||Number(cells[field])<0)fail(`Discovery coverage ${regionId} has invalid cell count ${field}`);
       }
-      const expectedTotal=(version>=4?Number(cells.core||0):0)+Number(cells.high||0)+Number(cells.dining||0);
+      const expectedTotal=(version>=4?Number(cells.core||0):0)+Number(cells.high||0)+Number(cells.dining||0)+Number(cells.outer||0);
       if(expectedTotal!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
       if(Number(cells.completed)>Number(cells.total))fail(`Discovery coverage ${regionId} completed cells exceed total`);
     }
