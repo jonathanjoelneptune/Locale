@@ -166,6 +166,13 @@ function buildCoverage(queue,sources,runStats){
         completed:Number(regionState.completedCellCount||regionState.completedCells?.length||0),
         failed:Object.keys(regionState.failedCells||{}).length,
         remaining:Number(regionState.remainingCellCount??cellSummary.total)
+      },
+      coverageAreaSweeps:{
+        version:regionState.coverageAreaSweepVersion||AREA_SWEEP_VERSION,
+        tracked:Object.keys(regionState.coverageAreaSweeps||{}).length,
+        completed:Object.values(regionState.coverageAreaSweeps||{}).filter(item=>!!item.lastCompletedAt).length,
+        failed:Object.values(regionState.coverageAreaSweeps||{}).filter(item=>!!item.error&&!item.lastCompletedAt).length,
+        sweptThisRun:(runStats.focusAreas||[]).filter(item=>item.regionId===region.id).length
       }
     };
   }
@@ -303,7 +310,7 @@ for(let index=0;index<AREA_SWEEPS_PER_RUN;index++){
       attempts:0,
       nextAttemptAt:null
     };
-    stats.focusAreas.push({id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"ok",candidateCount:cellCandidates.length,newCount:added});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"ok",candidateCount:cellCandidates.length,newCount:added});
     console.log(`${region.id}/area:${zone.id}: discovered ${cellCandidates.length} focused venues; ${added} new.`);
   }catch(error){
     const attempts=Number(sweep.attempts||0)+1;
@@ -314,7 +321,7 @@ for(let index=0;index<AREA_SWEEPS_PER_RUN;index++){
       nextAttemptAt:new Date(Date.now()+Math.min(CELL_RETRY_MS*attempts,12*60*60*1000)).toISOString(),
       error:String(error?.message||error)
     };
-    stats.focusAreas.push({id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
     console.error(`${region.id}/area:${zone.id}: focused discovery failed:`,error);
   }
 }
