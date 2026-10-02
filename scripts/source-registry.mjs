@@ -39,7 +39,7 @@ export const SOURCES=[
   },
   {
     id:"escondido-calendar",name:"City of Escondido Calendar",scope:"local",regions:["san-diego"],adapter:"multi-ics",
-    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Escondido",minExpectedEvents:1,
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Escondido",
     endpoints:["https://escondido.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"],fallbackCenter:{lat:33.1192,lng:-117.0864},refreshHours:6
   },
   {
