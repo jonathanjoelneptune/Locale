@@ -59,26 +59,39 @@ const normalizeUrl=value=>{
   }catch{return null}
 };
 
+const bboxForCell=cell=>{
+  const radiusMiles=Math.max(0.2,Number(cell.queryRadiusMiles||5));
+  const lat=Number(cell.lat),lng=Number(cell.lng);
+  const latDelta=radiusMiles/69;
+  const cosLat=Math.max(0.2,Math.cos(lat*Math.PI/180));
+  const lngDelta=radiusMiles/(69*cosLat);
+  return [
+    lat-latDelta,
+    lng-lngDelta,
+    lat+latDelta,
+    lng+lngDelta
+  ].map(value=>value.toFixed(5)).join(",");
+};
+
 export function buildCellOverpassQuery(cell){
-  const radius=Math.round(Number(cell.queryRadiusMiles||5)*1609.344);
-  const {lat,lng}=cell;
+  const bbox=bboxForCell(cell);
   if(cell.phase==="dining"){
-    return `[out:json][timeout:12];(
-      nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
-      nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
-      nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"="hotel"];
-      nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"="hotel"];
+    return `[out:json][timeout:10][bbox:${bbox}];(
+      nwr["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
+      nwr["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
+      nwr["name"]["website"]["tourism"="hotel"];
+      nwr["name"]["contact:website"]["tourism"="hotel"];
     );out center tags;`;
   }
-  return `[out:json][timeout:12];(
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["craft"="brewery"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["craft"="brewery"];
+  return `[out:json][timeout:10][bbox:${bbox}];(
+    nwr["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
+    nwr["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
+    nwr["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
+    nwr["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
+    nwr["name"]["website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
+    nwr["name"]["contact:website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
+    nwr["name"]["website"]["craft"="brewery"];
+    nwr["name"]["contact:website"]["craft"="brewery"];
   );out center tags;`;
 }
 
@@ -130,6 +143,7 @@ export async function fetchOverpass(query,{
   now=()=>Date.now()
 }={}){
   let lastError;
+  const failures=[];
   const nowMs=now();
   const ordered=endpointOrder(endpoints);
   const available=ordered.filter(endpoint=>endpointState(health,endpoint).cooldownUntil<=nowMs);
@@ -137,7 +151,10 @@ export async function fetchOverpass(query,{
     const earliest=ordered
       .map(endpoint=>({endpoint,...endpointState(health,endpoint)}))
       .sort((a,b)=>a.cooldownUntil-b.cooldownUntil)[0];
-    throw new Error(`All Overpass endpoints are cooling down after recent failures; next endpoint available ${new Date(earliest.cooldownUntil).toISOString()}`);
+    throw Object.assign(
+      new Error(`All Overpass endpoints are cooling down after recent failures; next endpoint available ${new Date(earliest.cooldownUntil).toISOString()}`),
+      {code:"OVERPASS_COOLDOWN"}
+    );
   }
 
   for(const endpoint of available){
@@ -157,6 +174,7 @@ export async function fetchOverpass(query,{
           retryAfter:retryAfterMs(response.headers),
           nowMs:now()
         });
+        failures.push(`${endpoint}: HTTP ${response.status}`);
         lastError=error;
         continue;
       }
@@ -167,11 +185,18 @@ export async function fetchOverpass(query,{
     }catch(error){
       if(error?.nonRetryable)throw error;
       markEndpointFailure(health,endpoint,error,{nowMs:now()});
+      failures.push(`${endpoint}: ${error?.name||"Error"} ${error?.message||error}`);
       lastError=error;
     }
   }
 
-  throw lastError||new Error("All Overpass endpoints failed");
+  const message=failures.length
+    ?`All Overpass endpoints failed: ${failures.join(" | ")}`
+    :"All Overpass endpoints failed";
+  throw Object.assign(new Error(message),{
+    code:"OVERPASS_ALL_FAILED",
+    cause:lastError
+  });
 }
 
 export function candidateFromOverpassElement(row,region){

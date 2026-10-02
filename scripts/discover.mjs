@@ -302,7 +302,8 @@ function nextCoverageAreaSweep(){
 }
 
 if(runOverpass){
-for(let index=0;index<discoveryBudget.areaSweeps;index++){
+let stopOverpass=false;
+for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
   const work=nextCoverageAreaSweep();
   if(!work)break;
   const {zone,region,regionState,sweep,row}=work;
@@ -342,6 +343,7 @@ for(let index=0;index<discoveryBudget.areaSweeps;index++){
       error:String(error?.message||error)
     };
     stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
+    if(["OVERPASS_ALL_FAILED","OVERPASS_COOLDOWN"].includes(error?.code))stopOverpass=true;
     console.error(`${region.id}/area:${zone.id}: focused discovery failed:`,error);
   }
 }
@@ -359,7 +361,7 @@ const regionWork=Object.values(REGIONS)
   .filter(item=>item.next)
   .sort((a,b)=>a.last-b.last||Number(b.region.discoveryPriority||0)-Number(a.region.discoveryPriority||0)||a.region.id.localeCompare(b.region.id))[0];
 
-if(regionWork){
+if(!stopOverpass&&regionWork){
   const {region,regionState}=regionWork;
   stats.sweptRegionId=region.id;
   stats.discoveryCells=[];
