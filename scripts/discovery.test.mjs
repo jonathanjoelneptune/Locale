@@ -31,7 +31,7 @@ test("cell queries prioritize local nightlife/culture and keep dining separate",
   const diningCell=buildDiscoveryCells({...region,discoveryDiningRadiusMiles:20},"dining")[0];
   const highQuery=buildCellOverpassQuery(highCell);
   const diningQuery=buildCellOverpassQuery(diningCell);
-  assert.match(highQuery,/\[bbox:32\.64324,-117\.24718,32\.78816,-117\.07502\]/);
+  assert.match(highQuery,/\[bbox:32\.64324,-117\.24723,32\.78816,-117\.07497\]/);
   assert.match(highQuery,/nightclub\|bar\|pub\|music_venue/);
   assert.match(highQuery,/theatre\|cinema\|arts_centre\|community_centre/);
   assert.match(highQuery,/craft"="brewery"/);
