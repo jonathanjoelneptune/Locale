@@ -6,6 +6,7 @@ import {probeLane,selectProbeCandidates,coldStorageDays,shouldColdStore} from ".
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
+import {tribeEvents} from "./providers/tribe.mjs";
 
 const region={
   id:"san-diego",
@@ -285,4 +286,36 @@ test("high-confidence venues get bounded common event-page fallbacks",()=>{
     discoveryCommonEventPages("https://food.example/",{category:"restaurant",name:"Plain Restaurant"}),
     []
   );
+});
+
+
+test("Tribe provider falls back to public HTML event pages when REST is blocked",async()=>{
+  const originalFetch=globalThis.fetch;
+  globalThis.fetch=async input=>{
+    const url=String(input);
+    if(url.includes("/wp-json/tribe/events/v1/events"))return {ok:false,status:403};
+    if(url==="https://venue.example/events/")return {
+      ok:true,status:200,
+      text:async()=>'<a href="/event/fall-show">Fall Show</a>'
+    };
+    if(url==="https://venue.example/event/fall-show")return {
+      ok:true,status:200,
+      text:async()=>`<script type="application/ld+json">{"@type":"Event","name":"Fall Show","startDate":"2026-10-15T19:00:00-07:00","url":"https://venue.example/event/fall-show"}</script>`
+    };
+    throw new Error("unexpected URL "+url);
+  };
+  try{
+    const events=await tribeEvents({
+      endpoint:"https://venue.example",
+      sourceName:"Example Venue",
+      sourceId:"example",
+      fallbackCenter:{lat:32.7,lng:-117.1},
+      days:45,
+      maxPages:1
+    });
+    assert.equal(events.length,1);
+    assert.equal(events[0].title,"Fall Show");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
 });
