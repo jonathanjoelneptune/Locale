@@ -57,7 +57,17 @@ for(const [regionId,region] of Object.entries(dashboard.regions||{})){
   for(const item of region.coverageAreas||region.neighborhoods||[]){
     if(!finite(item.fridaySaturdayNightAverage,0))fail(`${regionId}/${item.id} has invalid Friday/Saturday average`);
     if(!finite(item.recurringLocalOccurrences30d,0))fail(`${regionId}/${item.id} has invalid recurring count`);
+    if(!finite(item.gapScore,0,100))fail(`${regionId}/${item.id} has invalid gapScore`);
     if(typeof item.acceptance?.pass!=="boolean")fail(`${regionId}/${item.id} missing acceptance result`);
+    if(item.discovery){
+      for(const field of ["candidateCount","withWebsiteCount","qualifiedCount","retryCount"]){
+        if(!finite(item.discovery[field],0))fail(`${regionId}/${item.id} has invalid discovery ${field}`);
+      }
+    }
+  }
+  if(region.coverageAreaAcceptance){
+    if(Number(region.coverageAreaAcceptance.measured)!==configured.size)fail(`coverage-dashboard ${regionId} area acceptance count mismatch`);
+    if(!finite(region.coverageAreaAcceptance.passing,0,configured.size))fail(`coverage-dashboard ${regionId} has invalid passing area count`);
   }
 }
 
