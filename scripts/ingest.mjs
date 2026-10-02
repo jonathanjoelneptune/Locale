@@ -31,6 +31,7 @@ import {buildRegistry} from "./registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 import {refineEventCategory} from "./event-classification.mjs";
+import {isPreciseLocation} from "./location-quality.mjs";
 
 const SOURCES=await loadAllSources();
 
@@ -279,14 +280,13 @@ for(const region of Object.values(REGIONS)){
     "happy-hour":/\bhappy\s+hour\b/i
   };
   const locationPrecisionCounts={};
-  const approximatePrecisions=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
   let approximateLocationCount=0;
   for(const event of regionEvents){
     const category=event.category||"other";
     categoryCounts[category]=(categoryCounts[category]||0)+1;
     const precision=event.locationPrecision||"unknown";
     locationPrecisionCounts[precision]=(locationPrecisionCounts[precision]||0)+1;
-    if(approximatePrecisions.has(precision))approximateLocationCount++;
+    if(!isPreciseLocation(event))approximateLocationCount++;
     const activityText=`${event.title||""} ${event.description||""}`;
     for(const [activity,pattern] of Object.entries(recurringActivityPatterns)){
       if(pattern.test(activityText))recurringActivityCounts[activity]++;
