@@ -42,7 +42,7 @@ export function parseReaderPlaceMetadata(html){
     if(!street||!locality||!/\bCA\b/i.test(region||"CA")||!/^\d{5}(?:-\d{4})?$/.test(postal||""))continue;
     const lat=Number(object?.geo?.latitude),lng=Number(object?.geo?.longitude);
     return {
-      address:[street,locality,region||"CA",postal].filter(Boolean).join(", "),
+      address:[street,locality,[region||"CA",postal].filter(Boolean).join(" ")].filter(Boolean).join(", "),
       lat:Number.isFinite(lat)?lat:null,
       lng:Number.isFinite(lng)?lng:null
     };
