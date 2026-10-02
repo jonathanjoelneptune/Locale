@@ -115,6 +115,44 @@ test("BiblioCommons ingestion parses already-fetched HTML without refetching det
   }
 });
 
+test("BiblioCommons event identity includes branch location",async()=>{
+  const originalFetch=globalThis.fetch;
+  const html=`
+    <div>1 to 20 of 2 items</div>
+    <div>Location Locations Alpine (1) Poway (1) Audience Adults (2)</div>
+    <div>Event items</div>
+
+    <h3><a href="/events/storytime-a">Family Storytime</a></h3>
+    <div>Friday, October 9, 2026, 10:00am Alpine Event location: Alpine
+      Find more events in: Kids
+      <a href="/events/storytime-a">View event</a>
+    </div>
+
+    <h3><a href="/events/storytime-b">Family Storytime</a></h3>
+    <div>Friday, October 9, 2026, 10:00am Poway Event location: Poway
+      Find more events in: Kids
+      <a href="/events/storytime-b">View event</a>
+    </div>
+  `;
+  globalThis.fetch=async input=>({ok:true,status:200,url:String(input),text:async()=>html});
+  try{
+    const events=await biblioCommonsEvents({
+      endpoint:"https://library.example/v2/events",
+      sourceName:"San Diego County Library Events",
+      sourceId:"sd-county-library",
+      fallbackCenter:{lat:32.85,lng:-117.05},
+      days:45,maxPages:1
+    });
+    const storytimes=events.filter(event=>event.title==="Family Storytime");
+    assert.equal(storytimes.length,2);
+    assert.equal(new Set(storytimes.map(event=>event.id)).size,2);
+    assert.ok(storytimes.some(event=>event.id.includes(":alpine-library:")));
+    assert.ok(storytimes.some(event=>event.id.includes(":poway-library:")));
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
 test("Reader specials parser keeps neighborhood, venue, and deal text",()=>{
   const html=`
     <h2>North Park</h2>
