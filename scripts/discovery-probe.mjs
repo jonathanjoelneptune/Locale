@@ -4,9 +4,10 @@ import {jsonLdEvents} from "./providers/jsonld.mjs";
 import {jsonLdCrawlEvents} from "./providers/jsonld-crawl.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
 import {icsEvents} from "./providers/ics.mjs";
+import {calendarLinksEvents} from "./providers/calendar-links.mjs";
 
 const USER_AGENT="Locale-discovery/1.0";
-const EVENT_PATH=/\b(event|events|calendar|whats-on|whatson|happenings|live-music|music|shows|schedule|entertainment|trivia|karaoke)\b/i;
+const EVENT_PATH=/\b(event|events|calendar|whats-on|whatson|happenings|live-music|music|shows?|schedule|entertainment|trivia|karaoke|bingo|open-mic|openmic|specials?|lineup|tickets?|event-details?|experience)\b/i;
 
 const esc=value=>String(value||"").replace(/\s+/g," ").trim();
 const stableHash=value=>createHash("sha1").update(String(value)).digest("hex").slice(0,12);
@@ -172,6 +173,19 @@ export async function qualifyDiscoveryCandidate(candidate){
       }
     }
   }
+
+  const linked=await tryProvider(()=>calendarLinksEvents({
+    endpoint:baseUrl,
+    sourceName:candidate.name,
+    sourceId:"probe",
+    fallbackCenter:fallback,
+    maxLinks:24
+  }),2);
+  if(linked)return {
+    qualified:true,
+    source:buildSource(candidate,{adapter:"calendar-links",endpoint:baseUrl,eventCount:linked.length}),
+    evidence:{kind:"calendar-links",eventCount:linked.length,url:baseUrl}
+  };
 
   return {
     qualified:false,
