@@ -63,7 +63,7 @@ requireText(watchdog,'lowestLocationRate<0.90',"living-watchdog.yml");
 requireText(watchdog,'recover "$DISCOVERY_STALE" "discover-sources.yml" "discovery"',"living-watchdog.yml");
 requireText(watchdog,'recover "$RECONCILE_STALE" "reconcile-state.yml" "reconciliation"',"living-watchdog.yml");
 requireText(watchdog,'recover "$EVENTS_STALE" "refresh-events.yml" "event refresh"',"living-watchdog.yml");
-requireText(watchdog,'recover "$LOCATIONS_STALE" "resolve-locations.yml" "location resolution"',"living-watchdog.yml");
+requireText(watchdog,'recover "true" "resolve-locations.yml" "location resolution"',"living-watchdog.yml");
 
 requireText(provider,"raw.githubusercontent.com/jonathanjoelneptune/Locale/main/src/data/events.json","local provider");
 requireText(provider,'const BUNDLED_EVENTS="./src/data/events.json"',"local provider");
