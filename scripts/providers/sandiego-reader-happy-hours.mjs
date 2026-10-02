@@ -13,7 +13,7 @@ const decode=value=>String(value||"")
   .replace(/&[^;]+;/g," ").replace(/\s+/g," ").trim();
 const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));
 
-const finite=value=>Number.isFinite(Number(value));
+const finite=value=>value!==null&&value!==undefined&&value!==""&&Number.isFinite(Number(value));
 const cleanAddress=value=>decode(value).replace(/\s+,/g,",").replace(/,\s*,/g,",").trim();
 
 function jsonObjects(value,out=[]){
