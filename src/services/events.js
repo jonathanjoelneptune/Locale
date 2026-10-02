@@ -1,6 +1,7 @@
 import {milesBetween} from "./geo.js";
 import {inDateRange,inWindow} from "./time.js";
 import {eventIdentityKey,normalizeEvent} from "../domain/event.js";
+import {eventMatchesSelectedAreas} from "./areas.js";
 
 const VENUES=[
   {re:/\bpetco park\b/i,lat:32.7076,lng:-117.1570,venue:"PETCO Park"},
@@ -30,17 +31,25 @@ export function dedupe(events){
 const APPROXIMATE_PRECISIONS=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
 export const hasPreciseLocation=event=>!APPROXIMATE_PRECISIONS.has(event.locationPrecision||"")&&Number.isFinite(Number(event.lat))&&Number.isFinite(Number(event.lng));
 
+export function eventMatchesTimeAndCategory(event,state){
+  const categories=state.categories instanceof Set?state.categories:new Set;
+  const categoryOk=!categories.size||categories.has(event.category);
+  const dateOk=state.quickPreset?inWindow(event,state.quickPreset):inDateRange(event,state.dateStart,state.dateEnd);
+  return categoryOk&&dateOk;
+}
+
 export function filterEvents(events,state){
+  const explicitAreas=state.selectedAreaIds instanceof Set&&state.selectedAreaIds.size>0;
   return events
     .map(event=>{
       const filterDistance=milesBetween(state.center,event);
       return {...event,_filterDistance:filterDistance,distance:hasPreciseLocation(event)?filterDistance:null};
     })
     .filter(event=>{
-      const categories=state.categories instanceof Set?state.categories:new Set;
-      const categoryOk=!categories.size||categories.has(event.category);
-      const dateOk=state.quickPreset?inWindow(event,state.quickPreset):inDateRange(event,state.dateStart,state.dateEnd);
-      return event._filterDistance<=state.radius&&categoryOk&&dateOk;
+      const geographyOk=explicitAreas
+        ?eventMatchesSelectedAreas(event,state.selectedAreaIds)
+        :event._filterDistance<=state.radius;
+      return geographyOk&&eventMatchesTimeAndCategory(event,state);
     })
     .sort((a,b)=>new Date(a.start)-new Date(b.start)||(a.distance??Infinity)-(b.distance??Infinity));
 }

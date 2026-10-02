@@ -1,7 +1,7 @@
 import {hasPreciseLocation} from "../services/events.js";
 import {meters} from "../services/geo.js";
 
-export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportChange){
+export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportChange,onArea){
   const map=L.map(el,{zoomControl:true}).setView([state.center.lat,state.center.lng],state.zoom);
   Object.defineProperty(el,"__localeMap",{value:map,configurable:true});
   const styles={
@@ -37,6 +37,16 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     icon:L.divIcon({className:"locale-center-icon",html:'<div class="search-pin"><span></span></div>',iconSize:[30,38],iconAnchor:[15,34]})
   }).addTo(map);
   center.bindTooltip("Search center",{direction:"top",offset:[0,-30]});
+
+  const areaPolygonPane=map.createPane("locale-area-polygons");
+  areaPolygonPane.style.zIndex="340";
+  const areaLabelPane=map.createPane("locale-area-labels");
+  areaLabelPane.style.zIndex="440";
+  const areaLayer=L.layerGroup().addTo(map);
+  const areaLabelLayer=L.layerGroup().addTo(map);
+  let areaFeatures=[];
+  let selectedAreaIds=new Set;
+  let lastAreaSetSignature="";
 
   const layer=L.layerGroup().addTo(map);
   let resizeFrame=0;
@@ -78,6 +88,80 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
   const SYMBOLS={sports:"◆",music:"♫",festival:"✦",food:"♨",theater:"◈",comedy:"●",family:"●",community:"✺",nightlife:"☾",other:"＋"};
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
+  const areaId=feature=>feature?.properties?.id||feature?.id;
+  const areaPriority=feature=>Number(feature?.properties?.displayPriority||50);
+  const areaBounds=feature=>{
+    const bbox=feature?.properties?.bbox;
+    if(Array.isArray(bbox)&&bbox.length===4)return L.latLngBounds([[bbox[1],bbox[0]],[bbox[3],bbox[2]]]);
+    const layer=L.geoJSON(feature);
+    const bounds=layer.getBounds();
+    layer.remove();
+    return bounds;
+  };
+  const priorityThreshold=zoom=>zoom<=9?96:zoom===10?92:zoom===11?84:zoom===12?72:zoom===13?60:0;
+  const labelThreshold=zoom=>zoom<=9?100:zoom===10?96:zoom===11?90:zoom===12?82:zoom===13?70:55;
+
+  function renderAreas(){
+    areaLayer.clearLayers();
+    areaLabelLayer.clearLayers();
+    const zoom=map.getZoom();
+    const boundaryThreshold=priorityThreshold(zoom);
+    const textThreshold=labelThreshold(zoom);
+    let rendered=0;
+
+    areaFeatures.forEach(feature=>{
+      const id=areaId(feature);
+      if(!id)return;
+      const selected=selectedAreaIds.has(id);
+      if(!selected&&areaPriority(feature)<boundaryThreshold)return;
+      const p=feature.properties||{};
+      const normalStyle={
+        pane:"locale-area-polygons",
+        className:`locale-area-boundary ${selected?"selected-area-boundary":""}`,
+        color:selected?"#138aa5":"#2b7c89",
+        weight:selected?2.4:1,
+        opacity:selected ? .95 : (zoom>=12 ? .34 : .24),
+        fillColor:selected?"#3caec0":"#61aab4",
+        fillOpacity:selected ? .11 : (zoom>=12 ? .026 : .014)
+      };
+      const geo=L.geoJSON(feature,{pane:"locale-area-polygons",interactive:true,style:()=>normalStyle}).addTo(areaLayer);
+      geo.eachLayer(shape=>{
+        shape.on("click",ev=>{
+          L.DomEvent.stopPropagation(ev);
+          onArea?.({id,feature,originalEvent:ev.originalEvent});
+        });
+        shape.on("mouseover",()=>shape.setStyle({
+          weight:selected?2.7:1.8,
+          opacity:.8,
+          fillOpacity:selected ? .14 : .07
+        }));
+        shape.on("mouseout",()=>shape.setStyle(normalStyle));
+      });
+      rendered++;
+
+      const label=p.labelPoint;
+      if(!label||(!selected&&areaPriority(feature)<textThreshold))return;
+      const marker=L.marker([label.lat,label.lng],{
+        pane:"locale-area-labels",
+        interactive:true,
+        keyboard:false,
+        icon:L.divIcon({
+          className:"locale-area-label-marker",
+          html:`<span class="area-map-label ${selected?"selected":""}" data-area-label="${esc(id)}">${esc(p.name||id)}</span>`,
+          iconSize:[150,26],
+          iconAnchor:[75,13]
+        })
+      }).addTo(areaLabelLayer);
+      marker.on("click",ev=>{
+        L.DomEvent.stopPropagation(ev);
+        onArea?.({id,feature,originalEvent:ev.originalEvent});
+      });
+    });
+
+    el.dataset.areaBoundaryCount=String(rendered);
+    el.dataset.selectedAreaCount=String(selectedAreaIds.size);
+  }
+
   function commitCenter(latlng,{recenter=false}={}){
     const pos={lat:latlng.lat,lng:latlng.lng};
     radius.setLatLng(latlng);
@@ -94,10 +178,36 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     map,
     setStyle,
     getBasemapState(){return {activeStyle,url:base._url};},
-    setRadius(miles,pos){
+    setRadius(miles,pos,{visible=true}={}){
       const ll=[pos.lat,pos.lng];
       radius.setLatLng(ll).setRadius(meters(miles));
       center.setLatLng(ll);
+      radius.setStyle({
+        opacity:visible ? .65 : 0,
+        fillOpacity:visible ? .035 : 0
+      });
+      center.setOpacity(visible?1:.25);
+    },
+    setAreas(features,selectedIds=[]){
+      areaFeatures=Array.isArray(features)?features:[];
+      selectedAreaIds=selectedIds instanceof Set?new Set(selectedIds):new Set(selectedIds||[]);
+      const signature=`${areaFeatures.length}|${[...selectedAreaIds].sort().join(",")}`;
+      if(signature===lastAreaSetSignature)return;
+      lastAreaSetSignature=signature;
+      renderAreas();
+    },
+    focusAreas(ids=[]){
+      const wanted=new Set(ids);
+      const features=areaFeatures.filter(feature=>wanted.has(areaId(feature)));
+      if(!features.length)return;
+      let bounds=null;
+      features.forEach(feature=>{
+        const next=areaBounds(feature);
+        if(!next?.isValid?.())return;
+        if(!bounds)bounds=L.latLngBounds(next.getSouthWest(),next.getNorthEast());
+        else bounds.extend(next);
+      });
+      if(bounds?.isValid?.())map.flyToBounds(bounds,{padding:[58,58],maxZoom:14,duration:.55});
     },
     setSearchCenter(pos,{recenter=true,zoom}={}){
       const ll=L.latLng(pos.lat,pos.lng);
@@ -236,7 +346,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
       };
     }
   };
-  map.on("zoomend",()=>{if(lastEvents.length)api.renderEvents(lastEvents);notifyViewport()});
+  map.on("zoomend",()=>{renderAreas();if(lastEvents.length)api.renderEvents(lastEvents);notifyViewport()});
   map.on("moveend",notifyViewport);
   map.on("click",()=>onMapBackground?.());
   el.addEventListener("click",e=>{if(e.target.closest(".leaflet-marker-icon,.leaflet-popup,.leaflet-control"))return;onMapBackground?.()});
