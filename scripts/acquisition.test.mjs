@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import {loadAcquisitionRegistry} from "./acquisition-registry.mjs";
-import {parseBiblioCommonsPage,biblioCommonsEvents} from "./providers/bibliocommons.mjs";
+import {parseBiblioCommonsPage,biblioCommonsEvents,biblioCommonsLocationNames,biblioCommonsEventLocation} from "./providers/bibliocommons.mjs";
 import {parseReaderSpecials} from "./providers/sandiego-reader-happy-hours.mjs";
 import {parseCasbahCalendar} from "./providers/casbah-presents.mjs";
 import {parseMuseumCouncil} from "./providers/museum-council.mjs";
@@ -44,6 +44,41 @@ test("BiblioCommons parser extracts dated hyperlocal library activities",()=>{
   assert.equal(rows[0].title,"Family Storytime");
   assert.equal(rows[0].venue,"Alpine Library");
   assert.ok(rows[0].start.startsWith("2026-10-09T"));
+});
+
+test("BiblioCommons listing context recovers real branch names from embedded events",async()=>{
+  const originalFetch=globalThis.fetch;
+  const html=`
+    <div>Location Locations 4S Ranch (397) Alpine (383) Del Mar (91) Audience Adults (100)</div>
+    <div>Event items</div>
+    <script type="application/ld+json">
+      {"@type":"Event","name":"Chinese Mahjong Meetup","startDate":"2026-10-09T10:00:00-07:00","description":"Weekly mahjong"}
+    </script>
+    <h3><a href="/events/mahjong">Chinese Mahjong Meetup</a></h3>
+    <div>Friday, October 9, 2026, 10:00am–12:00pm Alpine Event location: Alpine
+      Find more events in: Gaming
+      <a href="/events/mahjong">View event</a>
+    </div>
+  `;
+  assert.deepEqual(biblioCommonsLocationNames(html),["4S Ranch","Alpine","Del Mar"]);
+  assert.deepEqual(biblioCommonsEventLocation(html,"Chinese Mahjong Meetup"),{name:"Alpine",kind:"library"});
+
+  globalThis.fetch=async input=>({ok:true,status:200,url:String(input),text:async()=>html});
+  try{
+    const events=await biblioCommonsEvents({
+      endpoint:"https://library.example/v2/events",
+      sourceName:"San Diego County Library Events",
+      sourceId:"sd-county-library",
+      fallbackCenter:{lat:32.85,lng:-117.05},
+      days:45,maxPages:1
+    });
+    const event=events.find(item=>item.title==="Chinese Mahjong Meetup");
+    assert.ok(event);
+    assert.equal(event.venue,"Alpine Library");
+    assert.equal(event.geocodeQuery,"Alpine Library, San Diego County, CA");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
 });
 
 test("BiblioCommons ingestion parses already-fetched HTML without refetching detail pages",async()=>{
@@ -92,6 +127,27 @@ test("Reader specials parser keeps neighborhood, venue, and deal text",()=>{
   assert.equal(rows[0].venue,"Example Bar");
   assert.equal(rows[0].neighborhood,"North Park");
   assert.match(rows[0].detail,/\$5 appetizers/);
+});
+
+test("Reader happy-hour events preserve neighborhood as a geocoding hint",async()=>{
+  const originalFetch=globalThis.fetch;
+  const html=`
+    <h2>North Park</h2>
+    <a href="/places/example-bar/">Example Bar</a>
+    <div><strong>Special</strong> 3 PM - 6 PM: $5 appetizers</div>
+    <a href="/places/next-bar/">Next Bar</a>
+  `;
+  globalThis.fetch=async()=>({ok:true,status:200,text:async()=>html});
+  try{
+    const {sanDiegoReaderHappyHourEvents}=await import("./providers/sandiego-reader-happy-hours.mjs");
+    const events=await sanDiegoReaderHappyHourEvents({days:7});
+    const event=events.find(item=>item.venue==="Example Bar");
+    assert.ok(event);
+    assert.equal(event.address,null);
+    assert.equal(event.geocodeQuery,"Example Bar, North Park, San Diego County, CA");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
 });
 
 test("Casbah parser treats promoter calendar venues as separate event locations",()=>{
