@@ -47,6 +47,7 @@ requireText(refresh,'cron: "11 * * * *"',"refresh-events.yml");
 requireText(discover,"gh workflow run reconcile-state.yml --ref main","discover-sources.yml");
 requireText(discover,'cron: "7,37 * * * *"',"discover-sources.yml");
 requireText(resolve,"gh workflow run reconcile-state.yml --ref main","resolve-locations.yml");
+requireText(resolve,'cron: "29 */6 * * *"',"resolve-locations.yml");
 
 requireText(reconcile,"node scripts/reconcile-state.mjs","reconcile-state.yml");
 requireText(reconcile,'FILES="src/data/coverage-dashboard.json src/data/discovery-live.json src/data/system-health.json"',"reconcile-state.yml");
