@@ -181,5 +181,10 @@ export async function biblioCommonsEvents({
       });
     }
   }
-  return [...new Map(out.map(event=>[`${event.title}|${event.start}|${event.venue}`,event])).values()];
+  const unique=[...new Map(out.map(event=>[`${event.title}|${event.start}|${event.venue}`,event])).values()];
+  return unique.map(event=>{
+    const titleKey=String(event.title||"event").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60);
+    const venueKey=String(event.venue||event.geocodeQuery||"unknown-location").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,48);
+    return {...event,id:`${sourceId}:${titleKey}:${venueKey}:${event.start}`};
+  });
 }
