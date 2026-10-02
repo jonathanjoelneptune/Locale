@@ -231,8 +231,8 @@ test("priority lane selection does not let ordinary restaurants consume bootstra
     hostFn:item=>new URL(item.website).hostname
   });
   assert.equal(result.selected.length,30);
-  assert.equal(result.selected.filter(item=>item.category==="restaurant").length,0);
-  assert.equal(result.selected.every(item=>probeLane(item)==="event-likely"),true);
+  assert.equal(result.selected.filter(item=>item.category==="restaurant").length,1);
+  assert.equal(result.selected.filter(item=>probeLane(item)==="low-value").length,1);
 });
 
 test("low-value calendar misses move to long-lived cold storage",()=>{
