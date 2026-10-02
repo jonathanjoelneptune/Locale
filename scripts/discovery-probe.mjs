@@ -144,7 +144,7 @@ function candidateWebsiteIsSpecific(candidate){
     return url.pathname.replace(/\/+$/,"")!=="";
   }catch{return false}
 }
-function tribeEventMatchesCandidate(event,candidate){
+export function discoveryEventMatchesCandidate(event,candidate){
   if(event?.locationPrecision==="source"&&pointMiles(event,candidate)<=0.75)return true;
   const candidateTokens=meaningfulTokens(candidate.name);
   const venueTokens=new Set(meaningfulTokens(event.venue));
@@ -155,7 +155,7 @@ function tribeEventMatchesCandidate(event,candidate){
 export function discoveryTribeScope(candidate,events){
   const rows=events||[];
   if(!rows.length)return {mode:"reject",events:[]};
-  const relevant=rows.filter(event=>tribeEventMatchesCandidate(event,candidate));
+  const relevant=rows.filter(event=>discoveryEventMatchesCandidate(event,candidate));
   const ratio=relevant.length/rows.length;
   const venueNames=new Set(
     rows.map(event=>normName(event?.venue)).filter(Boolean)
@@ -175,6 +175,13 @@ export function discoveryTribeScope(candidate,events){
 export function discoveryScopedTribeEvents(candidate,events){
   const scoped=discoveryTribeScope(candidate,events);
   return scoped.mode==="venue"?scoped.events:[];
+}
+
+export function discoveryScopedVenueEvents(candidate,events){
+  const rows=events||[];
+  if(!candidateWebsiteIsSpecific(candidate)||!rows.length)return rows;
+  const relevant=rows.filter(event=>discoveryEventMatchesCandidate(event,candidate));
+  return relevant.length/rows.length>=.75?relevant:[];
 }
 
 export function discoverySiteBrand(html,fallback=""){
@@ -290,29 +297,32 @@ export async function qualifyDiscoveryCandidate(candidate){
       const events=await tryProvider(()=>icsEvents({
         endpoint:ics,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
       }),1);
-      if(events)return {
+      const scopedEvents=events?discoveryScopedVenueEvents(candidate,events):null;
+      if(scopedEvents?.length)return {
         qualified:true,
-        source:buildSource(candidate,{adapter:"ics",endpoint:ics,eventCount:events.length}),
-        evidence:{kind:"ics",eventCount:events.length,url:ics}
+        source:buildSource(candidate,{adapter:"ics",endpoint:ics,eventCount:scopedEvents.length}),
+        evidence:{kind:"ics",eventCount:scopedEvents.length,url:ics}
       };
     }
 
     const jsonld=await tryProvider(()=>jsonLdEvents({
       endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback
     }),structuredMin);
-    if(jsonld)return {
+    const scopedJsonld=jsonld?discoveryScopedVenueEvents(candidate,jsonld):null;
+    if(scopedJsonld?.length)return {
       qualified:true,
-      source:buildSource(candidate,{adapter:"jsonld",endpoint:fetched.url,eventCount:jsonld.length}),
-      evidence:{kind:"jsonld",eventCount:jsonld.length,url:fetched.url}
+      source:buildSource(candidate,{adapter:"jsonld",endpoint:fetched.url,eventCount:scopedJsonld.length}),
+      evidence:{kind:"jsonld",eventCount:scopedJsonld.length,url:fetched.url}
     };
 
     const embedded=await tryProvider(()=>embeddedJsonEvents({
       endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
     }),structuredMin);
-    if(embedded)return {
+    const scopedEmbedded=embedded?discoveryScopedVenueEvents(candidate,embedded):null;
+    if(scopedEmbedded?.length)return {
       qualified:true,
-      source:buildSource(candidate,{adapter:"embedded-json",endpoint:fetched.url,eventCount:embedded.length}),
-      evidence:{kind:"embedded-json",eventCount:embedded.length,url:fetched.url}
+      source:buildSource(candidate,{adapter:"embedded-json",endpoint:fetched.url,eventCount:scopedEmbedded.length}),
+      evidence:{kind:"embedded-json",eventCount:scopedEmbedded.length,url:fetched.url}
     };
 
     if(!discoveryIsNonPublicEventUrl(fetched.url)&&EVENT_PATH.test(new URL(fetched.url).pathname)){
@@ -321,10 +331,11 @@ export async function qualifyDiscoveryCandidate(candidate){
           endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",
           fallbackCenter:fallback,linkPattern,maxLinks:15
         }),structuredMin);
-        if(crawled)return {
+        const scopedCrawled=crawled?discoveryScopedVenueEvents(candidate,crawled):null;
+        if(scopedCrawled?.length)return {
           qualified:true,
-          source:buildSource(candidate,{adapter:"jsonld-crawl",endpoint:fetched.url,eventCount:crawled.length,linkPattern}),
-          evidence:{kind:"jsonld-crawl",eventCount:crawled.length,url:fetched.url,linkPattern}
+          source:buildSource(candidate,{adapter:"jsonld-crawl",endpoint:fetched.url,eventCount:scopedCrawled.length,linkPattern}),
+          evidence:{kind:"jsonld-crawl",eventCount:scopedCrawled.length,url:fetched.url,linkPattern}
         };
       }
     }
@@ -337,10 +348,11 @@ export async function qualifyDiscoveryCandidate(candidate){
     fallbackCenter:fallback,
     maxLinks:24
   }),structuredMin);
-  if(linked)return {
+  const scopedLinked=linked?discoveryScopedVenueEvents(candidate,linked):null;
+  if(scopedLinked?.length)return {
     qualified:true,
-    source:buildSource(candidate,{adapter:"calendar-links",endpoint:baseUrl,eventCount:linked.length}),
-    evidence:{kind:"calendar-links",eventCount:linked.length,url:baseUrl}
+    source:buildSource(candidate,{adapter:"calendar-links",endpoint:baseUrl,eventCount:scopedLinked.length}),
+    evidence:{kind:"calendar-links",eventCount:scopedLinked.length,url:baseUrl}
   };
 
   return {
