@@ -224,7 +224,7 @@ function renderQueue(id,row){
   const clearText=dueCount===0?"clear":theoreticalHours<1?`~${Math.max(10,Math.ceil(theoreticalHours*60/10)*10)} min`:`~${theoreticalHours.toFixed(1)} hr`;
   document.querySelector("#queueThroughput").innerHTML=`
     <div class="kv-grid">
-      ${kv("Broad sources",row.sourceAcquisition?`${n(row.sourceAcquisition.active)} active / ${n(row.sourceAcquisition.total)} tracked`:"—",row.sourceAcquisition?`${n(row.sourceAcquisition.candidate)} candidates · ${n(row.sourceAcquisition.blocked)} blocked`:"source catalog pending",row.sourceAcquisition?.active?"good":"warn")}
+      ${kv("Acquisition registry",row.sourceAcquisition?`${n(row.sourceAcquisition.active)} active / ${n(row.sourceAcquisition.total)} tracked`:"—",row.sourceAcquisition?`Tier A ${n(row.sourceAcquisition.activeByPriority?.A)}/${n(row.sourceAcquisition.priorities?.A)} active · ${n(row.sourceAcquisition.areaMappings)} areas · ${n(row.sourceAcquisition.taxonomyFamilies)} families`:"source catalog pending",row.sourceAcquisition?.active?"good":"warn")}
       ${kv("Candidates",n(discovery.candidateCount),"Tier C venue gap-fill queue")}
       ${kv("Websites",n(discovery.withWebsiteCount),`${pct(discovery.withWebsiteCount/Math.max(1,discovery.candidateCount))} website-backed`)}
       ${kv("Due now",n(dueCount),"eligible for probing",dueCount?"warn":"good")}
@@ -391,8 +391,8 @@ function render(id){
   renderPromotions(id);
 
   const funnel=[
-    {label:"Broad calendars active",value:row.sourceAcquisition?.active||0},
-    {label:"Broad calendar candidates",value:row.sourceAcquisition?.candidate||0},
+    {label:"Tier A active",value:row.sourceAcquisition?.activeByPriority?.A||0},
+    {label:"Catalog candidates",value:row.sourceAcquisition?.candidate||0},
     {label:"Candidates",value:row.discovery.candidateCount},
     {label:"Websites found",value:row.discovery.withWebsiteCount},
     {label:"Due now",value:row.discovery.dueCount},
