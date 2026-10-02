@@ -2,7 +2,7 @@ import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
 import {discoverCellPlaces,overpassTelemetrySnapshot} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
-import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
+import {qualifyDiscoveryCandidate,DISCOVERY_QUALIFIER_VERSION} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
@@ -168,7 +168,10 @@ function migrateLowValueRetriesToCold(queue){
 
 function sourceDuplicate(sources,source){
   const key=sourceEndpointKey(source);
-  return [...STATIC_SOURCES.filter(item=>item.enabled!==false),...sources].find(existing=>
+  return [
+    ...STATIC_SOURCES.filter(item=>item.enabled!==false),
+    ...sources.filter(item=>item.enabled!==false&&!item.aliasOf)
+  ].find(existing=>
     existing.id===source.id||(key&&sourceEndpointKey(existing)===key)
   );
 }
@@ -206,6 +209,65 @@ function reconcileStaticSourceDuplicates(queue,sources){
   }
   if(aliased)console.log(`Aliased ${aliased} dynamic source duplicate(s) to existing catalog sources; remapped ${remapped} queue item(s).`);
   return {aliased,remapped};
+}
+
+function queueStaleSourceRevalidations(queue,sources){
+  let queued=0,missingCandidate=0;
+  for(const source of sources){
+    if(source.enabled===false||source.aliasOf)continue;
+    if(source.pendingRevalidation)continue;
+    if(Number(source.qualifierVersion||0)>=DISCOVERY_QUALIFIER_VERSION)continue;
+
+    const item=queue.find(row=>row.key===source.discoveryCandidateKey);
+    if(!item){
+      source.revalidationBlocked="missing-candidate";
+      missingCandidate++;
+      continue;
+    }
+    item.revalidationSourceId=source.id;
+    item.sourceId=source.id;
+    item.status="candidate";
+    item.nextCheckAt=nowIso();
+    item.coldUntil=null;
+    item.probeLane=probeLane(item);
+    item.updatedAt=nowIso();
+    source.pendingRevalidation=true;
+    source.revalidationRequestedAt=nowIso();
+    source.revalidationBlocked=null;
+    queued++;
+  }
+  if(queued||missingCandidate)console.log(
+    `Queued ${queued} discovered source(s) for qualifier v${DISCOVERY_QUALIFIER_VERSION} revalidation; ${missingCandidate} missing candidates.`
+  );
+  return {queued,missingCandidate};
+}
+
+function invalidateSource(source,reason,replacementId=null){
+  if(!source)return;
+  source.enabled=false;
+  source.sourceKind="invalidated";
+  source.invalidatedAt=nowIso();
+  source.invalidatedReason=reason;
+  source.pendingRevalidation=false;
+  source.qualifierVersion=DISCOVERY_QUALIFIER_VERSION;
+  if(replacementId)source.replacedBy=replacementId;
+}
+
+function updateRevalidatedSource(existing,next){
+  const id=existing.id,discoveredAt=existing.discoveredAt;
+  Object.assign(existing,next,{
+    id,
+    discoveredAt,
+    enabled:true,
+    pendingRevalidation:false,
+    qualifierVersion:DISCOVERY_QUALIFIER_VERSION,
+    lastRevalidatedAt:nowIso()
+  });
+  delete existing.invalidatedAt;
+  delete existing.invalidatedReason;
+  delete existing.replacedBy;
+  delete existing.revalidationBlocked;
+  return existing;
 }
 
 function buildCoverage(queue,sources,runStats){
@@ -273,6 +335,7 @@ const coverageDashboard=await readJson("src/data/coverage-dashboard.json",{regio
 
 if(!Array.isArray(queue)||!Array.isArray(discoveredSources))throw new Error("Discovery data files must contain arrays");
 const duplicateReconciliation=reconcileStaticSourceDuplicates(queue,discoveredSources);
+const revalidationQueue=queueStaleSourceRevalidations(queue,discoveredSources);
 
 const discoveryPlan=adaptiveDiscoveryPlan(
   coverageDashboard,
@@ -318,6 +381,11 @@ const stats={
   probeResults:[],
   sourceDuplicatesAliased:duplicateReconciliation.aliased,
   sourceReferencesRemapped:duplicateReconciliation.remapped,
+  sourceRevalidationsQueued:revalidationQueue.queued,
+  sourceRevalidationsMissingCandidate:revalidationQueue.missingCandidate,
+  sourceRevalidated:0,
+  sourceInvalidated:0,
+  sourceReplaced:0,
   coldMigrated:0,
   probeLaneCounts:{},
   probeLaneTargets:{},
@@ -526,7 +594,9 @@ const coverageGapBoost=item=>{
   return Math.round(best);
 };
 
-const probeScore=item=>Number(item.priority||0)+producerSignal(item)+coverageGapBoost(item)-Math.min(20,Number(item.attempts||0)*3);
+const probeScore=item=>
+  (item.revalidationSourceId?1000:0)+
+  Number(item.priority||0)+producerSignal(item)+coverageGapBoost(item)-Math.min(20,Number(item.attempts||0)*3);
 
 const probeHost=item=>{
   try{return new URL(item.website).hostname.toLowerCase().replace(/^www\./,"")}
@@ -548,25 +618,53 @@ async function probeCandidate(item){
   stats.probed++;
   item.lastCheckedAt=nowIso();
   item.attempts=Number(item.attempts||0)+1;
+  const revalidationSource=item.revalidationSourceId
+    ?discoveredSources.find(source=>source.id===item.revalidationSourceId)
+    :null;
+
   try{
     const result=await qualifyDiscoveryCandidate(item);
     item.lastResult=result.qualified?result.evidence:{reason:result.reason,detail:result.detail||null,statusCode:result.statusCode||null};
+
     if(result.qualified){
-      const existing=sourceDuplicate(discoveredSources,result.source);
-      const source=existing||result.source;
-      if(!existing){
-        discoveredSources.push(source);
-        stats.promoted++;
-        console.log(`PROMOTED ${item.name}: ${source.adapter} ${source.endpoint} (${result.evidence.eventCount} events)`);
+      let source;
+      if(revalidationSource&&sourceEndpointKey(revalidationSource)===sourceEndpointKey(result.source)){
+        source=updateRevalidatedSource(revalidationSource,result.source);
+        stats.sourceRevalidated++;
+        console.log(`REVALIDATED ${item.name}: kept ${source.id} as ${source.ownerEntityKind} source (${result.evidence.eventCount} events)`);
       }else{
-        console.log(`QUALIFIED ${item.name}: reusing source ${existing.id}`);
+        const existing=sourceDuplicate(discoveredSources,result.source);
+        source=existing||result.source;
+        if(!existing){
+          discoveredSources.push(source);
+          stats.promoted++;
+          console.log(`PROMOTED ${item.name}: ${source.adapter} ${source.endpoint} (${result.evidence.eventCount} events)`);
+        }else{
+          console.log(`QUALIFIED ${item.name}: reusing source ${existing.id}`);
+        }
+        if(revalidationSource){
+          invalidateSource(revalidationSource,"replaced-by-revalidation",source.id);
+          stats.sourceReplaced++;
+          console.log(`REPLACED ${revalidationSource.id} with ${source.id} for ${item.name}`);
+        }
       }
       item.status="qualified";
       item.sourceId=source.id;
       item.qualifiedAt=nowIso();
       item.nextCheckAt=null;
+      item.coldUntil=null;
+      delete item.revalidationSourceId;
     }else{
       stats.failed++;
+      const definitive=["no-website","invalid-website","no-supported-calendar"].includes(result.reason);
+      if(revalidationSource&&definitive){
+        invalidateSource(revalidationSource,`revalidation-${result.reason}`);
+        stats.sourceInvalidated++;
+        item.sourceId=null;
+        delete item.revalidationSourceId;
+        console.log(`INVALIDATED ${revalidationSource.id}: ${result.reason}`);
+      }
+
       if(result.reason==="no-website"){
         item.status="needs-website";
         item.nextCheckAt=null;
@@ -599,6 +697,7 @@ async function probeCandidate(item){
     attempts:item.attempts,
     status:item.status,
     probeLane:probeLane(item),
+    revalidationSourceId:item.revalidationSourceId||null,
     result:item.lastResult||null,
     sourceId:item.sourceId||null,
     nextCheckAt:item.nextCheckAt||null,
@@ -653,7 +752,12 @@ const compactRun={
   probeLaneCounts:stats.probeLaneCounts,
   probeLaneTargets:stats.probeLaneTargets,
   sourceDuplicatesAliased:stats.sourceDuplicatesAliased,
-  sourceReferencesRemapped:stats.sourceReferencesRemapped
+  sourceReferencesRemapped:stats.sourceReferencesRemapped,
+  sourceRevalidationsQueued:stats.sourceRevalidationsQueued,
+  sourceRevalidationsMissingCandidate:stats.sourceRevalidationsMissingCandidate,
+  sourceRevalidated:stats.sourceRevalidated,
+  sourceInvalidated:stats.sourceInvalidated,
+  sourceReplaced:stats.sourceReplaced
 };
 state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
 
