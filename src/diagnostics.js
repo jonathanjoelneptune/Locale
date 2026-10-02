@@ -57,7 +57,9 @@ function render(id){
     {label:"Needs website",value:row.discovery.needsWebsiteCount}
   ];
   document.querySelector("#discoveryFunnel").innerHTML=metricRows(funnel);
-  document.querySelector("#discoveryGenerated").textContent=row.discovery.cells?`${row.discovery.cells.completed||0}/${row.discovery.cells.total||0} discovery cells`:"";
+  const cellText=row.discovery.cells?`${row.discovery.cells.completed||0}/${row.discovery.cells.total||0} regional cells`:"";
+  const areaText=row.discovery.areaSweeps?`${row.discovery.areaSweeps.completed||0}/${(row.coverageAreaAcceptance||row.neighborhoodAcceptance).measured||0} focused areas swept`:"";
+  document.querySelector("#discoveryGenerated").textContent=[cellText,areaText].filter(Boolean).join(" · ");
 
   document.querySelector("#locationResolution").innerHTML=metricRows([
     {label:"Unresolved venue queries",value:row.locationResolution.unresolvedVenueCount},
