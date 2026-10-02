@@ -133,7 +133,13 @@ function seedObservedPlaces(queue,places,entityLinks){
 
 function retryHours(item,result){
   const attempts=Number(item.attempts||0);
-  if(result.reason==="website-fetch-failed")return Math.min(24*Math.max(1,attempts),168);
+  if(result.reason==="website-fetch-failed"){
+    const status=Number(result.statusCode||0);
+    if(status===404||status===410)return attempts<=1?168:720;
+    if(status===401||status===403)return attempts<=1?72:Math.min(168*attempts,720);
+    if(status===429)return attempts<=1?48:Math.min(96*attempts,336);
+    return Math.min(24*Math.max(1,attempts),168);
+  }
   if(result.reason==="no-supported-calendar")return attempts<2?72:Math.min(168*Math.max(1,attempts-1),720);
   return 168;
 }
@@ -509,7 +515,7 @@ async function probeCandidate(item){
   item.attempts=Number(item.attempts||0)+1;
   try{
     const result=await qualifyDiscoveryCandidate(item);
-    item.lastResult=result.qualified?result.evidence:{reason:result.reason,detail:result.detail||null};
+    item.lastResult=result.qualified?result.evidence:{reason:result.reason,detail:result.detail||null,statusCode:result.statusCode||null};
     if(result.qualified){
       const existing=sourceDuplicate(discoveredSources,result.source);
       const source=existing||result.source;
