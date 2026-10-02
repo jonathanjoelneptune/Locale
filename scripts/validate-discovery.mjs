@@ -1,6 +1,7 @@
 import {readFile} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
 import {STATIC_SOURCES} from "./source-catalog.mjs";
+import {loadAcquisitionRegistry} from "./acquisition-registry.mjs";
 
 const failures=[];
 const fail=message=>failures.push(message);
@@ -29,36 +30,77 @@ const state=await read("src/data/discovery-state.json",{});
 const coverage=await read("src/data/discovery-coverage.json",{});
 const coverageAreas=await read("src/data/coverage-zones.json",[]);
 const live=await readOptional("src/data/discovery-live.json");
-const acquisitionCatalog=await read("src/data/source-acquisition-catalog.json",{regions:{}});
+const acquisitionManifest=await read("src/data/source-acquisition-catalog.json",{});
+const acquisitionRegistry=await loadAcquisitionRegistry();
 
 if(!Array.isArray(queue))fail("discovery-queue.json must contain an array");
 if(!Array.isArray(sources))fail("discovered-sources.json must contain an array");
 
 const regionIds=new Set(Object.keys(REGIONS));
 const coverageAreaIds=new Set((coverageAreas||[]).map(item=>item.id));
+const coverageAreaNames=new Set((coverageAreas||[]).filter(item=>item.regionId==="san-diego").map(item=>item.name));
 const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
 const discoveredIds=new Set((sources||[]).map(source=>source?.id).filter(Boolean));
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
 const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json","calendar-links"]);
-const acquisitionStatuses=new Set(["active","candidate","blocked"]);
-if(acquisitionCatalog.strategy!=="source-first")fail("source-acquisition-catalog.json must use source-first strategy");
-for(const [regionId,rows] of Object.entries(acquisitionCatalog.regions||{})){
-  if(!regionIds.has(regionId))fail(`source-acquisition-catalog references unknown region ${regionId}`);
-  if(!Array.isArray(rows))fail(`source-acquisition-catalog region ${regionId} must be an array`);
-  const seen=new Set;
-  for(const [index,row] of (rows||[]).entries()){
-    const label=`source-acquisition-catalog ${regionId}[${index}]`;
-    if(!row?.id||!row?.name||!row?.url||!row?.layer||!row?.status)fail(`${label} missing required fields`);
-    if(seen.has(row.id))fail(`${label} duplicates id ${row.id}`);
-    seen.add(row.id);
-    if(!acquisitionStatuses.has(row.status))fail(`${label} has invalid status ${row.status}`);
-    if(!validUrl(row.url))fail(`${label} has invalid url ${row.url}`);
-    if(row.status==="active"){
-      if(!row.sourceId)fail(`${label} active source missing sourceId`);
-      if(!staticIds.has(row.sourceId)&&!discoveredIds.has(row.sourceId))fail(`${label} references unknown active source ${row.sourceId}`);
-    }
+const acquisitionStatuses=new Set(["active","candidate","blocked","disabled"]);
+if(acquisitionManifest.strategy!=="source-first")fail("source-acquisition-catalog.json must use source-first strategy");
+if(Number(acquisitionManifest.sourceCount)!==97)fail("source-acquisition-catalog.json must declare 97 workbook sources");
+if(Number(acquisitionManifest.areaCount)!==158)fail("source-acquisition-catalog.json must declare 158 workbook area mappings");
+if(Number(acquisitionManifest.taxonomyFamilyCount)!==38)fail("source-acquisition-catalog.json must declare 38 taxonomy families");
+
+const acquisitionSources=acquisitionRegistry.sources||[];
+const acquisitionAreas=acquisitionRegistry.areas||[];
+const acquisitionTaxonomy=acquisitionRegistry.taxonomy||{};
+if(acquisitionSources.length!==97)fail(`Workbook acquisition registry must contain 97 sources; found ${acquisitionSources.length}`);
+const acquisitionPriorityCounts={A:0,B:0,C:0};
+const acquisitionSourceIds=new Set;
+for(const [index,row] of acquisitionSources.entries()){
+  const label=`acquisition source[${index}]`;
+  if(!row?.id||!row?.name||!row?.url||!row?.coverageLayer||!row?.priority||!row?.integrationState)fail(`${label} missing required fields`);
+  if(acquisitionSourceIds.has(row.id))fail(`Duplicate workbook acquisition source id ${row.id}`);
+  acquisitionSourceIds.add(row.id);
+  if(!["A","B","C"].includes(row.priority))fail(`${label} has invalid priority ${row.priority}`);
+  else acquisitionPriorityCounts[row.priority]++;
+  if(!acquisitionStatuses.has(row.integrationState))fail(`${label} has invalid integrationState ${row.integrationState}`);
+  if(!validUrl(row.url))fail(`${label} has invalid url ${row.url}`);
+  if(row.integrationState==="active"){
+    if(!row.sourceId)fail(`${label} active source missing sourceId`);
+    if(row.sourceId&&!staticIds.has(row.sourceId)&&!discoveredIds.has(row.sourceId))fail(`${label} references unknown active source ${row.sourceId}`);
   }
+}
+for(const [priority,expected] of Object.entries({A:17,B:66,C:14})){
+  if(acquisitionPriorityCounts[priority]!==expected)fail(`Workbook acquisition priority ${priority} must contain ${expected}; found ${acquisitionPriorityCounts[priority]}`);
+}
+
+if(acquisitionAreas.length!==158)fail(`Workbook neighborhood mapping must contain 158 areas; found ${acquisitionAreas.length}`);
+const acquisitionAreaNames=new Set;
+for(const [index,row] of acquisitionAreas.entries()){
+  const label=`acquisition area[${index}]`;
+  if(!row?.area||!row?.coverageGroup||!row?.coverageConfidence)fail(`${label} missing required fields`);
+  if(acquisitionAreaNames.has(row.area))fail(`Duplicate workbook acquisition area ${row.area}`);
+  acquisitionAreaNames.add(row.area);
+  if(!coverageAreaNames.has(row.area))fail(`${label} references unknown configured coverage area ${row.area}`);
+  for(const field of ["primarySources","umbrellaSources","baselineSources"]){
+    if(!Array.isArray(row[field]))fail(`${label} ${field} must be an array`);
+  }
+}
+for(const areaName of coverageAreaNames){
+  if(!acquisitionAreaNames.has(areaName))fail(`Workbook acquisition mapping missing configured area ${areaName}`);
+}
+
+const taxonomyRows=Array.isArray(acquisitionTaxonomy.rows)?acquisitionTaxonomy.rows:[];
+if(Number(acquisitionTaxonomy.familyCount)!==38||taxonomyRows.length!==38)fail(`Workbook taxonomy must contain 38 families; found ${taxonomyRows.length}`);
+const taxonomyFamilies=new Set;
+for(const [index,row] of taxonomyRows.entries()){
+  const [category,family,bestSources,tags,strength]=Array.isArray(row)?row:[];
+  const label=`acquisition taxonomy[${index}]`;
+  if(!category||!family||!strength)fail(`${label} missing category/family/strength`);
+  if(taxonomyFamilies.has(family))fail(`Duplicate acquisition taxonomy family ${family}`);
+  taxonomyFamilies.add(family);
+  if(!Array.isArray(bestSources)||!bestSources.length)fail(`${label} must identify source families`);
+  if(!Array.isArray(tags)||!tags.length)fail(`${label} must identify tags`);
 }
 
 for(const [index,source] of (sources||[]).entries()){

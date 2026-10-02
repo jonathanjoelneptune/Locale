@@ -55,7 +55,7 @@ export async function tacoTuesdayEvents({days=45}={}){
         url:ENDPOINT,source:"TacoTuesday.com",
         description:decode(item.body).slice(0,700),
         featured:false,image:null,sourceUrl:ENDPOINT,lastVerified:verified,
-        timeZone:"America/Los_Angeles"
+        timeZone:"America/Los_Angeles",recurring:true,dealType:"taco-tuesday"
       });
     }
   }

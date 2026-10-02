@@ -25,6 +25,14 @@ import {singhubKaraokeEvents} from "./providers/singhub-karaoke.mjs";
 import {sanDiegoReaderCalendarEvents} from "./providers/sandiego-reader-calendar.mjs";
 import {tacoTuesdayEvents} from "./providers/taco-tuesday.mjs";
 import {libertyStationEvents} from "./providers/liberty-station.mjs";
+import {multiIcsEvents} from "./providers/multi-ics.mjs";
+import {biblioCommonsEvents} from "./providers/bibliocommons.mjs";
+import {museumCouncilEvents} from "./providers/museum-council.mjs";
+import {sanDiegoReaderHappyHourEvents} from "./providers/sandiego-reader-happy-hours.mjs";
+import {casbahPresentsEvents} from "./providers/casbah-presents.mjs";
+import {conventionCenterEvents} from "./providers/convention-center.mjs";
+import {delMarFairgroundsEvents} from "./providers/del-mar-fairgrounds.mjs";
+import {santeeCalendarEvents} from "./providers/santee-calendar.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {loadAllSources,sourcesForRegionFrom} from "./source-catalog.mjs";
@@ -37,6 +45,19 @@ import {isPreciseLocation} from "./location-quality.mjs";
 const SOURCES=await loadAllSources();
 
 const adapters={
+  "sd-county-library":async(region,source)=>biblioCommonsEvents({
+    endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,fallbackCenter:source.fallbackCenter||region.center,days:45
+  }),
+  "sd-museum-council":async()=>museumCouncilEvents(),
+  "sandiego-reader-happy-hours":async()=>sanDiegoReaderHappyHourEvents({days:45}),
+  "casbah-presents":async()=>casbahPresentsEvents(),
+  "convention-center":async()=>conventionCenterEvents(),
+  "del-mar-fairgrounds":async()=>delMarFairgroundsEvents(),
+  "santee-calendar":async()=>santeeCalendarEvents(),
+  "multi-ics":async(region,source)=>multiIcsEvents({
+    endpoints:source.endpoints,sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter||region.center,days:45
+  }),
   "liberty-station":async()=>libertyStationEvents(),
   "sunset-trivia":async()=>sunsetTriviaEvents(),
   "singhub-karaoke":async()=>singhubKaraokeEvents(),
