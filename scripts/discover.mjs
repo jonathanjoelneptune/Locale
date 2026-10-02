@@ -6,7 +6,7 @@ import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
-import {STATIC_SOURCES} from "./source-catalog.mjs";
+import {STATIC_SOURCES,sourceEndpointKey} from "./source-catalog.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
@@ -164,13 +164,6 @@ function migrateLowValueRetriesToCold(queue){
     if(coldStore(item,item.lastResult,{fromTime:checked}))migrated++;
   }
   return migrated;
-}
-
-function sourceEndpointKey(source){
-  if(!source?.adapter||!source?.endpoint)return null;
-  let endpoint;
-  try{endpoint=new URL(source.endpoint).href.replace(/\/$/,"")}catch{endpoint=String(source.endpoint).replace(/\/$/,"")}
-  return `${source.adapter}|${endpoint}`;
 }
 
 function sourceDuplicate(sources,source){
