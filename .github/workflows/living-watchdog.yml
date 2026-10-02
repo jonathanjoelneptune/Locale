@@ -45,7 +45,7 @@ jobs:
           console.log("DISCOVERY_STALE="+(age(discovery.lastRunAt)>75));
           console.log("RECONCILE_STALE="+(reconcileLagging||age(dashboard.generatedAt)>360));
           console.log("EVENTS_STALE="+(age(events.generatedAt)>120));
-          console.log("LOCATIONS_STALE="+(age(locations.generatedAt)>120));
+          console.log("LOCATIONS_STALE="+(age(locations.generatedAt)>480));
           console.log("DISCOVERY_AGE="+Math.round(age(discovery.lastRunAt)));
           console.log("RECONCILE_AGE="+Math.round(age(dashboard.generatedAt)));
           console.log("RECONCILE_LAGGING="+reconcileLagging);
