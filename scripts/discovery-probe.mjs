@@ -114,6 +114,43 @@ export function discoveryIcsLinks(html,base){
 
 const fallbackCenter=candidate=>({lat:Number(candidate.lat),lng:Number(candidate.lng)});
 
+const meaningfulTokens=value=>normName(value).split(" ").filter(token=>token.length>=3&&!new Set([
+  "the","and","san","diego","family","center","centre","building","company","hotel","club","bar"
+]).has(token));
+function normName(value){
+  return String(value||"").toLowerCase().replace(/&/g," and ").replace(/[^a-z0-9]+/g," ").trim();
+}
+function pointMiles(a,b){
+  const lat1=Number(a?.lat),lng1=Number(a?.lng),lat2=Number(b?.lat),lng2=Number(b?.lng);
+  if(![lat1,lng1,lat2,lng2].every(Number.isFinite))return Infinity;
+  const R=3958.7613,toRad=value=>value*Math.PI/180;
+  const dLat=toRad(lat2-lat1),dLng=toRad(lng2-lng1);
+  const h=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.min(1,Math.sqrt(h)));
+}
+function candidateWebsiteIsSpecific(candidate){
+  try{
+    const url=new URL(candidate.website);
+    return url.pathname.replace(/\/+$/,"")!=="";
+  }catch{return false}
+}
+function tribeEventMatchesCandidate(event,candidate){
+  if(event?.locationPrecision!=="source")return false;
+  if(pointMiles(event,candidate)<=0.75)return true;
+  const candidateTokens=meaningfulTokens(candidate.name);
+  const venueTokens=new Set(meaningfulTokens(event.venue));
+  if(!candidateTokens.length||!venueTokens.size)return false;
+  const matches=candidateTokens.filter(token=>venueTokens.has(token)).length;
+  return matches>=Math.min(2,Math.ceil(candidateTokens.length*.6));
+}
+export function discoveryScopedTribeEvents(candidate,events){
+  if(!candidateWebsiteIsSpecific(candidate))return events||[];
+  const rows=events||[];
+  if(!rows.length)return [];
+  const relevant=rows.filter(event=>tribeEventMatchesCandidate(event,candidate));
+  return relevant.length/rows.length>=.75?relevant:[];
+}
+
 function buildSource(candidate,{adapter,endpoint,eventCount,linkPattern=null}){
   const source={
     id:sourceIdFor(candidate,adapter,endpoint),
@@ -163,10 +200,11 @@ export async function qualifyDiscoveryCandidate(candidate){
   const tribe=await tryProvider(()=>tribeEvents({
     endpoint:origin,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60,maxPages:2
   }),1);
-  if(tribe)return {
+  const scopedTribe=tribe?discoveryScopedTribeEvents(candidate,tribe):null;
+  if(scopedTribe?.length)return {
     qualified:true,
-    source:buildSource(candidate,{adapter:"tribe",endpoint:origin,eventCount:tribe.length}),
-    evidence:{kind:"tribe",eventCount:tribe.length,url:origin}
+    source:buildSource(candidate,{adapter:"tribe",endpoint:origin,eventCount:scopedTribe.length}),
+    evidence:{kind:"tribe",eventCount:scopedTribe.length,url:origin}
   };
 
   const lane=probeLane(candidate);
@@ -205,7 +243,7 @@ export async function qualifyDiscoveryCandidate(candidate){
 
     const embedded=await tryProvider(()=>embeddedJsonEvents({
       endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
-    }),2);
+    }),structuredMin);
     if(embedded)return {
       qualified:true,
       source:buildSource(candidate,{adapter:"embedded-json",endpoint:fetched.url,eventCount:embedded.length}),
