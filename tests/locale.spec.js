@@ -589,8 +589,8 @@ test("clicking a neighborhood label on the map selects and focuses that area",as
   await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],11,{animate:false}));
   await expect(page.locator('[data-area-label="north-park"]')).toBeVisible({timeout:5000});
   // Event pins intentionally have pointer priority when they overlap an area label.
-  // Force the label target here to verify its selection/focus handler independently.
-  await page.locator('[data-area-label="north-park"]').click({force:true});
+  // Dispatch directly to the label here to verify its selection/focus handler independently.
+  await page.locator('[data-area-label="north-park"]').dispatchEvent("click");
   await expect(map).toHaveAttribute("data-selected-area-count","1");
   await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
 });
