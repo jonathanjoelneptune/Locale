@@ -67,7 +67,7 @@ function mergeCandidate(queue,candidate){
   const hadWebsite=!!existing.website;
   const previousWebsite=existing.website||null;
   const previousSocialUrl=existing.socialUrl||null;
-  const previousLane=probeLane(existing);
+  const previousLane=probeLane({...existing,status:existing.status==="cold"?"candidate":existing.status});
   Object.assign(existing,{
     name:candidate.name||existing.name,
     category:candidate.category||existing.category,
