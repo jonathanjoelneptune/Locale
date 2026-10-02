@@ -91,13 +91,13 @@ test("discovery probe extracts calendar feeds",()=>{
 
 
 test("generic calendar-link adapter follows same-site and trusted ticketing event links",()=>{
-  const html=\`
+  const html=`
     <a href="/events/friday-show">Friday Show</a>
     <a href="https://www.eventbrite.com/e/example-event-123">Tickets</a>
     <a href="https://dice.fm/event/abc">Live music tickets</a>
     <a href="https://random.example/events/other">Other site</a>
     <a href="/about">About</a>
-  \`;
+  `;
   const links=extractCalendarEventLinks(html,"https://venue.example/");
   assert.ok(links.includes("https://venue.example/events/friday-show"));
   assert.ok(links.includes("https://www.eventbrite.com/e/example-event-123"));
