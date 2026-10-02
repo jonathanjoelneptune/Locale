@@ -86,6 +86,7 @@ function parseStart(text){
 }
 export function parseBiblioCommonsPage(html){
   const out=[];
+  const knownLocations=biblioCommonsLocationNames(html);
   const headings=[...String(html||"").matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)];
   for(let i=0;i<headings.length;i++){
     const title=strip(headings[i][1]);
@@ -96,14 +97,20 @@ export function parseBiblioCommonsPage(html){
     const text=strip(fragment);
     const eventStart=parseStart(text);
     if(!eventStart)continue;
-    const location=text.match(/Event location:\s*(.+?)(?=\s+Find more events in:|\s+View event|\s+Audience:|\s+Program:|$)/i)?.[1]?.trim()
+    const contextual=libraryVenue(biblioCommonsEventLocation(html,title,knownLocations));
+    const location=contextual?.venue
+      ||text.match(/Event location:\s*(.+?)(?=\s+Find more events in:|\s+View event|\s+Audience:|\s+Program:|$)/i)?.[1]?.trim()
       ||fragment.match(/Event location:\s*<[^>]+>\s*([^<]{2,140})/i)?.[1]?.trim()
       ||"San Diego County Library";
     const tags=[...new Set([...fragment.matchAll(/Find more events in:\s*([^<]{2,80})/gi)].map(m=>strip(m[1])).filter(Boolean))];
     const link=fragment.match(/href=["']([^"']*\/events\/[^"'?#]+)["']/i)?.[1]
       ||headings[i][0].match(/href=["']([^"']+)["']/i)?.[1]
       ||null;
-    out.push({title,start:eventStart,venue:location,tags,description:text.slice(0,1400),link});
+    out.push({
+      title,start:eventStart,venue:location,
+      geocodeQuery:contextual?.geocodeQuery||(/\blibrary\b/i.test(location)?`${location}, San Diego County, CA`:null),
+      tags,description:text.slice(0,1400),link
+    });
   }
   return out;
 }
@@ -163,9 +170,9 @@ export async function biblioCommonsEvents({
         subcategories:item.tags.map(value=>value.toLowerCase().replace(/[^a-z0-9]+/g,"-")).filter(Boolean),
         tags:item.tags,
         venue:item.venue,
-        geocodeQuery:/\blibrary\b/i.test(item.venue)
+        geocodeQuery:item.geocodeQuery||(/\blibrary\b/i.test(item.venue)
           ?`${item.venue}, San Diego County, CA`
-          :`${item.venue} Library, San Diego County, CA`,
+          :`${item.venue}, San Diego County, CA`),
         lat:fallbackCenter.lat,lng:fallbackCenter.lng,locationPrecision:"source-center",
         start:item.start,end:null,timeStatus:"known",timeZone:"America/Los_Angeles",
         price:/\bfree\b/i.test(item.description)?"Free":null,
