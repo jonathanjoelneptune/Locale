@@ -5,7 +5,54 @@ export const OVERPASS_ENDPOINTS=[
 ];
 
 const ENDPOINT_HEALTH=new Map();
+const ENDPOINT_TELEMETRY=new Map();
 let endpointCursor=0;
+
+function telemetryState(endpoint){
+  const current=ENDPOINT_TELEMETRY.get(endpoint);
+  if(current)return current;
+  const fresh={endpoint,attempts:0,successes:0,failures:0,lastStatus:null,lastError:null,lastStartedAt:null,lastFinishedAt:null,lastLatencyMs:null};
+  ENDPOINT_TELEMETRY.set(endpoint,fresh);
+  return fresh;
+}
+
+function recordAttempt(endpoint){
+  const row=telemetryState(endpoint);
+  row.attempts++;
+  row.lastStartedAt=new Date().toISOString();
+  row.lastStatus="running";
+  row.lastError=null;
+  return Date.now();
+}
+
+function recordSuccess(endpoint,startedAt){
+  const row=telemetryState(endpoint);
+  row.successes++;
+  row.lastStatus="ok";
+  row.lastFinishedAt=new Date().toISOString();
+  row.lastLatencyMs=Math.max(0,Date.now()-startedAt);
+}
+
+function recordFailure(endpoint,error,startedAt){
+  const row=telemetryState(endpoint);
+  row.failures++;
+  row.lastStatus="failed";
+  row.lastError=String(error?.message||error);
+  row.lastFinishedAt=new Date().toISOString();
+  row.lastLatencyMs=Math.max(0,Date.now()-startedAt);
+}
+
+export function overpassTelemetrySnapshot(){
+  return OVERPASS_ENDPOINTS.map(endpoint=>({
+    ...telemetryState(endpoint),
+    cooldownUntil:endpointState(ENDPOINT_HEALTH,endpoint).cooldownUntil||0,
+    consecutiveFailures:endpointState(ENDPOINT_HEALTH,endpoint).failures||0
+  }));
+}
+
+export function resetOverpassTelemetry(){
+  ENDPOINT_TELEMETRY.clear();
+}
 
 const relevantTags=[
   ["amenity","nightclub"],["amenity","bar"],["amenity","pub"],["amenity","music_venue"],
@@ -158,6 +205,7 @@ export async function fetchOverpass(query,{
   }
 
   for(const endpoint of available){
+    const startedAt=recordAttempt(endpoint);
     try{
       const body=new URLSearchParams({data:query});
       const response=await fetchImpl(endpoint,{
@@ -174,6 +222,7 @@ export async function fetchOverpass(query,{
           retryAfter:retryAfterMs(response.headers),
           nowMs:now()
         });
+        recordFailure(endpoint,error,startedAt);
         failures.push(`${endpoint}: HTTP ${response.status}`);
         lastError=error;
         continue;
@@ -181,10 +230,15 @@ export async function fetchOverpass(query,{
 
       const payload=await response.json();
       markEndpointSuccess(health,endpoint);
+      recordSuccess(endpoint,startedAt);
       return payload;
     }catch(error){
-      if(error?.nonRetryable)throw error;
+      if(error?.nonRetryable){
+        recordFailure(endpoint,error,startedAt);
+        throw error;
+      }
       markEndpointFailure(health,endpoint,error,{nowMs:now()});
+      recordFailure(endpoint,error,startedAt);
       failures.push(`${endpoint}: ${error?.name||"Error"} ${error?.message||error}`);
       lastError=error;
     }
