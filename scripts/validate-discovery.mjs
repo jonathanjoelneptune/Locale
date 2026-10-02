@@ -53,14 +53,15 @@ for(const [index,source] of (sources||[]).entries()){
   if(!validUrl(source.endpoint))fail(`${label} has invalid endpoint ${source.endpoint}`);
   if(source.scope!=="local")fail(`${label} must have local scope`);
   if(!Array.isArray(source.regions)||source.regions.length!==1||!regionIds.has(source.regions[0]))fail(`${label} must reference exactly one known region`);
-  if(source.ownerEntityKind!=="place"||!source.ownerName)fail(`${label} must identify its owning place`);
+  if(!["place","organizer"].includes(source.ownerEntityKind)||!source.ownerName)fail(`${label} must identify an owning place or organizer`);
+  if(source.qualifierVersion!==undefined&&(!Number.isInteger(Number(source.qualifierVersion))||Number(source.qualifierVersion)<1))fail(`${label} has invalid qualifierVersion`);
   if(!source.discoveryCandidateKey)fail(`${label} missing discoveryCandidateKey`);
   if(source.aliasOf){
     if(source.enabled!==false)fail(`${label} alias must be disabled`);
     if(!staticIds.has(source.aliasOf)&&!discoveredIds.has(source.aliasOf))fail(`${label} references unknown aliasOf ${source.aliasOf}`);
-  }else{
+  }else if(source.enabled!==false){
     const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
-    if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
+    if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate active discovered endpoint ${endpointKey}`);
     sourceEndpointKeys.add(endpointKey);
   }
 }
