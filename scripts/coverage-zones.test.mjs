@@ -29,6 +29,8 @@ test("coverage grid spans all San Diego operating groups",()=>{
 
 test("coverage classes scale expectations to local density",()=>{
   assert.ok(COVERAGE_CLASS_TARGETS["entertainment-core"].fridaySaturdayNightAverage>
+    COVERAGE_CLASS_TARGETS["urban-core"].fridaySaturdayNightAverage);
+  assert.ok(COVERAGE_CLASS_TARGETS["urban-core"].fridaySaturdayNightAverage>=
     COVERAGE_CLASS_TARGETS.urban.fridaySaturdayNightAverage);
   assert.ok(COVERAGE_CLASS_TARGETS.urban.fridaySaturdayNightAverage>
     COVERAGE_CLASS_TARGETS.suburban.fridaySaturdayNightAverage);
