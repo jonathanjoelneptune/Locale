@@ -1,7 +1,7 @@
 import {jsonLdEvents} from "./jsonld.mjs";
 
 export async function jsonLdCrawlEvents({endpoint,sourceName,sourceId,fallbackCenter,linkPattern="/event/",maxLinks=40}){
-  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 Locale-events/1.0",Accept:"text/html"},signal:AbortSignal.timeout(10000)});
+  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",Accept:"text/html,application/xhtml+xml","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(10000)});
   if(!response.ok)throw new Error(`${sourceName} listing ${response.status}`);
   const html=await response.text();
   const links=[];
