@@ -44,6 +44,7 @@ for(const [label,text] of [
 }
 requireText(refresh,"gh workflow run reconcile-state.yml --ref main","refresh-events.yml");
 requireText(discover,"gh workflow run reconcile-state.yml --ref main","discover-sources.yml");
+requireText(discover,'cron: "3,13,23,33,43,53 * * * *"',"discover-sources.yml");
 requireText(resolve,"gh workflow run reconcile-state.yml --ref main","resolve-locations.yml");
 
 requireText(reconcile,"node scripts/reconcile-state.mjs","reconcile-state.yml");
