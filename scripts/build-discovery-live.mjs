@@ -31,7 +31,7 @@ export async function buildDiscoveryLive(){
       sourceId:item.sourceId||null,
       lastResult:item.lastResult||null
     }));
-  const recentPromotions=[...sources]
+  const recentPromotions=[...sources].filter(source=>source.enabled!==false&&!source.aliasOf)
     .sort((a,b)=>String(b.discoveredAt||"").localeCompare(String(a.discoveredAt||"")))
     .slice(0,30)
     .map(source=>({
