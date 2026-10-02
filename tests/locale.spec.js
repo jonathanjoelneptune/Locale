@@ -496,7 +496,7 @@ test("coverage diagnostics renders comprehensive area and discovery metrics",asy
   await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
   await expect(page.locator("#areaGroupSelect option").first()).toHaveText("All areas");
   await expect(page.locator("#areaGroupSelect option")).toHaveCount(10);
-  await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(8);
+  await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(10);
 });
 
 
