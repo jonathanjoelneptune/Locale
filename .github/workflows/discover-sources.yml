@@ -43,10 +43,12 @@ jobs:
           echo "Discovered sources: $BEFORE -> $AFTER ($PROMOTED promoted)"
       - name: Validate discovery data
         run: node scripts/validate-discovery.mjs
+      - name: Rebuild coverage diagnostics
+        run: node scripts/build-coverage-dashboard.mjs
       - name: Commit discovery progress
         id: commit
         run: |
-          FILES="src/data/discovery-queue.json src/data/discovered-sources.json src/data/discovery-state.json src/data/discovery-coverage.json"
+          FILES="src/data/discovery-queue.json src/data/discovered-sources.json src/data/discovery-state.json src/data/discovery-coverage.json src/data/coverage-dashboard.json"
           if git diff --quiet -- $FILES; then
             echo "No discovery changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
