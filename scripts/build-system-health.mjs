@@ -20,8 +20,8 @@ export async function buildSystemHealth({now=Date.now()}={}){
   const reconcileAge=ageMinutes(dashboard.generatedAt,now);
   const eventAge=ageMinutes(eventCoverage.generatedAt,now);
   const locationAge=ageMinutes(locationCoverage.generatedAt,now);
-  const discoveryStale=discoveryAge===null||discoveryAge>20;
-  const eventStale=eventAge===null||eventAge>420;
+  const discoveryStale=discoveryAge===null||discoveryAge>75;
+  const eventStale=eventAge===null||eventAge>120;
   const locationStale=locationAge===null||locationAge>120;
   const dashboardTime=Date.parse(dashboard.generatedAt||"")||0;
   const latestFactTime=Math.max(
@@ -35,8 +35,8 @@ export async function buildSystemHealth({now=Date.now()}={}){
     generatedAt:new Date(now).toISOString(),
     status:discoveryStale||reconcileStale?"degraded":eventStale||locationStale?"warning":"healthy",
     discovery:{
-      expectedCadenceMinutes:10,
-      staleAfterMinutes:20,
+      expectedCadenceMinutes:30,
+      staleAfterMinutes:75,
       lastRunAt:discoveryState.lastRunAt||null,
       ageMinutes:discoveryAge,
       stale:discoveryStale
@@ -51,8 +51,8 @@ export async function buildSystemHealth({now=Date.now()}={}){
       stale:reconcileStale
     },
     eventRefresh:{
-      expectedCadenceMinutes:360,
-      staleAfterMinutes:420,
+      expectedCadenceMinutes:60,
+      staleAfterMinutes:120,
       lastGeneratedAt:eventCoverage.generatedAt||null,
       ageMinutes:eventAge,
       stale:eventStale
