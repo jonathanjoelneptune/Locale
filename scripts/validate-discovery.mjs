@@ -27,7 +27,7 @@ const regionIds=new Set(Object.keys(REGIONS));
 const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
-const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json"]);
+const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json","calendar-links"]);
 
 for(const [index,source] of (sources||[]).entries()){
   const label=`discovered-sources[${index}]`;
