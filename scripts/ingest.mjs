@@ -58,7 +58,13 @@ const adapters={
     endpoints:source.endpoints,sourceName:source.name,sourceId:source.id,
     fallbackCenter:source.fallbackCenter||region.center,days:45
   }),
-  "liberty-station":async()=>libertyStationEvents(),
+  "liberty-station":async(region,source)=>libertyStationEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter||region.center,
+    maxLinks:source.maxLinks||80
+  }),
   "sunset-trivia":async()=>sunsetTriviaEvents(),
   "singhub-karaoke":async()=>singhubKaraokeEvents(),
   "taco-tuesday":async()=>tacoTuesdayEvents(),
