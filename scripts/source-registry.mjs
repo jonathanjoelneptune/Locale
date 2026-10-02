@@ -84,17 +84,20 @@ export const SOURCES=[
   {
     id:"national-city-calendar",name:"National City Calendar of Events",scope:"local",regions:["san-diego"],adapter:"calendar-links",
     sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of National City",minExpectedEvents:1,
-    endpoint:"https://www.nationalcityca.gov/services/calendar-of-events",fallbackCenter:{lat:32.6781,lng:-117.0992},refreshHours:6
+    endpoint:"https://www.nationalcityca.gov/services/calendar-of-events",fallbackCenter:{lat:32.6781,lng:-117.0992},refreshHours:6,enabled:false,
+    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
   },
   {
     id:"chula-vista-calendar",name:"City of Chula Vista Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
     sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Chula Vista",minExpectedEvents:1,
-    endpoint:"https://www.chulavistaca.gov/residents/advanced-components/site-content/city-calendar",fallbackCenter:{lat:32.6401,lng:-117.0842},refreshHours:6
+    endpoint:"https://www.chulavistaca.gov/residents/advanced-components/site-content/city-calendar",fallbackCenter:{lat:32.6401,lng:-117.0842},refreshHours:6,enabled:false,
+    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
   },
   {
     id:"san-marcos-calendar",name:"City of San Marcos Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
     sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:1,
-    endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},refreshHours:6
+    endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},refreshHours:6,enabled:false,
+    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
   },
   {
     id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,

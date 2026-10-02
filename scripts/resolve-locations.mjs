@@ -1,6 +1,6 @@
 import {readFile,writeFile} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
-import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
+import {geocodeVenue,saveVenueGeocodeCache,venueGeocodeTelemetry,VENUE_GEOCODER_VERSION} from "./venue-geocode.mjs";
 
 const QUEUE_PATH="src/data/location-resolution-queue.json";
 const COVERAGE_PATH="src/data/location-resolution-coverage.json";
@@ -73,6 +73,9 @@ for(const event of events){
 
 const queue=[...groups.values()].map(group=>{
   const prior=previousByKey.get(group.key)||{};
+  const priorResolved=prior.status==="resolved"&&prior.point;
+  const providerChanged=Number(prior.geocoderVersion||1)!==VENUE_GEOCODER_VERSION;
+  const resetRetry=!priorResolved&&providerChanged;
   const item={
     key:group.key,
     regionId:group.regionId,
@@ -86,13 +89,14 @@ const queue=[...groups.values()].map(group=>{
     categories:[...group.categories].sort(),
     sourceIds:[...group.sourceIds].sort(),
     priority:0,
-    status:prior.status==="resolved"?"resolved":"pending",
-    attempts:Number(prior.attempts||0),
+    status:priorResolved?"resolved":"pending",
+    attempts:resetRetry?0:Number(prior.attempts||0),
     firstSeenAt:prior.firstSeenAt||nowIso(),
-    lastAttemptAt:prior.lastAttemptAt||null,
-    nextCheckAt:prior.nextCheckAt||null,
-    resolvedAt:prior.resolvedAt||null,
-    point:prior.point||null
+    lastAttemptAt:resetRetry?null:prior.lastAttemptAt||null,
+    nextCheckAt:resetRetry?null:prior.nextCheckAt||null,
+    resolvedAt:priorResolved?prior.resolvedAt||null:null,
+    point:priorResolved?prior.point:null,
+    geocoderVersion:VENUE_GEOCODER_VERSION
   };
   item.priority=priorityFor(item);
   return item;
@@ -143,7 +147,8 @@ await writeFile(COVERAGE_PATH,JSON.stringify({
   generatedAt:nowIso(),
   run:{
     attempted:candidates.length,resolved,failed,maxPerRun:MAX_RESOLUTIONS_PER_RUN,
-    mode:resolutionMode,targetPrecision:DEFAULT_TARGET_PRECISION,startingPrecisionRate:lowestPrecisionRate
+    mode:resolutionMode,targetPrecision:DEFAULT_TARGET_PRECISION,startingPrecisionRate:lowestPrecisionRate,
+    geocoder:venueGeocodeTelemetry()
   },
   regions
 },null,2)+"\n");
