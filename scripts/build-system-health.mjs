@@ -22,7 +22,7 @@ export async function buildSystemHealth({now=Date.now()}={}){
   const locationAge=ageMinutes(locationCoverage.generatedAt,now);
   const discoveryStale=discoveryAge===null||discoveryAge>75;
   const eventStale=eventAge===null||eventAge>120;
-  const locationStale=locationAge===null||locationAge>120;
+  const locationStale=locationAge===null||locationAge>480;
   const dashboardTime=Date.parse(dashboard.generatedAt||"")||0;
   const latestFactTime=Math.max(
     Date.parse(discoveryState.lastRunAt||"")||0,
@@ -58,8 +58,8 @@ export async function buildSystemHealth({now=Date.now()}={}){
       stale:eventStale
     },
     locationResolution:{
-      expectedCadenceMinutes:60,
-      staleAfterMinutes:120,
+      expectedCadenceMinutes:360,
+      staleAfterMinutes:480,
       lastGeneratedAt:locationCoverage.generatedAt||null,
       ageMinutes:locationAge,
       stale:locationStale
