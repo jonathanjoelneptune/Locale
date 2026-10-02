@@ -75,10 +75,10 @@ if(coverage?.regions){
     if(summary.candidateCount!==expected)fail(`Discovery coverage candidateCount mismatch for ${regionId}`);
     if(summary.discoveryCells){
       const cells=summary.discoveryCells;
-      for(const field of ["total","high","dining","completed","failed","remaining"]){
+      for(const field of ["total","core","high","dining","completed","failed","remaining"]){
         if(!Number.isInteger(Number(cells[field]))||Number(cells[field])<0)fail(`Discovery coverage ${regionId} has invalid cell count ${field}`);
       }
-      if(Number(cells.high)+Number(cells.dining)!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
+      if(Number(cells.core)+Number(cells.high)+Number(cells.dining)!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
       if(Number(cells.completed)>Number(cells.total))fail(`Discovery coverage ${regionId} completed cells exceed total`);
     }
   }
