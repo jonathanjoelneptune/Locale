@@ -54,9 +54,14 @@ for(const [index,source] of (sources||[]).entries()){
   if(!Array.isArray(source.regions)||source.regions.length!==1||!regionIds.has(source.regions[0]))fail(`${label} must reference exactly one known region`);
   if(source.ownerEntityKind!=="place"||!source.ownerName)fail(`${label} must identify its owning place`);
   if(!source.discoveryCandidateKey)fail(`${label} missing discoveryCandidateKey`);
-  const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
-  if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
-  sourceEndpointKeys.add(endpointKey);
+  if(source.aliasOf){
+    if(source.enabled!==false)fail(`${label} alias must be disabled`);
+    if(!staticIds.has(source.aliasOf)&&!sourceIds.has(source.aliasOf))fail(`${label} references unknown aliasOf ${source.aliasOf}`);
+  }else{
+    const endpointKey=`${source.adapter}|${String(source.endpoint).replace(/\/$/,"")}`;
+    if(sourceEndpointKeys.has(endpointKey))fail(`Duplicate discovered endpoint ${endpointKey}`);
+    sourceEndpointKeys.add(endpointKey);
+  }
 }
 
 const queueKeys=new Set;
