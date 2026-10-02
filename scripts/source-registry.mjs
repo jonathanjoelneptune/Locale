@@ -172,8 +172,15 @@ export const SOURCES=[
     excludedReason:"College campus calendars are outside Locale scope",refreshHours:6
   },
   {
-    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",refreshHours:12,enabled:false,
-    disabledReason:"Official MyLibrary calendar is visible publicly but automated GitHub Actions requests are blocked or return no parseable event payload"
+    id:"sd-public-library",name:"San Diego Public Library",scope:"local",regions:["san-diego"],adapter:"sdpl",
+    sourceKind:"government",acquisitionTier:"A",coverageLayer:"citywide-library",ownerEntityKind:"organizer",ownerName:"San Diego Public Library",minExpectedEvents:1,
+    endpoints:[
+      "https://www.sandiego.gov/public-library/admitone",
+      "https://www.sandiego.gov/public-library/steam",
+      "https://www.sandiego.gov/public-library/careerprep",
+      "https://www.sandiego.gov/public-library/concertseries"
+    ],
+    fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:6
   },
   {
     id:"san-diego-parks",name:"City of San Diego Parks & Recreation",scope:"local",regions:["san-diego"],adapter:"san-diego-parks",refreshHours:12,enabled:false,
