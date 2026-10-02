@@ -1,62 +1,92 @@
 {
-  "generatedAt": "2026-10-02T02:38:17.356Z",
+  "generatedAt": "2026-10-02T03:25:37.736Z",
   "run": {
-    "startedAt": "2026-10-02T02:34:14.032Z",
-    "seededFromRegistry": 23,
+    "startedAt": "2026-10-02T03:24:55.240Z",
+    "seededFromRegistry": 1,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
-    "sweptRegionId": "san-diego",
+    "sweptRegionId": "chicago",
     "focusAreas": [
       {
         "regionId": "san-diego",
-        "id": "barrio-logan",
-        "name": "Barrio Logan",
-        "gapScore": 98,
+        "id": "coronado",
+        "name": "Coronado",
+        "gapScore": 97,
         "status": "failed",
         "error": "The operation was aborted due to timeout"
       },
       {
         "regionId": "san-diego",
-        "id": "fashion-valley",
-        "name": "Fashion Valley",
-        "gapScore": 98,
+        "id": "la-jolla-village",
+        "name": "La Jolla Village",
+        "gapScore": 99,
         "status": "failed",
-        "error": "The operation was aborted due to timeout"
+        "error": "fetch failed"
       }
     ],
-    "probed": 12,
+    "discoveryMode": "bootstrap",
+    "discoveryBudget": {
+      "probeLimit": 30,
+      "probeConcurrency": 3,
+      "overpassMinIntervalMinutes": 60,
+      "areaSweeps": 2,
+      "regionalCells": 2,
+      "failedSweepRetryMinutes": 60
+    },
+    "regionProfiles": {
+      "san-diego": {
+        "mode": "bootstrap",
+        "configuredAreaCount": 158,
+        "measured": 158,
+        "passing": 8,
+        "passRate": 0.05063291139240506,
+        "severeGapCount": 64,
+        "mediumGapCount": 135
+      },
+      "chicago": {
+        "mode": "unmeasured",
+        "configuredAreaCount": 0,
+        "measured": 0,
+        "passing": 0,
+        "passRate": 0,
+        "severeGapCount": 0,
+        "mediumGapCount": 0
+      }
+    },
+    "overpassRun": true,
+    "probed": 30,
     "promoted": 0,
-    "failed": 12,
+    "failed": 30,
     "discoveryCells": [
       {
         "id": "core:0:0",
         "phase": "core",
         "status": "failed",
-        "error": "The operation was aborted due to timeout"
+        "error": "All Overpass endpoints are cooling down after recent failures; next endpoint available 2026-10-02T03:25:41.166Z"
       },
       {
         "id": "core:0:-1",
         "phase": "core",
         "status": "failed",
-        "error": "The operation was aborted due to timeout"
+        "error": "All Overpass endpoints are cooling down after recent failures; next endpoint available 2026-10-02T03:25:41.166Z"
       }
     ],
-    "finishedAt": "2026-10-02T02:38:17.340Z"
+    "finishedAt": "2026-10-02T03:25:37.715Z"
   },
   "regions": {
     "san-diego": {
-      "candidateCount": 1696,
+      "candidateCount": 1697,
       "withWebsiteCount": 1191,
       "qualifiedCount": 0,
-      "needsWebsiteCount": 505,
-      "dueCount": 1155,
+      "needsWebsiteCount": 506,
+      "dueCount": 1125,
       "statusCounts": {
-        "needs-website": 505,
-        "retry": 36,
-        "candidate": 1155
+        "needs-website": 506,
+        "retry": 66,
+        "candidate": 1125
       },
       "categoryCounts": {
-        "observed-venue": 507,
+        "observed-venue": 508,
         "restaurant": 870,
         "cafe": 319
       },
@@ -73,10 +103,23 @@
       },
       "coverageAreaSweeps": {
         "version": 1,
-        "tracked": 2,
+        "tracked": 4,
         "completed": 0,
-        "failed": 2,
+        "failed": 4,
         "sweptThisRun": 2
+      },
+      "adaptiveDiscovery": {
+        "mode": "bootstrap",
+        "configuredAreaCount": 158,
+        "measured": 158,
+        "passing": 8,
+        "passRate": 0.05063291139240506,
+        "severeGapCount": 64,
+        "mediumGapCount": 135,
+        "activeMode": "bootstrap",
+        "probeLimit": 30,
+        "probeConcurrency": 3,
+        "overpassMinIntervalMinutes": 60
       }
     },
     "chicago": {
@@ -99,7 +142,7 @@
         "high": 69,
         "dining": 21,
         "completed": 0,
-        "failed": 0,
+        "failed": 2,
         "remaining": 135
       },
       "coverageAreaSweeps": {
@@ -108,6 +151,19 @@
         "completed": 0,
         "failed": 0,
         "sweptThisRun": 0
+      },
+      "adaptiveDiscovery": {
+        "mode": "unmeasured",
+        "configuredAreaCount": 0,
+        "measured": 0,
+        "passing": 0,
+        "passRate": 0,
+        "severeGapCount": 0,
+        "mediumGapCount": 0,
+        "activeMode": "bootstrap",
+        "probeLimit": 30,
+        "probeConcurrency": 3,
+        "overpassMinIntervalMinutes": 60
       }
     }
   }
