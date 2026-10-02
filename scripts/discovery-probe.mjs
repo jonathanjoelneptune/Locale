@@ -40,7 +40,7 @@ async function fetchHtml(url){
   return {html:await response.text(),url:response.url||url};
 }
 
-function websiteAlternates(value){
+export function discoveryWebsiteAlternates(value){
   let url;
   try{url=new URL(value)}catch{return []}
   const out=[url.href];
@@ -58,7 +58,7 @@ function websiteAlternates(value){
 
 async function fetchCandidateRoot(candidate){
   let lastError;
-  for(const url of websiteAlternates(candidate.website)){
+  for(const url of discoveryWebsiteAlternates(candidate.website)){
     try{return await fetchHtml(url)}
     catch(error){
       lastError=error;
@@ -68,7 +68,7 @@ async function fetchCandidateRoot(candidate){
   throw lastError||new Error("website fetch failed");
 }
 
-function commonEventPages(base,candidate){
+export function discoveryCommonEventPages(base,candidate){
   let origin;
   try{origin=new URL(base).origin}catch{return []}
   const lane=probeLane(candidate);
@@ -145,6 +145,10 @@ async function tryProvider(run,minEvents=1){
   }catch{return null}
 }
 
+export function discoveryMinimumEvents(candidate){
+  return ["event-likely","event-evidence","food-evidence"].includes(probeLane(candidate))?1:2;
+}
+
 export async function qualifyDiscoveryCandidate(candidate){
   if(!candidate?.website)return {qualified:false,reason:"no-website"};
   let root;
@@ -166,9 +170,9 @@ export async function qualifyDiscoveryCandidate(candidate){
   };
 
   const lane=probeLane(candidate);
-  const structuredMin=["event-likely","event-evidence","food-evidence"].includes(lane)?1:2;
+  const structuredMin=discoveryMinimumEvents(candidate);
   const linkedPages=discoveryEventLinks(root.html,baseUrl);
-  const commonPages=linkedPages.length>=2?[]:commonEventPages(baseUrl,candidate).slice(0,2);
+  const commonPages=linkedPages.length>=2?[]:discoveryCommonEventPages(baseUrl,candidate).slice(0,2);
   const pages=[baseUrl,...linkedPages,...commonPages];
   const seen=new Set;
   for(const page of pages){
