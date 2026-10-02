@@ -11,6 +11,13 @@ const NEGATIVE_CACHE_MS=7*86400000;
 
 const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+const searchQueryFor=(venue,region)=>{
+  const clean=String(venue||"").replace(/\s+/g," ").trim();
+  const lower=clean.toLowerCase();
+  const alreadyScoped=[region?.name,region?.administrativeArea,"san diego","chicago"]
+    .filter(Boolean).some(value=>lower.includes(String(value).toLowerCase()));
+  return alreadyScoped?clean:keyFor(clean,region);
+};
 
 const vague=/^(?:tbd|to be determined|location tba|uc san diego|balboa park|class and trip locations vary|location details to come!?|email .* location|seating is limited)/i;
 
@@ -45,7 +52,7 @@ export async function geocodeVenue(venue,region){
   const url=new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.set("format","jsonv2");
   url.searchParams.set("limit","1");
-  url.searchParams.set("q",key);
+  url.searchParams.set("q",searchQueryFor(clean,region));
   try{
     const response=await fetch(url,{
       headers:{"User-Agent":"Locale-events/1.0 (https://github.com/jonathanjoelneptune/Locale)"},
