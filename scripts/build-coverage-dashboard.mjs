@@ -2,6 +2,7 @@ import {readFile,writeFile} from "node:fs/promises";
 import {isPreciseLocation} from "./location-quality.mjs";
 import {REGIONS} from "./regions.mjs";
 import {COVERAGE_CLASS_TARGETS,coverageTargets,milesBetween,areaGapScore} from "./coverage-zones.mjs";
+import {loadAcquisitionRegistry,neighborhoodAcquisitionByName} from "./acquisition-registry.mjs";
 
 const OUT="src/data/coverage-dashboard.json";
 const readJson=async(path,fallback)=>{
@@ -108,7 +109,7 @@ function sourceSummary(sourceHealth=[]){
 }
 
 export async function buildCoverageDashboard({now=new Date()}={}){
-  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,coverageAreas,sourceAcquisitionCatalog]=await Promise.all([
+  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,coverageAreas,acquisitionRegistry]=await Promise.all([
     readJson("src/data/events.json",[]),
     readJson("src/data/coverage.json",{regions:{}}),
     readJson("src/data/places.json",[]),
@@ -118,7 +119,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     readJson("src/data/location-resolution-coverage.json",{regions:{}}),
     readJson("src/data/location-resolution-queue.json",[]),
     readJson("src/data/coverage-zones.json",[]),
-    readJson("src/data/source-acquisition-catalog.json",{regions:{}})
+    loadAcquisitionRegistry()
   ]);
 
   const regions={};
@@ -130,15 +131,30 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     const regionPlaces=places.filter(place=>place.regionId===region.id);
     const regionDiscovery=discoveryQueue.filter(item=>item.regionId===region.id);
     const regionLocationQueue=locationQueue.filter(item=>item.regionId===region.id);
-    const acquisitionRows=sourceAcquisitionCatalog.regions?.[region.id]||[];
+    const acquisitionRows=region.id===acquisitionRegistry.regionId?acquisitionRegistry.sources:[];
+    const acquisitionAreas=region.id===acquisitionRegistry.regionId?acquisitionRegistry.areas:[];
+    const acquisitionByArea=neighborhoodAcquisitionByName(acquisitionRegistry);
     const sourceAcquisition={
-      strategy:sourceAcquisitionCatalog.strategy||"source-first",
+      strategy:acquisitionRegistry.strategy||"source-first",
       total:acquisitionRows.length,
-      active:acquisitionRows.filter(item=>item.status==="active").length,
-      candidate:acquisitionRows.filter(item=>item.status==="candidate").length,
-      blocked:acquisitionRows.filter(item=>item.status==="blocked").length,
-      byLayer:Object.fromEntries([...new Set(acquisitionRows.map(item=>item.layer).filter(Boolean))].sort().map(layer=>[
-        layer,acquisitionRows.filter(item=>item.layer===layer).length
+      active:acquisitionRows.filter(item=>item.integrationState==="active").length,
+      candidate:acquisitionRows.filter(item=>item.integrationState==="candidate").length,
+      blocked:acquisitionRows.filter(item=>item.integrationState==="blocked").length,
+      disabled:acquisitionRows.filter(item=>item.integrationState==="disabled").length,
+      priorities:{
+        A:acquisitionRows.filter(item=>item.priority==="A").length,
+        B:acquisitionRows.filter(item=>item.priority==="B").length,
+        C:acquisitionRows.filter(item=>item.priority==="C").length
+      },
+      activeByPriority:{
+        A:acquisitionRows.filter(item=>item.priority==="A"&&item.integrationState==="active").length,
+        B:acquisitionRows.filter(item=>item.priority==="B"&&item.integrationState==="active").length,
+        C:acquisitionRows.filter(item=>item.priority==="C"&&item.integrationState==="active").length
+      },
+      areaMappings:acquisitionAreas.length,
+      taxonomyFamilies:region.id===acquisitionRegistry.regionId?Number(acquisitionRegistry.taxonomy?.familyCount||0):0,
+      byLayer:Object.fromEntries([...new Set(acquisitionRows.map(item=>item.coverageLayer).filter(Boolean))].sort().map(layer=>[
+        layer,acquisitionRows.filter(item=>item.coverageLayer===layer).length
       ]))
     };
     const precise=regionEvents.filter(isPreciseLocation).length;
@@ -150,6 +166,15 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     for(const row of coverageAreaRows){
       const area=areaConfigById.get(row.id);
       const candidates=regionDiscovery.filter(item=>milesBetween(item,area)<=Number(area.radiusMiles));
+      const acquisition=acquisitionByArea.get(row.name)||null;
+      row.acquisition=acquisition?{
+        coverageGroup:acquisition.coverageGroup,
+        primarySources:acquisition.primarySources||[],
+        umbrellaSources:acquisition.umbrellaSources||[],
+        baselineSources:acquisition.baselineSources||[],
+        coverageConfidence:acquisition.coverageConfidence||null,
+        notes:acquisition.notes||null
+      }:null;
       row.discovery={
         candidateCount:candidates.length,
         withWebsiteCount:candidates.filter(item=>!!item.website).length,
