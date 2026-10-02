@@ -411,6 +411,10 @@ test("static sources win over rediscovered dynamic copies of the same endpoint",
     {id:"new-theatre",adapter:"jsonld",endpoint:"https://theatre.example/events",enabled:true}
   ];
   const merged=mergeSourceCatalog(staticSources,discovered);
-  assert.deepEqual(merged.map(source=>source.id),["balboa-park","new-theatre"]);
+  assert.deepEqual(merged.map(source=>source.id),["balboa-park","dynamic-balboa","new-theatre"]);
+  const alias=merged.find(source=>source.id==="dynamic-balboa");
+  assert.equal(alias.enabled,false);
+  assert.equal(alias.sourceKind,"alias");
+  assert.equal(alias.aliasOf,"balboa-park");
   assert.equal(sourceEndpointKey(staticSources[0]),sourceEndpointKey(discovered[0]));
 });
