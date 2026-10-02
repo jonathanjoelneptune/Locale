@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {buildCellOverpassQuery,candidateFromOverpassElement} from "./discovery-overpass.mjs";
+import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from "./discovery-overpass.mjs";
+import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
@@ -116,4 +117,96 @@ test("focused area cells use the high-value venue discovery query",()=>{
   assert.match(focusQuery,/nightclub\|bar\|pub\|music_venue/);
   assert.match(focusQuery,/events_venue/);
   assert.doesNotMatch(focusQuery,/amenity"~"\^\(restaurant\|cafe\)\$"/);
+});
+
+
+test("Overpass failover skips a failed endpoint and succeeds on the next endpoint",async()=>{
+  const calls=[];
+  const health=new Map;
+  const fetchImpl=async url=>{
+    calls.push(url);
+    if(url==="https://one.example/api/interpreter"){
+      return {ok:false,status:503,headers:{get:()=>null}};
+    }
+    return {
+      ok:true,
+      status:200,
+      headers:{get:()=>null},
+      json:async()=>({elements:[{id:1}]})
+    };
+  };
+  const result=await fetchOverpass("[out:json];node(0,0,0,0);out;",{
+    fetchImpl,
+    endpoints:[
+      "https://one.example/api/interpreter",
+      "https://two.example/api/interpreter"
+    ],
+    timeoutMs:1000,
+    health,
+    now:()=>0
+  });
+  assert.deepEqual(calls,[
+    "https://one.example/api/interpreter",
+    "https://two.example/api/interpreter"
+  ]);
+  assert.equal(result.elements.length,1);
+  assert.ok(health.get("https://one.example/api/interpreter").cooldownUntil>=30000);
+});
+
+test("adaptive discovery stays aggressive while coverage is immature",()=>{
+  const rows=Array.from({length:158},(_,index)=>({
+    id:`area-${index}`,
+    gapScore:index<8?0:90,
+    acceptance:{pass:index<8}
+  }));
+  const zones=rows.map(row=>({id:row.id,regionId:"san-diego"}));
+  const plan=adaptiveDiscoveryPlan({
+    regions:{
+      "san-diego":{
+        coverageAreas:rows,
+        coverageAreaAcceptance:{measured:158,passing:8}
+      }
+    }
+  },zones,["san-diego"]);
+  assert.equal(plan.mode,"bootstrap");
+  assert.equal(plan.budget.probeLimit,30);
+  assert.equal(plan.budget.probeConcurrency,3);
+  assert.equal(plan.budget.overpassMinIntervalMinutes,60);
+});
+
+test("adaptive discovery tapers only after at least 95 percent coverage with no severe gaps",()=>{
+  const rows=Array.from({length:158},(_,index)=>({
+    id:`area-${index}`,
+    gapScore:index<151?0:20,
+    acceptance:{pass:index<151}
+  }));
+  const zones=rows.map(row=>({id:row.id,regionId:"san-diego"}));
+  const mature=adaptiveDiscoveryPlan({
+    regions:{
+      "san-diego":{
+        coverageAreas:rows,
+        coverageAreaAcceptance:{measured:158,passing:151}
+      }
+    }
+  },zones,["san-diego"]);
+  assert.equal(mature.mode,"maintenance");
+  assert.equal(mature.budget.probeLimit,10);
+
+  rows[157]={...rows[157],gapScore:90};
+  const severe=adaptiveDiscoveryPlan({
+    regions:{
+      "san-diego":{
+        coverageAreas:rows,
+        coverageAreaAcceptance:{measured:158,passing:151}
+      }
+    }
+  },zones,["san-diego"]);
+  assert.equal(severe.mode,"convergence");
+});
+
+test("Overpass cadence is independent from the faster discovery worker cadence",()=>{
+  const now=Date.parse("2026-10-01T20:00:00Z");
+  assert.equal(isOverpassDue(null,60,now),true);
+  assert.equal(isOverpassDue("2026-10-01T19:30:01Z",60,now),false);
+  assert.equal(isOverpassDue("2026-10-01T18:59:59Z",60,now),true);
 });

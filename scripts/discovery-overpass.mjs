@@ -1,7 +1,11 @@
-const ENDPOINTS=[
+export const OVERPASS_ENDPOINTS=[
   "https://overpass-api.de/api/interpreter",
-  "https://overpass.kumi.systems/api/interpreter"
+  "https://overpass.private.coffee/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
 ];
+
+const ENDPOINT_HEALTH=new Map();
+let endpointCursor=0;
 
 const relevantTags=[
   ["amenity","nightclub"],["amenity","bar"],["amenity","pub"],["amenity","music_venue"],
@@ -59,14 +63,14 @@ export function buildCellOverpassQuery(cell){
   const radius=Math.round(Number(cell.queryRadiusMiles||5)*1609.344);
   const {lat,lng}=cell;
   if(cell.phase==="dining"){
-    return `[out:json][timeout:20];(
+    return `[out:json][timeout:12];(
       nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
       nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
       nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"="hotel"];
       nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"="hotel"];
     );out center tags;`;
   }
-  return `[out:json][timeout:20];(
+  return `[out:json][timeout:12];(
     nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
     nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
     nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
@@ -78,22 +82,95 @@ export function buildCellOverpassQuery(cell){
   );out center tags;`;
 }
 
+const retryAfterMs=headers=>{
+  const value=headers?.get?.("retry-after");
+  if(!value)return 0;
+  const seconds=Number(value);
+  if(Number.isFinite(seconds))return Math.max(0,seconds*1000);
+  const date=Date.parse(value);
+  return Number.isFinite(date)?Math.max(0,date-Date.now()):0;
+};
 
-async function fetchOverpass(query){
+const retryableStatus=status=>status===408||status===425||status===429||status>=500;
+
+function endpointOrder(endpoints){
+  if(endpoints!==OVERPASS_ENDPOINTS)return [...endpoints];
+  const start=endpointCursor++%endpoints.length;
+  return [...endpoints.slice(start),...endpoints.slice(0,start)];
+}
+
+function endpointState(health,endpoint){
+  const current=health.get(endpoint);
+  if(current)return current;
+  const fresh={failures:0,cooldownUntil:0,lastError:null};
+  health.set(endpoint,fresh);
+  return fresh;
+}
+
+function markEndpointFailure(health,endpoint,error,{retryAfter=0,nowMs=Date.now()}={}){
+  const current=endpointState(health,endpoint);
+  const failures=Number(current.failures||0)+1;
+  const backoff=Math.min(5*60000,30000*(2**Math.min(3,failures-1)));
+  health.set(endpoint,{
+    failures,
+    cooldownUntil:nowMs+Math.max(30000,retryAfter,backoff),
+    lastError:String(error?.message||error)
+  });
+}
+
+function markEndpointSuccess(health,endpoint){
+  health.set(endpoint,{failures:0,cooldownUntil:0,lastError:null});
+}
+
+export async function fetchOverpass(query,{
+  fetchImpl=fetch,
+  endpoints=OVERPASS_ENDPOINTS,
+  timeoutMs=15000,
+  health=ENDPOINT_HEALTH,
+  now=()=>Date.now()
+}={}){
   let lastError;
-  for(const endpoint of ENDPOINTS){
+  const nowMs=now();
+  const ordered=endpointOrder(endpoints);
+  const available=ordered.filter(endpoint=>endpointState(health,endpoint).cooldownUntil<=nowMs);
+  if(!available.length){
+    const earliest=ordered
+      .map(endpoint=>({endpoint,...endpointState(health,endpoint)}))
+      .sort((a,b)=>a.cooldownUntil-b.cooldownUntil)[0];
+    throw new Error(`All Overpass endpoints are cooling down after recent failures; next endpoint available ${new Date(earliest.cooldownUntil).toISOString()}`);
+  }
+
+  for(const endpoint of available){
     try{
       const body=new URLSearchParams({data:query});
-      const response=await fetch(endpoint,{
+      const response=await fetchImpl(endpoint,{
         method:"POST",
-        headers:{"Content-Type":"application/x-www-form-urlencoded","User-Agent":"Locale-discovery/1.0"},
+        headers:{"Content-Type":"application/x-www-form-urlencoded","User-Agent":"Locale-discovery/1.1"},
         body,
-        signal:AbortSignal.timeout(28000)
+        signal:AbortSignal.timeout(timeoutMs)
       });
-      if(!response.ok)throw new Error(`${endpoint} returned ${response.status}`);
-      return await response.json();
-    }catch(error){lastError=error}
+
+      if(!response.ok){
+        const error=new Error(`${endpoint} returned ${response.status}`);
+        if(!retryableStatus(response.status))throw Object.assign(error,{nonRetryable:true});
+        markEndpointFailure(health,endpoint,error,{
+          retryAfter:retryAfterMs(response.headers),
+          nowMs:now()
+        });
+        lastError=error;
+        continue;
+      }
+
+      const payload=await response.json();
+      markEndpointSuccess(health,endpoint);
+      return payload;
+    }catch(error){
+      if(error?.nonRetryable)throw error;
+      markEndpointFailure(health,endpoint,error,{nowMs:now()});
+      lastError=error;
+    }
   }
+
   throw lastError||new Error("All Overpass endpoints failed");
 }
 
