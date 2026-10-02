@@ -14,6 +14,12 @@ function gridConfig(region,phase){
     spacingMiles:7.5,
     queryRadiusMiles:5.2
   };
+  if(phase==="outer")return {
+    radiusMiles:Number(region.discoveryOuterRadiusMiles||region.ingestRadiusMiles||50),
+    innerRadiusMiles:Number(region.discoveryRadiusMiles||30),
+    spacingMiles:8.5,
+    queryRadiusMiles:6.0
+  };
   return {
     radiusMiles:Number(region.discoveryRadiusMiles||30),
     spacingMiles:7.0,
@@ -30,14 +36,17 @@ export function buildDiscoveryCells(region,phase="high"){
     for(let col=-steps;col<=steps;col++){
       const northMiles=row*config.spacingMiles;
       const eastMiles=col*config.spacingMiles;
-      if(distance(eastMiles,northMiles)>config.radiusMiles+config.queryRadiusMiles*.45)continue;
+      const distanceMiles=distance(eastMiles,northMiles);
+      if(distanceMiles>config.radiusMiles+config.queryRadiusMiles*.45)continue;
+      if(config.innerRadiusMiles&&distanceMiles<Math.max(0,config.innerRadiusMiles-config.queryRadiusMiles*.6))continue;
       cells.push({
         id:`${phase}:${row}:${col}`,
         phase,
         row,col,
         lat:round(Number(region.center.lat)+northMiles/LAT_MILES_PER_DEGREE),
         lng:round(Number(region.center.lng)+eastMiles/lngMilesPerDegree),
-        distanceMiles:Number(distance(eastMiles,northMiles).toFixed(2)),
+        countryCode:region.countryCode||null,
+        distanceMiles:Number(distanceMiles.toFixed(2)),
         queryRadiusMiles:config.queryRadiusMiles
       });
     }
@@ -49,5 +58,6 @@ export function discoveryCellSummary(region){
   const core=buildDiscoveryCells(region,"core");
   const high=buildDiscoveryCells(region,"high");
   const dining=buildDiscoveryCells(region,"dining");
-  return {core:core.length,high:high.length,dining:dining.length,total:core.length+high.length+dining.length};
+  const outer=buildDiscoveryCells(region,"outer");
+  return {core:core.length,high:high.length,dining:dining.length,outer:outer.length,total:core.length+high.length+dining.length+outer.length};
 }
