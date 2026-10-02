@@ -254,11 +254,13 @@ export async function qualifyDiscoveryCandidate(candidate){
   let origin;
   try{origin=new URL(baseUrl).origin}catch{return {qualified:false,reason:"invalid-website"}}
   const fallback=fallbackCenter(candidate);
+  let sawScopeMismatch=false;
 
   const tribe=await tryProvider(()=>tribeEvents({
     endpoint:origin,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60,maxPages:2
   }),1);
   const tribeScope=tribe?discoveryTribeScope(candidate,tribe):{mode:"reject",events:[]};
+  if(tribe?.length&&tribeScope.mode==="reject")sawScopeMismatch=true;
   if(tribeScope.events.length){
     if(tribeScope.mode==="organizer"){
       const brand=discoverySiteBrand(root.html,candidate.name);
@@ -298,6 +300,7 @@ export async function qualifyDiscoveryCandidate(candidate){
         endpoint:ics,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
       }),1);
       const scopedEvents=events?discoveryScopedVenueEvents(candidate,events):null;
+      if(events?.length&&!scopedEvents?.length)sawScopeMismatch=true;
       if(scopedEvents?.length)return {
         qualified:true,
         source:buildSource(candidate,{adapter:"ics",endpoint:ics,eventCount:scopedEvents.length}),
@@ -309,6 +312,7 @@ export async function qualifyDiscoveryCandidate(candidate){
       endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback
     }),structuredMin);
     const scopedJsonld=jsonld?discoveryScopedVenueEvents(candidate,jsonld):null;
+    if(jsonld?.length&&!scopedJsonld?.length)sawScopeMismatch=true;
     if(scopedJsonld?.length)return {
       qualified:true,
       source:buildSource(candidate,{adapter:"jsonld",endpoint:fetched.url,eventCount:scopedJsonld.length}),
@@ -319,6 +323,7 @@ export async function qualifyDiscoveryCandidate(candidate){
       endpoint:fetched.url,sourceName:candidate.name,sourceId:"probe",fallbackCenter:fallback,days:60
     }),structuredMin);
     const scopedEmbedded=embedded?discoveryScopedVenueEvents(candidate,embedded):null;
+    if(embedded?.length&&!scopedEmbedded?.length)sawScopeMismatch=true;
     if(scopedEmbedded?.length)return {
       qualified:true,
       source:buildSource(candidate,{adapter:"embedded-json",endpoint:fetched.url,eventCount:scopedEmbedded.length}),
@@ -332,6 +337,7 @@ export async function qualifyDiscoveryCandidate(candidate){
           fallbackCenter:fallback,linkPattern,maxLinks:15
         }),structuredMin);
         const scopedCrawled=crawled?discoveryScopedVenueEvents(candidate,crawled):null;
+        if(crawled?.length&&!scopedCrawled?.length)sawScopeMismatch=true;
         if(scopedCrawled?.length)return {
           qualified:true,
           source:buildSource(candidate,{adapter:"jsonld-crawl",endpoint:fetched.url,eventCount:scopedCrawled.length,linkPattern}),
@@ -349,6 +355,7 @@ export async function qualifyDiscoveryCandidate(candidate){
     maxLinks:24
   }),structuredMin);
   const scopedLinked=linked?discoveryScopedVenueEvents(candidate,linked):null;
+  if(linked?.length&&!scopedLinked?.length)sawScopeMismatch=true;
   if(scopedLinked?.length)return {
     qualified:true,
     source:buildSource(candidate,{adapter:"calendar-links",endpoint:baseUrl,eventCount:scopedLinked.length}),
@@ -357,7 +364,9 @@ export async function qualifyDiscoveryCandidate(candidate){
 
   return {
     qualified:false,
-    reason:"no-supported-calendar",
-    detail:`Checked ${seen.size} page${seen.size===1?"":"s"} on ${esc(candidate.name)} (${lane})`
+    reason:sawScopeMismatch?"candidate-scope-mismatch":"no-supported-calendar",
+    detail:sawScopeMismatch
+      ?`Found event data, but it did not belong to ${esc(candidate.name)}`
+      :`Checked ${seen.size} page${seen.size===1?"":"s"} on ${esc(candidate.name)} (${lane})`
   };
 }
