@@ -11,28 +11,32 @@ export async function loadDiscoveredSources(){
   return Array.isArray(sources)?sources:[];
 }
 
-const endpointKey=source=>{
+export const sourceEndpointKey=source=>{
   if(!source?.adapter||!source?.endpoint)return null;
   let endpoint;
   try{endpoint=new URL(source.endpoint).href.replace(/\/$/,"")}catch{endpoint=String(source.endpoint).replace(/\/$/,"")}
   return `${source.adapter}|${endpoint}`;
 };
 
-export async function loadAllSources(){
-  const discovered=await loadDiscoveredSources();
-  const byId=new Map(STATIC_SOURCES.map(source=>[source.id,source]));
+export function mergeSourceCatalog(staticSources,discoveredSources){
+  const byId=new Map((staticSources||[]).map(source=>[source.id,source]));
   const endpointKeys=new Set(
-    STATIC_SOURCES.filter(source=>source.enabled!==false).map(endpointKey).filter(Boolean)
+    (staticSources||[]).filter(source=>source.enabled!==false).map(sourceEndpointKey).filter(Boolean)
   );
-  for(const source of discovered){
+  for(const source of discoveredSources||[]){
     if(!source?.id||source.enabled===false)continue;
     if(byId.has(source.id))continue;
-    const key=endpointKey(source);
+    const key=sourceEndpointKey(source);
     if(key&&endpointKeys.has(key))continue;
     byId.set(source.id,source);
     if(key)endpointKeys.add(key);
   }
   return [...byId.values()];
+}
+
+export async function loadAllSources(){
+  const discovered=await loadDiscoveredSources();
+  return mergeSourceCatalog(STATIC_SOURCES,discovered);
 }
 
 export const sourcesForRegionFrom=(sources,region)=>
