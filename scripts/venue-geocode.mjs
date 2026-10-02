@@ -24,6 +24,8 @@ const keyFor=(venue,region)=>{
   return legacyKeyFor(venue,region);
 };
 
+export const venueGeocodeKey=(venue,region)=>keyFor(venue,region);
+
 const vague=/^(?:tbd|to be determined|location tba|uc san diego|balboa park|class and trip locations vary|location details to come!?|email .* location|seating is limited)/i;
 
 async function load(){
