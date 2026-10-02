@@ -1,0 +1,72 @@
+name: Locale living-repository watchdog
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5,20,35,50 * * * *"
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: locale-living-watchdog
+  cancel-in-progress: true
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Sync latest repository state
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+      - name: Recover stale workers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          node <<'NODE' > /tmp/locale-watchdog.env
+          const fs=require("fs");
+          const read=(path,fallback={})=>{try{return JSON.parse(fs.readFileSync(path,"utf8"))}catch{return fallback}};
+          const now=Date.now();
+          const age=(value)=>{const t=Date.parse(value||"");return Number.isFinite(t)?(now-t)/60000:Infinity};
+          const discovery=read("src/data/discovery-state.json");
+          const dashboard=read("src/data/coverage-dashboard.json");
+          const events=read("src/data/coverage.json");
+          const locations=read("src/data/location-resolution-coverage.json");
+          console.log("DISCOVERY_STALE="+(age(discovery.lastRunAt)>20));
+          console.log("RECONCILE_STALE="+(age(dashboard.generatedAt)>30));
+          console.log("EVENTS_STALE="+(age(events.generatedAt)>420));
+          console.log("LOCATIONS_STALE="+(age(locations.generatedAt)>120));
+          console.log("DISCOVERY_AGE="+Math.round(age(discovery.lastRunAt)));
+          console.log("RECONCILE_AGE="+Math.round(age(dashboard.generatedAt)));
+          NODE
+          cat /tmp/locale-watchdog.env
+          source /tmp/locale-watchdog.env
+
+          active_runs() {
+            local workflow="$1"
+            local running queued
+            running="$(gh api "repos/$GH_REPO/actions/workflows/$workflow/runs?status=in_progress&per_page=1" --jq '.total_count')"
+            queued="$(gh api "repos/$GH_REPO/actions/workflows/$workflow/runs?status=queued&per_page=1" --jq '.total_count')"
+            echo $((running+queued))
+          }
+
+          recover() {
+            local stale="$1"
+            local workflow="$2"
+            local label="$3"
+            if [ "$stale" != "true" ]; then return; fi
+            if [ "$(active_runs "$workflow")" -gt 0 ]; then
+              echo "$label is stale but already has an active recovery run."
+              return
+            fi
+            echo "Recovering stale $label via $workflow"
+            gh workflow run "$workflow" --ref main
+          }
+
+          recover "$DISCOVERY_STALE" "discover-sources.yml" "discovery"
+          recover "$RECONCILE_STALE" "reconcile-state.yml" "reconciliation"
+          recover "$EVENTS_STALE" "refresh-events.yml" "event refresh"
+          recover "$LOCATIONS_STALE" "resolve-locations.yml" "location resolution"
