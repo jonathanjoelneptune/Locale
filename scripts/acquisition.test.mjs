@@ -209,7 +209,7 @@ test("Reader place metadata extracts source-native address and coordinates",()=>
     </script>
   `;
   assert.deepEqual(parseReaderPlaceMetadata(html),{
-    address:"1929 Cable Street, San Diego, CA, 92107",
+    address:"1929 Cable Street, San Diego, CA 92107",
     lat:32.746,
     lng:-117.249
   });
