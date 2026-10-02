@@ -41,7 +41,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
   const areaPolygonPane=map.createPane("locale-area-polygons");
   areaPolygonPane.style.zIndex="340";
   const areaLabelPane=map.createPane("locale-area-labels");
-  areaLabelPane.style.zIndex="625";
+  areaLabelPane.style.zIndex="440";
   const areaLayer=L.layerGroup().addTo(map);
   const areaLabelLayer=L.layerGroup().addTo(map);
   let areaFeatures=[];
