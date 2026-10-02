@@ -744,5 +744,8 @@ test("Design System v1 keeps the stacked mobile layout usable",async({page})=>{
   expect(boxes.events.width).toBeGreaterThan(500);
   expect(boxes.map.top).toBeGreaterThanOrEqual(boxes.discovery.bottom-2);
   expect(boxes.events.top).toBeGreaterThanOrEqual(boxes.map.bottom-2);
-  await expect(page.locator(".edge-toggle")).toBeHidden();
+  const toggles=page.locator(".edge-toggle");
+  await expect(toggles).toHaveCount(2);
+  await expect(toggles.nth(0)).toBeHidden();
+  await expect(toggles.nth(1)).toBeHidden();
 });
