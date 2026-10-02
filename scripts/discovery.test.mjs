@@ -4,7 +4,7 @@ import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from 
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,coldStorageDays,shouldColdStore} from "./discovery-priority.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
-import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents,discoveryScopedTribeEvents} from "./discovery-probe.mjs";
+import {discoveryEventLinks,discoveryIcsLinks,discoveryWebsiteAlternates,discoveryCommonEventPages,discoveryMinimumEvents,discoveryScopedTribeEvents,discoveryTribeScope,discoveryScopedVenueEvents,discoveryIsNonPublicEventUrl,DISCOVERY_QUALIFIER_VERSION} from "./discovery-probe.mjs";
 import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {mergeSourceCatalog,sourceEndpointKey} from "./source-catalog.mjs";
@@ -417,4 +417,74 @@ test("static sources win over rediscovered dynamic copies of the same endpoint",
   assert.equal(alias.sourceKind,"alias");
   assert.equal(alias.aliasOf,"balboa-park");
   assert.equal(sourceEndpointKey(staticSources[0]),sourceEndpointKey(discovered[0]));
+});
+
+
+test("private-event sales pages are excluded from public event discovery",()=>{
+  assert.equal(discoveryIsNonPublicEventUrl("https://venue.example/private-events/"),true);
+  assert.equal(discoveryIsNonPublicEventUrl("https://venue.example/corporate-events"),true);
+  assert.equal(discoveryIsNonPublicEventUrl("https://venue.example/book-an-event"),true);
+  assert.equal(discoveryIsNonPublicEventUrl("https://venue.example/events/friday-dj"),false);
+
+  const html=`
+    <a href="/private-events/">Private Events</a>
+    <a href="/events/friday-dj">Friday DJ</a>
+    <a href="/calendar/">Calendar</a>
+  `;
+  assert.deepEqual(discoveryEventLinks(html,"https://venue.example/"),[
+    "https://venue.example/calendar/",
+    "https://venue.example/events/friday-dj"
+  ]);
+});
+
+test("root multi-venue Tribe calendars are classified as organizer sources",()=>{
+  const candidate={name:"Example Venue",website:"https://example.org/",lat:32.75,lng:-117.13};
+  const events=[
+    {venue:"Venue One",lat:32.75,lng:-117.13,locationPrecision:"source"},
+    {venue:"Venue Two",lat:32.71,lng:-117.16,locationPrecision:"source"},
+    {venue:"Venue Three",lat:32.73,lng:-117.15,locationPrecision:"source"}
+  ];
+  const scope=discoveryTribeScope(candidate,events);
+  assert.equal(scope.mode,"organizer");
+  assert.equal(scope.events.length,3);
+});
+
+test("deep venue feeds must overwhelmingly match the candidate across adapters",()=>{
+  const candidate={
+    name:"Copley-Price Family YMCA",
+    website:"https://www.ymcasd.org/locations/copley-price-family-ymca",
+    lat:32.7556,lng:-117.1014
+  };
+  const mixed=[
+    {venue:"Copley-Price Family YMCA",lat:32.7557,lng:-117.1013,locationPrecision:"source"},
+    {venue:"Toby Wells YMCA",lat:32.8320,lng:-117.1570,locationPrecision:"source"},
+    {venue:"McGrath Family YMCA",lat:32.7810,lng:-116.9630,locationPrecision:"source"}
+  ];
+  assert.deepEqual(discoveryScopedVenueEvents(candidate,mixed),[]);
+
+  const matching=[
+    {venue:"Copley-Price Family YMCA",lat:32.7557,lng:-117.1013,locationPrecision:"source"},
+    {venue:"Copley-Price Family YMCA",lat:32.7555,lng:-117.1015,locationPrecision:"source"},
+    {venue:"Copley-Price Family YMCA",lat:32.7558,lng:-117.1012,locationPrecision:"source"}
+  ];
+  assert.equal(discoveryScopedVenueEvents(candidate,matching).length,3);
+});
+
+test("disabled discovered sources remain referential tombstones but are not active sources",()=>{
+  const merged=mergeSourceCatalog([],[
+    {
+      id:"old-source",name:"Old Source",scope:"local",regions:["san-diego"],
+      adapter:"tribe",endpoint:"https://old.example",enabled:false,
+      sourceKind:"invalidated",ownerEntityKind:"place",ownerName:"Old Venue",
+      discoveryCandidateKey:"candidate-old"
+    }
+  ]);
+  assert.equal(merged.length,1);
+  assert.equal(merged[0].id,"old-source");
+  assert.equal(merged[0].enabled,false);
+});
+
+test("discovery qualifier version is explicit and monotonic",()=>{
+  assert.ok(Number.isInteger(DISCOVERY_QUALIFIER_VERSION));
+  assert.ok(DISCOVERY_QUALIFIER_VERSION>=4);
 });
