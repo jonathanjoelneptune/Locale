@@ -40,7 +40,7 @@ const categoryFor=tags=>{
   if(tags.amenity==="marketplace")return "marketplace";
   if(tags.amenity==="library")return "library";
   if(tags.tourism)return tags.tourism;
-  if(tags.leisure==="stadium")return "stadium";
+  if(tags.leisure)return String(tags.leisure).replaceAll("_","-");
   return tags.amenity||"place";
 };
 
