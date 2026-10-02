@@ -219,7 +219,7 @@ function renderQueue(id,row){
   const dueCount=Number(discovery.dueCount||0);
   const perRun=Math.max(1,Number(budget.probeLimit||1));
   const cycles=Math.ceil(dueCount/perRun);
-  const runsPerHour=6;
+  const runsPerHour=2;
   const theoreticalHours=cycles/runsPerHour;
   const clearText=dueCount===0?"clear":theoreticalHours<1?`~${Math.max(10,Math.ceil(theoreticalHours*60/10)*10)} min`:`~${theoreticalHours.toFixed(1)} hr`;
   document.querySelector("#queueThroughput").innerHTML=`
@@ -233,7 +233,7 @@ function renderQueue(id,row){
       ${kv("Needs website",n(discovery.needsWebsiteCount),"cannot qualify yet",discovery.needsWebsiteCount?"warn":"")}
       ${kv("Qualified",n(discovery.qualifiedCount),`${pct(discovery.promotionRate)} yield`,discovery.qualifiedCount?"good":"warn")}
       ${kv("Theoretical cycles",n(cycles),`${perRun} probes/run`)}
-      ${kv("Backlog floor",clearText,"assumes 6 runs/hour and no new candidates")}
+      ${kv("Backlog floor",clearText,"assumes 2 gap-fill runs/hour and no new candidates")}
     </div>`;
 }
 
