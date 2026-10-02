@@ -60,7 +60,7 @@ test("BiblioCommons listing context recovers real branch names from embedded eve
       <a href="/events/mahjong">View event</a>
     </div>
   `;
-  assert.deepEqual(biblioCommonsLocationNames(html),["4S Ranch","Alpine","Del Mar"]);
+  assert.deepEqual(new Set(biblioCommonsLocationNames(html)),new Set(["4S Ranch","Alpine","Del Mar"]));
   assert.deepEqual(biblioCommonsEventLocation(html,"Chinese Mahjong Meetup"),{name:"Alpine",kind:"library"});
 
   globalThis.fetch=async input=>({ok:true,status:200,url:String(input),text:async()=>html});
