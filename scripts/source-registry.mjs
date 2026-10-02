@@ -68,6 +68,35 @@ export const SOURCES=[
     endpoints:["https://www.delmar.ca.us/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar"],fallbackCenter:{lat:32.9595,lng:-117.2653},refreshHours:6
   },
   {
+    id:"la-mesa-calendar",name:"City of La Mesa Community Calendars",scope:"local",regions:["san-diego"],adapter:"multi-ics",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of La Mesa",minExpectedEvents:1,
+    endpoints:[
+      "https://www.cityoflamesa.gov/common/modules/iCalendar/iCalendar.aspx?catID=34&feed=calendar",
+      "https://www.cityoflamesa.gov/common/modules/iCalendar/iCalendar.aspx?catID=15&feed=calendar",
+      "https://www.cityoflamesa.gov/common/modules/iCalendar/iCalendar.aspx?catID=35&feed=calendar"
+    ],fallbackCenter:{lat:32.7678,lng:-117.0231},refreshHours:6
+  },
+  {
+    id:"liberty-station-classes",name:"Liberty Station Classes",scope:"local",regions:["san-diego"],adapter:"liberty-station",
+    sourceKind:"district-aggregator",acquisitionTier:"B",coverageLayer:"classes",ownerEntityKind:"organizer",ownerName:"Liberty Station",minExpectedEvents:1,
+    endpoint:"https://libertystation.com/events/classes",fallbackCenter:{lat:32.7390,lng:-117.2122},maxLinks:100,refreshHours:6
+  },
+  {
+    id:"national-city-calendar",name:"National City Calendar of Events",scope:"local",regions:["san-diego"],adapter:"calendar-links",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of National City",minExpectedEvents:1,
+    endpoint:"https://www.nationalcityca.gov/services/calendar-of-events",fallbackCenter:{lat:32.6781,lng:-117.0992},refreshHours:6
+  },
+  {
+    id:"chula-vista-calendar",name:"City of Chula Vista Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Chula Vista",minExpectedEvents:1,
+    endpoint:"https://www.chulavistaca.gov/residents/advanced-components/site-content/city-calendar",fallbackCenter:{lat:32.6401,lng:-117.0842},refreshHours:6
+  },
+  {
+    id:"san-marcos-calendar",name:"City of San Marcos Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:1,
+    endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},refreshHours:6
+  },
+  {
     id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,
     excludedReason:"College campus calendars are outside Locale scope",endpoint:"https://calendar.ucsd.edu",fallbackCenter:{lat:32.8801,lng:-117.2340},refreshHours:6
   },

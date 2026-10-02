@@ -58,7 +58,13 @@ const adapters={
     endpoints:source.endpoints,sourceName:source.name,sourceId:source.id,
     fallbackCenter:source.fallbackCenter||region.center,days:45
   }),
-  "liberty-station":async()=>libertyStationEvents(),
+  "liberty-station":async(region,source)=>libertyStationEvents({
+    endpoint:source.endpoint,
+    sourceName:source.name,
+    sourceId:source.id,
+    fallbackCenter:source.fallbackCenter||region.center,
+    maxLinks:source.maxLinks||80
+  }),
   "sunset-trivia":async()=>sunsetTriviaEvents(),
   "singhub-karaoke":async()=>singhubKaraokeEvents(),
   "taco-tuesday":async()=>tacoTuesdayEvents(),
@@ -211,6 +217,32 @@ if(!events.length){
   console.log("Providers returned no events; leaving current event files unchanged.");
   process.exit(0);
 }
+
+const normVenue=value=>String(value||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+const previousPreciseByName=new Map();
+for(const place of previousRegistry.places||[]){
+  if(!isPreciseLocation(place)||!Number.isFinite(Number(place.lat))||!Number.isFinite(Number(place.lng)))continue;
+  const key=`${place.regionId}|${normVenue(place.name)}`;
+  if(!previousPreciseByName.has(key))previousPreciseByName.set(key,[]);
+  previousPreciseByName.get(key).push(place);
+}
+let reusedKnownPlaces=0;
+for(let index=0;index<events.length;index++){
+  const event=events[index];
+  if(event.locationPrecision!=="source-center")continue;
+  const key=`${event.regionId}|${normVenue(event.venue)}`;
+  const candidates=previousPreciseByName.get(key)||[];
+  if(candidates.length!==1)continue;
+  const place=candidates[0];
+  events[index]={
+    ...event,
+    lat:Number(place.lat),lng:Number(place.lng),
+    address:event.address||place.address||null,
+    locationPrecision:"venue-known"
+  };
+  reusedKnownPlaces++;
+}
+if(reusedKnownPlaces)console.log(`Venue enrichment: reused ${reusedKnownPlaces} precise locations from the place registry before external geocoding.`);
 
 let enrichedLocations=0;
 const locationGroups=new Map();

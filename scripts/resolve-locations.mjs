@@ -4,7 +4,10 @@ import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 
 const QUEUE_PATH="src/data/location-resolution-queue.json";
 const COVERAGE_PATH="src/data/location-resolution-coverage.json";
-const MAX_RESOLUTIONS_PER_RUN=25;
+const DEFAULT_TARGET_PRECISION=.90;
+const AGGRESSIVE_MAX_RESOLUTIONS=160;
+const CATCHUP_MAX_RESOLUTIONS=60;
+const MAINTENANCE_MAX_RESOLUTIONS=20;
 const APPROXIMATE=new Set(["source-center","city-only","region-only","campus-only","unresolved","unknown",""]);
 const RECURRING=/\b(trivia|karaoke|taco\s+tuesday|open\s+mic|bingo|happy\s+hour|weekly|every\s+(?:mon|tue|wed|thu|fri|sat|sun))\b/i;
 
@@ -17,12 +20,17 @@ const nowIso=()=>new Date().toISOString();
 const due=item=>!item.nextCheckAt||Date.parse(item.nextCheckAt)<=Date.now();
 const vague=/^(?:tbd|location tba|location|unknown|various|multiple locations?|san diego|chicago)$/i;
 
+function cleanQuery(value){
+  return String(value||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+}
 function queryFor(event){
-  const address=String(event.address||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-  if(address&&address.length<=180&&!/[{}\[\]"@]|schema\.org/i.test(address))return {query:address,hasAddress:true};
-  const venue=String(event.venue||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+  const hint=cleanQuery(event.geocodeQuery);
+  if(hint&&hint.length<=180&&!/[{}\[\]"@]|schema\.org/i.test(hint)&&!vague.test(hint))return {query:hint,hasAddress:false,kind:"hint"};
+  const address=cleanQuery(event.address);
+  if(address&&address.length<=180&&!/[{}\[\]"@]|schema\.org/i.test(address))return {query:address,hasAddress:true,kind:"address"};
+  const venue=cleanQuery(event.venue);
   if(!venue||venue.length>140||vague.test(venue))return null;
-  return {query:venue,hasAddress:false};
+  return {query:venue,hasAddress:false,kind:"venue"};
 }
 
 function priorityFor(group){
@@ -35,7 +43,14 @@ function priorityFor(group){
 }
 
 const events=await readJson("src/data/events.json",[]);
+const eventCoverage=await readJson("src/data/coverage.json",{regions:{}});
 const previous=await readJson(QUEUE_PATH,[]);
+const regionRates=Object.values(eventCoverage.regions||{}).map(region=>Number(region?.preciseLocationRate)).filter(Number.isFinite);
+const lowestPrecisionRate=regionRates.length?Math.min(...regionRates):0;
+const MAX_RESOLUTIONS_PER_RUN=lowestPrecisionRate<DEFAULT_TARGET_PRECISION
+  ?AGGRESSIVE_MAX_RESOLUTIONS
+  :lowestPrecisionRate<.95?CATCHUP_MAX_RESOLUTIONS:MAINTENANCE_MAX_RESOLUTIONS;
+const resolutionMode=lowestPrecisionRate<DEFAULT_TARGET_PRECISION?"aggressive":lowestPrecisionRate<.95?"catchup":"maintenance";
 const previousByKey=new Map((Array.isArray(previous)?previous:[]).map(item=>[item.key,item]));
 const groups=new Map();
 
@@ -46,7 +61,7 @@ for(const event of events){
   if(!target)continue;
   const key=`${event.regionId}|${norm(target.query)}`;
   if(!groups.has(key))groups.set(key,{
-    key,regionId:event.regionId,query:target.query,venue:event.venue||null,address:event.address||null,
+    key,regionId:event.regionId,query:target.query,queryKind:target.kind||"venue",venue:event.venue||null,address:event.address||null,
     hasAddress:target.hasAddress,eventCount:0,recurringCount:0,categories:new Set,sourceIds:new Set
   });
   const group=groups.get(key);
@@ -62,6 +77,7 @@ const queue=[...groups.values()].map(group=>{
     key:group.key,
     regionId:group.regionId,
     query:group.query,
+    queryKind:group.queryKind,
     venue:group.venue,
     address:group.address,
     hasAddress:group.hasAddress,
@@ -125,8 +141,11 @@ queue.sort((a,b)=>a.regionId.localeCompare(b.regionId)||Number(b.status==="resol
 await writeFile(QUEUE_PATH,JSON.stringify(queue,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify({
   generatedAt:nowIso(),
-  run:{attempted:candidates.length,resolved,failed,maxPerRun:MAX_RESOLUTIONS_PER_RUN},
+  run:{
+    attempted:candidates.length,resolved,failed,maxPerRun:MAX_RESOLUTIONS_PER_RUN,
+    mode:resolutionMode,targetPrecision:DEFAULT_TARGET_PRECISION,startingPrecisionRate:lowestPrecisionRate
+  },
   regions
 },null,2)+"\n");
 
-console.log(`Location resolution: ${candidates.length} attempted, ${resolved} resolved, ${failed} unresolved; ${queue.length} venue queries tracked.`);
+console.log(`Location resolution (${resolutionMode}, starting precision ${(lowestPrecisionRate*100).toFixed(1)}%): ${candidates.length} attempted, ${resolved} resolved, ${failed} unresolved; ${queue.length} venue queries tracked.`);

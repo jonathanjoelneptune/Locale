@@ -2,6 +2,8 @@ import {readFileSync} from "node:fs";
 import { test, expect } from "@playwright/test";
 
 const leafletSource=readFileSync("node_modules/leaflet/dist/leaflet.js","utf8");
+const configuredCoverageAreas=JSON.parse(readFileSync("src/data/coverage-zones.json","utf8"));
+const configuredSanDiegoAreaCount=configuredCoverageAreas.filter(area=>area.regionId==="san-diego").length;
 const mockLeaflet=async page=>{
   await page.addInitScript({content:leafletSource});
   const tile=(route,label,color)=>route.fulfill({
@@ -493,7 +495,7 @@ test("coverage diagnostics renders comprehensive area and discovery metrics",asy
   await expect(page.locator("#regionSelect option")).toHaveCount(2);
   await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6);
   await page.locator("#regionSelect").selectOption("san-diego");
-  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
+  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(configuredSanDiegoAreaCount);
   await expect(page.locator("#areaGroupSelect option").first()).toHaveText("All areas");
   await expect(page.locator("#areaGroupSelect option")).toHaveCount(10);
   await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(10);
@@ -513,5 +515,5 @@ test("diagnostics exposes live discovery operations console",async({page})=>{
   await expect(page.locator("#runHistoryRows")).toBeVisible();
   await expect(page.locator("#areaSweepRows")).toBeVisible();
   await expect(page.locator("#cellRows")).toBeVisible();
-  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
+  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(configuredSanDiegoAreaCount);
 });

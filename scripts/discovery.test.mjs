@@ -14,7 +14,8 @@ const region={
   id:"san-diego",
   countryCode:"US",
   center:{lat:32.7157,lng:-117.1611},
-  ingestRadiusMiles:50
+  ingestRadiusMiles:50,
+  countryCode:"US"
 };
 
 test("discovery grid covers a region in bounded center-first cells",()=>{
