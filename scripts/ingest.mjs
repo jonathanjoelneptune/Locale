@@ -12,6 +12,7 @@ import {spinEvents} from "./providers/spin.mjs";
 import {comedyStoreEvents} from "./providers/comedy-store.mjs";
 import {micDropEvents} from "./providers/micdrop.mjs";
 import {embeddedJsonEvents} from "./providers/embedded-json.mjs";
+import {calendarLinksEvents} from "./providers/calendar-links.mjs";
 import {sanDiegoFamilyEvents} from "./providers/sandiego-family.mjs";
 import {sanDiegoParksEvents} from "./providers/sandiego-parks.mjs";
 import {usdEvents} from "./providers/usd.mjs";
@@ -30,6 +31,7 @@ import {buildRegistry} from "./registry.mjs";
 import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 import {refineEventCategory} from "./event-classification.mjs";
+import {isPreciseLocation} from "./location-quality.mjs";
 
 const SOURCES=await loadAllSources();
 
@@ -52,6 +54,10 @@ const adapters={
   "embedded-json":async (region,source)=>embeddedJsonEvents({
     endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
     fallbackCenter:source.fallbackCenter,days:45
+  }),
+  "calendar-links":async (region,source)=>calendarLinksEvents({
+    endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter,maxLinks:30
   }),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
@@ -274,14 +280,13 @@ for(const region of Object.values(REGIONS)){
     "happy-hour":/\bhappy\s+hour\b/i
   };
   const locationPrecisionCounts={};
-  const approximatePrecisions=new Set(["source-center","city-only","region-only","campus-only","unresolved"]);
   let approximateLocationCount=0;
   for(const event of regionEvents){
     const category=event.category||"other";
     categoryCounts[category]=(categoryCounts[category]||0)+1;
     const precision=event.locationPrecision||"unknown";
     locationPrecisionCounts[precision]=(locationPrecisionCounts[precision]||0)+1;
-    if(approximatePrecisions.has(precision))approximateLocationCount++;
+    if(!isPreciseLocation(event))approximateLocationCount++;
     const activityText=`${event.title||""} ${event.description||""}`;
     for(const [activity,pattern] of Object.entries(recurringActivityPatterns)){
       if(pattern.test(activityText))recurringActivityCounts[activity]++;

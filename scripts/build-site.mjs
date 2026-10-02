@@ -7,6 +7,7 @@ const build=(process.env.LOCALE_BUILD_ID||process.env.VERCEL_GIT_COMMIT_SHA||pro
 await rm(outDir,{recursive:true,force:true});
 await mkdir(outDir,{recursive:true});
 await cp("index.html",`${outDir}/index.html`);
+await cp("diagnostics.html",`${outDir}/diagnostics.html`);
 await cp("styles",`${outDir}/styles`,{recursive:true});
 await cp("src",`${outDir}/src`,{recursive:true});
 
@@ -18,6 +19,13 @@ html=html
   .replace("</head>",`<meta name="locale-build" content="${build}"></head>`);
 await writeFile(`${outDir}/index.html`,html);
 await writeFile(`${outDir}/404.html`,html);
+
+let diagnostics=await readFile(`${outDir}/diagnostics.html`,"utf8");
+diagnostics=diagnostics
+  .replace("./styles/diagnostics.css",`./styles/diagnostics.css?v=${build}`)
+  .replace("./src/diagnostics.js",`./src/diagnostics.js?v=${build}`)
+  .replace("</head>",`<meta name="locale-build" content="${build}"></head>`);
+await writeFile(`${outDir}/diagnostics.html`,diagnostics);
 
 execFileSync(process.execPath,["scripts/version-site-modules.mjs",outDir,build],{stdio:"inherit"});
 execFileSync("bash",["-lc",`find ${outDir}/src -name '*.js' -print0 | xargs -0 -n1 node --check`],{stdio:"inherit"});

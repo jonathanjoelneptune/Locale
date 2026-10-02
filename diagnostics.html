@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Locale Coverage Diagnostics</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="./styles/diagnostics.css">
+</head>
+<body>
+  <main class="diag-shell">
+    <header class="diag-header">
+      <div>
+        <span class="eyebrow">LOCALE INTERNAL</span>
+        <h1>Coverage Diagnostics</h1>
+        <p>Discovery yield, location quality, source health, and neighborhood density.</p>
+      </div>
+      <div class="header-actions">
+        <select id="regionSelect" aria-label="Region"></select>
+        <button id="refreshDiagnostics" type="button">Refresh</button>
+        <a href="./">Open Locale</a>
+      </div>
+    </header>
+    <div id="diagStatus" class="diag-status">Loading current coverage…</div>
+    <section id="summaryCards" class="summary-grid"></section>
+    <section class="diag-grid two">
+      <article class="panel">
+        <div class="panel-head"><h2>Discovery Funnel</h2><span id="discoveryGenerated"></span></div>
+        <div id="discoveryFunnel"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><h2>Location Resolution</h2></div>
+        <div id="locationResolution"></div>
+      </article>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><div><h2>Neighborhood Acceptance</h2><p>Upcoming Friday/Saturday evening density plus recurring local happenings.</p></div></div>
+      <div class="table-wrap"><table><thead><tr>
+        <th>Neighborhood</th><th>28d events</th><th>Venues</th><th>Fri/Sat avg</th><th>Fri/Sat max</th><th>Recurring</th><th>Status</th>
+      </tr></thead><tbody id="neighborhoodRows"></tbody></table></div>
+    </section>
+    <section class="diag-grid two">
+      <article class="panel">
+        <div class="panel-head"><h2>Recurring Activity</h2></div>
+        <div id="recurringActivity"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><h2>Discovery Failure Reasons</h2></div>
+        <div id="failureReasons"></div>
+      </article>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>Source Health</h2></div>
+      <div class="table-wrap"><table><thead><tr><th>Source</th><th>Status</th><th>Events</th></tr></thead><tbody id="sourceRows"></tbody></table></div>
+    </section>
+  </main>
+  <script type="module" src="./src/diagnostics.js"></script>
+</body>
+</html>

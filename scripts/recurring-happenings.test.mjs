@@ -55,3 +55,21 @@ test("Taco Tuesday parser extracts recurring venue specials",()=>{
   assert.equal(rows[0].address,"702 Fifth Ave");
   assert.deepEqual(rows[0].clock,{hour:16,minute:0});
 });
+
+
+test("SingHUB parser prefers structured venue address and coordinates",()=>{
+  const page=`
+    <h1>Whiskey Girl</h1>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BarOrPub","name":"Whiskey Girl",
+     "address":{"@type":"PostalAddress","streetAddress":"702 Fifth Ave","addressLocality":"San Diego","addressRegion":"CA","postalCode":"92101"},
+     "geo":{"@type":"GeoCoordinates","latitude":32.7134,"longitude":-117.16}}
+    </script>
+    <h2>Weekly schedule</h2><div>Monday 8:30 PM</div>
+  `;
+  const parsed=parseSinghubVenuePage(page,"https://singhub.app/venues/whiskey-girl");
+  assert.equal(parsed.name,"Whiskey Girl");
+  assert.equal(parsed.address,"702 Fifth Ave, San Diego, CA, 92101");
+  assert.equal(parsed.lat,32.7134);
+  assert.equal(parsed.lng,-117.16);
+});

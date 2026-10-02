@@ -26,6 +26,12 @@ jobs:
         run: node scripts/validate-delivery.mjs
       - name: Validate discovery architecture
         run: node scripts/validate-discovery.mjs
+      - name: Build coverage diagnostics
+        run: node scripts/build-coverage-dashboard.mjs
+      - name: Validate coverage architecture
+        run: node scripts/validate-coverage.mjs
+      - name: Report neighborhood density
+        run: node scripts/check-neighborhood-density.mjs
       - name: Build production artifact
         run: LOCALE_BUILD_ID=ci-test node scripts/build-site.mjs
       - name: Test registry domain
@@ -36,6 +42,8 @@ jobs:
         run: node --test scripts/recurring-happenings.test.mjs
       - name: Test background discovery
         run: node --test scripts/discovery.test.mjs
+      - name: Test coverage metrics
+        run: node --test scripts/coverage-dashboard.test.mjs
       - name: Install browser test runner
         run: |
           npm install --no-save @playwright/test@1.55.0 leaflet@1.9.4

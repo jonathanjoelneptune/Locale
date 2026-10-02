@@ -42,10 +42,14 @@ requireText(index,"<noscript>","index.html");
 requireText(pages,"Verify document shell stays available","pages.yml");
 requireText(pages,"node scripts/build-site.mjs","pages.yml");
 requireText(buildSite,'await writeFile(`${outDir}/404.html`,html)',"build-site.mjs");
+requireText(buildSite,'await cp("diagnostics.html"', "build-site.mjs");
+requireText(buildSite,'diagnostics.js?v=',"build-site.mjs");
 requireText(vercel,'"outputDirectory": "dist"',"vercel.json");
 requireText(vercel,'"Cache-Control"',"vercel.json");
 requireText(vercel,'"ignoreCommand"',"vercel.json");
 requireText(vercel,"src/data/discovery-queue.json","vercel.json");
+requireText(vercel,"src/data/location-resolution-queue.json","vercel.json");
+requireText(vercel,"src/data/coverage-dashboard.json","vercel.json");
 
 if(failures.length){
   console.error("Locale delivery validation failed:");

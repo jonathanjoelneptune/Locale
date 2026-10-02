@@ -27,7 +27,7 @@ const regionIds=new Set(Object.keys(REGIONS));
 const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
-const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json"]);
+const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json","calendar-links"]);
 
 for(const [index,source] of (sources||[]).entries()){
   const label=`discovered-sources[${index}]`;
@@ -75,10 +75,13 @@ if(coverage?.regions){
     if(summary.candidateCount!==expected)fail(`Discovery coverage candidateCount mismatch for ${regionId}`);
     if(summary.discoveryCells){
       const cells=summary.discoveryCells;
-      for(const field of ["total","high","dining","completed","failed","remaining"]){
+      const version=Number(cells.version||0);
+      const required=version>=4?["total","core","high","dining","completed","failed","remaining"]:["total","high","dining","completed","failed","remaining"];
+      for(const field of required){
         if(!Number.isInteger(Number(cells[field]))||Number(cells[field])<0)fail(`Discovery coverage ${regionId} has invalid cell count ${field}`);
       }
-      if(Number(cells.high)+Number(cells.dining)!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
+      const expectedTotal=(version>=4?Number(cells.core||0):0)+Number(cells.high||0)+Number(cells.dining||0);
+      if(expectedTotal!==Number(cells.total))fail(`Discovery coverage ${regionId} cell total mismatch`);
       if(Number(cells.completed)>Number(cells.total))fail(`Discovery coverage ${regionId} completed cells exceed total`);
     }
   }

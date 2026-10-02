@@ -44,7 +44,7 @@ export async function ticketmasterEvents({apiKey,center,radiusMiles=50,regionId=
       const eventPrice=price(e);
       out.push(canonicalizeVenue({
         id:`ticketmaster:${e.id}`,regionId,title:e.name,category:category(e),venue:v?.name||"Location TBA",
-        lat,lng,start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
+        lat,lng,locationPrecision:"source",start:e.dates?.start?.dateTime||e.dates?.start?.localDate,end:null,
         price:eventPrice,priceStatus:e.priceRanges?.length?"known":(eventPrice?"source-text":"unknown"),url:e.url||null,source:"Ticketmaster",description:e.info||e.pleaseNote||"",
         featured:false,image:(e.images||[]).filter(i=>i.url&&(!i.ratio||i.ratio==="16_9")).sort((a,b)=>Math.abs((a.width||640)-640)-Math.abs((b.width||640)-640))[0]?.url||null,sourceUrl:e.url||null,lastVerified:new Date().toISOString()
       }));

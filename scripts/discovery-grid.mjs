@@ -4,6 +4,11 @@ const round=value=>Number(value.toFixed(5));
 const distance=(x,y)=>Math.sqrt(x*x+y*y);
 
 function gridConfig(region,phase){
+  if(phase==="core")return {
+    radiusMiles:Number(region.discoveryCoreRadiusMiles||15),
+    spacingMiles:4.0,
+    queryRadiusMiles:3.2
+  };
   if(phase==="dining")return {
     radiusMiles:Number(region.discoveryDiningRadiusMiles||18),
     spacingMiles:7.5,
@@ -41,7 +46,8 @@ export function buildDiscoveryCells(region,phase="high"){
 }
 
 export function discoveryCellSummary(region){
+  const core=buildDiscoveryCells(region,"core");
   const high=buildDiscoveryCells(region,"high");
   const dining=buildDiscoveryCells(region,"dining");
-  return {high:high.length,dining:dining.length,total:high.length+dining.length};
+  return {core:core.length,high:high.length,dining:dining.length,total:core.length+high.length+dining.length};
 }

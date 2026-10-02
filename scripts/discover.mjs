@@ -9,7 +9,7 @@ const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
 const MAX_PROBES_PER_RUN=8;
-const DISCOVERY_SWEEP_VERSION=3;
+const DISCOVERY_SWEEP_VERSION=4;
 const CELLS_PER_RUN=2;
 const CELL_RETRY_MS=2*60*60*1000;
 const MAX_QUEUE=6000;
@@ -156,6 +156,7 @@ function buildCoverage(queue,sources,runStats){
       discoveryCells:{
         version:regionState.cellSweepVersion||DISCOVERY_SWEEP_VERSION,
         total:cellSummary.total,
+        core:cellSummary.core,
         high:cellSummary.high,
         dining:cellSummary.dining,
         completed:Number(regionState.completedCellCount||regionState.completedCells?.length||0),
@@ -210,7 +211,7 @@ function ensureCellSweep(region){
 function nextDueCell(region,regionState){
   const completed=new Set(regionState.completedCells||[]);
   const failed=regionState.failedCells||{};
-  for(const phase of ["high","dining"]){
+  for(const phase of ["core","high","dining"]){
     const cells=buildDiscoveryCells(region,phase);
     for(const cell of cells){
       if(completed.has(cell.id))continue;
@@ -274,9 +275,14 @@ if(regionWork){
   if(regionState.remainingCellCount===0&&!regionState.cellSweepCompletedAt)regionState.cellSweepCompletedAt=nowIso();
 }
 
+const producerSignal=item=>/\b(bar|pub|brew|music|theat|club|comedy|museum|gallery|arts|community|stadium|karaoke|trivia|live|concert|taproom|tavern|lounge)\b/i.test(
+  [item.name,item.category,item.website,item.lastResult?.detail].filter(Boolean).join(" ")
+)?18:0;
+const probeScore=item=>Number(item.priority||0)+producerSignal(item)-Math.min(20,Number(item.attempts||0)*3);
+
 const candidates=queue
   .filter(item=>item.website&&item.status!=="qualified"&&due(item))
-  .sort((a,b)=>Number(b.priority||0)-Number(a.priority||0)||Number(a.attempts||0)-Number(b.attempts||0)||String(a.discoveredAt).localeCompare(String(b.discoveredAt)))
+  .sort((a,b)=>probeScore(b)-probeScore(a)||String(a.discoveredAt).localeCompare(String(b.discoveredAt)))
   .slice(0,MAX_PROBES_PER_RUN);
 
 for(const item of candidates){

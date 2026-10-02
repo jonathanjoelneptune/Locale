@@ -12,13 +12,14 @@ const relevantTags=[
 ];
 
 const priorityFor=tags=>{
-  if(tags.amenity==="music_venue"||tags.amenity==="nightclub")return 100;
-  if(["theatre","arts_centre","bar","pub"].includes(tags.amenity)||tags.craft==="brewery")return 92;
-  if(["cinema","community_centre"].includes(tags.amenity))return 82;
-  if(["museum","gallery","attraction"].includes(tags.tourism)||tags.leisure==="stadium")return 76;
-  if(tags.amenity==="restaurant")return 62;
-  if(tags.amenity==="cafe")return 48;
-  return 40;
+  if(tags.amenity==="music_venue"||tags.amenity==="nightclub")return 120;
+  if(["theatre","arts_centre","bar","pub"].includes(tags.amenity)||tags.craft==="brewery")return 110;
+  if(["cinema","community_centre"].includes(tags.amenity))return 98;
+  if(["museum","gallery","attraction"].includes(tags.tourism)||tags.leisure==="stadium")return 88;
+  if(tags.tourism==="hotel")return 50;
+  if(tags.amenity==="restaurant")return 34;
+  if(tags.amenity==="cafe")return 22;
+  return 30;
 };
 
 const categoryFor=tags=>{
@@ -53,6 +54,8 @@ export function buildCellOverpassQuery(cell){
     return `[out:json][timeout:20];(
       nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
       nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
+      nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"="hotel"];
+      nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"="hotel"];
     );out center tags;`;
   }
   return `[out:json][timeout:20];(
