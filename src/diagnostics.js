@@ -292,7 +292,7 @@ function renderProbes(id){
       <td class="cell-detail">${esc(probeDetail(item))}</td>
       <td class="nowrap">${item.nextCheckAt?esc(relative(item.nextCheckAt)):"—"}<br><small>${item.nextCheckAt?esc(shortDate(item.nextCheckAt)):""}</small></td>
     </tr>`;
-  }).join("")||'<tr><td colspan="7">No probe results recorded for this region yet.</td></tr>';
+  }).join("")||'<tr><td colspan="8">No probe results recorded for this region yet.</td></tr>';
 }
 
 function renderRunHistory(){
