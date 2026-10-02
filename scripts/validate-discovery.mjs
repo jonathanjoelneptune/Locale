@@ -29,6 +29,7 @@ const state=await read("src/data/discovery-state.json",{});
 const coverage=await read("src/data/discovery-coverage.json",{});
 const coverageAreas=await read("src/data/coverage-zones.json",[]);
 const live=await readOptional("src/data/discovery-live.json");
+const acquisitionCatalog=await read("src/data/source-acquisition-catalog.json",{regions:{}});
 
 if(!Array.isArray(queue))fail("discovery-queue.json must contain an array");
 if(!Array.isArray(sources))fail("discovered-sources.json must contain an array");
@@ -40,6 +41,25 @@ const discoveredIds=new Set((sources||[]).map(source=>source?.id).filter(Boolean
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
 const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-json","calendar-links"]);
+const acquisitionStatuses=new Set(["active","candidate","blocked"]);
+if(acquisitionCatalog.strategy!=="source-first")fail("source-acquisition-catalog.json must use source-first strategy");
+for(const [regionId,rows] of Object.entries(acquisitionCatalog.regions||{})){
+  if(!regionIds.has(regionId))fail(`source-acquisition-catalog references unknown region ${regionId}`);
+  if(!Array.isArray(rows))fail(`source-acquisition-catalog region ${regionId} must be an array`);
+  const seen=new Set;
+  for(const [index,row] of (rows||[]).entries()){
+    const label=`source-acquisition-catalog ${regionId}[${index}]`;
+    if(!row?.id||!row?.name||!row?.url||!row?.layer||!row?.status)fail(`${label} missing required fields`);
+    if(seen.has(row.id))fail(`${label} duplicates id ${row.id}`);
+    seen.add(row.id);
+    if(!acquisitionStatuses.has(row.status))fail(`${label} has invalid status ${row.status}`);
+    if(!validUrl(row.url))fail(`${label} has invalid url ${row.url}`);
+    if(row.status==="active"){
+      if(!row.sourceId)fail(`${label} active source missing sourceId`);
+      if(!staticIds.has(row.sourceId)&&!discoveredIds.has(row.sourceId))fail(`${label} references unknown active source ${row.sourceId}`);
+    }
+  }
+}
 
 for(const [index,source] of (sources||[]).entries()){
   const label=`discovered-sources[${index}]`;
