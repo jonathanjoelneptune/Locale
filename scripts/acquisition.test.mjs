@@ -15,7 +15,7 @@ test("workbook acquisition registry preserves the complete source, area, and tax
   const registry=await loadAcquisitionRegistry();
   assert.equal(registry.sources.length,97);
   assert.deepEqual(registry.summary.priorities,{A:17,B:66,C:14});
-  assert.equal(registry.areas.length,158);
+  assert.equal(registry.areas.length,188);
   assert.equal(registry.taxonomy.familyCount,38);
   assert.equal(registry.taxonomy.rows.length,38);
 
@@ -25,7 +25,7 @@ test("workbook acquisition registry preserves the complete source, area, and tax
   const zones=JSON.parse(await readFile("src/data/coverage-zones.json","utf8"));
   const configured=new Set(zones.filter(zone=>zone.regionId==="san-diego").map(zone=>zone.name));
   const mapped=new Set(registry.areas.map(area=>area.area));
-  assert.equal(mapped.size,158);
+  assert.equal(mapped.size,188);
   assert.deepEqual([...mapped].filter(name=>!configured.has(name)),[]);
   assert.deepEqual([...configured].filter(name=>!mapped.has(name)),[]);
 });
