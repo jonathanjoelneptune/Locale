@@ -33,7 +33,7 @@ test("neighborhood acceptance passes once both density targets are met",()=>{
   ];
   const events=[];
   for(const [nightIndex,start] of starts.entries()){
-    for(let i=0;i<8;i++)events.push(event(\`night-\${nightIndex}-\${i}\`,start,{venue:\`Venue \${i}\`,title:i===0?"Karaoke Night":"Live Music"}));
+    for(let i=0;i<8;i++)events.push(event(`night-${nightIndex}-${i}`,start,{venue:`Venue ${i}`,title:i===0?"Karaoke Night":"Live Music"}));
   }
   const row=neighborhoodCoverage(events,neighborhood,region,{now,days:28});
   assert.equal(row.fridaySaturdayNightAverage,8);
