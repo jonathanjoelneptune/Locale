@@ -19,7 +19,7 @@ const TRUSTED_EXTERNAL=[
   "universe.com","www.universe.com",
   "posh.vip","www.posh.vip",
   "shotgun.live","www.shotgun.live",
-  "feverup.com","feverup.com/m"
+  "feverup.com","m.feverup.com"
 ];
 
 const futureEvents=events=>{
