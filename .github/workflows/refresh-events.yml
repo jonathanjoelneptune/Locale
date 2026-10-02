@@ -26,20 +26,22 @@ jobs:
         env:
           TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
         run: node scripts/ingest.mjs
+      - name: Build coverage diagnostics
+        run: node scripts/build-coverage-dashboard.mjs
       - name: Validate generated event data
         run: node scripts/validate-data.mjs
       - name: Commit event changes
         id: commit
         if: github.ref == 'refs/heads/main'
         run: |
-          if git diff --quiet -- src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json; then
+          if git diff --quiet -- src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/coverage-dashboard.json src/data/geocode-cache.json src/data/venue-geocode-cache.json; then
             echo "No event changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "locale-events[bot]"
           git config user.email "locale-events[bot]@users.noreply.github.com"
-          git add src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/geocode-cache.json src/data/venue-geocode-cache.json
+          git add src/data/events.json src/data/places.json src/data/organizers.json src/data/series.json src/data/entity-source-links.json src/data/coverage.json src/data/coverage-dashboard.json src/data/geocode-cache.json src/data/venue-geocode-cache.json
           git commit -m "Refresh event data"
           git pull --rebase origin main
           git push
