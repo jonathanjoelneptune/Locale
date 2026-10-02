@@ -33,6 +33,8 @@ import {casbahPresentsEvents} from "./providers/casbah-presents.mjs";
 import {conventionCenterEvents} from "./providers/convention-center.mjs";
 import {delMarFairgroundsEvents} from "./providers/del-mar-fairgrounds.mjs";
 import {santeeCalendarEvents} from "./providers/santee-calendar.mjs";
+import {granicusMunicipalEvents} from "./providers/granicus-calendar.mjs";
+import {sanMarcosCalendarEvents} from "./providers/san-marcos-calendar.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {loadAllSources,sourcesForRegionFrom} from "./source-catalog.mjs";
@@ -54,6 +56,18 @@ const adapters={
   "convention-center":async()=>conventionCenterEvents(),
   "del-mar-fairgrounds":async()=>delMarFairgroundsEvents(),
   "santee-calendar":async()=>santeeCalendarEvents(),
+  "granicus-calendar":async(region,source)=>granicusMunicipalEvents({
+    endpoints:source.endpoints||[source.endpoint],
+    sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter||region.center,
+    cityName:source.cityName||region.name,
+    locationHints:source.locationHints||[],
+    days:45,maxPages:source.maxPages||8,maxDetails:source.maxDetails||120
+  }),
+  "san-marcos-calendar":async(region,source)=>sanMarcosCalendarEvents({
+    endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
+    fallbackCenter:source.fallbackCenter||region.center,days:45,maxDetails:source.maxDetails||60
+  }),
   "multi-ics":async(region,source)=>multiIcsEvents({
     endpoints:source.endpoints,sourceName:source.name,sourceId:source.id,
     fallbackCenter:source.fallbackCenter||region.center,days:45
