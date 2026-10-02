@@ -11,6 +11,59 @@ const decode=value=>String(value||"")
   .replace(/&[^;]+;/g," ").replace(/\s+/g," ").trim();
 const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));
 
+const escapeRegExp=value=>String(value||"").replace(/[.*+?^$\{\}()|[\]\\]/g,"\\const strip=value=>decode(String(value||"").replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," "));");
+
+export function biblioCommonsLocationNames(html){
+  const text=strip(html);
+  const section=text.match(/\bLocations\s+(.+?)\s+Audience\b/i)?.[1]||"";
+  const names=[];
+  for(const match of section.matchAll(/([A-Za-z0-9][A-Za-z0-9 &'’().\/-]{1,80}?)\s+\([\d,]+\)/g)){
+    const name=match[1].trim().replace(/^Locations\s+/i,"");
+    if(name&&!names.includes(name))names.push(name);
+  }
+  return names.sort((a,b)=>b.length-a.length);
+}
+
+export function biblioCommonsEventLocation(html,title,knownLocations=biblioCommonsLocationNames(html)){
+  const text=strip(html);
+  const eventItemsIndex=text.search(/\bEvent items\b/i);
+  const haystack=eventItemsIndex>=0?text.slice(eventItemsIndex):text;
+  const titleIndex=haystack.toLowerCase().indexOf(String(title||"").trim().toLowerCase());
+  if(titleIndex<0)return null;
+  const window=haystack.slice(titleIndex,titleIndex+2600);
+
+  for(const location of knownLocations){
+    const escaped=escapeRegExp(location);
+    if(new RegExp(`${escaped}\\s*Event location:\\s*${escaped}(?:\\s|$)`,"i").test(window)){
+      return {name:location,kind:"library"};
+    }
+  }
+
+  const repeated=window.match(/([A-Za-z0-9][A-Za-z0-9 &'’().\/-]{2,100}?)\s*Event location:\s*\1(?:\s|$)/i);
+  if(repeated?.[1]){
+    const name=repeated[1]
+      .replace(/^(?:View all dates|In Progress|Featured Event|Featured)\s*/i,"")
+      .trim();
+    if(name&&name.length<=100)return {name,kind:"offsite"};
+  }
+  return null;
+}
+
+function libraryVenue(location){
+  if(!location)return null;
+  if(location.kind==="library")return {
+    venue:/\blibrary\b/i.test(location.name)?location.name:`${location.name} Library`,
+    geocodeQuery:/\blibrary\b/i.test(location.name)
+      ?`${location.name}, San Diego County, CA`
+      :`${location.name} Library, San Diego County, CA`
+  };
+  return {
+    venue:location.name,
+    geocodeQuery:`${location.name}, San Diego County, CA`
+  };
+}
+
+
 function clock(value){
   const m=String(value||"").match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)/i);
   if(!m)return null;
@@ -89,9 +142,14 @@ export async function biblioCommonsEvents({
 
   const out=[];
   for(const page of htmlPages){
+    const knownLocations=biblioCommonsLocationNames(page.html);
     try{
       const embedded=embeddedJsonEventsFromHtml({
         html:page.html,endpoint:page.url,sourceName,sourceId,fallbackCenter,days
+      }).map(event=>{
+        if(event.locationPrecision!=="source-center"||event.venue!==sourceName)return event;
+        const context=libraryVenue(biblioCommonsEventLocation(page.html,event.title,knownLocations));
+        return context?{...event,...context}:event;
       });
       out.push(...embedded);
     }catch{}
@@ -105,6 +163,9 @@ export async function biblioCommonsEvents({
         subcategories:item.tags.map(value=>value.toLowerCase().replace(/[^a-z0-9]+/g,"-")).filter(Boolean),
         tags:item.tags,
         venue:item.venue,
+        geocodeQuery:/\blibrary\b/i.test(item.venue)
+          ?`${item.venue}, San Diego County, CA`
+          :`${item.venue} Library, San Diego County, CA`,
         lat:fallbackCenter.lat,lng:fallbackCenter.lng,locationPrecision:"source-center",
         start:item.start,end:null,timeStatus:"known",timeZone:"America/Los_Angeles",
         price:/\bfree\b/i.test(item.description)?"Free":null,
