@@ -121,9 +121,9 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
         className:`locale-area-boundary ${selected?"selected-area-boundary":""}`,
         color:selected?"#138aa5":"#2b7c89",
         weight:selected?2.4:1,
-        opacity:selected?.95:(zoom>=12?.34:.24),
+        opacity:selected ? .95 : (zoom>=12 ? .34 : .24),
         fillColor:selected?"#3caec0":"#61aab4",
-        fillOpacity:selected?.11:(zoom>=12?.026:.014)
+        fillOpacity:selected ? .11 : (zoom>=12 ? .026 : .014)
       };
       const geo=L.geoJSON(feature,{pane:"locale-area-polygons",interactive:true,style:()=>normalStyle}).addTo(areaLayer);
       geo.eachLayer(shape=>{
@@ -134,7 +134,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
         shape.on("mouseover",()=>shape.setStyle({
           weight:selected?2.7:1.8,
           opacity:.8,
-          fillOpacity:selected?.14:.07
+          fillOpacity:selected ? .14 : .07
         }));
         shape.on("mouseout",()=>shape.setStyle(normalStyle));
       });
@@ -184,8 +184,8 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
       radius.setLatLng(ll).setRadius(meters(miles));
       center.setLatLng(ll);
       radius.setStyle({
-        opacity:visible?.65:0,
-        fillOpacity:visible?.035:0
+        opacity:visible ? .65 : 0,
+        fillOpacity:visible ? .035 : 0
       });
       center.setOpacity(visible?1:.25);
     },
