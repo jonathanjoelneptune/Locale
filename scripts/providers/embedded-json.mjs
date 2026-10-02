@@ -27,21 +27,19 @@ function locationOf(event,sourceName,fallbackCenter){
   return {venue:strip(venue),address:address||null,...fallbackCenter,locationPrecision:"source-center"};
 }
 
-export async function embeddedJsonEvents({endpoint,sourceName,sourceId,fallbackCenter,days=45}){
-  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",Accept:"text/html,application/xhtml+xml","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(10000)});
-  if(!response.ok)throw new Error(`${sourceName} embedded JSON page ${response.status}`);
-  const html=await response.text();
+export function embeddedJsonEventsFromHtml({html,endpoint,sourceName,sourceId,fallbackCenter,days=45,now=Date.now()}){
   const payloads=[];
-  for(const match of html.matchAll(/<script\b[^>]*(?:type=["']application\/(?:ld\+)?json["']|id=["']__NEXT_DATA__["'])[^>]*>([\s\S]*?)<\/script>/gi)){
+  for(const match of String(html||"").matchAll(/<script\b[^>]*(?:type=["']application\/(?:ld\+)?json["']|id=["']__NEXT_DATA__["'])[^>]*>([\s\S]*?)<\/script>/gi)){
     try{payloads.push(JSON.parse(match[1]))}catch{}
   }
-  const now=Date.now(),horizon=now+days*86400000,verified=new Date().toISOString();
+  const nowMs=now instanceof Date?now.getTime():Number(now);
+  const horizon=nowMs+days*86400000,verified=new Date(nowMs).toISOString();
   const candidates=collect(payloads);
   const out=[];
   for(const event of candidates){
     const startValue=first(event,["startDate","start_date","start","startsAt","starts_at","dateTime","datetime","date"]);
     const startTime=Date.parse(startValue);
-    if(!Number.isFinite(startTime)||startTime<now-86400000||startTime>horizon)continue;
+    if(!Number.isFinite(startTime)||startTime<nowMs-86400000||startTime>horizon)continue;
     const title=strip(first(event,["title","name","eventTitle","event_name","summary"]));
     if(!title)continue;
     const location=locationOf(event,sourceName,fallbackCenter);
@@ -61,3 +59,12 @@ export async function embeddedJsonEvents({endpoint,sourceName,sourceId,fallbackC
   }
   return [...new Map(out.map(event=>[event.id,event])).values()];
 }
+
+export async function embeddedJsonEvents({endpoint,sourceName,sourceId,fallbackCenter,days=45}){
+  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",Accept:"text/html,application/xhtml+xml","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(10000)});
+  if(!response.ok)throw new Error(`${sourceName} embedded JSON page ${response.status}`);
+  return embeddedJsonEventsFromHtml({
+    html:await response.text(),endpoint,sourceName,sourceId,fallbackCenter,days
+  });
+}
+

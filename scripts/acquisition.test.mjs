@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import {loadAcquisitionRegistry} from "./acquisition-registry.mjs";
-import {parseBiblioCommonsPage} from "./providers/bibliocommons.mjs";
+import {parseBiblioCommonsPage,biblioCommonsEvents} from "./providers/bibliocommons.mjs";
 import {parseReaderSpecials} from "./providers/sandiego-reader-happy-hours.mjs";
 import {parseCasbahCalendar} from "./providers/casbah-presents.mjs";
 import {parseMuseumCouncil} from "./providers/museum-council.mjs";
@@ -43,6 +43,40 @@ test("BiblioCommons parser extracts dated hyperlocal library activities",()=>{
   assert.equal(rows[0].title,"Family Storytime");
   assert.equal(rows[0].venue,"Alpine Library");
   assert.ok(rows[0].start.startsWith("2026-10-09T"));
+});
+
+test("BiblioCommons ingestion parses already-fetched HTML without refetching detail pages",async()=>{
+  const originalFetch=globalThis.fetch;
+  let calls=0;
+  const html=`
+    <div>1 to 20 of 1 items</div>
+    <script type="application/ld+json">
+      {"@type":"Event","name":"Library Craft","startDate":"2026-10-10T10:00:00-07:00","location":{"name":"Alpine Library"}}
+    </script>
+    <h3><a href="/events/craft">Library Craft</a></h3>
+    <div>Saturday, October 10, 2026, 10:00am Event location: Alpine Library
+      Find more events in: Arts and Culture
+      <a href="/events/craft">View event</a>
+    </div>
+  `;
+  globalThis.fetch=async input=>{
+    calls++;
+    return {ok:true,status:200,url:String(input),text:async()=>html};
+  };
+  try{
+    const events=await biblioCommonsEvents({
+      endpoint:"https://library.example/v2/events",
+      sourceName:"Example Library",
+      sourceId:"example-library",
+      fallbackCenter:{lat:32.8,lng:-117.1},
+      days:45,
+      maxPages:5
+    });
+    assert.equal(calls,1);
+    assert.ok(events.length>=1);
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
 });
 
 test("Reader specials parser keeps neighborhood, venue, and deal text",()=>{
