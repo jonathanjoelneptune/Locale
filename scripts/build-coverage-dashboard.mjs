@@ -67,6 +67,8 @@ export function coverageAreaMetrics(events,area,region,{now=new Date(),days=28}=
     kind:area.kind||"coverage-area",
     coverageClass:area.coverageClass||"mixed",
     discoveryPriority:Number(area.discoveryPriority||50),
+    lat:area.lat,
+    lng:area.lng,
     radiusMiles:area.radiusMiles,
     preciseEventsNext28d:relevant.length,
     uniqueVenuesNext28d:venues.size,
@@ -132,6 +134,18 @@ export async function buildCoverageDashboard({now=new Date()}={}){
       .filter(item=>item.regionId===region.id)
       .map(item=>coverageAreaMetrics(regionEvents,item,region,{now}))
       .sort((a,b)=>Number(b.gapScore)-Number(a.gapScore)||Number(b.discoveryPriority)-Number(a.discoveryPriority)||a.name.localeCompare(b.name));
+    const areaConfigById=new Map(coverageAreas.filter(item=>item.regionId===region.id).map(item=>[item.id,item]));
+    for(const row of coverageAreaRows){
+      const area=areaConfigById.get(row.id);
+      const candidates=regionDiscovery.filter(item=>milesBetween(item,area)<=Number(area.radiusMiles));
+      row.discovery={
+        candidateCount:candidates.length,
+        withWebsiteCount:candidates.filter(item=>!!item.website).length,
+        qualifiedCount:candidates.filter(item=>item.status==="qualified").length,
+        retryCount:candidates.filter(item=>item.status==="retry").length
+      };
+    }
+
     const gapGroups={};
     for(const item of coverageAreaRows){
       const key=item.group||"other";
