@@ -11,14 +11,17 @@ const region={
 };
 
 test("discovery grid covers a region in bounded center-first cells",()=>{
+  const core=buildDiscoveryCells({...region,discoveryCoreRadiusMiles:15},"core");
   const high=buildDiscoveryCells({...region,discoveryRadiusMiles:35},"high");
   const dining=buildDiscoveryCells({...region,discoveryDiningRadiusMiles:20},"dining");
+  assert.ok(core.length>20);
   assert.ok(high.length>20);
   assert.ok(dining.length>10);
-  assert.equal(high[0].distanceMiles,0);
-  assert.equal(high[0].phase,"high");
-  const summary=discoveryCellSummary({...region,discoveryRadiusMiles:35,discoveryDiningRadiusMiles:20});
-  assert.equal(summary.total,high.length+dining.length);
+  assert.equal(core[0].distanceMiles,0);
+  assert.equal(core[0].phase,"core");
+  assert.ok(core[0].queryRadiusMiles<high[0].queryRadiusMiles);
+  const summary=discoveryCellSummary({...region,discoveryCoreRadiusMiles:15,discoveryRadiusMiles:35,discoveryDiningRadiusMiles:20});
+  assert.equal(summary.total,core.length+high.length+dining.length);
 });
 
 test("cell queries prioritize local nightlife/culture and keep dining separate",()=>{
@@ -56,7 +59,7 @@ test("OpenStreetMap venue candidates become Tier C queue entries",()=>{
   assert.equal(candidate.website,"https://example.com/events");
   assert.equal(candidate.category,"bar");
   assert.equal(candidate.monitorTier,"C");
-  assert.equal(candidate.priority,92);
+  assert.equal(candidate.priority,110);
   assert.match(candidate.address,/123 Main St/);
 });
 
