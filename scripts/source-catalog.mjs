@@ -11,13 +11,26 @@ export async function loadDiscoveredSources(){
   return Array.isArray(sources)?sources:[];
 }
 
+const endpointKey=source=>{
+  if(!source?.adapter||!source?.endpoint)return null;
+  let endpoint;
+  try{endpoint=new URL(source.endpoint).href.replace(/\/$/,"")}catch{endpoint=String(source.endpoint).replace(/\/$/,"")}
+  return `${source.adapter}|${endpoint}`;
+};
+
 export async function loadAllSources(){
   const discovered=await loadDiscoveredSources();
   const byId=new Map(STATIC_SOURCES.map(source=>[source.id,source]));
+  const endpointKeys=new Set(
+    STATIC_SOURCES.filter(source=>source.enabled!==false).map(endpointKey).filter(Boolean)
+  );
   for(const source of discovered){
     if(!source?.id||source.enabled===false)continue;
     if(byId.has(source.id))continue;
+    const key=endpointKey(source);
+    if(key&&endpointKeys.has(key))continue;
     byId.set(source.id,source);
+    if(key)endpointKeys.add(key);
   }
   return [...byId.values()];
 }
