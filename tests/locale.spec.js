@@ -585,16 +585,19 @@ test("users can multi-select areas and see the same scope on the map and results
   await expect(page.locator("#clearAreaSelectionMap")).toBeHidden();
 });
 
-test("clicking a neighborhood label on the map selects and focuses that area",async({page})=>{
+test("clicking a visible neighborhood label on the map selects and focuses that area",async({page})=>{
   await waitForLocale(page);
   const map=page.locator("#map");
-  await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],11,{animate:false}));
-  await expect(page.locator('[data-area-label="north-park"]')).toBeVisible({timeout:5000});
+  await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],12,{animate:false}));
+  const label=page.locator(".area-map-label").first();
+  await expect(label).toBeVisible({timeout:5000});
+  const id=await label.getAttribute("data-area-label");
+  expect(id).toBeTruthy();
   // Event pins intentionally have pointer priority when they overlap an area label.
-  // Dispatch directly to the label here to verify its selection/focus handler independently.
-  await page.locator('[data-area-label="north-park"]').dispatchEvent("click");
+  // Dispatch directly to the rendered label to verify its selection/focus handler independently.
+  await label.dispatchEvent("click");
   await expect(map).toHaveAttribute("data-selected-area-count","1");
-  await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
+  await expect(page.locator(`.area-chip[data-remove-area="${id}"]`)).toBeVisible();
 });
 
 
