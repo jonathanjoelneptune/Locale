@@ -6,7 +6,7 @@ const EVENT_LIKELY_CATEGORIES=new Set([
 const FOOD_CATEGORIES=new Set(["restaurant","cafe"]);
 const EVENT_SIGNAL=/\b(events?|calendar|tickets?|live\s*music|music|concert|show|performance|theat(?:re|er)|comedy|trivia|karaoke|bingo|open\s*mic|dance|festival|brew(?:ery|ing)?|taproom|pub|bar|club|nightlife|stadium|museum|gallery|arts?|community)\b/i;
 
-export const PROBE_LANE_ORDER=["event-likely","event-evidence","food-evidence","exploratory","cold-sample"];
+export const PROBE_LANE_ORDER=["event-likely","event-evidence","food-evidence","exploratory","low-value","cold-sample"];
 
 export function eventEvidence(item){
   const text=[
@@ -38,12 +38,14 @@ export function probeLaneTargets(limit){
   const eventEvidence=Math.floor(n*.20);
   const foodEvidence=Math.floor(n*.10);
   const coldSample=n>=10?1:0;
-  const exploratory=Math.max(0,n-eventLikely-eventEvidence-foodEvidence-coldSample);
+  const lowValue=n>=10?1:0;
+  const exploratory=Math.max(0,n-eventLikely-eventEvidence-foodEvidence-lowValue-coldSample);
   return {
     "event-likely":eventLikely,
     "event-evidence":eventEvidence,
     "food-evidence":foodEvidence,
     exploratory,
+    "low-value":lowValue,
     "cold-sample":coldSample
   };
 }
