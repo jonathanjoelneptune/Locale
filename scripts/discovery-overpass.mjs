@@ -95,6 +95,15 @@ const categoryFor=tags=>{
   return tags.amenity||"place";
 };
 
+const milesBetween=(a,b)=>{
+  if(!Number.isFinite(Number(a?.lat))||!Number.isFinite(Number(a?.lng))||!Number.isFinite(Number(b?.lat))||!Number.isFinite(Number(b?.lng)))return Infinity;
+  const R=3958.7613,toRad=value=>Number(value)*Math.PI/180;
+  const dLat=toRad(Number(b.lat)-Number(a.lat)),dLng=toRad(Number(b.lng)-Number(a.lng));
+  const lat1=toRad(a.lat),lat2=toRad(b.lat);
+  const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.min(1,Math.sqrt(h)));
+};
+
 const normalizeUrl=value=>{
   const raw=String(value||"").trim();
   if(!raw)return null;
@@ -122,23 +131,27 @@ const bboxForCell=cell=>{
 
 export function buildCellOverpassQuery(cell){
   const bbox=bboxForCell(cell);
+  const countryCode=String(cell.countryCode||"").toUpperCase().replace(/[^A-Z]/g,"");
+  const countryPrefix=countryCode?`area["ISO3166-1"="${countryCode}"]["boundary"="administrative"]->.localeCountry;`:"";
+  const scope=countryCode?"(area.localeCountry)":"";
+  const nwr=filter=>`nwr${scope}${filter};`;
   if(cell.phase==="dining"){
-    return `[out:json][timeout:10][bbox:${bbox}];(
-      nwr["name"]["website"]["amenity"~"^(restaurant|cafe)$"];
-      nwr["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"];
-      nwr["name"]["website"]["tourism"="hotel"];
-      nwr["name"]["contact:website"]["tourism"="hotel"];
+    return `[out:json][timeout:10][bbox:${bbox}];${countryPrefix}(
+      ${nwr('["name"]["website"]["amenity"~"^(restaurant|cafe)$"]')}
+      ${nwr('["name"]["contact:website"]["amenity"~"^(restaurant|cafe)$"]')}
+      ${nwr('["name"]["website"]["tourism"="hotel"]')}
+      ${nwr('["name"]["contact:website"]["tourism"="hotel"]')}
     );out center tags;`;
   }
-  return `[out:json][timeout:10][bbox:${bbox}];(
-    nwr["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
-    nwr["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
-    nwr["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
-    nwr["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
-    nwr["name"]["website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
-    nwr["name"]["contact:website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
-    nwr["name"]["website"]["craft"="brewery"];
-    nwr["name"]["contact:website"]["craft"="brewery"];
+  return `[out:json][timeout:10][bbox:${bbox}];${countryPrefix}(
+    ${nwr('["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"]')}
+    ${nwr('["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"]')}
+    ${nwr('["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"]')}
+    ${nwr('["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"]')}
+    ${nwr('["name"]["website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"]')}
+    ${nwr('["name"]["contact:website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"]')}
+    ${nwr('["name"]["website"]["craft"="brewery"]')}
+    ${nwr('["name"]["contact:website"]["craft"="brewery"]')}
   );out center tags;`;
 }
 
@@ -261,6 +274,7 @@ export function candidateFromOverpassElement(row,region){
   if(!website)return null;
   const lat=Number(row.lat??row.center?.lat),lng=Number(row.lon??row.center?.lon);
   if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+  if(region?.center&&Number(region.ingestRadiusMiles)>0&&milesBetween(region.center,{lat,lng})>Number(region.ingestRadiusMiles))return null;
   const address=[
     [tags["addr:housenumber"],tags["addr:street"]].filter(Boolean).join(" "),
     tags["addr:city"],tags["addr:state"],tags["addr:postcode"]
