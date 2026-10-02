@@ -30,7 +30,7 @@ const relative=value=>{
 };
 const statusClass=value=>{
   const normalized=String(value||"").toLowerCase();
-  if(["ok","success","completed","qualified","pass"].includes(normalized))return "success";
+  if(["ok","success","completed","qualified","pass","healthy"].includes(normalized))return "success";
   if(["in_progress","running"].includes(normalized))return "running";
   if(["failure","failed","retry","cancelled","timed_out"].includes(normalized))return "failed";
   return normalized.replace(/[^a-z0-9-]+/g,"-")||"queued";
@@ -49,6 +49,7 @@ async function optionalJson(name){
 
 let dashboard=null;
 let live=null;
+let systemHealth=null;
 let actionsState={run:null,jobs:[],checkedAt:null,error:null};
 let actionsLastFetch=0;
 let loading=false;
@@ -103,6 +104,30 @@ async function fetchActions(force=false){
   }catch(error){
     actionsState={...actionsState,checkedAt:new Date().toISOString(),error:error.message};
   }
+}
+
+function renderSystemHealth(){
+  const container=document.querySelector("#systemHealth");
+  const generated=document.querySelector("#systemHealthGenerated");
+  if(!container)return;
+  if(!systemHealth){
+    container.innerHTML='<div class="empty-note">System health will populate after the next reconciliation cycle.</div>';
+    if(generated)generated.textContent="";
+    return;
+  }
+  if(generated)generated.textContent=`health snapshot ${relative(systemHealth.generatedAt)}`;
+  const components=[
+    ["Discovery",systemHealth.discovery],
+    ["Reconciliation",systemHealth.reconciliation],
+    ["Event refresh",systemHealth.eventRefresh],
+    ["Location resolution",systemHealth.locationResolution]
+  ];
+  container.innerHTML=`<div class="mode-banner"><div>${pill(systemHealth.status)} <strong>${esc(String(systemHealth.status||"unknown").toUpperCase())}</strong></div>
+    <p>Workers continuously update factual state. Reconciliation owns the derived diagnostics views and the watchdog recovers stale workers.</p>
+  </div><div class="kv-grid">${components.map(([label,row])=>{
+    const detail=row?.laggingFacts?"newer factual state is waiting for reconciliation":row?.stale?"past stale threshold":`last update ${relative(row?.lastRunAt||row?.lastGeneratedAt)}`;
+    return kv(label,row?.stale?"STALE":"HEALTHY",detail,row?.stale?"bad":"good");
+  }).join("")}</div>`;
 }
 
 function renderWorker(){
@@ -181,6 +206,8 @@ function renderLatestRun(id){
       ${kv("New candidates",n(newCandidates),`${n(run.seededFromAreaSweep)} area + ${n(run.seededFromRegionalSweep)} regional`)}
       ${kv("Overpass",run.overpassRun?"ran":"deferred",run.overpassRun?"geographic discovery attempted":"cadence not due",run.overpassRun?"":"muted")}
       ${kv("Focused areas",n(regionFocus.length),regionFocus.map(item=>item.name).slice(0,3).join(", ")||"none this run")}
+      ${kv("Moved to cold",n(run.coldMigrated||0),"low-value failures deferred 45–180 days")}
+      ${kv("Probe lanes",Object.entries(run.probeLaneCounts||{}).filter(([,v])=>v).map(([k,v])=>`${k} ${v}`).join(" · ")||"—","actual selected lane mix")}
     </div>`;
 }
 
@@ -199,7 +226,9 @@ function renderQueue(id,row){
       ${kv("Candidates",n(discovery.candidateCount),"total queue")}
       ${kv("Websites",n(discovery.withWebsiteCount),`${pct(discovery.withWebsiteCount/Math.max(1,discovery.candidateCount))} website-backed`)}
       ${kv("Due now",n(dueCount),"eligible for probing",dueCount?"warn":"good")}
-      ${kv("Retry queue",n(discovery.retryCount),"waiting for retry/backoff",discovery.retryCount?"warn":"")}
+      ${kv("Retry queue",n(discovery.retryCount),"short-term retry/backoff",discovery.retryCount?"warn":"")}
+      ${kv("Cold storage",n(discovery.coldCount||0),"low-yield candidates retained for periodic resampling",discovery.coldCount?"muted":"")}
+      ${kv("Low-value inventory",n(discovery.lowValueCount||0),"not competing for hot probe slots",discovery.lowValueCount?"muted":"")}
       ${kv("Needs website",n(discovery.needsWebsiteCount),"cannot qualify yet",discovery.needsWebsiteCount?"warn":"")}
       ${kv("Qualified",n(discovery.qualifiedCount),`${pct(discovery.promotionRate)} yield`,discovery.qualifiedCount?"good":"warn")}
       ${kv("Theoretical cycles",n(cycles),`${perRun} probes/run`)}
@@ -257,6 +286,7 @@ function renderProbes(id){
       <td class="nowrap">${esc(relative(checked))}<br><small>${esc(shortDate(checked))}</small></td>
       <td><strong>${esc(item.name)}</strong>${url?`<br><small><a href="${esc(url)}" target="_blank" rel="noopener">website ↗</a></small>`:""}</td>
       <td>${esc(String(item.category||"—").replaceAll("-"," "))}</td>
+      <td>${pill(item.probeLane||"unknown")}</td>
       <td>${pill(result)}</td>
       <td>${n(item.attempts)}</td>
       <td class="cell-detail">${esc(probeDetail(item))}</td>
@@ -347,6 +377,7 @@ function render(id){
     summary("Area coverage",`${n(acceptance.passing)}/${n(acceptance.measured)}`,`${pct(acceptance.passing/Math.max(1,acceptance.measured))} passing`,acceptance.passing===acceptance.measured&&acceptance.measured?"good":"warn")
   ].join("");
 
+  renderSystemHealth();
   renderAdaptive(id);
   renderLatestRun(id);
   renderQueue(id,row);
@@ -363,6 +394,8 @@ function render(id){
     {label:"Due now",value:row.discovery.dueCount},
     {label:"Qualified",value:row.discovery.qualifiedCount},
     {label:"Retry queue",value:row.discovery.retryCount},
+    {label:"Cold storage",value:row.discovery.coldCount||0},
+    {label:"Low-value inventory",value:row.discovery.lowValueCount||0},
     {label:"Needs website",value:row.discovery.needsWebsiteCount}
   ];
   document.querySelector("#discoveryFunnel").innerHTML=metricRows(funnel);
@@ -416,9 +449,10 @@ async function load({silent=false,forceActions=false}={}){
   const status=document.querySelector("#diagStatus");
   if(!silent)status.textContent="Loading current operations state…";
   try{
-    const [nextDashboard,nextLive]=await Promise.all([
+    const [nextDashboard,nextLive,nextSystemHealth]=await Promise.all([
       json("coverage-dashboard.json"),
-      optionalJson("discovery-live.json")
+      optionalJson("discovery-live.json"),
+      optionalJson("system-health.json")
     ]);
     let stateFallback=null,coverageFallback=null;
     if(!nextLive){
@@ -428,6 +462,7 @@ async function load({silent=false,forceActions=false}={}){
       ]);
     }
     dashboard=nextDashboard;
+    systemHealth=nextSystemHealth;
     live=nextLive||{
       generatedAt:coverageFallback?.generatedAt||stateFallback?.lastRunAt||null,
       lastRun:stateFallback?.lastRun||coverageFallback?.run||null,
@@ -450,7 +485,7 @@ async function load({silent=false,forceActions=false}={}){
     const generated=live?.generatedAt||dashboard.generatedAt;
     const stale=generated&&Date.now()-Date.parse(generated)>20*60*1000;
     document.querySelector("#liveBadge").classList.toggle("stale",!!stale);
-    status.textContent=`Live snapshot ${generated?relative(generated):"unknown"} · coverage generated ${dashboard.generatedAt?relative(dashboard.generatedAt):"unknown"} · metric v${dashboard.metricVersion||1}`;
+    status.textContent=`Repository ${systemHealth?.status||"health pending"} · live snapshot ${generated?relative(generated):"unknown"} · coverage generated ${dashboard.generatedAt?relative(dashboard.generatedAt):"unknown"} · metric v${dashboard.metricVersion||1}`;
   }catch(error){
     status.textContent=`Diagnostics unavailable: ${error.message}`;
   }finally{
