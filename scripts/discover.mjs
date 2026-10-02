@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
-import {discoverCellPlaces} from "./discovery-overpass.mjs";
+import {discoverCellPlaces,overpassTelemetrySnapshot} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
@@ -204,8 +204,18 @@ const runOverpass=isOverpassDue(
   discoveryBudget.overpassMinIntervalMinutes
 );
 
+const queueSnapshot=()=>({
+  total:queue.length,
+  withWebsite:queue.filter(item=>!!item.website).length,
+  due:queue.filter(item=>item.website&&item.status!=="qualified"&&due(item)).length,
+  retry:queue.filter(item=>item.status==="retry").length,
+  qualified:queue.filter(item=>item.status==="qualified").length,
+  needsWebsite:queue.filter(item=>item.status==="needs-website").length
+});
+
 const stats={
   startedAt:nowIso(),
+  queueBefore:queueSnapshot(),
   seededFromRegistry:0,
   seededFromRegionalSweep:0,
   seededFromAreaSweep:0,
@@ -215,6 +225,7 @@ const stats={
   discoveryBudget,
   regionProfiles:discoveryPlan.profiles,
   overpassRun:runOverpass,
+  probeResults:[],
   probed:0,
   promoted:0,
   failed:0
@@ -474,6 +485,19 @@ async function probeCandidate(item){
     console.error(`Probe failed for ${item.name}:`,error);
   }
   item.updatedAt=nowIso();
+  stats.probeResults.push({
+    regionId:item.regionId,
+    key:item.key,
+    name:item.name,
+    category:item.category||null,
+    website:item.website||null,
+    attempts:item.attempts,
+    status:item.status,
+    result:item.lastResult||null,
+    sourceId:item.sourceId||null,
+    nextCheckAt:item.nextCheckAt||null,
+    checkedAt:item.lastCheckedAt||null
+  });
 }
 
 let probeCursor=0;
@@ -497,8 +521,30 @@ if(queue.length>MAX_QUEUE){
 }
 
 stats.finishedAt=nowIso();
+stats.durationMs=Math.max(0,Date.parse(stats.finishedAt)-Date.parse(stats.startedAt));
+stats.queueAfter=queueSnapshot();
+stats.overpassEndpoints=overpassTelemetrySnapshot();
 state.lastRunAt=stats.finishedAt;
 state.lastRun=stats;
+const compactRun={
+  startedAt:stats.startedAt,
+  finishedAt:stats.finishedAt,
+  durationMs:stats.durationMs,
+  discoveryMode:stats.discoveryMode,
+  probed:stats.probed,
+  promoted:stats.promoted,
+  failed:stats.failed,
+  overpassRun:stats.overpassRun,
+  overpassEndpoints:stats.overpassEndpoints,
+  seededFromRegistry:stats.seededFromRegistry,
+  seededFromRegionalSweep:stats.seededFromRegionalSweep,
+  seededFromAreaSweep:stats.seededFromAreaSweep,
+  focusAreas:stats.focusAreas,
+  discoveryCells:stats.discoveryCells||[],
+  queueBefore:stats.queueBefore,
+  queueAfter:stats.queueAfter
+};
+state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
 
 await mkdir("src/data",{recursive:true});
 await writeFile(QUEUE_PATH,JSON.stringify(queue,null,2)+"\n");
