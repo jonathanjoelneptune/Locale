@@ -85,7 +85,8 @@ export const SOURCES=[
     id:"national-city-calendar",name:"National City Calendar of Events",scope:"local",regions:["san-diego"],adapter:"granicus-calendar",
     sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of National City",minExpectedEvents:5,
     endpoints:["https://www.nationalcityca.gov/services/advanced-components/calendar-list/-sortn-EDate/-toggle-next30days/-sortd-asc"],
-    cityName:"National City",fallbackCenter:{lat:32.6781,lng:-117.0992},maxPages:8,maxDetails:120,
+    cityName:"National City",fallbackCenter:{lat:32.6781,lng:-117.0992},maxPages:8,maxDetails:120,enabled:false,
+    disabledReason:"Dedicated Granicus endpoint returns HTTP 403 from GitHub Actions; retain adapter for a future stable fetch path",
     locationHints:[
       {match:"(?:Library|Storytime|TCG Tuesdays|Gamer's World|Lego Club|Coding|u-Tool-ize|Book Club|Craft Night Out|Chronicles of Yarnia|Stay & Play|Yoga @ The Library|Mission: STEAM)",venue:"National City Public Library",address:"1401 National City Blvd, National City, CA 91950",query:"1401 National City Blvd, National City, CA 91950"},
       {match:"Casa de Salud",venue:"Casa de Salud",address:"1408 Harding Avenue, National City, CA 91950",query:"1408 Harding Avenue, National City, CA 91950"},
@@ -100,7 +101,8 @@ export const SOURCES=[
       "https://www.chulavistaca.gov/residents/advanced-components/list-detail-pages/calendar/-sortn-EDate/-toggle-next30days/-sortd-asc",
       "https://www.chulavistaca.gov/residents/cultural-arts/events/-sortn-EDate/-toggle-next30days/-sortd-asc"
     ],
-    cityName:"Chula Vista",fallbackCenter:{lat:32.6401,lng:-117.0842},maxPages:8,maxDetails:120,
+    cityName:"Chula Vista",fallbackCenter:{lat:32.6401,lng:-117.0842},maxPages:8,maxDetails:120,enabled:false,
+    disabledReason:"Dedicated Granicus endpoints return HTTP 403 from GitHub Actions; retain adapter for a future stable fetch path",
     locationHints:[
       {match:"^CIVIC:",venue:"Civic Center Branch Library",address:"365 F Street, Chula Vista, CA 91910",query:"365 F Street, Chula Vista, CA 91910"},
       {match:"^SOUTH:",venue:"South Chula Vista Branch Library",address:"389 Orange Avenue, Chula Vista, CA 91911",query:"389 Orange Avenue, Chula Vista, CA 91911"},
@@ -109,7 +111,7 @@ export const SOURCES=[
   },
   {
     id:"san-marcos-calendar",name:"City of San Marcos Calendar",scope:"local",regions:["san-diego"],adapter:"san-marcos-calendar",
-    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:2,
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:1,
     endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},maxDetails:60,refreshHours:6
   },
   {
