@@ -10,6 +10,7 @@ import {parseConventionCenter} from "./providers/convention-center.mjs";
 import {parseFairgroundsPrint} from "./providers/del-mar-fairgrounds.mjs";
 import {parseSanteeCalendar} from "./providers/santee-calendar.mjs";
 import {libertyStationLocation} from "./providers/liberty-station.mjs";
+import {parseSdplProgramPage,sdplEvents} from "./providers/sdpl.mjs";
 import {SOURCES} from "./source-registry.mjs";
 import {parseGranicusListRows,parseGranicusDetail,granicusMunicipalEvents} from "./providers/granicus-calendar.mjs";
 import {parseSanMarcosListingLinks,parseSanMarcosDetail,sanMarcosCalendarEvents} from "./providers/san-marcos-calendar.mjs";
@@ -240,6 +241,62 @@ test("Liberty Station location parsing rejects newsletter copy",()=>{
     venue:"Example Gallery",
     address:"2690 Historic Decatur Rd, Ste. 202"
   });
+});
+
+test("SDPL public program pages parse single and recurring branch events",()=>{
+  const html=`
+    <h3>Degree or No Degree: Discovering Your Options</h3>
+    <p>October 17, 2026 | 11:00 a.m. - 12:00 p.m.</p>
+    <p>Balboa Library | Ages 14+ | Register Here</p>
+    <p>Explore different post-high school paths.</p>
+
+    <h3>SAT Test Prep (Session 2)</h3>
+    <p>Tuesdays, October 6, 2026 - November 3, 2026 | 4:00 - 6:00 p.m.</p>
+    <p>Valencia Park/Malcolm X Library - Teen Center | Ages 14 - 18 | Register Here</p>
+    <p>Prepare for the SAT.</p>
+  `;
+  const events=parseSdplProgramPage(html,{
+    url:"https://www.sandiego.gov/public-library/admitone",
+    now:Date.parse("2026-10-02T12:00:00-07:00"),
+    days:45
+  });
+  assert.equal(events.filter(event=>event.title==="Degree or No Degree: Discovering Your Options").length,1);
+  const recurring=events.filter(event=>event.title==="SAT Test Prep (Session 2)");
+  assert.equal(recurring.length,5);
+  assert.equal(recurring[0].venue,"Valencia Park/Malcolm X Library - Teen Center");
+  assert.equal(recurring[0].geocodeQuery,"Valencia Park/Malcolm X Library, San Diego, CA");
+  assert.ok(recurring.every(event=>event.end));
+});
+
+test("SDPL aggregator deduplicates programs repeated across city-hosted pages",async()=>{
+  const originalFetch=globalThis.fetch;
+  const html=`
+    <h3>Dance Party: Code the Beat</h3>
+    <p>October 6, 2026 | 4:00 - 5:30 p.m.</p>
+    <p>San Ysidro Library | Ages 8 - 14 | Register Here</p>
+    <p>Create animated dance sequences.</p>
+  `;
+  globalThis.fetch=async input=>({ok:true,status:200,url:String(input),text:async()=>html});
+  try{
+    const events=await sdplEvents({
+      days:45,
+      endpoints:["https://city.example/a","https://city.example/b"]
+    });
+    assert.equal(events.length,1);
+    assert.equal(events[0].venue,"San Ysidro Library");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+test("SDPL source is active through bounded city-hosted program surfaces",()=>{
+  const source=SOURCES.find(item=>item.id==="sd-public-library");
+  assert.ok(source);
+  assert.notEqual(source.enabled,false);
+  assert.equal(source.adapter,"sdpl");
+  assert.equal(source.minExpectedEvents,1);
+  assert.equal(source.endpoints.length,4);
+  assert.ok(source.endpoints.every(url=>url.startsWith("https://www.sandiego.gov/public-library/")));
 });
 
 test("Casbah parser treats promoter calendar venues as separate event locations",()=>{
