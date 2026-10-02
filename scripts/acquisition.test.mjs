@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import {loadAcquisitionRegistry} from "./acquisition-registry.mjs";
 import {parseBiblioCommonsPage,biblioCommonsEvents,biblioCommonsLocationNames,biblioCommonsEventLocation} from "./providers/bibliocommons.mjs";
-import {parseReaderSpecials} from "./providers/sandiego-reader-happy-hours.mjs";
+import {parseReaderSpecials,parseReaderPlaceDetails,sanDiegoReaderHappyHourEvents} from "./providers/sandiego-reader-happy-hours.mjs";
 import {parseCasbahCalendar} from "./providers/casbah-presents.mjs";
 import {parseMuseumCouncil} from "./providers/museum-council.mjs";
 import {parseConventionCenter} from "./providers/convention-center.mjs";
@@ -179,12 +179,76 @@ test("Reader happy-hour events preserve neighborhood as a geocoding hint",async(
   `;
   globalThis.fetch=async()=>({ok:true,status:200,text:async()=>html});
   try{
-    const {sanDiegoReaderHappyHourEvents}=await import("./providers/sandiego-reader-happy-hours.mjs");
-    const events=await sanDiegoReaderHappyHourEvents({days:7});
+    const events=await sanDiegoReaderHappyHourEvents({days:7,enrichPlaces:false});
     const event=events.find(item=>item.venue==="Example Bar");
     assert.ok(event);
     assert.equal(event.address,null);
     assert.equal(event.geocodeQuery,"Example Bar, North Park, San Diego County, CA");
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+test("Reader place parser extracts canonical address and coordinates",()=>{
+  const html=`
+    <script type="application/ld+json">
+      {
+        "@type":"Restaurant",
+        "name":"Dirty Birds Ocean Beach",
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":"1929 Cable Street",
+          "addressLocality":"San Diego",
+          "addressRegion":"CA",
+          "postalCode":"92107"
+        },
+        "geo":{"@type":"GeoCoordinates","latitude":32.7461,"longitude":-117.2482}
+      }
+    </script>
+  `;
+  const detail=parseReaderPlaceDetails(html,"Dirty Birds Ocean Beach");
+  assert.equal(detail.address,"1929 Cable Street, San Diego, CA, 92107");
+  assert.equal(detail.lat,32.7461);
+  assert.equal(detail.lng,-117.2482);
+});
+
+test("Reader happy-hour enrichment fetches each unique place once and applies precise location",async()=>{
+  const originalFetch=globalThis.fetch;
+  let placeCalls=0;
+  const listing=`
+    <h2>Ocean Beach</h2>
+    <a href="/places/dirty-birds-ocean-beach/">Dirty Birds Ocean Beach</a>
+    <div><strong>Special</strong> 3-6pm: Half-price wings.</div>
+    <a href="/places/next-bar/">Next Bar</a>
+  `;
+  const place=`
+    <script type="application/ld+json">
+      {
+        "@type":"Restaurant",
+        "name":"Dirty Birds Ocean Beach",
+        "address":{"streetAddress":"1929 Cable Street","addressLocality":"San Diego","addressRegion":"CA","postalCode":"92107"},
+        "geo":{"latitude":32.7461,"longitude":-117.2482}
+      }
+    </script>
+  `;
+  globalThis.fetch=async input=>{
+    const url=String(input);
+    if(url.includes("/specials/"))return {ok:true,status:200,text:async()=>listing};
+    if(url.includes("/places/dirty-birds-ocean-beach/")){
+      placeCalls++;
+      return {ok:true,status:200,text:async()=>place};
+    }
+    throw new Error("unexpected URL "+url);
+  };
+  try{
+    const events=await sanDiegoReaderHappyHourEvents({days:7,cachePath:null,maxPlaceFetches:10});
+    const event=events.find(item=>item.venue==="Dirty Birds Ocean Beach");
+    assert.ok(event);
+    assert.equal(placeCalls,1);
+    assert.equal(event.address,"1929 Cable Street, San Diego, CA, 92107");
+    assert.equal(event.locationPrecision,"source");
+    assert.equal(event.lat,32.7461);
+    assert.equal(event.lng,-117.2482);
   }finally{
     globalThis.fetch=originalFetch;
   }
