@@ -179,13 +179,15 @@ function reconcileStaticSourceDuplicates(queue,sources){
       .filter(source=>source.enabled!==false&&sourceEndpointKey(source))
       .map(source=>[sourceEndpointKey(source),source])
   );
-  let removed=0,remapped=0;
-  for(let index=sources.length-1;index>=0;index--){
-    const duplicate=sources[index];
+  let aliased=0,remapped=0;
+  for(const duplicate of sources){
     const existing=staticByEndpoint.get(sourceEndpointKey(duplicate));
-    if(!existing)continue;
-    sources.splice(index,1);
-    removed++;
+    if(!existing||duplicate.aliasOf===existing.id)continue;
+    duplicate.enabled=false;
+    duplicate.sourceKind="alias";
+    duplicate.aliasOf=existing.id;
+    duplicate.aliasedAt=nowIso();
+    aliased++;
     for(const item of queue){
       if(item.sourceId!==duplicate.id)continue;
       item.sourceId=existing.id;
@@ -202,8 +204,8 @@ function reconcileStaticSourceDuplicates(queue,sources){
       remapped++;
     }
   }
-  if(removed)console.log(`Reconciled ${removed} dynamic source duplicate(s) to existing catalog sources; remapped ${remapped} queue item(s).`);
-  return {removed,remapped};
+  if(aliased)console.log(`Aliased ${aliased} dynamic source duplicate(s) to existing catalog sources; remapped ${remapped} queue item(s).`);
+  return {aliased,remapped};
 }
 
 function buildCoverage(queue,sources,runStats){
@@ -231,7 +233,7 @@ function buildCoverage(queue,sources,runStats){
       ),
       statusCounts,
       categoryCounts,
-      discoveredSourceCount:sources.filter(source=>source.regions?.includes(region.id)).length,
+      discoveredSourceCount:sources.filter(source=>source.enabled!==false&&source.regions?.includes(region.id)).length,
       discoveryCells:{
         version:regionState.cellSweepVersion||DISCOVERY_SWEEP_VERSION,
         total:cellSummary.total,
@@ -314,7 +316,7 @@ const stats={
   regionProfiles:discoveryPlan.profiles,
   overpassRun:runOverpass,
   probeResults:[],
-  sourceDuplicatesRemoved:duplicateReconciliation.removed,
+  sourceDuplicatesAliased:duplicateReconciliation.aliased,
   sourceReferencesRemapped:duplicateReconciliation.remapped,
   coldMigrated:0,
   probeLaneCounts:{},
@@ -650,7 +652,7 @@ const compactRun={
   coldMigrated:stats.coldMigrated,
   probeLaneCounts:stats.probeLaneCounts,
   probeLaneTargets:stats.probeLaneTargets,
-  sourceDuplicatesRemoved:stats.sourceDuplicatesRemoved,
+  sourceDuplicatesAliased:stats.sourceDuplicatesAliased,
   sourceReferencesRemapped:stats.sourceReferencesRemapped
 };
 state.runHistory=[compactRun,...(Array.isArray(state.runHistory)?state.runHistory:[])].slice(0,72);
