@@ -487,12 +487,14 @@ test("map style changes one visible Leaflet tile layer",async({page})=>{
 });
 
 
-test("coverage diagnostics renders neighborhood and discovery metrics",async({page})=>{
+test("coverage diagnostics renders comprehensive area and discovery metrics",async({page})=>{
   await page.goto("./diagnostics.html");
   await expect(page.locator("h1")).toHaveText("Coverage Diagnostics");
   await expect(page.locator("#regionSelect option")).toHaveCount(2);
   await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6);
   await page.locator("#regionSelect").selectOption("san-diego");
-  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(7);
+  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
+  await expect(page.locator("#areaGroupSelect option").first()).toHaveText("All areas");
+  await expect(page.locator("#areaGroupSelect option")).toHaveCount(10);
   await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(5);
 });

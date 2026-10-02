@@ -46,7 +46,7 @@ function render(id){
     summary("Known places",n(row.placeCount),"canonical venue registry"),
     summary("Discovery queue",n(row.discovery.candidateCount),`${n(row.discovery.withWebsiteCount)} with websites`),
     summary("Auto sources",n(row.dynamicSourceCount),`${pct(row.discovery.promotionRate)} promotion yield`,row.dynamicSourceCount?"good":"warn"),
-    summary("Neighborhood checks",`${n(row.neighborhoodAcceptance.passing)}/${n(row.neighborhoodAcceptance.measured)}`,"passing density targets",row.neighborhoodAcceptance.passing===row.neighborhoodAcceptance.measured?"good":"warn")
+    summary("Area checks",`${n((row.coverageAreaAcceptance||row.neighborhoodAcceptance).passing)}/${n((row.coverageAreaAcceptance||row.neighborhoodAcceptance).measured)}`,"passing local coverage targets",(row.coverageAreaAcceptance||row.neighborhoodAcceptance).passing===(row.coverageAreaAcceptance||row.neighborhoodAcceptance).measured?"good":"warn")
   ].join("");
 
   const funnel=[
@@ -57,7 +57,9 @@ function render(id){
     {label:"Needs website",value:row.discovery.needsWebsiteCount}
   ];
   document.querySelector("#discoveryFunnel").innerHTML=metricRows(funnel);
-  document.querySelector("#discoveryGenerated").textContent=row.discovery.cells?`${row.discovery.cells.completed||0}/${row.discovery.cells.total||0} discovery cells`:"";
+  const cellText=row.discovery.cells?`${row.discovery.cells.completed||0}/${row.discovery.cells.total||0} regional cells`:"";
+  const areaText=row.discovery.areaSweeps?`${row.discovery.areaSweeps.completed||0}/${(row.coverageAreaAcceptance||row.neighborhoodAcceptance).measured||0} focused areas swept`:"";
+  document.querySelector("#discoveryGenerated").textContent=[cellText,areaText].filter(Boolean).join(" · ");
 
   document.querySelector("#locationResolution").innerHTML=metricRows([
     {label:"Unresolved venue queries",value:row.locationResolution.unresolvedVenueCount},
@@ -66,14 +68,25 @@ function render(id){
     {label:"High-priority unresolved",value:row.locationResolution.highPriorityCount}
   ]);
 
-  document.querySelector("#neighborhoodRows").innerHTML=(row.neighborhoods||[]).map(item=>`<tr>
+  const areaRows=row.coverageAreas||row.neighborhoods||[];
+  const groupSelect=document.querySelector("#areaGroupSelect");
+  const previousGroup=groupSelect.value||"all";
+  const groups=[...new Set(areaRows.map(item=>item.group).filter(Boolean))].sort();
+  groupSelect.innerHTML='<option value="all">All areas</option>'+groups.map(group=>`<option value="${esc(group)}">${esc(group.replaceAll("-"," "))}</option>`).join("");
+  groupSelect.value=groups.includes(previousGroup)?previousGroup:"all";
+  const visibleAreas=areaRows.filter(item=>groupSelect.value==="all"||item.group===groupSelect.value);
+  document.querySelector("#neighborhoodRows").innerHTML=visibleAreas.map(item=>`<tr>
     <td><strong>${esc(item.name)}</strong><br><small>${item.radiusMiles} mi radius</small></td>
-    <td>${n(item.preciseEventsNext28d)}</td><td>${n(item.uniqueVenuesNext28d)}</td>
+    <td>${esc((item.group||"").replaceAll("-"," "))}</td>
+    <td>${esc((item.coverageClass||"mixed").replaceAll("-"," "))}</td>
+    <td>${n(item.preciseEventsNext28d)}</td>
+    <td>${n(item.uniqueVenuesNext28d)}</td>
+    <td>${n(item.discovery?.withWebsiteCount||0)} / ${n(item.discovery?.candidateCount||0)}</td>
     <td>${item.fridaySaturdayNightAverage} / ${item.targets.fridaySaturdayNightAverage}</td>
-    <td>${n(item.fridaySaturdayNightMax)}</td>
     <td>${n(item.recurringLocalOccurrences30d)} / ${n(item.targets.recurringLocalOccurrences30d)}</td>
+    <td><strong class="${Number(item.gapScore||0)>=60?"bad":Number(item.gapScore||0)>=30?"warn":"good"}">${n(item.gapScore||0)}</strong></td>
     <td><span class="status-pill ${item.acceptance.pass?"pass":"fail"}">${item.acceptance.pass?"PASS":"GAP"}</span></td>
-  </tr>`).join("")||'<tr><td colspan="7">No neighborhood checks configured.</td></tr>';
+  </tr>`).join("")||'<tr><td colspan="10">No coverage areas configured.</td></tr>';
 
   const recurring=Object.entries(row.recurringActivityCounts||{}).sort((a,b)=>b[1]-a[1]).map(([label,value])=>({label:label.replaceAll("-"," "),value}));
   document.querySelector("#recurringActivity").innerHTML=metricRows(recurring);
@@ -87,5 +100,6 @@ function render(id){
 }
 
 document.querySelector("#regionSelect").addEventListener("change",event=>render(event.target.value));
+document.querySelector("#areaGroupSelect").addEventListener("change",()=>render(document.querySelector("#regionSelect").value));
 document.querySelector("#refreshDiagnostics").addEventListener("click",load);
 load();

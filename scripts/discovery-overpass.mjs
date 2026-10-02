@@ -6,16 +6,19 @@ const ENDPOINTS=[
 const relevantTags=[
   ["amenity","nightclub"],["amenity","bar"],["amenity","pub"],["amenity","music_venue"],
   ["amenity","theatre"],["amenity","cinema"],["amenity","arts_centre"],["amenity","community_centre"],
+  ["amenity","events_venue"],["amenity","conference_centre"],["amenity","casino"],["amenity","marketplace"],["amenity","library"],
   ["amenity","restaurant"],["amenity","cafe"],
-  ["tourism","museum"],["tourism","gallery"],["tourism","attraction"],
-  ["leisure","stadium"],["craft","brewery"]
+  ["tourism","museum"],["tourism","gallery"],["tourism","attraction"],["tourism","zoo"],["tourism","theme_park"],
+  ["leisure","stadium"],["leisure","sports_centre"],["leisure","bowling_alley"],["craft","brewery"]
 ];
 
 const priorityFor=tags=>{
   if(tags.amenity==="music_venue"||tags.amenity==="nightclub")return 120;
   if(["theatre","arts_centre","bar","pub"].includes(tags.amenity)||tags.craft==="brewery")return 110;
-  if(["cinema","community_centre"].includes(tags.amenity))return 98;
-  if(["museum","gallery","attraction"].includes(tags.tourism)||tags.leisure==="stadium")return 88;
+  if(["events_venue","conference_centre","casino"].includes(tags.amenity))return 108;
+  if(["cinema","community_centre","marketplace"].includes(tags.amenity))return 98;
+  if(tags.amenity==="library")return 78;
+  if(["museum","gallery","attraction","zoo","theme_park"].includes(tags.tourism)||["stadium","sports_centre","bowling_alley"].includes(tags.leisure))return 88;
   if(tags.tourism==="hotel")return 50;
   if(tags.amenity==="restaurant")return 34;
   if(tags.amenity==="cafe")return 22;
@@ -31,8 +34,13 @@ const categoryFor=tags=>{
   if(tags.amenity==="cinema")return "cinema";
   if(tags.amenity==="arts_centre")return "arts-centre";
   if(tags.amenity==="community_centre")return "community-centre";
+  if(tags.amenity==="events_venue")return "events-venue";
+  if(tags.amenity==="conference_centre")return "conference-centre";
+  if(tags.amenity==="casino")return "casino";
+  if(tags.amenity==="marketplace")return "marketplace";
+  if(tags.amenity==="library")return "library";
   if(tags.tourism)return tags.tourism;
-  if(tags.leisure==="stadium")return "stadium";
+  if(tags.leisure)return String(tags.leisure).replaceAll("_","-");
   return tags.amenity||"place";
 };
 
@@ -59,12 +67,12 @@ export function buildCellOverpassQuery(cell){
     );out center tags;`;
   }
   return `[out:json][timeout:20];(
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction)$"];
-    nwr(around:${radius},${lat},${lng})["name"]["website"]["leisure"="stadium"];
-    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["leisure"="stadium"];
+    nwr(around:${radius},${lat},${lng})["name"]["website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
+    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["amenity"~"^(nightclub|bar|pub|music_venue|theatre|cinema|arts_centre|community_centre|events_venue|conference_centre|casino|marketplace|library)$"];
+    nwr(around:${radius},${lat},${lng})["name"]["website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
+    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["tourism"~"^(museum|gallery|attraction|zoo|theme_park)$"];
+    nwr(around:${radius},${lat},${lng})["name"]["website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
+    nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["leisure"~"^(stadium|sports_centre|bowling_alley)$"];
     nwr(around:${radius},${lat},${lng})["name"]["website"]["craft"="brewery"];
     nwr(around:${radius},${lat},${lng})["name"]["contact:website"]["craft"="brewery"];
   );out center tags;`;

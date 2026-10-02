@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {neighborhoodCoverage} from "./build-coverage-dashboard.mjs";
+import {coverageAreaMetrics} from "./build-coverage-dashboard.mjs";
 
-const neighborhood={id:"test",name:"Test District",regionId:"san-diego",lat:32.75,lng:-117.13,radiusMiles:1.25};
+const neighborhood={id:"test",name:"Test District",regionId:"san-diego",group:"test",coverageClass:"entertainment-core",discoveryPriority:100,lat:32.75,lng:-117.13,radiusMiles:1.25};
 const region={id:"san-diego",timeZone:"America/Los_Angeles"};
 const now=new Date("2026-10-01T12:00:00.000Z");
 
@@ -17,7 +17,7 @@ test("neighborhood density only counts precise nearby upcoming events",()=>{
     event("c","2026-10-04T03:00:00.000Z",{precision:"source-center"}),
     event("d","2026-10-03T03:00:00.000Z",{lat:33.1,lng:-117.13})
   ];
-  const row=neighborhoodCoverage(events,neighborhood,region,{now,days:7});
+  const row=coverageAreaMetrics(events,neighborhood,region,{now,days:7});
   assert.equal(row.preciseEventsNext28d,2);
   assert.equal(row.uniqueVenuesNext28d,1);
   assert.equal(row.recurringLocalOccurrences30d,1);
@@ -35,8 +35,17 @@ test("neighborhood acceptance passes once both density targets are met",()=>{
   for(const [nightIndex,start] of starts.entries()){
     for(let i=0;i<8;i++)events.push(event(`night-${nightIndex}-${i}`,start,{venue:`Venue ${i}`,title:i===0?"Karaoke Night":"Live Music"}));
   }
-  const row=neighborhoodCoverage(events,neighborhood,region,{now,days:28});
+  const row=coverageAreaMetrics(events,neighborhood,region,{now,days:28});
   assert.equal(row.fridaySaturdayNightAverage,8);
   assert.ok(row.recurringLocalOccurrences30d>=5);
   assert.equal(row.acceptance.pass,true);
+});
+
+
+test("coverage classes scale density targets by area type",()=>{
+  const urban=coverageAreaMetrics([], {...neighborhood,coverageClass:"urban"},region,{now,days:7});
+  const outer=coverageAreaMetrics([], {...neighborhood,coverageClass:"outer"},region,{now,days:7});
+  assert.equal(urban.targets.fridaySaturdayNightAverage,5);
+  assert.equal(outer.targets.fridaySaturdayNightAverage,2);
+  assert.ok(urban.gapScore>=outer.gapScore-10);
 });

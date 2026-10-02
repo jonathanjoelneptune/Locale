@@ -34,6 +34,9 @@ test("cell queries prioritize local nightlife/culture and keep dining separate",
   assert.match(highQuery,/nightclub\|bar\|pub\|music_venue/);
   assert.match(highQuery,/theatre\|cinema\|arts_centre\|community_centre/);
   assert.match(highQuery,/craft"="brewery"/);
+  assert.match(highQuery,/events_venue/);
+  assert.match(highQuery,/library/);
+  assert.match(highQuery,/sports_centre/);
   assert.doesNotMatch(highQuery,/restaurant\|cafe/);
   assert.match(diningQuery,/restaurant\|cafe/);
   assert.doesNotMatch(diningQuery,/nightclub\|bar/);
@@ -103,4 +106,14 @@ test("generic calendar-link adapter follows same-site and trusted ticketing even
   assert.ok(links.includes("https://www.eventbrite.com/e/example-event-123"));
   assert.ok(links.includes("https://dice.fm/event/abc"));
   assert.ok(!links.includes("https://random.example/events/other"));
+});
+
+
+test("focused area cells use the high-value venue discovery query",()=>{
+  const focusQuery=buildCellOverpassQuery({
+    id:"area:north-park",phase:"focus",lat:32.7475,lng:-117.1297,queryRadiusMiles:1.7
+  });
+  assert.match(focusQuery,/nightclub\|bar\|pub\|music_venue/);
+  assert.match(focusQuery,/events_venue/);
+  assert.doesNotMatch(focusQuery,/amenity"~"\^\(restaurant\|cafe\)\$"/);
 });

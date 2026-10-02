@@ -19,11 +19,13 @@ const queue=await read("src/data/discovery-queue.json",[]);
 const sources=await read("src/data/discovered-sources.json",[]);
 const state=await read("src/data/discovery-state.json",{});
 const coverage=await read("src/data/discovery-coverage.json",{});
+const coverageAreas=await read("src/data/coverage-zones.json",[]);
 
 if(!Array.isArray(queue))fail("discovery-queue.json must contain an array");
 if(!Array.isArray(sources))fail("discovered-sources.json must contain an array");
 
 const regionIds=new Set(Object.keys(REGIONS));
+const coverageAreaIds=new Set((coverageAreas||[]).map(item=>item.id));
 const staticIds=new Set(STATIC_SOURCES.map(source=>source.id));
 const sourceIds=new Set;
 const sourceEndpointKeys=new Set;
@@ -61,6 +63,10 @@ for(const [index,item] of (queue||[]).entries()){
   if(!validStatuses.has(item.status))fail(`${label} has invalid status ${item.status}`);
   if(item.monitorTier!=="C")fail(`${label} must use monitorTier C`);
   if(item.website&&!validUrl(item.website))fail(`${label} has invalid website ${item.website}`);
+  if(item.coverageAreaIds!==undefined){
+    if(!Array.isArray(item.coverageAreaIds))fail(`${label} coverageAreaIds must be an array`);
+    else for(const areaId of item.coverageAreaIds)if(!coverageAreaIds.has(areaId))fail(`${label} references unknown coverage area ${areaId}`);
+  }
   if(item.status==="qualified"){
     if(!item.sourceId)fail(`${label} is qualified without sourceId`);
     if(item.sourceId&&!sourceIds.has(item.sourceId))fail(`${label} references unknown discovered source ${item.sourceId}`);
