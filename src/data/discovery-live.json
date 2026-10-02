@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-10-02T19:01:00.645Z",
+  "generatedAt": "2026-10-02T19:02:46.250Z",
   "lastRun": {
-    "startedAt": "2026-10-02T16:02:30.614Z",
+    "startedAt": "2026-10-02T19:01:18.610Z",
     "queueBefore": {
-      "total": 1937,
+      "total": 1982,
       "withWebsite": 1318,
-      "due": 26,
-      "retry": 138,
-      "cold": 114,
-      "lowValue": 1052,
-      "qualified": 14,
-      "needsWebsite": 619,
+      "due": 15,
+      "retry": 143,
+      "cold": 120,
+      "lowValue": 1051,
+      "qualified": 15,
+      "needsWebsite": 664,
       "lanes": {
-        "exploratory": 457,
-        "event-evidence": 165,
-        "event-likely": 126,
-        "cold-sample": 114,
-        "low-value": 1052,
-        "food-evidence": 23
+        "exploratory": 491,
+        "event-evidence": 179,
+        "event-likely": 124,
+        "cold-sample": 120,
+        "low-value": 1051,
+        "food-evidence": 17
       }
     },
-    "seededFromRegistry": 45,
+    "seededFromRegistry": 190,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
@@ -37,12 +37,12 @@
     "regionProfiles": {
       "san-diego": {
         "mode": "bootstrap",
-        "configuredAreaCount": 158,
-        "measured": 158,
-        "passing": 9,
-        "passRate": 0.056962025316455694,
-        "severeGapCount": 64,
-        "mediumGapCount": 133
+        "configuredAreaCount": 188,
+        "measured": 188,
+        "passing": 16,
+        "passRate": 0.0851063829787234,
+        "severeGapCount": 85,
+        "mediumGapCount": 150
       },
       "chicago": {
         "mode": "unmeasured",
@@ -58,124 +58,86 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|709059097",
-        "name": "AMC Mission Valley 20",
-        "category": "cinema",
-        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-mission-valley-20",
+        "key": "san-diego|osm|way|350398727",
+        "name": "Serrano's Street Tacos & Bar",
+        "category": "restaurant",
+        "website": "https://serranostacossd.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Serrano's Street Tacos & Bar (food-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-16T19:01:24.505Z",
+        "checkedAt": "2026-10-02T19:01:19.428Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3247113141",
+        "name": "Steamy Piggy",
+        "category": "observed-venue",
+        "website": "https://www.steamypiggy.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Steamy Piggy (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T19:01:25.804Z",
+        "checkedAt": "2026-10-02T19:01:24.505Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12397642459",
+        "name": "Denny's",
+        "category": "restaurant",
+        "website": "https://locations.dennys.com/CA/SAN-DIEGO/200891",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Denny's (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-16T19:01:26.420Z",
+        "checkedAt": "2026-10-02T19:01:25.804Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1416351146",
+        "name": "City Heights Swim Center",
+        "category": "sports-centre",
+        "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
         "attempts": 1,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-05T16:02:31.427Z",
-        "checkedAt": "2026-10-02T16:02:31.158Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8793152104",
-        "name": "Central Library Art Gallery",
-        "category": "gallery",
-        "website": "https://www.sandiego.gov/public-library/visualarts",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-09T16:02:39.990Z",
-        "checkedAt": "2026-10-02T16:02:31.114Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12230395438",
-        "name": "Whiskers and Wine Bar",
-        "category": "cafe",
-        "website": "https://www.whiskersandwinebar.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Whiskers and Wine Bar (food-evidence)",
+          "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:02:41.078Z",
-        "checkedAt": "2026-10-02T16:02:39.991Z"
+        "nextCheckAt": "2026-10-05T19:01:26.886Z",
+        "checkedAt": "2026-10-02T19:01:19.384Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9185141931",
-        "name": "China 1968",
+        "key": "san-diego|osm|node|11748134769",
+        "name": "Topside Terrace Kitchen & Bar",
         "category": "restaurant",
-        "website": "https://www.china1968elcajon.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on China 1968 (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-16T16:02:43.479Z",
-        "checkedAt": "2026-10-02T16:02:41.079Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11426654533",
-        "name": "Old Gallery Coffee House",
-        "category": "cafe",
-        "website": "https://oldgallerysd.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on Old Gallery Coffee House (food-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:02:48.059Z",
-        "checkedAt": "2026-10-02T16:02:43.479Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|368173980",
-        "name": "Brigantine Seafood and Oyster Bar",
-        "category": "restaurant",
-        "website": "https://www.brigantine.com/locations/portside-pier/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Brigantine Seafood and Oyster Bar (food-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:02:56.592Z",
-        "checkedAt": "2026-10-02T16:02:48.060Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|5131241022",
-        "name": "Fleming's Prime Steakhouse & Wine Bar",
-        "category": "restaurant",
-        "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
+        "website": "https://www.hotelrepublicsd.com/dining/topside-terrace-kitchen-bar",
         "attempts": 1,
         "status": "retry",
         "probeLane": "food-evidence",
@@ -186,103 +148,141 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-05T16:02:56.882Z",
-        "checkedAt": "2026-10-02T16:02:56.593Z"
+        "nextCheckAt": "2026-10-05T19:01:26.978Z",
+        "checkedAt": "2026-10-02T19:01:26.420Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|3804289881",
-        "name": "Las Hadas Bar & Grill",
+        "key": "san-diego|osm|node|1741818469",
+        "name": "Oggi's Pizza & Brewing Co.",
         "category": "restaurant",
-        "website": "https://lashadasgrillsd.com/",
+        "website": "https://www.oggis.com/location/oggis-sports-brewhouse-pizza-mission-valley/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Las Hadas Bar & Grill (food-evidence)",
+          "detail": "Checked 3 pages on Oggi's Pizza & Brewing Co. (food-evidence)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:03:00.199Z",
-        "checkedAt": "2026-10-02T16:02:56.882Z"
+        "nextCheckAt": "2026-10-16T19:01:29.107Z",
+        "checkedAt": "2026-10-02T19:01:26.978Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079090",
-        "name": "Mad House Comedy Club",
-        "category": "restaurant",
-        "website": "https://madhousecomedyclub.com/",
+        "key": "san-diego|osm|node|8477440717",
+        "name": "Lux Coffee Bar & Roasters",
+        "category": "cafe",
+        "website": "https://www.instagram.com/luxcoffeebar/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-04T19:01:29.630Z",
+        "checkedAt": "2026-10-02T19:01:29.107Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8148491343",
+        "name": "La Doña",
+        "category": "observed-venue",
+        "website": "https://ladonaob.com/",
         "attempts": 1,
         "status": "qualified",
-        "probeLane": "food-evidence",
+        "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
-          "kind": "ics",
-          "eventCount": 30,
-          "url": "https://madhousecomedyclub.com/events/?ical=1"
+          "kind": "tribe",
+          "eventCount": 2,
+          "url": "https://www.ladonaob.com"
         },
-        "sourceId": "discovered-san-diego-95630275eebf",
+        "sourceId": "discovered-san-diego-c4c13a874369",
         "nextCheckAt": null,
-        "checkedAt": "2026-10-02T16:03:00.199Z"
+        "checkedAt": "2026-10-02T19:01:29.630Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079095",
-        "name": "Metl Bar Restaurant -Gaslamp",
-        "category": "restaurant",
-        "website": "https://metlsd.com/",
+        "key": "san-diego|osm|node|3253158572",
+        "name": "Ototo Sushi Co.",
+        "category": "observed-venue",
+        "website": "https://www.ototosushico.com/",
         "attempts": 1,
         "status": "retry",
-        "probeLane": "food-evidence",
+        "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Ototo Sushi Co. (exploratory)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-03T16:03:15.160Z",
-        "checkedAt": "2026-10-02T16:03:15.104Z"
+        "nextCheckAt": "2026-10-05T19:01:31.969Z",
+        "checkedAt": "2026-10-02T19:01:30.527Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079113",
-        "name": "Salt & Whiskey",
+        "key": "san-diego|osm|node|1937204277",
+        "name": "Phil's BBQ",
+        "category": "observed-venue",
+        "website": "https://philsbbq.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Phil's BBQ (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T19:01:35.438Z",
+        "checkedAt": "2026-10-02T19:01:31.969Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596322512",
+        "name": "Dunedin New Zealand Eats",
+        "category": "observed-venue",
+        "website": "https://dnp-sd.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T19:01:36.034Z",
+        "checkedAt": "2026-10-02T19:01:35.438Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5467441986",
+        "name": "Mike Hess Brewing - Seaport Village Biergarten",
         "category": "restaurant",
-        "website": "https://www.hortongrand.com/dine-bar",
+        "website": "https://www.mikehessbrewing.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Salt & Whiskey (food-evidence)",
+          "detail": "Checked 3 pages on Mike Hess Brewing - Seaport Village Biergarten (food-evidence)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:03:19.820Z",
-        "checkedAt": "2026-10-02T16:03:15.160Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1207407694",
-        "name": "LandShark Bar & Grill",
-        "category": "observed-venue",
-        "website": "https://www.margaritavilleresorts.com/margaritaville-hotel-san-diego/eat-drink/landshark-bar-grill",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on LandShark Bar & Grill (event-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-05T16:03:20.990Z",
-        "checkedAt": "2026-10-02T16:02:31.427Z"
+        "nextCheckAt": "2026-10-16T19:01:50.404Z",
+        "checkedAt": "2026-10-02T19:01:26.886Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -294,10 +294,10 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
-      "event-evidence": 1,
-      "food-evidence": 8,
-      "exploratory": 0,
+      "event-likely": 1,
+      "event-evidence": 0,
+      "food-evidence": 5,
+      "exploratory": 5,
       "low-value": 1,
       "cold-sample": 0
     },
@@ -312,24 +312,24 @@
     "probed": 12,
     "promoted": 1,
     "failed": 11,
-    "finishedAt": "2026-10-02T16:03:20.992Z",
-    "durationMs": 50378,
+    "finishedAt": "2026-10-02T19:01:50.406Z",
+    "durationMs": 31796,
     "queueAfter": {
-      "total": 1982,
+      "total": 2172,
       "withWebsite": 1318,
       "due": 15,
-      "retry": 143,
-      "cold": 120,
-      "lowValue": 1051,
-      "qualified": 15,
-      "needsWebsite": 664,
+      "retry": 150,
+      "cold": 124,
+      "lowValue": 1039,
+      "qualified": 16,
+      "needsWebsite": 854,
       "lanes": {
-        "exploratory": 491,
-        "event-evidence": 179,
-        "event-likely": 124,
-        "cold-sample": 120,
-        "low-value": 1051,
-        "food-evidence": 17
+        "exploratory": 656,
+        "event-evidence": 224,
+        "event-likely": 116,
+        "cold-sample": 124,
+        "low-value": 1039,
+        "food-evidence": 13
       }
     },
     "overpassEndpoints": [
@@ -375,6 +375,122 @@
     ]
   },
   "runHistory": [
+    {
+      "startedAt": "2026-10-02T19:01:18.610Z",
+      "finishedAt": "2026-10-02T19:01:50.406Z",
+      "durationMs": 31796,
+      "discoveryMode": "bootstrap",
+      "probed": 12,
+      "promoted": 1,
+      "failed": 11,
+      "overpassRun": false,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        }
+      ],
+      "seededFromRegistry": 190,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 1982,
+        "withWebsite": 1318,
+        "due": 15,
+        "retry": 143,
+        "cold": 120,
+        "lowValue": 1051,
+        "qualified": 15,
+        "needsWebsite": 664,
+        "lanes": {
+          "exploratory": 491,
+          "event-evidence": 179,
+          "event-likely": 124,
+          "cold-sample": 120,
+          "low-value": 1051,
+          "food-evidence": 17
+        }
+      },
+      "queueAfter": {
+        "total": 2172,
+        "withWebsite": 1318,
+        "due": 15,
+        "retry": 150,
+        "cold": 124,
+        "lowValue": 1039,
+        "qualified": 16,
+        "needsWebsite": 854,
+        "lanes": {
+          "exploratory": 656,
+          "event-evidence": 224,
+          "event-likely": 116,
+          "cold-sample": 124,
+          "low-value": 1039,
+          "food-evidence": 13
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 1,
+        "event-evidence": 0,
+        "food-evidence": 5,
+        "exploratory": 5,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-02T16:02:30.614Z",
       "finishedAt": "2026-10-02T16:03:20.992Z",
@@ -1306,6 +1422,234 @@
   "recentProbeResults": [
     {
       "regionId": "san-diego",
+      "key": "san-diego|osm|node|596322512",
+      "name": "Dunedin New Zealand Eats",
+      "category": "observed-venue",
+      "website": "https://dnp-sd.com/",
+      "status": "retry",
+      "probeLane": "exploratory",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:35.438Z",
+      "nextCheckAt": "2026-10-05T19:01:36.034Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|1937204277",
+      "name": "Phil's BBQ",
+      "category": "observed-venue",
+      "website": "https://philsbbq.com/",
+      "status": "retry",
+      "probeLane": "exploratory",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:31.969Z",
+      "nextCheckAt": "2026-10-05T19:01:35.438Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 3 pages on Phil's BBQ (exploratory)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|3253158572",
+      "name": "Ototo Sushi Co.",
+      "category": "observed-venue",
+      "website": "https://www.ototosushico.com/",
+      "status": "retry",
+      "probeLane": "exploratory",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:30.527Z",
+      "nextCheckAt": "2026-10-05T19:01:31.969Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 1 page on Ototo Sushi Co. (exploratory)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|8148491343",
+      "name": "La Doña",
+      "category": "observed-venue",
+      "website": "https://ladonaob.com/",
+      "status": "qualified",
+      "probeLane": "exploratory",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:29.630Z",
+      "nextCheckAt": null,
+      "coldUntil": null,
+      "sourceId": "discovered-san-diego-c4c13a874369",
+      "lastResult": {
+        "kind": "tribe",
+        "eventCount": 2,
+        "url": "https://www.ladonaob.com"
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|8477440717",
+      "name": "Lux Coffee Bar & Roasters",
+      "category": "cafe",
+      "website": "https://www.instagram.com/luxcoffeebar/",
+      "status": "retry",
+      "probeLane": "food-evidence",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:29.107Z",
+      "nextCheckAt": "2026-10-04T19:01:29.630Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "website-fetch-failed",
+        "detail": "HTTP 429",
+        "statusCode": 429
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|1741818469",
+      "name": "Oggi's Pizza & Brewing Co.",
+      "category": "restaurant",
+      "website": "https://www.oggis.com/location/oggis-sports-brewhouse-pizza-mission-valley/",
+      "status": "cold",
+      "probeLane": "cold-sample",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:26.978Z",
+      "nextCheckAt": "2026-10-16T19:01:29.107Z",
+      "coldUntil": "2026-10-16T19:01:29.107Z",
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 3 pages on Oggi's Pizza & Brewing Co. (food-evidence)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|5467441986",
+      "name": "Mike Hess Brewing - Seaport Village Biergarten",
+      "category": "restaurant",
+      "website": "https://www.mikehessbrewing.com/",
+      "status": "cold",
+      "probeLane": "cold-sample",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:26.886Z",
+      "nextCheckAt": "2026-10-16T19:01:50.404Z",
+      "coldUntil": "2026-10-16T19:01:50.404Z",
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 3 pages on Mike Hess Brewing - Seaport Village Biergarten (food-evidence)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|11748134769",
+      "name": "Topside Terrace Kitchen & Bar",
+      "category": "restaurant",
+      "website": "https://www.hotelrepublicsd.com/dining/topside-terrace-kitchen-bar",
+      "status": "retry",
+      "probeLane": "food-evidence",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:26.420Z",
+      "nextCheckAt": "2026-10-05T19:01:26.978Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "website-fetch-failed",
+        "detail": "HTTP 403",
+        "statusCode": 403
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|12397642459",
+      "name": "Denny's",
+      "category": "restaurant",
+      "website": "https://locations.dennys.com/CA/SAN-DIEGO/200891",
+      "status": "cold",
+      "probeLane": "cold-sample",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:25.804Z",
+      "nextCheckAt": "2026-11-16T19:01:26.420Z",
+      "coldUntil": "2026-11-16T19:01:26.420Z",
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 1 page on Denny's (low-value)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|3247113141",
+      "name": "Steamy Piggy",
+      "category": "observed-venue",
+      "website": "https://www.steamypiggy.com/",
+      "status": "retry",
+      "probeLane": "exploratory",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:24.505Z",
+      "nextCheckAt": "2026-10-05T19:01:25.804Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 1 page on Steamy Piggy (exploratory)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|way|350398727",
+      "name": "Serrano's Street Tacos & Bar",
+      "category": "restaurant",
+      "website": "https://serranostacossd.com/",
+      "status": "cold",
+      "probeLane": "cold-sample",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:19.428Z",
+      "nextCheckAt": "2026-10-16T19:01:24.505Z",
+      "coldUntil": "2026-10-16T19:01:24.505Z",
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 3 pages on Serrano's Street Tacos & Bar (food-evidence)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|way|1416351146",
+      "name": "City Heights Swim Center",
+      "category": "sports-centre",
+      "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
+      "status": "retry",
+      "probeLane": "event-likely",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-02T19:01:19.384Z",
+      "nextCheckAt": "2026-10-05T19:01:26.886Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
       "key": "san-diego|osm|node|9215079113",
       "name": "Salt & Whiskey",
       "category": "restaurant",
@@ -1384,10 +1728,10 @@
       "regionId": "san-diego",
       "key": "san-diego|osm|node|5131241022",
       "name": "Fleming's Prime Steakhouse & Wine Bar",
-      "category": "restaurant",
+      "category": "observed-venue",
       "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
       "status": "retry",
-      "probeLane": "food-evidence",
+      "probeLane": "event-evidence",
       "attempts": 1,
       "lastCheckedAt": "2026-10-02T16:02:56.593Z",
       "nextCheckAt": "2026-10-05T16:02:56.882Z",
@@ -1917,10 +2261,10 @@
       "regionId": "san-diego",
       "key": "san-diego|osm|node|1448557328",
       "name": "Gossip Grill",
-      "category": "bar",
+      "category": "observed-venue",
       "website": "http://www.thegossipgrill.com/",
       "status": "retry",
-      "probeLane": "event-likely",
+      "probeLane": "exploratory",
       "attempts": 1,
       "lastCheckedAt": "2026-10-02T15:13:28.125Z",
       "nextCheckAt": "2026-10-03T15:13:28.360Z",
@@ -1935,11 +2279,11 @@
     {
       "regionId": "san-diego",
       "key": "san-diego|osm|node|1803431547",
-      "name": "The New Children's Museum",
-      "category": "museum",
+      "name": "The New Children’s Museum",
+      "category": "observed-venue",
       "website": "https://thinkplaycreate.org/",
       "status": "qualified",
-      "probeLane": "event-likely",
+      "probeLane": "event-evidence",
       "attempts": 2,
       "lastCheckedAt": "2026-10-02T15:13:25.421Z",
       "nextCheckAt": null,
@@ -2216,237 +2560,20 @@
         "detail": "Checked 3 pages on San Diego Police Museum (event-likely)",
         "statusCode": null
       }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|6654042485",
-      "name": "San Diego Police Department Exhibit & Jail Cells",
-      "category": "museum",
-      "website": "https://theheadquarters.com/police-jail-cells",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:43.192Z",
-      "nextCheckAt": "2026-10-05T11:12:43.305Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on San Diego Police Department Exhibit & Jail Cells (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|way|31841162",
-      "name": "San Diego Chinese Historical Museum",
-      "category": "museum",
-      "website": "https://sdchm.org/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:43.168Z",
-      "nextCheckAt": "2026-10-05T11:12:43.859Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on San Diego Chinese Historical Museum (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|596424512",
-      "name": "K Sandwiches",
-      "category": "restaurant",
-      "website": "https://www.ksandwiches.com/",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:39.096Z",
-      "nextCheckAt": "2026-11-16T11:12:43.293Z",
-      "coldUntil": "2026-11-16T11:12:43.293Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 1 page on K Sandwiches (low-value)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|12161250230",
-      "name": "Ko-Li Bar",
-      "category": "cafe",
-      "website": "https://www.sandiegoyakyudori.com/page/ko-li",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:25.082Z",
-      "nextCheckAt": "2026-10-16T11:12:39.096Z",
-      "coldUntil": "2026-10-16T11:12:39.096Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on Ko-Li Bar (food-evidence)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|12050133668",
-      "name": "Camellia Rd Tea Bar",
-      "category": "cafe",
-      "website": "https://www.camelliard.com/",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:23.615Z",
-      "nextCheckAt": "2026-10-16T11:12:25.082Z",
-      "coldUntil": "2026-10-16T11:12:25.082Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on Camellia Rd Tea Bar (food-evidence)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|way|958800945",
-      "name": "Humphreys SoCal Dining & Music",
-      "category": "restaurant",
-      "website": "https://humphreysrestaurant.com/",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:19.484Z",
-      "nextCheckAt": "2026-10-16T11:12:23.615Z",
-      "coldUntil": "2026-10-16T11:12:23.615Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 4 pages on Humphreys SoCal Dining & Music (food-evidence)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|9607389522",
-      "name": "Gaslamp Museum at the Davis-Horton House",
-      "category": "museum",
-      "website": "https://www.gaslampmuseum.org/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:17.258Z",
-      "nextCheckAt": "2026-10-05T11:12:19.484Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on Gaslamp Museum at the Davis-Horton House (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|way|611726954",
-      "name": "Marriott Hall",
-      "category": "conference-centre",
-      "website": "https://www.marriott.com/hotels/event-planning/business-meeting/sandt-marriott-marquis-san-diego-marina/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:15.465Z",
-      "nextCheckAt": "2026-10-05T11:12:15.772Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "website-fetch-failed",
-        "detail": "HTTP 403",
-        "statusCode": 403
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|way|108402077",
-      "name": "National City Public Library",
-      "category": "library",
-      "website": "https://www.nationalcityca.gov/government/library/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:14.892Z",
-      "nextCheckAt": "2026-10-05T11:12:15.465Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "website-fetch-failed",
-        "detail": "HTTP 403",
-        "statusCode": 403
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|9215210417",
-      "name": "San Diego Musical Theatre",
-      "category": "theatre",
-      "website": "https://www.sdmt.org/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:12:13.410Z",
-      "nextCheckAt": "2026-10-05T11:12:43.192Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 7 pages on San Diego Musical Theatre (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|way|1075932489",
-      "name": "Rady Shell",
-      "category": "theatre",
-      "website": "https://www.theshell.org/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:11:54.291Z",
-      "nextCheckAt": "2026-10-05T11:12:14.892Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 7 pages on Rady Shell (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|9215210435",
-      "name": "Bay City Brewing Co Tasting Room",
-      "category": "brewery",
-      "website": "https://baycitybrewingco.com/",
-      "status": "retry",
-      "probeLane": "event-likely",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T11:11:49.843Z",
-      "nextCheckAt": "2026-10-05T11:12:43.168Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 4 pages on Bay City Brewing Co Tasting Room (event-likely)",
-        "statusCode": null
-      }
     }
   ],
   "recentPromotions": [
+    {
+      "id": "discovered-san-diego-c4c13a874369",
+      "name": "La Doña",
+      "regions": [
+        "san-diego"
+      ],
+      "adapter": "tribe",
+      "endpoint": "https://www.ladonaob.com",
+      "discoveredAt": "2026-10-02T19:01:30.527Z",
+      "discoveryEventCount": 2
+    },
     {
       "id": "discovered-san-diego-95630275eebf",
       "name": "Mad House Comedy Club",
