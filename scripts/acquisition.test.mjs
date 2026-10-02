@@ -3,12 +3,13 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import {loadAcquisitionRegistry} from "./acquisition-registry.mjs";
 import {parseBiblioCommonsPage,biblioCommonsEvents,biblioCommonsLocationNames,biblioCommonsEventLocation} from "./providers/bibliocommons.mjs";
-import {parseReaderSpecials} from "./providers/sandiego-reader-happy-hours.mjs";
+import {parseReaderSpecials,parseReaderPlaceMetadata} from "./providers/sandiego-reader-happy-hours.mjs";
 import {parseCasbahCalendar} from "./providers/casbah-presents.mjs";
 import {parseMuseumCouncil} from "./providers/museum-council.mjs";
 import {parseConventionCenter} from "./providers/convention-center.mjs";
 import {parseFairgroundsPrint} from "./providers/del-mar-fairgrounds.mjs";
 import {parseSanteeCalendar} from "./providers/santee-calendar.mjs";
+import {libertyStationLocation} from "./providers/liberty-station.mjs";
 import {SOURCES} from "./source-registry.mjs";
 import {parseGranicusListRows,parseGranicusDetail,granicusMunicipalEvents} from "./providers/granicus-calendar.mjs";
 import {parseSanMarcosListingLinks,parseSanMarcosDetail,sanMarcosCalendarEvents} from "./providers/san-marcos-calendar.mjs";
@@ -180,7 +181,7 @@ test("Reader happy-hour events preserve neighborhood as a geocoding hint",async(
   globalThis.fetch=async()=>({ok:true,status:200,text:async()=>html});
   try{
     const {sanDiegoReaderHappyHourEvents}=await import("./providers/sandiego-reader-happy-hours.mjs");
-    const events=await sanDiegoReaderHappyHourEvents({days:7});
+    const events=await sanDiegoReaderHappyHourEvents({days:7,enrichPlaces:false});
     const event=events.find(item=>item.venue==="Example Bar");
     assert.ok(event);
     assert.equal(event.address,null);
@@ -188,6 +189,57 @@ test("Reader happy-hour events preserve neighborhood as a geocoding hint",async(
   }finally{
     globalThis.fetch=originalFetch;
   }
+});
+
+test("Reader place metadata extracts source-native address and coordinates",()=>{
+  const html=`
+    <script type="application/ld+json">
+      {
+        "@type":"Restaurant",
+        "name":"Example Bar",
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":"1929 Cable Street",
+          "addressLocality":"San Diego",
+          "addressRegion":"CA",
+          "postalCode":"92107"
+        },
+        "geo":{"@type":"GeoCoordinates","latitude":32.746,"longitude":-117.249}
+      }
+    </script>
+  `;
+  assert.deepEqual(parseReaderPlaceMetadata(html),{
+    address:"1929 Cable Street, San Diego, CA 92107",
+    lat:32.746,
+    lng:-117.249
+  });
+});
+
+test("Reader place metadata falls back to visible street address",()=>{
+  const html="<h1>Example Restaurant</h1><div>6996 El Camino Real, Carlsbad, CA 92009</div>";
+  assert.deepEqual(parseReaderPlaceMetadata(html),{
+    address:"6996 El Camino Real, Carlsbad, CA 92009",
+    lat:null,
+    lng:null
+  });
+});
+
+test("Liberty Station location parsing rejects newsletter copy",()=>{
+  assert.deepEqual(libertyStationLocation([
+    "2590 Truxtun Rd",
+    "Stay in the Liberty Station loop. Join the email list."
+  ]),{
+    venue:"2590 Truxtun Rd",
+    address:"2590 Truxtun Rd"
+  });
+  assert.deepEqual(libertyStationLocation([
+    "Example Gallery",
+    "2690 Historic Decatur Rd, Ste. 202",
+    "Stay in the Liberty Station loop. Join the email list."
+  ]),{
+    venue:"Example Gallery",
+    address:"2690 Historic Decatur Rd, Ste. 202"
+  });
 });
 
 test("Casbah parser treats promoter calendar venues as separate event locations",()=>{
