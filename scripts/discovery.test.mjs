@@ -175,9 +175,9 @@ test("adaptive discovery stays aggressive while coverage is immature",()=>{
     }
   },zones,["san-diego"]);
   assert.equal(plan.mode,"bootstrap");
-  assert.equal(plan.budget.probeLimit,30);
-  assert.equal(plan.budget.probeConcurrency,3);
-  assert.equal(plan.budget.overpassMinIntervalMinutes,60);
+  assert.equal(plan.budget.probeLimit,12);
+  assert.equal(plan.budget.probeConcurrency,2);
+  assert.equal(plan.budget.overpassMinIntervalMinutes,360);
 });
 
 test("adaptive discovery tapers only after at least 95 percent coverage with no severe gaps",()=>{
@@ -196,7 +196,7 @@ test("adaptive discovery tapers only after at least 95 percent coverage with no 
     }
   },zones,["san-diego"]);
   assert.equal(mature.mode,"maintenance");
-  assert.equal(mature.budget.probeLimit,10);
+  assert.equal(mature.budget.probeLimit,6);
 
   rows[157]={...rows[157],gapScore:90};
   const severe=adaptiveDiscoveryPlan({
