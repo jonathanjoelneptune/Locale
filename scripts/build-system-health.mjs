@@ -21,9 +21,16 @@ export async function buildSystemHealth({now=Date.now()}={}){
   const eventAge=ageMinutes(eventCoverage.generatedAt,now);
   const locationAge=ageMinutes(locationCoverage.generatedAt,now);
   const discoveryStale=discoveryAge===null||discoveryAge>20;
-  const reconcileStale=reconcileAge===null||reconcileAge>30;
   const eventStale=eventAge===null||eventAge>420;
   const locationStale=locationAge===null||locationAge>120;
+  const dashboardTime=Date.parse(dashboard.generatedAt||"")||0;
+  const latestFactTime=Math.max(
+    Date.parse(discoveryState.lastRunAt||"")||0,
+    Date.parse(eventCoverage.generatedAt||"")||0,
+    Date.parse(locationCoverage.generatedAt||"")||0
+  );
+  const reconcileLagging=latestFactTime>dashboardTime+1000;
+  const reconcileStale=reconcileAge===null||reconcileAge>360||reconcileLagging;
   const output={
     generatedAt:new Date(now).toISOString(),
     status:discoveryStale||reconcileStale?"degraded":eventStale||locationStale?"warning":"healthy",
@@ -35,10 +42,12 @@ export async function buildSystemHealth({now=Date.now()}={}){
       stale:discoveryStale
     },
     reconciliation:{
-      expectedCadenceMinutes:15,
-      staleAfterMinutes:30,
+      mode:"event-driven",
+      maximumAgeMinutes:360,
       lastGeneratedAt:dashboard.generatedAt||null,
       ageMinutes:reconcileAge,
+      latestFactAt:latestFactTime?new Date(latestFactTime).toISOString():null,
+      laggingFacts:reconcileLagging,
       stale:reconcileStale
     },
     eventRefresh:{
