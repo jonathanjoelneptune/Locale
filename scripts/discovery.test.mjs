@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {buildCellOverpassQuery,candidateFromOverpassElement} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {discoveryEventLinks,discoveryIcsLinks} from "./discovery-probe.mjs";
+import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 
 const region={
   id:"san-diego",
@@ -86,4 +87,20 @@ test("discovery probe extracts calendar feeds",()=>{
     "https://venue.example/calendar/events.ics",
     "https://venue.example/feed/calendar.ics?x=1"
   ]);
+});
+
+
+test("generic calendar-link adapter follows same-site and trusted ticketing event links",()=>{
+  const html=\`
+    <a href="/events/friday-show">Friday Show</a>
+    <a href="https://www.eventbrite.com/e/example-event-123">Tickets</a>
+    <a href="https://dice.fm/event/abc">Live music tickets</a>
+    <a href="https://random.example/events/other">Other site</a>
+    <a href="/about">About</a>
+  \`;
+  const links=extractCalendarEventLinks(html,"https://venue.example/");
+  assert.ok(links.includes("https://venue.example/events/friday-show"));
+  assert.ok(links.includes("https://www.eventbrite.com/e/example-event-123"));
+  assert.ok(links.includes("https://dice.fm/event/abc"));
+  assert.ok(!links.includes("https://random.example/events/other"));
 });
