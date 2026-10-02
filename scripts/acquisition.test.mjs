@@ -10,6 +10,8 @@ import {parseConventionCenter} from "./providers/convention-center.mjs";
 import {parseFairgroundsPrint} from "./providers/del-mar-fairgrounds.mjs";
 import {parseSanteeCalendar} from "./providers/santee-calendar.mjs";
 import {SOURCES} from "./source-registry.mjs";
+import {parseGranicusListRows,parseGranicusDetail,granicusMunicipalEvents} from "./providers/granicus-calendar.mjs";
+import {parseSanMarcosListingLinks,parseSanMarcosDetail,sanMarcosCalendarEvents} from "./providers/san-marcos-calendar.mjs";
 
 test("workbook acquisition registry preserves the complete source, area, and taxonomy inventory",async()=>{
   const registry=await loadAcquisitionRegistry();
@@ -257,4 +259,119 @@ test("Santee parser extracts community activities while preserving address",()=>
   assert.equal(rows.length,1);
   assert.equal(rows[0].title,"Family Bingo Night");
   assert.match(rows[0].address,/Santee, CA 92071/);
+});
+
+
+test("Granicus list parser extracts municipal activities and date ranges",()=>{
+  const html=`
+    <table>
+      <tr><th>Event</th><th>Date/Time</th></tr>
+      <tr>
+        <td><a href="/Home/Components/Calendar/Event/1/1">TCG Tuesdays</a></td>
+        <td>10/06/2026 5:00 PM - 6:30 PM 10/06/2026 5:00 PM 10/06/2026 6:30 PM</td>
+      </tr>
+      <tr>
+        <td><a href="/Home/Components/Calendar/Event/2/1">Ballet Folklorico</a></td>
+        <td>10/07/2026 - 10/09/2026</td>
+      </tr>
+    </table>
+  `;
+  const rows=parseGranicusListRows(html,"https://city.example/calendar");
+  assert.equal(rows.length,2);
+  assert.equal(rows[0].title,"TCG Tuesdays");
+  assert.ok(rows[0].start.startsWith("2026-10-07T00:00:00")||rows[0].start.startsWith("2026-10-06T"));
+  assert.ok(rows[0].end);
+  assert.equal(rows[1].timeStatus,"unknown");
+});
+
+test("Granicus detail parser extracts coordinates, address, and venue",()=>{
+  const html=`
+    <h1>Fire Open House</h1>
+    <div>Description: Family-friendly open house.</div>
+    <div>Location: Fire Station 1 180 West Mission Road, San Marcos, CA 92069</div>
+    <div>33.143494, -117.164563</div>
+    <div>Date: Saturday</div>
+  `;
+  const row=parseGranicusDetail(html,{cityName:"San Marcos"});
+  assert.equal(row.lat,33.143494);
+  assert.equal(row.lng,-117.164563);
+  assert.match(row.address,/180 West Mission Road/);
+});
+
+test("Dedicated Granicus adapter filters civic meetings and applies facility hints",async()=>{
+  const originalFetch=globalThis.fetch;
+  const listing=`
+    <div>1 - 20 of 2 items</div>
+    <table>
+      <tr><th>Event</th><th>Date/Time</th></tr>
+      <tr><td> <a href="/event/library">TCG Tuesdays</a></td><td>10/06/2026 5:00 PM - 6:30 PM</td></tr>
+      <tr><td> <a href="/event/council">City Council Meeting</a></td><td>10/06/2026 6:00 PM - 8:00 PM</td></tr>
+    </table>
+  `;
+  globalThis.fetch=async input=>{
+    const url=String(input);
+    if(url==="https://city.example/calendar")return {ok:true,status:200,url,text:async()=>listing};
+    if(url==="https://city.example/event/library")return {ok:true,status:200,url,text:async()=>"<div>Description: Weekly card game.</div>"};
+    if(url==="https://city.example/event/council")return {ok:true,status:200,url,text:async()=>"<div>Location: City Hall</div>"};
+    throw new Error("unexpected URL "+url);
+  };
+  try{
+    const events=await granicusMunicipalEvents({
+      endpoints:["https://city.example/calendar"],
+      sourceName:"National City Calendar of Events",
+      sourceId:"national-city-calendar",
+      fallbackCenter:{lat:32.6781,lng:-117.0992},
+      cityName:"National City",
+      locationHints:[{
+        match:"TCG Tuesdays",
+        venue:"National City Public Library",
+        address:"1401 National City Blvd, National City, CA 91950",
+        query:"1401 National City Blvd, National City, CA 91950"
+      }],
+      days:45,maxPages:2,maxDetails:10
+    });
+    assert.equal(events.length,1);
+    assert.equal(events[0].title,"TCG Tuesdays");
+    assert.equal(events[0].venue,"National City Public Library");
+    assert.equal(events[0].address,"1401 National City Blvd, National City, CA 91950");
+    assert.ok(!events.some(event=>/Council Meeting/.test(event.title)));
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
+});
+
+test("San Marcos listing finds dated event detail links",()=>{
+  const html=`
+    <a href="/Meetings-Events/Parks-Recreation/City-Hikes/October-City-Hike">October City Hike</a>
+    <div>03 Oct 2026 Hike to the summit.</div>
+    <a href="/Online-Services">Online Services</a>
+  `;
+  const rows=parseSanMarcosListingLinks(html,"https://www.sanmarcosca.gov/Meetings-Events");
+  assert.equal(rows.length,1);
+  assert.equal(rows[0].title,"October City Hike");
+});
+
+test("San Marcos detail parser preserves precise event coordinates and dates",()=>{
+  const html=`
+    <h1>San Marcos Fire Department Open House</h1>
+    <div>Next date: Saturday, October 03, 2026 | 10:00 AM to 02:00 PM</div>
+    <div>Join us for a free family-friendly event. Location: San Marcos Fire Station 1</div>
+    <div>When Saturday, October 03, 2026 | 10:00 AM - 02:00 PM</div>
+    <div>Location 180 West Mission Road, San Marcos, CA 92069 33.143494, -117.164563</div>
+    <div>Tagged as: Kids & family Back to top</div>
+  `;
+  const row=parseSanMarcosDetail(html,"https://www.sanmarcosca.gov/event");
+  assert.equal(row.title,"San Marcos Fire Department Open House");
+  assert.ok(row.whens.length>=1);
+  assert.equal(row.lat,33.143494);
+  assert.equal(row.lng,-117.164563);
+});
+
+test("municipal workbook candidates are active only with dedicated adapters",()=>{
+  const national=SOURCES.find(source=>source.id==="national-city-calendar");
+  const chula=SOURCES.find(source=>source.id==="chula-vista-calendar");
+  const sanMarcos=SOURCES.find(source=>source.id==="san-marcos-calendar");
+  assert.equal(national.enabled,false);
+  assert.equal(chula.enabled,false);
+  assert.equal(sanMarcos.enabled,false);
 });
