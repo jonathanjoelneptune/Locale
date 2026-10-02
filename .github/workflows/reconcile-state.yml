@@ -1,0 +1,42 @@
+name: Reconcile Locale state
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "2,17,32,47 * * * *"
+permissions:
+  contents: write
+concurrency:
+  group: locale-state-reconcile
+  cancel-in-progress: true
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Sync latest factual state
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+      - name: Reconcile derived state
+        run: node scripts/reconcile-state.mjs
+      - name: Validate discovery diagnostics
+        run: node scripts/validate-discovery.mjs
+      - name: Validate coverage diagnostics
+        run: node scripts/validate-coverage.mjs
+      - name: Commit derived state
+        run: |
+          FILES="src/data/coverage-dashboard.json src/data/discovery-live.json src/data/system-health.json"
+          if git diff --quiet -- $FILES; then
+            echo "Derived state already current."
+            exit 0
+          fi
+          git config user.name "locale-reconcile[bot]"
+          git config user.email "locale-reconcile[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "Reconcile Locale derived state"
+          git pull --rebase origin main
+          git push
