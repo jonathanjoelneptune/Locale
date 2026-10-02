@@ -43,8 +43,8 @@ export function parseBiblioCommonsPage(html){
     const text=strip(fragment);
     const eventStart=parseStart(text);
     if(!eventStart)continue;
-    const location=text.match(/([A-Za-z0-9 &'’().\/\-]+?)\s*Event location:/i)?.[1]?.trim()
-      ||text.match(/Event location:\s*([A-Za-z0-9 &'’().\/\-]+)/i)?.[1]?.trim()
+    const location=text.match(/Event location:\s*(.+?)(?=\s+Find more events in:|\s+View event|\s+Audience:|\s+Program:|$)/i)?.[1]?.trim()
+      ||fragment.match(/Event location:\s*<[^>]+>\s*([^<]{2,140})/i)?.[1]?.trim()
       ||"San Diego County Library";
     const tags=[...new Set([...fragment.matchAll(/Find more events in:\s*([^<]{2,80})/gi)].map(m=>strip(m[1])).filter(Boolean))];
     const link=fragment.match(/href=["']([^"']*\/events\/[^"'?#]+)["']/i)?.[1]
