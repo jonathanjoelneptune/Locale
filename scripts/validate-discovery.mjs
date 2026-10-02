@@ -84,7 +84,7 @@ for(const [index,item] of (queue||[]).entries()){
   }
   if(item.status==="qualified"){
     if(!item.sourceId)fail(`${label} is qualified without sourceId`);
-    if(item.sourceId&&!sourceIds.has(item.sourceId))fail(`${label} references unknown discovered source ${item.sourceId}`);
+    if(item.sourceId&&!sourceIds.has(item.sourceId)&&!staticIds.has(item.sourceId))fail(`${label} references unknown source ${item.sourceId}`);
   }
 }
 
