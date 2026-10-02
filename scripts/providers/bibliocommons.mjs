@@ -31,7 +31,7 @@ function parseStart(text){
   if(!month||!t)return null;
   return zonedLocalIso({year,month,day,hour:t.hour,minute:t.minute,timeZone:"America/Los_Angeles"});
 }
-function blocks(html){
+export function parseBiblioCommonsPage(html){
   const out=[];
   const headings=[...String(html||"").matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi)];
   for(let i=0;i<headings.length;i++){
@@ -93,7 +93,7 @@ export async function biblioCommonsEvents({
       const embedded=await embeddedJsonEvents({endpoint:page.url,sourceName,sourceId,fallbackCenter,days});
       out.push(...embedded);
     }catch{}
-    for(const item of blocks(page.html)){
+    for(const item of parseBiblioCommonsPage(page.html)){
       let url=page.url;
       try{if(item.link)url=new URL(item.link,page.url).href}catch{}
       out.push({
