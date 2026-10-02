@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Locale Coverage Diagnostics</title>
+  <title>Locale Operations Diagnostics</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="./styles/diagnostics.css">
 </head>
@@ -11,18 +11,87 @@
   <main class="diag-shell">
     <header class="diag-header">
       <div>
-        <span class="eyebrow">LOCALE INTERNAL</span>
-        <h1>Coverage Diagnostics</h1>
-        <p>Discovery yield, location quality, source health, and area-by-area coverage density.</p>
+        <div class="title-line"><span class="eyebrow">LOCALE INTERNAL</span><span id="liveBadge" class="live-badge">LIVE</span></div>
+        <h1>Operations & Coverage Diagnostics</h1>
+        <p>Live worker status, discovery throughput, source qualification, location quality, and area-by-area coverage.</p>
       </div>
       <div class="header-actions">
+        <span id="autoRefreshText" class="refresh-note">Auto refresh 30s</span>
         <select id="regionSelect" aria-label="Region"></select>
-        <button id="refreshDiagnostics" type="button">Refresh</button>
+        <button id="refreshDiagnostics" type="button">Refresh now</button>
         <a href="./">Open Locale</a>
       </div>
     </header>
-    <div id="diagStatus" class="diag-status">Loading current coverage…</div>
+
+    <div id="diagStatus" class="diag-status">Loading current operations state…</div>
     <section id="summaryCards" class="summary-grid"></section>
+
+    <section class="panel live-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Live Discovery Worker</h2>
+          <p>Current GitHub Actions run and step status. This can show work that has started but has not yet committed new diagnostics data.</p>
+        </div>
+        <span id="workerFreshness"></span>
+      </div>
+      <div id="workerStatus"></div>
+      <div id="workerSteps" class="worker-steps"></div>
+    </section>
+
+    <section class="diag-grid two">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Adaptive Discovery Control</h2><p>How aggressively Locale is searching right now and why.</p></div></div>
+        <div id="adaptiveControl"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Latest Completed Run</h2><p>Measured work and results from the last committed discovery cycle.</p></div></div>
+        <div id="latestRun"></div>
+      </article>
+    </section>
+
+    <section class="diag-grid two">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Queue & Throughput</h2><p>Current acquisition backlog and estimated clearing rate at the active discovery budget.</p></div></div>
+        <div id="queueThroughput"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Overpass Provider Health</h2><p>Endpoint attempts, failover results, latency, and provider cooldown state from the latest Overpass cycle.</p></div></div>
+        <div id="overpassHealth"></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2>Recent Probe Results</h2><p>The most recent venue website/calendar qualification attempts, including why each candidate passed, failed, or was deferred.</p></div>
+        <span id="probeSummary"></span>
+      </div>
+      <div class="table-wrap tall"><table><thead><tr>
+        <th>Checked</th><th>Venue</th><th>Category</th><th>Result</th><th>Attempts</th><th>Detail</th><th>Next check</th>
+      </tr></thead><tbody id="probeRows"></tbody></table></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2>Recent Discovery Runs</h2><p>Rolling run history showing throughput, promotion yield, new candidates, and Overpass activity.</p></div>
+        <span id="runHistorySummary"></span>
+      </div>
+      <div class="table-wrap"><table><thead><tr>
+        <th>Finished</th><th>Mode</th><th>Duration</th><th>Probed</th><th>Promoted</th><th>Failed</th><th>New candidates</th><th>Overpass</th><th>Queue due</th>
+      </tr></thead><tbody id="runHistoryRows"></tbody></table></div>
+    </section>
+
+    <section class="diag-grid two">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Focused Area Sweeps</h2><p>Gap-driven neighborhood/community searches and retry state.</p></div></div>
+        <div class="table-wrap medium"><table><thead><tr><th>Area</th><th>Status</th><th>Last attempt</th><th>Found</th><th>New</th><th>Next retry</th></tr></thead><tbody id="areaSweepRows"></tbody></table></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Regional Discovery Cells</h2><p>Systematic geographic sweep coverage and active failures.</p></div></div>
+        <div id="regionalCells"></div>
+        <div class="table-wrap medium"><table><thead><tr><th>Cell</th><th>Status</th><th>Attempts</th><th>Last attempt</th><th>Next retry</th></tr></thead><tbody id="cellRows"></tbody></table></div>
+      </article>
+    </section>
+
     <section class="diag-grid two">
       <article class="panel">
         <div class="panel-head"><h2>Discovery Funnel</h2><span id="discoveryGenerated"></span></div>
@@ -33,12 +102,17 @@
         <div id="locationResolution"></div>
       </article>
     </section>
+
     <section class="panel">
-      <div class="panel-head"><div><h2>Area Coverage</h2><p>Discovery gaps across San Diego neighborhoods, districts, cities, and surrounding communities.</p></div><select id="areaGroupSelect" class="area-filter" aria-label="Area group"><option value="all">All areas</option></select></div>
-      <div class="table-wrap"><table><thead><tr>
+      <div class="panel-head">
+        <div><h2>Area Coverage</h2><p>Discovery gaps across neighborhoods, districts, cities, and surrounding communities.</p></div>
+        <select id="areaGroupSelect" class="area-filter" aria-label="Area group"><option value="all">All areas</option></select>
+      </div>
+      <div class="table-wrap tall"><table><thead><tr>
         <th>Area</th><th>Group</th><th>Class</th><th>28d events</th><th>Venues</th><th>Candidates</th><th>Fri/Sat avg</th><th>Recurring</th><th>Gap</th><th>Status</th>
       </tr></thead><tbody id="neighborhoodRows"></tbody></table></div>
     </section>
+
     <section class="diag-grid two">
       <article class="panel">
         <div class="panel-head"><h2>Recurring Activity</h2></div>
@@ -49,6 +123,12 @@
         <div id="failureReasons"></div>
       </article>
     </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Recent Auto-Promotions</h2><p>Discovered venue calendars that have been promoted into the normal ingestion pipeline.</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Promoted</th><th>Source</th><th>Adapter</th><th>Events seen</th><th>Endpoint</th></tr></thead><tbody id="promotionRows"></tbody></table></div>
+    </section>
+
     <section class="panel">
       <div class="panel-head"><h2>Source Health</h2></div>
       <div class="table-wrap"><table><thead><tr><th>Source</th><th>Status</th><th>Events</th></tr></thead><tbody id="sourceRows"></tbody></table></div>
