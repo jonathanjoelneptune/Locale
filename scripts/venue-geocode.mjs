@@ -187,43 +187,44 @@ export async function geocodeVenue(venue,region){
   await load();
   const clean=String(venue||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
   if(!clean||clean.length>180||vague.test(clean))return null;
+  telemetry.queries++;
   const key=keyFor(clean,region);
   const cached=cache[key];
   if(cached?.miss){
     const checked=Date.parse(cached.checkedAt||"");
-    if(Number.isFinite(checked)&&Date.now()-checked<NEGATIVE_CACHE_MS)return null;
+    if(cached.version===VENUE_GEOCODER_VERSION&&Number.isFinite(checked)&&Date.now()-checked<NEGATIVE_CACHE_MS){
+      telemetry.negativeCacheHits++;
+      return null;
+    }
   }else if(cached&&Number.isFinite(Number(cached.lat))&&Number.isFinite(Number(cached.lng))){
+    telemetry.cacheHits++;
     return cached;
   }
   if(newLookups>=MAX_NEW_LOOKUPS_PER_RUN)return null;
   newLookups++;
 
-  await throttle();
-  const url=new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("format","jsonv2");
-  url.searchParams.set("limit","1");
-  url.searchParams.set("q",searchQueryFor(clean,region));
-  try{
-    const response=await fetch(url,{
-      headers:{"User-Agent":"Locale-events/1.0 (https://github.com/jonathanjoelneptune/Locale)"},
-      signal:AbortSignal.timeout(3000)
-    });
-    if(!response.ok)return null;
-    const rows=await response.json();
-    const first=rows?.[0];
-    const lat=Number(first?.lat),lng=Number(first?.lon);
-    if(!Number.isFinite(lat)||!Number.isFinite(lng)){
-      cache[key]={miss:true,checkedAt:new Date().toISOString()};
-      dirty=true;
-      return null;
-    }
-    const point={lat,lng,displayName:first.display_name||clean};
-    cache[key]=point;
+  const point=await geocodeVenueUncached(clean,region);
+  if(point){
+    const stored={...point,displayName:point.displayName||clean,version:VENUE_GEOCODER_VERSION,checkedAt:new Date().toISOString()};
+    cache[key]=stored;
     dirty=true;
-    return point;
-  }catch{
-    return null;
+    telemetry.resolved++;
+    return stored;
   }
+  cache[key]={miss:true,checkedAt:new Date().toISOString(),version:VENUE_GEOCODER_VERSION};
+  dirty=true;
+  telemetry.misses++;
+  return null;
+}
+
+export function venueGeocodeTelemetry(){
+  return JSON.parse(JSON.stringify({
+    ...telemetry,
+    version:VENUE_GEOCODER_VERSION,
+    providerState:Object.fromEntries(Object.entries(providerState).map(([name,state])=>[
+      name,{failures:state.failures,cooldownUntil:state.cooldownUntil?new Date(state.cooldownUntil).toISOString():null}
+    ]))
+  }));
 }
 
 export async function saveVenueGeocodeCache(){
