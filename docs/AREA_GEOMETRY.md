@@ -12,6 +12,6 @@ Locale treats geography as a reusable data layer instead of map-specific UI stat
 
 ## Geometry precision
 
-The initial San Diego dataset uses the existing coverage-zone center/radius definitions to create approximate polygons for all 188 configured areas. The GeoJSON contract is intentionally independent of those circles. Any feature can later be replaced with an authoritative Polygon or MultiPolygon without changing the map, event filtering, or area selector.
+The initial San Diego dataset uses the existing coverage-zone centers to generate a non-overlapping nearest-center polygon tessellation for all 188 configured areas. Adjacent display areas share edges instead of overlapping. These polygons are still approximate and are explicitly marked as such. Any feature can later be replaced with an authoritative Polygon or MultiPolygon without changing the map, event filtering, or area selector.
 
 This keeps the front-end usable now while preserving a clean path to official neighborhood, city, county, or third-party boundary datasets as Locale expands beyond San Diego.
