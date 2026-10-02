@@ -302,6 +302,7 @@ function buildCoverage(queue,sources,runStats){
         core:cellSummary.core,
         high:cellSummary.high,
         dining:cellSummary.dining,
+        outer:cellSummary.outer,
         completed:Number(regionState.completedCellCount||regionState.completedCells?.length||0),
         failed:Object.keys(regionState.failedCells||{}).length,
         remaining:Number(regionState.remainingCellCount??cellSummary.total)
