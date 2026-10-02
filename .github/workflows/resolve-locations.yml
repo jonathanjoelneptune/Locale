@@ -10,7 +10,7 @@ on:
       - "src/data/regions.js"
       - ".github/workflows/resolve-locations.yml"
   schedule:
-    - cron: "7 * * * *"
+    - cron: "29 */6 * * *"
 permissions:
   contents: write
   actions: write
@@ -58,7 +58,7 @@ jobs:
             if [ -n "$UPSTREAM_LOCATION_CHANGES" ]; then
               echo "Location state changed upstream while this run was working:"
               echo "$UPSTREAM_LOCATION_CHANGES"
-              echo "Discarding stale resolver output; the next hourly run will continue from newer state."
+              echo "Discarding stale resolver output; the next backfill run will continue from newer state."
               echo "changed=false" >> "$GITHUB_OUTPUT"
               exit 0
             fi
