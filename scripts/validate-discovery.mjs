@@ -47,7 +47,7 @@ const allowedAdapters=new Set(["tribe","jsonld","jsonld-crawl","ics","embedded-j
 const acquisitionStatuses=new Set(["active","candidate","blocked","disabled"]);
 if(acquisitionManifest.strategy!=="source-first")fail("source-acquisition-catalog.json must use source-first strategy");
 if(Number(acquisitionManifest.sourceCount)!==97)fail("source-acquisition-catalog.json must declare 97 workbook sources");
-if(Number(acquisitionManifest.areaCount)!==158)fail("source-acquisition-catalog.json must declare 158 workbook area mappings");
+if(Number(acquisitionManifest.areaCount)!==188)fail("source-acquisition-catalog.json must declare 188 workbook area mappings");
 if(Number(acquisitionManifest.taxonomyFamilyCount)!==38)fail("source-acquisition-catalog.json must declare 38 taxonomy families");
 
 const acquisitionSources=acquisitionRegistry.sources||[];
@@ -74,7 +74,7 @@ for(const [priority,expected] of Object.entries({A:17,B:66,C:14})){
   if(acquisitionPriorityCounts[priority]!==expected)fail(`Workbook acquisition priority ${priority} must contain ${expected}; found ${acquisitionPriorityCounts[priority]}`);
 }
 
-if(acquisitionAreas.length!==158)fail(`Workbook neighborhood mapping must contain 158 areas; found ${acquisitionAreas.length}`);
+if(acquisitionAreas.length!==188)fail(`Workbook neighborhood mapping must contain 188 areas; found ${acquisitionAreas.length}`);
 const acquisitionAreaNames=new Set;
 for(const [index,row] of acquisitionAreas.entries()){
   const label=`acquisition area[${index}]`;
