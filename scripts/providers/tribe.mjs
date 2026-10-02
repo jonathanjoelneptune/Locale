@@ -1,3 +1,4 @@
+import {jsonLdCrawlEvents} from "./jsonld-crawl.mjs";
 import {classifyEvent} from "../event-classification.mjs";
 const strip=value=>String(value||"")
   .replace(/<script[\s\S]*?<\/script>/gi," ")
@@ -41,8 +42,18 @@ export async function tribeEvents({endpoint,sourceName,sourceId,fallbackCenter,d
     url.searchParams.set("end_date",end.toISOString().slice(0,10));
     url.searchParams.set("per_page","50");
     url.searchParams.set("page",String(page));
-    const response=await fetch(url,{headers:{Accept:"application/json","User-Agent":"Locale-events/1.0"},signal:AbortSignal.timeout(10000)});
-    if(!response.ok)throw new Error(`${sourceName} Tribe ${response.status}`);
+    const response=await fetch(url,{headers:{
+      Accept:"application/json",
+      "User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",
+      "Accept-Language":"en-US,en;q=0.9"
+    },signal:AbortSignal.timeout(10000)});
+    if(!response.ok){
+      if(page===1&&[401,403,404,429].includes(response.status)){
+        const fallback=await tribeHtmlFallback({base,sourceName,sourceId,fallbackCenter});
+        if(fallback.length)return fallback;
+      }
+      throw new Error(`${sourceName} Tribe ${response.status}`);
+    }
     const payload=await response.json();
     const rows=Array.isArray(payload.events)?payload.events:[];
     for(const event of rows){
