@@ -1,6 +1,7 @@
 import {readFile,writeFile} from "node:fs/promises";
 import {isPreciseLocation} from "./location-quality.mjs";
 import {REGIONS} from "./regions.mjs";
+import {coverageTargets,milesBetween,areaGapScore} from "./coverage-zones.mjs";
 
 const OUT="src/data/coverage-dashboard.json";
 const readJson=async(path,fallback)=>{
@@ -9,15 +10,6 @@ const readJson=async(path,fallback)=>{
 };
 const finite=value=>Number.isFinite(Number(value));
 const recurringPattern=/\b(trivia|karaoke|taco\s+tuesday|open\s+mic|bingo|happy\s+hour)\b/i;
-
-function miles(a,b){
-  if(!finite(a?.lat)||!finite(a?.lng)||!finite(b?.lat)||!finite(b?.lng))return Infinity;
-  const R=3958.7613,toRad=value=>Number(value)*Math.PI/180;
-  const dLat=toRad(Number(b.lat)-Number(a.lat)),dLng=toRad(Number(b.lng)-Number(a.lng));
-  const lat1=toRad(a.lat),lat2=toRad(b.lat);
-  const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLng/2)**2;
-  return 2*R*Math.asin(Math.min(1,Math.sqrt(h)));
-}
 
 function localParts(date,timeZone){
   const parts=new Intl.DateTimeFormat("en-US",{
@@ -41,15 +33,15 @@ function upcomingWeekendNights(now,timeZone,days=28){
   return [...new Set(keys)];
 }
 
-export function neighborhoodCoverage(events,neighborhood,region,{now=new Date(),days=28}={}){
+export function coverageAreaMetrics(events,area,region,{now=new Date(),days=28}={}){
   const horizon=now.getTime()+days*86400000;
   const nightKeys=upcomingWeekendNights(now,region.timeZone,days);
   const nightCounts=Object.fromEntries(nightKeys.map(key=>[key,0]));
   const relevant=(events||[]).filter(event=>{
-    if(event.regionId!==neighborhood.regionId||!isPreciseLocation(event))return false;
+    if(event.regionId!==area.regionId||!isPreciseLocation(event))return false;
     const start=Date.parse(event.start);
     if(!Number.isFinite(start)||start<now.getTime()-3600000||start>horizon)return false;
-    return miles(event,neighborhood)<=Number(neighborhood.radiusMiles);
+    return milesBetween(event,area)<=Number(area.radiusMiles);
   });
   const venues=new Set;
   let recurring30d=0;
@@ -67,11 +59,15 @@ export function neighborhoodCoverage(events,neighborhood,region,{now=new Date(),
   const counts=Object.values(nightCounts);
   const avg=counts.length?counts.reduce((sum,value)=>sum+value,0)/counts.length:0;
   const activeNights=counts.filter(value=>value>0).length;
-  const targetAverage=8,targetRecurring=5;
-  return {
-    id:neighborhood.id,
-    name:neighborhood.name,
-    radiusMiles:neighborhood.radiusMiles,
+  const targets=coverageTargets(area);
+  const row={
+    id:area.id,
+    name:area.name,
+    group:area.group||"other",
+    kind:area.kind||"coverage-area",
+    coverageClass:area.coverageClass||"mixed",
+    discoveryPriority:Number(area.discoveryPriority||50),
+    radiusMiles:area.radiusMiles,
     preciseEventsNext28d:relevant.length,
     uniqueVenuesNext28d:venues.size,
     fridaySaturdayNightAverage:Number(avg.toFixed(1)),
@@ -79,15 +75,19 @@ export function neighborhoodCoverage(events,neighborhood,region,{now=new Date(),
     activeFridaySaturdayNights:activeNights,
     measuredFridaySaturdayNights:counts.length,
     recurringLocalOccurrences30d:recurring30d,
-    targets:{fridaySaturdayNightAverage:targetAverage,recurringLocalOccurrences30d:targetRecurring},
+    targets,
     acceptance:{
-      density:avg>=targetAverage,
-      recurring:recurring30d>=targetRecurring,
-      pass:avg>=targetAverage&&recurring30d>=targetRecurring
+      density:avg>=targets.fridaySaturdayNightAverage,
+      recurring:recurring30d>=targets.recurringLocalOccurrences30d,
+      pass:avg>=targets.fridaySaturdayNightAverage&&recurring30d>=targets.recurringLocalOccurrences30d
     },
     nightCounts
   };
+  row.gapScore=areaGapScore(row);
+  return row;
 }
+
+export const neighborhoodCoverage=coverageAreaMetrics;
 
 function reasonCounts(queue){
   const out={};
@@ -106,7 +106,7 @@ function sourceSummary(sourceHealth=[]){
 }
 
 export async function buildCoverageDashboard({now=new Date()}={}){
-  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,neighborhoods]=await Promise.all([
+  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,coverageAreas]=await Promise.all([
     readJson("src/data/events.json",[]),
     readJson("src/data/coverage.json",{regions:{}}),
     readJson("src/data/places.json",[]),
@@ -115,7 +115,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     readJson("src/data/discovered-sources.json",[]),
     readJson("src/data/location-resolution-coverage.json",{regions:{}}),
     readJson("src/data/location-resolution-queue.json",[]),
-    readJson("src/data/neighborhoods.json",[])
+    readJson("src/data/coverage-zones.json",[])
   ]);
 
   const regions={};
@@ -128,9 +128,22 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     const regionDiscovery=discoveryQueue.filter(item=>item.regionId===region.id);
     const regionLocationQueue=locationQueue.filter(item=>item.regionId===region.id);
     const precise=regionEvents.filter(isPreciseLocation).length;
-    const neighborhoodRows=neighborhoods
+    const coverageAreaRows=coverageAreas
       .filter(item=>item.regionId===region.id)
-      .map(item=>neighborhoodCoverage(regionEvents,item,region,{now}));
+      .map(item=>coverageAreaMetrics(regionEvents,item,region,{now}))
+      .sort((a,b)=>Number(b.gapScore)-Number(a.gapScore)||Number(b.discoveryPriority)-Number(a.discoveryPriority)||a.name.localeCompare(b.name));
+    const gapGroups={};
+    for(const item of coverageAreaRows){
+      const key=item.group||"other";
+      if(!gapGroups[key])gapGroups[key]={measured:0,passing:0,gapScoreTotal:0};
+      gapGroups[key].measured++;
+      if(item.acceptance.pass)gapGroups[key].passing++;
+      gapGroups[key].gapScoreTotal+=Number(item.gapScore||0);
+    }
+    for(const group of Object.values(gapGroups)){
+      group.averageGapScore=Number((group.gapScoreTotal/Math.max(1,group.measured)).toFixed(1));
+      delete group.gapScoreTotal;
+    }
 
     regions[region.id]={
       name:region.name,
@@ -163,21 +176,33 @@ export async function buildCoverageDashboard({now=new Date()}={}){
         highPriorityCount:regionLocationQueue.filter(item=>item.status!=="resolved"&&Number(item.priority||0)>=50).length,
         run:locationCoverage.run||null
       },
-      neighborhoods:neighborhoodRows,
+      coverageAreas:coverageAreaRows,
+      coverageAreaAcceptance:{
+        measured:coverageAreaRows.length,
+        passing:coverageAreaRows.filter(row=>row.acceptance.pass).length,
+        groups:gapGroups
+      },
+      neighborhoods:coverageAreaRows,
       neighborhoodAcceptance:{
-        measured:neighborhoodRows.length,
-        passing:neighborhoodRows.filter(row=>row.acceptance.pass).length
+        measured:coverageAreaRows.length,
+        passing:coverageAreaRows.filter(row=>row.acceptance.pass).length
       }
     };
   }
 
   const output={
     generatedAt:new Date().toISOString(),
-    metricVersion:1,
+    metricVersion:2,
     targets:{
       regionPreciseLocationRate:0.9,
-      neighborhoodFridaySaturdayNightAverage:8,
-      neighborhoodRecurringLocalOccurrences30d:5
+      coverageClasses:{
+        "entertainment-core":{fridaySaturdayNightAverage:8,recurringLocalOccurrences30d:5},
+        urban:{fridaySaturdayNightAverage:5,recurringLocalOccurrences30d:4},
+        mixed:{fridaySaturdayNightAverage:4,recurringLocalOccurrences30d:3},
+        suburban:{fridaySaturdayNightAverage:3,recurringLocalOccurrences30d:2},
+        outer:{fridaySaturdayNightAverage:2,recurringLocalOccurrences30d:1},
+        rural:{fridaySaturdayNightAverage:1,recurringLocalOccurrences30d:1}
+      }
     },
     regions
   };
@@ -188,6 +213,6 @@ export async function buildCoverageDashboard({now=new Date()}={}){
 if(import.meta.url===`file://${process.argv[1]}`){
   const output=await buildCoverageDashboard();
   for(const [id,region] of Object.entries(output.regions)){
-    console.log(`${id}: ${(region.preciseLocationRate*100).toFixed(1)}% precise, ${region.discovery.qualifiedCount}/${region.discovery.withWebsiteCount} discovery sources qualified, ${region.neighborhoodAcceptance.passing}/${region.neighborhoodAcceptance.measured} neighborhood checks passing.`);
+    console.log(`${id}: ${(region.preciseLocationRate*100).toFixed(1)}% precise, ${region.discovery.qualifiedCount}/${region.discovery.withWebsiteCount} discovery sources qualified, ${region.coverageAreaAcceptance.passing}/${region.coverageAreaAcceptance.measured} area checks passing.`);
   }
 }
