@@ -1,4 +1,15 @@
-export const AREA_GEOMETRY_SCHEMA_VERSION=2;
+import {areaGeometryConstraints} from "./areaGeometryRegions.js";
+import {
+  closePolygonRing,
+  geometryOuterRings,
+  intersectPolygonRings,
+  pointInPolygonRing,
+  polygonRingArea,
+  ringsToGeometry,
+  subtractPolygonRing
+} from "../services/polygonGeometry.js";
+
+export const AREA_GEOMETRY_SCHEMA_VERSION=3;
 
 const COVERAGE_ZONES_URL=new URL("./coverage-zones.json",import.meta.url);
 const GEOGRAPHY_CATALOG_URL=new URL("./geography-catalog.json",import.meta.url);
@@ -167,15 +178,114 @@ function voronoiGeometry(zones){
   return polygons;
 }
 
+function clipGeometryToRing(geometry,clipRing){
+  const clipped=[];
+  geometryOuterRings(geometry).forEach(ring=>{
+    clipped.push(...intersectPolygonRings(ring,clipRing));
+  });
+  return ringsToGeometry(clipped);
+}
+
+function subtractRingFromGeometry(geometry,clipRing){
+  const remaining=[];
+  geometryOuterRings(geometry).forEach(ring=>{
+    remaining.push(...subtractPolygonRing(ring,clipRing));
+  });
+  return ringsToGeometry(remaining);
+}
+
+function applyRegionalConstraints(generated,regionId){
+  const constraints=areaGeometryConstraints(regionId);
+  if(!constraints?.landMask?.length){
+    return {
+      geometries:generated,
+      sources:new Map([...generated.keys()].map(id=>[id,"coverage-voronoi"])),
+      policy:null
+    };
+  }
+
+  const landRing=closePolygonRing(constraints.landMask);
+  const geometries=new Map;
+  const sources=new Map;
+  generated.forEach((geometry,id)=>{
+    geometries.set(id,clipGeometryToRing(geometry,landRing));
+    sources.set(id,"land-clipped-voronoi");
+  });
+
+  Object.entries(constraints.overrides||{}).forEach(([overrideId,override])=>{
+    const maskRing=closePolygonRing(override.mask||[]);
+    const overrideRings=intersectPolygonRings(maskRing,landRing);
+    if(!overrideRings.length)return;
+
+    for(const [id,geometry] of geometries){
+      if(id===overrideId)continue;
+      let next=geometry;
+      overrideRings.forEach(ring=>{
+        next=subtractRingFromGeometry(next,ring);
+      });
+      geometries.set(id,next);
+    }
+
+    geometries.set(overrideId,ringsToGeometry(overrideRings));
+    sources.set(overrideId,override.source||"curated-area-override");
+  });
+
+  return {
+    geometries,
+    sources,
+    policy:{
+      source:constraints.source,
+      waterClipping:"Generated area cells are clipped to a regional land mask before event membership and map rendering.",
+      overrides:Object.keys(constraints.overrides||{})
+    }
+  };
+}
+
+function geometryContainsPoint(geometry,point){
+  return geometryOuterRings(geometry).some(ring=>pointInPolygonRing(point,ring));
+}
+
+function ringCentroid(ring){
+  const points=closePolygonRing(ring);
+  let twiceArea=0,cx=0,cy=0;
+  for(let i=0;i<points.length-1;i++){
+    const a=points[i],b=points[i+1];
+    const cross=a[0]*b[1]-b[0]*a[1];
+    twiceArea+=cross;
+    cx+=(a[0]+b[0])*cross;
+    cy+=(a[1]+b[1])*cross;
+  }
+  if(Math.abs(twiceArea)<1e-12)return points[0]||null;
+  return [cx/(3*twiceArea),cy/(3*twiceArea)];
+}
+
+function labelPointFor(zone,geometry){
+  const seed=[Number(zone.lng),Number(zone.lat)];
+  if(geometryContainsPoint(geometry,seed))return {lat:seed[1],lng:seed[0]};
+
+  const rings=geometryOuterRings(geometry);
+  const ring=[...rings].sort((a,b)=>Math.abs(polygonRingArea(b))-Math.abs(polygonRingArea(a)))[0];
+  if(!ring?.length)return {lat:seed[1],lng:seed[0]};
+
+  const centroid=ringCentroid(ring);
+  if(centroid&&pointInPolygonRing(centroid,ring))return {lat:centroid[1],lng:centroid[0]};
+
+  const fallback=ring[Math.floor((ring.length-1)/2)]||ring[0];
+  return {lat:fallback[1],lng:fallback[0]};
+}
+
 export async function loadAreaGeometry({regionId="san-diego"}={}){
   const [allZones,catalog]=await Promise.all([fetchJson(COVERAGE_ZONES_URL),fetchJson(GEOGRAPHY_CATALOG_URL)]);
   const zones=allZones.filter(zone=>zone.regionId===regionId);
   const catalogIndex=buildCatalogIndex(catalog);
-  const geometries=voronoiGeometry(zones);
+  const generated=voronoiGeometry(zones);
+  const resolved=applyRegionalConstraints(generated,regionId);
+
   const features=zones
     .map(zone=>{
       const entries=catalogIndex.get(zone.id)||[];
-      const geometry=geometries.get(zone.id);
+      const geometry=resolved.geometries.get(zone.id)||generated.get(zone.id);
+      const source=resolved.sources.get(zone.id)||"coverage-voronoi";
       return {
         type:"Feature",
         id:zone.id,
@@ -189,11 +299,11 @@ export async function loadAreaGeometry({regionId="san-diego"}={}){
           areaType:bestAreaType(entries),
           coverageClass:zone.coverageClass||"mixed",
           aliases:aliasesFor(zone,entries),
-          labelPoint:{lat:Number(zone.lat),lng:Number(zone.lng)},
+          labelPoint:labelPointFor(zone,geometry),
           displayPriority:Number(zone.discoveryPriority||50),
           radiusMiles:Number(zone.radiusMiles||1),
-          geometrySource:"coverage-voronoi",
-          geometryAccuracy:"approximate-partition",
+          geometrySource:source,
+          geometryAccuracy:resolved.policy?"approximate-land-aware":"approximate-partition",
           bbox:geometryBounds(geometry)
         },
         geometry
@@ -206,9 +316,11 @@ export async function loadAreaGeometry({regionId="san-diego"}={}){
     schemaVersion:AREA_GEOMETRY_SCHEMA_VERSION,
     regionId,
     geometryPolicy:{
-      source:"Locale coverage-zone centers",
-      accuracy:"approximate-partition",
-      topology:"non-overlapping nearest-center tessellation",
+      source:resolved.policy?.source||"Locale coverage-zone centers",
+      accuracy:resolved.policy?"approximate-land-aware":"approximate-partition",
+      topology:resolved.policy?"non-overlapping land-clipped tessellation with curated overrides":"non-overlapping nearest-center tessellation",
+      waterClipping:resolved.policy?.waterClipping||null,
+      overrides:resolved.policy?.overrides||[],
       replacementContract:"A feature may be replaced by an authoritative Polygon or MultiPolygon without changing map or event-filter consumers."
     },
     features
