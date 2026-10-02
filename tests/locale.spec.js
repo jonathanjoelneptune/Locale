@@ -498,3 +498,19 @@ test("coverage diagnostics renders comprehensive area and discovery metrics",asy
   await expect(page.locator("#areaGroupSelect option")).toHaveCount(10);
   await expect(page.locator("#discoveryFunnel .metric-row")).toHaveCount(5);
 });
+
+
+test("diagnostics exposes live discovery operations console",async({page})=>{
+  await page.goto("./diagnostics.html");
+  await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6,{timeout:10000});
+  await expect(page.locator("#workerStatus")).toContainText("No live Actions status available");
+  await expect(page.locator("#adaptiveControl")).toContainText(/BOOTSTRAP|ACCELERATED|CONVERGENCE|MAINTENANCE|UNMEASURED/i);
+  await expect(page.locator("#queueThroughput")).toContainText("Candidates");
+  await expect(page.locator("#latestRun")).toContainText("Probed");
+  await expect(page.locator("#overpassHealth")).toBeVisible();
+  await expect(page.locator("#probeRows")).toBeVisible();
+  await expect(page.locator("#runHistoryRows")).toBeVisible();
+  await expect(page.locator("#areaSweepRows")).toBeVisible();
+  await expect(page.locator("#cellRows")).toBeVisible();
+  await expect(page.locator("#neighborhoodRows tr")).toHaveCount(158);
+});
