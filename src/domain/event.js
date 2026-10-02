@@ -13,6 +13,8 @@ export function normalizeEvent(event={}){
     category:event.category||"other",
     subcategories:Array.isArray(event.subcategories)?event.subcategories:[],
     tags:Array.isArray(event.tags)?event.tags:[],
+    recurring:!!event.recurring,
+    dealType:event.dealType||null,
     start:event.start,
     end:event.end||null,
     timeStatus:event.timeStatus==="unknown"?"unknown":"known",
