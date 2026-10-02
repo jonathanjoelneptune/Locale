@@ -2,7 +2,7 @@ import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
 import {discoverCellPlaces,overpassTelemetrySnapshot} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
-import {qualifyDiscoveryCandidate,DISCOVERY_QUALIFIER_VERSION} from "./discovery-probe.mjs";
+import {qualifyDiscoveryCandidate,DISCOVERY_QUALIFIER_VERSION,discoveryIsNonPublicEventUrl} from "./discovery-probe.mjs";
 import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
@@ -656,9 +656,15 @@ async function probeCandidate(item){
       delete item.revalidationSourceId;
     }else{
       stats.failed++;
-      const definitive=["no-website","invalid-website","no-supported-calendar"].includes(result.reason);
+      const nonPublicExistingEndpoint=!!revalidationSource&&discoveryIsNonPublicEventUrl(revalidationSource.endpoint);
+      const definitive=
+        ["no-website","invalid-website","candidate-scope-mismatch"].includes(result.reason)||
+        nonPublicExistingEndpoint;
       if(revalidationSource&&definitive){
-        invalidateSource(revalidationSource,`revalidation-${result.reason}`);
+        invalidateSource(
+          revalidationSource,
+          nonPublicExistingEndpoint?"revalidation-non-public-endpoint":`revalidation-${result.reason}`
+        );
         stats.sourceInvalidated++;
         item.sourceId=null;
         delete item.revalidationSourceId;
