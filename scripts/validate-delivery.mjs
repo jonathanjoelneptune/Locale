@@ -1,12 +1,13 @@
 import {readFile} from "node:fs/promises";
 
-const [pages,refresh,provider,index,buildSite,vercel]=await Promise.all([
+const [pages,refresh,provider,index,buildSite,vercel,vercelIgnore]=await Promise.all([
   readFile(".github/workflows/pages.yml","utf8"),
   readFile(".github/workflows/refresh-events.yml","utf8"),
   readFile("src/providers/local.js","utf8"),
   readFile("index.html","utf8"),
   readFile("scripts/build-site.mjs","utf8"),
-  readFile("vercel.json","utf8")
+  readFile("vercel.json","utf8"),
+  readFile("scripts/vercel-ignore.mjs","utf8")
 ]);
 
 const failures=[];
@@ -46,10 +47,10 @@ requireText(buildSite,'await cp("diagnostics.html"', "build-site.mjs");
 requireText(buildSite,'diagnostics.js?v=',"build-site.mjs");
 requireText(vercel,'"outputDirectory": "dist"',"vercel.json");
 requireText(vercel,'"Cache-Control"',"vercel.json");
-requireText(vercel,'"ignoreCommand"',"vercel.json");
-requireText(vercel,"src/data/discovery-queue.json","vercel.json");
-requireText(vercel,"src/data/location-resolution-queue.json","vercel.json");
-requireText(vercel,"src/data/coverage-dashboard.json","vercel.json");
+requireText(vercel,'"ignoreCommand": "node scripts/vercel-ignore.mjs"',"vercel.json");
+requireText(vercelIgnore,"src/data/discovery-queue.json","vercel-ignore.mjs");
+requireText(vercelIgnore,"src/data/location-resolution-queue.json","vercel-ignore.mjs");
+requireText(vercelIgnore,"src/data/coverage-dashboard.json","vercel-ignore.mjs");
 
 if(failures.length){
   console.error("Locale delivery validation failed:");
