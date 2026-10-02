@@ -29,10 +29,12 @@ jobs:
           else
             echo "resolved=false" >> "$GITHUB_OUTPUT"
           fi
+      - name: Rebuild coverage diagnostics
+        run: node scripts/build-coverage-dashboard.mjs
       - name: Commit location progress
         id: commit
         run: |
-          FILES="src/data/venue-geocode-cache.json src/data/location-resolution-queue.json src/data/location-resolution-coverage.json"
+          FILES="src/data/venue-geocode-cache.json src/data/location-resolution-queue.json src/data/location-resolution-coverage.json src/data/coverage-dashboard.json"
           if git diff --quiet -- $FILES; then
             echo "No location-resolution changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
