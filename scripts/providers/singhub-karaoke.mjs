@@ -16,6 +16,38 @@ const decode=value=>String(value||"")
 
 const strip=value=>decode(String(value||"").replace(/<[^>]+>/g," "));
 
+function jsonLdVenueMetadata(html){
+  const nodes=[];
+  const walk=value=>{
+    if(!value||typeof value!=="object")return;
+    if(Array.isArray(value)){for(const item of value)walk(item);return}
+    nodes.push(value);
+    for(const child of Object.values(value))if(child&&typeof child==="object")walk(child);
+  };
+  for(const match of String(html||"").matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){
+    try{walk(JSON.parse(match[1]))}catch{}
+  }
+  const venue=nodes.find(node=>{
+    const type=Array.isArray(node?.["@type"])?node["@type"].join(" "):String(node?.["@type"]||"");
+    return /BarOrPub|NightClub|Restaurant|LocalBusiness|Place|MusicVenue|EntertainmentBusiness/i.test(type)&&node?.name;
+  });
+  if(!venue)return {};
+  const addressValue=venue.address;
+  const address=typeof addressValue==="string"?addressValue:[
+    addressValue?.streetAddress,
+    addressValue?.addressLocality,
+    addressValue?.addressRegion,
+    addressValue?.postalCode
+  ].filter(Boolean).join(", ");
+  const lat=Number(venue.geo?.latitude),lng=Number(venue.geo?.longitude);
+  return {
+    name:decode(venue.name||""),
+    address:decode(address||""),
+    lat:Number.isFinite(lat)?lat:null,
+    lng:Number.isFinite(lng)?lng:null
+  };
+}
+
 function textLines(html){
   return String(html||"")
     .replace(/<(?:br|hr)\b[^>]*>/gi,"\n")
@@ -35,12 +67,14 @@ export function extractSinghubVenueLinks(html){
 }
 
 export function parseSinghubVenuePage(html,url){
-  const name=strip(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||"");
+  const metadata=jsonLdVenueMetadata(html);
+  const name=metadata.name||strip(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||"");
   if(!name)return null;
   const lines=textLines(html);
   const addressIndex=lines.findIndex(line=>/^Address$/i.test(line));
-  let address=addressIndex>=0?lines[addressIndex+1]||"":lines.find(line=>/\d{2,6}\s+.+(?:CA\s+\d{5}|San Diego(?:\s|,|$)|La Mesa(?:\s|,|$)|Santee(?:\s|,|$)|Chula Vista(?:\s|,|$)|Spring Valley(?:\s|,|$)|El Cajon(?:\s|,|$)|Lakeside(?:\s|,|$)|Oceanside(?:\s|,|$))/i.test(line))||"";
+  let address=metadata.address||(addressIndex>=0?lines[addressIndex+1]||"":lines.find(line=>/\d{2,6}\s+.+(?:CA\s+\d{5}|San Diego(?:\s|,|$)|La Mesa(?:\s|,|$)|Santee(?:\s|,|$)|Chula Vista(?:\s|,|$)|Spring Valley(?:\s|,|$)|El Cajon(?:\s|,|$)|Lakeside(?:\s|,|$)|Oceanside(?:\s|,|$))/i.test(line))||"");
   address=decode(address.replace(/^Address\s*/i,""));
+  if(address.length>180||/[{}\[\]"@]|schema\.org/i.test(address))address="";
   const scheduleStart=lines.findIndex(line=>/Weekly schedule/i.test(line));
   if(scheduleStart<0)return {name,address,url,schedules:[]};
   const scheduleEnd=lines.findIndex((line,index)=>index>scheduleStart&&/Good to know|About the room|Singers Say/i.test(line));
@@ -66,7 +100,7 @@ export function parseSinghubVenuePage(html,url){
     }
   }
   const unique=[...new Map(schedules.filter(item=>parseClock(item.time)).map(item=>[item.day.toLowerCase()+"|"+item.time.toLowerCase(),item])).values()];
-  return {name,address,url,schedules:unique};
+  return {name,address,url,lat:metadata.lat,lng:metadata.lng,schedules:unique};
 }
 
 async function fetchHtml(url){
@@ -99,7 +133,9 @@ export async function singhubKaraokeEvents({days=45,maxVenues=100}={}){
           category:"nightlife",
           venue:venue.name,
           address:venue.address||null,
-          lat:32.7157,lng:-117.1611,locationPrecision:"source-center",
+          lat:Number.isFinite(venue.lat)?venue.lat:32.7157,
+          lng:Number.isFinite(venue.lng)?venue.lng:-117.1611,
+          locationPrecision:Number.isFinite(venue.lat)&&Number.isFinite(venue.lng)?"source":"source-center",
           start,end:null,
           price:null,priceStatus:"unknown",
           url:venue.url,source:"SingHUB",
