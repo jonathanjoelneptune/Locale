@@ -1,4 +1,4 @@
-export const AREA_GEOMETRY_SCHEMA_VERSION=1;
+export const AREA_GEOMETRY_SCHEMA_VERSION=2;
 
 const COVERAGE_ZONES_URL=new URL("./coverage-zones.json",import.meta.url);
 const GEOGRAPHY_CATALOG_URL=new URL("./geography-catalog.json",import.meta.url);
@@ -36,21 +36,6 @@ const COMMON_ALIASES={
   "ocean-beach":["OB"],
   "mission-beach":["Mission Beach San Diego"]
 };
-
-const milesToLatitudeDegrees=miles=>miles/69.0;
-const milesToLongitudeDegrees=(miles,lat)=>miles/(69.172*Math.max(.2,Math.cos(lat*Math.PI/180)));
-
-function circlePolygon(lat,lng,radiusMiles,steps=36){
-  const ring=[];
-  for(let i=0;i<=steps;i++){
-    const angle=(Math.PI*2*i)/steps;
-    ring.push([
-      lng+Math.cos(angle)*milesToLongitudeDegrees(radiusMiles,lat),
-      lat+Math.sin(angle)*milesToLatitudeDegrees(radiusMiles)
-    ]);
-  }
-  return {type:"Polygon",coordinates:[ring]};
-}
 
 function geometryBounds(geometry){
   const points=[];
@@ -103,14 +88,94 @@ async function fetchJson(url){
   return response.json();
 }
 
+const closeRing=ring=>{
+  if(!ring.length)return ring;
+  const first=ring[0],last=ring[ring.length-1];
+  if(first[0]===last[0]&&first[1]===last[1])return ring;
+  return [...ring,[...first]];
+};
+
+function makeProjector(zones){
+  const referenceLat=zones.reduce((sum,zone)=>sum+Number(zone.lat),0)/Math.max(1,zones.length);
+  const scaleX=Math.cos(referenceLat*Math.PI/180);
+  return {
+    project:({lat,lng})=>({x:Number(lng)*scaleX,y:Number(lat)}),
+    unproject:({x,y})=>[x/scaleX,y]
+  };
+}
+
+function clipHalfPlane(polygon,a,b,c){
+  if(!polygon.length)return [];
+  const inside=point=>(a*point.x+b*point.y)<=c+1e-12;
+  const intersect=(start,end)=>{
+    const dx=end.x-start.x,dy=end.y-start.y;
+    const denominator=a*dx+b*dy;
+    if(Math.abs(denominator)<1e-15)return {...start};
+    const t=(c-a*start.x-b*start.y)/denominator;
+    return {x:start.x+t*dx,y:start.y+t*dy};
+  };
+  const output=[];
+  for(let i=0;i<polygon.length;i++){
+    const current=polygon[i],previous=polygon[(i+polygon.length-1)%polygon.length];
+    const currentInside=inside(current),previousInside=inside(previous);
+    if(currentInside){
+      if(!previousInside)output.push(intersect(previous,current));
+      output.push(current);
+    }else if(previousInside){
+      output.push(intersect(previous,current));
+    }
+  }
+  return output;
+}
+
+function partitionEnvelope(points){
+  const xs=points.map(point=>point.x),ys=points.map(point=>point.y);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const width=Math.max(.02,maxX-minX),height=Math.max(.02,maxY-minY);
+  const padX=Math.max(.018,width*.035),padY=Math.max(.018,height*.035);
+  return [
+    {x:minX-padX,y:minY-padY},
+    {x:maxX+padX,y:minY-padY},
+    {x:maxX+padX,y:maxY+padY},
+    {x:minX-padX,y:maxY+padY}
+  ];
+}
+
+function voronoiGeometry(zones){
+  const projector=makeProjector(zones);
+  const seeds=zones.map(zone=>({
+    id:zone.id,
+    ...projector.project({lat:Number(zone.lat),lng:Number(zone.lng)})
+  }));
+  const envelope=partitionEnvelope(seeds);
+  const polygons=new Map;
+
+  for(const seed of seeds){
+    let polygon=envelope.map(point=>({...point}));
+    for(const other of seeds){
+      if(other.id===seed.id)continue;
+      const dx=other.x-seed.x,dy=other.y-seed.y;
+      if(Math.abs(dx)+Math.abs(dy)<1e-12)continue;
+      const c=(other.x*other.x+other.y*other.y-seed.x*seed.x-seed.y*seed.y)/2;
+      polygon=clipHalfPlane(polygon,dx,dy,c);
+      if(!polygon.length)break;
+    }
+    const ring=closeRing(polygon.map(projector.unproject));
+    polygons.set(seed.id,{type:"Polygon",coordinates:[ring]});
+  }
+
+  return polygons;
+}
+
 export async function loadAreaGeometry({regionId="san-diego"}={}){
-  const [zones,catalog]=await Promise.all([fetchJson(COVERAGE_ZONES_URL),fetchJson(GEOGRAPHY_CATALOG_URL)]);
+  const [allZones,catalog]=await Promise.all([fetchJson(COVERAGE_ZONES_URL),fetchJson(GEOGRAPHY_CATALOG_URL)]);
+  const zones=allZones.filter(zone=>zone.regionId===regionId);
   const catalogIndex=buildCatalogIndex(catalog);
+  const geometries=voronoiGeometry(zones);
   const features=zones
-    .filter(zone=>zone.regionId===regionId)
     .map(zone=>{
       const entries=catalogIndex.get(zone.id)||[];
-      const geometry=circlePolygon(Number(zone.lat),Number(zone.lng),Number(zone.radiusMiles||1));
+      const geometry=geometries.get(zone.id);
       return {
         type:"Feature",
         id:zone.id,
@@ -127,8 +192,8 @@ export async function loadAreaGeometry({regionId="san-diego"}={}){
           labelPoint:{lat:Number(zone.lat),lng:Number(zone.lng)},
           displayPriority:Number(zone.discoveryPriority||50),
           radiusMiles:Number(zone.radiusMiles||1),
-          geometrySource:"coverage-radius",
-          geometryAccuracy:"approximate",
+          geometrySource:"coverage-voronoi",
+          geometryAccuracy:"approximate-partition",
           bbox:geometryBounds(geometry)
         },
         geometry
@@ -141,8 +206,9 @@ export async function loadAreaGeometry({regionId="san-diego"}={}){
     schemaVersion:AREA_GEOMETRY_SCHEMA_VERSION,
     regionId,
     geometryPolicy:{
-      source:"Locale coverage zones",
-      accuracy:"approximate",
+      source:"Locale coverage-zone centers",
+      accuracy:"approximate-partition",
+      topology:"non-overlapping nearest-center tessellation",
       replacementContract:"A feature may be replaced by an authoritative Polygon or MultiPolygon without changing map or event-filter consumers."
     },
     features
