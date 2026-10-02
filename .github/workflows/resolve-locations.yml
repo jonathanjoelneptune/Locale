@@ -44,6 +44,8 @@ jobs:
           fi
       - name: Rebuild coverage diagnostics
         run: node scripts/build-coverage-dashboard.mjs
+      - name: Validate coverage diagnostics
+        run: node scripts/validate-coverage.mjs
       - name: Commit location progress
         id: commit
         run: |
