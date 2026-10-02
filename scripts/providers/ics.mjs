@@ -14,7 +14,7 @@ function parseDate(raw){
   const d=new Date(iso); return Number.isNaN(+d)?null:d.toISOString();
 }
 export async function icsEvents({endpoint,sourceName,sourceId,fallbackCenter,days=45}){
-  const response=await fetch(endpoint,{headers:{"User-Agent":"Locale-events/1.0",Accept:"text/calendar"},signal:AbortSignal.timeout(10000)});
+  const response=await fetch(endpoint,{headers:{"User-Agent":"Mozilla/5.0 (compatible; LocaleEvents/1.2; +https://jonathanjoelneptune.github.io/Locale/)",Accept:"text/calendar","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(10000)});
   if(!response.ok)throw new Error(`${sourceName} ICS ${response.status}`);
   const text=unfold(await response.text()),now=Date.now(),horizon=now+days*86400000,verified=new Date().toISOString(),out=[];
   for(const match of text.matchAll(/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g)){
