@@ -9,8 +9,20 @@ let newLookups=0;
 const MAX_NEW_LOOKUPS_PER_RUN=120;
 const NEGATIVE_CACHE_MS=7*86400000;
 
-const keyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
+const legacyKeyFor=(venue,region)=>[venue,region?.name,region?.administrativeArea,region?.countryCode]
   .filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+
+const isQualifiedQuery=value=>{
+  const text=String(value||"");
+  return /,/.test(text)&&/\b(?:CA|California)\b/i.test(text);
+};
+
+const keyFor=(venue,region)=>{
+  if(isQualifiedQuery(venue)){
+    return [venue,region?.countryCode].filter(Boolean).join(", ").replace(/\s+/g," ").trim();
+  }
+  return legacyKeyFor(venue,region);
+};
 
 const vague=/^(?:tbd|to be determined|location tba|uc san diego|balboa park|class and trip locations vary|location details to come!?|email .* location|seating is limited)/i;
 
@@ -31,7 +43,8 @@ export async function geocodeVenue(venue,region){
   const clean=String(venue||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
   if(!clean||clean.length>180||vague.test(clean))return null;
   const key=keyFor(clean,region);
-  const cached=cache[key];
+  const legacyKey=legacyKeyFor(clean,region);
+  const cached=cache[key]||cache[legacyKey];
   if(cached?.miss){
     const checked=Date.parse(cached.checkedAt||"");
     if(Number.isFinite(checked)&&Date.now()-checked<NEGATIVE_CACHE_MS)return null;
