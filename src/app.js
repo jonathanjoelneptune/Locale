@@ -260,6 +260,7 @@ function resetMapScope(){
   state.resultScope="nearby";
   state.viewport=null;
   state.hasFit=false;
+  if(state.selectedAreaIds?.size)state.areaFitPending=true;
 }
 
 function persistSelectedAreas(){
