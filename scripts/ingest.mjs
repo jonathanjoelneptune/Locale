@@ -217,7 +217,7 @@ const locationGroups=new Map();
 for(let index=0;index<events.length;index++){
   const event=events[index];
   if(event.locationPrecision!=="source-center")continue;
-  const query=String(event.address||event.venue||"").trim();
+  const query=String(event.geocodeQuery||event.address||event.venue||"").trim();
   if(!query)continue;
   const key=`${event.regionId}|${query.toLowerCase().replace(/\s+/g," ")}`;
   if(!locationGroups.has(key))locationGroups.set(key,{eventIndexes:[],query,regionId:event.regionId,hasAddress:!!event.address});
