@@ -1,5 +1,6 @@
 export const COVERAGE_CLASS_TARGETS={
   "entertainment-core":{fridaySaturdayNightAverage:8,recurringLocalOccurrences30d:5},
+  "urban-core":{fridaySaturdayNightAverage:6,recurringLocalOccurrences30d:4},
   urban:{fridaySaturdayNightAverage:5,recurringLocalOccurrences30d:4},
   mixed:{fridaySaturdayNightAverage:4,recurringLocalOccurrences30d:3},
   suburban:{fridaySaturdayNightAverage:3,recurringLocalOccurrences30d:2},
