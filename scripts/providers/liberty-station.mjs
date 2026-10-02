@@ -71,8 +71,15 @@ const parseTime=(month,day,year,time)=>{
   return zonedIso(Number(year),monthIndex,Number(day),clock.hour,clock.minute);
 };
 
-const ADDRESS_RE=/\b\d{2,6}\s+[A-Za-z0-9][A-Za-z0-9 .#'’&\/-]{1,90}\b(?:St|Street|Rd|Road|Ave|Avenue|Blvd|Boulevard|Dr|Drive|Ln|Lane|Way|Ct|Court|Pkwy|Parkway|Pl|Place|Truxtun Rd|Historic Decatur Rd)\b(?:[^,\n]{0,60})?/i;
+const ADDRESS_RE=/\b\d{2,6}\s+[A-Za-z0-9][A-Za-z0-9 .#'’&\/-]{1,90}\b(?:St|Street|Rd|Road|Ave|Avenue|Blvd|Boulevard|Dr|Drive|Ln|Lane|Way|Ct|Court|Pkwy|Parkway|Pl|Place)\b(?:[^,\n]{0,60})?/i;
 const cleanLocationLines=lines=>lines.filter(line=>!/stay in the liberty station loop|join the email list|subscribe|follow us/i.test(line));
+
+export function libertyStationLocation(lines){
+  const clean=cleanLocationLines(lines||[]);
+  const address=clean.find(line=>ADDRESS_RE.test(line))||null;
+  const venueCandidate=clean.find(line=>line!==address&&!ADDRESS_RE.test(line)&&line.length<=120)||null;
+  return {venue:venueCandidate||address||null,address};
+}
 
 function fallbackEvents({html,url,sourceName,sourceId,fallbackCenter}){
   const lines=textLines(html);
@@ -85,10 +92,10 @@ function fallbackEvents({html,url,sourceName,sourceId,fallbackCenter}){
     const end=parseTime(match[1],match[2],match[3],match[5]);
     if(!start)continue;
     const locationIndex=lines.findIndex(line=>/^location$/i.test(line));
-    const locationLines=locationIndex>=0?cleanLocationLines(lines.slice(locationIndex+1,locationIndex+7)):[];
-    const address=locationLines.find(line=>ADDRESS_RE.test(line))||null;
-    const venueCandidate=locationLines.find(line=>line!==address&&!ADDRESS_RE.test(line)&&line.length<=120)||null;
-    const venue=venueCandidate||address||sourceName;
+    const locationLines=locationIndex>=0?lines.slice(locationIndex+1,locationIndex+7):[];
+    const location=libertyStationLocation(locationLines);
+    const address=location.address;
+    const venue=location.venue||sourceName;
     rows.push({
       id:`${sourceId}:${Buffer.from(title+"|"+start).toString("base64url").slice(0,80)}`,
       title,
