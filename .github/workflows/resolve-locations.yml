@@ -21,10 +21,10 @@ jobs:
       - name: Resolve queued venue locations
         id: resolve
         run: |
-          BEFORE="$(git hash-object src/data/venue-geocode-cache.json 2>/dev/null || echo none)"
           node scripts/resolve-locations.mjs
-          AFTER="$(git hash-object src/data/venue-geocode-cache.json 2>/dev/null || echo none)"
-          if [ "$BEFORE" != "$AFTER" ]; then
+          RESOLVED="$(node -e "const fs=require('fs');const x=JSON.parse(fs.readFileSync('src/data/location-resolution-coverage.json','utf8'));process.stdout.write(String(Number(x.run?.resolved||0)))")"
+          echo "resolved_count=$RESOLVED" >> "$GITHUB_OUTPUT"
+          if [ "$RESOLVED" -gt 0 ]; then
             echo "resolved=true" >> "$GITHUB_OUTPUT"
           else
             echo "resolved=false" >> "$GITHUB_OUTPUT"
