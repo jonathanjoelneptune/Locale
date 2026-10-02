@@ -108,7 +108,7 @@ function sourceSummary(sourceHealth=[]){
 }
 
 export async function buildCoverageDashboard({now=new Date()}={}){
-  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,coverageAreas]=await Promise.all([
+  const [events,coverage,places,discoveryCoverage,discoveryQueue,discoveredSources,locationCoverage,locationQueue,coverageAreas,sourceAcquisitionCatalog]=await Promise.all([
     readJson("src/data/events.json",[]),
     readJson("src/data/coverage.json",{regions:{}}),
     readJson("src/data/places.json",[]),
@@ -117,7 +117,8 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     readJson("src/data/discovered-sources.json",[]),
     readJson("src/data/location-resolution-coverage.json",{regions:{}}),
     readJson("src/data/location-resolution-queue.json",[]),
-    readJson("src/data/coverage-zones.json",[])
+    readJson("src/data/coverage-zones.json",[]),
+    readJson("src/data/source-acquisition-catalog.json",{regions:{}})
   ]);
 
   const regions={};
@@ -129,6 +130,17 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     const regionPlaces=places.filter(place=>place.regionId===region.id);
     const regionDiscovery=discoveryQueue.filter(item=>item.regionId===region.id);
     const regionLocationQueue=locationQueue.filter(item=>item.regionId===region.id);
+    const acquisitionRows=sourceAcquisitionCatalog.regions?.[region.id]||[];
+    const sourceAcquisition={
+      strategy:sourceAcquisitionCatalog.strategy||"source-first",
+      total:acquisitionRows.length,
+      active:acquisitionRows.filter(item=>item.status==="active").length,
+      candidate:acquisitionRows.filter(item=>item.status==="candidate").length,
+      blocked:acquisitionRows.filter(item=>item.status==="blocked").length,
+      byLayer:Object.fromEntries([...new Set(acquisitionRows.map(item=>item.layer).filter(Boolean))].sort().map(layer=>[
+        layer,acquisitionRows.filter(item=>item.layer===layer).length
+      ]))
+    };
     const precise=regionEvents.filter(isPreciseLocation).length;
     const coverageAreaRows=coverageAreas
       .filter(item=>item.regionId===region.id)
@@ -172,6 +184,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
       categoryCounts:eventCoverage.categoryCounts||{},
       recurringActivityCounts:eventCoverage.recurringActivityCounts||{},
       sourceHealth:sourceSummary(eventCoverage.sourceHealth||[]),
+      sourceAcquisition,
       discovery:{
         candidateCount:regionDiscovery.length,
         withWebsiteCount:regionDiscovery.filter(item=>!!item.website).length,

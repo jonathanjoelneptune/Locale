@@ -1,6 +1,6 @@
 export const SOURCES=[
-  {id:"ticketmaster",name:"Ticketmaster",scope:"country",countries:["US"],adapter:"ticketmaster",sourceKind:"platform",discovery:"geographic",refreshHours:6},
-  {id:"san-diego-city",name:"City of San Diego",scope:"local",regions:["san-diego"],adapter:"san-diego-city",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"City of San Diego",refreshHours:6},
+  {id:"ticketmaster",name:"Ticketmaster",scope:"country",countries:["US"],adapter:"ticketmaster",sourceKind:"platform",acquisitionTier:"A",coverageLayer:"platform",discovery:"geographic",refreshHours:1},
+  {id:"san-diego-city",name:"City of San Diego",scope:"local",regions:["san-diego"],adapter:"san-diego-city",sourceKind:"government",acquisitionTier:"A",coverageLayer:"citywide",ownerEntityKind:"organizer",ownerName:"City of San Diego",refreshHours:2},
   {id:"poway",name:"City of Poway",scope:"local",regions:["san-diego"],adapter:"poway",sourceKind:"government",ownerEntityKind:"organizer",ownerName:"City of Poway",refreshHours:6},
   {
     id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,
@@ -11,11 +11,11 @@ export const SOURCES=[
     endpoint:"https://balboapark.org",fallbackCenter:{lat:32.7311,lng:-117.1467},refreshHours:6
   },
   {
-    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"sandiego-reader-calendar",sourceKind:"aggregator",minExpectedEvents:1,
+    id:"sandiego-reader",name:"San Diego Reader",scope:"regional",regions:["san-diego"],adapter:"sandiego-reader-calendar",sourceKind:"aggregator",acquisitionTier:"A",coverageLayer:"regional",minExpectedEvents:1,
     endpoint:"https://www.sandiegoreader.com/events/",fallbackCenter:{lat:32.7157,lng:-117.1611},refreshHours:12
   },
   {
-    id:"singhub-karaoke",name:"SingHUB",scope:"regional",regions:["san-diego"],adapter:"singhub-karaoke",sourceKind:"aggregator",minExpectedEvents:1,
+    id:"singhub-karaoke",name:"SingHUB",scope:"regional",regions:["san-diego"],adapter:"singhub-karaoke",sourceKind:"aggregator",acquisitionTier:"A",coverageLayer:"category",minExpectedEvents:1,
     endpoint:"https://singhub.app/find-karaoke?type=live",refreshHours:12
   },
   {
@@ -25,6 +25,18 @@ export const SOURCES=[
   {
     id:"north-park-noise",name:"North Park Noise",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"aggregator",minExpectedEvents:1,
     endpoint:"https://northparknoise.com",fallbackCenter:{lat:32.7470,lng:-117.1290},refreshHours:12
+  },
+  {
+    id:"north-park-main-street",name:"North Park Main Street",scope:"local",regions:["san-diego"],adapter:"tribe",
+    sourceKind:"neighborhood-aggregator",acquisitionTier:"B",coverageLayer:"neighborhood",
+    ownerEntityKind:"organizer",ownerName:"North Park Main Street",minExpectedEvents:1,
+    endpoint:"https://northparkmainstreet.com",fallbackCenter:{lat:32.7475,lng:-117.1297},refreshHours:3
+  },
+  {
+    id:"liberty-station",name:"Liberty Station",scope:"local",regions:["san-diego"],adapter:"liberty-station",
+    sourceKind:"neighborhood-aggregator",acquisitionTier:"B",coverageLayer:"district",
+    ownerEntityKind:"organizer",ownerName:"Liberty Station",minExpectedEvents:1,
+    endpoint:"https://libertystation.com/events/calendar",fallbackCenter:{lat:32.7390,lng:-117.2122},refreshHours:3
   },
   {
     id:"nova-sd",name:"NOVA SD",scope:"local",regions:["san-diego"],adapter:"nova",sourceKind:"official",ownerEntityKind:"place",ownerName:"NOVA SD",minExpectedEvents:1,refreshHours:6
@@ -60,7 +72,7 @@ export const SOURCES=[
     endpoint:"https://tockify.com/api/feeds/ics/sdparkscalendar",fallbackCenter:{lat:32.85,lng:-117.05},refreshHours:12
   },
   {
-    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",sourceKind:"organizer",ownerEntityKind:"organizer",ownerName:"Sunset Trivia",minExpectedEvents:1,refreshHours:12
+    id:"sunset-trivia",name:"Sunset Trivia",scope:"regional",regions:["san-diego"],adapter:"sunset-trivia",sourceKind:"organizer",acquisitionTier:"A",coverageLayer:"category",ownerEntityKind:"organizer",ownerName:"Sunset Trivia",minExpectedEvents:1,refreshHours:6
   },
   {
     id:"til-two-club",name:"Til-Two Club",scope:"local",regions:["san-diego"],adapter:"tribe",sourceKind:"official",ownerEntityKind:"place",ownerName:"Til-Two Club",minExpectedEvents:1,

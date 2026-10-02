@@ -219,12 +219,13 @@ function renderQueue(id,row){
   const dueCount=Number(discovery.dueCount||0);
   const perRun=Math.max(1,Number(budget.probeLimit||1));
   const cycles=Math.ceil(dueCount/perRun);
-  const runsPerHour=6;
+  const runsPerHour=2;
   const theoreticalHours=cycles/runsPerHour;
   const clearText=dueCount===0?"clear":theoreticalHours<1?`~${Math.max(10,Math.ceil(theoreticalHours*60/10)*10)} min`:`~${theoreticalHours.toFixed(1)} hr`;
   document.querySelector("#queueThroughput").innerHTML=`
     <div class="kv-grid">
-      ${kv("Candidates",n(discovery.candidateCount),"total queue")}
+      ${kv("Broad sources",row.sourceAcquisition?`${n(row.sourceAcquisition.active)} active / ${n(row.sourceAcquisition.total)} tracked`:"—",row.sourceAcquisition?`${n(row.sourceAcquisition.candidate)} candidates · ${n(row.sourceAcquisition.blocked)} blocked`:"source catalog pending",row.sourceAcquisition?.active?"good":"warn")}
+      ${kv("Candidates",n(discovery.candidateCount),"Tier C venue gap-fill queue")}
       ${kv("Websites",n(discovery.withWebsiteCount),`${pct(discovery.withWebsiteCount/Math.max(1,discovery.candidateCount))} website-backed`)}
       ${kv("Due now",n(dueCount),"eligible for probing",dueCount?"warn":"good")}
       ${kv("Retry queue",n(discovery.retryCount),"short-term retry/backoff",discovery.retryCount?"warn":"")}
@@ -233,7 +234,7 @@ function renderQueue(id,row){
       ${kv("Needs website",n(discovery.needsWebsiteCount),"cannot qualify yet",discovery.needsWebsiteCount?"warn":"")}
       ${kv("Qualified",n(discovery.qualifiedCount),`${pct(discovery.promotionRate)} yield`,discovery.qualifiedCount?"good":"warn")}
       ${kv("Theoretical cycles",n(cycles),`${perRun} probes/run`)}
-      ${kv("Backlog floor",clearText,"assumes 6 runs/hour and no new candidates")}
+      ${kv("Backlog floor",clearText,"assumes 2 gap-fill runs/hour and no new candidates")}
     </div>`;
 }
 
@@ -390,6 +391,8 @@ function render(id){
   renderPromotions(id);
 
   const funnel=[
+    {label:"Broad calendars active",value:row.sourceAcquisition?.active||0},
+    {label:"Broad calendar candidates",value:row.sourceAcquisition?.candidate||0},
     {label:"Candidates",value:row.discovery.candidateCount},
     {label:"Websites found",value:row.discovery.withWebsiteCount},
     {label:"Due now",value:row.discovery.dueCount},

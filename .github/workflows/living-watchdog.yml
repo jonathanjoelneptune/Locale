@@ -42,9 +42,9 @@ jobs:
             Date.parse(locations.generatedAt||"")||0
           );
           const reconcileLagging=latestFact>dashboardTime+1000;
-          console.log("DISCOVERY_STALE="+(age(discovery.lastRunAt)>20));
+          console.log("DISCOVERY_STALE="+(age(discovery.lastRunAt)>75));
           console.log("RECONCILE_STALE="+(reconcileLagging||age(dashboard.generatedAt)>360));
-          console.log("EVENTS_STALE="+(age(events.generatedAt)>420));
+          console.log("EVENTS_STALE="+(age(events.generatedAt)>120));
           console.log("LOCATIONS_STALE="+(age(locations.generatedAt)>120));
           console.log("DISCOVERY_AGE="+Math.round(age(discovery.lastRunAt)));
           console.log("RECONCILE_AGE="+Math.round(age(dashboard.generatedAt)));

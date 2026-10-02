@@ -24,6 +24,7 @@ import {sunsetTriviaEvents} from "./providers/sunset-trivia.mjs";
 import {singhubKaraokeEvents} from "./providers/singhub-karaoke.mjs";
 import {sanDiegoReaderCalendarEvents} from "./providers/sandiego-reader-calendar.mjs";
 import {tacoTuesdayEvents} from "./providers/taco-tuesday.mjs";
+import {libertyStationEvents} from "./providers/liberty-station.mjs";
 import {canonicalizeVenue} from "./venue-canonical.mjs";
 import {geocodeVenue,saveVenueGeocodeCache} from "./venue-geocode.mjs";
 import {loadAllSources,sourcesForRegionFrom} from "./source-catalog.mjs";
@@ -36,6 +37,7 @@ import {isPreciseLocation} from "./location-quality.mjs";
 const SOURCES=await loadAllSources();
 
 const adapters={
+  "liberty-station":async()=>libertyStationEvents(),
   "sunset-trivia":async()=>sunsetTriviaEvents(),
   "singhub-karaoke":async()=>singhubKaraokeEvents(),
   "taco-tuesday":async()=>tacoTuesdayEvents(),

@@ -1,32 +1,32 @@
 export const DISCOVERY_BUDGETS=Object.freeze({
   bootstrap:Object.freeze({
-    probeLimit:30,
-    probeConcurrency:3,
-    overpassMinIntervalMinutes:60,
+    probeLimit:12,
+    probeConcurrency:2,
+    overpassMinIntervalMinutes:360,
     areaSweeps:2,
     regionalCells:2,
     failedSweepRetryMinutes:60
   }),
   accelerated:Object.freeze({
-    probeLimit:24,
-    probeConcurrency:3,
-    overpassMinIntervalMinutes:90,
+    probeLimit:10,
+    probeConcurrency:2,
+    overpassMinIntervalMinutes:360,
     areaSweeps:2,
     regionalCells:1,
     failedSweepRetryMinutes:90
   }),
   convergence:Object.freeze({
-    probeLimit:18,
+    probeLimit:8,
     probeConcurrency:2,
-    overpassMinIntervalMinutes:180,
+    overpassMinIntervalMinutes:720,
     areaSweeps:1,
     regionalCells:1,
     failedSweepRetryMinutes:180
   }),
   maintenance:Object.freeze({
-    probeLimit:10,
+    probeLimit:6,
     probeConcurrency:2,
-    overpassMinIntervalMinutes:720,
+    overpassMinIntervalMinutes:1440,
     areaSweeps:1,
     regionalCells:1,
     failedSweepRetryMinutes:360
