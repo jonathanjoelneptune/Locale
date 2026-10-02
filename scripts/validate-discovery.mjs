@@ -60,7 +60,8 @@ for(const [index,source] of (sources||[]).entries()){
 }
 
 const queueKeys=new Set;
-const validStatuses=new Set(["candidate","needs-website","retry","qualified"]);
+const validStatuses=new Set(["candidate","needs-website","retry","cold","qualified"]);
+const validProbeLanes=new Set(["event-likely","event-evidence","food-evidence","exploratory","cold-sample","low-value"]);
 for(const [index,item] of (queue||[]).entries()){
   const label=`discovery-queue[${index}]`;
   for(const field of ["key","regionId","name","status","monitorTier"]){
@@ -72,6 +73,11 @@ for(const [index,item] of (queue||[]).entries()){
   if(!validStatuses.has(item.status))fail(`${label} has invalid status ${item.status}`);
   if(item.monitorTier!=="C")fail(`${label} must use monitorTier C`);
   if(item.website&&!validUrl(item.website))fail(`${label} has invalid website ${item.website}`);
+  if(item.probeLane!==undefined&&!validProbeLanes.has(item.probeLane))fail(`${label} has invalid probeLane ${item.probeLane}`);
+  if(item.status==="cold"){
+    if(!item.coldUntil||!Number.isFinite(Date.parse(item.coldUntil)))fail(`${label} is cold without valid coldUntil`);
+    if(item.nextCheckAt!==item.coldUntil)fail(`${label} cold nextCheckAt must equal coldUntil`);
+  }
   if(item.coverageAreaIds!==undefined){
     if(!Array.isArray(item.coverageAreaIds))fail(`${label} coverageAreaIds must be an array`);
     else for(const areaId of item.coverageAreaIds)if(!coverageAreaIds.has(areaId))fail(`${label} references unknown coverage area ${areaId}`);
