@@ -82,22 +82,35 @@ export const SOURCES=[
     endpoint:"https://libertystation.com/events/classes",fallbackCenter:{lat:32.7390,lng:-117.2122},maxLinks:100,refreshHours:6
   },
   {
-    id:"national-city-calendar",name:"National City Calendar of Events",scope:"local",regions:["san-diego"],adapter:"calendar-links",
-    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of National City",minExpectedEvents:1,
-    endpoint:"https://www.nationalcityca.gov/services/calendar-of-events",fallbackCenter:{lat:32.6781,lng:-117.0992},refreshHours:6,enabled:false,
-    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
+    id:"national-city-calendar",name:"National City Calendar of Events",scope:"local",regions:["san-diego"],adapter:"granicus-calendar",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of National City",minExpectedEvents:5,
+    endpoints:["https://www.nationalcityca.gov/services/advanced-components/calendar-list/-sortn-EDate/-toggle-next30days/-sortd-asc"],
+    cityName:"National City",fallbackCenter:{lat:32.6781,lng:-117.0992},maxPages:8,maxDetails:120,
+    locationHints:[
+      {match:"(?:Library|Storytime|TCG Tuesdays|Gamer's World|Lego Club|Coding|u-Tool-ize|Book Club|Craft Night Out|Chronicles of Yarnia|Stay & Play|Yoga @ The Library|Mission: STEAM)",venue:"National City Public Library",address:"1401 National City Blvd, National City, CA 91950",query:"1401 National City Blvd, National City, CA 91950"},
+      {match:"Casa de Salud",venue:"Casa de Salud",address:"1408 Harding Avenue, National City, CA 91950",query:"1408 Harding Avenue, National City, CA 91950"},
+      {match:"FAB |Feeling Fit|Walking Club|Crochet Club",venue:"Kimball Senior Center",address:"1221 D Avenue, National City, CA 91950",query:"1221 D Avenue, National City, CA 91950"},
+      {match:"Community Market",venue:"Kimball Park",address:"E 12th St, National City, CA 91950",query:"Kimball Park, National City, CA"}
+    ],refreshHours:6
   },
   {
-    id:"chula-vista-calendar",name:"City of Chula Vista Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
-    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Chula Vista",minExpectedEvents:1,
-    endpoint:"https://www.chulavistaca.gov/residents/advanced-components/site-content/city-calendar",fallbackCenter:{lat:32.6401,lng:-117.0842},refreshHours:6,enabled:false,
-    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
+    id:"chula-vista-calendar",name:"City of Chula Vista Calendar",scope:"local",regions:["san-diego"],adapter:"granicus-calendar",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of Chula Vista",minExpectedEvents:3,
+    endpoints:[
+      "https://www.chulavistaca.gov/residents/advanced-components/list-detail-pages/calendar/-sortn-EDate/-toggle-next30days/-sortd-asc",
+      "https://www.chulavistaca.gov/residents/cultural-arts/events/-sortn-EDate/-toggle-next30days/-sortd-asc"
+    ],
+    cityName:"Chula Vista",fallbackCenter:{lat:32.6401,lng:-117.0842},maxPages:8,maxDetails:120,
+    locationHints:[
+      {match:"^CIVIC:",venue:"Civic Center Branch Library",address:"365 F Street, Chula Vista, CA 91910",query:"365 F Street, Chula Vista, CA 91910"},
+      {match:"^SOUTH:",venue:"South Chula Vista Branch Library",address:"389 Orange Avenue, Chula Vista, CA 91911",query:"389 Orange Avenue, Chula Vista, CA 91911"},
+      {match:"^OTAY:",venue:"Otay Ranch Branch Library",address:"2015 Birch Road Suite 1103, Chula Vista, CA 91915",query:"2015 Birch Road Suite 1103, Chula Vista, CA 91915"}
+    ],refreshHours:6
   },
   {
-    id:"san-marcos-calendar",name:"City of San Marcos Calendar",scope:"local",regions:["san-diego"],adapter:"calendar-links",
-    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:1,
-    endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},refreshHours:6,enabled:false,
-    disabledReason:"Candidate calendar did not produce a stable production feed; keep in acquisition registry for a dedicated adapter"
+    id:"san-marcos-calendar",name:"City of San Marcos Calendar",scope:"local",regions:["san-diego"],adapter:"san-marcos-calendar",
+    sourceKind:"government",acquisitionTier:"B",coverageLayer:"municipality",ownerEntityKind:"organizer",ownerName:"City of San Marcos",minExpectedEvents:2,
+    endpoint:"https://www.sanmarcosca.gov/Meetings-Events",fallbackCenter:{lat:33.1434,lng:-117.1661},maxDetails:60,refreshHours:6
   },
   {
     id:"ucsd",name:"UC San Diego",scope:"local",regions:["san-diego"],adapter:"localist",sourceKind:"college",enabled:false,excludedFromLocale:true,
