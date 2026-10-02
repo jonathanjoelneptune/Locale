@@ -79,7 +79,7 @@ function recurrenceStarts(match){
   const startDay=Number(match[2]),startYear=Number(match[3]);
   const endMonth=match[4]?MONTHS[match[4].toLowerCase()]:null;
   const endDay=match[5]?Number(match[5]):null,endYear=match[6]?Number(match[6]):null;
-  const endMeridiem=match[11],startMeridiem=match[9]||endMeridiem;
+  const endMeridiem=match[12],startMeridiem=match[9]||endMeridiem;
   const startClock=clock(match[7],match[8],startMeridiem);
   const starts=[localIso(startYear,startMonth,startDay,startClock)];
   if(!endMonth||!endDay||!endYear)return starts;
@@ -113,13 +113,15 @@ export function parseSdplProgramPage(html,{url="https://www.sandiego.gov/public-
       const date=new Date(start);
       let end=null;
       if(endMeridiem){
-        const ending=clock(match[10],match[11]?undefined:undefined,endMeridiem);
+        const ending=clock(match[10],match[11],endMeridiem);
+        const parts=Object.fromEntries(
+          new Intl.DateTimeFormat("en-US",{
+            timeZone:"America/Los_Angeles",year:"numeric",month:"numeric",day:"numeric"
+          }).formatToParts(date).filter(part=>part.type!=="literal").map(part=>[part.type,Number(part.value)])
+        );
         end=zonedLocalIso({
-          year:Number(new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",year:"numeric"}).format(date)),
-          month:Number(new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",month:"numeric"}).format(date)),
-          day:Number(new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",day:"numeric"}).format(date)),
-          hour:ending.hour,minute:Number(match[10]&&match[10].includes(":")?match[10].split(":")[1]:0)||0,
-          timeZone:"America/Los_Angeles"
+          year:parts.year,month:parts.month,day:parts.day,
+          hour:ending.hour,minute:ending.minute,timeZone:"America/Los_Angeles"
         });
       }
       const branch=venue.replace(/\s*-\s*(?:Teen Center|Community Room.*|IDEA Lab.*)$/i,"").trim();
