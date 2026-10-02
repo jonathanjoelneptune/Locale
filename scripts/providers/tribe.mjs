@@ -28,6 +28,18 @@ function cost(event){
   return match?{price:text,priceStatus:"source-text"}:{price:null,priceStatus:"unknown"};
 }
 
+async function tribeHtmlFallback({base,sourceName,sourceId,fallbackCenter}){
+  for(const listing of [base+"/events/",base+"/events/list/"]){
+    try{
+      const events=await jsonLdCrawlEvents({
+        endpoint:listing,sourceName,sourceId,fallbackCenter,linkPattern:"/event/",maxLinks:40
+      });
+      if(events.length)return events;
+    }catch{}
+  }
+  return [];
+}
+
 export async function tribeEvents({endpoint,sourceName,sourceId,fallbackCenter,days=45,maxPages=12}){
   if(!endpoint)throw new Error("Tribe adapter requires endpoint");
   const base=endpoint.replace(/\/$/,"");
