@@ -663,4 +663,5 @@ await writeFile(SOURCES_PATH,JSON.stringify(discoveredSources.sort((a,b)=>a.id.l
 await writeFile(STATE_PATH,JSON.stringify(state,null,2)+"\n");
 await writeFile(COVERAGE_PATH,JSON.stringify(buildCoverage(queue,discoveredSources,stats),null,2)+"\n");
 
-console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed across priority lanes, ${stats.coldMigrated} moved to cold storage, ${stats.promoted} promoted, ${discoveredSources.length} dynamic sources total. Overpass ${runOverpass?"ran":"deferred"}.`);
+const activeDynamicSources=discoveredSources.filter(source=>source.enabled!==false&&!source.aliasOf).length;
+console.log(`Discovery run complete [${discoveryPlan.mode}]: ${queue.length} queued places, ${stats.probed} probed across priority lanes, ${stats.coldMigrated} moved to cold storage, ${stats.promoted} promoted, ${activeDynamicSources} active dynamic sources. Overpass ${runOverpass?"ran":"deferred"}.`);
