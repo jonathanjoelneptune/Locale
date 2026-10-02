@@ -42,6 +42,7 @@ const state={
   hasFit:false,
   sort:"time",
   listMode:"events",
+  selectedEventId:null,
   saved,
   venueFilter:null,
   resultScope:"nearby",
@@ -52,7 +53,7 @@ const state={
 const root=document.querySelector("#app");
 root.innerHTML=`<div id="eventDetailRoot"></div>
 <div id="splash" class="locale-splash"><div class="splash-mark">⌖</div><strong>Locale</strong><span>Finding what’s happening around you…</span></div>
-<div class="shell dual-shell">
+<div class="shell dual-shell ds-v1">
   <aside class="discovery-panel discovery-left">
     <div class="discovery-controls">
       ${Header()}
@@ -124,8 +125,13 @@ function initMapLater(){
             state.hasFit=true;
             render();
           }else{
-            document.querySelectorAll(".card.selected").forEach(x=>x.classList.remove("selected"));
-            mapUI?.selectEvent("__none__");
+            state.selectedEventId=null;
+            document.querySelectorAll(".card.selected").forEach(x=>{
+              x.classList.remove("selected");
+              x.setAttribute("aria-selected","false");
+            });
+            document.querySelectorAll(".highlight-card.selected").forEach(x=>x.classList.remove("selected"));
+            mapUI?.selectEvent(null);
           }
         },
         viewport=>{
@@ -218,6 +224,7 @@ function render(){
   if(clearAreaMap)clearAreaMap.hidden=!areaMode;
 
   const {nearby,visible}=currentEventView();
+  if(state.selectedEventId&&!visible.some(event=>event.id===state.selectedEventId))state.selectedEventId=null;
   const count=document.querySelector("#resultsRailCount");
   if(count)count.textContent=visible.length;
   renderSidebar(document.querySelector("#sidebar"),visible,state);
@@ -225,6 +232,7 @@ function render(){
   mapUI?.setAreas(state.areaFeatures,state.selectedAreaIds);
   mapUI?.setRadius(state.radius,state.center,{visible:!areaMode});
   mapUI?.renderEvents(visible);
+  mapUI?.selectEvent(state.selectedEventId);
 
   if(areaMode&&state.areaFitPending&&mapUI){
     mapUI.focusAreas([...state.selectedAreaIds]);
@@ -245,7 +253,8 @@ function renderHighlights(events){
   section.classList.toggle("is-empty",!events.length);
   const highlights=rankHighlights(events,{limit:6});
   const symbols={sports:"◆",music:"♫",festival:"✦",food:"◇",theater:"◈",comedy:"✺",family:"●",community:"✺",nightlife:"☾",other:"＋"};
-  el.innerHTML=highlights.length?highlights.map(event=>`<button class="highlight-card event-surface category-surface-${event.category}" data-highlight="${event.id}" data-url="${event.url||""}"><span class="highlight-art category-art category-bg-${event.category} ${event.image?"has-image":"is-fallback"}">${event.image?`<img src="${event.image}" alt="" loading="lazy">`:`<span class="category-art-symbol" aria-hidden="true">${symbols[event.category]||"✦"}</span><small>${event.category}</small>`}</span><span class="highlight-copy"><strong>${event.title}</strong><small>${event.venue} · ${Number.isFinite(event.distance)?event.distance.toFixed(1)+" mi":"Location approximate"}</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
+  const fmt=event=>new Intl.DateTimeFormat("en-US",event.timeStatus==="unknown"?{weekday:"short",month:"short",day:"numeric"}:{weekday:"short",month:"short",day:"numeric",hour:"numeric"}).format(new Date(event.start));
+  el.innerHTML=highlights.length?highlights.map(event=>`<button class="highlight-card event-surface category-surface-${event.category} ${state.selectedEventId===event.id?"selected":""}" data-highlight="${event.id}" data-url="${event.url||""}" aria-pressed="${state.selectedEventId===event.id}"><span class="highlight-art category-art category-bg-${event.category} ${event.image?"has-image":"is-fallback"}">${event.image?`<img src="${event.image}" alt="" loading="lazy">`:`<span class="category-art-symbol" aria-hidden="true">${symbols[event.category]||"✦"}</span><small>${event.category}</small>`}</span><span class="highlight-copy"><span class="highlight-kicker">${event.category} · ${fmt(event)}</span><strong>${event.title}</strong><small>${event.venue} · ${Number.isFinite(event.distance)?event.distance.toFixed(1)+" mi":"Location approximate"}</small><em>Explore event →</em></span></button>`).join(""):`<div class="highlight-empty">Highlights will appear here as real event sources come online.</div>`;
   el.querySelectorAll("[data-highlight]").forEach(button=>button.onclick=()=>{selectEvent(button.dataset.highlight);openEventDetail(button.dataset.highlight)});
 }
 
@@ -479,10 +488,20 @@ function closeEventDetail(){
   detailRoot.innerHTML="";
 }
 function selectEvent(id){
-  const target=document.querySelector('[data-event-id="'+CSS.escape(id)+'"]');
-  document.querySelectorAll(".card").forEach(card=>card.classList.toggle("selected",card.dataset.eventId===id));
+  state.selectedEventId=id||null;
+  const target=id?document.querySelector('[data-event-id="'+CSS.escape(id)+'"]'):null;
+  document.querySelectorAll(".card").forEach(card=>{
+    const selected=card.dataset.eventId===state.selectedEventId;
+    card.classList.toggle("selected",selected);
+    card.setAttribute("aria-selected",String(selected));
+  });
+  document.querySelectorAll("[data-highlight]").forEach(card=>{
+    const selected=card.dataset.highlight===state.selectedEventId;
+    card.classList.toggle("selected",selected);
+    card.setAttribute("aria-pressed",String(selected));
+  });
   target?.scrollIntoView({behavior:"smooth",block:"center"});
-  mapUI?.selectEvent(id);
+  mapUI?.selectEvent(state.selectedEventId);
 }
 
 document.querySelector("#resultsToggle").onclick=()=>{

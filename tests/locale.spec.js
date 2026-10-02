@@ -653,3 +653,99 @@ test("neighborhood polygons stay land-aware and labels read as map typography",a
   expect(css).toContain("text-transform:uppercase");
   expect(css).toContain("text-shadow:-1px -1px");
 });
+
+
+test("Design System v1 tokens and hierarchy are active",async({page})=>{
+  await page.setViewportSize({width:1600,height:900});
+  await waitForLocale(page);
+  await expect(page.locator(".shell")).toHaveClass(/ds-v1/);
+
+  const tokenSource=await (await page.request.get("./styles/base.css")).text();
+  expect(tokenSource).toContain("--surface-1");
+  expect(tokenSource).toContain("--border-subtle");
+  expect(tokenSource).toContain("--radius-md");
+  expect(tokenSource).toContain("--motion-base");
+  expect(tokenSource).toContain("prefers-reduced-motion");
+
+  const geometry=await page.evaluate(()=>{
+    const box=selector=>document.querySelector(selector)?.getBoundingClientRect();
+    const discovery=box(".discovery-left");
+    const map=box(".map-stage");
+    const events=box(".event-right");
+    const row=document.querySelector(".event-row");
+    const rowStyle=row?getComputedStyle(row):null;
+    return {
+      discoveryWidth:discovery?.width||0,
+      mapWidth:map?.width||0,
+      eventWidth:events?.width||0,
+      rowRadius:rowStyle?.borderRadius||"",
+      rowHeight:row?.getBoundingClientRect().height||0
+    };
+  });
+  expect(geometry.mapWidth).toBeGreaterThan(geometry.discoveryWidth);
+  expect(geometry.mapWidth).toBeGreaterThan(geometry.eventWidth);
+  if(geometry.rowHeight){
+    expect(geometry.rowHeight).toBeLessThanOrEqual(64);
+    expect(geometry.rowRadius).not.toBe("0px");
+  }
+});
+
+test("event selection persists across rail renders and focuses the map",async({page})=>{
+  await waitForLocale(page);
+  await selectNext7Days(page);
+  const row=page.locator('.event-row[data-mappable="true"]').first();
+  await expect(row).toBeVisible();
+  const id=await row.getAttribute("data-event-id");
+  await row.click();
+
+  await expect(page.locator(`[data-event-id="${id}"]`)).toHaveAttribute("aria-selected","true");
+  await expect(page.locator("#map")).toHaveClass(/has-selected-event/);
+  await expect(page.locator(".event-pin.selected-pin")).toHaveCount(1);
+
+  const heart=page.locator(`[data-event-id="${id}"] [data-save-event]`);
+  await heart.click();
+  await expect(page.locator(`[data-event-id="${id}"]`)).toHaveAttribute("aria-selected","true");
+  await expect(page.locator(".event-pin.selected-pin")).toHaveCount(1);
+
+  await page.locator("#map").click({position:{x:20,y:120}});
+  await expect(page.locator("#map")).not.toHaveClass(/has-selected-event/);
+});
+
+test("map density hides low-priority single-event labels until interaction",async({page})=>{
+  await waitForLocale(page);
+  await selectNext7Days(page);
+  const map=page.locator("#map");
+  await map.evaluate(el=>el.__localeMap.setZoom(11,{animate:false}));
+  await expect.poll(async()=>map.getAttribute("data-map-zoom")).toBe("11");
+
+  const hidden=page.locator(".event-pin-label.is-density-hidden");
+  if(await hidden.count()){
+    await expect(hidden.first()).toHaveCSS("visibility","hidden");
+  }
+
+  const mapSource=await (await page.request.get("./src/components/map.js")).text();
+  expect(mapSource).toContain("count>1||zoom>=13");
+  expect(mapSource).toContain("has-selected-event");
+});
+
+test("Design System v1 keeps the stacked mobile layout usable",async({page})=>{
+  await page.setViewportSize({width:600,height:900});
+  await waitForLocale(page);
+  const boxes=await page.evaluate(()=>{
+    const rect=selector=>document.querySelector(selector)?.getBoundingClientRect();
+    return {
+      discovery:rect(".discovery-left"),
+      map:rect(".map-stage"),
+      events:rect(".event-right")
+    };
+  });
+  expect(boxes.discovery.width).toBeGreaterThan(500);
+  expect(boxes.map.width).toBeGreaterThan(500);
+  expect(boxes.events.width).toBeGreaterThan(500);
+  expect(boxes.map.top).toBeGreaterThanOrEqual(boxes.discovery.bottom-2);
+  expect(boxes.events.top).toBeGreaterThanOrEqual(boxes.map.bottom-2);
+  const toggles=page.locator(".edge-toggle");
+  await expect(toggles).toHaveCount(2);
+  await expect(toggles.nth(0)).toBeHidden();
+  await expect(toggles.nth(1)).toBeHidden();
+});

@@ -308,7 +308,9 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
           :target;
         const face=count>1?`<span>${count}</span>`:(e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${SYMBOLS[e.category]||"•"}</span>`);
         const label=count>1?`${count} events`:e.title;
-        const icon=L.divIcon({className:"event-marker-wrap locale-event-marker-icon",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
+        const showLabel=count>1||zoom>=13;
+        const labelClass=showLabel?"":" is-density-hidden";
+        const icon=L.divIcon({className:"event-marker-wrap locale-event-marker-icon",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label${labelClass}">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
         const marker=L.marker(origin,{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} nearby events`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));
@@ -334,9 +336,17 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
       });
     },
     selectEvent(id){
-      markers.forEach(marker=>marker.getElement()?.querySelector(".event-pin")?.classList.remove("selected-pin"));
-      const marker=markers.get(id);
-      marker?.getElement()?.querySelector(".event-pin")?.classList.add("selected-pin");
+      const selectedMarker=id?markers.get(id):null;
+      el.classList.toggle("has-selected-event",!!selectedMarker);
+      const seen=new Set;
+      markers.forEach(marker=>{
+        if(seen.has(marker))return;
+        seen.add(marker);
+        const node=marker.getElement();
+        const selected=marker===selectedMarker;
+        node?.classList.toggle("selected-event-marker",selected);
+        node?.querySelector(".event-pin")?.classList.toggle("selected-pin",selected);
+      });
     },
     hoverEvent(id,on=true){
       const marker=markers.get(id);
