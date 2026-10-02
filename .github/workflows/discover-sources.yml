@@ -45,6 +45,8 @@ jobs:
         run: node scripts/validate-discovery.mjs
       - name: Rebuild coverage diagnostics
         run: node scripts/build-coverage-dashboard.mjs
+      - name: Validate coverage diagnostics
+        run: node scripts/validate-coverage.mjs
       - name: Commit discovery progress
         id: commit
         run: |
