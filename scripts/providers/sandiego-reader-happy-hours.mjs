@@ -140,7 +140,7 @@ function startClock(detail){
   return parsed?{...parsed,known:true}:{hour:16,minute:0,known:false};
 }
 
-export async function sanDiegoReaderHappyHourEvents({days=45}={}){
+export async function sanDiegoReaderHappyHourEvents({days=45,enrichPlaces=true}={}){
   const settled=await Promise.allSettled(DAYS.map(async day=>{
     const endpoint=`${BASE}/${day}/`;
     const response=await fetch(endpoint,{headers:{"User-Agent":UA,Accept:"text/html","Accept-Language":"en-US,en;q=0.9"},signal:AbortSignal.timeout(12000)});
@@ -148,7 +148,7 @@ export async function sanDiegoReaderHappyHourEvents({days=45}={}){
     return parseReaderSpecials(await response.text(),day);
   }));
   const allItems=settled.flatMap(result=>result.status==="fulfilled"?result.value:[]);
-  const placeMetadata=await enrichReaderPlaces(allItems);
+  const placeMetadata=enrichPlaces?await enrichReaderPlaces(allItems):new Map();
   const verified=new Date().toISOString(),out=[];
   for(const result of settled){
     if(result.status!=="fulfilled")continue;
@@ -163,9 +163,9 @@ export async function sanDiegoReaderHappyHourEvents({days=45}={}){
           category:"food",subcategories:["happy-hour","recurring-special"],tags:["happy-hour","deal","recurring-special",item.day],
           venue:item.venue,address:meta?.address||null,
           geocodeQuery:meta?.address||[item.venue,item.neighborhood,"San Diego County, CA"].filter(Boolean).join(", "),
-          lat:Number.isFinite(Number(meta?.lat))?Number(meta.lat):32.7157,
-          lng:Number.isFinite(Number(meta?.lng))?Number(meta.lng):-117.1611,
-          locationPrecision:Number.isFinite(Number(meta?.lat))&&Number.isFinite(Number(meta?.lng))?"source":"source-center",
+          lat:meta?.lat!==null&&meta?.lat!==undefined&&Number.isFinite(Number(meta.lat))?Number(meta.lat):32.7157,
+          lng:meta?.lng!==null&&meta?.lng!==undefined&&Number.isFinite(Number(meta.lng))?Number(meta.lng):-117.1611,
+          locationPrecision:meta?.lat!==null&&meta?.lat!==undefined&&meta?.lng!==null&&meta?.lng!==undefined&&Number.isFinite(Number(meta.lat))&&Number.isFinite(Number(meta.lng))?"source":"source-center",
           start,end:null,timeStatus:clock.known?"known":"unknown",timeZone:"America/Los_Angeles",
           price:/\$\s*\d/.test(item.detail)?item.detail.match(/\$\s*\d+(?:\.\d{1,2})?/)?.[0]||null:null,
           priceStatus:/\$\s*\d/.test(item.detail)?"source-text":"unknown",
