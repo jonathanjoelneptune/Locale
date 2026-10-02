@@ -6,8 +6,9 @@ const pct=value=>Number.isFinite(Number(value))?`${(Number(value)*100).toFixed(1
 const n=value=>fmt.format(Number(value||0));
 const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 const safeUrl=value=>{try{const url=new URL(value);return ["http:","https:"].includes(url.protocol)?url.href:null}catch{return null}};
-const dateText=value=>value&&Number.isFinite(Date.parse(value))?new Date(value).toLocaleString():"—";
-const shortDate=value=>value&&Number.isFinite(Date.parse(value))?new Date(value).toLocaleTimeString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):"—";
+const timeValue=value=>typeof value==="number"?value:Date.parse(value||"");
+const dateText=value=>Number.isFinite(timeValue(value))?new Date(timeValue(value)).toLocaleString():"—";
+const shortDate=value=>Number.isFinite(timeValue(value))?new Date(timeValue(value)).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):"—";
 const duration=value=>{
   const ms=Math.max(0,Number(value||0));
   if(ms<1000)return `${ms} ms`;
@@ -17,7 +18,7 @@ const duration=value=>{
   return `${minutes}m ${rest}s`;
 };
 const relative=value=>{
-  const time=Date.parse(value||"");
+  const time=timeValue(value);
   if(!Number.isFinite(time))return "—";
   const delta=Date.now()-time;
   const future=delta<0;
@@ -84,15 +85,17 @@ async function fetchActions(force=false){
     actionsState={run:null,jobs:[],checkedAt:new Date().toISOString(),error:"Live Actions status is only queried on the deployed diagnostics page."};
     return;
   }
-  if(!force&&Date.now()-actionsLastFetch<90000)return;
+  if(!force&&Date.now()-actionsLastFetch<115000)return;
   actionsLastFetch=Date.now();
   try{
     const response=await fetch(ACTIONS_RUNS,{headers:{Accept:"application/vnd.github+json"},cache:"no-store"});
     if(!response.ok)throw new Error(`GitHub Actions API ${response.status}`);
     const payload=await response.json();
     const run=payload.workflow_runs?.[0]||null;
-    let jobs=[];
-    if(run?.jobs_url){
+    let jobs=actionsState.run?.id===run?.id?(actionsState.jobs||[]):[];
+    const active=["queued","in_progress","waiting","pending"].includes(run?.status);
+    const needJobs=!!run?.jobs_url&&(active||actionsState.run?.id!==run?.id||!jobs.length);
+    if(needJobs){
       const jobsResponse=await fetch(run.jobs_url,{headers:{Accept:"application/vnd.github+json"},cache:"no-store"});
       if(jobsResponse.ok)jobs=(await jobsResponse.json()).jobs||[];
     }
@@ -413,12 +416,17 @@ async function load({silent=false,forceActions=false}={}){
   const status=document.querySelector("#diagStatus");
   if(!silent)status.textContent="Loading current operations state…";
   try{
-    const [nextDashboard,nextLive,stateFallback,coverageFallback]=await Promise.all([
+    const [nextDashboard,nextLive]=await Promise.all([
       json("coverage-dashboard.json"),
-      optionalJson("discovery-live.json"),
-      optionalJson("discovery-state.json"),
-      optionalJson("discovery-coverage.json")
+      optionalJson("discovery-live.json")
     ]);
+    let stateFallback=null,coverageFallback=null;
+    if(!nextLive){
+      [stateFallback,coverageFallback]=await Promise.all([
+        optionalJson("discovery-state.json"),
+        optionalJson("discovery-coverage.json")
+      ]);
+    }
     dashboard=nextDashboard;
     live=nextLive||{
       generatedAt:coverageFallback?.generatedAt||stateFallback?.lastRunAt||null,
@@ -465,7 +473,7 @@ setInterval(()=>{
 },1000);
 
 setInterval(async()=>{
-  await fetchActions(true);
+  await fetchActions(false);
   renderWorker();
 },120000);
 
