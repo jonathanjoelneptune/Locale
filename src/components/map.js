@@ -90,6 +90,13 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
 
   const areaId=feature=>feature?.properties?.id||feature?.id;
   const areaPriority=feature=>Number(feature?.properties?.displayPriority||50);
+  const AREA_COLORS=["#6c78a8","#4f8c92","#a1718f","#8c7b55","#6f8b6b","#8d6f63","#6d84a0","#82729f","#7d8f62","#9a7662","#5f8890","#8b7997"];
+  const areaColor=feature=>{
+    const id=areaId(feature)||"area";
+    let hash=0;
+    for(let i=0;i<id.length;i++)hash=((hash<<5)-hash+id.charCodeAt(i))|0;
+    return AREA_COLORS[Math.abs(hash)%AREA_COLORS.length];
+  };
   const areaBounds=feature=>{
     const bbox=feature?.properties?.bbox;
     if(Array.isArray(bbox)&&bbox.length===4)return L.latLngBounds([[bbox[1],bbox[0]],[bbox[3],bbox[2]]]);
@@ -108,6 +115,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     const boundaryThreshold=priorityThreshold(zoom);
     const textThreshold=labelThreshold(zoom);
     let rendered=0;
+    const labelCandidates=[];
 
     areaFeatures.forEach(feature=>{
       const id=areaId(feature);
@@ -115,14 +123,15 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
       const selected=selectedAreaIds.has(id);
       if(!selected&&areaPriority(feature)<boundaryThreshold)return;
       const p=feature.properties||{};
+      const shade=areaColor(feature);
       const normalStyle={
         pane:"locale-area-polygons",
         className:`locale-area-boundary ${selected?"selected-area-boundary":""}`,
-        color:selected?"#138aa5":"#2b7c89",
-        weight:selected?2.4:1,
-        opacity:selected ? .95 : (zoom>=12 ? .34 : .24),
-        fillColor:selected?"#3caec0":"#61aab4",
-        fillOpacity:selected ? .11 : (zoom>=12 ? .026 : .014)
+        color:selected?"#173943":shade,
+        weight:selected?2.6:1.15,
+        opacity:selected ? .96 : (zoom>=12 ? .62 : .46),
+        fillColor:shade,
+        fillOpacity:selected ? .19 : (zoom>=12 ? .085 : .055)
       };
       const geo=L.geoJSON(feature,{pane:"locale-area-polygons",interactive:true,style:()=>normalStyle}).addTo(areaLayer);
       geo.eachLayer(shape=>{
@@ -131,34 +140,54 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
           onArea?.({id,feature,originalEvent:ev.originalEvent});
         });
         shape.on("mouseover",()=>shape.setStyle({
-          weight:selected?2.7:1.8,
-          opacity:.8,
-          fillOpacity:selected ? .14 : .07
+          weight:selected?2.9:1.9,
+          opacity:.92,
+          fillOpacity:selected ? .22 : .13
         }));
         shape.on("mouseout",()=>shape.setStyle(normalStyle));
       });
       rendered++;
 
       const label=p.labelPoint;
-      if(!label||(!selected&&areaPriority(feature)<textThreshold))return;
-      const marker=L.marker([label.lat,label.lng],{
-        pane:"locale-area-labels",
-        interactive:true,
-        keyboard:false,
-        icon:L.divIcon({
-          className:"locale-area-label-marker",
-          html:`<span class="area-map-label ${selected?"selected":""}" data-area-label="${esc(id)}">${esc(p.name||id)}</span>`,
-          iconSize:[150,26],
-          iconAnchor:[75,13]
-        })
-      }).addTo(areaLabelLayer);
-      marker.on("click",ev=>{
-        L.DomEvent.stopPropagation(ev);
-        onArea?.({id,feature,originalEvent:ev.originalEvent});
-      });
+      if(label&&(selected||areaPriority(feature)>=textThreshold)){
+        labelCandidates.push({feature,id,p,label,selected,shade,priority:areaPriority(feature)});
+      }
     });
 
+    const occupied=[];
+    const overlaps=(a,b)=>!(a.right<b.left||a.left>b.right||a.bottom<b.top||a.top>b.bottom);
+    labelCandidates
+      .sort((a,b)=>Number(b.selected)-Number(a.selected)||b.priority-a.priority||a.p.name.localeCompare(b.p.name))
+      .forEach(item=>{
+        const {feature,id,p,label,selected,shade}=item;
+        const latLng=L.latLng(label.lat,label.lng);
+        if(!map.getBounds().pad(.08).contains(latLng))return;
+        const point=map.latLngToContainerPoint(latLng);
+        const width=Math.min(150,Math.max(54,(String(p.name||id).length*6.2)+18));
+        const height=22;
+        const box={left:point.x-width/2-5,right:point.x+width/2+5,top:point.y-height/2-4,bottom:point.y+height/2+4};
+        if(!selected&&occupied.some(existing=>overlaps(box,existing)))return;
+        occupied.push(box);
+
+        const marker=L.marker(latLng,{
+          pane:"locale-area-labels",
+          interactive:true,
+          keyboard:false,
+          icon:L.divIcon({
+            className:"locale-area-label-marker",
+            html:`<span class="area-map-label ${selected?"selected":""}" data-area-label="${esc(id)}" style="--area-shade:${shade}">${esc(p.name||id)}</span>`,
+            iconSize:[150,26],
+            iconAnchor:[75,13]
+          })
+        }).addTo(areaLabelLayer);
+        marker.on("click",ev=>{
+          L.DomEvent.stopPropagation(ev);
+          onArea?.({id,feature,originalEvent:ev.originalEvent});
+        });
+      });
+
     el.dataset.areaBoundaryCount=String(rendered);
+    el.dataset.areaLabelCount=String(areaLabelLayer.getLayers().length);
     el.dataset.selectedAreaCount=String(selectedAreaIds.size);
   }
 

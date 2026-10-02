@@ -62,8 +62,8 @@ root.innerHTML=`<div id="eventDetailRoot"></div>
         <div class="radius-ticks"><span>5</span><span>15</span><span>25</span><span>35</span><span>50</span></div>
         <small id="radiusAreaNote" class="radius-area-note">Radius resumes when selected areas are cleared.</small>
       </section>
-      <div id="areaControls"></div>
       <div id="dateControls"></div>
+      <div id="areaControls"></div>
     </div>
   </aside>
   <button id="discoveryToggle" class="edge-toggle discovery-toggle-left" type="button" aria-label="Toggle search controls"><span class="drawer-arrow">‹</span><span class="drawer-label">Search</span></button>

@@ -533,14 +533,16 @@ test("area geometry is a reusable data layer independent of Leaflet",async({page
       count:collection.features.length,
       northParkGeometry:northPark.geometry.type,
       northParkSource:northPark.properties.geometrySource,
-      northParkFound:memberships.includes("north-park")
+      northParkFound:memberships.includes("north-park"),
+      seedMembershipsAreExclusive:collection.features.every(feature=>index.areasForPoint(feature.properties.labelPoint).length===1)
     };
   });
-  expect(result.schemaVersion).toBe(1);
+  expect(result.schemaVersion).toBe(2);
   expect(result.count).toBe(configuredSanDiegoAreaCount);
   expect(result.northParkGeometry).toBe("Polygon");
-  expect(result.northParkSource).toBe("coverage-radius");
+  expect(result.northParkSource).toBe("coverage-voronoi");
   expect(result.northParkFound).toBe(true);
+  expect(result.seedMembershipsAreExclusive).toBe(true);
 
   const mapSource=await (await page.request.get("./src/components/map.js")).text();
   const dataSource=await (await page.request.get("./src/data/areaGeometry.js")).text();
@@ -583,14 +585,44 @@ test("users can multi-select areas and see the same scope on the map and results
   await expect(page.locator("#clearAreaSelectionMap")).toBeHidden();
 });
 
-test("clicking a neighborhood label on the map selects and focuses that area",async({page})=>{
+test("clicking a visible neighborhood label on the map selects and focuses that area",async({page})=>{
   await waitForLocale(page);
   const map=page.locator("#map");
-  await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],11,{animate:false}));
-  await expect(page.locator('[data-area-label="north-park"]')).toBeVisible({timeout:5000});
+  await map.evaluate(el=>el.__localeMap.setView([32.7475,-117.1297],12,{animate:false}));
+  const label=page.locator(".area-map-label").first();
+  await expect(label).toBeVisible({timeout:5000});
+  const id=await label.getAttribute("data-area-label");
+  expect(id).toBeTruthy();
   // Event pins intentionally have pointer priority when they overlap an area label.
-  // Dispatch directly to the label here to verify its selection/focus handler independently.
-  await page.locator('[data-area-label="north-park"]').dispatchEvent("click");
+  // Dispatch directly to the rendered label to verify its selection/focus handler independently.
+  await label.dispatchEvent("click");
   await expect(map).toHaveAttribute("data-selected-area-count","1");
-  await expect(page.locator('.area-chip[data-remove-area="north-park"]')).toBeVisible();
+  await expect(page.locator(`.area-chip[data-remove-area="${id}"]`)).toBeVisible();
+});
+
+
+test("neighborhood polygons form a non-overlapping partition and date controls precede areas",async({page})=>{
+  await waitForLocale(page);
+  const layout=await page.evaluate(()=>{
+    const date=document.querySelector("#dateControls");
+    const areas=document.querySelector("#areaControls");
+    return {
+      dateBeforeAreas:!!(date.compareDocumentPosition(areas)&Node.DOCUMENT_POSITION_FOLLOWING),
+      boundaryCount:Number(document.querySelector("#map")?.dataset.areaBoundaryCount||0),
+      labelCount:Number(document.querySelector("#map")?.dataset.areaLabelCount||0)
+    };
+  });
+  expect(layout.dateBeforeAreas).toBe(true);
+  expect(layout.boundaryCount).toBeGreaterThan(0);
+  expect(layout.labelCount).toBeLessThanOrEqual(layout.boundaryCount);
+
+  const source=await (await page.request.get("./src/data/areaGeometry.js")).text();
+  const mapSource=await (await page.request.get("./src/components/map.js")).text();
+  const css=await (await page.request.get("./styles/app.css")).text();
+  expect(source).toContain("coverage-voronoi");
+  expect(source).toContain("clipHalfPlane");
+  expect(source).not.toContain("circlePolygon");
+  expect(mapSource).toContain("AREA_COLORS");
+  expect(mapSource).toContain("occupied.some");
+  expect(css).toContain("--area-shade");
 });
