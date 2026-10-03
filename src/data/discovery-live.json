@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-03T13:40:51.021Z",
+  "generatedAt": "2026-10-03T14:57:25.821Z",
   "lastRun": {
-    "startedAt": "2026-10-03T13:39:45.471Z",
+    "startedAt": "2026-10-03T14:57:05.553Z",
     "queueBefore": {
-      "total": 2220,
+      "total": 2221,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 170,
+      "due": 0,
+      "retry": 171,
       "cold": 128,
       "lowValue": 1033,
       "qualified": 16,
-      "needsWebsite": 902,
+      "needsWebsite": 903,
       "lanes": {
-        "exploratory": 696,
+        "exploratory": 697,
         "event-evidence": 235,
         "event-likely": 116,
         "cold-sample": 128,
@@ -20,29 +20,11 @@
         "food-evidence": 12
       }
     },
-    "seededFromRegistry": 1,
+    "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "gapScore": 99,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "logan-heights",
-        "name": "Logan Heights",
-        "gapScore": 96,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -72,14 +54,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1429439653",
-        "name": "Amardeen Cafe",
+        "key": "san-diego|osm|way|31809315",
+        "name": "California Pizza Kitchen",
         "category": "restaurant",
-        "website": "http://amardeencafe.com/",
+        "website": "https://www.cpk.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
@@ -90,27 +72,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-05T13:40:29.796Z",
-        "checkedAt": "2026-10-03T13:40:29.604Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8726804043",
-        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-06T13:40:31.830Z",
-        "checkedAt": "2026-10-03T13:40:29.602Z"
+        "nextCheckAt": "2026-10-05T14:57:06.211Z",
+        "checkedAt": "2026-10-03T14:57:05.792Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -122,7 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
+      "event-likely": 0,
       "event-evidence": 0,
       "food-evidence": 0,
       "exploratory": 0,
@@ -137,11 +100,11 @@
       "low-value": 1,
       "cold-sample": 1
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-03T13:40:31.838Z",
-    "durationMs": 46367,
+    "failed": 1,
+    "finishedAt": "2026-10-03T14:57:06.219Z",
+    "durationMs": 666,
     "queueAfter": {
       "total": 2221,
       "withWebsite": 1318,
@@ -163,46 +126,162 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 2,
-        "successes": 1,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-03T13:40:14.372Z",
-        "lastFinishedAt": "2026-10-03T13:40:29.372Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1791034859372,
-        "consecutiveFailures": 1
+        "attempts": 0,
+        "successes": 0,
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-03T13:39:58.401Z",
-        "lastFinishedAt": "2026-10-03T13:40:13.402Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1791034843402,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-03T13:40:13.402Z",
-        "lastFinishedAt": "2026-10-03T13:40:14.372Z",
-        "lastLatencyMs": 970,
-        "cooldownUntil": 1791034844372,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
   "runHistory": [
+    {
+      "startedAt": "2026-10-03T14:57:05.553Z",
+      "finishedAt": "2026-10-03T14:57:06.219Z",
+      "durationMs": 666,
+      "discoveryMode": "bootstrap",
+      "probed": 1,
+      "promoted": 0,
+      "failed": 1,
+      "overpassRun": false,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        }
+      ],
+      "seededFromRegistry": 0,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2221,
+        "withWebsite": 1318,
+        "due": 0,
+        "retry": 171,
+        "cold": 128,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 903,
+        "lanes": {
+          "exploratory": 697,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 128,
+          "low-value": 1033,
+          "food-evidence": 12
+        }
+      },
+      "queueAfter": {
+        "total": 2221,
+        "withWebsite": 1318,
+        "due": 0,
+        "retry": 171,
+        "cold": 128,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 903,
+        "lanes": {
+          "exploratory": 697,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 128,
+          "low-value": 1033,
+          "food-evidence": 12
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 0,
+        "event-evidence": 0,
+        "food-evidence": 0,
+        "exploratory": 0,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-03T13:39:45.471Z",
       "finishedAt": "2026-10-03T13:40:31.838Z",
@@ -2477,6 +2556,25 @@
   "recentProbeResults": [
     {
       "regionId": "san-diego",
+      "key": "san-diego|osm|way|31809315",
+      "name": "California Pizza Kitchen",
+      "category": "restaurant",
+      "website": "https://www.cpk.com/",
+      "status": "retry",
+      "probeLane": "low-value",
+      "attempts": 2,
+      "lastCheckedAt": "2026-10-03T14:57:05.792Z",
+      "nextCheckAt": "2026-10-05T14:57:06.211Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "website-fetch-failed",
+        "detail": "fetch failed",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
       "key": "san-diego|osm|node|1429439653",
       "name": "Amardeen Cafe",
       "category": "restaurant",
@@ -3593,25 +3691,6 @@
       "lastResult": {
         "reason": "no-supported-calendar",
         "detail": "Checked 3 pages on Oggi's Pizza & Brewing Co. (food-evidence)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|5467441986",
-      "name": "Mike Hess Brewing - Seaport Village Biergarten",
-      "category": "restaurant",
-      "website": "https://www.mikehessbrewing.com/",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T19:01:26.886Z",
-      "nextCheckAt": "2026-10-16T19:01:50.404Z",
-      "coldUntil": "2026-10-16T19:01:50.404Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 3 pages on Mike Hess Brewing - Seaport Village Biergarten (food-evidence)",
         "statusCode": null
       }
     }
