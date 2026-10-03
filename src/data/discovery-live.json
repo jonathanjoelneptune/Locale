@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-03T18:39:33.800Z",
+  "generatedAt": "2026-10-03T18:48:36.870Z",
   "lastRun": {
-    "startedAt": "2026-10-03T18:39:18.661Z",
+    "startedAt": "2026-10-03T18:48:16.617Z",
     "queueBefore": {
       "total": 2228,
       "withWebsite": 1318,
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9434301173",
-        "name": "CAVA",
+        "key": "san-diego|osm|node|12122650419",
+        "name": "Chef Zhu Chinese Cuisine",
         "category": "restaurant",
-        "website": "https://cava.com/locations/carmel-mountain-ranch-ca",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.chefzhusd.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Chef Zhu Chinese Cuisine (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-17T18:39:19.511Z",
-        "checkedAt": "2026-10-03T18:39:18.936Z"
+        "nextCheckAt": "2026-11-17T18:48:18.639Z",
+        "checkedAt": "2026-10-03T18:48:16.828Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -103,23 +103,23 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-03T18:39:19.512Z",
-    "durationMs": 851,
+    "finishedAt": "2026-10-03T18:48:18.641Z",
+    "durationMs": 2024,
     "queueAfter": {
       "total": 2228,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 129,
-      "lowValue": 1033,
+      "cold": 130,
+      "lowValue": 1032,
       "qualified": 16,
       "needsWebsite": 910,
       "lanes": {
         "exploratory": 703,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 129,
-        "low-value": 1033,
+        "cold-sample": 130,
+        "low-value": 1032,
         "food-evidence": 11
       }
     },
@@ -166,6 +166,122 @@
     ]
   },
   "runHistory": [
+    {
+      "startedAt": "2026-10-03T18:48:16.617Z",
+      "finishedAt": "2026-10-03T18:48:18.641Z",
+      "durationMs": 2024,
+      "discoveryMode": "bootstrap",
+      "probed": 1,
+      "promoted": 0,
+      "failed": 1,
+      "overpassRun": false,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        }
+      ],
+      "seededFromRegistry": 0,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2228,
+        "withWebsite": 1318,
+        "due": 0,
+        "retry": 171,
+        "cold": 129,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 910,
+        "lanes": {
+          "exploratory": 703,
+          "event-evidence": 236,
+          "event-likely": 116,
+          "cold-sample": 129,
+          "low-value": 1033,
+          "food-evidence": 11
+        }
+      },
+      "queueAfter": {
+        "total": 2228,
+        "withWebsite": 1318,
+        "due": 0,
+        "retry": 171,
+        "cold": 130,
+        "lowValue": 1032,
+        "qualified": 16,
+        "needsWebsite": 910,
+        "lanes": {
+          "exploratory": 703,
+          "event-evidence": 236,
+          "event-likely": 116,
+          "cold-sample": 130,
+          "low-value": 1032,
+          "food-evidence": 11
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 0,
+        "event-evidence": 0,
+        "food-evidence": 0,
+        "exploratory": 0,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-03T18:39:18.661Z",
       "finishedAt": "2026-10-03T18:39:19.512Z",
@@ -2904,6 +3020,25 @@
   "recentProbeResults": [
     {
       "regionId": "san-diego",
+      "key": "san-diego|osm|node|12122650419",
+      "name": "Chef Zhu Chinese Cuisine",
+      "category": "restaurant",
+      "website": "https://www.chefzhusd.com/",
+      "status": "cold",
+      "probeLane": "cold-sample",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-03T18:48:16.828Z",
+      "nextCheckAt": "2026-11-17T18:48:18.639Z",
+      "coldUntil": "2026-11-17T18:48:18.639Z",
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 1 page on Chef Zhu Chinese Cuisine (low-value)",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
       "key": "san-diego|osm|node|9434301173",
       "name": "CAVA",
       "category": "restaurant",
@@ -4020,25 +4155,6 @@
       "lastResult": {
         "reason": "no-supported-calendar",
         "detail": "Checked 5 pages on Mountain View-Beckwourth Branch San Diego City Public Library (event-likely)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|596322512",
-      "name": "Dunedin New Zealand Eats",
-      "category": "observed-venue",
-      "website": "https://dnp-sd.com/",
-      "status": "retry",
-      "probeLane": "exploratory",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T19:01:35.438Z",
-      "nextCheckAt": "2026-10-05T19:01:36.034Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
         "statusCode": null
       }
     }
