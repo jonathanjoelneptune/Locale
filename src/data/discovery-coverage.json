@@ -1,30 +1,48 @@
 {
-  "generatedAt": "2026-10-03T18:48:18.664Z",
+  "generatedAt": "2026-10-03T21:15:06.943Z",
   "run": {
-    "startedAt": "2026-10-03T18:48:16.617Z",
+    "startedAt": "2026-10-03T21:14:13.281Z",
     "queueBefore": {
       "total": 2228,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 129,
-      "lowValue": 1033,
+      "cold": 130,
+      "lowValue": 1032,
       "qualified": 16,
       "needsWebsite": 910,
       "lanes": {
         "exploratory": 703,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 129,
-        "low-value": 1033,
+        "cold-sample": 130,
+        "low-value": 1032,
         "food-evidence": 11
       }
     },
-    "seededFromRegistry": 0,
+    "seededFromRegistry": 1,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "san-ysidro",
+        "name": "San Ysidro",
+        "gapScore": 96,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "gapScore": 100,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -42,7 +60,7 @@
         "passing": 22,
         "passRate": 0.11702127659574468,
         "severeGapCount": 76,
-        "mediumGapCount": 138
+        "mediumGapCount": 137
       },
       "chicago": {
         "mode": "unmeasured",
@@ -54,26 +72,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12122650419",
-        "name": "Chef Zhu Chinese Cuisine",
+        "key": "san-diego|osm|node|7345384056",
+        "name": "Fresco Pizzeria",
         "category": "restaurant",
-        "website": "https://www.chefzhusd.com/",
+        "website": "https://frescosd.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Chef Zhu Chinese Cuisine (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T18:48:18.639Z",
-        "checkedAt": "2026-10-03T18:48:16.828Z"
+        "nextCheckAt": "2026-10-06T21:15:06.903Z",
+        "checkedAt": "2026-10-03T21:15:06.657Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -103,19 +121,19 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-03T18:48:18.641Z",
-    "durationMs": 2024,
+    "finishedAt": "2026-10-03T21:15:06.905Z",
+    "durationMs": 53624,
     "queueAfter": {
-      "total": 2228,
+      "total": 2229,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 171,
+      "retry": 172,
       "cold": 130,
       "lowValue": 1032,
       "qualified": 16,
-      "needsWebsite": 910,
+      "needsWebsite": 911,
       "lanes": {
-        "exploratory": 703,
+        "exploratory": 704,
         "event-evidence": 236,
         "event-likely": 116,
         "cold-sample": 130,
@@ -126,51 +144,51 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 2,
+        "successes": 1,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-03T21:14:56.890Z",
+        "lastFinishedAt": "2026-10-03T21:15:06.479Z",
+        "lastLatencyMs": 9589,
+        "cooldownUntil": 1791062136479,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-03T21:14:26.888Z",
+        "lastFinishedAt": "2026-10-03T21:14:41.889Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791062111889,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-03T21:14:41.889Z",
+        "lastFinishedAt": "2026-10-03T21:14:56.890Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791062126890,
+        "consecutiveFailures": 1
       }
     ]
   },
   "regions": {
     "san-diego": {
-      "candidateCount": 2124,
+      "candidateCount": 2125,
       "withWebsiteCount": 1318,
       "qualifiedCount": 16,
-      "needsWebsiteCount": 806,
+      "needsWebsiteCount": 807,
       "dueCount": 0,
       "coldCount": 130,
       "lowValueCount": 1032,
@@ -178,20 +196,20 @@
         "cold-sample": 130,
         "event-evidence": 201,
         "event-likely": 116,
-        "exploratory": 634,
+        "exploratory": 635,
         "food-evidence": 11,
         "low-value": 1032
       },
       "statusCounts": {
         "qualified": 16,
-        "retry": 171,
-        "needs-website": 806,
+        "retry": 172,
+        "needs-website": 807,
         "cold": 130,
-        "candidate": 1001
+        "candidate": 1000
       },
       "categoryCounts": {
         "nightclub": 8,
-        "observed-venue": 835,
+        "observed-venue": 836,
         "bar": 39,
         "theatre": 5,
         "arts-centre": 2,
@@ -224,10 +242,10 @@
       },
       "coverageAreaSweeps": {
         "version": 1,
-        "tracked": 7,
-        "completed": 6,
-        "failed": 1,
-        "sweptThisRun": 0
+        "tracked": 9,
+        "completed": 7,
+        "failed": 2,
+        "sweptThisRun": 2
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
@@ -236,7 +254,7 @@
         "passing": 22,
         "passRate": 0.11702127659574468,
         "severeGapCount": 76,
-        "mediumGapCount": 138,
+        "mediumGapCount": 137,
         "activeMode": "bootstrap",
         "probeLimit": 12,
         "probeConcurrency": 2,
