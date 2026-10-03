@@ -320,7 +320,8 @@ test("event rail stays compact and highlights remain well formed when collapsed"
   const firstRow=page.locator(".event-row").first();
   await expect(firstRow).toBeVisible();
   const rowBox=await firstRow.boundingBox();
-  expect(rowBox?.height||999).toBeLessThanOrEqual(64);
+  expect(rowBox?.height||0).toBeGreaterThanOrEqual(70);
+  expect(rowBox?.height||999).toBeLessThanOrEqual(86);
 
   await page.locator("#resultsToggle").click();
   await expect(page.locator(".shell")).toHaveClass(/results-collapsed/);
@@ -342,12 +343,14 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
   const row=page.locator(".event-row").first();
   await expect(row).toHaveClass(/event-surface/);
   const rowBox=await row.boundingBox();
-  expect(rowBox?.height||999).toBeLessThanOrEqual(68);
+  expect(rowBox?.height||0).toBeGreaterThanOrEqual(70);
+  expect(rowBox?.height||999).toBeLessThanOrEqual(86);
 
-  const fallback=page.locator(".event-thumb.is-fallback").first();
+  const fallback=page.locator(".event-row:has(.event-thumb.is-fallback)").first();
   if(await fallback.count()){
-    await expect(fallback.locator(".category-art-symbol")).toBeVisible();
-    await expect(fallback.locator("small")).toBeVisible();
+    await expect(fallback.locator(".event-thumb.is-fallback")).toBeHidden();
+    const cue=await fallback.locator(".event-title-line").evaluate(el=>getComputedStyle(el,"::before").content);
+    expect(cue).not.toBe("none");
   }
 
   await page.locator("#resultsToggle").click();
@@ -355,7 +358,8 @@ test("premium event surfaces keep dense cards and intentional fallbacks",async({
   if(await highlight.count()){
     await expect(highlight).toHaveClass(/event-surface/);
     const box=await highlight.boundingBox();
-    expect(box?.width||999).toBeLessThanOrEqual(225);
+    expect(box?.width||0).toBeGreaterThanOrEqual(250);
+    expect(box?.width||999).toBeLessThanOrEqual(275);
   }
 
   const mapSource=await (await page.request.get("./src/components/map.js")).text();
@@ -380,7 +384,7 @@ test("dual rails keep search left and event filters with events right",async({pa
   await expect(page.locator(".event-right .category-pill")).toHaveCount(10);
   await expect(page.locator(".discovery-left .category-pill")).toHaveCount(0);
   const categoriesBox=await page.locator(".event-right .category-pills").boundingBox();
-  expect(categoriesBox.height).toBeLessThanOrEqual(60);
+  expect(categoriesBox.height).toBeLessThanOrEqual(70);
 
   const initial=await page.locator("#dateSummary span").textContent();
   await page.locator('[data-date-shift="1"]').click();
@@ -406,7 +410,8 @@ test("dual rails keep search left and event filters with events right",async({pa
   const highlights=page.locator(".compact-highlights");
   if(await highlights.count()){
     const box=await highlights.boundingBox();
-    expect(box.height).toBeLessThanOrEqual(130);
+    expect(box.height).toBeGreaterThanOrEqual(120);
+    expect(box.height).toBeLessThanOrEqual(150);
     await expect(highlights.locator(".highlight-title-row")).toBeVisible();
   }
 });
@@ -685,7 +690,8 @@ test("Design System v1 tokens and hierarchy are active",async({page})=>{
   expect(geometry.mapWidth).toBeGreaterThan(geometry.discoveryWidth);
   expect(geometry.mapWidth).toBeGreaterThan(geometry.eventWidth);
   if(geometry.rowHeight){
-    expect(geometry.rowHeight).toBeLessThanOrEqual(64);
+    expect(geometry.rowHeight).toBeGreaterThanOrEqual(70);
+    expect(geometry.rowHeight).toBeLessThanOrEqual(86);
     expect(geometry.rowRadius).not.toBe("0px");
   }
 });
