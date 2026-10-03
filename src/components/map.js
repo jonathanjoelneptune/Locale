@@ -299,9 +299,55 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
         });
       }
 
+      const boxesOverlap=(a,b)=>!(a.right<=b.left||a.left>=b.right||a.bottom<=b.top||a.top>=b.bottom);
+      const occupiedMarkerBoxes=[];
+      const placementOffsets=[
+        [0,0],[0,-26],[0,26],[-28,0],[28,0],
+        [-30,-26],[30,-26],[-30,26],[30,26],
+        [0,-44],[0,44],[-46,0],[46,0],
+        [-48,-34],[48,-34],[-48,34],[48,34],
+        [0,-58],[0,58],[-60,0],[60,0]
+      ];
+      const maxNudgePx=zoom>=17?60:zoom===16?48:zoom===15?36:0;
+      const placementOrder=[...groups].sort((a,b)=>b.events.length-a.events.length||String(a.events[0]?.title||"").localeCompare(String(b.events[0]?.title||"")));
+      placementOrder.forEach(g=>{
+        const e=g.events[0];
+        const count=g.events.length;
+        const showLabel=count>1||zoom>=13;
+        const labelText=count>1?`${count} events`:String(e.title||"Event");
+        const labelWidth=count>1?78:Math.min(188,Math.max(86,Math.min(labelText.length,34)*5.5+18));
+        const labelLines=count>1?1:Math.min(2,Math.max(1,Math.ceil(labelText.length/27)));
+        const labelHeight=labelLines>1?38:25;
+        const candidates=maxNudgePx?placementOffsets.filter(([x,y])=>Math.hypot(x,y)<=maxNudgePx+1):[[0,0]];
+        let chosen=g.p;
+        let placed=false;
+        for(const [dx,dy] of candidates){
+          const p=L.point(g.p.x+dx,g.p.y+dy);
+          const pinBox={left:p.x-20,right:p.x+20,top:p.y-21,bottom:p.y+21};
+          const labelBox=showLabel?{left:p.x+20,right:p.x+24+labelWidth,top:p.y-labelHeight/2-3,bottom:p.y+labelHeight/2+3}:null;
+          const box=labelBox?{
+            left:Math.min(pinBox.left,labelBox.left),
+            right:Math.max(pinBox.right,labelBox.right),
+            top:Math.min(pinBox.top,labelBox.top),
+            bottom:Math.max(pinBox.bottom,labelBox.bottom)
+          }:pinBox;
+          if(occupiedMarkerBoxes.some(existing=>boxesOverlap(box,existing)))continue;
+          chosen=p;
+          occupiedMarkerBoxes.push(box);
+          placed=true;
+          break;
+        }
+        g.renderP=chosen;
+        g.nudgePx=Math.hypot(chosen.x-g.p.x,chosen.y-g.p.y);
+        g.hideLabel=!placed&&showLabel&&count===1;
+        if(!placed){
+          occupiedMarkerBoxes.push({left:g.p.x-20,right:g.p.x+20,top:g.p.y-21,bottom:g.p.y+21});
+        }
+      });
+
       groups.forEach(g=>{
         const group=g.events,e=group[0],count=group.length;
-        const target=zoom>=FULLY_EXPANDED_ZOOM?map.unproject(g.p,zoom):(count>1?map.unproject(g.p,zoom):L.latLng(e.lat,e.lng));
+        const target=map.unproject(g.renderP||g.p,zoom);
         const prior=group.map(item=>previousPositions.get(item.id)).filter(Boolean);
         const origin=animateFromPrevious&&prior.length
           ?L.latLng(prior.reduce((sum,pos)=>sum+pos.lat,0)/prior.length,prior.reduce((sum,pos)=>sum+pos.lng,0)/prior.length)
@@ -309,8 +355,9 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
         const face=count>1?`<span>${count}</span>`:(e.image?`<img src="${esc(e.image)}" alt="">`:`<span>${SYMBOLS[e.category]||"•"}</span>`);
         const label=count>1?`${count} events`:e.title;
         const showLabel=count>1||zoom>=13;
-        const labelClass=showLabel?"":" is-density-hidden";
-        const icon=L.divIcon({className:"event-marker-wrap locale-event-marker-icon",html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label${labelClass}">${esc(label)}</span></div>`,iconSize:[180,38],iconAnchor:[16,19]});
+        const labelClass=`${showLabel?"":" is-density-hidden"}${g.hideLabel?" is-collision-hidden":""}`;
+        const nudgeClass=g.nudgePx>2?" nudged-event-marker":"";
+        const icon=L.divIcon({className:`event-marker-wrap locale-event-marker-icon${nudgeClass}`,html:`<div class="event-marker"><div class="event-pin pin-${e.category} ${count>1?"event-stack":""}">${face}</div><span class="event-pin-label${labelClass}">${esc(label)}</span></div>`,iconSize:[228,54],iconAnchor:[16,27]});
         const marker=L.marker(origin,{icon}).addTo(layer);
         marker.bindTooltip(count>1?`${count} nearby events`:e.title,{direction:"top"});
         group.forEach(item=>markers.set(item.id,marker));

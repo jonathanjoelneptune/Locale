@@ -515,3 +515,233 @@
   min-height:30px;
   font-size:10.5px;
 }
+
+
+/* Interface Clarity v2 ----------------------------------------------------
+   More readable rails, stronger surface separation, full-height area browser,
+   custom area selection affordance, and collision-aware map labels. */
+
+.ds-v1{
+  --discovery-rail:clamp(330px,21vw,370px);
+  --events-rail:clamp(430px,27vw,480px);
+}
+
+/* Stronger page/surface boundaries. */
+.ds-v1 .discovery-left,
+.ds-v1 .event-right{
+  background:rgba(248,250,247,.96)!important;
+  border-color:rgba(92,119,126,.42)!important;
+}
+.ds-v1 .discovery-left{
+  box-shadow:10px 0 30px rgba(24,52,61,.13)!important;
+}
+.ds-v1 .event-right{
+  box-shadow:-10px 0 30px rgba(24,52,61,.13)!important;
+}
+.ds-v1 .event-filters{
+  background:rgba(243,247,244,.94)!important;
+  border-bottom:1px solid rgba(105,132,138,.30)!important;
+}
+.ds-v1 .results-tabs{
+  border-bottom:1px solid rgba(105,132,138,.30)!important;
+}
+.ds-v1 .results-head{
+  border-bottom:1px solid rgba(105,132,138,.20);
+  background:rgba(250,252,249,.90);
+}
+.ds-v1 .compact-highlights{
+  border-top:1px solid rgba(91,117,124,.36)!important;
+  box-shadow:0 -8px 22px rgba(28,52,61,.07);
+}
+
+/* Let the neighborhood browser consume all remaining vertical space. */
+.ds-v1 .discovery-controls{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+.ds-v1 .locale-identity,
+.ds-v1 .location-block,
+.ds-v1 .radius-panel,
+.ds-v1 #dateControls{
+  flex:0 0 auto;
+}
+.ds-v1 #areaControls{
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  overflow:hidden;
+}
+.ds-v1 .area-filter{
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  padding-top:12px;
+  border-top:1px solid rgba(110,136,142,.28);
+}
+.ds-v1 .area-filter-meta,
+.ds-v1 .area-selected-chips,
+.ds-v1 .area-search,
+.ds-v1 .area-expand{
+  flex:0 0 auto;
+}
+.ds-v1 .area-options{
+  flex:1 1 auto;
+  min-height:96px;
+  max-height:none!important;
+  overflow:auto;
+  padding:2px 4px 6px 0;
+}
+
+/* The full row is the selector; use a map-like indicator instead of a checkbox. */
+.ds-v1 .area-option{
+  grid-template-columns:20px minmax(0,1fr) auto;
+  min-height:37px;
+  padding:6px 7px;
+  border:1px solid transparent;
+  border-left:3px solid transparent;
+  border-radius:9px;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+.ds-v1 .area-option:hover{
+  background:#f0f6f4;
+  border-color:rgba(99,130,137,.18);
+  transform:translateX(1px);
+}
+.ds-v1 .area-option.active{
+  background:#e5f3f0;
+  border-color:rgba(20,135,159,.24);
+  border-left-color:var(--accent);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.58);
+}
+.ds-v1 .area-select-indicator{
+  width:16px;
+  height:16px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:2px solid #9db2b6;
+  background:#fff;
+  box-shadow:0 1px 2px rgba(34,62,70,.08);
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+}
+.ds-v1 .area-select-indicator>span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:transparent;
+  transform:scale(.25);
+  transition:background-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard);
+}
+.ds-v1 .area-option:hover .area-select-indicator{
+  border-color:#5d929e;
+  box-shadow:0 0 0 3px rgba(20,135,159,.08);
+}
+.ds-v1 .area-option.active .area-select-indicator{
+  border-color:var(--accent);
+  background:#f7fffd;
+  box-shadow:0 0 0 3px rgba(20,135,159,.11);
+}
+.ds-v1 .area-option.active .area-select-indicator>span{
+  background:var(--accent);
+  transform:scale(1);
+}
+
+/* Give event rows enough contrast to scan as individual objects. */
+.ds-v1 .event-row{
+  background:rgba(255,255,252,.76);
+  border-color:rgba(106,132,138,.18)!important;
+  box-shadow:0 1px 2px rgba(28,54,63,.035);
+}
+.ds-v1 .event-row:hover{
+  background:#fffefa;
+  border-color:rgba(82,115,123,.32)!important;
+  box-shadow:0 5px 14px rgba(26,55,64,.09);
+}
+.ds-v1 .event-row.selected{
+  border-color:color-mix(in srgb,var(--event-accent,var(--accent)) 42%,rgba(88,116,123,.2))!important;
+  box-shadow:0 6px 16px rgba(24,55,65,.11);
+}
+.ds-v1 .event-filters .category-pill,
+.ds-v1 .sort-button,
+.ds-v1 .date-step,
+.ds-v1 .date-summary,
+.ds-v1 .date-mode button,
+.ds-v1 .quick-date-presets button{
+  border-color:rgba(103,130,136,.30)!important;
+}
+
+/* Map event labels: allow two lines, then hide unresolved collisions.
+   Hidden collision labels still reveal on hover/selection. */
+.ds-v1 .event-marker{
+  min-height:54px;
+  height:auto;
+  align-items:center;
+  white-space:normal;
+  overflow:visible;
+}
+.ds-v1 .event-pin-label{
+  width:max-content;
+  min-width:72px;
+  max-width:188px;
+  min-height:25px;
+  max-height:42px;
+  padding:5px 8px;
+  white-space:normal!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  line-clamp:2;
+  line-height:1.22;
+  border-radius:8px;
+  background:rgba(255,254,250,.94);
+  border-color:rgba(91,119,126,.30);
+  box-shadow:0 2px 6px rgba(29,53,61,.12);
+}
+.ds-v1 .event-pin-label.is-collision-hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateX(-4px);
+}
+.ds-v1 .event-marker:hover .event-pin-label.is-collision-hidden,
+.ds-v1 .event-pin.hover-pulse + .event-pin-label.is-collision-hidden,
+.ds-v1 .event-pin.selected-pin + .event-pin-label.is-collision-hidden{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(0);
+}
+.ds-v1 .nudged-event-marker .event-pin{
+  box-shadow:0 3px 8px rgba(24,56,65,.24);
+}
+
+/* Large monitors can afford rails that feel like real reading panes. */
+@media(min-width:1650px){
+  .ds-v1{
+    --discovery-rail:360px;
+    --events-rail:470px;
+  }
+}
+@media(min-width:2400px){
+  .ds-v1{
+    --discovery-rail:375px;
+    --events-rail:490px;
+  }
+}
+@media(max-width:1350px) and (min-width:851px){
+  .ds-v1{
+    --discovery-rail:300px;
+    --events-rail:365px;
+    grid-template-columns:var(--discovery-rail) minmax(330px,1fr) var(--events-rail)!important;
+  }
+}
