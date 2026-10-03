@@ -607,16 +607,20 @@ const producerSignal=item=>/\b(bar|pub|brew|music|theat|club|comedy|museum|galle
   [item.name,item.category,item.website,item.lastResult?.detail].filter(Boolean).join(" ")
 )?18:0;
 
-const coverageGapBoost=item=>{
+const candidateCoverageTarget=item=>{
   const zones=containingCoverageZones(item,coverageAreas,{regionId:item.regionId});
-  let best=0;
+  let best=null;
   for(const zone of zones){
     const row=areaMetric(zone);
-    const gap=Number(row?.gapScore||0);
-    const boost=gap*.45+Number(zone.discoveryPriority||0)*.12+(row?.acceptance?.pass?0:8);
-    if(boost>best)best=boost;
+    const score=areaEquityFor(zone,row);
+    if(!best||score>best.score)best={zone,row,score};
   }
-  return Math.round(best);
+  return best;
+};
+
+const coverageGapBoost=item=>{
+  const target=candidateCoverageTarget(item);
+  return target?Math.round(Math.max(0,target.score)*.55):0;
 };
 
 const probeScore=item=>
@@ -631,13 +635,36 @@ const probeHost=item=>{
 const rankedCandidates=queue
   .filter(item=>item.website&&item.status!=="qualified"&&due(item));
 
-const selection=selectProbeCandidates(rankedCandidates,discoveryBudget.probeLimit,{
+const poolLimit=Math.min(
+  rankedCandidates.length,
+  Math.max(discoveryBudget.probeLimit,discoveryBudget.probeLimit*4)
+);
+const laneSelection=selectProbeCandidates(rankedCandidates,poolLimit,{
   scoreFn:probeScore,
   hostFn:probeHost
 });
-const candidates=selection.selected;
-stats.probeLaneCounts=selection.counts;
-stats.probeLaneTargets=selection.targets;
+const balancedSelection=selectCoverageBalancedCandidates(
+  laneSelection.selected,
+  discoveryBudget.probeLimit,
+  {
+    scoreFn:probeScore,
+    areaFn:item=>{
+      if(item.revalidationSourceId)return "revalidation:"+item.key;
+      return candidateCoverageTarget(item)?.zone?.id||("unmapped:"+item.key);
+    },
+    groupFn:item=>{
+      if(item.revalidationSourceId)return "revalidation";
+      const target=candidateCoverageTarget(item);
+      return target?.zone?.group||target?.row?.group||"unmapped";
+    },
+    hostFn:probeHost
+  }
+);
+const candidates=balancedSelection.selected;
+stats.probeLaneCounts=laneSnapshot(candidates);
+stats.probeLaneTargets=laneSelection.targets;
+stats.probeAreaCounts=balancedSelection.areaCounts;
+stats.probeGroupCounts=balancedSelection.groupCounts;
 
 async function probeCandidate(item){
   stats.probed++;
@@ -782,6 +809,9 @@ const compactRun={
   coldMigrated:stats.coldMigrated,
   probeLaneCounts:stats.probeLaneCounts,
   probeLaneTargets:stats.probeLaneTargets,
+  probeAreaCounts:stats.probeAreaCounts,
+  probeGroupCounts:stats.probeGroupCounts,
+  coverageEquity:stats.coverageEquity,
   sourceDuplicatesAliased:stats.sourceDuplicatesAliased,
   sourceReferencesRemapped:stats.sourceReferencesRemapped,
   sourceRevalidationsQueued:stats.sourceRevalidationsQueued,
