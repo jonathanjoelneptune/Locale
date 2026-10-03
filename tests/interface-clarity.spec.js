@@ -111,6 +111,7 @@ test("visible event labels do not overlap after dense-map placement",async({page
   await page.setViewportSize({width:1800,height:1000});
   await waitForLocale(page);
   const map=page.locator("#map");
+  await expect.poll(async()=>map.evaluate(el=>Boolean(el.__localeMap)),{timeout:10000}).toBe(true);
   await map.evaluate(el=>el.__localeMap.setZoom(15,{animate:false}));
   await expect.poll(async()=>map.getAttribute("data-map-zoom")).toBe("15");
 
