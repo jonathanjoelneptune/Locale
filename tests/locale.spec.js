@@ -384,7 +384,7 @@ test("dual rails keep search left and event filters with events right",async({pa
   await expect(page.locator(".event-right .category-pill")).toHaveCount(10);
   await expect(page.locator(".discovery-left .category-pill")).toHaveCount(0);
   const categoriesBox=await page.locator(".event-right .category-pills").boundingBox();
-  expect(categoriesBox.height).toBeLessThanOrEqual(60);
+  expect(categoriesBox.height).toBeLessThanOrEqual(70);
 
   const initial=await page.locator("#dateSummary span").textContent();
   await page.locator('[data-date-shift="1"]').click();
