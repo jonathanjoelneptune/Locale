@@ -14,7 +14,7 @@ const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
 const DISCOVERY_SWEEP_VERSION=4;
-const AREA_SWEEP_VERSION=1;
+const AREA_SWEEP_VERSION=2;
 const MAX_QUEUE=6000;
 
 const readJson=async(path,fallback)=>{
