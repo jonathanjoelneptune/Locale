@@ -1,0 +1,517 @@
+
+/* Locale Readability v1
+   Larger practical type floor, wider rails, simpler no-image event cards,
+   and more comfortable scanning without changing map/data architecture. */
+
+:root{
+  --type-micro:9px;
+  --type-caption:10px;
+  --type-meta:11px;
+  --type-body:12px;
+  --type-card:13px;
+  --type-section:15px;
+  --type-title:21px;
+}
+
+/* Give reading surfaces room before making the map itself denser. */
+.ds-v1{
+  --discovery-rail:clamp(310px,20vw,340px);
+  --events-rail:clamp(390px,25vw,430px);
+}
+
+/* Left discovery rail ---------------------------------------------------- */
+.ds-v1 .discovery-controls{
+  padding:15px 16px 12px;
+}
+.ds-v1 .brand{
+  font-size:24px!important;
+  line-height:1.05;
+}
+.ds-v1 .tagline{
+  font-size:10px!important;
+  line-height:1.35;
+}
+.ds-v1 .location-block label,
+.ds-v1 .date-filter-label,
+.ds-v1 .filter-heading{
+  font-size:10px!important;
+  line-height:1.25;
+}
+.ds-v1 .search-wrap{
+  height:38px!important;
+}
+.ds-v1 .search{
+  font-size:12px!important;
+  line-height:1.3;
+}
+.ds-v1 .radius-title,
+.ds-v1 .radius-title strong{
+  font-size:12px!important;
+}
+.ds-v1 .radius-ticks{
+  font-size:9px!important;
+}
+.ds-v1 .radius-area-note{
+  font-size:10px;
+  line-height:1.35;
+}
+.ds-v1 .date-filter{
+  padding:10px 0 9px!important;
+}
+.ds-v1 .date-step{
+  height:32px!important;
+  font-size:18px!important;
+}
+.ds-v1 .date-summary{
+  height:32px!important;
+  font-size:11.5px!important;
+  line-height:1.2;
+}
+.ds-v1 .date-summary b{
+  font-size:10px;
+}
+.ds-v1 .date-mode button{
+  padding:5px 8px!important;
+  font-size:10px!important;
+  line-height:1.15;
+}
+.ds-v1 .quick-date-presets{
+  gap:5px;
+}
+.ds-v1 .quick-date-presets button{
+  height:28px;
+  padding:3px 7px;
+  font-size:9.5px;
+  line-height:1.1;
+}
+.ds-v1 .calendar-head strong{
+  font-size:12px;
+}
+.ds-v1 .calendar-weekdays span{
+  font-size:9px;
+}
+.ds-v1 .calendar-day{
+  font-size:10px!important;
+}
+.ds-v1 .calendar-help{
+  font-size:9px;
+}
+
+/* Area selector needs to be a readable browsing surface, not microcopy. */
+.ds-v1 .area-filter{
+  padding:11px 0 10px;
+}
+.ds-v1 .area-filter-meta{
+  font-size:10.5px;
+  line-height:1.3;
+}
+.ds-v1 .area-filter-meta small{
+  font-size:9.5px;
+}
+.ds-v1 .area-search{
+  height:35px;
+}
+.ds-v1 .area-search input{
+  font-size:11.5px;
+}
+.ds-v1 .area-options{
+  max-height:214px;
+  gap:3px;
+}
+.ds-v1 .area-option{
+  min-height:35px;
+  grid-template-columns:20px minmax(0,1fr) auto;
+  gap:7px;
+  padding:5px 7px;
+}
+.ds-v1 .area-check{
+  width:16px;
+  height:16px;
+  font-size:10px;
+}
+.ds-v1 .area-option-copy strong{
+  font-size:11.5px;
+  line-height:1.2;
+}
+.ds-v1 .area-option-copy small{
+  font-size:9.5px;
+  line-height:1.2;
+}
+.ds-v1 .area-count{
+  min-width:24px;
+  padding:3px 6px;
+  font-size:9px;
+}
+.ds-v1 .area-chip{
+  padding:5px 9px;
+  font-size:10.5px;
+  line-height:1.15;
+}
+.ds-v1 .area-expand,
+.ds-v1 .area-no-results,
+.ds-v1 .area-loading{
+  font-size:10.5px;
+  line-height:1.35;
+}
+
+/* Right event rail ------------------------------------------------------- */
+.ds-v1 .event-filters{
+  padding:11px 14px 9px!important;
+}
+.ds-v1 .event-filters .filter-heading{
+  margin-bottom:7px!important;
+}
+.ds-v1 .event-filters .filter-heading button{
+  font-size:10px!important;
+}
+.ds-v1 .event-filters .category-pills{
+  gap:6px!important;
+}
+.ds-v1 .event-filters .category-pill{
+  height:30px;
+  padding:3px 7px!important;
+  gap:4px!important;
+  font-size:9.5px!important;
+  line-height:1;
+}
+.ds-v1 .event-filters .category-pill .category-icon{
+  width:16px!important;
+  height:16px!important;
+  flex-basis:16px;
+  font-size:7px!important;
+}
+.ds-v1 .results-tabs{
+  margin:0 14px!important;
+}
+.ds-v1 .results-tabs button{
+  padding:13px 8px 10px!important;
+  font-size:11.5px!important;
+}
+.ds-v1 .results-head{
+  padding:13px 14px 9px!important;
+}
+.ds-v1 .results-head h1{
+  font-size:16px!important;
+  line-height:1.15;
+}
+.ds-v1 .results-head h1 em{
+  font-size:22px!important;
+}
+.ds-v1 .results-head p{
+  margin-top:4px;
+  font-size:10.5px!important;
+  line-height:1.3;
+}
+.ds-v1 .sort-button{
+  min-height:31px;
+  padding:6px 9px!important;
+  font-size:10px!important;
+}
+.ds-v1 .cards{
+  padding:2px 8px 12px!important;
+}
+
+/* Comfortable event rows. Keep real art; remove repetitive fake art. */
+.ds-v1 .event-row{
+  min-height:76px!important;
+  max-height:84px;
+  grid-template-columns:64px minmax(0,1fr)!important;
+  gap:11px!important;
+  margin:4px 4px;
+  padding:8px 8px!important;
+  border-radius:11px;
+}
+.ds-v1 .event-row.selected{
+  margin:4px 4px;
+  padding:8px 8px!important;
+}
+.ds-v1 .event-thumb{
+  width:64px;
+  height:62px!important;
+  border-radius:9px;
+}
+.ds-v1 .event-row:has(.event-thumb.is-fallback){
+  grid-template-columns:minmax(0,1fr)!important;
+}
+.ds-v1 .event-row:has(.event-thumb.is-fallback) .event-thumb{
+  display:none!important;
+}
+.ds-v1 .event-row:has(.event-thumb.is-fallback) .event-title-line::before{
+  content:"•";
+  flex:0 0 auto;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--event-tint,rgba(20,135,159,.10));
+  color:var(--event-accent,var(--accent));
+  font-size:15px;
+  font-weight:900;
+  line-height:1;
+}
+.ds-v1 .event-row.category-surface-music:has(.event-thumb.is-fallback) .event-title-line::before{content:"♫"}
+.ds-v1 .event-row.category-surface-sports:has(.event-thumb.is-fallback) .event-title-line::before{content:"◆"}
+.ds-v1 .event-row.category-surface-festival:has(.event-thumb.is-fallback) .event-title-line::before{content:"✦"}
+.ds-v1 .event-row.category-surface-food:has(.event-thumb.is-fallback) .event-title-line::before{content:"◇"}
+.ds-v1 .event-row.category-surface-theater:has(.event-thumb.is-fallback) .event-title-line::before{content:"◈"}
+.ds-v1 .event-row.category-surface-comedy:has(.event-thumb.is-fallback) .event-title-line::before{content:"✺"}
+.ds-v1 .event-row.category-surface-family:has(.event-thumb.is-fallback) .event-title-line::before,
+.ds-v1 .event-row.category-surface-community:has(.event-thumb.is-fallback) .event-title-line::before{content:"●"}
+.ds-v1 .event-row.category-surface-nightlife:has(.event-thumb.is-fallback) .event-title-line::before{content:"☾"}
+
+/* Category is already communicated by the row accent/glyph. Remove the extra pill. */
+.ds-v1 .event-row .event-badge{
+  display:none!important;
+}
+.ds-v1 .event-title-line{
+  gap:8px;
+  min-height:22px;
+  align-items:center;
+}
+.ds-v1 .event-title-line h2{
+  font-size:13.5px!important;
+  line-height:1.25!important;
+  font-weight:800;
+  letter-spacing:-.08px;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+.ds-v1 .event-meta{
+  margin-top:5px!important;
+  gap:10px!important;
+  font-size:10.5px!important;
+  line-height:1.3;
+}
+.ds-v1 .event-meta .event-venue{
+  max-width:54%;
+}
+.ds-v1 .event-foot{
+  min-height:18px!important;
+  margin-top:4px!important;
+  font-size:10px!important;
+  line-height:1.2;
+}
+.ds-v1 .event-foot strong{
+  font-size:10.5px!important;
+}
+.ds-v1 .event-action{
+  font-size:10px;
+}
+.ds-v1 .save-event{
+  width:24px;
+  height:24px;
+}
+.ds-v1 .save-event .save-heart{
+  font-size:17px;
+}
+.ds-v1 .area-result-bar,
+.ds-v1 .venue-filter-bar{
+  padding-block:8px;
+  font-size:10px;
+}
+.ds-v1 .area-result-bar>span{
+  font-size:9px;
+}
+.ds-v1 .area-result-bar button{
+  padding:4px 7px;
+  font-size:9.5px;
+}
+
+/* Map text can be readable without making the pins larger. */
+.ds-v1 .event-pin-label{
+  padding:4px 7px;
+  font-size:9.5px;
+  line-height:1.15;
+}
+.ds-v1 .area-map-label{
+  font-size:10.5px;
+  line-height:1.05;
+}
+.ds-v1 .area-map-label.selected{
+  font-size:11.5px;
+}
+.ds-v1 .search-area-button,
+.ds-v1 .clear-area-map-button{
+  font-size:11px;
+}
+.ds-v1 .map-radius-label{
+  font-size:10px;
+}
+
+/* Highlights should feel editorial and comfortably readable. */
+.ds-v1 .compact-highlights{
+  padding:7px 14px 10px!important;
+}
+.ds-v1 .compact-highlights:not(.is-empty){
+  min-height:132px!important;
+}
+.ds-v1 .compact-highlights .highlight-heading{
+  height:30px!important;
+}
+.ds-v1 .highlight-title-row strong{
+  font-size:13px!important;
+}
+.ds-v1 .highlight-title-row span{
+  font-size:9.5px!important;
+}
+.ds-v1 .highlight-heading button{
+  font-size:10.5px!important;
+}
+.ds-v1 .compact-highlights .highlight-cards{
+  height:94px!important;
+  gap:10px!important;
+}
+.ds-v1 .compact-highlights .highlight-card{
+  min-width:260px!important;
+  width:260px!important;
+  flex-basis:260px!important;
+  grid-template-columns:88px minmax(0,1fr)!important;
+}
+.ds-v1 .compact-highlights .highlight-art{
+  width:88px;
+}
+.ds-v1 .compact-highlights .highlight-copy{
+  padding:9px 10px!important;
+}
+.ds-v1 .highlight-kicker{
+  font-size:8px;
+  line-height:1.15;
+}
+.ds-v1 .compact-highlights .highlight-copy strong{
+  font-size:11.5px!important;
+  line-height:1.25;
+}
+.ds-v1 .compact-highlights .highlight-copy small{
+  margin-top:4px!important;
+  font-size:9px!important;
+  line-height:1.25;
+}
+.ds-v1 .compact-highlights .highlight-copy em{
+  font-size:8.5px!important;
+}
+
+/* Drawer chrome remains secondary but readable. */
+.ds-v1 .edge-toggle{
+  width:29px;
+  min-height:92px;
+}
+.ds-v1 .edge-toggle .drawer-label{
+  font-size:8.5px;
+}
+.ds-v1 .edge-toggle #resultsRailCount{
+  font-size:8.5px;
+}
+
+/* Explicit desktop/laptop tuning. */
+@media(min-width:1650px){
+  .ds-v1{
+    --discovery-rail:330px;
+    --events-rail:420px;
+  }
+}
+@media(max-width:1350px) and (min-width:851px){
+  .ds-v1{
+    --discovery-rail:290px;
+    --events-rail:350px;
+    grid-template-columns:var(--discovery-rail) minmax(330px,1fr) var(--events-rail)!important;
+  }
+  .ds-v1 .discovery-controls{padding:12px}
+  .ds-v1 .event-row{
+    min-height:72px!important;
+    grid-template-columns:58px minmax(0,1fr)!important;
+  }
+  .ds-v1 .event-thumb{
+    width:58px;
+    height:56px!important;
+  }
+  .ds-v1 .event-title-line h2{font-size:12.5px!important}
+  .ds-v1 .event-meta{font-size:10px!important}
+  .ds-v1 .event-filters .category-pill{font-size:9px!important}
+}
+@media(max-height:760px) and (min-width:851px){
+  .ds-v1 .area-options{max-height:122px}
+  .ds-v1 .compact-highlights:not(.is-empty){min-height:114px!important}
+  .ds-v1 .compact-highlights .highlight-cards{height:80px!important}
+}
+@media(max-width:850px){
+  .ds-v1 .event-row{
+    min-height:78px!important;
+    max-height:none;
+    grid-template-columns:64px minmax(0,1fr)!important;
+  }
+  .ds-v1 .event-thumb{
+    width:64px;
+    height:60px!important;
+  }
+  .ds-v1 .event-row:has(.event-thumb.is-fallback){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .ds-v1 .event-title-line h2{
+    font-size:14px!important;
+  }
+  .ds-v1 .event-meta{
+    font-size:11px!important;
+  }
+}
+@media(max-width:560px){
+  .ds-v1 .event-filters .category-pill{
+    font-size:10px!important;
+  }
+  .ds-v1 .event-meta{
+    display:flex!important;
+    flex-wrap:wrap;
+    gap:3px 9px!important;
+  }
+  .ds-v1 .event-meta .event-venue{
+    max-width:100%;
+  }
+}
+
+
+/* Event detail and map chrome readability -------------------------------- */
+#eventDetailRoot .detail-body{
+  padding:20px 22px 22px;
+}
+#eventDetailRoot .detail-body h1{
+  margin:8px 0 12px;
+  font-size:24px;
+  line-height:1.15;
+  letter-spacing:-.35px;
+}
+#eventDetailRoot .detail-facts{
+  gap:7px;
+  font-size:12px;
+  line-height:1.4;
+}
+#eventDetailRoot .detail-body p{
+  font-size:13px;
+  line-height:1.55;
+}
+#eventDetailRoot .detail-sources small,
+#eventDetailRoot .detail-sources a,
+#eventDetailRoot .detail-sources span{
+  font-size:10.5px;
+  line-height:1.35;
+}
+#eventDetailRoot .detail-primary,
+#eventDetailRoot .detail-save{
+  min-height:38px;
+  padding:8px 13px;
+  font-size:11.5px;
+}
+#eventDetailRoot .detail-close{
+  width:34px;
+  height:34px;
+  font-size:22px;
+}
+.ds-v1 .map-style-picker{
+  font-size:10.5px;
+}
+.ds-v1 .map-style-picker select{
+  min-height:30px;
+  font-size:10.5px;
+}
