@@ -259,6 +259,8 @@ export async function buildCoverageDashboard({now=new Date()}={}){
     metricVersion:3,
     targets:{
       regionPreciseLocationRate:0.9,
+      coverageEquityScore:85,
+      groupPassRateSpread:0.2,
       coverageClasses:COVERAGE_CLASS_TARGETS
     },
     regions
