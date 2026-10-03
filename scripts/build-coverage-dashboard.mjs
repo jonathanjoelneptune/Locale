@@ -3,6 +3,7 @@ import {isPreciseLocation} from "./location-quality.mjs";
 import {REGIONS} from "./regions.mjs";
 import {COVERAGE_CLASS_TARGETS,coverageTargets,milesBetween,areaGapScore} from "./coverage-zones.mjs";
 import {loadAcquisitionRegistry,neighborhoodAcquisitionByName} from "./acquisition-registry.mjs";
+import {coverageEquitySummary,areaEquityPriority} from "./coverage-equity.mjs";
 
 const OUT="src/data/coverage-dashboard.json";
 const readJson=async(path,fallback)=>{
@@ -196,6 +197,12 @@ export async function buildCoverageDashboard({now=new Date()}={}){
       delete group.gapScoreTotal;
     }
 
+    const coverageEquity=coverageEquitySummary(coverageAreaRows);
+    for(const row of coverageAreaRows){
+      const area=areaConfigById.get(row.id);
+      row.equityPriority=areaEquityPriority(row,area,coverageEquity.groups?.[row.group]);
+    }
+
     regions[region.id]={
       name:region.name,
       eventCount:regionEvents.length,
@@ -233,6 +240,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
         run:locationCoverage.run||null
       },
       coverageAreas:coverageAreaRows,
+      coverageEquity,
       coverageAreaAcceptance:{
         measured:coverageAreaRows.length,
         passing:coverageAreaRows.filter(row=>row.acceptance.pass).length,
