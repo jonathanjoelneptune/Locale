@@ -494,7 +494,7 @@ function nextCoverageAreaSweep(){
       const gap=Number(row?.gapScore||50);
       const groupKey=zone.group||row?.group||"other";
       const sameGroupThisRun=(stats.focusAreas||[]).filter(item=>item.regionId===zone.regionId&&item.group===groupKey).length;
-      const score=areaEquityFor(zone,row)-sameGroupThisRun*35-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
+      const score=areaEquityFor(zone,row)-sameGroupThisRun*1000-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
       return {zone,region,regionState,sweep,row,score,completedAt,gap};
     })
     .filter(Boolean)
