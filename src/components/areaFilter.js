@@ -29,7 +29,7 @@ export function AreaFilter(state,features,counts=new Map){
         const active=selected.has(p.id);
         const count=counts.get(p.id)||0;
         return `<button type="button" class="area-option ${active?"active":""}" data-area-id="${esc(p.id)}" role="option" aria-selected="${active}" aria-pressed="${active}">
-          <span class="area-check">${active?"✓":""}</span>
+          <span class="area-select-indicator" aria-hidden="true"><span></span></span>
           <span class="area-option-copy"><strong>${esc(p.name)}</strong><small>${esc(p.groupLabel||p.areaType||"Area")}</small></span>
           <span class="area-count">${count}</span>
         </button>`;
