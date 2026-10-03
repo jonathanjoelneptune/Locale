@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-10-03T15:12:58.805Z",
+  "generatedAt": "2026-10-03T17:16:31.469Z",
   "run": {
-    "startedAt": "2026-10-03T15:12:58.090Z",
+    "startedAt": "2026-10-03T17:16:29.714Z",
     "queueBefore": {
-      "total": 2221,
+      "total": 2227,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 171,
       "cold": 128,
       "lowValue": 1033,
       "qualified": 16,
-      "needsWebsite": 903,
+      "needsWebsite": 909,
       "lanes": {
-        "exploratory": 697,
-        "event-evidence": 235,
+        "exploratory": 702,
+        "event-evidence": 236,
         "event-likely": 116,
         "cold-sample": 128,
         "low-value": 1033,
         "food-evidence": 12
       }
     },
-    "seededFromRegistry": 6,
+    "seededFromRegistry": 1,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
@@ -42,7 +42,7 @@
         "passing": 22,
         "passRate": 0.11702127659574468,
         "severeGapCount": 76,
-        "mediumGapCount": 136
+        "mediumGapCount": 134
       },
       "chicago": {
         "mode": "unmeasured",
@@ -58,22 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|544065366",
-        "name": "Sushi Lounge",
-        "category": "restaurant",
-        "website": "https://www.sushiloungesd.com/",
+        "key": "san-diego|osm|node|1448557328",
+        "name": "Gossip Grill",
+        "category": "observed-venue",
+        "website": "http://www.thegossipgrill.com/",
         "attempts": 2,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T17:16:30.184Z",
+        "checkedAt": "2026-10-03T17:16:30.118Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|2149913857",
+        "name": "Carmel Sushi",
+        "category": "restaurant",
+        "website": "http://www.zipfusion-sd.com/",
+        "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-17T15:12:58.762Z",
-        "checkedAt": "2026-10-03T15:12:58.484Z"
+        "nextCheckAt": "2026-10-04T17:16:30.225Z",
+        "checkedAt": "2026-10-03T17:16:30.185Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079095",
+        "name": "Metl Bar Restaurant -Gaslamp",
+        "category": "restaurant",
+        "website": "https://metlsd.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Metl Bar Restaurant -Gaslamp (food-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-02T17:16:31.436Z",
+        "checkedAt": "2026-10-03T17:16:30.035Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -87,8 +125,8 @@
     "probeLaneCounts": {
       "event-likely": 0,
       "event-evidence": 0,
-      "food-evidence": 0,
-      "exploratory": 0,
+      "food-evidence": 1,
+      "exploratory": 1,
       "low-value": 1,
       "cold-sample": 0
     },
@@ -100,27 +138,27 @@
       "low-value": 1,
       "cold-sample": 1
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-03T15:12:58.764Z",
-    "durationMs": 674,
+    "failed": 3,
+    "finishedAt": "2026-10-03T17:16:31.437Z",
+    "durationMs": 1723,
     "queueAfter": {
-      "total": 2227,
+      "total": 2228,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 128,
+      "cold": 129,
       "lowValue": 1033,
       "qualified": 16,
-      "needsWebsite": 909,
+      "needsWebsite": 910,
       "lanes": {
-        "exploratory": 702,
+        "exploratory": 703,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 128,
+        "cold-sample": 129,
         "low-value": 1033,
-        "food-evidence": 12
+        "food-evidence": 11
       }
     },
     "overpassEndpoints": [
@@ -172,22 +210,22 @@
       "qualifiedCount": 16,
       "needsWebsiteCount": 806,
       "dueCount": 0,
-      "coldCount": 128,
+      "coldCount": 129,
       "lowValueCount": 1033,
       "laneCounts": {
-        "cold-sample": 128,
+        "cold-sample": 129,
         "event-evidence": 201,
         "event-likely": 116,
         "exploratory": 634,
-        "food-evidence": 12,
+        "food-evidence": 11,
         "low-value": 1033
       },
       "statusCounts": {
         "qualified": 16,
         "retry": 171,
         "needs-website": 806,
-        "cold": 128,
-        "candidate": 1003
+        "cold": 129,
+        "candidate": 1002
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -236,7 +274,7 @@
         "passing": 22,
         "passRate": 0.11702127659574468,
         "severeGapCount": 76,
-        "mediumGapCount": 136,
+        "mediumGapCount": 134,
         "activeMode": "bootstrap",
         "probeLimit": 12,
         "probeConcurrency": 2,
@@ -244,22 +282,22 @@
       }
     },
     "chicago": {
-      "candidateCount": 103,
+      "candidateCount": 104,
       "withWebsiteCount": 0,
       "qualifiedCount": 0,
-      "needsWebsiteCount": 103,
+      "needsWebsiteCount": 104,
       "dueCount": 0,
       "coldCount": 0,
       "lowValueCount": 0,
       "laneCounts": {
         "event-evidence": 35,
-        "exploratory": 68
+        "exploratory": 69
       },
       "statusCounts": {
-        "needs-website": 103
+        "needs-website": 104
       },
       "categoryCounts": {
-        "observed-venue": 103
+        "observed-venue": 104
       },
       "discoveredSourceCount": 0,
       "discoveryCells": {
