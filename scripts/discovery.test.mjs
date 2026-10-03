@@ -9,6 +9,7 @@ import {extractCalendarEventLinks} from "./providers/calendar-links.mjs";
 import {tribeEvents} from "./providers/tribe.mjs";
 import {mergeSourceCatalog,sourceEndpointKey} from "./source-catalog.mjs";
 import {libertyStationEvents} from "./providers/liberty-station.mjs";
+import {coverageGroupProfiles,coverageEquitySummary,areaEquityPriority,selectCoverageBalancedCandidates} from "./coverage-equity.mjs";
 
 const region={
   id:"san-diego",
@@ -195,6 +196,8 @@ test("adaptive discovery stays aggressive while coverage is immature",()=>{
   assert.equal(plan.budget.probeLimit,12);
   assert.equal(plan.budget.probeConcurrency,2);
   assert.equal(plan.budget.overpassMinIntervalMinutes,360);
+  assert.equal(plan.budget.areaSweeps,3);
+  assert.equal(plan.budget.regionalCells,1);
 });
 
 test("adaptive discovery tapers only after at least 95 percent coverage with no severe gaps",()=>{
@@ -234,6 +237,55 @@ test("Overpass cadence is independent from the faster discovery worker cadence",
   assert.equal(isOverpassDue("2026-10-01T18:59:59Z",60,now),true);
 });
 
+
+test("coverage equity identifies group-level starvation",()=>{
+  const rows=[
+    ...Array.from({length:4},(_,index)=>({
+      id:"core-"+index,group:"central-core",gapScore:0,preciseEventsNext28d:30,uniqueVenuesNext28d:12,acceptance:{pass:true}
+    })),
+    ...Array.from({length:4},(_,index)=>({
+      id:"east-"+index,group:"east-county",gapScore:100,preciseEventsNext28d:0,uniqueVenuesNext28d:0,acceptance:{pass:false}
+    }))
+  ];
+  const groups=coverageGroupProfiles(rows);
+  const equity=coverageEquitySummary(rows);
+  assert.equal(groups["central-core"].passRate,1);
+  assert.equal(groups["east-county"].passRate,0);
+  assert.ok(groups["east-county"].deficitScore>groups["central-core"].deficitScore);
+  assert.equal(equity.groupPassRateSpread,1);
+  assert.equal(equity.zeroEventAreas,4);
+  assert.ok(equity.equityScore<60);
+});
+
+test("area equity priority strongly favors empty failing areas over saturated passing areas",()=>{
+  const weak={gapScore:100,preciseEventsNext28d:0,uniqueVenuesNext28d:0,acceptance:{pass:false}};
+  const strong={gapScore:0,preciseEventsNext28d:80,uniqueVenuesNext28d:30,acceptance:{pass:true}};
+  const zone={discoveryPriority:70};
+  const weakScore=areaEquityPriority(weak,zone,{deficitScore:90});
+  const strongScore=areaEquityPriority(strong,zone,{deficitScore:5});
+  assert.ok(weakScore>strongScore+100);
+});
+
+test("balanced probe selection spreads scarce slots across groups and areas first",()=>{
+  const rows=[
+    {key:"core-1",coverageGroup:"central-core",coverageAreaId:"downtown",priority:200,website:"https://core1.example"},
+    {key:"core-2",coverageGroup:"central-core",coverageAreaId:"downtown",priority:199,website:"https://core2.example"},
+    {key:"core-3",coverageGroup:"central-core",coverageAreaId:"gaslamp",priority:198,website:"https://core3.example"},
+    {key:"east-1",coverageGroup:"east-county",coverageAreaId:"lakeside",priority:170,website:"https://east1.example"},
+    {key:"south-1",coverageGroup:"south-bay",coverageAreaId:"skyline",priority:165,website:"https://south1.example"},
+    {key:"north-1",coverageGroup:"north-inland",coverageAreaId:"poway",priority:160,website:"https://north1.example"}
+  ];
+  const result=selectCoverageBalancedCandidates(rows,4,{
+    scoreFn:item=>item.priority,
+    areaFn:item=>item.coverageAreaId,
+    groupFn:item=>item.coverageGroup,
+    hostFn:item=>new URL(item.website).hostname
+  });
+  assert.equal(result.selected.length,4);
+  assert.equal(new Set(result.selected.map(item=>item.coverageGroup)).size,4);
+  assert.equal(new Set(result.selected.map(item=>item.coverageAreaId)).size,4);
+  assert.equal(result.selected.filter(item=>item.coverageAreaId==="downtown").length,1);
+});
 
 test("probe lanes prioritize event-producing venues ahead of ordinary dining",()=>{
   assert.equal(probeLane({category:"music-venue",name:"The Sound"}),"event-likely");
