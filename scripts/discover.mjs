@@ -464,11 +464,18 @@ function areaMetric(zone){
 }
 
 function areaSweepIntervalMs(zone,row){
-  if(row?.acceptance?.pass)return 14*86400000;
+  if(row?.acceptance?.pass)return 21*86400000;
   const gap=Number(row?.gapScore||50);
-  if(gap>=70||Number(zone.discoveryPriority||0)>=95)return 2*86400000;
-  if(gap>=45)return 4*86400000;
+  const events=Number(row?.preciseEventsNext28d||0);
+  if(events===0)return 24*3600000;
+  if(gap>=70||Number(zone.discoveryPriority||0)>=95)return 36*3600000;
+  if(gap>=45)return 3*86400000;
   return 7*86400000;
+}
+
+function areaEquityFor(zone,row=areaMetric(zone)){
+  const group=coverageEquityByRegion?.[zone.regionId]?.groups?.[zone.group||row?.group||"other"];
+  return areaEquityPriority(row,zone,group);
 }
 
 function nextCoverageAreaSweep(){
@@ -485,8 +492,10 @@ function nextCoverageAreaSweep(){
       const dueAt=completedAt+areaSweepIntervalMs(zone,row);
       if(retryAt>now||completedAt&&dueAt>now)return null;
       const gap=Number(row?.gapScore||50);
-      const score=Number(zone.discoveryPriority||50)+gap*.8-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
-      return {zone,region,regionState,sweep,row,score,completedAt};
+      const groupKey=zone.group||row?.group||"other";
+      const sameGroupThisRun=(stats.focusAreas||[]).filter(item=>item.regionId===zone.regionId&&item.group===groupKey).length;
+      const score=areaEquityFor(zone,row)-sameGroupThisRun*35-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
+      return {zone,region,regionState,sweep,row,score,completedAt,gap};
     })
     .filter(Boolean)
     .sort((a,b)=>b.score-a.score||a.completedAt-b.completedAt||a.zone.name.localeCompare(b.zone.name))[0]||null;
@@ -523,7 +532,7 @@ for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
       attempts:0,
       nextAttemptAt:null
     };
-    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"ok",candidateCount:cellCandidates.length,newCount:added});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,group:zone.group||row?.group||"other",gapScore:Number(row?.gapScore||0),equityPriority:areaEquityFor(zone,row),status:"ok",candidateCount:cellCandidates.length,newCount:added});
     console.log(`${region.id}/area:${zone.id}: discovered ${cellCandidates.length} focused venues; ${added} new.`);
   }catch(error){
     const attempts=Number(sweep.attempts||0)+1;
@@ -534,7 +543,7 @@ for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
       nextAttemptAt:new Date(Date.now()+Math.min(discoveryBudget.failedSweepRetryMinutes*60000*attempts,12*60*60*1000)).toISOString(),
       error:String(error?.message||error)
     };
-    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,group:zone.group||row?.group||"other",gapScore:Number(row?.gapScore||0),equityPriority:areaEquityFor(zone,row),status:"failed",error:String(error?.message||error)});
     if(["OVERPASS_ALL_FAILED","OVERPASS_COOLDOWN"].includes(error?.code))stopOverpass=true;
     console.error(`${region.id}/area:${zone.id}: focused discovery failed:`,error);
   }
