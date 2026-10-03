@@ -122,14 +122,14 @@
       "remainingCellCount": 135
     }
   },
-  "lastRunAt": "2026-10-03T10:40:16.905Z",
+  "lastRunAt": "2026-10-03T11:32:24.222Z",
   "lastRun": {
-    "startedAt": "2026-10-03T10:40:12.434Z",
+    "startedAt": "2026-10-03T11:32:16.781Z",
     "queueBefore": {
       "total": 2220,
       "withWebsite": 1318,
-      "due": 6,
-      "retry": 167,
+      "due": 3,
+      "retry": 169,
       "cold": 127,
       "lowValue": 1034,
       "qualified": 16,
@@ -181,13 +181,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596649040",
-        "name": "Oggi's Pizza and Brewing Co.",
-        "category": "restaurant",
-        "website": "http://cmr.oggis.com/",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
         "attempts": 2,
         "status": "retry",
-        "probeLane": "food-evidence",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -195,84 +195,46 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-05T10:40:13.352Z",
-        "checkedAt": "2026-10-03T10:40:12.961Z"
+        "nextCheckAt": "2026-10-05T11:32:17.424Z",
+        "checkedAt": "2026-10-03T11:32:17.261Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6638606123",
-        "name": "Sammy's Woodfire Pizza and Grille",
-        "category": "restaurant",
-        "website": "https://sammyspizza.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-06T10:40:13.612Z",
-        "checkedAt": "2026-10-03T10:40:13.352Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1353404055",
-        "name": "Fleming's Prime Steakhouse and Wine Bar",
-        "category": "restaurant",
-        "website": "https://www.flemingssteakhouse.com/locations/ca/la-jolla/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-17T10:40:14.198Z",
-        "checkedAt": "2026-10-03T10:40:13.612Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|13375144703",
-        "name": "OB Noodle House & Sake Bar",
-        "category": "restaurant",
-        "website": "https://www.obnoodlehouse.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-05T10:40:15.611Z",
-        "checkedAt": "2026-10-03T10:40:14.198Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596499269",
-        "name": "North Park Branch San Diego Public Library",
+        "key": "san-diego|osm|node|368170974",
+        "name": "University Heights Branch San Diego Public Library",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/north-park-library",
+        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
         "attempts": 1,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on North Park Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-06T10:40:16.904Z",
-        "checkedAt": "2026-10-03T10:40:12.917Z"
+        "nextCheckAt": "2026-10-06T11:32:21.776Z",
+        "checkedAt": "2026-10-03T11:32:17.310Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6016781034",
+        "name": "The Peruvian Spot",
+        "category": "restaurant",
+        "website": "https://www.theperuvianspot.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on The Peruvian Spot (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T11:32:24.220Z",
+        "checkedAt": "2026-10-03T11:32:17.425Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -284,9 +246,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
+      "event-likely": 2,
       "event-evidence": 0,
-      "food-evidence": 3,
+      "food-evidence": 0,
       "exploratory": 0,
       "low-value": 1,
       "cold-sample": 0
@@ -299,26 +261,26 @@
       "low-value": 1,
       "cold-sample": 1
     },
-    "probed": 5,
+    "probed": 3,
     "promoted": 0,
-    "failed": 5,
-    "finishedAt": "2026-10-03T10:40:16.905Z",
-    "durationMs": 4471,
+    "failed": 3,
+    "finishedAt": "2026-10-03T11:32:24.222Z",
+    "durationMs": 7441,
     "queueAfter": {
       "total": 2220,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 169,
-      "cold": 127,
-      "lowValue": 1034,
+      "due": 1,
+      "retry": 170,
+      "cold": 128,
+      "lowValue": 1033,
       "qualified": 16,
       "needsWebsite": 902,
       "lanes": {
         "exploratory": 696,
         "event-evidence": 235,
         "event-likely": 116,
-        "cold-sample": 127,
-        "low-value": 1034,
+        "cold-sample": 128,
+        "low-value": 1033,
         "food-evidence": 12
       }
     },
@@ -366,6 +328,122 @@
   },
   "lastOverpassRunAt": "2026-10-03T05:40:30.465Z",
   "runHistory": [
+    {
+      "startedAt": "2026-10-03T11:32:16.781Z",
+      "finishedAt": "2026-10-03T11:32:24.222Z",
+      "durationMs": 7441,
+      "discoveryMode": "bootstrap",
+      "probed": 3,
+      "promoted": 0,
+      "failed": 3,
+      "overpassRun": false,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        }
+      ],
+      "seededFromRegistry": 0,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2220,
+        "withWebsite": 1318,
+        "due": 3,
+        "retry": 169,
+        "cold": 127,
+        "lowValue": 1034,
+        "qualified": 16,
+        "needsWebsite": 902,
+        "lanes": {
+          "exploratory": 696,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 127,
+          "low-value": 1034,
+          "food-evidence": 12
+        }
+      },
+      "queueAfter": {
+        "total": 2220,
+        "withWebsite": 1318,
+        "due": 1,
+        "retry": 170,
+        "cold": 128,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 902,
+        "lanes": {
+          "exploratory": 696,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 128,
+          "low-value": 1033,
+          "food-evidence": 12
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 2,
+        "event-evidence": 0,
+        "food-evidence": 0,
+        "exploratory": 0,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-03T10:40:12.434Z",
       "finishedAt": "2026-10-03T10:40:16.905Z",
