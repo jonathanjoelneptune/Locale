@@ -1,149 +1,8 @@
 {
-  "generatedAt": "2026-10-03T13:39:25.824Z",
+  "generatedAt": "2026-10-03T13:40:51.021Z",
   "lastRun": {
-    "startedAt": "2026-10-03T11:32:16.781Z",
+    "startedAt": "2026-10-03T13:39:45.471Z",
     "queueBefore": {
-      "total": 2220,
-      "withWebsite": 1318,
-      "due": 3,
-      "retry": 169,
-      "cold": 127,
-      "lowValue": 1034,
-      "qualified": 16,
-      "needsWebsite": 902,
-      "lanes": {
-        "exploratory": 696,
-        "event-evidence": 235,
-        "event-likely": 116,
-        "cold-sample": 127,
-        "low-value": 1034,
-        "food-evidence": 12
-      }
-    },
-    "seededFromRegistry": 0,
-    "seededFromRegionalSweep": 0,
-    "seededFromAreaSweep": 0,
-    "sweptRegionId": null,
-    "focusAreas": [],
-    "discoveryMode": "bootstrap",
-    "discoveryBudget": {
-      "probeLimit": 12,
-      "probeConcurrency": 2,
-      "overpassMinIntervalMinutes": 360,
-      "areaSweeps": 2,
-      "regionalCells": 2,
-      "failedSweepRetryMinutes": 60
-    },
-    "regionProfiles": {
-      "san-diego": {
-        "mode": "bootstrap",
-        "configuredAreaCount": 188,
-        "measured": 188,
-        "passing": 22,
-        "passRate": 0.11702127659574468,
-        "severeGapCount": 76,
-        "mediumGapCount": 136
-      },
-      "chicago": {
-        "mode": "unmeasured",
-        "configuredAreaCount": 0,
-        "measured": 0,
-        "passing": 0,
-        "passRate": 0,
-        "severeGapCount": 0,
-        "mediumGapCount": 0
-      }
-    },
-    "overpassRun": false,
-    "probeResults": [
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|28824905",
-        "name": "Reuben H. Fleet Science Center",
-        "category": "museum",
-        "website": "https://www.rhfleet.org/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-05T11:32:17.424Z",
-        "checkedAt": "2026-10-03T11:32:17.261Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|368170974",
-        "name": "University Heights Branch San Diego Public Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-06T11:32:21.776Z",
-        "checkedAt": "2026-10-03T11:32:17.310Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6016781034",
-        "name": "The Peruvian Spot",
-        "category": "restaurant",
-        "website": "https://www.theperuvianspot.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on The Peruvian Spot (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T11:32:24.220Z",
-        "checkedAt": "2026-10-03T11:32:17.425Z"
-      }
-    ],
-    "sourceDuplicatesAliased": 0,
-    "sourceReferencesRemapped": 0,
-    "sourceRevalidationsQueued": 0,
-    "sourceRevalidationsMissingCandidate": 0,
-    "sourceRevalidated": 0,
-    "sourceInvalidated": 0,
-    "sourceReplaced": 0,
-    "coldMigrated": 0,
-    "probeLaneCounts": {
-      "event-likely": 2,
-      "event-evidence": 0,
-      "food-evidence": 0,
-      "exploratory": 0,
-      "low-value": 1,
-      "cold-sample": 0
-    },
-    "probeLaneTargets": {
-      "event-likely": 6,
-      "event-evidence": 2,
-      "food-evidence": 1,
-      "exploratory": 1,
-      "low-value": 1,
-      "cold-sample": 1
-    },
-    "probed": 3,
-    "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-10-03T11:32:24.222Z",
-    "durationMs": 7441,
-    "queueAfter": {
       "total": 2220,
       "withWebsite": 1318,
       "due": 1,
@@ -161,49 +20,323 @@
         "food-evidence": 12
       }
     },
+    "seededFromRegistry": 1,
+    "seededFromRegionalSweep": 0,
+    "seededFromAreaSweep": 0,
+    "sweptRegionId": null,
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "gapScore": 99,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "logan-heights",
+        "name": "Logan Heights",
+        "gapScore": 96,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
+    "discoveryMode": "bootstrap",
+    "discoveryBudget": {
+      "probeLimit": 12,
+      "probeConcurrency": 2,
+      "overpassMinIntervalMinutes": 360,
+      "areaSweeps": 2,
+      "regionalCells": 2,
+      "failedSweepRetryMinutes": 60
+    },
+    "regionProfiles": {
+      "san-diego": {
+        "mode": "bootstrap",
+        "configuredAreaCount": 188,
+        "measured": 188,
+        "passing": 22,
+        "passRate": 0.11702127659574468,
+        "severeGapCount": 76,
+        "mediumGapCount": 134
+      },
+      "chicago": {
+        "mode": "unmeasured",
+        "configuredAreaCount": 0,
+        "measured": 0,
+        "passing": 0,
+        "passRate": 0,
+        "severeGapCount": 0,
+        "mediumGapCount": 0
+      }
+    },
+    "overpassRun": true,
+    "probeResults": [
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1429439653",
+        "name": "Amardeen Cafe",
+        "category": "restaurant",
+        "website": "http://amardeencafe.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T13:40:29.796Z",
+        "checkedAt": "2026-10-03T13:40:29.604Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8726804043",
+        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-06T13:40:31.830Z",
+        "checkedAt": "2026-10-03T13:40:29.602Z"
+      }
+    ],
+    "sourceDuplicatesAliased": 0,
+    "sourceReferencesRemapped": 0,
+    "sourceRevalidationsQueued": 0,
+    "sourceRevalidationsMissingCandidate": 0,
+    "sourceRevalidated": 0,
+    "sourceInvalidated": 0,
+    "sourceReplaced": 0,
+    "coldMigrated": 0,
+    "probeLaneCounts": {
+      "event-likely": 1,
+      "event-evidence": 0,
+      "food-evidence": 0,
+      "exploratory": 0,
+      "low-value": 1,
+      "cold-sample": 0
+    },
+    "probeLaneTargets": {
+      "event-likely": 6,
+      "event-evidence": 2,
+      "food-evidence": 1,
+      "exploratory": 1,
+      "low-value": 1,
+      "cold-sample": 1
+    },
+    "probed": 2,
+    "promoted": 0,
+    "failed": 2,
+    "finishedAt": "2026-10-03T13:40:31.838Z",
+    "durationMs": 46367,
+    "queueAfter": {
+      "total": 2221,
+      "withWebsite": 1318,
+      "due": 0,
+      "retry": 171,
+      "cold": 128,
+      "lowValue": 1033,
+      "qualified": 16,
+      "needsWebsite": 903,
+      "lanes": {
+        "exploratory": 697,
+        "event-evidence": 235,
+        "event-likely": 116,
+        "cold-sample": 128,
+        "low-value": 1033,
+        "food-evidence": 12
+      }
+    },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 2,
+        "successes": 1,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-03T13:40:14.372Z",
+        "lastFinishedAt": "2026-10-03T13:40:29.372Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791034859372,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-03T13:39:58.401Z",
+        "lastFinishedAt": "2026-10-03T13:40:13.402Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791034843402,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-03T13:40:13.402Z",
+        "lastFinishedAt": "2026-10-03T13:40:14.372Z",
+        "lastLatencyMs": 970,
+        "cooldownUntil": 1791034844372,
+        "consecutiveFailures": 1
       }
     ]
   },
   "runHistory": [
+    {
+      "startedAt": "2026-10-03T13:39:45.471Z",
+      "finishedAt": "2026-10-03T13:40:31.838Z",
+      "durationMs": 46367,
+      "discoveryMode": "bootstrap",
+      "probed": 2,
+      "promoted": 0,
+      "failed": 2,
+      "overpassRun": true,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 2,
+          "successes": 1,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "The operation was aborted due to timeout",
+          "lastStartedAt": "2026-10-03T13:40:14.372Z",
+          "lastFinishedAt": "2026-10-03T13:40:29.372Z",
+          "lastLatencyMs": 15000,
+          "cooldownUntil": 1791034859372,
+          "consecutiveFailures": 1
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 1,
+          "successes": 0,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "The operation was aborted due to timeout",
+          "lastStartedAt": "2026-10-03T13:39:58.401Z",
+          "lastFinishedAt": "2026-10-03T13:40:13.402Z",
+          "lastLatencyMs": 15001,
+          "cooldownUntil": 1791034843402,
+          "consecutiveFailures": 1
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 1,
+          "successes": 0,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+          "lastStartedAt": "2026-10-03T13:40:13.402Z",
+          "lastFinishedAt": "2026-10-03T13:40:14.372Z",
+          "lastLatencyMs": 970,
+          "cooldownUntil": 1791034844372,
+          "consecutiveFailures": 1
+        }
+      ],
+      "seededFromRegistry": 1,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [
+        {
+          "regionId": "san-diego",
+          "id": "rancho-bernardo",
+          "name": "Rancho Bernardo",
+          "gapScore": 99,
+          "status": "ok",
+          "candidateCount": 0,
+          "newCount": 0
+        },
+        {
+          "regionId": "san-diego",
+          "id": "logan-heights",
+          "name": "Logan Heights",
+          "gapScore": 96,
+          "status": "failed",
+          "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
+        }
+      ],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2220,
+        "withWebsite": 1318,
+        "due": 1,
+        "retry": 170,
+        "cold": 128,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 902,
+        "lanes": {
+          "exploratory": 696,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 128,
+          "low-value": 1033,
+          "food-evidence": 12
+        }
+      },
+      "queueAfter": {
+        "total": 2221,
+        "withWebsite": 1318,
+        "due": 0,
+        "retry": 171,
+        "cold": 128,
+        "lowValue": 1033,
+        "qualified": 16,
+        "needsWebsite": 903,
+        "lanes": {
+          "exploratory": 697,
+          "event-evidence": 235,
+          "event-likely": 116,
+          "cold-sample": 128,
+          "low-value": 1033,
+          "food-evidence": 12
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 1,
+        "event-evidence": 0,
+        "food-evidence": 0,
+        "exploratory": 0,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-03T11:32:16.781Z",
       "finishedAt": "2026-10-03T11:32:24.222Z",
@@ -2209,7 +2342,7 @@
       }
     }
   ],
-  "lastOverpassRunAt": "2026-10-03T05:40:30.465Z",
+  "lastOverpassRunAt": "2026-10-03T13:40:29.374Z",
   "regions": {
     "san-diego": {
       "lastSweepAttemptAt": "2026-10-01T23:27:39.421Z",
@@ -2289,10 +2422,18 @@
           "nextAttemptAt": null
         },
         "rancho-bernardo": {
-          "attempts": 2,
-          "lastAttemptAt": "2026-10-03T05:39:45.457Z",
-          "nextAttemptAt": "2026-10-03T07:40:30.463Z",
-          "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+          "lastAttemptAt": "2026-10-03T13:39:45.714Z",
+          "lastCompletedAt": "2026-10-03T13:39:58.399Z",
+          "candidateCount": 0,
+          "newCount": 0,
+          "attempts": 0,
+          "nextAttemptAt": null
+        },
+        "logan-heights": {
+          "attempts": 1,
+          "lastAttemptAt": "2026-10-03T13:39:58.401Z",
+          "nextAttemptAt": "2026-10-03T14:40:29.372Z",
+          "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
         }
       }
     },
@@ -2334,6 +2475,44 @@
     }
   },
   "recentProbeResults": [
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|1429439653",
+      "name": "Amardeen Cafe",
+      "category": "restaurant",
+      "website": "http://amardeencafe.com/",
+      "status": "retry",
+      "probeLane": "low-value",
+      "attempts": 2,
+      "lastCheckedAt": "2026-10-03T13:40:29.604Z",
+      "nextCheckAt": "2026-10-05T13:40:29.796Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "website-fetch-failed",
+        "detail": "fetch failed",
+        "statusCode": null
+      }
+    },
+    {
+      "regionId": "san-diego",
+      "key": "san-diego|osm|node|8726804043",
+      "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
+      "category": "library",
+      "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
+      "status": "retry",
+      "probeLane": "event-likely",
+      "attempts": 1,
+      "lastCheckedAt": "2026-10-03T13:40:29.602Z",
+      "nextCheckAt": "2026-10-06T13:40:31.830Z",
+      "coldUntil": null,
+      "sourceId": null,
+      "lastResult": {
+        "reason": "no-supported-calendar",
+        "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
+        "statusCode": null
+      }
+    },
     {
       "regionId": "san-diego",
       "key": "san-diego|osm|node|6016781034",
@@ -3433,44 +3612,6 @@
       "lastResult": {
         "reason": "no-supported-calendar",
         "detail": "Checked 3 pages on Mike Hess Brewing - Seaport Village Biergarten (food-evidence)",
-        "statusCode": null
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|11748134769",
-      "name": "Topside Terrace Kitchen & Bar",
-      "category": "restaurant",
-      "website": "https://www.hotelrepublicsd.com/dining/topside-terrace-kitchen-bar",
-      "status": "retry",
-      "probeLane": "food-evidence",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T19:01:26.420Z",
-      "nextCheckAt": "2026-10-05T19:01:26.978Z",
-      "coldUntil": null,
-      "sourceId": null,
-      "lastResult": {
-        "reason": "website-fetch-failed",
-        "detail": "HTTP 403",
-        "statusCode": 403
-      }
-    },
-    {
-      "regionId": "san-diego",
-      "key": "san-diego|osm|node|12397642459",
-      "name": "Denny's",
-      "category": "restaurant",
-      "website": "https://locations.dennys.com/CA/SAN-DIEGO/200891",
-      "status": "cold",
-      "probeLane": "cold-sample",
-      "attempts": 1,
-      "lastCheckedAt": "2026-10-02T19:01:25.804Z",
-      "nextCheckAt": "2026-11-16T19:01:26.420Z",
-      "coldUntil": "2026-11-16T19:01:26.420Z",
-      "sourceId": null,
-      "lastResult": {
-        "reason": "no-supported-calendar",
-        "detail": "Checked 1 page on Denny's (low-value)",
         "statusCode": null
       }
     }
