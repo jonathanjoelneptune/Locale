@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T05:41:05.176Z",
+  "generatedAt": "2026-10-03T05:41:37.944Z",
   "metricVersion": 2,
   "targets": {
     "regionPreciseLocationRate": 0.9,
@@ -37,8 +37,8 @@
   "regions": {
     "san-diego": {
       "name": "San Diego",
-      "eventCount": 11909,
-      "preciseLocationCount": 11561,
+      "eventCount": 11891,
+      "preciseLocationCount": 11549,
       "preciseLocationRate": 0.971,
       "preciseLocationTarget": 0.9,
       "preciseLocationTargetMet": true,
@@ -46,15 +46,15 @@
       "sourceCount": 45,
       "dynamicSourceCount": 14,
       "categoryCounts": {
-        "community": 1735,
-        "food": 6472,
+        "community": 1733,
+        "food": 6463,
         "family": 460,
-        "theater": 576,
-        "sports": 75,
-        "music": 741,
+        "theater": 575,
+        "music": 736,
         "nightlife": 1603,
         "comedy": 175,
-        "festival": 72
+        "festival": 72,
+        "sports": 74
       },
       "recurringActivityCounts": {
         "trivia": 653,
@@ -62,7 +62,7 @@
         "taco-tuesday": 138,
         "open-mic": 20,
         "bingo": 19,
-        "happy-hour": 6200
+        "happy-hour": 6191
       },
       "sourceHealth": [
         {
@@ -75,6 +75,12 @@
           "regionId": "san-diego",
           "sourceId": "discovered-san-diego-c39647815396",
           "count": 1,
+          "status": "stale-preserved"
+        },
+        {
+          "regionId": "san-diego",
+          "sourceId": "spin-nightclub",
+          "count": 18,
           "status": "stale-preserved"
         },
         {
@@ -199,12 +205,6 @@
         },
         {
           "regionId": "san-diego",
-          "sourceId": "spin-nightclub",
-          "count": 18,
-          "status": "ok"
-        },
-        {
-          "regionId": "san-diego",
           "sourceId": "discovered-san-diego-f22dfba5136c",
           "count": 22,
           "status": "ok"
@@ -253,14 +253,14 @@
         },
         {
           "regionId": "san-diego",
-          "sourceId": "liberty-station",
+          "sourceId": "del-mar-fairgrounds",
           "count": 73,
           "status": "ok"
         },
         {
           "regionId": "san-diego",
-          "sourceId": "del-mar-fairgrounds",
-          "count": 75,
+          "sourceId": "liberty-station",
+          "count": 73,
           "status": "ok"
         },
         {
@@ -272,7 +272,7 @@
         {
           "regionId": "san-diego",
           "sourceId": "county-parks",
-          "count": 99,
+          "count": 98,
           "status": "ok"
         },
         {
@@ -326,7 +326,7 @@
         {
           "regionId": "san-diego",
           "sourceId": "ticketmaster",
-          "count": 551,
+          "count": 544,
           "status": "ok"
         },
         {
@@ -344,7 +344,7 @@
         {
           "regionId": "san-diego",
           "sourceId": "sandiego-reader-happy-hours",
-          "count": 6356,
+          "count": 6347,
           "status": "ok"
         }
       ],
@@ -10198,7 +10198,7 @@
           "lat": 32.8328,
           "lng": -117.2713,
           "radiusMiles": 1.6,
-          "preciseEventsNext28d": 141,
+          "preciseEventsNext28d": 140,
           "uniqueVenuesNext28d": 16,
           "fridaySaturdayNightAverage": 3.5,
           "fridaySaturdayNightMax": 6,
@@ -10438,67 +10438,6 @@
           }
         },
         {
-          "id": "coronado",
-          "name": "Coronado",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.6859,
-          "lng": -117.1831,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 209,
-          "uniqueVenuesNext28d": 11,
-          "fridaySaturdayNightAverage": 4.8,
-          "fridaySaturdayNightMax": 7,
-          "activeFridaySaturdayNights": 7,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 206,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 0,
-            "2026-10-03": 5,
-            "2026-10-09": 7,
-            "2026-10-10": 4,
-            "2026-10-16": 7,
-            "2026-10-17": 4,
-            "2026-10-23": 7,
-            "2026-10-24": 4
-          },
-          "gapScore": 27,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Coronado Calendar"
-            ],
-            "umbrellaSources": [
-              "Reader",
-              "Ticketmaster"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 25,
-            "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 6
-          }
-        },
-        {
           "id": "liberty-station",
           "name": "Liberty Station",
           "group": "central-west",
@@ -10557,6 +10496,67 @@
             "withWebsiteCount": 10,
             "qualifiedCount": 1,
             "retryCount": 0
+          }
+        },
+        {
+          "id": "coronado",
+          "name": "Coronado",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.6859,
+          "lng": -117.1831,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 212,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 4.8,
+          "fridaySaturdayNightMax": 7,
+          "activeFridaySaturdayNights": 7,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 206,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 0,
+            "2026-10-03": 5,
+            "2026-10-09": 7,
+            "2026-10-10": 4,
+            "2026-10-16": 7,
+            "2026-10-17": 4,
+            "2026-10-23": 7,
+            "2026-10-24": 4
+          },
+          "gapScore": 26,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Coronado Calendar"
+            ],
+            "umbrellaSources": [
+              "Reader",
+              "Ticketmaster"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 25,
+            "withWebsiteCount": 13,
+            "qualifiedCount": 0,
+            "retryCount": 6
           }
         },
         {
@@ -10940,13 +10940,13 @@
           "lat": 32.7157,
           "lng": -117.1611,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 1441,
+          "preciseEventsNext28d": 1440,
           "uniqueVenuesNext28d": 121,
-          "fridaySaturdayNightAverage": 34.9,
-          "fridaySaturdayNightMax": 54,
+          "fridaySaturdayNightAverage": 34.8,
+          "fridaySaturdayNightMax": 55,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 1071,
+          "recurringLocalOccurrences30d": 1070,
           "targets": {
             "fridaySaturdayNightAverage": 6,
             "recurringLocalOccurrences30d": 4
@@ -10957,9 +10957,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 3,
+            "2026-10-02": 1,
             "2026-10-03": 38,
-            "2026-10-09": 54,
+            "2026-10-09": 55,
             "2026-10-10": 27,
             "2026-10-16": 47,
             "2026-10-17": 34,
@@ -11005,9 +11005,9 @@
           "radiusMiles": 0.9,
           "preciseEventsNext28d": 925,
           "uniqueVenuesNext28d": 66,
-          "fridaySaturdayNightAverage": 21.6,
+          "fridaySaturdayNightAverage": 21.5,
           "fridaySaturdayNightMax": 32,
-          "activeFridaySaturdayNights": 8,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 717,
           "targets": {
@@ -11020,7 +11020,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 22,
             "2026-10-09": 32,
             "2026-10-10": 17,
@@ -11065,11 +11065,11 @@
           "lat": 32.7117,
           "lng": -117.1602,
           "radiusMiles": 0.85,
-          "preciseEventsNext28d": 1067,
-          "uniqueVenuesNext28d": 79,
+          "preciseEventsNext28d": 1068,
+          "uniqueVenuesNext28d": 80,
           "fridaySaturdayNightAverage": 24.8,
-          "fridaySaturdayNightMax": 38,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightMax": 39,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 829,
           "targets": {
@@ -11082,9 +11082,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 26,
-            "2026-10-09": 38,
+            "2026-10-09": 39,
             "2026-10-10": 19,
             "2026-10-16": 36,
             "2026-10-17": 21,
@@ -11194,10 +11194,10 @@
           "preciseEventsNext28d": 749,
           "uniqueVenuesNext28d": 59,
           "fridaySaturdayNightAverage": 20.5,
-          "fridaySaturdayNightMax": 32,
+          "fridaySaturdayNightMax": 33,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 545,
+          "recurringLocalOccurrences30d": 544,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -11208,9 +11208,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 24,
-            "2026-10-09": 32,
+            "2026-10-09": 33,
             "2026-10-10": 18,
             "2026-10-16": 25,
             "2026-10-17": 22,
@@ -11319,8 +11319,8 @@
           "preciseEventsNext28d": 999,
           "uniqueVenuesNext28d": 68,
           "fridaySaturdayNightAverage": 23.3,
-          "fridaySaturdayNightMax": 34,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightMax": 35,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 769,
           "targets": {
@@ -11333,9 +11333,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 23,
-            "2026-10-09": 34,
+            "2026-10-09": 35,
             "2026-10-10": 19,
             "2026-10-16": 34,
             "2026-10-17": 21,
@@ -11564,7 +11564,7 @@
           "lat": 32.7341,
           "lng": -117.1446,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 821,
+          "preciseEventsNext28d": 825,
           "uniqueVenuesNext28d": 78,
           "fridaySaturdayNightAverage": 11.3,
           "fridaySaturdayNightMax": 17,
@@ -11625,13 +11625,13 @@
           "lat": 32.7318,
           "lng": -117.1611,
           "radiusMiles": 0.95,
-          "preciseEventsNext28d": 511,
+          "preciseEventsNext28d": 514,
           "uniqueVenuesNext28d": 67,
-          "fridaySaturdayNightAverage": 12.3,
+          "fridaySaturdayNightAverage": 12.1,
           "fridaySaturdayNightMax": 19,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 304,
+          "recurringLocalOccurrences30d": 303,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11642,7 +11642,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 16,
             "2026-10-09": 19,
             "2026-10-10": 9,
@@ -11685,13 +11685,13 @@
           "lat": 32.7488,
           "lng": -117.164,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 1369,
+          "preciseEventsNext28d": 1372,
           "uniqueVenuesNext28d": 107,
-          "fridaySaturdayNightAverage": 25.5,
+          "fridaySaturdayNightAverage": 25.4,
           "fridaySaturdayNightMax": 39,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 960,
+          "recurringLocalOccurrences30d": 959,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11702,7 +11702,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 3,
+            "2026-10-02": 2,
             "2026-10-03": 27,
             "2026-10-09": 39,
             "2026-10-10": 21,
@@ -11811,13 +11811,13 @@
           "lat": 32.7177,
           "lng": -117.1677,
           "radiusMiles": 0.75,
-          "preciseEventsNext28d": 1067,
+          "preciseEventsNext28d": 1066,
           "uniqueVenuesNext28d": 72,
-          "fridaySaturdayNightAverage": 27,
-          "fridaySaturdayNightMax": 41,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightAverage": 26.9,
+          "fridaySaturdayNightMax": 42,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 805,
+          "recurringLocalOccurrences30d": 804,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11828,9 +11828,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 0,
             "2026-10-03": 28,
-            "2026-10-09": 41,
+            "2026-10-09": 42,
             "2026-10-10": 23,
             "2026-10-16": 36,
             "2026-10-17": 27,
@@ -11873,11 +11873,11 @@
           "radiusMiles": 0.7,
           "preciseEventsNext28d": 633,
           "uniqueVenuesNext28d": 55,
-          "fridaySaturdayNightAverage": 15.9,
+          "fridaySaturdayNightAverage": 15.8,
           "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 490,
+          "recurringLocalOccurrences30d": 489,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -11888,7 +11888,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 18,
             "2026-10-09": 25,
             "2026-10-10": 14,
@@ -12177,7 +12177,7 @@
           "south-bay": {
             "measured": 29,
             "passing": 0,
-            "averageGapScore": 73.7
+            "averageGapScore": 73.6
           },
           "north-inland": {
             "measured": 11,
@@ -21903,7 +21903,7 @@
           "lat": 32.8328,
           "lng": -117.2713,
           "radiusMiles": 1.6,
-          "preciseEventsNext28d": 141,
+          "preciseEventsNext28d": 140,
           "uniqueVenuesNext28d": 16,
           "fridaySaturdayNightAverage": 3.5,
           "fridaySaturdayNightMax": 6,
@@ -22143,67 +22143,6 @@
           }
         },
         {
-          "id": "coronado",
-          "name": "Coronado",
-          "group": "south-bay",
-          "kind": "coverage-area",
-          "coverageClass": "entertainment-core",
-          "discoveryPriority": 96,
-          "lat": 32.6859,
-          "lng": -117.1831,
-          "radiusMiles": 1.6,
-          "preciseEventsNext28d": 209,
-          "uniqueVenuesNext28d": 11,
-          "fridaySaturdayNightAverage": 4.8,
-          "fridaySaturdayNightMax": 7,
-          "activeFridaySaturdayNights": 7,
-          "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 206,
-          "targets": {
-            "fridaySaturdayNightAverage": 8,
-            "recurringLocalOccurrences30d": 5
-          },
-          "acceptance": {
-            "density": false,
-            "recurring": true,
-            "pass": false
-          },
-          "nightCounts": {
-            "2026-10-02": 0,
-            "2026-10-03": 5,
-            "2026-10-09": 7,
-            "2026-10-10": 4,
-            "2026-10-16": 7,
-            "2026-10-17": 4,
-            "2026-10-23": 7,
-            "2026-10-24": 4
-          },
-          "gapScore": 27,
-          "acquisition": {
-            "coverageGroup": "South Bay",
-            "primarySources": [
-              "City of Coronado Calendar"
-            ],
-            "umbrellaSources": [
-              "Reader",
-              "Ticketmaster"
-            ],
-            "baselineSources": [
-              "San Diego Reader",
-              "Meetup",
-              "category specialists (SingHUB / Sunset Trivia / deals)"
-            ],
-            "coverageConfidence": "High",
-            "notes": null
-          },
-          "discovery": {
-            "candidateCount": 25,
-            "withWebsiteCount": 13,
-            "qualifiedCount": 0,
-            "retryCount": 6
-          }
-        },
-        {
           "id": "liberty-station",
           "name": "Liberty Station",
           "group": "central-west",
@@ -22262,6 +22201,67 @@
             "withWebsiteCount": 10,
             "qualifiedCount": 1,
             "retryCount": 0
+          }
+        },
+        {
+          "id": "coronado",
+          "name": "Coronado",
+          "group": "south-bay",
+          "kind": "coverage-area",
+          "coverageClass": "entertainment-core",
+          "discoveryPriority": 96,
+          "lat": 32.6859,
+          "lng": -117.1831,
+          "radiusMiles": 1.6,
+          "preciseEventsNext28d": 212,
+          "uniqueVenuesNext28d": 12,
+          "fridaySaturdayNightAverage": 4.8,
+          "fridaySaturdayNightMax": 7,
+          "activeFridaySaturdayNights": 7,
+          "measuredFridaySaturdayNights": 8,
+          "recurringLocalOccurrences30d": 206,
+          "targets": {
+            "fridaySaturdayNightAverage": 8,
+            "recurringLocalOccurrences30d": 5
+          },
+          "acceptance": {
+            "density": false,
+            "recurring": true,
+            "pass": false
+          },
+          "nightCounts": {
+            "2026-10-02": 0,
+            "2026-10-03": 5,
+            "2026-10-09": 7,
+            "2026-10-10": 4,
+            "2026-10-16": 7,
+            "2026-10-17": 4,
+            "2026-10-23": 7,
+            "2026-10-24": 4
+          },
+          "gapScore": 26,
+          "acquisition": {
+            "coverageGroup": "South Bay",
+            "primarySources": [
+              "City of Coronado Calendar"
+            ],
+            "umbrellaSources": [
+              "Reader",
+              "Ticketmaster"
+            ],
+            "baselineSources": [
+              "San Diego Reader",
+              "Meetup",
+              "category specialists (SingHUB / Sunset Trivia / deals)"
+            ],
+            "coverageConfidence": "High",
+            "notes": null
+          },
+          "discovery": {
+            "candidateCount": 25,
+            "withWebsiteCount": 13,
+            "qualifiedCount": 0,
+            "retryCount": 6
           }
         },
         {
@@ -22645,13 +22645,13 @@
           "lat": 32.7157,
           "lng": -117.1611,
           "radiusMiles": 1.25,
-          "preciseEventsNext28d": 1441,
+          "preciseEventsNext28d": 1440,
           "uniqueVenuesNext28d": 121,
-          "fridaySaturdayNightAverage": 34.9,
-          "fridaySaturdayNightMax": 54,
+          "fridaySaturdayNightAverage": 34.8,
+          "fridaySaturdayNightMax": 55,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 1071,
+          "recurringLocalOccurrences30d": 1070,
           "targets": {
             "fridaySaturdayNightAverage": 6,
             "recurringLocalOccurrences30d": 4
@@ -22662,9 +22662,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 3,
+            "2026-10-02": 1,
             "2026-10-03": 38,
-            "2026-10-09": 54,
+            "2026-10-09": 55,
             "2026-10-10": 27,
             "2026-10-16": 47,
             "2026-10-17": 34,
@@ -22710,9 +22710,9 @@
           "radiusMiles": 0.9,
           "preciseEventsNext28d": 925,
           "uniqueVenuesNext28d": 66,
-          "fridaySaturdayNightAverage": 21.6,
+          "fridaySaturdayNightAverage": 21.5,
           "fridaySaturdayNightMax": 32,
-          "activeFridaySaturdayNights": 8,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 717,
           "targets": {
@@ -22725,7 +22725,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 22,
             "2026-10-09": 32,
             "2026-10-10": 17,
@@ -22770,11 +22770,11 @@
           "lat": 32.7117,
           "lng": -117.1602,
           "radiusMiles": 0.85,
-          "preciseEventsNext28d": 1067,
-          "uniqueVenuesNext28d": 79,
+          "preciseEventsNext28d": 1068,
+          "uniqueVenuesNext28d": 80,
           "fridaySaturdayNightAverage": 24.8,
-          "fridaySaturdayNightMax": 38,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightMax": 39,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 829,
           "targets": {
@@ -22787,9 +22787,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 26,
-            "2026-10-09": 38,
+            "2026-10-09": 39,
             "2026-10-10": 19,
             "2026-10-16": 36,
             "2026-10-17": 21,
@@ -22899,10 +22899,10 @@
           "preciseEventsNext28d": 749,
           "uniqueVenuesNext28d": 59,
           "fridaySaturdayNightAverage": 20.5,
-          "fridaySaturdayNightMax": 32,
+          "fridaySaturdayNightMax": 33,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 545,
+          "recurringLocalOccurrences30d": 544,
           "targets": {
             "fridaySaturdayNightAverage": 8,
             "recurringLocalOccurrences30d": 5
@@ -22913,9 +22913,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 24,
-            "2026-10-09": 32,
+            "2026-10-09": 33,
             "2026-10-10": 18,
             "2026-10-16": 25,
             "2026-10-17": 22,
@@ -23024,8 +23024,8 @@
           "preciseEventsNext28d": 999,
           "uniqueVenuesNext28d": 68,
           "fridaySaturdayNightAverage": 23.3,
-          "fridaySaturdayNightMax": 34,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightMax": 35,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
           "recurringLocalOccurrences30d": 769,
           "targets": {
@@ -23038,9 +23038,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 1,
+            "2026-10-02": 0,
             "2026-10-03": 23,
-            "2026-10-09": 34,
+            "2026-10-09": 35,
             "2026-10-10": 19,
             "2026-10-16": 34,
             "2026-10-17": 21,
@@ -23269,7 +23269,7 @@
           "lat": 32.7341,
           "lng": -117.1446,
           "radiusMiles": 1.4,
-          "preciseEventsNext28d": 821,
+          "preciseEventsNext28d": 825,
           "uniqueVenuesNext28d": 78,
           "fridaySaturdayNightAverage": 11.3,
           "fridaySaturdayNightMax": 17,
@@ -23330,13 +23330,13 @@
           "lat": 32.7318,
           "lng": -117.1611,
           "radiusMiles": 0.95,
-          "preciseEventsNext28d": 511,
+          "preciseEventsNext28d": 514,
           "uniqueVenuesNext28d": 67,
-          "fridaySaturdayNightAverage": 12.3,
+          "fridaySaturdayNightAverage": 12.1,
           "fridaySaturdayNightMax": 19,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 304,
+          "recurringLocalOccurrences30d": 303,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23347,7 +23347,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 16,
             "2026-10-09": 19,
             "2026-10-10": 9,
@@ -23390,13 +23390,13 @@
           "lat": 32.7488,
           "lng": -117.164,
           "radiusMiles": 1.8,
-          "preciseEventsNext28d": 1369,
+          "preciseEventsNext28d": 1372,
           "uniqueVenuesNext28d": 107,
-          "fridaySaturdayNightAverage": 25.5,
+          "fridaySaturdayNightAverage": 25.4,
           "fridaySaturdayNightMax": 39,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 960,
+          "recurringLocalOccurrences30d": 959,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23407,7 +23407,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 3,
+            "2026-10-02": 2,
             "2026-10-03": 27,
             "2026-10-09": 39,
             "2026-10-10": 21,
@@ -23516,13 +23516,13 @@
           "lat": 32.7177,
           "lng": -117.1677,
           "radiusMiles": 0.75,
-          "preciseEventsNext28d": 1067,
+          "preciseEventsNext28d": 1066,
           "uniqueVenuesNext28d": 72,
-          "fridaySaturdayNightAverage": 27,
-          "fridaySaturdayNightMax": 41,
-          "activeFridaySaturdayNights": 8,
+          "fridaySaturdayNightAverage": 26.9,
+          "fridaySaturdayNightMax": 42,
+          "activeFridaySaturdayNights": 7,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 805,
+          "recurringLocalOccurrences30d": 804,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23533,9 +23533,9 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 0,
             "2026-10-03": 28,
-            "2026-10-09": 41,
+            "2026-10-09": 42,
             "2026-10-10": 23,
             "2026-10-16": 36,
             "2026-10-17": 27,
@@ -23578,11 +23578,11 @@
           "radiusMiles": 0.7,
           "preciseEventsNext28d": 633,
           "uniqueVenuesNext28d": 55,
-          "fridaySaturdayNightAverage": 15.9,
+          "fridaySaturdayNightAverage": 15.8,
           "fridaySaturdayNightMax": 25,
           "activeFridaySaturdayNights": 8,
           "measuredFridaySaturdayNights": 8,
-          "recurringLocalOccurrences30d": 490,
+          "recurringLocalOccurrences30d": 489,
           "targets": {
             "fridaySaturdayNightAverage": 5,
             "recurringLocalOccurrences30d": 4
@@ -23593,7 +23593,7 @@
             "pass": true
           },
           "nightCounts": {
-            "2026-10-02": 2,
+            "2026-10-02": 1,
             "2026-10-03": 18,
             "2026-10-09": 25,
             "2026-10-10": 14,
@@ -23882,8 +23882,8 @@
     },
     "chicago": {
       "name": "Chicago",
-      "eventCount": 525,
-      "preciseLocationCount": 525,
+      "eventCount": 519,
+      "preciseLocationCount": 519,
       "preciseLocationRate": 1,
       "preciseLocationTarget": 0.9,
       "preciseLocationTargetMet": true,
@@ -23891,14 +23891,14 @@
       "sourceCount": 1,
       "dynamicSourceCount": 0,
       "categoryCounts": {
-        "theater": 154,
-        "community": 63,
-        "music": 237,
-        "comedy": 23,
+        "theater": 152,
+        "community": 60,
+        "music": 236,
         "sports": 27,
+        "comedy": 22,
         "nightlife": 7,
         "festival": 5,
-        "food": 7,
+        "food": 8,
         "family": 2
       },
       "recurringActivityCounts": {
