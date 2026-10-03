@@ -256,7 +256,7 @@ export async function buildCoverageDashboard({now=new Date()}={}){
 
   const output={
     generatedAt:new Date().toISOString(),
-    metricVersion:2,
+    metricVersion:3,
     targets:{
       regionPreciseLocationRate:0.9,
       coverageClasses:COVERAGE_CLASS_TARGETS
