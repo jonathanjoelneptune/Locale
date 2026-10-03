@@ -122,50 +122,32 @@
       "remainingCellCount": 135
     }
   },
-  "lastRunAt": "2026-10-02T22:35:43.435Z",
+  "lastRunAt": "2026-10-03T00:22:46.521Z",
   "lastRun": {
-    "startedAt": "2026-10-02T22:34:37.633Z",
+    "startedAt": "2026-10-03T00:22:41.087Z",
     "queueBefore": {
-      "total": 2193,
+      "total": 2210,
       "withWebsite": 1318,
       "due": 7,
-      "retry": 161,
-      "cold": 124,
-      "lowValue": 1037,
+      "retry": 162,
+      "cold": 125,
+      "lowValue": 1036,
       "qualified": 16,
-      "needsWebsite": 875,
+      "needsWebsite": 892,
       "lanes": {
-        "exploratory": 673,
-        "event-evidence": 230,
+        "exploratory": 689,
+        "event-evidence": 231,
         "event-likely": 116,
-        "cold-sample": 124,
-        "low-value": 1037,
+        "cold-sample": 125,
+        "low-value": 1036,
         "food-evidence": 13
       }
     },
-    "seededFromRegistry": 17,
+    "seededFromRegistry": 1,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "otay-mesa",
-        "name": "Otay Mesa",
-        "gapScore": 100,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "gapScore": 99,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -195,45 +177,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|218923462",
-        "name": "Jalisco Cafe",
+        "key": "san-diego|osm|node|2651673866",
+        "name": "Ace New York Giant Pizza Bar & Lounge",
         "category": "restaurant",
-        "website": "http://www.jaliscocafe.com/",
+        "website": "https://acenypizza.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-05T00:22:41.783Z",
+        "checkedAt": "2026-10-03T00:22:41.628Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|232399561",
+        "name": "Marechiaro's Italian Restaurant",
+        "category": "restaurant",
+        "website": "https://www.marechiarositalian.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Jalisco Cafe (low-value)",
+          "detail": "Checked 2 pages on Marechiaro's Italian Restaurant (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T22:35:36.279Z",
-        "checkedAt": "2026-10-02T22:35:35.328Z"
+        "nextCheckAt": "2026-11-17T00:22:45.432Z",
+        "checkedAt": "2026-10-03T00:22:41.783Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31840107",
-        "name": "City Heights-Weingart Branch San Diego City Library",
+        "key": "san-diego|osm|way|31803078",
+        "name": "Paradise Hills Branch San Diego Public Library",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/city-heights-weingart-library-and-performance-annex",
+        "website": "https://www.sandiego.gov/public-library/locations/paradise-hills-library",
         "attempts": 1,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on City Heights-Weingart Branch San Diego City Library (event-likely)",
+          "detail": "Checked 5 pages on Paradise Hills Branch San Diego Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-05T22:35:43.428Z",
-        "checkedAt": "2026-10-02T22:35:35.326Z"
+        "nextCheckAt": "2026-10-06T00:22:46.519Z",
+        "checkedAt": "2026-10-03T00:22:41.584Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -247,7 +248,7 @@
     "probeLaneCounts": {
       "event-likely": 1,
       "event-evidence": 0,
-      "food-evidence": 0,
+      "food-evidence": 1,
       "exploratory": 0,
       "low-value": 1,
       "cold-sample": 0
@@ -260,73 +261,189 @@
       "low-value": 1,
       "cold-sample": 1
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-02T22:35:43.435Z",
-    "durationMs": 65802,
+    "failed": 3,
+    "finishedAt": "2026-10-03T00:22:46.521Z",
+    "durationMs": 5434,
     "queueAfter": {
-      "total": 2210,
+      "total": 2211,
       "withWebsite": 1318,
-      "due": 6,
-      "retry": 162,
-      "cold": 125,
-      "lowValue": 1036,
+      "due": 5,
+      "retry": 163,
+      "cold": 126,
+      "lowValue": 1035,
       "qualified": 16,
-      "needsWebsite": 892,
+      "needsWebsite": 893,
       "lanes": {
-        "exploratory": 689,
+        "exploratory": 690,
         "event-evidence": 231,
         "event-likely": 116,
-        "cold-sample": 125,
-        "low-value": 1036,
+        "cold-sample": 126,
+        "low-value": 1035,
         "food-evidence": 13
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 2,
-        "successes": 1,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-02T22:35:20.016Z",
-        "lastFinishedAt": "2026-10-02T22:35:35.017Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1790980565017,
-        "consecutiveFailures": 1
+        "attempts": 0,
+        "successes": 0,
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-02T22:34:50.014Z",
-        "lastFinishedAt": "2026-10-02T22:35:05.016Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1790980535016,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-02T22:35:05.016Z",
-        "lastFinishedAt": "2026-10-02T22:35:20.016Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1790980550016,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
   "lastOverpassRunAt": "2026-10-02T22:35:35.019Z",
   "runHistory": [
+    {
+      "startedAt": "2026-10-03T00:22:41.087Z",
+      "finishedAt": "2026-10-03T00:22:46.521Z",
+      "durationMs": 5434,
+      "discoveryMode": "bootstrap",
+      "probed": 3,
+      "promoted": 0,
+      "failed": 3,
+      "overpassRun": false,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "lastStatus": null,
+          "lastError": null,
+          "lastStartedAt": null,
+          "lastFinishedAt": null,
+          "lastLatencyMs": null,
+          "cooldownUntil": 0,
+          "consecutiveFailures": 0
+        }
+      ],
+      "seededFromRegistry": 1,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2210,
+        "withWebsite": 1318,
+        "due": 7,
+        "retry": 162,
+        "cold": 125,
+        "lowValue": 1036,
+        "qualified": 16,
+        "needsWebsite": 892,
+        "lanes": {
+          "exploratory": 689,
+          "event-evidence": 231,
+          "event-likely": 116,
+          "cold-sample": 125,
+          "low-value": 1036,
+          "food-evidence": 13
+        }
+      },
+      "queueAfter": {
+        "total": 2211,
+        "withWebsite": 1318,
+        "due": 5,
+        "retry": 163,
+        "cold": 126,
+        "lowValue": 1035,
+        "qualified": 16,
+        "needsWebsite": 893,
+        "lanes": {
+          "exploratory": 690,
+          "event-evidence": 231,
+          "event-likely": 116,
+          "cold-sample": 126,
+          "low-value": 1035,
+          "food-evidence": 13
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 1,
+        "event-evidence": 0,
+        "food-evidence": 1,
+        "exploratory": 0,
+        "low-value": 1,
+        "cold-sample": 0
+      },
+      "probeLaneTargets": {
+        "event-likely": 6,
+        "event-evidence": 2,
+        "food-evidence": 1,
+        "exploratory": 1,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-02T22:34:37.633Z",
       "finishedAt": "2026-10-02T22:35:43.435Z",
