@@ -7,6 +7,7 @@ import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
 import {STATIC_SOURCES,sourceEndpointKey} from "./source-catalog.mjs";
+import {coverageEquitySummary,areaEquityPriority,selectCoverageBalancedCandidates} from "./coverage-equity.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
@@ -344,6 +345,16 @@ const discoveryPlan=adaptiveDiscoveryPlan(
   Object.keys(REGIONS)
 );
 const discoveryBudget=discoveryPlan.budget;
+const coverageEquityByRegion=Object.fromEntries(
+  Object.keys(REGIONS).map(regionId=>[
+    regionId,
+    coverageEquitySummary(
+      coverageDashboard.regions?.[regionId]?.coverageAreas||
+      coverageDashboard.regions?.[regionId]?.neighborhoods||
+      []
+    )
+  ])
+);
 const runOverpass=isOverpassDue(
   state.lastOverpassRunAt,
   discoveryBudget.overpassMinIntervalMinutes
@@ -390,6 +401,9 @@ const stats={
   coldMigrated:0,
   probeLaneCounts:{},
   probeLaneTargets:{},
+  probeAreaCounts:{},
+  probeGroupCounts:{},
+  coverageEquity:coverageEquityByRegion,
   probed:0,
   promoted:0,
   failed:0
