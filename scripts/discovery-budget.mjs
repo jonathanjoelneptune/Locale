@@ -3,15 +3,15 @@ export const DISCOVERY_BUDGETS=Object.freeze({
     probeLimit:12,
     probeConcurrency:2,
     overpassMinIntervalMinutes:360,
-    areaSweeps:2,
-    regionalCells:2,
+    areaSweeps:3,
+    regionalCells:1,
     failedSweepRetryMinutes:60
   }),
   accelerated:Object.freeze({
     probeLimit:10,
     probeConcurrency:2,
     overpassMinIntervalMinutes:360,
-    areaSweeps:2,
+    areaSweeps:3,
     regionalCells:1,
     failedSweepRetryMinutes:90
   }),
@@ -19,7 +19,7 @@ export const DISCOVERY_BUDGETS=Object.freeze({
     probeLimit:8,
     probeConcurrency:2,
     overpassMinIntervalMinutes:720,
-    areaSweeps:1,
+    areaSweeps:2,
     regionalCells:1,
     failedSweepRetryMinutes:180
   }),

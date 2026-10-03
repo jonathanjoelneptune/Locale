@@ -7,13 +7,14 @@ import {containingCoverageZones} from "./coverage-zones.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
 import {probeLane,selectProbeCandidates,shouldColdStore,coldStorageDays} from "./discovery-priority.mjs";
 import {STATIC_SOURCES,sourceEndpointKey} from "./source-catalog.mjs";
+import {coverageEquitySummary,areaEquityPriority,selectCoverageBalancedCandidates} from "./coverage-equity.mjs";
 
 const QUEUE_PATH="src/data/discovery-queue.json";
 const SOURCES_PATH="src/data/discovered-sources.json";
 const STATE_PATH="src/data/discovery-state.json";
 const COVERAGE_PATH="src/data/discovery-coverage.json";
 const DISCOVERY_SWEEP_VERSION=4;
-const AREA_SWEEP_VERSION=1;
+const AREA_SWEEP_VERSION=2;
 const MAX_QUEUE=6000;
 
 const readJson=async(path,fallback)=>{
@@ -344,6 +345,16 @@ const discoveryPlan=adaptiveDiscoveryPlan(
   Object.keys(REGIONS)
 );
 const discoveryBudget=discoveryPlan.budget;
+const coverageEquityByRegion=Object.fromEntries(
+  Object.keys(REGIONS).map(regionId=>[
+    regionId,
+    coverageEquitySummary(
+      coverageDashboard.regions?.[regionId]?.coverageAreas||
+      coverageDashboard.regions?.[regionId]?.neighborhoods||
+      []
+    )
+  ])
+);
 const runOverpass=isOverpassDue(
   state.lastOverpassRunAt,
   discoveryBudget.overpassMinIntervalMinutes
@@ -390,6 +401,9 @@ const stats={
   coldMigrated:0,
   probeLaneCounts:{},
   probeLaneTargets:{},
+  probeAreaCounts:{},
+  probeGroupCounts:{},
+  coverageEquity:coverageEquityByRegion,
   probed:0,
   promoted:0,
   failed:0
@@ -450,11 +464,18 @@ function areaMetric(zone){
 }
 
 function areaSweepIntervalMs(zone,row){
-  if(row?.acceptance?.pass)return 14*86400000;
+  if(row?.acceptance?.pass)return 21*86400000;
   const gap=Number(row?.gapScore||50);
-  if(gap>=70||Number(zone.discoveryPriority||0)>=95)return 2*86400000;
-  if(gap>=45)return 4*86400000;
+  const events=Number(row?.preciseEventsNext28d||0);
+  if(events===0)return 24*3600000;
+  if(gap>=70||Number(zone.discoveryPriority||0)>=95)return 36*3600000;
+  if(gap>=45)return 3*86400000;
   return 7*86400000;
+}
+
+function areaEquityFor(zone,row=areaMetric(zone)){
+  const group=coverageEquityByRegion?.[zone.regionId]?.groups?.[zone.group||row?.group||"other"];
+  return areaEquityPriority(row,zone,group);
 }
 
 function nextCoverageAreaSweep(){
@@ -471,8 +492,10 @@ function nextCoverageAreaSweep(){
       const dueAt=completedAt+areaSweepIntervalMs(zone,row);
       if(retryAt>now||completedAt&&dueAt>now)return null;
       const gap=Number(row?.gapScore||50);
-      const score=Number(zone.discoveryPriority||50)+gap*.8-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
-      return {zone,region,regionState,sweep,row,score,completedAt};
+      const groupKey=zone.group||row?.group||"other";
+      const sameGroupThisRun=(stats.focusAreas||[]).filter(item=>item.regionId===zone.regionId&&item.group===groupKey).length;
+      const score=areaEquityFor(zone,row)-sameGroupThisRun*1000-(completedAt?Math.min(20,(now-completedAt)/86400000):0);
+      return {zone,region,regionState,sweep,row,score,completedAt,gap};
     })
     .filter(Boolean)
     .sort((a,b)=>b.score-a.score||a.completedAt-b.completedAt||a.zone.name.localeCompare(b.zone.name))[0]||null;
@@ -509,7 +532,7 @@ for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
       attempts:0,
       nextAttemptAt:null
     };
-    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"ok",candidateCount:cellCandidates.length,newCount:added});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,group:zone.group||row?.group||"other",gapScore:Number(row?.gapScore||0),equityPriority:areaEquityFor(zone,row),status:"ok",candidateCount:cellCandidates.length,newCount:added});
     console.log(`${region.id}/area:${zone.id}: discovered ${cellCandidates.length} focused venues; ${added} new.`);
   }catch(error){
     const attempts=Number(sweep.attempts||0)+1;
@@ -520,7 +543,7 @@ for(let index=0;index<discoveryBudget.areaSweeps&&!stopOverpass;index++){
       nextAttemptAt:new Date(Date.now()+Math.min(discoveryBudget.failedSweepRetryMinutes*60000*attempts,12*60*60*1000)).toISOString(),
       error:String(error?.message||error)
     };
-    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,gapScore:Number(row?.gapScore||0),status:"failed",error:String(error?.message||error)});
+    stats.focusAreas.push({regionId:region.id,id:zone.id,name:zone.name,group:zone.group||row?.group||"other",gapScore:Number(row?.gapScore||0),equityPriority:areaEquityFor(zone,row),status:"failed",error:String(error?.message||error)});
     if(["OVERPASS_ALL_FAILED","OVERPASS_COOLDOWN"].includes(error?.code))stopOverpass=true;
     console.error(`${region.id}/area:${zone.id}: focused discovery failed:`,error);
   }
@@ -584,16 +607,20 @@ const producerSignal=item=>/\b(bar|pub|brew|music|theat|club|comedy|museum|galle
   [item.name,item.category,item.website,item.lastResult?.detail].filter(Boolean).join(" ")
 )?18:0;
 
-const coverageGapBoost=item=>{
+const candidateCoverageTarget=item=>{
   const zones=containingCoverageZones(item,coverageAreas,{regionId:item.regionId});
-  let best=0;
+  let best=null;
   for(const zone of zones){
     const row=areaMetric(zone);
-    const gap=Number(row?.gapScore||0);
-    const boost=gap*.45+Number(zone.discoveryPriority||0)*.12+(row?.acceptance?.pass?0:8);
-    if(boost>best)best=boost;
+    const score=areaEquityFor(zone,row);
+    if(!best||score>best.score)best={zone,row,score};
   }
-  return Math.round(best);
+  return best;
+};
+
+const coverageGapBoost=item=>{
+  const target=candidateCoverageTarget(item);
+  return target?Math.round(Math.max(0,target.score)*.55):0;
 };
 
 const probeScore=item=>
@@ -608,13 +635,36 @@ const probeHost=item=>{
 const rankedCandidates=queue
   .filter(item=>item.website&&item.status!=="qualified"&&due(item));
 
-const selection=selectProbeCandidates(rankedCandidates,discoveryBudget.probeLimit,{
+const poolLimit=Math.min(
+  rankedCandidates.length,
+  Math.max(discoveryBudget.probeLimit,discoveryBudget.probeLimit*4)
+);
+const laneSelection=selectProbeCandidates(rankedCandidates,poolLimit,{
   scoreFn:probeScore,
   hostFn:probeHost
 });
-const candidates=selection.selected;
-stats.probeLaneCounts=selection.counts;
-stats.probeLaneTargets=selection.targets;
+const balancedSelection=selectCoverageBalancedCandidates(
+  laneSelection.selected,
+  discoveryBudget.probeLimit,
+  {
+    scoreFn:probeScore,
+    areaFn:item=>{
+      if(item.revalidationSourceId)return "revalidation:"+item.key;
+      return candidateCoverageTarget(item)?.zone?.id||("unmapped:"+item.key);
+    },
+    groupFn:item=>{
+      if(item.revalidationSourceId)return "revalidation";
+      const target=candidateCoverageTarget(item);
+      return target?.zone?.group||target?.row?.group||"unmapped";
+    },
+    hostFn:probeHost
+  }
+);
+const candidates=balancedSelection.selected;
+stats.probeLaneCounts=laneSnapshot(candidates);
+stats.probeLaneTargets=laneSelection.targets;
+stats.probeAreaCounts=balancedSelection.areaCounts;
+stats.probeGroupCounts=balancedSelection.groupCounts;
 
 async function probeCandidate(item){
   stats.probed++;
@@ -759,6 +809,9 @@ const compactRun={
   coldMigrated:stats.coldMigrated,
   probeLaneCounts:stats.probeLaneCounts,
   probeLaneTargets:stats.probeLaneTargets,
+  probeAreaCounts:stats.probeAreaCounts,
+  probeGroupCounts:stats.probeGroupCounts,
+  coverageEquity:stats.coverageEquity,
   sourceDuplicatesAliased:stats.sourceDuplicatesAliased,
   sourceReferencesRemapped:stats.sourceReferencesRemapped,
   sourceRevalidationsQueued:stats.sourceRevalidationsQueued,
