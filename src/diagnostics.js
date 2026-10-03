@@ -162,6 +162,7 @@ function renderWorker(){
 
 function renderAdaptive(id){
   const profile=regionProfile(id);
+  const equity=regionRow(id)?.coverageEquity||{};
   const run=lastRun()||{};
   const budget=run.discoveryBudget||{};
   const mode=profile.mode==="unmeasured"?(run.discoveryMode||"unmeasured"):profile.mode;
@@ -178,6 +179,9 @@ function renderAdaptive(id){
     <div class="progress-caption"><span>${pct(passRate)} passing</span><span>95% maintenance threshold</span></div>
     <div class="kv-grid" style="margin-top:9px">
       ${kv("Passing areas",`${n(profile.passing)}/${n(profile.measured)}`,`${n(profile.configuredAreaCount)} configured`,passRate>=.95?"good":"warn")}
+      ${kv("Equity score",equity.equityScore==null?"—":`${Number(equity.equityScore).toFixed(1)}/100`,"coverage + group balance + zero-event penalty",Number(equity.equityScore||0)>=85?"good":"warn")}
+      ${kv("Zero-event areas",n(equity.zeroEventAreas||0),equity.measured?`${pct(equity.zeroEventRate)} of configured areas`:"no equity snapshot",equity.zeroEventAreas?"bad":"good")}
+      ${kv("Group spread",equity.groupPassRateSpread==null?"—":pct(equity.groupPassRateSpread),"best-to-worst group pass-rate spread",Number(equity.groupPassRateSpread||0)>.25?"warn":"good")}
       ${kv("Severe gaps",n(profile.severeGapCount),"gap score ≥70",profile.severeGapCount?"bad":"good")}
       ${kv("Medium+ gaps",n(profile.mediumGapCount),"gap score ≥45",profile.mediumGapCount?"warn":"good")}
       ${kv("Probe budget",n(budget.probeLimit),`${n(budget.probeConcurrency)} concurrent`)}
@@ -208,6 +212,7 @@ function renderLatestRun(id){
       ${kv("Focused areas",n(regionFocus.length),regionFocus.map(item=>item.name).slice(0,3).join(", ")||"none this run")}
       ${kv("Moved to cold",n(run.coldMigrated||0),"low-value failures deferred 45–180 days")}
       ${kv("Probe lanes",Object.entries(run.probeLaneCounts||{}).filter(([,v])=>v).map(([k,v])=>`${k} ${v}`).join(" · ")||"—","actual selected lane mix")}
+      ${kv("Probe groups",Object.entries(run.probeGroupCounts||{}).filter(([,v])=>v).map(([k,v])=>`${k} ${v}`).join(" · ")||"—","spatially balanced selection")}
       ${kv("Global queue",run.queueAfter?`${n(run.queueAfter.due)} due / ${n(run.queueAfter.total)} total`:"—","all configured regions; regional queue is shown separately below")}
     </div>`;
 }
