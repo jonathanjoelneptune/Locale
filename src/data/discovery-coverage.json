@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-04T12:48:13.474Z",
+  "generatedAt": "2026-10-04T14:56:36.339Z",
   "run": {
-    "startedAt": "2026-10-04T12:48:11.071Z",
+    "startedAt": "2026-10-04T14:56:35.495Z",
     "queueBefore": {
       "total": 2234,
       "withWebsite": 1318,
       "due": 0,
       "retry": 173,
-      "cold": 135,
-      "lowValue": 1027,
+      "cold": 136,
+      "lowValue": 1026,
       "qualified": 16,
       "needsWebsite": 916,
       "lanes": {
         "exploratory": 709,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 135,
-        "low-value": 1027,
+        "cold-sample": 136,
+        "low-value": 1026,
         "food-evidence": 11
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10615751688",
-        "name": "Nutmeg Bakery & Cafe",
+        "key": "san-diego|osm|node|2126642451",
+        "name": "Refresh Coffee",
         "category": "cafe",
-        "website": "https://nutmegsd.com/",
+        "website": "http://www.refreshcoffee.co/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Nutmeg Bakery & Cafe (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 404",
+          "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-18T12:48:13.424Z",
-        "checkedAt": "2026-10-04T12:48:11.450Z"
+        "nextCheckAt": "2026-10-11T14:56:36.316Z",
+        "checkedAt": "2026-10-04T14:56:35.711Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -163,7 +163,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 30.88888888888889,
-            "averageEvents": 258.72222222222223,
+            "averageEvents": 258.77777777777777,
             "averageVenues": 18.666666666666668,
             "deficitScore": 44.97777777777778
           },
@@ -174,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.2631578947368421,
             "averageGapScore": 32.78947368421053,
-            "averageEvents": 229.05263157894737,
-            "averageVenues": 21.57894736842105,
+            "averageEvents": 228.94736842105263,
+            "averageVenues": 21.473684210526315,
             "deficitScore": 52.52894736842106
           },
           "north-county-inland": {
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.636363636363637,
-            "averageEvents": 751.6363636363636,
+            "averageEvents": 751.4545454545455,
             "averageVenues": 60.72727272727273,
             "deficitScore": 13.37272727272727
           }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-04T12:48:13.426Z",
-    "durationMs": 2355,
+    "finishedAt": "2026-10-04T14:56:36.317Z",
+    "durationMs": 822,
     "queueAfter": {
       "total": 2234,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 173,
+      "retry": 174,
       "cold": 136,
       "lowValue": 1026,
       "qualified": 16,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 16,
-        "retry": 173,
+        "retry": 174,
         "needs-website": 809,
         "cold": 136,
-        "candidate": 993
+        "candidate": 992
       },
       "categoryCounts": {
         "nightclub": 8,
