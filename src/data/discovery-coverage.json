@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-10-04T18:45:01.324Z",
+  "generatedAt": "2026-10-04T20:02:06.969Z",
   "run": {
-    "startedAt": "2026-10-04T18:44:32.880Z",
+    "startedAt": "2026-10-04T20:01:58.536Z",
     "queueBefore": {
-      "total": 2235,
+      "total": 2246,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 174,
-      "cold": 138,
-      "lowValue": 1024,
+      "cold": 139,
+      "lowValue": 1023,
       "qualified": 16,
-      "needsWebsite": 917,
+      "needsWebsite": 928,
       "lanes": {
-        "exploratory": 710,
-        "event-evidence": 236,
+        "exploratory": 716,
+        "event-evidence": 241,
         "event-likely": 116,
-        "cold-sample": 138,
-        "low-value": 1024,
+        "cold-sample": 139,
+        "low-value": 1023,
         "food-evidence": 11
       }
     },
-    "seededFromRegistry": 11,
+    "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 198.46,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,14 +54,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9289008462",
+        "key": "san-diego|osm|way|727899201",
         "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/89236/target-poway-296-14823-pomerado-rd-poway-ca-920642803-us",
+        "website": "https://www.starbucks.com/store-locator/store/1024927/scripps-spring-ranch-10565-scripps-poway-parkway-san-diego-ca-921313917",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -83,8 +72,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-18T18:45:01.285Z",
-        "checkedAt": "2026-10-04T18:44:59.806Z"
+        "nextCheckAt": "2026-11-18T20:01:59.757Z",
+        "checkedAt": "2026-10-04T20:01:58.914Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8477440717",
+        "name": "Lux Coffee Bar & Roasters",
+        "category": "cafe",
+        "website": "https://www.instagram.com/luxcoffeebar/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Lux Coffee Bar & Roasters (food-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-03T20:02:06.922Z",
+        "checkedAt": "2026-10-04T20:01:58.958Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "food-evidence": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -107,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-mountain-ranch": 1
+      "sabre-springs": 1,
+      "unmapped:san-diego|osm|node|8477440717": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "north-inland": 1,
+      "unmapped": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -236,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-04T18:45:01.287Z",
-    "durationMs": 28407,
+    "failed": 2,
+    "finishedAt": "2026-10-04T20:02:06.924Z",
+    "durationMs": 8388,
     "queueAfter": {
       "total": 2246,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 174,
-      "cold": 139,
-      "lowValue": 1023,
+      "retry": 173,
+      "cold": 141,
+      "lowValue": 1022,
       "qualified": 16,
       "needsWebsite": 928,
       "lanes": {
         "exploratory": 716,
         "event-evidence": 241,
         "event-likely": 116,
-        "cold-sample": 139,
-        "low-value": 1023,
-        "food-evidence": 11
+        "cold-sample": 141,
+        "low-value": 1022,
+        "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-04T18:44:32.965Z",
-        "lastFinishedAt": "2026-10-04T18:44:43.393Z",
-        "lastLatencyMs": 10428,
-        "cooldownUntil": 1791139513393,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-04T18:44:43.393Z",
-        "lastFinishedAt": "2026-10-04T18:44:58.394Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1791139528394,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-04T18:44:58.394Z",
-        "lastFinishedAt": "2026-10-04T18:44:59.511Z",
-        "lastLatencyMs": 1117,
-        "cooldownUntil": 1791139529511,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +319,22 @@
       "qualifiedCount": 16,
       "needsWebsiteCount": 820,
       "dueCount": 0,
-      "coldCount": 139,
-      "lowValueCount": 1023,
+      "coldCount": 141,
+      "lowValueCount": 1022,
       "laneCounts": {
-        "cold-sample": 139,
+        "cold-sample": 141,
         "event-evidence": 206,
         "event-likely": 116,
         "exploratory": 643,
-        "food-evidence": 11,
-        "low-value": 1023
+        "food-evidence": 10,
+        "low-value": 1022
       },
       "statusCounts": {
         "qualified": 16,
-        "retry": 174,
+        "retry": 173,
         "needs-website": 820,
-        "cold": 139,
-        "candidate": 989
+        "cold": 141,
+        "candidate": 988
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -363,7 +374,7 @@
         "tracked": 2,
         "completed": 0,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
