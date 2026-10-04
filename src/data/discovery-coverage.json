@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-04T08:40:42.850Z",
+  "generatedAt": "2026-10-04T12:13:52.451Z",
   "run": {
-    "startedAt": "2026-10-04T08:40:38.912Z",
+    "startedAt": "2026-10-04T12:13:03.805Z",
     "queueBefore": {
       "total": 2234,
       "withWebsite": 1318,
       "due": 0,
       "retry": 173,
-      "cold": 133,
-      "lowValue": 1029,
+      "cold": 134,
+      "lowValue": 1028,
       "qualified": 16,
       "needsWebsite": 916,
       "lanes": {
         "exploratory": 709,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 133,
-        "low-value": 1029,
+        "cold-sample": 134,
+        "low-value": 1028,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 199.45,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9311713938",
-        "name": "Kung Fu Tea",
+        "key": "san-diego|osm|node|6758166095",
+        "name": "Mostra Coffee",
         "category": "cafe",
-        "website": "https://www.kungfutea.com/",
+        "website": "https://www.mostracoffee.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Kung Fu Tea (low-value)",
+          "detail": "Checked 2 pages on Mostra Coffee (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-18T08:40:42.772Z",
-        "checkedAt": "2026-10-04T08:40:39.229Z"
+        "nextCheckAt": "2026-11-18T12:13:52.411Z",
+        "checkedAt": "2026-10-04T12:13:49.196Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-04T08:40:42.805Z",
-    "durationMs": 3893,
+    "finishedAt": "2026-10-04T12:13:52.412Z",
+    "durationMs": 48607,
     "queueAfter": {
       "total": 2234,
       "withWebsite": 1318,
       "due": 0,
       "retry": 173,
-      "cold": 134,
-      "lowValue": 1028,
+      "cold": 135,
+      "lowValue": 1027,
       "qualified": 16,
       "needsWebsite": 916,
       "lanes": {
         "exploratory": 709,
         "event-evidence": 236,
         "event-likely": 116,
-        "cold-sample": 134,
-        "low-value": 1028,
+        "cold-sample": 135,
+        "low-value": 1027,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-04T12:13:03.885Z",
+        "lastFinishedAt": "2026-10-04T12:13:18.889Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1791116028889,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-04T12:13:18.889Z",
+        "lastFinishedAt": "2026-10-04T12:13:33.889Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791116043889,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-04T12:13:33.889Z",
+        "lastFinishedAt": "2026-10-04T12:13:48.891Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1791116058891,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 16,
       "needsWebsiteCount": 809,
       "dueCount": 0,
-      "coldCount": 134,
-      "lowValueCount": 1028,
+      "coldCount": 135,
+      "lowValueCount": 1027,
       "laneCounts": {
-        "cold-sample": 134,
+        "cold-sample": 135,
         "event-evidence": 201,
         "event-likely": 116,
         "exploratory": 637,
         "food-evidence": 11,
-        "low-value": 1028
+        "low-value": 1027
       },
       "statusCounts": {
         "qualified": 16,
         "retry": 173,
         "needs-website": 809,
-        "cold": 134,
-        "candidate": 995
+        "cold": 135,
+        "candidate": 994
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -352,7 +363,7 @@
         "tracked": 1,
         "completed": 0,
         "failed": 1,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
