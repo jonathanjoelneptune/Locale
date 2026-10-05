@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-10-05T02:19:28.839Z",
+  "generatedAt": "2026-10-05T06:15:13.979Z",
   "run": {
-    "startedAt": "2026-10-05T02:19:27.051Z",
+    "startedAt": "2026-10-05T06:14:51.421Z",
     "queueBefore": {
-      "total": 2246,
+      "total": 2247,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 59,
       "retry": 173,
-      "cold": 143,
-      "lowValue": 1020,
+      "cold": 144,
+      "lowValue": 1019,
       "qualified": 16,
-      "needsWebsite": 928,
+      "needsWebsite": 929,
       "lanes": {
-        "exploratory": 716,
+        "exploratory": 717,
         "event-evidence": 241,
         "event-likely": 116,
-        "cold-sample": 143,
-        "low-value": 1020,
+        "cold-sample": 144,
+        "low-value": 1019,
         "food-evidence": 10
       }
     },
-    "seededFromRegistry": 1,
+    "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
@@ -58,22 +58,231 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|775461670",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/12445/palm-saturn-san-diego-635-saturn-blvd-suite-b-san-diego-ca-921544732-us",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|13298749818",
+        "name": "Jaguar Paw",
+        "category": "bar",
+        "website": "https://jaguarpawsd.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "detail": "Checked 3 pages on Jaguar Paw (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-19T02:19:28.788Z",
-        "checkedAt": "2026-10-05T02:19:27.593Z"
+        "nextCheckAt": "2026-10-12T06:14:52.695Z",
+        "checkedAt": "2026-10-05T06:14:52.149Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11168607137",
+        "name": "The Dog Society Cafe, Bar, and Groomers",
+        "category": "bar",
+        "website": "https://dogsocietysd.com/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-08T06:14:54.112Z",
+        "checkedAt": "2026-10-05T06:14:52.025Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13247308603",
+        "name": "Bock",
+        "category": "bar",
+        "website": "https://www.bockbar.com/",
+        "attempts": 2,
+        "status": "qualified",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "kind": "ics",
+          "eventCount": 1,
+          "url": "https://www.bockbar.com/event/brewery-spotlight-chuckanut?format=ical"
+        },
+        "sourceId": "discovered-san-diego-bc03fbf97b14",
+        "nextCheckAt": null,
+        "checkedAt": "2026-10-05T06:14:54.112Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|101292629",
+        "name": "North University Community Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/north-university-community-library",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on North University Community Branch San Diego Public Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:14:57.789Z",
+        "checkedAt": "2026-10-05T06:14:52.695Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1416356363",
+        "name": "Southern Sudanese Community Center",
+        "category": "community-centre",
+        "website": "https://ssccsd.org/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Southern Sudanese Community Center (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:14:58.579Z",
+        "checkedAt": "2026-10-05T06:14:57.789Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13125299090",
+        "name": "Filippi's Pizza Grotto - Santee",
+        "category": "observed-venue",
+        "website": "https://realcheesepizza.com/santee",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Filippi's Pizza Grotto - Santee (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:14:58.645Z",
+        "checkedAt": "2026-10-05T06:14:56.655Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11170882537",
+        "name": "Women's Museum of California Education Center",
+        "category": "museum",
+        "website": "https://www.womensmuseumca.org/educationcenter",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-08T06:14:59.401Z",
+        "checkedAt": "2026-10-05T06:14:58.579Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596332292",
+        "name": "Botanica Art & Cocktails",
+        "category": "bar",
+        "website": "https://botanicabarsd.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Botanica Art & Cocktails (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:15:00.625Z",
+        "checkedAt": "2026-10-05T06:14:59.401Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1011961277",
+        "name": "ARTS Center",
+        "category": "arts-centre",
+        "website": "https://www.areasontosurvive.org/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 4 pages on ARTS Center (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:15:06.340Z",
+        "checkedAt": "2026-10-05T06:15:00.625Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3804832857",
+        "name": "El After Social Club",
+        "category": "nightclub",
+        "website": "https://elaftersocialclub.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 4 pages on El After Social Club (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:15:11.967Z",
+        "checkedAt": "2026-10-05T06:14:58.645Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215210424",
+        "name": "Prohibition Lounge",
+        "category": "nightclub",
+        "website": "https://prohibitionsd.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on Prohibition Lounge (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:15:12.450Z",
+        "checkedAt": "2026-10-05T06:15:06.340Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13713514709",
+        "name": "Asylum Brewing Company",
+        "category": "pub",
+        "website": "https://asylumbrewingcompany.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 4 pages on Asylum Brewing Company (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T06:15:13.936Z",
+        "checkedAt": "2026-10-05T06:15:11.967Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +294,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "event-likely": 11,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +306,25 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "nestor": 1
+      "rolando-park": 1,
+      "logan-heights": 1,
+      "la-jolla-village": 1,
+      "south-park": 1,
+      "santee": 1,
+      "teralta": 1,
+      "valencia-park": 1,
+      "little-italy": 1,
+      "cherokee-point": 1,
+      "national-city": 1,
+      "east-village": 1,
+      "city-heights": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "uptown-midcity": 4,
+      "south-bay": 3,
+      "north-central": 1,
+      "central-core": 3,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -119,7 +344,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.06896551724138,
-            "averageEvents": 22.03448275862069,
+            "averageEvents": 22.137931034482758,
             "averageVenues": 2.9655172413793105,
             "deficitScore": 82.98793103448276
           },
@@ -141,7 +366,7 @@
             "zeroEventAreas": 16,
             "passRate": 0.025,
             "averageGapScore": 72.675,
-            "averageEvents": 84.825,
+            "averageEvents": 84.925,
             "averageVenues": 2.75,
             "deficitScore": 83.06125
           },
@@ -152,7 +377,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 32.89473684210526,
-            "averageEvents": 227.42105263157896,
+            "averageEvents": 228.73684210526315,
             "averageVenues": 21.842105263157894,
             "deficitScore": 53.0921052631579
           },
@@ -163,7 +388,7 @@
             "zeroEventAreas": 3,
             "passRate": 0,
             "averageGapScore": 63.96153846153846,
-            "averageEvents": 34.96153846153846,
+            "averageEvents": 35.03846153846154,
             "averageVenues": 3.5384615384615383,
             "deficitScore": 78.54038461538462
           },
@@ -174,7 +399,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 30.77777777777778,
-            "averageEvents": 254.27777777777777,
+            "averageEvents": 255.77777777777777,
             "averageVenues": 18.833333333333332,
             "deficitScore": 44.9388888888889
           },
@@ -185,7 +410,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 88.31818181818181,
-            "averageEvents": 9.681818181818182,
+            "averageEvents": 9.590909090909092,
             "averageVenues": 2,
             "deficitScore": 91.36590909090908
           },
@@ -196,7 +421,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 60.75,
-            "averageEvents": 42.333333333333336,
+            "averageEvents": 42.5,
             "averageVenues": 5.916666666666667,
             "deficitScore": 77.92916666666667
           },
@@ -207,7 +432,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.636363636363637,
-            "averageEvents": 746.0909090909091,
+            "averageEvents": 751.0909090909091,
             "averageVenues": 60.36363636363637,
             "deficitScore": 13.37272727272727
           }
@@ -225,19 +450,19 @@
         "groups": {}
       }
     },
-    "probed": 1,
-    "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-05T02:19:28.797Z",
-    "durationMs": 1746,
+    "probed": 12,
+    "promoted": 1,
+    "failed": 11,
+    "finishedAt": "2026-10-05T06:15:13.943Z",
+    "durationMs": 22522,
     "queueAfter": {
       "total": 2247,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 173,
+      "due": 47,
+      "retry": 172,
       "cold": 144,
       "lowValue": 1019,
-      "qualified": 16,
+      "qualified": 17,
       "needsWebsite": 929,
       "lanes": {
         "exploratory": 717,
@@ -294,9 +519,9 @@
     "san-diego": {
       "candidateCount": 2139,
       "withWebsiteCount": 1318,
-      "qualifiedCount": 16,
+      "qualifiedCount": 17,
       "needsWebsiteCount": 821,
-      "dueCount": 0,
+      "dueCount": 47,
       "coldCount": 144,
       "lowValueCount": 1019,
       "laneCounts": {
@@ -308,8 +533,8 @@
         "low-value": 1019
       },
       "statusCounts": {
-        "qualified": 16,
-        "retry": 173,
+        "qualified": 17,
+        "retry": 172,
         "needs-website": 821,
         "cold": 144,
         "candidate": 985
@@ -336,7 +561,7 @@
         "restaurant": 854,
         "cafe": 319
       },
-      "discoveredSourceCount": 14,
+      "discoveredSourceCount": 15,
       "discoveryCells": {
         "version": 4,
         "total": 163,
