@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-06T07:28:00.752Z",
+  "generatedAt": "2026-10-06T10:15:09.217Z",
   "run": {
-    "startedAt": "2026-10-06T07:27:38.873Z",
+    "startedAt": "2026-10-06T10:14:56.584Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 7,
+      "due": 2,
       "retry": 168,
-      "cold": 150,
-      "lowValue": 1014,
+      "cold": 151,
+      "lowValue": 1013,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 150,
-        "low-value": 1014,
+        "cold-sample": 151,
+        "low-value": 1013,
         "food-evidence": 9
       }
     },
@@ -58,136 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14013700418",
-        "name": "Castelli & Pizarro Family Vineyards & Winery",
-        "category": "cafe",
-        "website": "https://www.cpfwinery.com/",
-        "attempts": 1,
+        "key": "san-diego|osm|node|1429439653",
+        "name": "Amardeen Cafe",
+        "category": "restaurant",
+        "website": "http://amardeencafe.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Castelli & Pizarro Family Vineyards & Winery (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-20T07:27:40.130Z",
-        "checkedAt": "2026-10-06T07:27:39.366Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|362339141",
-        "name": "San Diego Chinese Historical Museum - Sun Yat Sen Memorial Extension",
-        "category": "museum",
-        "website": "https://sdchm.org/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on San Diego Chinese Historical Museum - Sun Yat Sen Memorial Extension (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T07:27:41.419Z",
-        "checkedAt": "2026-10-06T07:27:40.130Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11748134769",
-        "name": "Topside Terrace Kitchen & Bar",
-        "category": "restaurant",
-        "website": "https://www.hotelrepublicsd.com/dining/topside-terrace-kitchen-bar",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T07:27:42.381Z",
-        "checkedAt": "2026-10-06T07:27:41.419Z"
+        "nextCheckAt": "2026-11-05T10:14:57.310Z",
+        "checkedAt": "2026-10-06T10:14:57.067Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|104946026",
-        "name": "Azalea Recreation Center",
-        "category": "community-centre",
-        "website": "https://www.sandiego.gov/park-and-recreation/centers/recctr/azalea",
+        "key": "san-diego|osm|node|368171005",
+        "name": "Oak Park Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/oak-park-library",
         "attempts": 2,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Azalea Recreation Center (event-likely)",
+          "detail": "Checked 5 pages on Oak Park Branch San Diego Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T07:27:43.315Z",
-        "checkedAt": "2026-10-06T07:27:39.411Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11060509647",
-        "name": "Hasta Mañana Cantina",
-        "category": "observed-venue",
-        "website": "https://hastamananacantina.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Hasta Mañana Cantina (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T07:27:51.149Z",
-        "checkedAt": "2026-10-06T07:27:42.382Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|3804220367",
-        "name": "Dansooz Cycle Studio",
-        "category": "sports-centre",
-        "website": "https://m.facebook.com/dansooz",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Dansooz Cycle Studio (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T07:27:52.571Z",
-        "checkedAt": "2026-10-06T07:27:51.149Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|5831142732",
-        "name": "The Smoking Gun",
-        "category": "observed-venue",
-        "website": "https://www.thesmokinggunsd.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on The Smoking Gun (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T07:28:00.704Z",
-        "checkedAt": "2026-10-06T07:27:43.315Z"
+        "nextCheckAt": "2026-10-13T10:15:08.952Z",
+        "checkedAt": "2026-10-06T10:14:57.115Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -200,9 +105,7 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "low-value": 1,
-      "event-likely": 3,
-      "food-evidence": 1,
-      "exploratory": 2
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -213,15 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "torrey-highlands": 1,
-      "city-heights": 1,
-      "east-village": 4,
-      "little-italy": 1
+      "la-jolla-village": 1,
+      "oak-park": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
-      "uptown-midcity": 1,
-      "central-core": 5
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -263,7 +163,7 @@
             "zeroEventAreas": 16,
             "passRate": 0.025,
             "averageGapScore": 72.625,
-            "averageEvents": 84.45,
+            "averageEvents": 84.4,
             "averageVenues": 2.775,
             "deficitScore": 83.04375
           },
@@ -347,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 7,
+    "probed": 2,
     "promoted": 0,
-    "failed": 7,
-    "finishedAt": "2026-10-06T07:28:00.706Z",
-    "durationMs": 21833,
+    "failed": 2,
+    "finishedAt": "2026-10-06T10:15:09.059Z",
+    "durationMs": 12475,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 1,
-      "retry": 168,
-      "cold": 151,
-      "lowValue": 1013,
+      "retry": 167,
+      "cold": 152,
+      "lowValue": 1012,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 151,
-        "low-value": 1013,
+        "cold-sample": 152,
+        "low-value": 1012,
         "food-evidence": 9
       }
     },
@@ -419,21 +319,21 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 1,
-      "coldCount": 151,
-      "lowValueCount": 1013,
+      "coldCount": 152,
+      "lowValueCount": 1012,
       "laneCounts": {
-        "cold-sample": 151,
+        "cold-sample": 152,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 1013
+        "low-value": 1012
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 168,
+        "retry": 167,
         "needs-website": 824,
-        "cold": 151,
+        "cold": 152,
         "candidate": 981
       },
       "categoryCounts": {
