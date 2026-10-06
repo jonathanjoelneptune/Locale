@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-06T19:46:36.384Z",
+  "generatedAt": "2026-10-06T21:17:18.015Z",
   "run": {
-    "startedAt": "2026-10-06T19:46:30.363Z",
+    "startedAt": "2026-10-06T21:16:36.599Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 167,
-      "cold": 152,
-      "lowValue": 1012,
+      "due": 0,
+      "retry": 166,
+      "cold": 153,
+      "lowValue": 1011,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 152,
-        "low-value": 1012,
+        "cold-sample": 153,
+        "low-value": 1011,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 198.97,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13890645831",
-        "name": "Dosa Studio",
+        "key": "san-diego|osm|node|7345384056",
+        "name": "Fresco Pizzeria",
         "category": "restaurant",
-        "website": "https://dosastudiosd.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Dosa Studio (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-04T19:46:34.747Z",
-        "checkedAt": "2026-10-06T19:46:30.663Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8726804043",
-        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
+        "website": "https://frescosd.com/",
         "attempts": 2,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T19:46:36.319Z",
-        "checkedAt": "2026-10-06T19:46:30.699Z"
+        "nextCheckAt": "2026-10-20T21:17:17.974Z",
+        "checkedAt": "2026-10-06T21:17:17.674Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +96,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "sorrento-valley": 1,
-      "mission-hills": 1
+      "torrey-highlands": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "uptown-midcity": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,11 +236,11 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-06T19:46:36.338Z",
-    "durationMs": 5975,
+    "failed": 1,
+    "finishedAt": "2026-10-06T21:17:17.981Z",
+    "durationMs": 41382,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -273,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-06T21:16:36.829Z",
+        "lastFinishedAt": "2026-10-06T21:16:47.438Z",
+        "lastLatencyMs": 10609,
+        "cooldownUntil": 1791321437438,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-06T21:16:47.438Z",
+        "lastFinishedAt": "2026-10-06T21:17:02.438Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791321452438,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-06T21:17:02.438Z",
+        "lastFinishedAt": "2026-10-06T21:17:17.438Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791321467438,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -374,7 +363,7 @@
         "tracked": 4,
         "completed": 2,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
