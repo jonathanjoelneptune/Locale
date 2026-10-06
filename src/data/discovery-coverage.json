@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-06T00:44:45.105Z",
+  "generatedAt": "2026-10-06T02:53:33.818Z",
   "run": {
-    "startedAt": "2026-10-06T00:44:18.982Z",
+    "startedAt": "2026-10-06T02:52:28.289Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 38,
-      "retry": 170,
-      "cold": 148,
-      "lowValue": 1016,
+      "due": 28,
+      "retry": 169,
+      "cold": 149,
+      "lowValue": 1015,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 718,
         "event-evidence": 244,
         "event-likely": 116,
-        "cold-sample": 148,
-        "low-value": 1016,
+        "cold-sample": 149,
+        "low-value": 1015,
         "food-evidence": 9
       }
     },
@@ -58,86 +58,48 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10087436745",
-        "name": "Addy's Bistro",
+        "key": "san-diego|osm|node|596642072",
+        "name": "Mendocino Farms",
         "category": "restaurant",
-        "website": "https://addysbistro.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.mendocinofarms.com/location-directory/san-diego/10715-scripps-poway-pkwy-san-diego-california-92131-san-diego-ca-92131",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-05T00:44:19.644Z",
-        "checkedAt": "2026-10-06T00:44:19.500Z"
+        "nextCheckAt": "2026-10-20T02:52:29.619Z",
+        "checkedAt": "2026-10-06T02:52:28.867Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079111",
-        "name": "Tabac",
-        "category": "bar",
-        "website": "https://www.tabachookah.com/",
+        "key": "san-diego|osm|node|9215079083",
+        "name": "Gaslamp Tavern",
+        "category": "observed-venue",
+        "website": "https://www.gaslamptavern.com/",
         "attempts": 2,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "event-evidence",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Tabac (event-likely)",
+          "detail": "Checked 3 pages on Gaslamp Tavern (event-evidence)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:21.359Z",
-        "checkedAt": "2026-10-06T00:44:19.644Z"
+        "nextCheckAt": "2026-10-13T02:52:31.861Z",
+        "checkedAt": "2026-10-06T02:52:29.619Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5430484523",
-        "name": "Coin-Op Game Room",
-        "category": "bar",
-        "website": "https://coinopsd.com/",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-09T00:44:22.125Z",
-        "checkedAt": "2026-10-06T00:44:21.359Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12700512601",
-        "name": "Novo Brazil Brewing",
-        "category": "brewery",
-        "website": "https://www.novobrew.com/locations/mission-valley/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Novo Brazil Brewing (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:26.125Z",
-        "checkedAt": "2026-10-06T00:44:22.125Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079092",
-        "name": "Tropical Savor Bar & Grill",
-        "category": "bar",
-        "website": "https://www.tropicalsavorbarandgrill.com/",
+        "key": "san-diego|osm|way|709059097",
+        "name": "AMC Mission Valley 20",
+        "category": "cinema",
+        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-mission-valley-20",
         "attempts": 2,
         "status": "retry",
         "probeLane": "event-likely",
@@ -148,113 +110,18 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T00:44:26.524Z",
-        "checkedAt": "2026-10-06T00:44:26.125Z"
+        "nextCheckAt": "2026-10-20T02:52:32.360Z",
+        "checkedAt": "2026-10-06T02:52:31.861Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596322512",
-        "name": "Dunedin New Zealand Eats",
-        "category": "observed-venue",
-        "website": "https://dnp-sd.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:27.899Z",
-        "checkedAt": "2026-10-06T00:44:26.524Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31274621",
-        "name": "San Diego Zoo",
-        "category": "zoo",
-        "website": "https://www.sandiegozoo.org/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on San Diego Zoo (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:29.836Z",
-        "checkedAt": "2026-10-06T00:44:27.900Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|3804821757",
-        "name": "Urban Bar & Grill",
+        "key": "san-diego|osm|way|377357190",
+        "name": "Tivoli Bar and Grill",
         "category": "bar",
-        "website": "https://www.urbanbarandgrill.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Urban Bar & Grill (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:30.989Z",
-        "checkedAt": "2026-10-06T00:44:29.836Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31803078",
-        "name": "Paradise Hills Branch San Diego Public Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/paradise-hills-library",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Paradise Hills Branch San Diego Public Library (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:33.189Z",
-        "checkedAt": "2026-10-06T00:44:19.547Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31842625",
-        "name": "Original 40 Brewing Company",
-        "category": "observed-venue",
-        "website": "https://original40brewing.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Original 40 Brewing Company (event-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-13T00:44:37.381Z",
-        "checkedAt": "2026-10-06T00:44:33.189Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1448557328",
-        "name": "Gossip Grill",
-        "category": "observed-venue",
-        "website": "http://www.thegossipgrill.com/",
+        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
         "attempts": 3,
         "status": "retry",
-        "probeLane": "exploratory",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -262,27 +129,160 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-09T00:44:37.543Z",
-        "checkedAt": "2026-10-06T00:44:37.381Z"
+        "nextCheckAt": "2026-10-09T02:52:32.677Z",
+        "checkedAt": "2026-10-06T02:52:32.360Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079098",
-        "name": "Henry's Pub",
-        "category": "pub",
-        "website": "https://www.henryspub.com/",
-        "attempts": 3,
+        "key": "san-diego|osm|way|1416351146",
+        "name": "City Heights Swim Center",
+        "category": "sports-centre",
+        "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
+        "attempts": 2,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Henry's Pub (event-likely)",
+          "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T00:44:45.064Z",
-        "checkedAt": "2026-10-06T00:44:30.989Z"
+        "nextCheckAt": "2026-10-13T02:52:33.547Z",
+        "checkedAt": "2026-10-06T02:52:29.013Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3890027002",
+        "name": "Fluxx",
+        "category": "nightclub",
+        "website": "https://www.fluxxsd.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Fluxx (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:52:37.936Z",
+        "checkedAt": "2026-10-06T02:52:32.677Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31806619",
+        "name": "RustiCucina",
+        "category": "observed-venue",
+        "website": "https://www.rusticucina.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on RustiCucina (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:52:39.157Z",
+        "checkedAt": "2026-10-06T02:52:37.936Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|registry|place_whiskey-girl_f883db9e07",
+        "name": "Whiskey Girl",
+        "category": "observed-venue",
+        "website": "https://whiskeygirl.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 6 pages on Whiskey Girl (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:52:41.520Z",
+        "checkedAt": "2026-10-06T02:52:39.158Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5131241022",
+        "name": "Fleming's Prime Steakhouse & Wine Bar",
+        "category": "observed-venue",
+        "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-20T02:52:42.160Z",
+        "checkedAt": "2026-10-06T02:52:41.520Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079085",
+        "name": "Onyx Room Nightclub",
+        "category": "nightclub",
+        "website": "https://www.onyxroom.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Onyx Room Nightclub (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:52:57.994Z",
+        "checkedAt": "2026-10-06T02:52:33.547Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1075932489",
+        "name": "Rady Shell",
+        "category": "theatre",
+        "website": "https://www.theshell.org/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on Rady Shell (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:53:12.218Z",
+        "checkedAt": "2026-10-06T02:52:57.994Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1207407694",
+        "name": "LandShark Bar & Grill",
+        "category": "observed-venue",
+        "website": "https://www.margaritavilleresorts.com/margaritaville-hotel-san-diego/eat-drink/landshark-bar-grill",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on LandShark Bar & Grill (event-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:53:33.761Z",
+        "checkedAt": "2026-10-06T02:52:42.160Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -295,9 +295,9 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "low-value": 1,
-      "event-likely": 8,
-      "exploratory": 2,
-      "event-evidence": 1
+      "event-likely": 6,
+      "event-evidence": 3,
+      "exploratory": 2
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -308,20 +308,16 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "rancho-encantada": 1,
-      "paradise-hills": 1,
-      "east-village": 2,
-      "city-heights": 2,
+      "sabre-springs": 1,
+      "teralta": 1,
+      "little-italy": 3,
       "mission-valley": 2,
-      "little-italy": 2,
-      "north-park": 1,
-      "hillcrest": 1
+      "east-village": 5
     },
     "probeGroupCounts": {
       "north-inland": 1,
-      "south-bay": 1,
-      "central-core": 4,
-      "uptown-midcity": 4,
+      "uptown-midcity": 1,
+      "central-core": 8,
       "central-west": 2
     },
     "coverageEquity": {
@@ -451,12 +447,12 @@
     "probed": 12,
     "promoted": 0,
     "failed": 12,
-    "finishedAt": "2026-10-06T00:44:45.066Z",
-    "durationMs": 26084,
+    "finishedAt": "2026-10-06T02:53:33.773Z",
+    "durationMs": 65484,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 27,
+      "due": 17,
       "retry": 169,
       "cold": 149,
       "lowValue": 1015,
@@ -519,7 +515,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 27,
+      "dueCount": 17,
       "coldCount": 149,
       "lowValueCount": 1015,
       "laneCounts": {
