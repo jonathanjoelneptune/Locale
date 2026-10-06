@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-06T10:15:09.217Z",
+  "generatedAt": "2026-10-06T14:26:33.674Z",
   "run": {
-    "startedAt": "2026-10-06T10:14:56.584Z",
+    "startedAt": "2026-10-06T14:25:43.530Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 168,
-      "cold": 151,
-      "lowValue": 1013,
+      "due": 4,
+      "retry": 167,
+      "cold": 152,
+      "lowValue": 1012,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 151,
-        "low-value": 1013,
+        "cold-sample": 152,
+        "low-value": 1012,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 198.97,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1429439653",
-        "name": "Amardeen Cafe",
+        "key": "san-diego|osm|node|6638606123",
+        "name": "Sammy's Woodfire Pizza and Grille",
         "category": "restaurant",
-        "website": "http://amardeencafe.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://sammyspizza.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-05T10:14:57.310Z",
-        "checkedAt": "2026-10-06T10:14:57.067Z"
+        "nextCheckAt": "2026-10-20T14:26:29.127Z",
+        "checkedAt": "2026-10-06T14:26:29.014Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|368171005",
-        "name": "Oak Park Branch San Diego Public Library",
+        "key": "san-diego|osm|way|377357193",
+        "name": "San Diego Central Library",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/oak-park-library",
+        "website": "https://www.sandiego.gov/public-library/central-library",
         "attempts": 2,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Oak Park Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 7 pages on San Diego Central Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T10:15:08.952Z",
-        "checkedAt": "2026-10-06T10:14:57.115Z"
+        "nextCheckAt": "2026-10-13T14:26:33.619Z",
+        "checkedAt": "2026-10-06T14:26:29.016Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla-village": 1,
-      "oak-park": 1
+      "sabre-springs": 1,
+      "sherman-heights": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "uptown-midcity": 1
+      "north-inland": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,12 +261,12 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-06T10:15:09.059Z",
-    "durationMs": 12475,
+    "finishedAt": "2026-10-06T14:26:33.627Z",
+    "durationMs": 50097,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 3,
       "retry": 167,
       "cold": 152,
       "lowValue": 1012,
@@ -273,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-06T14:25:43.596Z",
+        "lastFinishedAt": "2026-10-06T14:25:58.599Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1791296788599,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-06T14:25:58.599Z",
+        "lastFinishedAt": "2026-10-06T14:26:13.600Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791296803600,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-06T14:26:13.600Z",
+        "lastFinishedAt": "2026-10-06T14:26:28.601Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791296818601,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,7 +329,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 1,
+      "dueCount": 3,
       "coldCount": 152,
       "lowValueCount": 1012,
       "laneCounts": {
@@ -374,7 +385,7 @@
         "tracked": 4,
         "completed": 2,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
