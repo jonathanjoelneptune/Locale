@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-06T18:38:21.585Z",
+  "generatedAt": "2026-10-06T19:46:36.384Z",
   "run": {
-    "startedAt": "2026-10-06T18:38:11.060Z",
+    "startedAt": "2026-10-06T19:46:30.363Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
+      "due": 1,
       "retry": 167,
       "cold": 152,
       "lowValue": 1012,
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12062333892",
-        "name": "BHC Chicken",
+        "key": "san-diego|osm|node|13890645831",
+        "name": "Dosa Studio",
         "category": "restaurant",
-        "website": "https://www.bhcsandiego.com/",
+        "website": "https://dosastudiosd.com/",
         "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Dosa Studio (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T18:38:12.752Z",
-        "checkedAt": "2026-10-06T18:38:11.560Z"
+        "nextCheckAt": "2027-01-04T19:46:34.747Z",
+        "checkedAt": "2026-10-06T19:46:30.663Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|368170974",
-        "name": "University Heights Branch San Diego Public Library",
+        "key": "san-diego|osm|node|8726804043",
+        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
+        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
         "attempts": 2,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T18:38:21.535Z",
-        "checkedAt": "2026-10-06T18:38:11.684Z"
+        "nextCheckAt": "2026-10-13T19:46:36.319Z",
+        "checkedAt": "2026-10-06T19:46:30.699Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,11 +117,11 @@
     },
     "probeAreaCounts": {
       "sorrento-valley": 1,
-      "mission-valley": 1
+      "mission-hills": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
-      "central-west": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,23 +250,23 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-06T18:38:21.541Z",
-    "durationMs": 10481,
+    "finishedAt": "2026-10-06T19:46:36.338Z",
+    "durationMs": 5975,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 167,
-      "cold": 152,
-      "lowValue": 1012,
+      "due": 0,
+      "retry": 166,
+      "cold": 153,
+      "lowValue": 1011,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 152,
-        "low-value": 1012,
+        "cold-sample": 153,
+        "low-value": 1011,
         "food-evidence": 9
       }
     },
@@ -318,22 +318,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 1,
-      "coldCount": 152,
-      "lowValueCount": 1012,
+      "dueCount": 0,
+      "coldCount": 153,
+      "lowValueCount": 1011,
       "laneCounts": {
-        "cold-sample": 152,
+        "cold-sample": 153,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 1012
+        "low-value": 1011
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 167,
+        "retry": 166,
         "needs-website": 824,
-        "cold": 152,
+        "cold": 153,
         "candidate": 981
       },
       "categoryCounts": {
