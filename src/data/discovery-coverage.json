@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-08T23:35:05.503Z",
+  "generatedAt": "2026-10-08T23:53:19.361Z",
   "run": {
-    "startedAt": "2026-10-08T23:34:14.309Z",
+    "startedAt": "2026-10-08T23:53:18.593Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
+      "due": 0,
       "retry": 164,
       "cold": 169,
       "lowValue": 995,
@@ -23,42 +23,8 @@
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
-    "sweptRegionId": "chicago",
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 198.97,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "hidden-meadows",
-        "name": "Hidden Meadows",
-        "group": "north-county-inland",
-        "gapScore": 100,
-        "equityPriority": 196.95,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "ramona",
-        "name": "Ramona",
-        "group": "east-county",
-        "gapScore": 100,
-        "equityPriority": 193.8,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      }
-    ],
+    "sweptRegionId": null,
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -88,36 +54,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|3648247065",
-        "name": "Porkyland Mexican Grill",
+        "key": "san-diego|osm|node|11203324837",
+        "name": "Pho Royal",
         "category": "restaurant",
-        "website": "https://goporkyland.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-22T23:35:04.651Z",
-        "checkedAt": "2026-10-08T23:35:04.037Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079082",
-        "name": "Coin-Op Game Room",
-        "category": "bar",
-        "website": "https://coinopgaslamp.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
+        "website": "https://www.orderphoroyal.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -125,27 +72,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-12T23:35:04.710Z",
-        "checkedAt": "2026-10-08T23:35:04.038Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|28824905",
-        "name": "Reuben H. Fleet Science Center",
-        "category": "museum",
-        "website": "https://www.rhfleet.org/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-12T23:35:05.449Z",
-        "checkedAt": "2026-10-08T23:35:04.651Z"
+        "nextCheckAt": "2026-11-07T23:53:19.334Z",
+        "checkedAt": "2026-10-08T23:53:18.800Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -157,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 2
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -169,13 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "torrey-hills": 1,
-      "cortez-hill": 1,
-      "uptown": 1
+      "rolando-park": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "central-core": 1,
       "uptown-midcity": 1
     },
     "coverageEquity": {
@@ -302,77 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 1,
     "promoted": 0,
-    "failed": 3,
-    "discoveryCells": [
-      {
-        "id": "core:0:0",
-        "phase": "core",
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      }
-    ],
-    "finishedAt": "2026-10-08T23:35:05.456Z",
-    "durationMs": 51147,
+    "failed": 1,
+    "finishedAt": "2026-10-08T23:53:19.336Z",
+    "durationMs": 743,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 164,
-      "cold": 169,
-      "lowValue": 995,
+      "retry": 163,
+      "cold": 170,
+      "lowValue": 994,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 169,
-        "low-value": 995,
+        "cold-sample": 170,
+        "low-value": 994,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 3,
-        "successes": 3,
+        "attempts": 0,
+        "successes": 0,
         "failures": 0,
-        "lastStatus": "ok",
+        "lastStatus": null,
         "lastError": null,
-        "lastStartedAt": "2026-10-08T23:34:51.161Z",
-        "lastFinishedAt": "2026-10-08T23:35:03.667Z",
-        "lastLatencyMs": 12506,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
         "cooldownUntil": 0,
         "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
-        "successes": 1,
+        "attempts": 0,
+        "successes": 0,
         "failures": 0,
-        "lastStatus": "ok",
+        "lastStatus": null,
         "lastError": null,
-        "lastStartedAt": "2026-10-08T23:34:26.189Z",
-        "lastFinishedAt": "2026-10-08T23:34:38.296Z",
-        "lastLatencyMs": 12107,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
         "cooldownUntil": 0,
         "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-08T23:34:38.298Z",
-        "lastFinishedAt": "2026-10-08T23:34:39.574Z",
-        "lastLatencyMs": 1276,
-        "cooldownUntil": 1791502509574,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -383,21 +297,21 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 169,
-      "lowValueCount": 995,
+      "coldCount": 170,
+      "lowValueCount": 994,
       "laneCounts": {
-        "cold-sample": 169,
+        "cold-sample": 170,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 995
+        "low-value": 994
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 164,
+        "retry": 163,
         "needs-website": 824,
-        "cold": 169,
+        "cold": 170,
         "candidate": 967
       },
       "categoryCounts": {
@@ -439,7 +353,7 @@
         "tracked": 6,
         "completed": 6,
         "failed": 0,
-        "sweptThisRun": 3
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
