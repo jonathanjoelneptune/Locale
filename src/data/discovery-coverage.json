@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-07T23:43:54.166Z",
+  "generatedAt": "2026-10-08T01:57:25.160Z",
   "run": {
-    "startedAt": "2026-10-07T23:43:52.859Z",
+    "startedAt": "2026-10-08T01:57:09.711Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 165,
-      "cold": 161,
-      "lowValue": 1003,
+      "cold": 162,
+      "lowValue": 1002,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 161,
-        "low-value": 1003,
+        "cold-sample": 162,
+        "low-value": 1002,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 199.45,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|3886102520",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/12114/rancho-penasquitos-13289-4-black-mountain-rd-san-diego-ca-921292660-u",
+        "key": "san-diego|osm|node|2651673866",
+        "name": "Ace New York Giant Pizza Bar & Lounge",
+        "category": "restaurant",
+        "website": "https://acenypizza.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-12T01:57:23.726Z",
+        "checkedAt": "2026-10-08T01:57:23.661Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6722520088",
+        "name": "Verdes El Ranchero",
+        "category": "restaurant",
+        "website": "http://www.verdeselranchero.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "detail": "Checked 2 pages on Verdes El Ranchero (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-21T23:43:54.124Z",
-        "checkedAt": "2026-10-07T23:43:53.248Z"
+        "nextCheckAt": "2026-11-22T01:57:25.115Z",
+        "checkedAt": "2026-10-08T01:57:23.659Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "food-evidence": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "rancho-penasquitos": 1
+      "windansea": 1,
+      "winter-gardens": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-07T23:43:54.126Z",
-    "durationMs": 1267,
+    "failed": 2,
+    "finishedAt": "2026-10-08T01:57:25.122Z",
+    "durationMs": 15411,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 162,
-      "lowValue": 1002,
+      "cold": 163,
+      "lowValue": 1001,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 162,
-        "low-value": 1002,
+        "cold-sample": 163,
+        "low-value": 1001,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-08T01:57:09.940Z",
+        "lastFinishedAt": "2026-10-08T01:57:21.494Z",
+        "lastLatencyMs": 11554,
+        "cooldownUntil": 1791424671494,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-08T01:57:21.494Z",
+        "lastFinishedAt": "2026-10-08T01:57:22.350Z",
+        "lastLatencyMs": 856,
+        "cooldownUntil": 1791424672350,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-08T01:57:22.350Z",
+        "lastFinishedAt": "2026-10-08T01:57:23.356Z",
+        "lastLatencyMs": 1006,
+        "cooldownUntil": 1791424673356,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +330,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 162,
-      "lowValueCount": 1002,
+      "coldCount": 163,
+      "lowValueCount": 1001,
       "laneCounts": {
-        "cold-sample": 162,
+        "cold-sample": 163,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 1002
+        "low-value": 1001
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 165,
         "needs-website": 824,
-        "cold": 162,
-        "candidate": 973
+        "cold": 163,
+        "candidate": 972
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -352,7 +385,7 @@
         "tracked": 4,
         "completed": 2,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
