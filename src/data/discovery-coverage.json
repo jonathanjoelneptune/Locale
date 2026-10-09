@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-08T23:53:19.361Z",
+  "generatedAt": "2026-10-09T02:09:32.400Z",
   "run": {
-    "startedAt": "2026-10-08T23:53:18.593Z",
+    "startedAt": "2026-10-09T02:09:17.646Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 164,
-      "cold": 169,
-      "lowValue": 995,
+      "due": 3,
+      "retry": 163,
+      "cold": 170,
+      "lowValue": 994,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 169,
-        "low-value": 995,
+        "cold-sample": 170,
+        "low-value": 994,
         "food-evidence": 9
       }
     },
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11203324837",
-        "name": "Pho Royal",
-        "category": "restaurant",
-        "website": "https://www.orderphoroyal.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|5430484523",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopsd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,8 +72,65 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-07T23:53:19.334Z",
-        "checkedAt": "2026-10-08T23:53:18.800Z"
+        "nextCheckAt": "2026-10-13T02:09:18.276Z",
+        "checkedAt": "2026-10-09T02:09:18.065Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|365317542",
+        "name": "Numbers",
+        "category": "nightclub",
+        "website": "https://www.numberssd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:09:18.522Z",
+        "checkedAt": "2026-10-09T02:09:18.276Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1448557328",
+        "name": "Gossip Grill",
+        "category": "observed-venue",
+        "website": "http://www.thegossipgrill.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-13T02:09:18.665Z",
+        "checkedAt": "2026-10-09T02:09:18.523Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13911349715",
+        "name": "Cafe 86",
+        "category": "cafe",
+        "website": "https://www.cafe-86.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Cafe 86 (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-23T02:09:32.361Z",
+        "checkedAt": "2026-10-09T02:09:18.020Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +142,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 2,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +155,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "rolando-park": 1
+      "sorrento-valley": 1,
+      "city-heights": 1,
+      "mission-valley": 2
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "north-central": 1,
+      "uptown-midcity": 1,
+      "central-west": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,26 +288,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 4,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-08T23:53:19.336Z",
-    "durationMs": 743,
+    "failed": 4,
+    "finishedAt": "2026-10-09T02:09:32.363Z",
+    "durationMs": 14717,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 163,
-      "cold": 170,
-      "lowValue": 994,
+      "cold": 171,
+      "lowValue": 993,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 170,
-        "low-value": 994,
+        "cold-sample": 171,
+        "low-value": 993,
         "food-evidence": 9
       }
     },
@@ -297,22 +360,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 170,
-      "lowValueCount": 994,
+      "coldCount": 171,
+      "lowValueCount": 993,
       "laneCounts": {
-        "cold-sample": 170,
+        "cold-sample": 171,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 994
+        "low-value": 993
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 163,
         "needs-website": 824,
-        "cold": 170,
-        "candidate": 967
+        "cold": 171,
+        "candidate": 966
       },
       "categoryCounts": {
         "nightclub": 8,
