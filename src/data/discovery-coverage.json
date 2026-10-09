@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-09T16:12:06.274Z",
+  "generatedAt": "2026-10-09T18:45:41.033Z",
   "run": {
-    "startedAt": "2026-10-09T16:11:45.567Z",
+    "startedAt": "2026-10-09T18:45:40.483Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
+      "due": 0,
       "retry": 164,
-      "cold": 173,
-      "lowValue": 991,
+      "cold": 174,
+      "lowValue": 990,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 173,
-        "low-value": 991,
+        "cold-sample": 174,
+        "low-value": 990,
         "food-evidence": 9
       }
     },
@@ -58,79 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8793152104",
-        "name": "Central Library Art Gallery",
-        "category": "gallery",
-        "website": "https://www.sandiego.gov/public-library/visualarts",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:11:55.761Z",
-        "checkedAt": "2026-10-09T16:11:45.788Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31808505",
-        "name": "Milton's",
+        "key": "san-diego|osm|way|31817523",
+        "name": "Taste of Thai",
         "category": "restaurant",
-        "website": "https://miltonsdeli.com/",
+        "website": "https://sdtasteofthai.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Milton's (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-23T16:11:58.969Z",
-        "checkedAt": "2026-10-09T16:11:55.762Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31810379",
-        "name": "Resident Brewing",
-        "category": "brewery",
-        "website": "https://residentbrewing.com/",
-        "attempts": 2,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-08T16:11:59.944Z",
-        "checkedAt": "2026-10-09T16:11:58.969Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|381012089",
-        "name": "Copley-Price Family YMCA",
-        "category": "sports-centre",
-        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-16T16:12:06.249Z",
-        "checkedAt": "2026-10-09T16:11:45.818Z"
+        "nextCheckAt": "2026-10-12T18:45:41.003Z",
+        "checkedAt": "2026-10-09T18:45:40.713Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -142,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 3,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -154,16 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "sherman-heights": 1,
-      "teralta": 1,
-      "via-de-la-valle": 1,
-      "little-italy": 1
+      "via-de-la-valle": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "uptown-midcity": 1,
-      "north-central": 1,
-      "central-core": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -194,7 +130,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 91.54545454545455,
-            "averageEvents": 1.8181818181818181,
+            "averageEvents": 1.9090909090909092,
             "averageVenues": 0.9090909090909091,
             "deficitScore": 91.58636363636363
           },
@@ -205,7 +141,7 @@
             "zeroEventAreas": 16,
             "passRate": 0.025,
             "averageGapScore": 72.675,
-            "averageEvents": 72.775,
+            "averageEvents": 72.125,
             "averageVenues": 2.725,
             "deficitScore": 83.06125
           },
@@ -216,7 +152,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 33.10526315789474,
-            "averageEvents": 219.8421052631579,
+            "averageEvents": 219.68421052631578,
             "averageVenues": 20.789473684210527,
             "deficitScore": 53.165789473684214
           },
@@ -249,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 61.166666666666664,
-            "averageEvents": 40.75,
+            "averageEvents": 40.583333333333336,
             "averageVenues": 5.5,
             "deficitScore": 78.075
           },
@@ -260,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3888888888888889,
             "averageGapScore": 31,
-            "averageEvents": 237.55555555555554,
+            "averageEvents": 237.61111111111111,
             "averageVenues": 18.5,
             "deficitScore": 44.461111111111116
           },
@@ -271,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.636363636363637,
-            "averageEvents": 727.8181818181819,
+            "averageEvents": 728.0909090909091,
             "averageVenues": 59,
             "deficitScore": 13.37272727272727
           }
@@ -289,16 +225,16 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 1,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-10-09T16:12:06.251Z",
-    "durationMs": 20684,
+    "failed": 1,
+    "finishedAt": "2026-10-09T18:45:41.004Z",
+    "durationMs": 521,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 164,
+      "retry": 165,
       "cold": 174,
       "lowValue": 990,
       "qualified": 18,
@@ -373,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 164,
+        "retry": 165,
         "needs-website": 824,
         "cold": 174,
-        "candidate": 962
+        "candidate": 961
       },
       "categoryCounts": {
         "nightclub": 8,
