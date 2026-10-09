@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-09T13:05:31.246Z",
+  "generatedAt": "2026-10-09T16:12:06.274Z",
   "run": {
-    "startedAt": "2026-10-09T13:05:01.727Z",
+    "startedAt": "2026-10-09T16:11:45.567Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 3,
       "retry": 164,
-      "cold": 172,
-      "lowValue": 992,
+      "cold": 173,
+      "lowValue": 991,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 172,
-        "low-value": 992,
+        "cold-sample": 173,
+        "low-value": 991,
         "food-evidence": 9
       }
     },
@@ -24,29 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 199.45,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "harmony-grove",
-        "name": "Harmony Grove",
-        "group": "north-county-inland",
-        "gapScore": 100,
-        "equityPriority": 196.98,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -76,26 +54,83 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2205114860",
-        "name": "Karak House Coffee Co.",
-        "category": "cafe",
-        "website": "https://karakhousecoffee.com/",
+        "key": "san-diego|osm|node|8793152104",
+        "name": "Central Library Art Gallery",
+        "category": "gallery",
+        "website": "https://www.sandiego.gov/public-library/visualarts",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-16T16:11:55.761Z",
+        "checkedAt": "2026-10-09T16:11:45.788Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31808505",
+        "name": "Milton's",
+        "category": "restaurant",
+        "website": "https://miltonsdeli.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Karak House Coffee Co. (low-value)",
+          "detail": "Checked 3 pages on Milton's (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-23T13:05:31.187Z",
-        "checkedAt": "2026-10-09T13:05:30.070Z"
+        "nextCheckAt": "2026-11-23T16:11:58.969Z",
+        "checkedAt": "2026-10-09T16:11:55.762Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31810379",
+        "name": "Resident Brewing",
+        "category": "brewery",
+        "website": "https://residentbrewing.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 404",
+          "statusCode": 404
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-08T16:11:59.944Z",
+        "checkedAt": "2026-10-09T16:11:58.969Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|381012089",
+        "name": "Copley-Price Family YMCA",
+        "category": "sports-centre",
+        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-16T16:12:06.249Z",
+        "checkedAt": "2026-10-09T16:11:45.818Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -107,6 +142,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 3,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -118,10 +154,16 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "sorrento-valley": 1
+      "sherman-heights": 1,
+      "teralta": 1,
+      "via-de-la-valle": 1,
+      "little-italy": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "south-bay": 1,
+      "uptown-midcity": 1,
+      "north-central": 1,
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +205,7 @@
             "zeroEventAreas": 16,
             "passRate": 0.025,
             "averageGapScore": 72.675,
-            "averageEvents": 74.425,
+            "averageEvents": 72.775,
             "averageVenues": 2.725,
             "deficitScore": 83.06125
           },
@@ -218,7 +260,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3888888888888889,
             "averageGapScore": 31,
-            "averageEvents": 237.61111111111111,
+            "averageEvents": 237.55555555555554,
             "averageVenues": 18.5,
             "deficitScore": 44.461111111111116
           },
@@ -229,7 +271,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.636363636363637,
-            "averageEvents": 728.0909090909091,
+            "averageEvents": 727.8181818181819,
             "averageVenues": 59,
             "deficitScore": 13.37272727272727
           }
@@ -247,68 +289,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 4,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-09T13:05:31.197Z",
-    "durationMs": 29470,
+    "failed": 4,
+    "finishedAt": "2026-10-09T16:12:06.251Z",
+    "durationMs": 20684,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 164,
-      "cold": 173,
-      "lowValue": 991,
+      "cold": 174,
+      "lowValue": 990,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 173,
-        "low-value": 991,
+        "cold-sample": 174,
+        "low-value": 990,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 2,
-        "successes": 1,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-09T13:05:16.550Z",
-        "lastFinishedAt": "2026-10-09T13:05:29.850Z",
-        "lastLatencyMs": 13300,
-        "cooldownUntil": 1791551159850,
-        "consecutiveFailures": 1
+        "attempts": 0,
+        "successes": 0,
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-09T13:05:14.470Z",
-        "lastFinishedAt": "2026-10-09T13:05:15.432Z",
-        "lastLatencyMs": 962,
-        "cooldownUntil": 1791551145432,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-09T13:05:15.432Z",
-        "lastFinishedAt": "2026-10-09T13:05:16.550Z",
-        "lastLatencyMs": 1118,
-        "cooldownUntil": 1791551146550,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -319,22 +361,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 173,
-      "lowValueCount": 991,
+      "coldCount": 174,
+      "lowValueCount": 990,
       "laneCounts": {
-        "cold-sample": 173,
+        "cold-sample": 174,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 991
+        "low-value": 990
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 164,
         "needs-website": 824,
-        "cold": 173,
-        "candidate": 963
+        "cold": 174,
+        "candidate": 962
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +417,7 @@
         "tracked": 8,
         "completed": 7,
         "failed": 1,
-        "sweptThisRun": 2
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
