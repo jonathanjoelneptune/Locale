@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-10T21:31:58.083Z",
+  "generatedAt": "2026-10-10T23:24:54.222Z",
   "run": {
-    "startedAt": "2026-10-10T21:31:55.250Z",
+    "startedAt": "2026-10-10T23:24:53.474Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 166,
-      "cold": 184,
-      "lowValue": 980,
+      "cold": 185,
+      "lowValue": 979,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 184,
-        "low-value": 980,
+        "cold-sample": 185,
+        "low-value": 979,
         "food-evidence": 9
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9046935573",
-        "name": "Cafe Royale",
+        "key": "san-diego|osm|node|12787310206",
+        "name": "Royal Pearl Tea",
         "category": "cafe",
-        "website": "https://www.caferoyalesandiego.com/",
+        "website": "https://www.royalpearltea.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Cafe Royale (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-24T21:31:58.034Z",
-        "checkedAt": "2026-10-10T21:31:55.609Z"
+        "nextCheckAt": "2026-10-11T23:24:54.174Z",
+        "checkedAt": "2026-10-10T23:24:53.832Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -119,7 +119,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.89655172413794,
-            "averageEvents": 21.655172413793103,
+            "averageEvents": 21.620689655172413,
             "averageVenues": 2.6206896551724137,
             "deficitScore": 83.27758620689654
           },
@@ -140,10 +140,10 @@
             "passing": 1,
             "zeroEventAreas": 17,
             "passRate": 0.025,
-            "averageGapScore": 73.375,
-            "averageEvents": 69.825,
-            "averageVenues": 2.575,
-            "deficitScore": 83.55625
+            "averageGapScore": 73.4,
+            "averageEvents": 69.725,
+            "averageVenues": 2.475,
+            "deficitScore": 83.565
           },
           "central-west": {
             "group": "central-west",
@@ -152,8 +152,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 33.8421052631579,
-            "averageEvents": 216.78947368421052,
-            "averageVenues": 19.526315789473685,
+            "averageEvents": 216.68421052631578,
+            "averageVenues": 19.473684210526315,
             "deficitScore": 53.42368421052632
           },
           "north-central": {
@@ -174,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.72222222222222,
-            "averageEvents": 235.55555555555554,
-            "averageVenues": 17.38888888888889,
+            "averageEvents": 234.77777777777777,
+            "averageVenues": 17.22222222222222,
             "deficitScore": 45.61944444444445
           },
           "north-county-inland": {
@@ -196,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 61.833333333333336,
-            "averageEvents": 39.416666666666664,
+            "averageEvents": 39.583333333333336,
             "averageVenues": 5.333333333333333,
             "deficitScore": 78.30833333333334
           },
@@ -207,8 +207,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.909090909090908,
-            "averageEvents": 716.2727272727273,
-            "averageVenues": 56.81818181818182,
+            "averageEvents": 715.7272727272727,
+            "averageVenues": 56.72727272727273,
             "deficitScore": 13.468181818181815
           }
         }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-10T21:31:58.036Z",
-    "durationMs": 2786,
+    "finishedAt": "2026-10-10T23:24:54.177Z",
+    "durationMs": 703,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 166,
+      "retry": 167,
       "cold": 185,
       "lowValue": 979,
       "qualified": 18,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 166,
+        "retry": 167,
         "needs-website": 824,
         "cold": 185,
-        "candidate": 949
+        "candidate": 948
       },
       "categoryCounts": {
         "nightclub": 8,
