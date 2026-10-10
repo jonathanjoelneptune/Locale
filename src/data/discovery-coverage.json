@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-10T09:42:22.876Z",
+  "generatedAt": "2026-10-10T13:04:44.265Z",
   "run": {
-    "startedAt": "2026-10-10T09:42:22.004Z",
+    "startedAt": "2026-10-10T13:04:28.642Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 180,
-      "lowValue": 984,
+      "cold": 181,
+      "lowValue": 983,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 180,
-        "low-value": 984,
+        "cold-sample": 181,
+        "low-value": 983,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.08,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31801263",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/1027510/dairy-mart-i-5-2032-dairy-mart-road-san-diego-ca-921731841-us",
+        "key": "san-diego|osm|node|6327910653",
+        "name": "Blaze Pizza",
+        "category": "restaurant",
+        "website": "https://blazepizza.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "detail": "Checked 1 page on Blaze Pizza (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-24T09:42:22.834Z",
-        "checkedAt": "2026-10-10T09:42:22.363Z"
+        "nextCheckAt": "2026-11-24T13:04:44.240Z",
+        "checkedAt": "2026-10-10T13:04:40.270Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +107,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "san-ysidro": 1
+      "otay-ranch": 1
     },
     "probeGroupCounts": {
       "south-bay": 1
@@ -141,7 +152,7 @@
             "zeroEventAreas": 17,
             "passRate": 0.025,
             "averageGapScore": 73.325,
-            "averageEvents": 71.875,
+            "averageEvents": 70.575,
             "averageVenues": 2.625,
             "deficitScore": 83.53875
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.666666666666664,
-            "averageEvents": 235.66666666666666,
+            "averageEvents": 235.44444444444446,
             "averageVenues": 17.38888888888889,
             "deficitScore": 45.044444444444444
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.909090909090908,
-            "averageEvents": 720.9090909090909,
+            "averageEvents": 718.9090909090909,
             "averageVenues": 56.63636363636363,
             "deficitScore": 13.468181818181815
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-10T09:42:22.836Z",
-    "durationMs": 832,
+    "finishedAt": "2026-10-10T13:04:44.241Z",
+    "durationMs": 15599,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 181,
-      "lowValue": 983,
+      "cold": 182,
+      "lowValue": 982,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 181,
-        "low-value": 983,
+        "cold-sample": 182,
+        "low-value": 982,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-10T13:04:28.689Z",
+        "lastFinishedAt": "2026-10-10T13:04:37.490Z",
+        "lastLatencyMs": 8801,
+        "cooldownUntil": 1791637507490,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-10T13:04:37.490Z",
+        "lastFinishedAt": "2026-10-10T13:04:38.920Z",
+        "lastLatencyMs": 1430,
+        "cooldownUntil": 1791637508920,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-10T13:04:38.920Z",
+        "lastFinishedAt": "2026-10-10T13:04:40.115Z",
+        "lastLatencyMs": 1195,
+        "cooldownUntil": 1791637510115,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 181,
-      "lowValueCount": 983,
+      "coldCount": 182,
+      "lowValueCount": 982,
       "laneCounts": {
-        "cold-sample": 181,
+        "cold-sample": 182,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 983
+        "low-value": 982
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 165,
         "needs-website": 824,
-        "cold": 181,
-        "candidate": 954
+        "cold": 182,
+        "candidate": 953
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
