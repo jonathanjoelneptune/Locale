@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-10T13:04:44.265Z",
+  "generatedAt": "2026-10-10T15:32:03.143Z",
   "run": {
-    "startedAt": "2026-10-10T13:04:28.642Z",
+    "startedAt": "2026-10-10T15:32:01.477Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 181,
-      "lowValue": 983,
+      "cold": 182,
+      "lowValue": 982,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 181,
-        "low-value": 983,
+        "cold-sample": 182,
+        "low-value": 982,
         "food-evidence": 9
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.08,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6327910653",
-        "name": "Blaze Pizza",
+        "key": "san-diego|osm|node|8424214677",
+        "name": "Casa Nori Sushi",
         "category": "restaurant",
-        "website": "https://blazepizza.com/",
+        "website": "https://www.casanorisushi.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Blaze Pizza (low-value)",
+          "detail": "Checked 2 pages on Casa Nori Sushi (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-24T13:04:44.240Z",
-        "checkedAt": "2026-10-10T13:04:40.270Z"
+        "nextCheckAt": "2026-11-24T15:32:03.091Z",
+        "checkedAt": "2026-10-10T15:32:01.842Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -152,7 +141,7 @@
             "zeroEventAreas": 17,
             "passRate": 0.025,
             "averageGapScore": 73.325,
-            "averageEvents": 70.575,
+            "averageEvents": 69.975,
             "averageVenues": 2.625,
             "deficitScore": 83.53875
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.909090909090908,
-            "averageEvents": 718.9090909090909,
+            "averageEvents": 718.5454545454545,
             "averageVenues": 56.63636363636363,
             "deficitScore": 13.468181818181815
           }
@@ -239,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-10T13:04:44.241Z",
-    "durationMs": 15599,
+    "finishedAt": "2026-10-10T15:32:03.097Z",
+    "durationMs": 1620,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 182,
-      "lowValue": 982,
+      "cold": 183,
+      "lowValue": 981,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 182,
-        "low-value": 982,
+        "cold-sample": 183,
+        "low-value": 981,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-10T13:04:28.689Z",
-        "lastFinishedAt": "2026-10-10T13:04:37.490Z",
-        "lastLatencyMs": 8801,
-        "cooldownUntil": 1791637507490,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-10T13:04:37.490Z",
-        "lastFinishedAt": "2026-10-10T13:04:38.920Z",
-        "lastLatencyMs": 1430,
-        "cooldownUntil": 1791637508920,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-10T13:04:38.920Z",
-        "lastFinishedAt": "2026-10-10T13:04:40.115Z",
-        "lastLatencyMs": 1195,
-        "cooldownUntil": 1791637510115,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +297,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 182,
-      "lowValueCount": 982,
+      "coldCount": 183,
+      "lowValueCount": 981,
       "laneCounts": {
-        "cold-sample": 182,
+        "cold-sample": 183,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 982
+        "low-value": 981
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 165,
         "needs-website": 824,
-        "cold": 182,
-        "candidate": 953
+        "cold": 183,
+        "candidate": 952
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
