@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-10T15:49:57.385Z",
+  "generatedAt": "2026-10-10T17:57:44.905Z",
   "run": {
-    "startedAt": "2026-10-10T15:49:48.144Z",
+    "startedAt": "2026-10-10T17:57:23.364Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 165,
-      "cold": 183,
-      "lowValue": 981,
+      "cold": 184,
+      "lowValue": 980,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 183,
-        "low-value": 981,
+        "cold-sample": 184,
+        "low-value": 980,
         "food-evidence": 9
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12063776069",
-        "name": "Cafe Moto",
+        "key": "san-diego|osm|node|6769342199",
+        "name": "Cafe Virtuoso",
         "category": "cafe",
-        "website": "https://cafemoto.com/",
+        "website": "https://www.cafevirtuoso.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Cafe Moto (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-24T15:49:57.328Z",
-        "checkedAt": "2026-10-10T15:49:48.526Z"
+        "nextCheckAt": "2026-10-11T17:57:44.853Z",
+        "checkedAt": "2026-10-10T17:57:23.731Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -207,8 +207,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.909090909090908,
-            "averageEvents": 718.5454545454545,
-            "averageVenues": 56.63636363636363,
+            "averageEvents": 719.1818181818181,
+            "averageVenues": 57.27272727272727,
             "deficitScore": 13.468181818181815
           }
         }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-10T15:49:57.341Z",
-    "durationMs": 9197,
+    "finishedAt": "2026-10-10T17:57:44.861Z",
+    "durationMs": 21497,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 165,
+      "retry": 166,
       "cold": 184,
       "lowValue": 980,
       "qualified": 18,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 165,
+        "retry": 166,
         "needs-website": 824,
         "cold": 184,
-        "candidate": 951
+        "candidate": 950
       },
       "categoryCounts": {
         "nightclub": 8,
