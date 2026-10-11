@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-11T15:33:51.187Z",
+  "generatedAt": "2026-10-11T18:00:30.075Z",
   "run": {
-    "startedAt": "2026-10-11T15:33:27.595Z",
+    "startedAt": "2026-10-11T18:00:28.426Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
@@ -24,29 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.75,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "harmony-grove",
-        "name": "Harmony Grove",
-        "group": "north-county-inland",
-        "gapScore": 100,
-        "equityPriority": 197.25,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504 | https://overpass-api.de/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -76,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2126642451",
-        "name": "Refresh Coffee",
-        "category": "cafe",
-        "website": "http://www.refreshcoffee.co/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "key": "san-diego|osm|node|12605491401",
+        "name": "​Thanh Tinh Chay",
+        "category": "restaurant",
+        "website": "https://www.thanhtinhchayrestaurant.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on ​Thanh Tinh Chay (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-10T15:33:51.141Z",
-        "checkedAt": "2026-10-11T15:33:50.687Z"
+        "nextCheckAt": "2026-11-25T18:00:30.025Z",
+        "checkedAt": "2026-10-11T18:00:28.810Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -118,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "sabre-springs": 1
+      "teralta": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.725,
-            "averageEvents": 69.475,
+            "averageEvents": 69.325,
             "averageVenues": 2.375,
             "deficitScore": 83.92875
           },
@@ -250,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-11T15:33:51.149Z",
-    "durationMs": 23554,
+    "finishedAt": "2026-10-11T18:00:30.033Z",
+    "durationMs": 1607,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 169,
-      "cold": 188,
-      "lowValue": 976,
+      "cold": 189,
+      "lowValue": 975,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 188,
-        "low-value": 976,
+        "cold-sample": 189,
+        "low-value": 975,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 2,
-        "successes": 1,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-11T15:33:43.572Z",
-        "lastFinishedAt": "2026-10-11T15:33:50.395Z",
-        "lastLatencyMs": 6823,
-        "cooldownUntil": 1791732860395,
-        "consecutiveFailures": 1
+        "attempts": 0,
+        "successes": 0,
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-11T15:33:41.564Z",
-        "lastFinishedAt": "2026-10-11T15:33:42.495Z",
-        "lastLatencyMs": 931,
-        "cooldownUntil": 1791732852495,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-11T15:33:42.495Z",
-        "lastFinishedAt": "2026-10-11T15:33:43.572Z",
-        "lastLatencyMs": 1077,
-        "cooldownUntil": 1791732853572,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -319,22 +297,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 188,
-      "lowValueCount": 976,
+      "coldCount": 189,
+      "lowValueCount": 975,
       "laneCounts": {
-        "cold-sample": 188,
+        "cold-sample": 189,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 976
+        "low-value": 975
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 169,
         "needs-website": 824,
-        "cold": 188,
-        "candidate": 943
+        "cold": 189,
+        "candidate": 942
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 2
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
