@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-10T23:24:54.222Z",
+  "generatedAt": "2026-10-11T01:53:07.977Z",
   "run": {
-    "startedAt": "2026-10-10T23:24:53.474Z",
+    "startedAt": "2026-10-11T01:53:06.310Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 166,
+      "retry": 167,
       "cold": 185,
       "lowValue": 979,
       "qualified": 18,
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12787310206",
-        "name": "Royal Pearl Tea",
+        "key": "san-diego|osm|node|5962205153",
+        "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.royalpearltea.com/",
+        "website": "https://www.starbucks.com/store-locator/store/16862;https://www.starbucks.com/store/16862/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Starbucks (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-11T23:24:54.174Z",
-        "checkedAt": "2026-10-10T23:24:53.832Z"
+        "nextCheckAt": "2026-11-25T01:53:07.951Z",
+        "checkedAt": "2026-10-11T01:53:06.507Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -119,7 +119,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.89655172413794,
-            "averageEvents": 21.620689655172413,
+            "averageEvents": 21.689655172413794,
             "averageVenues": 2.6206896551724137,
             "deficitScore": 83.27758620689654
           },
@@ -152,8 +152,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 33.8421052631579,
-            "averageEvents": 216.68421052631578,
-            "averageVenues": 19.473684210526315,
+            "averageEvents": 216.52631578947367,
+            "averageVenues": 19.31578947368421,
             "deficitScore": 53.42368421052632
           },
           "north-central": {
@@ -163,7 +163,7 @@
             "zeroEventAreas": 3,
             "passRate": 0,
             "averageGapScore": 64.46153846153847,
-            "averageEvents": 33.96153846153846,
+            "averageEvents": 33.88461538461539,
             "averageVenues": 3.423076923076923,
             "deficitScore": 78.71538461538462
           },
@@ -174,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.72222222222222,
-            "averageEvents": 234.77777777777777,
-            "averageVenues": 17.22222222222222,
+            "averageEvents": 234.44444444444446,
+            "averageVenues": 17,
             "deficitScore": 45.61944444444445
           },
           "north-county-inland": {
@@ -185,7 +185,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 89.27272727272727,
-            "averageEvents": 7.954545454545454,
+            "averageEvents": 7.909090909090909,
             "averageVenues": 1.7272727272727273,
             "deficitScore": 91.7
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 61.833333333333336,
-            "averageEvents": 39.583333333333336,
+            "averageEvents": 39.5,
             "averageVenues": 5.333333333333333,
             "deficitScore": 78.30833333333334
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 9.909090909090908,
-            "averageEvents": 715.7272727272727,
+            "averageEvents": 716.0909090909091,
             "averageVenues": 56.72727272727273,
             "deficitScore": 13.468181818181815
           }
@@ -228,23 +228,23 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-10T23:24:54.177Z",
-    "durationMs": 703,
+    "finishedAt": "2026-10-11T01:53:07.953Z",
+    "durationMs": 1643,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 167,
-      "cold": 185,
-      "lowValue": 979,
+      "cold": 186,
+      "lowValue": 978,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 185,
-        "low-value": 979,
+        "cold-sample": 186,
+        "low-value": 978,
         "food-evidence": 9
       }
     },
@@ -297,22 +297,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 185,
-      "lowValueCount": 979,
+      "coldCount": 186,
+      "lowValueCount": 978,
       "laneCounts": {
-        "cold-sample": 185,
+        "cold-sample": 186,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 979
+        "low-value": 978
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 167,
         "needs-website": 824,
-        "cold": 185,
-        "candidate": 948
+        "cold": 186,
+        "candidate": 947
       },
       "categoryCounts": {
         "nightclub": 8,
