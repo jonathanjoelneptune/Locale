@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-11T19:40:27.404Z",
+  "generatedAt": "2026-10-11T21:47:34.592Z",
   "run": {
-    "startedAt": "2026-10-11T19:40:26.732Z",
+    "startedAt": "2026-10-11T21:46:25.973Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
@@ -24,7 +24,40 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.27,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "harmony-grove",
+        "name": "Harmony Grove",
+        "group": "north-county-inland",
+        "gapScore": 100,
+        "equityPriority": 197.26,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "otay-mesa",
+        "name": "Otay Mesa",
+        "group": "south-bay",
+        "gapScore": 100,
+        "equityPriority": 195.04,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +87,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9339501290",
-        "name": "Choi's",
-        "category": "restaurant",
-        "website": "https://choisandiego.com/",
+        "key": "san-diego|osm|node|6769342199",
+        "name": "Cafe Virtuoso",
+        "category": "cafe",
+        "website": "https://www.cafevirtuoso.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
@@ -72,8 +105,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-13T19:40:27.362Z",
-        "checkedAt": "2026-10-11T19:40:27.092Z"
+        "nextCheckAt": "2026-10-13T21:47:34.545Z",
+        "checkedAt": "2026-10-11T21:47:14.057Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +129,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "barrio-logan": 1
+      "logan-heights": 1
     },
     "probeGroupCounts": {
       "south-bay": 1
@@ -163,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.36842105263158,
-            "averageEvents": 215.94736842105263,
+            "averageEvents": 215.78947368421052,
             "averageVenues": 18.68421052631579,
             "deficitScore": 53.607894736842105
           },
@@ -195,10 +228,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 62.333333333333336,
-            "averageEvents": 38.5,
-            "averageVenues": 5.083333333333333,
-            "deficitScore": 78.48333333333333
+            "averageGapScore": 62.5,
+            "averageEvents": 38.25,
+            "averageVenues": 4.916666666666667,
+            "deficitScore": 78.54166666666667
           },
           "central-core": {
             "group": "central-core",
@@ -207,8 +240,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 712.1818181818181,
-            "averageVenues": 55.36363636363637,
+            "averageEvents": 711.3636363636364,
+            "averageVenues": 55,
             "deficitScore": 13.659090909090907
           }
         }
@@ -228,8 +261,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-11T19:40:27.365Z",
-    "durationMs": 633,
+    "finishedAt": "2026-10-11T21:47:34.547Z",
+    "durationMs": 68574,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -251,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-11T21:46:26.048Z",
+        "lastFinishedAt": "2026-10-11T21:46:35.652Z",
+        "lastLatencyMs": 9604,
+        "cooldownUntil": 1791755225651,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 3,
+        "successes": 2,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-11T21:47:13.394Z",
+        "lastFinishedAt": "2026-10-11T21:47:13.766Z",
+        "lastLatencyMs": 372,
+        "cooldownUntil": 1791755263766,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-11T21:46:58.394Z",
+        "lastFinishedAt": "2026-10-11T21:47:13.394Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791755263394,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -353,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 3
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
