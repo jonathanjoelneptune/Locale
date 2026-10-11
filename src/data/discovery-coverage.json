@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-11T18:00:30.075Z",
+  "generatedAt": "2026-10-11T19:40:27.404Z",
   "run": {
-    "startedAt": "2026-10-11T18:00:28.426Z",
+    "startedAt": "2026-10-11T19:40:26.732Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 169,
-      "cold": 188,
-      "lowValue": 976,
+      "cold": 189,
+      "lowValue": 975,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 188,
-        "low-value": 976,
+        "cold-sample": 189,
+        "low-value": 975,
         "food-evidence": 9
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12605491401",
-        "name": "​Thanh Tinh Chay",
+        "key": "san-diego|osm|node|9339501290",
+        "name": "Choi's",
         "category": "restaurant",
-        "website": "https://www.thanhtinhchayrestaurant.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://choisandiego.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on ​Thanh Tinh Chay (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-25T18:00:30.025Z",
-        "checkedAt": "2026-10-11T18:00:28.810Z"
+        "nextCheckAt": "2026-10-13T19:40:27.362Z",
+        "checkedAt": "2026-10-11T19:40:27.092Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,21 +96,21 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "teralta": 1
+      "barrio-logan": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
         "measured": 188,
         "passing": 22,
         "metroPassRate": 0.117,
-        "zeroEventAreas": 53,
-        "zeroEventRate": 0.282,
+        "zeroEventAreas": 54,
+        "zeroEventRate": 0.287,
         "groupPassRateSpread": 0.818,
         "groupGapSpread": 82.6,
-        "equityScore": 22,
+        "equityScore": 21.9,
         "groups": {
           "south-bay": {
             "group": "south-bay",
@@ -138,12 +138,12 @@
             "group": "north-central",
             "areas": 26,
             "passing": 0,
-            "zeroEventAreas": 4,
+            "zeroEventAreas": 5,
             "passRate": 0,
-            "averageGapScore": 64.1923076923077,
-            "averageEvents": 34.07692307692308,
-            "averageVenues": 3.3076923076923075,
-            "deficitScore": 79.00576923076922
+            "averageGapScore": 64.42307692307692,
+            "averageEvents": 33.96153846153846,
+            "averageVenues": 3.1923076923076925,
+            "deficitScore": 79.47115384615384
           },
           "east-county": {
             "group": "east-county",
@@ -163,8 +163,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.36842105263158,
-            "averageEvents": 215.89473684210526,
-            "averageVenues": 18.894736842105264,
+            "averageEvents": 215.94736842105263,
+            "averageVenues": 18.68421052631579,
             "deficitScore": 53.607894736842105
           },
           "uptown-midcity": {
@@ -174,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.77777777777778,
-            "averageEvents": 234.11111111111111,
-            "averageVenues": 16.5,
+            "averageEvents": 234.05555555555554,
+            "averageVenues": 16.333333333333332,
             "deficitScore": 45.63888888888889
           },
           "north-county-inland": {
@@ -184,10 +184,10 @@
             "passing": 0,
             "zeroEventAreas": 12,
             "passRate": 0,
-            "averageGapScore": 90,
-            "averageEvents": 7.409090909090909,
-            "averageVenues": 1.4090909090909092,
-            "deficitScore": 91.95454545454545
+            "averageGapScore": 90.04545454545455,
+            "averageEvents": 7.363636363636363,
+            "averageVenues": 1.3636363636363635,
+            "deficitScore": 91.97045454545454
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -196,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 62.333333333333336,
-            "averageEvents": 39,
+            "averageEvents": 38.5,
             "averageVenues": 5.083333333333333,
             "deficitScore": 78.48333333333333
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 711.5454545454545,
+            "averageEvents": 712.1818181818181,
             "averageVenues": 55.36363636363637,
             "deficitScore": 13.659090909090907
           }
@@ -228,8 +228,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-11T18:00:30.033Z",
-    "durationMs": 1607,
+    "finishedAt": "2026-10-11T19:40:27.365Z",
+    "durationMs": 633,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
