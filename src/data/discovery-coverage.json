@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-12T00:45:13.161Z",
+  "generatedAt": "2026-10-12T02:37:29.076Z",
   "run": {
-    "startedAt": "2026-10-12T00:45:12.357Z",
+    "startedAt": "2026-10-12T02:37:25.664Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 169,
       "cold": 189,
       "lowValue": 975,
@@ -58,22 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9556571175",
-        "name": "Ali's Chicken & Waffles",
+        "key": "san-diego|osm|node|2651673866",
+        "name": "Ace New York Giant Pizza Bar & Lounge",
         "category": "restaurant",
-        "website": "https://www.alischickenandwaffles.com/",
-        "attempts": 2,
+        "website": "https://acenypizza.com/",
+        "attempts": 5,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-26T00:45:13.129Z",
-        "checkedAt": "2026-10-12T00:45:12.858Z"
+        "nextCheckAt": "2026-10-17T02:37:26.150Z",
+        "checkedAt": "2026-10-12T02:37:26.028Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|registry|place_waterbar_172a84ad11",
+        "name": "Waterbar",
+        "category": "observed-venue",
+        "website": "https://www.waterbarsd.com/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Waterbar (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-26T02:37:28.678Z",
+        "checkedAt": "2026-10-12T02:37:26.151Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11395050179",
+        "name": "Rosemonts Cafe",
+        "category": "cafe",
+        "website": "https://rosemontscafe.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Rosemonts Cafe (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-26T02:37:29.030Z",
+        "checkedAt": "2026-10-12T02:37:26.070Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +123,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "food-evidence": 1,
+      "low-value": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,43 +136,47 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "teralta": 1
+      "winter-gardens": 1,
+      "windansea": 1,
+      "pacific-beach": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "east-county": 1,
+      "north-central": 1,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
         "measured": 188,
         "passing": 22,
         "metroPassRate": 0.117,
-        "zeroEventAreas": 56,
-        "zeroEventRate": 0.298,
+        "zeroEventAreas": 58,
+        "zeroEventRate": 0.309,
         "groupPassRateSpread": 0.818,
-        "groupGapSpread": 82.6,
-        "equityScore": 21.8,
+        "groupGapSpread": 82.8,
+        "equityScore": 21.6,
         "groups": {
           "south-bay": {
             "group": "south-bay",
             "areas": 29,
             "passing": 0,
-            "zeroEventAreas": 7,
+            "zeroEventAreas": 8,
             "passRate": 0,
-            "averageGapScore": 74.75862068965517,
-            "averageEvents": 21.448275862068964,
-            "averageVenues": 2.3448275862068964,
-            "deficitScore": 83.57931034482758
+            "averageGapScore": 74.96551724137932,
+            "averageEvents": 21.379310344827587,
+            "averageVenues": 2.2758620689655173,
+            "deficitScore": 83.99655172413793
           },
           "north-inland": {
             "group": "north-inland",
             "areas": 11,
             "passing": 0,
-            "zeroEventAreas": 7,
+            "zeroEventAreas": 8,
             "passRate": 0,
-            "averageGapScore": 93.0909090909091,
-            "averageEvents": 1.0909090909090908,
-            "averageVenues": 0.45454545454545453,
-            "deficitScore": 93.94545454545454
+            "averageGapScore": 93.27272727272727,
+            "averageEvents": 1,
+            "averageVenues": 0.36363636363636365,
+            "deficitScore": 94.91818181818181
           },
           "north-central": {
             "group": "north-central",
@@ -141,7 +185,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.76923076923077,
-            "averageEvents": 33.65384615384615,
+            "averageEvents": 33.73076923076923,
             "averageVenues": 3,
             "deficitScore": 79.59230769230768
           },
@@ -163,7 +207,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 215.1578947368421,
+            "averageEvents": 215.10526315789474,
             "averageVenues": 18.105263157894736,
             "deficitScore": 53.626315789473686
           },
@@ -174,8 +218,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.833333333333336,
-            "averageEvents": 233.61111111111111,
-            "averageVenues": 16.11111111111111,
+            "averageEvents": 233.44444444444446,
+            "averageVenues": 16,
             "deficitScore": 45.65833333333334
           },
           "north-county-inland": {
@@ -184,10 +228,10 @@
             "passing": 0,
             "zeroEventAreas": 14,
             "passRate": 0,
-            "averageGapScore": 90.31818181818181,
-            "averageEvents": 7.2727272727272725,
-            "averageVenues": 1.2727272727272727,
-            "deficitScore": 92.975
+            "averageGapScore": 90.4090909090909,
+            "averageEvents": 7.2272727272727275,
+            "averageVenues": 1.2272727272727273,
+            "deficitScore": 93.00681818181818
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -207,8 +251,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 708.7272727272727,
-            "averageVenues": 54.18181818181818,
+            "averageEvents": 707.1818181818181,
+            "averageVenues": 53.54545454545455,
             "deficitScore": 13.659090909090907
           }
         }
@@ -225,26 +269,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-12T00:45:13.131Z",
-    "durationMs": 774,
+    "failed": 3,
+    "finishedAt": "2026-10-12T02:37:29.032Z",
+    "durationMs": 3368,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 169,
-      "cold": 189,
-      "lowValue": 975,
+      "cold": 190,
+      "lowValue": 974,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 189,
-        "low-value": 975,
+        "cold-sample": 190,
+        "low-value": 974,
         "food-evidence": 9
       }
     },
@@ -297,22 +341,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 189,
-      "lowValueCount": 975,
+      "coldCount": 190,
+      "lowValueCount": 974,
       "laneCounts": {
-        "cold-sample": 189,
+        "cold-sample": 190,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 975
+        "low-value": 974
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 169,
         "needs-website": 824,
-        "cold": 189,
-        "candidate": 942
+        "cold": 190,
+        "candidate": 941
       },
       "categoryCounts": {
         "nightclub": 8,
