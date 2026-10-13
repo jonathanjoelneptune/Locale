@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-13T21:17:18.183Z",
+  "generatedAt": "2026-10-13T21:48:49.506Z",
   "run": {
-    "startedAt": "2026-10-13T21:16:20.228Z",
+    "startedAt": "2026-10-13T21:48:27.784Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
-      "retry": 168,
-      "cold": 206,
-      "lowValue": 958,
+      "due": 2,
+      "retry": 167,
+      "cold": 207,
+      "lowValue": 957,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 206,
-        "low-value": 958,
+        "cold-sample": 207,
+        "low-value": 957,
         "food-evidence": 9
       }
     },
@@ -24,29 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.8,
-        "status": "ok",
-        "candidateCount": 0,
-        "newCount": 0
-      },
-      {
-        "regionId": "san-diego",
-        "id": "harmony-grove",
-        "name": "Harmony Grove",
-        "group": "north-county-inland",
-        "gapScore": 100,
-        "equityPriority": 197.86,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -76,14 +54,33 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9339501290",
-        "name": "Choi's",
-        "category": "restaurant",
-        "website": "https://choisandiego.com/",
+        "key": "san-diego|osm|node|368170974",
+        "name": "University Heights Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T21:48:32.778Z",
+        "checkedAt": "2026-10-13T21:48:28.459Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6769342199",
+        "name": "Cafe Virtuoso",
+        "category": "cafe",
+        "website": "https://www.cafevirtuoso.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -94,27 +91,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-12T21:17:14.540Z",
-        "checkedAt": "2026-10-13T21:17:14.412Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596499269",
-        "name": "North Park Branch San Diego Public Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/north-park-library",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on North Park Branch San Diego Public Library (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-27T21:17:18.133Z",
-        "checkedAt": "2026-10-13T21:17:14.414Z"
+        "nextCheckAt": "2026-11-12T21:48:49.449Z",
+        "checkedAt": "2026-10-13T21:48:28.317Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -138,8 +116,8 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "barrio-logan": 1,
-      "city-heights": 1
+      "logan-heights": 1,
+      "hillcrest": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
@@ -185,7 +163,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.76923076923077,
-            "averageEvents": 33.57692307692308,
+            "averageEvents": 33.53846153846154,
             "averageVenues": 3,
             "deficitScore": 79.59230769230768
           },
@@ -196,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.85,
-            "averageEvents": 64.9,
+            "averageEvents": 64.2,
             "averageVenues": 2.175,
             "deficitScore": 83.9725
           },
@@ -207,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 212.47368421052633,
+            "averageEvents": 212.6315789473684,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -218,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 227.5,
+            "averageEvents": 227.33333333333334,
             "averageVenues": 15.555555555555555,
             "deficitScore": 45.69722222222222
           },
@@ -240,7 +218,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 62.916666666666664,
-            "averageEvents": 37.666666666666664,
+            "averageEvents": 37.5,
             "averageVenues": 4.416666666666667,
             "deficitScore": 78.6875
           },
@@ -251,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 696.8181818181819,
+            "averageEvents": 696.4545454545455,
             "averageVenues": 51.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -272,65 +250,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-13T21:17:18.139Z",
-    "durationMs": 57911,
+    "finishedAt": "2026-10-13T21:48:49.459Z",
+    "durationMs": 21675,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 167,
-      "cold": 207,
-      "lowValue": 957,
+      "due": 1,
+      "retry": 166,
+      "cold": 208,
+      "lowValue": 956,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 207,
-        "low-value": 957,
+        "cold-sample": 208,
+        "low-value": 956,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 2,
-        "successes": 1,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-13T21:17:04.014Z",
-        "lastFinishedAt": "2026-10-13T21:17:14.026Z",
-        "lastLatencyMs": 10012,
-        "cooldownUntil": 1791926264026,
-        "consecutiveFailures": 1
+        "attempts": 0,
+        "successes": 0,
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-13T21:16:34.013Z",
-        "lastFinishedAt": "2026-10-13T21:16:49.015Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1791926239014,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-13T21:16:49.015Z",
-        "lastFinishedAt": "2026-10-13T21:17:04.014Z",
-        "lastLatencyMs": 14999,
-        "cooldownUntil": 1791926254014,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -340,22 +318,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 2,
-      "coldCount": 207,
-      "lowValueCount": 957,
+      "dueCount": 1,
+      "coldCount": 208,
+      "lowValueCount": 956,
       "laneCounts": {
-        "cold-sample": 207,
+        "cold-sample": 208,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 957
+        "low-value": 956
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 167,
+        "retry": 166,
         "needs-website": 824,
-        "cold": 207,
+        "cold": 208,
         "candidate": 926
       },
       "categoryCounts": {
@@ -397,7 +375,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 2
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
