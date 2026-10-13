@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-13T10:58:31.140Z",
+  "generatedAt": "2026-10-13T14:37:06.624Z",
   "run": {
-    "startedAt": "2026-10-13T10:58:26.212Z",
+    "startedAt": "2026-10-13T14:36:20.333Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 1,
       "retry": 168,
-      "cold": 202,
-      "lowValue": 962,
+      "cold": 203,
+      "lowValue": 961,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 202,
-        "low-value": 962,
+        "cold-sample": 203,
+        "low-value": 961,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|546280446",
-        "name": "Pho Ca Dao",
-        "category": "restaurant",
-        "website": "http://thephocadaogrill.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pho Ca Dao (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-27T10:58:28.690Z",
-        "checkedAt": "2026-10-13T10:58:26.567Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|368171005",
-        "name": "Oak Park Branch San Diego Public Library",
+        "key": "san-diego|osm|way|377357193",
+        "name": "San Diego Central Library",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/oak-park-library",
+        "website": "https://www.sandiego.gov/public-library/central-library",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Oak Park Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 7 pages on San Diego Central Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T10:58:31.096Z",
-        "checkedAt": "2026-10-13T10:58:26.610Z"
+        "nextCheckAt": "2026-10-27T14:37:03.861Z",
+        "checkedAt": "2026-10-13T14:36:59.979Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9179215678",
+        "name": "Poway Social House",
+        "category": "restaurant",
+        "website": "https://powaysocialhouse.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Poway Social House (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-27T14:37:06.557Z",
+        "checkedAt": "2026-10-13T14:36:59.977Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,11 +128,11 @@
     },
     "probeAreaCounts": {
       "poway": 1,
-      "oak-park": 1
+      "sherman-heights": 1
     },
     "probeGroupCounts": {
       "north-inland": 1,
-      "uptown-midcity": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +185,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.85,
-            "averageEvents": 67.05,
+            "averageEvents": 66.05,
             "averageVenues": 2.175,
             "deficitScore": 83.9725
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 227.55555555555554,
+            "averageEvents": 227.5,
             "averageVenues": 15.555555555555555,
             "deficitScore": 45.69722222222222
           },
@@ -229,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 697,
+            "averageEvents": 696.8181818181819,
             "averageVenues": 51.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -250,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-13T10:58:31.098Z",
-    "durationMs": 4886,
+    "finishedAt": "2026-10-13T14:37:06.583Z",
+    "durationMs": 46250,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 168,
-      "cold": 203,
-      "lowValue": 961,
+      "cold": 204,
+      "lowValue": 960,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 203,
-        "low-value": 961,
+        "cold-sample": 204,
+        "low-value": 960,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-13T14:36:20.998Z",
+        "lastFinishedAt": "2026-10-13T14:36:29.690Z",
+        "lastLatencyMs": 8692,
+        "cooldownUntil": 1791902219690,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T14:36:29.690Z",
+        "lastFinishedAt": "2026-10-13T14:36:44.691Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791902234691,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T14:36:44.691Z",
+        "lastFinishedAt": "2026-10-13T14:36:59.692Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791902249692,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,22 +330,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 203,
-      "lowValueCount": 961,
+      "coldCount": 204,
+      "lowValueCount": 960,
       "laneCounts": {
-        "cold-sample": 203,
+        "cold-sample": 204,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 961
+        "low-value": 960
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 168,
         "needs-website": 824,
-        "cold": 203,
-        "candidate": 929
+        "cold": 204,
+        "candidate": 928
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
