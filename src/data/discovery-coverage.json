@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-13T03:31:15.384Z",
+  "generatedAt": "2026-10-13T07:45:20.630Z",
   "run": {
-    "startedAt": "2026-10-13T03:29:23.153Z",
+    "startedAt": "2026-10-13T07:43:41.354Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 11,
+      "due": 15,
       "retry": 168,
-      "cold": 199,
-      "lowValue": 965,
+      "cold": 200,
+      "lowValue": 964,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 199,
-        "low-value": 965,
+        "cold-sample": 200,
+        "low-value": 964,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,29 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "harmony-grove",
+        "name": "Harmony Grove",
+        "group": "north-county-inland",
+        "gapScore": 100,
+        "equityPriority": 197.86,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,235 +76,235 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9181471363",
-        "name": "Iron Pan Thai Kitchen",
+        "key": "san-diego|osm|way|31840107",
+        "name": "City Heights-Weingart Branch San Diego City Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/city-heights-weingart-library-and-performance-annex",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on City Heights-Weingart Branch San Diego City Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T07:44:36.752Z",
+        "checkedAt": "2026-10-13T07:44:33.777Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|377357190",
+        "name": "Tivoli Bar and Grill",
+        "category": "bar",
+        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-18T07:44:36.919Z",
+        "checkedAt": "2026-10-13T07:44:36.752Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9335661839",
+        "name": "Joyee's Dumpling House",
         "category": "restaurant",
-        "website": "https://ironpanthaikitchen.com/",
+        "website": "https://www.joyeesdumpling.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Iron Pan Thai Kitchen (low-value)",
+          "detail": "Checked 1 page on Joyee's Dumpling House (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-27T03:29:23.984Z",
-        "checkedAt": "2026-10-13T03:29:23.677Z"
+        "nextCheckAt": "2026-11-27T07:44:38.170Z",
+        "checkedAt": "2026-10-13T07:44:33.779Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1416351146",
-        "name": "City Heights Swim Center",
+        "key": "san-diego|osm|node|6635562870",
+        "name": "Yard House",
+        "category": "observed-venue",
+        "website": "https://www.yardhouse.com/locations/ca/san-diego/san-diego-mission-valley-mall/8363",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Yard House (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T07:44:39.244Z",
+        "checkedAt": "2026-10-13T07:44:38.170Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|541654693",
+        "name": "Let's Play! San Diego Indoor Soccer",
         "category": "sports-centre",
-        "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
+        "website": "https://www.letsplaysoccer.com/facilities/13",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
+          "detail": "Checked 3 pages on Let's Play! San Diego Indoor Soccer (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:29:27.060Z",
-        "checkedAt": "2026-10-13T03:29:23.635Z"
+        "nextCheckAt": "2026-10-27T07:44:42.314Z",
+        "checkedAt": "2026-10-13T07:44:36.919Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5430484523",
-        "name": "Coin-Op Game Room",
-        "category": "bar",
-        "website": "https://coinopsd.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-18T03:29:27.358Z",
-        "checkedAt": "2026-10-13T03:29:27.060Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079083",
-        "name": "Gaslamp Tavern",
+        "key": "san-diego|osm|way|31809565",
+        "name": "The Tipsy Crow",
         "category": "observed-venue",
-        "website": "https://www.gaslamptavern.com/",
+        "website": "https://thetipsycrow.com/",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-evidence",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Gaslamp Tavern (event-evidence)",
+          "detail": "Checked 3 pages on The Tipsy Crow (event-evidence)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:29:27.522Z",
-        "checkedAt": "2026-10-13T03:29:23.984Z"
+        "nextCheckAt": "2026-10-27T07:45:00.928Z",
+        "checkedAt": "2026-10-13T07:44:39.244Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317542",
-        "name": "Numbers",
-        "category": "nightclub",
-        "website": "https://www.numberssd.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-18T03:29:27.741Z",
-        "checkedAt": "2026-10-13T03:29:27.522Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|3890027002",
-        "name": "Fluxx",
-        "category": "nightclub",
-        "website": "https://www.fluxxsd.com/",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Fluxx (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:30:10.572Z",
-        "checkedAt": "2026-10-13T03:29:27.358Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079085",
-        "name": "Onyx Room Nightclub",
-        "category": "nightclub",
-        "website": "https://www.onyxroom.com/",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Onyx Room Nightclub (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:30:30.940Z",
-        "checkedAt": "2026-10-13T03:29:27.741Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1448557328",
-        "name": "Gossip Grill",
+        "key": "san-diego|registry|place_double-deuce_bf5947de03",
+        "name": "Double Deuce",
         "category": "observed-venue",
-        "website": "http://www.thegossipgrill.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-18T03:30:31.032Z",
-        "checkedAt": "2026-10-13T03:30:30.940Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|registry|place_whiskey-girl_f883db9e07",
-        "name": "Whiskey Girl",
-        "category": "observed-venue",
-        "website": "https://whiskeygirl.com/",
+        "website": "https://doubledeucesd.com/",
         "attempts": 3,
         "status": "retry",
         "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on Whiskey Girl (exploratory)",
+          "detail": "Checked 3 pages on Double Deuce (exploratory)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:30:33.333Z",
-        "checkedAt": "2026-10-13T03:30:31.032Z"
+        "nextCheckAt": "2026-10-27T07:45:02.189Z",
+        "checkedAt": "2026-10-13T07:45:00.928Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1075932489",
-        "name": "Rady Shell",
+        "key": "san-diego|osm|node|9607389522",
+        "name": "Gaslamp Museum at the Davis-Horton House",
+        "category": "museum",
+        "website": "https://www.gaslampmuseum.org/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Gaslamp Museum at the Davis-Horton House (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T07:45:05.424Z",
+        "checkedAt": "2026-10-13T07:45:02.189Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31841162",
+        "name": "San Diego Chinese Historical Museum",
+        "category": "museum",
+        "website": "https://sdchm.org/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on San Diego Chinese Historical Museum (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T07:45:06.342Z",
+        "checkedAt": "2026-10-13T07:45:05.424Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|25965018",
+        "name": "USS Midway Museum",
+        "category": "museum",
+        "website": "https://www.midway.org/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on USS Midway Museum (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T07:45:11.997Z",
+        "checkedAt": "2026-10-13T07:45:06.343Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215210417",
+        "name": "San Diego Musical Theatre",
         "category": "theatre",
-        "website": "https://www.theshell.org/",
+        "website": "https://www.sdmt.org/",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on Rady Shell (event-likely)",
+          "detail": "Checked 7 pages on San Diego Musical Theatre (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:30:50.293Z",
-        "checkedAt": "2026-10-13T03:30:33.333Z"
+        "nextCheckAt": "2026-10-27T07:45:18.383Z",
+        "checkedAt": "2026-10-13T07:44:42.315Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31806619",
-        "name": "RustiCucina",
+        "key": "san-diego|osm|node|11060509647",
+        "name": "Hasta Mañana Cantina",
         "category": "observed-venue",
-        "website": "https://www.rusticucina.com/",
+        "website": "https://hastamananacantina.com/",
         "attempts": 3,
         "status": "retry",
         "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on RustiCucina (exploratory)",
+          "detail": "Checked 2 pages on Hasta Mañana Cantina (exploratory)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:30:51.089Z",
-        "checkedAt": "2026-10-13T03:30:50.293Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1207407694",
-        "name": "LandShark Bar & Grill",
-        "category": "observed-venue",
-        "website": "https://www.margaritavilleresorts.com/margaritaville-hotel-san-diego/eat-drink/landshark-bar-grill",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on LandShark Bar & Grill (event-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-27T03:31:15.327Z",
-        "checkedAt": "2026-10-13T03:30:10.572Z"
+        "nextCheckAt": "2026-10-27T07:45:20.589Z",
+        "checkedAt": "2026-10-13T07:45:11.997Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -294,10 +316,10 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 6,
+      "event-likely": 7,
       "low-value": 1,
-      "event-evidence": 2,
-      "exploratory": 3
+      "exploratory": 3,
+      "event-evidence": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -310,15 +332,16 @@
     "probeAreaCounts": {
       "teralta": 1,
       "poway": 1,
-      "little-italy": 3,
-      "city-heights": 1,
-      "east-village": 3,
-      "hillcrest": 3
+      "east-village": 5,
+      "mission-valley": 1,
+      "university-heights": 1,
+      "little-italy": 3
     },
     "probeGroupCounts": {
-      "uptown-midcity": 5,
+      "uptown-midcity": 2,
       "north-inland": 1,
-      "central-core": 6
+      "central-core": 8,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -360,7 +383,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.76923076923077,
-            "averageEvents": 33.65384615384615,
+            "averageEvents": 33.57692307692308,
             "averageVenues": 3,
             "deficitScore": 79.59230769230768
           },
@@ -382,8 +405,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 213.3684210526316,
-            "averageVenues": 17.63157894736842,
+            "averageEvents": 212.94736842105263,
+            "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
           "uptown-midcity": {
@@ -393,8 +416,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 228,
-            "averageVenues": 15.61111111111111,
+            "averageEvents": 227.61111111111111,
+            "averageVenues": 15.555555555555555,
             "deficitScore": 45.69722222222222
           },
           "north-county-inland": {
@@ -415,7 +438,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 62.916666666666664,
-            "averageEvents": 37.583333333333336,
+            "averageEvents": 37.5,
             "averageVenues": 4.416666666666667,
             "deficitScore": 78.6875
           },
@@ -426,8 +449,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 699.2727272727273,
-            "averageVenues": 52.27272727272727,
+            "averageEvents": 696.7272727272727,
+            "averageVenues": 51.81818181818182,
             "deficitScore": 13.659090909090907
           }
         }
@@ -447,65 +470,65 @@
     "probed": 12,
     "promoted": 0,
     "failed": 12,
-    "finishedAt": "2026-10-13T03:31:15.337Z",
-    "durationMs": 112184,
+    "finishedAt": "2026-10-13T07:45:20.591Z",
+    "durationMs": 99237,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 4,
       "retry": 168,
-      "cold": 200,
-      "lowValue": 964,
+      "cold": 201,
+      "lowValue": 963,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 200,
-        "low-value": 964,
+        "cold-sample": 201,
+        "low-value": 963,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 2,
+        "successes": 1,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-13T07:44:24.397Z",
+        "lastFinishedAt": "2026-10-13T07:44:33.385Z",
+        "lastLatencyMs": 8988,
+        "cooldownUntil": 1791877503385,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T07:43:54.395Z",
+        "lastFinishedAt": "2026-10-13T07:44:09.396Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791877479396,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T07:44:09.396Z",
+        "lastFinishedAt": "2026-10-13T07:44:24.397Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1791877494397,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -515,23 +538,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 0,
-      "coldCount": 200,
-      "lowValueCount": 964,
+      "dueCount": 4,
+      "coldCount": 201,
+      "lowValueCount": 963,
       "laneCounts": {
-        "cold-sample": 200,
+        "cold-sample": 201,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 964
+        "low-value": 963
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 168,
         "needs-website": 824,
-        "cold": 200,
-        "candidate": 932
+        "cold": 201,
+        "candidate": 931
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -572,7 +595,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 2
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
