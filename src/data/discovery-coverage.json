@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-13T17:06:00.000Z",
+  "generatedAt": "2026-10-13T21:17:18.183Z",
   "run": {
-    "startedAt": "2026-10-13T17:05:58.635Z",
+    "startedAt": "2026-10-13T21:16:20.228Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 3,
       "retry": 168,
-      "cold": 205,
-      "lowValue": 959,
+      "cold": 206,
+      "lowValue": 958,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 205,
-        "low-value": 959,
+        "cold-sample": 206,
+        "low-value": 958,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,29 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "ok",
+        "candidateCount": 0,
+        "newCount": 0
+      },
+      {
+        "regionId": "san-diego",
+        "id": "harmony-grove",
+        "name": "Harmony Grove",
+        "group": "north-county-inland",
+        "gapScore": 100,
+        "equityPriority": 197.86,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass-api.de/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +76,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14021159374",
-        "name": "Tahkrai Thai",
+        "key": "san-diego|osm|node|9339501290",
+        "name": "Choi's",
         "category": "restaurant",
-        "website": "https://takhraithai.com/",
-        "attempts": 1,
+        "website": "https://choisandiego.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Tahkrai Thai (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-27T17:05:59.790Z",
-        "checkedAt": "2026-10-13T17:05:58.914Z"
+        "nextCheckAt": "2026-11-12T21:17:14.540Z",
+        "checkedAt": "2026-10-13T21:17:14.412Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596499269",
+        "name": "North Park Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/north-park-library",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on North Park Branch San Diego Public Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-27T21:17:18.133Z",
+        "checkedAt": "2026-10-13T21:17:14.414Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +126,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +138,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1
+      "barrio-logan": 1,
+      "city-heights": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "south-bay": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +196,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.85,
-            "averageEvents": 65.85,
+            "averageEvents": 64.9,
             "averageVenues": 2.175,
             "deficitScore": 83.9725
           },
@@ -225,68 +269,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-13T17:05:59.956Z",
-    "durationMs": 1321,
+    "failed": 2,
+    "finishedAt": "2026-10-13T21:17:18.139Z",
+    "durationMs": 57911,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 168,
-      "cold": 206,
-      "lowValue": 958,
+      "due": 2,
+      "retry": 167,
+      "cold": 207,
+      "lowValue": 957,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 206,
-        "low-value": 958,
+        "cold-sample": 207,
+        "low-value": 957,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
-        "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "attempts": 2,
+        "successes": 1,
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-13T21:17:04.014Z",
+        "lastFinishedAt": "2026-10-13T21:17:14.026Z",
+        "lastLatencyMs": 10012,
+        "cooldownUntil": 1791926264026,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T21:16:34.013Z",
+        "lastFinishedAt": "2026-10-13T21:16:49.015Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1791926239014,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-13T21:16:49.015Z",
+        "lastFinishedAt": "2026-10-13T21:17:04.014Z",
+        "lastLatencyMs": 14999,
+        "cooldownUntil": 1791926254014,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -296,22 +340,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 0,
-      "coldCount": 206,
-      "lowValueCount": 958,
+      "dueCount": 2,
+      "coldCount": 207,
+      "lowValueCount": 957,
       "laneCounts": {
-        "cold-sample": 206,
+        "cold-sample": 207,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 958
+        "low-value": 957
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 168,
+        "retry": 167,
         "needs-website": 824,
-        "cold": 206,
+        "cold": 207,
         "candidate": 926
       },
       "categoryCounts": {
@@ -353,7 +397,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 2
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
