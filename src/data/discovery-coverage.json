@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-13T21:48:49.506Z",
+  "generatedAt": "2026-10-13T23:01:52.397Z",
   "run": {
-    "startedAt": "2026-10-13T21:48:27.784Z",
+    "startedAt": "2026-10-13T23:01:47.173Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 167,
-      "cold": 207,
-      "lowValue": 957,
+      "due": 1,
+      "retry": 166,
+      "cold": 208,
+      "lowValue": 956,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 207,
-        "low-value": 957,
+        "cold-sample": 208,
+        "low-value": 956,
         "food-evidence": 9
       }
     },
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|368170974",
-        "name": "University Heights Branch San Diego Public Library",
+        "key": "san-diego|osm|node|12572243201",
+        "name": "Thai Ladle",
+        "category": "restaurant",
+        "website": "https://thailadle.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-16T23:01:47.873Z",
+        "checkedAt": "2026-10-13T23:01:47.377Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8726804043",
+        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
+        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T21:48:32.778Z",
-        "checkedAt": "2026-10-13T21:48:28.459Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6769342199",
-        "name": "Cafe Virtuoso",
-        "category": "cafe",
-        "website": "https://www.cafevirtuoso.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-12T21:48:49.449Z",
-        "checkedAt": "2026-10-13T21:48:28.317Z"
+        "nextCheckAt": "2026-10-27T23:01:52.352Z",
+        "checkedAt": "2026-10-13T23:01:47.408Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "logan-heights": 1,
-      "hillcrest": 1
+      "poway": 1,
+      "mission-hills": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
+      "north-inland": 1,
       "uptown-midcity": 1
     },
     "coverageEquity": {
@@ -185,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 212.6315789473684,
+            "averageEvents": 212.42105263157896,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -250,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-13T21:48:49.459Z",
-    "durationMs": 21675,
+    "finishedAt": "2026-10-13T23:01:52.353Z",
+    "durationMs": 5180,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 166,
+      "due": 0,
+      "retry": 167,
       "cold": 208,
       "lowValue": 956,
       "qualified": 18,
@@ -318,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 1,
+      "dueCount": 0,
       "coldCount": 208,
       "lowValueCount": 956,
       "laneCounts": {
@@ -331,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 166,
+        "retry": 167,
         "needs-website": 824,
         "cold": 208,
-        "candidate": 926
+        "candidate": 925
       },
       "categoryCounts": {
         "nightclub": 8,
