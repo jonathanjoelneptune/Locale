@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-14T20:33:52.711Z",
+  "generatedAt": "2026-10-14T21:57:28.605Z",
   "run": {
-    "startedAt": "2026-10-14T20:33:41.028Z",
+    "startedAt": "2026-10-14T21:57:28.071Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 167,
-      "cold": 214,
-      "lowValue": 950,
+      "cold": 215,
+      "lowValue": 949,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 214,
-        "low-value": 950,
+        "cold-sample": 215,
+        "low-value": 949,
         "food-evidence": 9
       }
     },
@@ -58,41 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12990593671",
-        "name": "Luna Grill",
+        "key": "san-diego|osm|node|14024384314",
+        "name": "Panda House",
         "category": "restaurant",
-        "website": "https://locations.lunagrill.com/luna-grill-3e682dd03aba",
+        "website": "https://www.pandahousespringvalley.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Luna Grill (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T20:33:42.639Z",
-        "checkedAt": "2026-10-14T20:33:41.248Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1163474971",
-        "name": "Tenth Avenue Arts Center",
-        "category": "arts-centre",
-        "website": "http://www.tenthavenuearts.com/",
-        "attempts": 5,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Tenth Avenue Arts Center (event-likely)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-11T20:33:52.667Z",
-        "checkedAt": "2026-10-14T20:33:41.287Z"
+        "nextCheckAt": "2026-10-16T21:57:28.580Z",
+        "checkedAt": "2026-10-14T21:57:28.276Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "eastlake": 1,
-      "cortez-hill": 1
+      "la-presa": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "central-core": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -141,7 +119,7 @@
             "zeroEventAreas": 8,
             "passRate": 0,
             "averageGapScore": 74.96551724137932,
-            "averageEvents": 21.275862068965516,
+            "averageEvents": 21.24137931034483,
             "averageVenues": 2.2758620689655173,
             "deficitScore": 83.99655172413793
           },
@@ -163,7 +141,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.73076923076923,
-            "averageEvents": 33.53846153846154,
+            "averageEvents": 33.5,
             "averageVenues": 3.0384615384615383,
             "deficitScore": 79.57884615384614
           },
@@ -174,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.85,
-            "averageEvents": 61.15,
+            "averageEvents": 61.025,
             "averageVenues": 2.175,
             "deficitScore": 83.9725
           },
@@ -185,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 211.8421052631579,
+            "averageEvents": 211.73684210526315,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -196,7 +174,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 223.61111111111111,
+            "averageEvents": 222.83333333333334,
             "averageVenues": 15.555555555555555,
             "deficitScore": 45.69722222222222
           },
@@ -207,7 +185,7 @@
             "zeroEventAreas": 14,
             "passRate": 0,
             "averageGapScore": 90.54545454545455,
-            "averageEvents": 7.136363636363637,
+            "averageEvents": 7,
             "averageVenues": 1.0909090909090908,
             "deficitScore": 93.05454545454545
           },
@@ -218,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.083333333333336,
-            "averageEvents": 37.333333333333336,
+            "averageEvents": 37,
             "averageVenues": 4.25,
             "deficitScore": 78.74583333333334
           },
@@ -229,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 692.4545454545455,
+            "averageEvents": 691.8181818181819,
             "averageVenues": 51.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -247,16 +225,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-14T20:33:52.669Z",
-    "durationMs": 11641,
+    "failed": 1,
+    "finishedAt": "2026-10-14T21:57:28.581Z",
+    "durationMs": 510,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 167,
+      "retry": 168,
       "cold": 215,
       "lowValue": 949,
       "qualified": 18,
@@ -331,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 167,
+        "retry": 168,
         "needs-website": 824,
         "cold": 215,
-        "candidate": 918
+        "candidate": 917
       },
       "categoryCounts": {
         "nightclub": 8,
