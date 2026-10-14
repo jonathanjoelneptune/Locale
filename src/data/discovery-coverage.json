@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-13T23:01:52.397Z",
+  "generatedAt": "2026-10-14T01:05:19.658Z",
   "run": {
-    "startedAt": "2026-10-13T23:01:47.173Z",
+    "startedAt": "2026-10-14T01:05:18.938Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 166,
+      "due": 0,
+      "retry": 167,
       "cold": 208,
       "lowValue": 956,
       "qualified": 18,
@@ -58,41 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12572243201",
-        "name": "Thai Ladle",
-        "category": "restaurant",
-        "website": "https://thailadle.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "key": "san-diego|osm|node|12787310206",
+        "name": "Royal Pearl Tea",
+        "category": "cafe",
+        "website": "https://www.royalpearltea.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-16T23:01:47.873Z",
-        "checkedAt": "2026-10-13T23:01:47.377Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8726804043",
-        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T23:01:52.352Z",
-        "checkedAt": "2026-10-13T23:01:47.408Z"
+        "nextCheckAt": "2026-11-13T01:05:19.616Z",
+        "checkedAt": "2026-10-14T01:05:19.300Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,11 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1,
-      "mission-hills": 1
+      "rolando-park": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
       "uptown-midcity": 1
     },
     "coverageEquity": {
@@ -247,26 +225,26 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-13T23:01:52.353Z",
-    "durationMs": 5180,
+    "failed": 1,
+    "finishedAt": "2026-10-14T01:05:19.619Z",
+    "durationMs": 681,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 167,
-      "cold": 208,
-      "lowValue": 956,
+      "retry": 166,
+      "cold": 209,
+      "lowValue": 955,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 208,
-        "low-value": 956,
+        "cold-sample": 209,
+        "low-value": 955,
         "food-evidence": 9
       }
     },
@@ -319,21 +297,21 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 208,
-      "lowValueCount": 956,
+      "coldCount": 209,
+      "lowValueCount": 955,
       "laneCounts": {
-        "cold-sample": 208,
+        "cold-sample": 209,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 956
+        "low-value": 955
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 167,
+        "retry": 166,
         "needs-website": 824,
-        "cold": 208,
+        "cold": 209,
         "candidate": 925
       },
       "categoryCounts": {
