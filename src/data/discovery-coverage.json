@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-14T07:38:33.147Z",
+  "generatedAt": "2026-10-14T11:42:07.342Z",
   "run": {
-    "startedAt": "2026-10-14T07:38:30.928Z",
+    "startedAt": "2026-10-14T11:41:27.979Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 166,
-      "cold": 211,
-      "lowValue": 953,
+      "cold": 212,
+      "lowValue": 952,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 211,
-        "low-value": 953,
+        "cold-sample": 212,
+        "low-value": 952,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 504 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12634692501",
-        "name": "Bankhead Mississippi Style Cooking",
+        "key": "san-diego|osm|node|12904040501",
+        "name": "So Saap",
         "category": "restaurant",
-        "website": "https://www.bankheadmsstyle.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://sosaap.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Bankhead Mississippi Style Cooking (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-28T07:38:33.115Z",
-        "checkedAt": "2026-10-14T07:38:31.238Z"
+        "nextCheckAt": "2026-10-28T11:42:07.309Z",
+        "checkedAt": "2026-10-14T11:42:06.912Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-presa": 1
+      "teralta": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -228,8 +239,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-14T07:38:33.120Z",
-    "durationMs": 2192,
+    "finishedAt": "2026-10-14T11:42:07.311Z",
+    "durationMs": 39332,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-14T11:41:28.045Z",
+        "lastFinishedAt": "2026-10-14T11:41:36.687Z",
+        "lastLatencyMs": 8642,
+        "cooldownUntil": 1791978126687,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-14T11:41:36.687Z",
+        "lastFinishedAt": "2026-10-14T11:41:51.689Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1791978141689,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-14T11:41:51.689Z",
+        "lastFinishedAt": "2026-10-14T11:42:06.689Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1791978156689,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
