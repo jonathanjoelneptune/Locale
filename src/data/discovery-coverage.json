@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-14T23:23:43.414Z",
+  "generatedAt": "2026-10-15T01:31:20.760Z",
   "run": {
-    "startedAt": "2026-10-14T23:23:41.860Z",
+    "startedAt": "2026-10-15T01:30:33.482Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 168,
-      "cold": 215,
-      "lowValue": 949,
+      "cold": 216,
+      "lowValue": 948,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 215,
-        "low-value": 949,
+        "cold-sample": 216,
+        "low-value": 948,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6016861915",
+        "key": "san-diego|osm|node|10170216900",
         "name": "Pizza Hut",
         "category": "restaurant",
-        "website": "https://locations.pizzahut.com/ca/spring-valley/8300-paradise-valley-rd",
+        "website": "https://locations.pizzahut.com/ca/chula-vista/2326-proctor-valley-rd",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -72,8 +83,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-28T23:23:43.366Z",
-        "checkedAt": "2026-10-14T23:23:42.211Z"
+        "nextCheckAt": "2026-11-29T01:31:20.708Z",
+        "checkedAt": "2026-10-15T01:31:18.822Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-presa": 1
+      "eastlake": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 211.73684210526315,
+            "averageEvents": 211.89473684210526,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-14T23:23:43.368Z",
-    "durationMs": 1508,
+    "finishedAt": "2026-10-15T01:31:20.710Z",
+    "durationMs": 47228,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 168,
-      "cold": 216,
-      "lowValue": 948,
+      "cold": 217,
+      "lowValue": 947,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 216,
-        "low-value": 948,
+        "cold-sample": 217,
+        "low-value": 947,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-15T01:30:33.547Z",
+        "lastFinishedAt": "2026-10-15T01:30:48.551Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1792027878551,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-15T01:30:48.551Z",
+        "lastFinishedAt": "2026-10-15T01:31:03.552Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792027893551,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-15T01:31:03.552Z",
+        "lastFinishedAt": "2026-10-15T01:31:18.553Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792027908553,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 216,
-      "lowValueCount": 948,
+      "coldCount": 217,
+      "lowValueCount": 947,
       "laneCounts": {
-        "cold-sample": 216,
+        "cold-sample": 217,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 948
+        "low-value": 947
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 168,
         "needs-website": 824,
-        "cold": 216,
-        "candidate": 916
+        "cold": 217,
+        "candidate": 915
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
