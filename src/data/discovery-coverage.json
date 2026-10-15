@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-15T01:44:31.503Z",
+  "generatedAt": "2026-10-15T05:14:45.818Z",
   "run": {
-    "startedAt": "2026-10-15T01:44:29.812Z",
+    "startedAt": "2026-10-15T05:14:43.772Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 168,
-      "cold": 217,
-      "lowValue": 947,
+      "cold": 218,
+      "lowValue": 946,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 217,
-        "low-value": 947,
+        "cold-sample": 218,
+        "low-value": 946,
         "food-evidence": 9
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10956195568",
-        "name": "Pizza Hut",
+        "key": "san-diego|osm|node|6074685768",
+        "name": "Tambayan Filipino BBQ & Grill",
         "category": "restaurant",
-        "website": "https://locations.pizzahut.com/ca/el-cajon/1762-n-2nd-street",
+        "website": "https://tambayansd.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pizza Hut (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 500",
+          "statusCode": 500
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-29T01:44:31.474Z",
-        "checkedAt": "2026-10-15T01:44:30.012Z"
+        "nextCheckAt": "2026-10-16T05:14:45.766Z",
+        "checkedAt": "2026-10-15T05:14:44.253Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +96,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "winter-gardens": 1
+      "la-presa": 1
     },
     "probeGroupCounts": {
       "east-county": 1
@@ -151,10 +151,10 @@
             "passing": 1,
             "zeroEventAreas": 18,
             "passRate": 0.025,
-            "averageGapScore": 73.85,
-            "averageEvents": 60.825,
-            "averageVenues": 2.175,
-            "deficitScore": 83.9725
+            "averageGapScore": 73.9,
+            "averageEvents": 60.85,
+            "averageVenues": 2.15,
+            "deficitScore": 83.99000000000001
           },
           "central-west": {
             "group": "central-west",
@@ -163,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 210.73684210526315,
+            "averageEvents": 210.78947368421052,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -174,7 +174,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 218.83333333333334,
+            "averageEvents": 218.55555555555554,
             "averageVenues": 15.555555555555555,
             "deficitScore": 45.69722222222222
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.083333333333336,
-            "averageEvents": 37.25,
+            "averageEvents": 37.083333333333336,
             "averageVenues": 4.25,
             "deficitScore": 78.74583333333334
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 689.8181818181819,
+            "averageEvents": 689,
             "averageVenues": 51.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-15T01:44:31.476Z",
-    "durationMs": 1664,
+    "finishedAt": "2026-10-15T05:14:45.775Z",
+    "durationMs": 2003,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 168,
+      "retry": 169,
       "cold": 218,
       "lowValue": 946,
       "qualified": 18,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 168,
+        "retry": 169,
         "needs-website": 824,
         "cold": 218,
-        "candidate": 914
+        "candidate": 913
       },
       "categoryCounts": {
         "nightclub": 8,
