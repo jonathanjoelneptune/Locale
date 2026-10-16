@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-16T11:34:42.868Z",
+  "generatedAt": "2026-10-16T14:10:23.948Z",
   "run": {
-    "startedAt": "2026-10-16T11:34:22.623Z",
+    "startedAt": "2026-10-16T14:10:03.468Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 23,
+      "due": 22,
       "retry": 169,
-      "cold": 230,
-      "lowValue": 934,
+      "cold": 231,
+      "lowValue": 933,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 230,
-        "low-value": 934,
+        "cold-sample": 231,
+        "low-value": 933,
         "food-evidence": 9
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.8,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|961427351",
-        "name": "Janet's Cafe",
+        "key": "san-diego|osm|node|11168791637",
+        "name": "Riviera Supper Club and Turquoise Room",
         "category": "restaurant",
-        "website": "https://www.janetscafeelcajon.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Janet's Cafe (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-30T11:34:40.630Z",
-        "checkedAt": "2026-10-16T11:34:39.389Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596039333",
-        "name": "La Familia Restaurant & Bar",
-        "category": "restaurant",
-        "website": "https://lafamiliasandiego.com/",
+        "website": "https://www.rivierasupperclub.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on La Familia Restaurant & Bar (cold-sample)",
+          "detail": "Checked 2 pages on Riviera Supper Club and Turquoise Room (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-15T11:34:42.829Z",
-        "checkedAt": "2026-10-16T11:34:39.387Z"
+        "nextCheckAt": "2026-11-15T14:10:05.546Z",
+        "checkedAt": "2026-10-16T14:10:03.795Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|961427364",
+        "name": "Marieta's",
+        "category": "restaurant",
+        "website": "https://www.marietas.net/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-17T14:10:23.893Z",
+        "checkedAt": "2026-10-16T14:10:03.839Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "allied-gardens": 1,
+      "lemon-grove": 1,
       "granite-hills": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "east-county": 1
+      "east-county": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -185,7 +173,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.9,
-            "averageEvents": 57.2,
+            "averageEvents": 55.85,
             "averageVenues": 2.15,
             "deficitScore": 83.99000000000001
           },
@@ -207,7 +195,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 214.33333333333334,
+            "averageEvents": 214.27777777777777,
             "averageVenues": 15.5,
             "deficitScore": 45.69722222222222
           },
@@ -240,7 +228,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 684.4545454545455,
+            "averageEvents": 684.2727272727273,
             "averageVenues": 51.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -261,13 +249,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-16T11:34:42.836Z",
-    "durationMs": 20213,
+    "finishedAt": "2026-10-16T14:10:23.895Z",
+    "durationMs": 20427,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 22,
-      "retry": 169,
+      "due": 21,
+      "retry": 170,
       "cold": 231,
       "lowValue": 933,
       "qualified": 18,
@@ -284,42 +272,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-16T11:34:22.678Z",
-        "lastFinishedAt": "2026-10-16T11:34:23.334Z",
-        "lastLatencyMs": 656,
-        "cooldownUntil": 1792150493334,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-16T11:34:23.334Z",
-        "lastFinishedAt": "2026-10-16T11:34:24.218Z",
-        "lastLatencyMs": 884,
-        "cooldownUntil": 1792150494218,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-16T11:34:24.218Z",
-        "lastFinishedAt": "2026-10-16T11:34:39.220Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1792150509219,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,7 +317,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 22,
+      "dueCount": 21,
       "coldCount": 231,
       "lowValueCount": 933,
       "laneCounts": {
@@ -342,10 +330,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 169,
+        "retry": 170,
         "needs-website": 824,
         "cold": 231,
-        "candidate": 900
+        "candidate": 899
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +374,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
