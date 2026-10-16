@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-16T09:14:00.744Z",
+  "generatedAt": "2026-10-16T11:34:42.868Z",
   "run": {
-    "startedAt": "2026-10-16T09:13:57.009Z",
+    "startedAt": "2026-10-16T11:34:22.623Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 18,
+      "due": 23,
       "retry": 169,
-      "cold": 229,
-      "lowValue": 935,
+      "cold": 230,
+      "lowValue": 934,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 229,
-        "low-value": 935,
+        "cold-sample": 230,
+        "low-value": 934,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12714938772",
-        "name": "Buffalo Wild Wings",
+        "key": "san-diego|osm|way|961427351",
+        "name": "Janet's Cafe",
         "category": "restaurant",
-        "website": "https://www.buffalowildwings.com/locations/us/ca/chula-vista/555-broadway/sports-bar-862/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Buffalo Wild Wings (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-15T09:13:58.665Z",
-        "checkedAt": "2026-10-16T09:13:57.363Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|2965331681",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/18650/hilton-san-diego-bayfront-1-park-blvd-san-diego-ca-921017897-us",
+        "website": "https://www.janetscafeelcajon.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "detail": "Checked 1 page on Janet's Cafe (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T09:14:00.701Z",
-        "checkedAt": "2026-10-16T09:13:57.545Z"
+        "nextCheckAt": "2026-11-30T11:34:40.630Z",
+        "checkedAt": "2026-10-16T11:34:39.389Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596039333",
+        "name": "La Familia Restaurant & Bar",
+        "category": "restaurant",
+        "website": "https://lafamiliasandiego.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on La Familia Restaurant & Bar (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-15T11:34:42.829Z",
+        "checkedAt": "2026-10-16T11:34:39.387Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-chula-vista": 1,
-      "barrio-logan": 1
+      "allied-gardens": 1,
+      "granite-hills": 1
     },
     "probeGroupCounts": {
-      "south-bay": 2
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -228,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 684,
+            "averageEvents": 684.4545454545455,
             "averageVenues": 51.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -249,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-16T09:14:00.703Z",
-    "durationMs": 3694,
+    "finishedAt": "2026-10-16T11:34:42.836Z",
+    "durationMs": 20213,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 17,
+      "due": 22,
       "retry": 169,
-      "cold": 230,
-      "lowValue": 934,
+      "cold": 231,
+      "lowValue": 933,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 230,
-        "low-value": 934,
+        "cold-sample": 231,
+        "low-value": 933,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-16T11:34:22.678Z",
+        "lastFinishedAt": "2026-10-16T11:34:23.334Z",
+        "lastLatencyMs": 656,
+        "cooldownUntil": 1792150493334,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-16T11:34:23.334Z",
+        "lastFinishedAt": "2026-10-16T11:34:24.218Z",
+        "lastLatencyMs": 884,
+        "cooldownUntil": 1792150494218,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-16T11:34:24.218Z",
+        "lastFinishedAt": "2026-10-16T11:34:39.220Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1792150509219,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -317,23 +329,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 17,
-      "coldCount": 230,
-      "lowValueCount": 934,
+      "dueCount": 22,
+      "coldCount": 231,
+      "lowValueCount": 933,
       "laneCounts": {
-        "cold-sample": 230,
+        "cold-sample": 231,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 934
+        "low-value": 933
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 169,
         "needs-website": 824,
-        "cold": 230,
-        "candidate": 901
+        "cold": 231,
+        "candidate": 900
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
