@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-16T01:22:19.539Z",
+  "generatedAt": "2026-10-16T04:19:21.149Z",
   "run": {
-    "startedAt": "2026-10-16T01:22:17.568Z",
+    "startedAt": "2026-10-16T04:18:53.009Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 12,
       "retry": 169,
-      "cold": 227,
-      "lowValue": 937,
+      "cold": 228,
+      "lowValue": 936,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 227,
-        "low-value": 937,
+        "cold-sample": 228,
+        "low-value": 936,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11214888246",
-        "name": "Lakeside Pho & Grill",
-        "category": "restaurant",
-        "website": "https://www.orderlakesidepho.com/",
+        "key": "san-diego|osm|node|9339501289",
+        "name": "Achilles Coffee",
+        "category": "cafe",
+        "website": "https://achillescoffeeroasters.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Lakeside Pho & Grill (low-value)",
+          "detail": "Checked 1 page on Achilles Coffee (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T01:22:19.512Z",
-        "checkedAt": "2026-10-16T01:22:17.788Z"
+        "nextCheckAt": "2026-11-30T04:19:19.766Z",
+        "checkedAt": "2026-10-16T04:19:18.258Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|7573433228",
+        "name": "Best Pizza and Brew",
+        "category": "restaurant",
+        "website": "https://www.bestpizzaandbrew.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Best Pizza and Brew (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-15T04:19:21.121Z",
+        "checkedAt": "2026-10-16T04:19:18.256Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +115,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lakeside": 1
+      "carmel-mountain-ranch": 1,
+      "barrio-logan": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "north-inland": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -118,10 +151,10 @@
             "passing": 0,
             "zeroEventAreas": 8,
             "passRate": 0,
-            "averageGapScore": 75,
-            "averageEvents": 21.20689655172414,
-            "averageVenues": 2.2413793103448274,
-            "deficitScore": 84.00862068965517
+            "averageGapScore": 74.96551724137932,
+            "averageEvents": 21.24137931034483,
+            "averageVenues": 2.2758620689655173,
+            "deficitScore": 83.99655172413793
           },
           "north-inland": {
             "group": "north-inland",
@@ -152,7 +185,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.9,
-            "averageEvents": 57.35,
+            "averageEvents": 57.2,
             "averageVenues": 2.15,
             "deficitScore": 83.99000000000001
           },
@@ -163,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.421052631578945,
-            "averageEvents": 210.68421052631578,
+            "averageEvents": 209.8421052631579,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.626315789473686
           },
@@ -174,7 +207,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.94444444444444,
-            "averageEvents": 217.72222222222223,
+            "averageEvents": 214.88888888888889,
             "averageVenues": 15.5,
             "deficitScore": 45.69722222222222
           },
@@ -207,8 +240,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 686.6363636363636,
-            "averageVenues": 51.18181818181818,
+            "averageEvents": 686.0909090909091,
+            "averageVenues": 51.45454545454545,
             "deficitScore": 13.659090909090907
           }
         }
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-16T01:22:19.514Z",
-    "durationMs": 1946,
+    "failed": 2,
+    "finishedAt": "2026-10-16T04:19:21.123Z",
+    "durationMs": 28114,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 11,
       "retry": 169,
-      "cold": 228,
-      "lowValue": 936,
+      "cold": 229,
+      "lowValue": 935,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 228,
-        "low-value": 936,
+        "cold-sample": 229,
+        "low-value": 935,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-16T04:18:53.057Z",
+        "lastFinishedAt": "2026-10-16T04:19:08.059Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1792124378059,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-16T04:19:08.059Z",
+        "lastFinishedAt": "2026-10-16T04:19:16.987Z",
+        "lastLatencyMs": 8928,
+        "cooldownUntil": 1792124386987,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-16T04:19:16.987Z",
+        "lastFinishedAt": "2026-10-16T04:19:18.075Z",
+        "lastLatencyMs": 1088,
+        "cooldownUntil": 1792124388075,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -296,23 +329,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 0,
-      "coldCount": 228,
-      "lowValueCount": 936,
+      "dueCount": 11,
+      "coldCount": 229,
+      "lowValueCount": 935,
       "laneCounts": {
-        "cold-sample": 228,
+        "cold-sample": 229,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 936
+        "low-value": 935
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 169,
         "needs-website": 824,
-        "cold": 228,
-        "candidate": 903
+        "cold": 229,
+        "candidate": 902
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
