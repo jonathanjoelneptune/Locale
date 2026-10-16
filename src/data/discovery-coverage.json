@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-16T14:10:23.948Z",
+  "generatedAt": "2026-10-16T16:59:06.345Z",
   "run": {
-    "startedAt": "2026-10-16T14:10:03.468Z",
+    "startedAt": "2026-10-16T16:58:46.241Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 22,
-      "retry": 169,
+      "due": 32,
+      "retry": 170,
       "cold": 231,
       "lowValue": 933,
       "qualified": 18,
@@ -58,29 +58,48 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168791637",
-        "name": "Riviera Supper Club and Turquoise Room",
+        "key": "san-diego|osm|node|8793152104",
+        "name": "Central Library Art Gallery",
+        "category": "gallery",
+        "website": "https://www.sandiego.gov/public-library/visualarts",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-23T16:58:57.074Z",
+        "checkedAt": "2026-10-16T16:58:46.640Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|10177608937",
+        "name": "Monarch Ocean Pub",
         "category": "restaurant",
-        "website": "https://www.rivierasupperclub.com/",
+        "website": "https://monarchdelmar.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Riviera Supper Club and Turquoise Room (cold-sample)",
+          "detail": "Checked 4 pages on Monarch Ocean Pub (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-15T14:10:05.546Z",
-        "checkedAt": "2026-10-16T14:10:03.795Z"
+        "nextCheckAt": "2026-11-15T16:58:58.849Z",
+        "checkedAt": "2026-10-16T16:58:57.074Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|961427364",
-        "name": "Marieta's",
+        "key": "san-diego|osm|way|961427372",
+        "name": "Taste of the Himalayas",
         "category": "restaurant",
-        "website": "https://www.marietas.net/",
+        "website": "https://www.himalayaselcajon.com/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
@@ -91,8 +110,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-17T14:10:23.893Z",
-        "checkedAt": "2026-10-16T14:10:03.839Z"
+        "nextCheckAt": "2026-10-17T16:58:58.933Z",
+        "checkedAt": "2026-10-16T16:58:58.849Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|381012089",
+        "name": "Copley-Price Family YMCA",
+        "category": "sports-centre",
+        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-23T16:59:06.306Z",
+        "checkedAt": "2026-10-16T16:58:46.593Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,6 +142,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
       "cold-sample": 1,
       "low-value": 1
     },
@@ -116,11 +155,16 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lemon-grove": 1,
+      "teralta": 1,
+      "sherman-heights": 1,
+      "del-mar": 1,
       "granite-hills": 1
     },
     "probeGroupCounts": {
-      "east-county": 2
+      "uptown-midcity": 1,
+      "south-bay": 1,
+      "north-county-coast": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -173,7 +217,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.9,
-            "averageEvents": 55.85,
+            "averageEvents": 55.15,
             "averageVenues": 2.15,
             "deficitScore": 83.99000000000001
           },
@@ -246,16 +290,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 4,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-16T14:10:23.895Z",
-    "durationMs": 20427,
+    "failed": 4,
+    "finishedAt": "2026-10-16T16:59:06.308Z",
+    "durationMs": 20067,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 21,
-      "retry": 170,
+      "due": 29,
+      "retry": 171,
       "cold": 231,
       "lowValue": 933,
       "qualified": 18,
@@ -317,7 +361,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 21,
+      "dueCount": 29,
       "coldCount": 231,
       "lowValueCount": 933,
       "laneCounts": {
@@ -330,10 +374,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 170,
+        "retry": 171,
         "needs-website": 824,
         "cold": 231,
-        "candidate": 899
+        "candidate": 898
       },
       "categoryCounts": {
         "nightclub": 8,
