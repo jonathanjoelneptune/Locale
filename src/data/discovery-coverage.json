@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-16T16:59:06.345Z",
+  "generatedAt": "2026-10-16T18:18:06.619Z",
   "run": {
-    "startedAt": "2026-10-16T16:58:46.241Z",
+    "startedAt": "2026-10-16T18:17:59.396Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 32,
-      "retry": 170,
+      "due": 29,
+      "retry": 171,
       "cold": 231,
       "lowValue": 933,
       "qualified": 18,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,83 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8793152104",
-        "name": "Central Library Art Gallery",
-        "category": "gallery",
-        "website": "https://www.sandiego.gov/public-library/visualarts",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
+        "key": "san-diego|osm|way|97469293",
+        "name": "Applebee's",
+        "category": "restaurant",
+        "website": "https://restaurants.applebees.com/en-us/ca/el-cajon/107-fletcher-parkway-79041",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Applebee's (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-23T16:58:57.074Z",
-        "checkedAt": "2026-10-16T16:58:46.640Z"
+        "nextCheckAt": "2026-11-30T18:18:06.390Z",
+        "checkedAt": "2026-10-16T18:18:04.198Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10177608937",
-        "name": "Monarch Ocean Pub",
+        "key": "san-diego|osm|node|9074779446",
+        "name": "TJ Oyster Bar",
         "category": "restaurant",
-        "website": "https://monarchdelmar.com/",
+        "website": "https://www.tjoyster.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on Monarch Ocean Pub (cold-sample)",
+          "detail": "Checked 1 page on TJ Oyster Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-15T16:58:58.849Z",
-        "checkedAt": "2026-10-16T16:58:57.074Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|961427372",
-        "name": "Taste of the Himalayas",
-        "category": "restaurant",
-        "website": "https://www.himalayaselcajon.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-17T16:58:58.933Z",
-        "checkedAt": "2026-10-16T16:58:58.849Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|381012089",
-        "name": "Copley-Price Family YMCA",
-        "category": "sports-centre",
-        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-23T16:59:06.306Z",
-        "checkedAt": "2026-10-16T16:58:46.593Z"
+        "nextCheckAt": "2026-11-15T18:18:06.577Z",
+        "checkedAt": "2026-10-16T18:18:04.196Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -142,7 +115,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
       "cold-sample": 1,
       "low-value": 1
     },
@@ -155,15 +127,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "teralta": 1,
-      "sherman-heights": 1,
-      "del-mar": 1,
-      "granite-hills": 1
+      "bonita": 1,
+      "downtown-el-cajon": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1,
       "south-bay": 1,
-      "north-county-coast": 1,
       "east-county": 1
     },
     "coverageEquity": {
@@ -261,7 +229,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.083333333333336,
-            "averageEvents": 37,
+            "averageEvents": 36.833333333333336,
             "averageVenues": 4.25,
             "deficitScore": 78.74583333333334
           },
@@ -272,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 684.2727272727273,
+            "averageEvents": 685.0909090909091,
             "averageVenues": 51.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -290,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 2,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-10-16T16:59:06.308Z",
-    "durationMs": 20067,
+    "failed": 2,
+    "finishedAt": "2026-10-16T18:18:06.579Z",
+    "durationMs": 7183,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 29,
+      "due": 28,
       "retry": 171,
-      "cold": 231,
-      "lowValue": 933,
+      "cold": 232,
+      "lowValue": 932,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 231,
-        "low-value": 933,
+        "cold-sample": 232,
+        "low-value": 932,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-16T18:17:59.469Z",
+        "lastFinishedAt": "2026-10-16T18:18:00.388Z",
+        "lastLatencyMs": 919,
+        "cooldownUntil": 1792174710388,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-16T18:18:00.388Z",
+        "lastFinishedAt": "2026-10-16T18:18:02.641Z",
+        "lastLatencyMs": 2253,
+        "cooldownUntil": 1792174712641,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-16T18:18:02.641Z",
+        "lastFinishedAt": "2026-10-16T18:18:03.913Z",
+        "lastLatencyMs": 1272,
+        "cooldownUntil": 1792174713913,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -361,23 +329,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 29,
-      "coldCount": 231,
-      "lowValueCount": 933,
+      "dueCount": 28,
+      "coldCount": 232,
+      "lowValueCount": 932,
       "laneCounts": {
-        "cold-sample": 231,
+        "cold-sample": 232,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 933
+        "low-value": 932
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 171,
         "needs-website": 824,
-        "cold": 231,
-        "candidate": 898
+        "cold": 232,
+        "candidate": 897
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -418,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
