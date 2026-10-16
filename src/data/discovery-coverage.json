@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-16T21:36:45.657Z",
+  "generatedAt": "2026-10-16T23:36:31.014Z",
   "run": {
-    "startedAt": "2026-10-16T21:36:41.833Z",
+    "startedAt": "2026-10-16T23:36:27.796Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 30,
+      "due": 29,
       "retry": 172,
-      "cold": 232,
-      "lowValue": 932,
+      "cold": 233,
+      "lowValue": 931,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 232,
-        "low-value": 932,
+        "cold-sample": 233,
+        "low-value": 931,
         "food-evidence": 9
       }
     },
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13194703143",
-        "name": "LHK Noodle Bar",
+        "key": "san-diego|osm|node|12572243201",
+        "name": "Thai Ladle",
         "category": "restaurant",
-        "website": "https://lhknoodlebar.com/",
+        "website": "https://thailadle.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-30T23:36:28.512Z",
+        "checkedAt": "2026-10-16T23:36:28.182Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1727146711",
+        "name": "The Curry Club",
+        "category": "restaurant",
+        "website": "https://www.thecurryclubsd.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on LHK Noodle Bar (cold-sample)",
+          "detail": "Checked 1 page on The Curry Club (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-15T21:36:43.197Z",
-        "checkedAt": "2026-10-16T21:36:42.187Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|699301256",
-        "name": "Mal Al Sham",
-        "category": "restaurant",
-        "website": "https://malalsham.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Mal Al Sham (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-30T21:36:45.617Z",
-        "checkedAt": "2026-10-16T21:36:42.231Z"
+        "nextCheckAt": "2026-11-15T23:36:30.966Z",
+        "checkedAt": "2026-10-16T23:36:28.144Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "mira-mesa": 1,
-      "downtown-el-cajon": 1
+      "convoy": 1,
+      "poway": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
-      "east-county": 1
+      "north-inland": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,12 +250,12 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-16T21:36:45.619Z",
-    "durationMs": 3786,
+    "finishedAt": "2026-10-16T23:36:30.968Z",
+    "durationMs": 3172,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 29,
+      "due": 28,
       "retry": 172,
       "cold": 233,
       "lowValue": 931,
@@ -318,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 29,
+      "dueCount": 28,
       "coldCount": 233,
       "lowValueCount": 931,
       "laneCounts": {
