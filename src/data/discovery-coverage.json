@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-16T21:06:57.771Z",
+  "generatedAt": "2026-10-16T21:36:45.657Z",
   "run": {
-    "startedAt": "2026-10-16T21:06:56.243Z",
+    "startedAt": "2026-10-16T21:36:41.833Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 31,
-      "retry": 171,
+      "due": 30,
+      "retry": 172,
       "cold": 232,
       "lowValue": 932,
       "qualified": 18,
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12660709353",
-        "name": "Dough Mamma Pizzeria",
+        "key": "san-diego|osm|node|13194703143",
+        "name": "LHK Noodle Bar",
         "category": "restaurant",
-        "website": "https://doughmommapizzeria.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-19T21:06:56.740Z",
-        "checkedAt": "2026-10-16T21:06:56.556Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9438411805",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/12316/poway-rd-community-rd-13434-poway-rd-poway-ca-920644714-us",
+        "website": "https://lhknoodlebar.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (cold-sample)",
+          "detail": "Checked 1 page on LHK Noodle Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-15T21:06:57.732Z",
-        "checkedAt": "2026-10-16T21:06:56.511Z"
+        "nextCheckAt": "2026-11-15T21:36:43.197Z",
+        "checkedAt": "2026-10-16T21:36:42.187Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|699301256",
+        "name": "Mal Al Sham",
+        "category": "restaurant",
+        "website": "https://malalsham.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Mal Al Sham (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-30T21:36:45.617Z",
+        "checkedAt": "2026-10-16T21:36:42.231Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1,
-      "la-jolla-shores": 1
+      "mira-mesa": 1,
+      "downtown-el-cajon": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "north-central": 1
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0.025,
             "averageGapScore": 73.9,
-            "averageEvents": 55.15,
+            "averageEvents": 55,
             "averageVenues": 2.15,
             "deficitScore": 83.99000000000001
           },
@@ -195,10 +195,10 @@
             "passing": 7,
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
-            "averageGapScore": 32.94444444444444,
-            "averageEvents": 214.11111111111111,
-            "averageVenues": 15.444444444444445,
-            "deficitScore": 45.69722222222222
+            "averageGapScore": 33.111111111111114,
+            "averageEvents": 213.61111111111111,
+            "averageVenues": 15.277777777777779,
+            "deficitScore": 45.75555555555556
           },
           "north-county-inland": {
             "group": "north-county-inland",
@@ -218,7 +218,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.083333333333336,
-            "averageEvents": 36.5,
+            "averageEvents": 36.666666666666664,
             "averageVenues": 4.25,
             "deficitScore": 78.74583333333334
           },
@@ -229,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 685,
+            "averageEvents": 684.0909090909091,
             "averageVenues": 51.27272727272727,
             "deficitScore": 13.659090909090907
           }
@@ -250,23 +250,23 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-16T21:06:57.734Z",
-    "durationMs": 1491,
+    "finishedAt": "2026-10-16T21:36:45.619Z",
+    "durationMs": 3786,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 30,
+      "due": 29,
       "retry": 172,
-      "cold": 232,
-      "lowValue": 932,
+      "cold": 233,
+      "lowValue": 931,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 232,
-        "low-value": 932,
+        "cold-sample": 233,
+        "low-value": 931,
         "food-evidence": 9
       }
     },
@@ -318,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 30,
-      "coldCount": 232,
-      "lowValueCount": 932,
+      "dueCount": 29,
+      "coldCount": 233,
+      "lowValueCount": 931,
       "laneCounts": {
-        "cold-sample": 232,
+        "cold-sample": 233,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 932
+        "low-value": 931
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 172,
         "needs-website": 824,
-        "cold": 232,
-        "candidate": 896
+        "cold": 233,
+        "candidate": 895
       },
       "categoryCounts": {
         "nightclub": 8,
