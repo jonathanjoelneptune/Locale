@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-17T20:52:46.585Z",
+  "generatedAt": "2026-10-17T21:23:10.405Z",
   "run": {
-    "startedAt": "2026-10-17T20:52:39.830Z",
+    "startedAt": "2026-10-17T21:23:07.915Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 16,
+      "due": 15,
       "retry": 173,
       "cold": 240,
       "lowValue": 924,
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9206559778",
-        "name": "Godfather's Pizza",
-        "category": "restaurant",
-        "website": "https://www.godfathers.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "key": "san-diego|osm|node|6355766023",
+        "name": "Starbucks",
+        "category": "cafe",
+        "website": "https://www.starbucks.com/store-locator/store/1019284/vons-chula-vista-2826-1745-eastlake-parkway-chula-vista-ca-91915-us",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Starbucks (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-31T20:52:40.463Z",
-        "checkedAt": "2026-10-17T20:52:40.037Z"
+        "nextCheckAt": "2026-12-01T21:23:09.230Z",
+        "checkedAt": "2026-10-17T21:23:08.274Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5733214993",
-        "name": "OB Noodle House Bar 1502",
+        "key": "san-diego|osm|node|5746612575",
+        "name": "Rosemarie's Buns & Brew",
         "category": "restaurant",
-        "website": "https://www.obnoodlehouse.com/ob-noodle-house-bar-1502/",
+        "website": "https://rosemariesburgers.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on OB Noodle House Bar 1502 (cold-sample)",
+          "detail": "Checked 1 page on Rosemarie's Buns & Brew (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T20:52:46.554Z",
-        "checkedAt": "2026-10-17T20:52:40.070Z"
+        "nextCheckAt": "2026-11-16T21:23:10.361Z",
+        "checkedAt": "2026-10-17T21:23:08.316Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-presa": 1,
+      "otay-ranch": 1,
       "ocean-beach": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
+      "south-bay": 1,
       "central-west": 1
     },
     "coverageEquity": {
@@ -163,7 +163,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.84615384615384,
-            "averageEvents": 33.38461538461539,
+            "averageEvents": 33.34615384615385,
             "averageVenues": 3,
             "deficitScore": 79.61923076923075
           },
@@ -185,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.21052631578947,
-            "averageEvents": 209.68421052631578,
+            "averageEvents": 209.42105263157896,
             "averageVenues": 17.263157894736842,
             "deficitScore": 53.55263157894737
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 212.77777777777777,
+            "averageEvents": 212.94444444444446,
             "averageVenues": 15.222222222222221,
             "deficitScore": 45.775000000000006
           },
@@ -218,7 +218,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.25,
-            "averageEvents": 35.833333333333336,
+            "averageEvents": 36,
             "averageVenues": 4.25,
             "deficitScore": 78.80416666666667
           },
@@ -250,23 +250,23 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-17T20:52:46.555Z",
-    "durationMs": 6725,
+    "finishedAt": "2026-10-17T21:23:10.363Z",
+    "durationMs": 2448,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 15,
+      "due": 14,
       "retry": 173,
-      "cold": 240,
-      "lowValue": 924,
+      "cold": 241,
+      "lowValue": 923,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 240,
-        "low-value": 924,
+        "cold-sample": 241,
+        "low-value": 923,
         "food-evidence": 9
       }
     },
@@ -318,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 15,
-      "coldCount": 240,
-      "lowValueCount": 924,
+      "dueCount": 14,
+      "coldCount": 241,
+      "lowValueCount": 923,
       "laneCounts": {
-        "cold-sample": 240,
+        "cold-sample": 241,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 924
+        "low-value": 923
       },
       "statusCounts": {
         "qualified": 18,
         "retry": 173,
         "needs-website": 824,
-        "cold": 240,
-        "candidate": 887
+        "cold": 241,
+        "candidate": 886
       },
       "categoryCounts": {
         "nightclub": 8,
