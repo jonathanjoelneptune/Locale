@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-17T12:53:42.150Z",
+  "generatedAt": "2026-10-17T14:20:20.840Z",
   "run": {
-    "startedAt": "2026-10-17T12:53:39.525Z",
+    "startedAt": "2026-10-17T14:20:18.250Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 22,
+      "due": 21,
       "retry": 172,
-      "cold": 237,
-      "lowValue": 927,
+      "cold": 238,
+      "lowValue": 926,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 237,
-        "low-value": 927,
+        "cold-sample": 238,
+        "low-value": 926,
         "food-evidence": 9
       }
     },
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|7168205760",
-        "name": "Dirty Birds Bar and Grill",
+        "key": "san-diego|osm|way|97469253",
+        "name": "Texas Roadhouse",
         "category": "restaurant",
-        "website": "https://www.dirtybirdsbarandgrill.com/",
+        "website": "https://www.texasroadhouse.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-20T14:20:18.835Z",
+        "checkedAt": "2026-10-17T14:20:18.621Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12050133668",
+        "name": "Camellia Rd Tea Bar",
+        "category": "cafe",
+        "website": "https://www.camelliard.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Dirty Birds Bar and Grill (cold-sample)",
+          "detail": "Checked 1 page on Camellia Rd Tea Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T12:53:41.885Z",
-        "checkedAt": "2026-10-17T12:53:40.049Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31844745",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/16932/fairmount-university-3895-fairmount-avenue-san-diego-ca-921052607-us",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-01T12:53:42.032Z",
-        "checkedAt": "2026-10-17T12:53:39.887Z"
+        "nextCheckAt": "2026-11-16T14:20:20.788Z",
+        "checkedAt": "2026-10-17T14:20:18.670Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "teralta": 1,
-      "rolando": 1
+      "downtown-el-cajon": 1,
+      "convoy": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 2
+      "east-county": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -173,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.05,
-            "averageEvents": 53.9,
+            "averageEvents": 53.75,
             "averageVenues": 2.15,
             "deficitScore": 85.41749999999999
           },
@@ -195,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 212.88888888888889,
+            "averageEvents": 212.83333333333334,
             "averageVenues": 15.222222222222221,
             "deficitScore": 45.775000000000006
           },
@@ -228,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 680.5454545454545,
+            "averageEvents": 680.1818181818181,
             "averageVenues": 50.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -249,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-17T12:53:42.038Z",
-    "durationMs": 2513,
+    "finishedAt": "2026-10-17T14:20:20.790Z",
+    "durationMs": 2540,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 21,
-      "retry": 172,
+      "due": 20,
+      "retry": 173,
       "cold": 238,
       "lowValue": 926,
       "qualified": 18,
@@ -317,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 21,
+      "dueCount": 20,
       "coldCount": 238,
       "lowValueCount": 926,
       "laneCounts": {
@@ -330,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 172,
+        "retry": 173,
         "needs-website": 824,
         "cold": 238,
-        "candidate": 890
+        "candidate": 889
       },
       "categoryCounts": {
         "nightclub": 8,
