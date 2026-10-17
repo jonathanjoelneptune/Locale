@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-17T15:52:20.156Z",
+  "generatedAt": "2026-10-17T16:17:55.536Z",
   "run": {
-    "startedAt": "2026-10-17T15:52:14.480Z",
+    "startedAt": "2026-10-17T16:17:52.155Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 20,
-      "retry": 173,
-      "cold": 238,
-      "lowValue": 926,
+      "due": 19,
+      "retry": 172,
+      "cold": 239,
+      "lowValue": 925,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 238,
-        "low-value": 926,
+        "cold-sample": 239,
+        "low-value": 925,
         "food-evidence": 9
       }
     },
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|544065366",
-        "name": "Sushi Lounge",
-        "category": "restaurant",
-        "website": "https://www.sushiloungesd.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|8424238975",
+        "name": "Fresheria",
+        "category": "cafe",
+        "website": "https://lafresheria.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,27 +72,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T15:52:15.035Z",
-        "checkedAt": "2026-10-17T15:52:14.843Z"
+        "nextCheckAt": "2026-10-20T16:17:54.430Z",
+        "checkedAt": "2026-10-17T16:17:52.645Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12161250230",
-        "name": "Ko-Li Bar",
+        "key": "san-diego|osm|node|12105361184",
+        "name": "MNGO Dessert & Coffee Bar",
         "category": "cafe",
-        "website": "https://www.sandiegoyakyudori.com/page/ko-li",
+        "website": "https://www.mngocafe.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Ko-Li Bar (cold-sample)",
+          "detail": "Checked 1 page on MNGO Dessert & Coffee Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T15:52:20.110Z",
-        "checkedAt": "2026-10-17T15:52:14.886Z"
+        "nextCheckAt": "2026-11-16T16:17:55.487Z",
+        "checkedAt": "2026-10-17T16:17:52.808Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1,
+      "otay-ranch": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
+      "south-bay": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -174,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.05,
-            "averageEvents": 53.75,
+            "averageEvents": 53.5,
             "averageVenues": 2.15,
             "deficitScore": 85.41749999999999
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 212.83333333333334,
+            "averageEvents": 212.88888888888889,
             "averageVenues": 15.222222222222221,
             "deficitScore": 45.775000000000006
           },
@@ -229,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 680.1818181818181,
+            "averageEvents": 680.6363636363636,
             "averageVenues": 50.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -250,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-17T15:52:20.111Z",
-    "durationMs": 5631,
+    "finishedAt": "2026-10-17T16:17:55.495Z",
+    "durationMs": 3340,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 19,
-      "retry": 172,
+      "due": 18,
+      "retry": 173,
       "cold": 239,
       "lowValue": 925,
       "qualified": 18,
@@ -318,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 19,
+      "dueCount": 18,
       "coldCount": 239,
       "lowValueCount": 925,
       "laneCounts": {
@@ -331,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 172,
+        "retry": 173,
         "needs-website": 824,
         "cold": 239,
-        "candidate": 889
+        "candidate": 888
       },
       "categoryCounts": {
         "nightclub": 8,
