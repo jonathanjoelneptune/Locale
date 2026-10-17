@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-17T18:45:38.838Z",
+  "generatedAt": "2026-10-17T20:52:46.585Z",
   "run": {
-    "startedAt": "2026-10-17T18:45:37.032Z",
+    "startedAt": "2026-10-17T20:52:39.830Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 17,
-      "retry": 174,
-      "cold": 239,
-      "lowValue": 925,
+      "due": 16,
+      "retry": 173,
+      "cold": 240,
+      "lowValue": 924,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 239,
-        "low-value": 925,
+        "cold-sample": 240,
+        "low-value": 924,
         "food-evidence": 9
       }
     },
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9434301173",
-        "name": "CAVA",
+        "key": "san-diego|osm|node|9206559778",
+        "name": "Godfather's Pizza",
         "category": "restaurant",
-        "website": "https://cava.com/locations/carmel-mountain-ranch-ca",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.godfathers.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,27 +72,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T18:45:37.818Z",
-        "checkedAt": "2026-10-17T18:45:37.234Z"
+        "nextCheckAt": "2026-10-31T20:52:40.463Z",
+        "checkedAt": "2026-10-17T20:52:40.037Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5033049780",
-        "name": "Aquarias Bar & Grille",
+        "key": "san-diego|osm|node|5733214993",
+        "name": "OB Noodle House Bar 1502",
         "category": "restaurant",
-        "website": "https://aquariusbargrille.com/",
+        "website": "https://www.obnoodlehouse.com/ob-noodle-house-bar-1502/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Aquarias Bar & Grille (cold-sample)",
+          "detail": "Checked 1 page on OB Noodle House Bar 1502 (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T18:45:38.808Z",
-        "checkedAt": "2026-10-17T18:45:37.264Z"
+        "nextCheckAt": "2026-11-16T20:52:46.554Z",
+        "checkedAt": "2026-10-17T20:52:40.070Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-mountain-ranch": 1,
+      "la-presa": 1,
       "ocean-beach": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
+      "east-county": 1,
       "central-west": 1
     },
     "coverageEquity": {
@@ -162,10 +162,10 @@
             "passing": 0,
             "zeroEventAreas": 5,
             "passRate": 0,
-            "averageGapScore": 64.8076923076923,
+            "averageGapScore": 64.84615384615384,
             "averageEvents": 33.38461538461539,
-            "averageVenues": 3.0384615384615383,
-            "deficitScore": 79.60576923076923
+            "averageVenues": 3,
+            "deficitScore": 79.61923076923075
           },
           "east-county": {
             "group": "east-county",
@@ -174,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.05,
-            "averageEvents": 53.35,
+            "averageEvents": 53.3,
             "averageVenues": 2.15,
             "deficitScore": 85.41749999999999
           },
@@ -185,8 +185,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.21052631578947,
-            "averageEvents": 209.78947368421052,
-            "averageVenues": 17.31578947368421,
+            "averageEvents": 209.68421052631578,
+            "averageVenues": 17.263157894736842,
             "deficitScore": 53.55263157894737
           },
           "uptown-midcity": {
@@ -196,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 213,
+            "averageEvents": 212.77777777777777,
             "averageVenues": 15.222222222222221,
             "deficitScore": 45.775000000000006
           },
@@ -229,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 680.5454545454545,
+            "averageEvents": 679.9090909090909,
             "averageVenues": 50.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -250,12 +250,12 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-17T18:45:38.810Z",
-    "durationMs": 1778,
+    "finishedAt": "2026-10-17T20:52:46.555Z",
+    "durationMs": 6725,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 16,
+      "due": 15,
       "retry": 173,
       "cold": 240,
       "lowValue": 924,
@@ -318,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 16,
+      "dueCount": 15,
       "coldCount": 240,
       "lowValueCount": 924,
       "laneCounts": {
