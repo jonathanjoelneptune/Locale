@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-17T14:20:20.840Z",
+  "generatedAt": "2026-10-17T15:52:20.156Z",
   "run": {
-    "startedAt": "2026-10-17T14:20:18.250Z",
+    "startedAt": "2026-10-17T15:52:14.480Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 21,
-      "retry": 172,
+      "due": 20,
+      "retry": 173,
       "cold": 238,
       "lowValue": 926,
       "qualified": 18,
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|97469253",
-        "name": "Texas Roadhouse",
+        "key": "san-diego|osm|way|544065366",
+        "name": "Sushi Lounge",
         "category": "restaurant",
-        "website": "https://www.texasroadhouse.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.sushiloungesd.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,27 +72,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T14:20:18.835Z",
-        "checkedAt": "2026-10-17T14:20:18.621Z"
+        "nextCheckAt": "2026-11-16T15:52:15.035Z",
+        "checkedAt": "2026-10-17T15:52:14.843Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12050133668",
-        "name": "Camellia Rd Tea Bar",
+        "key": "san-diego|osm|node|12161250230",
+        "name": "Ko-Li Bar",
         "category": "cafe",
-        "website": "https://www.camelliard.com/",
+        "website": "https://www.sandiegoyakyudori.com/page/ko-li",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Camellia Rd Tea Bar (cold-sample)",
+          "detail": "Checked 1 page on Ko-Li Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T14:20:20.788Z",
-        "checkedAt": "2026-10-17T14:20:18.670Z"
+        "nextCheckAt": "2026-11-16T15:52:20.110Z",
+        "checkedAt": "2026-10-17T15:52:14.886Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-el-cajon": 1,
+      "poway": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
+      "north-inland": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -250,23 +250,23 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-17T14:20:20.790Z",
-    "durationMs": 2540,
+    "finishedAt": "2026-10-17T15:52:20.111Z",
+    "durationMs": 5631,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 20,
-      "retry": 173,
-      "cold": 238,
-      "lowValue": 926,
+      "due": 19,
+      "retry": 172,
+      "cold": 239,
+      "lowValue": 925,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 238,
-        "low-value": 926,
+        "cold-sample": 239,
+        "low-value": 925,
         "food-evidence": 9
       }
     },
@@ -318,22 +318,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 20,
-      "coldCount": 238,
-      "lowValueCount": 926,
+      "dueCount": 19,
+      "coldCount": 239,
+      "lowValueCount": 925,
       "laneCounts": {
-        "cold-sample": 238,
+        "cold-sample": 239,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 926
+        "low-value": 925
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 173,
+        "retry": 172,
         "needs-website": 824,
-        "cold": 238,
+        "cold": 239,
         "candidate": 889
       },
       "categoryCounts": {
