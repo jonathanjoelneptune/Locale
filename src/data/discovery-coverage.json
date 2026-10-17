@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-17T16:17:55.536Z",
+  "generatedAt": "2026-10-17T18:23:20.131Z",
   "run": {
-    "startedAt": "2026-10-17T16:17:52.155Z",
+    "startedAt": "2026-10-17T18:22:46.609Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 19,
-      "retry": 172,
+      "due": 20,
+      "retry": 173,
       "cold": 239,
       "lowValue": 925,
       "qualified": 18,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,83 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8424238975",
-        "name": "Fresheria",
+        "key": "san-diego|osm|node|596649040",
+        "name": "Oggi's Pizza and Brewing Co.",
+        "category": "restaurant",
+        "website": "http://cmr.oggis.com/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-23T18:23:18.635Z",
+        "checkedAt": "2026-10-17T18:23:18.328Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9908007843",
+        "name": "Blue Pearl Art",
+        "category": "gallery",
+        "website": "https://www.bluepearlartstudio.com/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-23T18:23:18.676Z",
+        "checkedAt": "2026-10-17T18:23:18.326Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|764493724",
+        "name": "Happy Lemon",
         "category": "cafe",
-        "website": "https://lafresheria.com/",
+        "website": "https://www.happylemonsandiego.com/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-20T16:17:54.430Z",
-        "checkedAt": "2026-10-17T16:17:52.645Z"
+        "nextCheckAt": "2026-10-18T18:23:18.946Z",
+        "checkedAt": "2026-10-17T18:23:18.635Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12105361184",
-        "name": "MNGO Dessert & Coffee Bar",
-        "category": "cafe",
-        "website": "https://www.mngocafe.com/",
+        "key": "san-diego|osm|way|1268969029",
+        "name": "Pizza Port Brewing Company",
+        "category": "restaurant",
+        "website": "https://www.pizzaport.com/brewpubs/imperial-beach",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on MNGO Dessert & Coffee Bar (cold-sample)",
+          "detail": "Checked 3 pages on Pizza Port Brewing Company (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T16:17:55.487Z",
-        "checkedAt": "2026-10-17T16:17:52.808Z"
+        "nextCheckAt": "2026-11-16T18:23:20.089Z",
+        "checkedAt": "2026-10-17T18:23:18.676Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,6 +153,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 1,
+      "food-evidence": 1,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -116,12 +167,15 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
+      "teralta": 1,
+      "sabre-springs": 1,
       "otay-ranch": 1,
-      "convoy": 1
+      "imperial-beach": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "north-central": 1
+      "uptown-midcity": 1,
+      "north-inland": 1,
+      "south-bay": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +217,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.8076923076923,
-            "averageEvents": 33.38461538461539,
+            "averageEvents": 33.42307692307692,
             "averageVenues": 3.0384615384615383,
             "deficitScore": 79.60576923076923
           },
@@ -174,7 +228,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.05,
-            "averageEvents": 53.5,
+            "averageEvents": 53.35,
             "averageVenues": 2.15,
             "deficitScore": 85.41749999999999
           },
@@ -185,7 +239,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.21052631578947,
-            "averageEvents": 209.6315789473684,
+            "averageEvents": 209.73684210526315,
             "averageVenues": 17.31578947368421,
             "deficitScore": 53.55263157894737
           },
@@ -196,7 +250,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 212.88888888888889,
+            "averageEvents": 212.83333333333334,
             "averageVenues": 15.222222222222221,
             "deficitScore": 45.775000000000006
           },
@@ -207,7 +261,7 @@
             "zeroEventAreas": 13,
             "passRate": 0,
             "averageGapScore": 90.18181818181819,
-            "averageEvents": 7.090909090909091,
+            "averageEvents": 7.181818181818182,
             "averageVenues": 1.1363636363636365,
             "deficitScore": 92.47272727272727
           },
@@ -218,7 +272,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.25,
-            "averageEvents": 36.5,
+            "averageEvents": 36.333333333333336,
             "averageVenues": 4.25,
             "deficitScore": 78.80416666666667
           },
@@ -229,7 +283,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 680.6363636363636,
+            "averageEvents": 680,
             "averageVenues": 50.45454545454545,
             "deficitScore": 13.659090909090907
           }
@@ -247,16 +301,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 4,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-17T16:17:55.495Z",
-    "durationMs": 3340,
+    "failed": 4,
+    "finishedAt": "2026-10-17T18:23:20.094Z",
+    "durationMs": 33485,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 18,
-      "retry": 173,
+      "due": 17,
+      "retry": 174,
       "cold": 239,
       "lowValue": 925,
       "qualified": 18,
@@ -273,42 +327,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-17T18:22:46.693Z",
+        "lastFinishedAt": "2026-10-17T18:23:01.697Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1792261411697,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-17T18:23:01.697Z",
+        "lastFinishedAt": "2026-10-17T18:23:03.046Z",
+        "lastLatencyMs": 1349,
+        "cooldownUntil": 1792261413046,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-17T18:23:03.046Z",
+        "lastFinishedAt": "2026-10-17T18:23:18.047Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792261428047,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,7 +372,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 18,
+      "dueCount": 17,
       "coldCount": 239,
       "lowValueCount": 925,
       "laneCounts": {
@@ -331,10 +385,10 @@
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 173,
+        "retry": 174,
         "needs-website": 824,
         "cold": 239,
-        "candidate": 888
+        "candidate": 887
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +429,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
