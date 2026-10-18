@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-18T20:29:26.883Z",
+  "generatedAt": "2026-10-18T21:43:05.547Z",
   "run": {
-    "startedAt": "2026-10-18T20:29:25.848Z",
+    "startedAt": "2026-10-18T21:43:01.784Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 175,
+      "retry": 176,
       "cold": 250,
       "lowValue": 913,
       "qualified": 19,
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5870511594",
-        "name": "Spoon House",
+        "key": "san-diego|osm|node|6074685768",
+        "name": "Tambayan Filipino BBQ & Grill",
         "category": "restaurant",
-        "website": "https://spoonhouse.business.site/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://tambayansd.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 500",
+          "statusCode": 500
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-19T20:29:26.845Z",
-        "checkedAt": "2026-10-18T20:29:26.107Z"
+        "nextCheckAt": "2026-11-17T21:43:05.505Z",
+        "checkedAt": "2026-10-18T21:43:02.132Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-chula-vista": 1
+      "la-presa": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -162,10 +162,10 @@
             "passing": 5,
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
-            "averageGapScore": 34.1578947368421,
-            "averageEvents": 209.68421052631578,
-            "averageVenues": 17.36842105263158,
-            "deficitScore": 53.53421052631579
+            "averageGapScore": 34.26315789473684,
+            "averageEvents": 209.3684210526316,
+            "averageVenues": 17.105263157894736,
+            "deficitScore": 53.57105263157895
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -174,7 +174,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.888888888888886,
-            "averageEvents": 212.77777777777777,
+            "averageEvents": 212.5,
             "averageVenues": 14.88888888888889,
             "deficitScore": 45.67777777777778
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.583333333333336,
-            "averageEvents": 35.333333333333336,
+            "averageEvents": 35.5,
             "averageVenues": 3.9166666666666665,
             "deficitScore": 78.92083333333333
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 678.6363636363636,
+            "averageEvents": 677.5454545454545,
             "averageVenues": 49.18181818181818,
             "deficitScore": 13.659090909090907
           }
@@ -228,23 +228,23 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-18T20:29:26.847Z",
-    "durationMs": 999,
+    "finishedAt": "2026-10-18T21:43:05.507Z",
+    "durationMs": 3723,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
-      "cold": 250,
-      "lowValue": 913,
+      "retry": 175,
+      "cold": 251,
+      "lowValue": 912,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 250,
-        "low-value": 913,
+        "cold-sample": 251,
+        "low-value": 912,
         "food-evidence": 10
       }
     },
@@ -297,21 +297,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 250,
-      "lowValueCount": 913,
+      "coldCount": 251,
+      "lowValueCount": 912,
       "laneCounts": {
-        "cold-sample": 250,
+        "cold-sample": 251,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 913
+        "low-value": 912
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 175,
         "needs-website": 824,
-        "cold": 250,
+        "cold": 251,
         "candidate": 873
       },
       "categoryCounts": {
