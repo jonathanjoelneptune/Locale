@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-17T23:20:38.287Z",
+  "generatedAt": "2026-10-18T00:50:55.039Z",
   "run": {
-    "startedAt": "2026-10-17T23:20:35.034Z",
+    "startedAt": "2026-10-18T00:50:19.740Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 13,
+      "due": 14,
       "retry": 173,
-      "cold": 242,
-      "lowValue": 922,
+      "cold": 243,
+      "lowValue": 921,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 242,
-        "low-value": 922,
+        "cold-sample": 243,
+        "low-value": 921,
         "food-evidence": 9
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,83 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|368173980",
-        "name": "Brigantine Seafood and Oyster Bar",
+        "key": "san-diego|osm|node|9288998853",
+        "name": "Pacific Pizza",
         "category": "restaurant",
-        "website": "https://www.brigantine.com/locations/portside-pier/",
+        "website": "https://www.pacificpizza.net/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T00:50:51.253Z",
+        "checkedAt": "2026-10-18T00:50:50.961Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079082",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopgaslamp.com/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-24T00:50:51.256Z",
+        "checkedAt": "2026-10-18T00:50:50.963Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-24T00:50:51.611Z",
+        "checkedAt": "2026-10-18T00:50:51.253Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|958800945",
+        "name": "Humphreys SoCal Dining & Music",
+        "category": "restaurant",
+        "website": "https://humphreysrestaurant.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Brigantine Seafood and Oyster Bar (cold-sample)",
+          "detail": "Checked 4 pages on Humphreys SoCal Dining & Music (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-16T23:20:37.904Z",
-        "checkedAt": "2026-10-17T23:20:35.441Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6691788578",
-        "name": "BJ's",
-        "category": "restaurant",
-        "website": "https://www.bjsrestaurants.com/locations/ca/chula-vista",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on BJ's (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-01T23:20:38.241Z",
-        "checkedAt": "2026-10-17T23:20:35.394Z"
+        "nextCheckAt": "2026-11-17T00:50:54.989Z",
+        "checkedAt": "2026-10-18T00:50:51.256Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -105,6 +154,7 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "low-value": 1,
+      "event-likely": 2,
       "cold-sample": 1
     },
     "probeLaneTargets": {
@@ -116,12 +166,16 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-chula-vista": 1,
-      "little-italy": 1
+      "carmel-mountain-ranch": 1,
+      "cortez-hill": 1,
+      "uptown": 1,
+      "point-loma": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "central-core": 1
+      "north-inland": 1,
+      "central-core": 1,
+      "uptown-midcity": 1,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +217,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 64.84615384615384,
-            "averageEvents": 33.38461538461539,
+            "averageEvents": 33.34615384615385,
             "averageVenues": 3,
             "deficitScore": 79.61923076923075
           },
@@ -174,8 +228,8 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.05,
-            "averageEvents": 53.3,
-            "averageVenues": 2.15,
+            "averageEvents": 53.275,
+            "averageVenues": 2.125,
             "deficitScore": 85.41749999999999
           },
           "central-west": {
@@ -185,8 +239,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.10526315789474,
-            "averageEvents": 209.26315789473685,
-            "averageVenues": 17.31578947368421,
+            "averageEvents": 209.3684210526316,
+            "averageVenues": 17.42105263157895,
             "deficitScore": 53.515789473684215
           },
           "uptown-midcity": {
@@ -196,7 +250,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 33.166666666666664,
-            "averageEvents": 212.22222222222223,
+            "averageEvents": 212.05555555555554,
             "averageVenues": 15.055555555555555,
             "deficitScore": 45.775000000000006
           },
@@ -229,7 +283,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 679.7272727272727,
+            "averageEvents": 679.5454545454545,
             "averageVenues": 50.27272727272727,
             "deficitScore": 13.659090909090907
           }
@@ -247,68 +301,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 4,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-17T23:20:38.243Z",
-    "durationMs": 3209,
+    "failed": 4,
+    "finishedAt": "2026-10-18T00:50:54.995Z",
+    "durationMs": 35255,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 12,
-      "retry": 173,
-      "cold": 243,
-      "lowValue": 921,
+      "due": 11,
+      "retry": 172,
+      "cold": 244,
+      "lowValue": 920,
       "qualified": 18,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 243,
-        "low-value": 921,
+        "cold-sample": 244,
+        "low-value": 920,
         "food-evidence": 9
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-18T00:50:19.927Z",
+        "lastFinishedAt": "2026-10-18T00:50:34.930Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1792284664930,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-18T00:50:34.930Z",
+        "lastFinishedAt": "2026-10-18T00:50:35.617Z",
+        "lastLatencyMs": 687,
+        "cooldownUntil": 1792284665617,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-18T00:50:35.617Z",
+        "lastFinishedAt": "2026-10-18T00:50:50.617Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1792284680617,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +372,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 18,
       "needsWebsiteCount": 824,
-      "dueCount": 12,
-      "coldCount": 243,
-      "lowValueCount": 921,
+      "dueCount": 11,
+      "coldCount": 244,
+      "lowValueCount": 920,
       "laneCounts": {
-        "cold-sample": 243,
+        "cold-sample": 244,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 9,
-        "low-value": 921
+        "low-value": 920
       },
       "statusCounts": {
         "qualified": 18,
-        "retry": 173,
+        "retry": 172,
         "needs-website": 824,
-        "cold": 243,
+        "cold": 244,
         "candidate": 884
       },
       "categoryCounts": {
@@ -375,7 +429,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
