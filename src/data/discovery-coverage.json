@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-10-18T16:04:47.152Z",
+  "generatedAt": "2026-10-18T17:59:44.034Z",
   "run": {
-    "startedAt": "2026-10-18T16:04:29.497Z",
+    "startedAt": "2026-10-18T17:59:42.527Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 174,
-      "cold": 250,
+      "due": 1,
+      "retry": 175,
+      "cold": 249,
       "lowValue": 914,
-      "qualified": 18,
+      "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 250,
+        "cold-sample": 249,
         "low-value": 914,
-        "food-evidence": 9
+        "food-evidence": 10
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.28,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|673229809",
-        "name": "La Bella Cafe & Games",
+        "key": "san-diego|osm|node|1741818469",
+        "name": "Oggi's Pizza & Brewing Co.",
         "category": "restaurant",
-        "website": "https://www.labellas.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.oggis.com/location/oggis-sports-brewhouse-pizza-mission-valley/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Oggi's Pizza & Brewing Co. (cold-sample)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-21T16:04:46.744Z",
-        "checkedAt": "2026-10-18T16:04:46.576Z"
+        "nextCheckAt": "2026-11-17T17:59:43.977Z",
+        "checkedAt": "2026-10-18T17:59:42.771Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5467441986",
-        "name": "Mike Hess Brewing - Seaport Village Biergarten",
+        "key": "san-diego|osm|node|5870511655",
+        "name": "Lime in the Coconut",
         "category": "restaurant",
-        "website": "https://www.mikehessbrewing.com/",
-        "attempts": 2,
-        "status": "qualified",
-        "probeLane": "food-evidence",
+        "website": "https://limexcoconut.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "kind": "tribe-organizer",
-          "eventCount": 30,
-          "url": "https://www.mikehessbrewing.com"
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Lime in the Coconut (low-value)",
+          "statusCode": null
         },
-        "sourceId": "discovered-san-diego-0d633209266b",
-        "nextCheckAt": null,
-        "checkedAt": "2026-10-18T16:04:46.578Z"
+        "sourceId": null,
+        "nextCheckAt": "2026-12-02T17:59:44.007Z",
+        "checkedAt": "2026-10-18T17:59:42.739Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -128,11 +117,11 @@
     },
     "probeAreaCounts": {
       "downtown-chula-vista": 1,
-      "marina-seaport": 1
+      "mission-valley": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
-      "central-core": 1
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -259,67 +248,67 @@
       }
     },
     "probed": 2,
-    "promoted": 1,
-    "failed": 1,
-    "finishedAt": "2026-10-18T16:04:47.106Z",
-    "durationMs": 17609,
+    "promoted": 0,
+    "failed": 2,
+    "finishedAt": "2026-10-18T17:59:44.009Z",
+    "durationMs": 1482,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 175,
-      "cold": 249,
-      "lowValue": 914,
+      "cold": 250,
+      "lowValue": 913,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 249,
-        "low-value": 914,
+        "cold-sample": 250,
+        "low-value": 913,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-18T16:04:29.575Z",
-        "lastFinishedAt": "2026-10-18T16:04:44.578Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1792339514578,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-18T16:04:44.578Z",
-        "lastFinishedAt": "2026-10-18T16:04:45.286Z",
-        "lastLatencyMs": 708,
-        "cooldownUntil": 1792339515286,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-18T16:04:45.286Z",
-        "lastFinishedAt": "2026-10-18T16:04:46.299Z",
-        "lastLatencyMs": 1013,
-        "cooldownUntil": 1792339516299,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
-      "dueCount": 1,
-      "coldCount": 249,
-      "lowValueCount": 914,
+      "dueCount": 0,
+      "coldCount": 250,
+      "lowValueCount": 913,
       "laneCounts": {
-        "cold-sample": 249,
+        "cold-sample": 250,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 914
+        "low-value": 913
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 175,
         "needs-website": 824,
-        "cold": 249,
-        "candidate": 875
+        "cold": 250,
+        "candidate": 874
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +375,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
