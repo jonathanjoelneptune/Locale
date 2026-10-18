@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-18T14:47:07.670Z",
+  "generatedAt": "2026-10-18T16:04:47.152Z",
   "run": {
-    "startedAt": "2026-10-18T14:47:05.583Z",
+    "startedAt": "2026-10-18T16:04:29.497Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
-      "retry": 173,
+      "due": 2,
+      "retry": 174,
       "cold": 250,
       "lowValue": 914,
       "qualified": 18,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,12 +65,12 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11112369306",
-        "name": "La Bella",
+        "key": "san-diego|osm|way|673229809",
+        "name": "La Bella Cafe & Games",
         "category": "restaurant",
         "website": "https://www.labellas.com/",
         "attempts": 1,
@@ -72,27 +83,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-21T14:47:06.136Z",
-        "checkedAt": "2026-10-18T14:47:05.825Z"
+        "nextCheckAt": "2026-10-21T16:04:46.744Z",
+        "checkedAt": "2026-10-18T16:04:46.576Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1430103454",
-        "name": "Zoo Brew",
-        "category": "cafe",
-        "website": "https://zoo.sandiegozoo.org/dining",
+        "key": "san-diego|osm|node|5467441986",
+        "name": "Mike Hess Brewing - Seaport Village Biergarten",
+        "category": "restaurant",
+        "website": "https://www.mikehessbrewing.com/",
         "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "qualified",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Zoo Brew (cold-sample)",
-          "statusCode": null
+          "kind": "tribe-organizer",
+          "eventCount": 30,
+          "url": "https://www.mikehessbrewing.com"
         },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T14:47:07.636Z",
-        "checkedAt": "2026-10-18T14:47:05.859Z"
+        "sourceId": "discovered-san-diego-0d633209266b",
+        "nextCheckAt": null,
+        "checkedAt": "2026-10-18T16:04:46.578Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,11 +128,11 @@
     },
     "probeAreaCounts": {
       "downtown-chula-vista": 1,
-      "hillcrest": 1
+      "marina-seaport": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
-      "uptown-midcity": 1
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +185,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 53.075,
+            "averageEvents": 52.975,
             "averageVenues": 2.1,
             "deficitScore": 85.47874999999999
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.1578947368421,
-            "averageEvents": 209.57894736842104,
+            "averageEvents": 209.6315789473684,
             "averageVenues": 17.36842105263158,
             "deficitScore": 53.53421052631579
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.888888888888886,
-            "averageEvents": 212.61111111111111,
+            "averageEvents": 212.88888888888889,
             "averageVenues": 14.944444444444445,
             "deficitScore": 45.67777777777778
           },
@@ -229,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 677.5454545454545,
+            "averageEvents": 677.8181818181819,
             "averageVenues": 49.36363636363637,
             "deficitScore": 13.659090909090907
           }
@@ -248,67 +259,67 @@
       }
     },
     "probed": 2,
-    "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-18T14:47:07.638Z",
-    "durationMs": 2055,
+    "promoted": 1,
+    "failed": 1,
+    "finishedAt": "2026-10-18T16:04:47.106Z",
+    "durationMs": 17609,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 174,
-      "cold": 250,
+      "due": 1,
+      "retry": 175,
+      "cold": 249,
       "lowValue": 914,
-      "qualified": 18,
+      "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 250,
+        "cold-sample": 249,
         "low-value": 914,
-        "food-evidence": 9
+        "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-18T16:04:29.575Z",
+        "lastFinishedAt": "2026-10-18T16:04:44.578Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1792339514578,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
+        "lastStartedAt": "2026-10-18T16:04:44.578Z",
+        "lastFinishedAt": "2026-10-18T16:04:45.286Z",
+        "lastLatencyMs": 708,
+        "cooldownUntil": 1792339515286,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-18T16:04:45.286Z",
+        "lastFinishedAt": "2026-10-18T16:04:46.299Z",
+        "lastLatencyMs": 1013,
+        "cooldownUntil": 1792339516299,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -316,25 +327,25 @@
     "san-diego": {
       "candidateCount": 2142,
       "withWebsiteCount": 1318,
-      "qualifiedCount": 18,
+      "qualifiedCount": 19,
       "needsWebsiteCount": 824,
-      "dueCount": 2,
-      "coldCount": 250,
+      "dueCount": 1,
+      "coldCount": 249,
       "lowValueCount": 914,
       "laneCounts": {
-        "cold-sample": 250,
+        "cold-sample": 249,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
-        "food-evidence": 9,
+        "food-evidence": 10,
         "low-value": 914
       },
       "statusCounts": {
-        "qualified": 18,
-        "retry": 174,
+        "qualified": 19,
+        "retry": 175,
         "needs-website": 824,
-        "cold": 250,
-        "candidate": 876
+        "cold": 249,
+        "candidate": 875
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -358,7 +369,7 @@
         "restaurant": 854,
         "cafe": 319
       },
-      "discoveredSourceCount": 16,
+      "discoveredSourceCount": 17,
       "discoveryCells": {
         "version": 4,
         "total": 239,
@@ -375,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
