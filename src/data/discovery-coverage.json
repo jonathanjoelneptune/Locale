@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-18T17:59:44.034Z",
+  "generatedAt": "2026-10-18T19:22:45.471Z",
   "run": {
-    "startedAt": "2026-10-18T17:59:42.527Z",
+    "startedAt": "2026-10-18T19:22:24.960Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 175,
-      "cold": 249,
-      "lowValue": 914,
+      "cold": 250,
+      "lowValue": 913,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 249,
-        "low-value": 914,
+        "cold-sample": 250,
+        "low-value": 913,
         "food-evidence": 10
       }
     },
@@ -58,41 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1741818469",
-        "name": "Oggi's Pizza & Brewing Co.",
+        "key": "san-diego|osm|way|961427364",
+        "name": "Marieta's",
         "category": "restaurant",
-        "website": "https://www.oggis.com/location/oggis-sports-brewhouse-pizza-mission-valley/",
+        "website": "https://www.marietas.net/",
         "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Oggi's Pizza & Brewing Co. (cold-sample)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T17:59:43.977Z",
-        "checkedAt": "2026-10-18T17:59:42.771Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|5870511655",
-        "name": "Lime in the Coconut",
-        "category": "restaurant",
-        "website": "https://limexcoconut.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Lime in the Coconut (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-02T17:59:44.007Z",
-        "checkedAt": "2026-10-18T17:59:42.739Z"
+        "nextCheckAt": "2026-10-20T19:22:45.421Z",
+        "checkedAt": "2026-10-18T19:22:25.310Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "cold-sample": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-chula-vista": 1,
-      "mission-valley": 1
+      "granite-hills": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "central-west": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -185,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.1578947368421,
-            "averageEvents": 209.6315789473684,
+            "averageEvents": 209.8421052631579,
             "averageVenues": 17.36842105263158,
             "deficitScore": 53.53421052631579
           },
@@ -196,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.888888888888886,
-            "averageEvents": 212.88888888888889,
-            "averageVenues": 14.944444444444445,
+            "averageEvents": 212.72222222222223,
+            "averageVenues": 14.88888888888889,
             "deficitScore": 45.67777777777778
           },
           "north-county-inland": {
@@ -217,10 +195,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 63.25,
-            "averageEvents": 36,
-            "averageVenues": 4.25,
-            "deficitScore": 78.80416666666667
+            "averageGapScore": 63.583333333333336,
+            "averageEvents": 35.333333333333336,
+            "averageVenues": 3.9166666666666665,
+            "deficitScore": 78.92083333333333
           },
           "central-core": {
             "group": "central-core",
@@ -229,8 +207,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 677.8181818181819,
-            "averageVenues": 49.36363636363637,
+            "averageEvents": 678.6363636363636,
+            "averageVenues": 49.18181818181818,
             "deficitScore": 13.659090909090907
           }
         }
@@ -247,11 +225,11 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-18T17:59:44.009Z",
-    "durationMs": 1482,
+    "failed": 1,
+    "finishedAt": "2026-10-18T19:22:45.429Z",
+    "durationMs": 20469,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
