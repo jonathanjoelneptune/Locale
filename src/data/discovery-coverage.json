@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-19T11:09:37.579Z",
+  "generatedAt": "2026-10-19T13:58:27.520Z",
   "run": {
-    "startedAt": "2026-10-19T11:09:32.378Z",
+    "startedAt": "2026-10-19T13:58:25.758Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 254,
-      "lowValue": 909,
+      "cold": 255,
+      "lowValue": 908,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 254,
-        "low-value": 909,
+        "cold-sample": 255,
+        "low-value": 908,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.8,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 500 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6636243168",
-        "name": "Tappi Sushi",
+        "key": "san-diego|osm|way|995099392",
+        "name": "Ali Baba Family Restaurant",
         "category": "restaurant",
-        "website": "https://www.tappisushi.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.alibabarestaurantofelcajon.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Tappi Sushi (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-03T11:09:37.531Z",
-        "checkedAt": "2026-10-19T11:09:35.954Z"
+        "nextCheckAt": "2026-10-21T13:58:27.488Z",
+        "checkedAt": "2026-10-19T13:58:26.022Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -107,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "tierrasanta": 1
+      "downtown-el-cajon": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 52.625,
+            "averageEvents": 52.125,
             "averageVenues": 2.1,
             "deficitScore": 85.47874999999999
           },
@@ -239,8 +228,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-19T11:09:37.533Z",
-    "durationMs": 5155,
+    "finishedAt": "2026-10-19T13:58:27.490Z",
+    "durationMs": 1732,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -262,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-19T11:09:32.455Z",
-        "lastFinishedAt": "2026-10-19T11:09:33.214Z",
-        "lastLatencyMs": 759,
-        "cooldownUntil": 1792408203214,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 500",
-        "lastStartedAt": "2026-10-19T11:09:33.214Z",
-        "lastFinishedAt": "2026-10-19T11:09:34.403Z",
-        "lastLatencyMs": 1189,
-        "cooldownUntil": 1792408204403,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-19T11:09:34.403Z",
-        "lastFinishedAt": "2026-10-19T11:09:35.682Z",
-        "lastLatencyMs": 1279,
-        "cooldownUntil": 1792408205682,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
