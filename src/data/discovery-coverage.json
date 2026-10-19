@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-19T15:57:13.092Z",
+  "generatedAt": "2026-10-19T17:40:34.612Z",
   "run": {
-    "startedAt": "2026-10-19T15:57:06.672Z",
+    "startedAt": "2026-10-19T17:40:02.453Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 2,
       "retry": 176,
-      "cold": 255,
-      "lowValue": 908,
+      "cold": 256,
+      "lowValue": 907,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 255,
-        "low-value": 908,
+        "cold-sample": 256,
+        "low-value": 907,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|528160926",
-        "name": "National City Aquatic Center",
-        "category": "sports-centre",
-        "website": "https://www.nationalcityca.gov/city-government/community-services/national-city-aquatic-center",
+        "key": "san-diego|osm|way|744775716",
+        "name": "AMC Fashion Valley 18",
+        "category": "cinema",
+        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-fashion-valley-18",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
@@ -72,27 +83,46 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-09T15:57:07.800Z",
-        "checkedAt": "2026-10-19T15:57:07.029Z"
+        "nextCheckAt": "2026-11-09T17:40:33.783Z",
+        "checkedAt": "2026-10-19T17:40:33.452Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13841747274",
-        "name": "Anjappar",
+        "key": "san-diego|osm|node|1712136224",
+        "name": "Lorna's Italian Kitchen",
         "category": "restaurant",
-        "website": "https://www.anjapparsd.com/",
-        "attempts": 1,
+        "website": "https://lornasitaliankitchen.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Anjappar (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-03T15:57:13.042Z",
-        "checkedAt": "2026-10-19T15:57:07.076Z"
+        "nextCheckAt": "2026-11-18T17:40:34.002Z",
+        "checkedAt": "2026-10-19T17:40:33.450Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|108402077",
+        "name": "National City Public Library",
+        "category": "library",
+        "website": "https://www.nationalcityca.gov/government/library/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-09T17:40:34.568Z",
+        "checkedAt": "2026-10-19T17:40:33.783Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +134,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 2
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +146,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "chula-vista": 1,
-      "miramar": 1
+      "la-jolla-village": 1,
+      "fashion-valley": 1,
+      "national-city": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "north-central": 1
+      "north-central": 1,
+      "central-west": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +206,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 52.025,
+            "averageEvents": 51.225,
             "averageVenues": 2.1,
             "deficitScore": 85.47874999999999
           },
@@ -229,7 +261,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 676.5454545454545,
+            "averageEvents": 676.0909090909091,
             "averageVenues": 48.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -247,68 +279,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-19T15:57:13.044Z",
-    "durationMs": 6372,
+    "failed": 3,
+    "finishedAt": "2026-10-19T17:40:34.569Z",
+    "durationMs": 32116,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
-      "cold": 256,
-      "lowValue": 907,
+      "retry": 175,
+      "cold": 257,
+      "lowValue": 906,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 256,
-        "low-value": 907,
+        "cold-sample": 257,
+        "low-value": 906,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-19T17:40:02.501Z",
+        "lastFinishedAt": "2026-10-19T17:40:03.225Z",
+        "lastLatencyMs": 724,
+        "cooldownUntil": 1792431633225,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-19T17:40:03.225Z",
+        "lastFinishedAt": "2026-10-19T17:40:18.226Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792431648226,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-19T17:40:18.226Z",
+        "lastFinishedAt": "2026-10-19T17:40:33.227Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792431663227,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,21 +351,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 256,
-      "lowValueCount": 907,
+      "coldCount": 257,
+      "lowValueCount": 906,
       "laneCounts": {
-        "cold-sample": 256,
+        "cold-sample": 257,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 907
+        "low-value": 906
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 175,
         "needs-website": 824,
-        "cold": 256,
+        "cold": 257,
         "candidate": 867
       },
       "categoryCounts": {
@@ -375,7 +407,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
