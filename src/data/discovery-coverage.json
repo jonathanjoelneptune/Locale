@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-19T13:58:27.520Z",
+  "generatedAt": "2026-10-19T15:57:13.092Z",
   "run": {
-    "startedAt": "2026-10-19T13:58:25.758Z",
+    "startedAt": "2026-10-19T15:57:06.672Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 176,
       "cold": 255,
       "lowValue": 908,
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|995099392",
-        "name": "Ali Baba Family Restaurant",
-        "category": "restaurant",
-        "website": "https://www.alibabarestaurantofelcajon.com/",
-        "attempts": 2,
+        "key": "san-diego|osm|way|528160926",
+        "name": "National City Aquatic Center",
+        "category": "sports-centre",
+        "website": "https://www.nationalcityca.gov/city-government/community-services/national-city-aquatic-center",
+        "attempts": 3,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-09T15:57:07.800Z",
+        "checkedAt": "2026-10-19T15:57:07.029Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13841747274",
+        "name": "Anjappar",
+        "category": "restaurant",
+        "website": "https://www.anjapparsd.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Anjappar (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-21T13:58:27.488Z",
-        "checkedAt": "2026-10-19T13:58:26.022Z"
+        "nextCheckAt": "2026-12-03T15:57:13.042Z",
+        "checkedAt": "2026-10-19T15:57:07.076Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +104,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "downtown-el-cajon": 1
+      "chula-vista": 1,
+      "miramar": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "south-bay": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +174,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 52.125,
+            "averageEvents": 52.025,
             "averageVenues": 2.1,
             "deficitScore": 85.47874999999999
           },
@@ -207,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 676.0909090909091,
+            "averageEvents": 676.5454545454545,
             "averageVenues": 48.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -225,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-19T13:58:27.490Z",
-    "durationMs": 1732,
+    "failed": 2,
+    "finishedAt": "2026-10-19T15:57:13.044Z",
+    "durationMs": 6372,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 255,
-      "lowValue": 908,
+      "cold": 256,
+      "lowValue": 907,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 255,
-        "low-value": 908,
+        "cold-sample": 256,
+        "low-value": 907,
         "food-evidence": 10
       }
     },
@@ -297,22 +319,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 255,
-      "lowValueCount": 908,
+      "coldCount": 256,
+      "lowValueCount": 907,
       "laneCounts": {
-        "cold-sample": 255,
+        "cold-sample": 256,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 908
+        "low-value": 907
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 176,
         "needs-website": 824,
-        "cold": 255,
-        "candidate": 868
+        "cold": 256,
+        "candidate": 867
       },
       "categoryCounts": {
         "nightclub": 8,
