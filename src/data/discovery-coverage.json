@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-20T06:03:01.733Z",
+  "generatedAt": "2026-10-20T06:29:56.416Z",
   "run": {
-    "startedAt": "2026-10-20T06:02:29.631Z",
+    "startedAt": "2026-10-20T06:29:55.760Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 175,
-      "cold": 261,
-      "lowValue": 902,
+      "due": 0,
+      "retry": 174,
+      "cold": 262,
+      "lowValue": 901,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 261,
-        "low-value": 902,
+        "cold-sample": 262,
+        "low-value": 901,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.28,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,55 +54,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5131241022",
-        "name": "Fleming's Prime Steakhouse & Wine Bar",
-        "category": "observed-venue",
-        "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-10T06:03:01.321Z",
-        "checkedAt": "2026-10-20T06:03:01.071Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596642072",
-        "name": "Mendocino Farms",
+        "key": "san-diego|osm|node|13463029000",
+        "name": "California Thai Cafe",
         "category": "restaurant",
-        "website": "https://www.mendocinofarms.com/location-directory/san-diego/10715-scripps-poway-pkwy-san-diego-california-92131-san-diego-ca-92131",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-19T06:03:01.365Z",
-        "checkedAt": "2026-10-20T06:03:01.069Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|709059097",
-        "name": "AMC Mission Valley 20",
-        "category": "cinema",
-        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-mission-valley-20",
-        "attempts": 3,
+        "website": "https://www.californiathaicafe.online/",
+        "attempts": 1,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -121,8 +72,8 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-10T06:03:01.674Z",
-        "checkedAt": "2026-10-20T06:03:01.321Z"
+        "nextCheckAt": "2026-10-23T06:29:56.390Z",
+        "checkedAt": "2026-10-20T06:29:55.978Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -134,9 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-evidence": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -147,14 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "sabre-springs": 1,
-      "east-village": 1,
-      "university-heights": 1
+      "miramar": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "central-core": 1,
-      "uptown-midcity": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -280,16 +225,16 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 1,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-10-20T06:03:01.684Z",
-    "durationMs": 32053,
+    "failed": 1,
+    "finishedAt": "2026-10-20T06:29:56.391Z",
+    "durationMs": 631,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 174,
+      "retry": 175,
       "cold": 262,
       "lowValue": 901,
       "qualified": 19,
@@ -306,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-20T06:02:29.812Z",
-        "lastFinishedAt": "2026-10-20T06:02:30.804Z",
-        "lastLatencyMs": 992,
-        "cooldownUntil": 1792476180803,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-20T06:02:30.804Z",
-        "lastFinishedAt": "2026-10-20T06:02:45.803Z",
-        "lastLatencyMs": 14999,
-        "cooldownUntil": 1792476195803,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-20T06:02:45.803Z",
-        "lastFinishedAt": "2026-10-20T06:03:00.804Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1792476210804,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -364,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 174,
+        "retry": 175,
         "needs-website": 824,
         "cold": 262,
-        "candidate": 863
+        "candidate": 862
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -408,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
