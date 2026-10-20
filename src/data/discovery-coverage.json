@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-19T23:46:16.928Z",
+  "generatedAt": "2026-10-20T01:12:09.699Z",
   "run": {
-    "startedAt": "2026-10-19T23:45:28.131Z",
+    "startedAt": "2026-10-20T01:12:03.498Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 2,
       "retry": 175,
-      "cold": 259,
-      "lowValue": 904,
+      "cold": 260,
+      "lowValue": 903,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 259,
-        "low-value": 904,
+        "cold-sample": 260,
+        "low-value": 903,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 200.8,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,14 +54,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1974495839",
-        "name": "Uptown Tavern",
+        "key": "san-diego|osm|node|9215079092",
+        "name": "Tropical Savor Bar & Grill",
         "category": "bar",
-        "website": "https://www.uptowntavernsd.com/",
+        "website": "https://www.tropicalsavorbarandgrill.com/",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
@@ -83,27 +72,46 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-09T23:46:14.302Z",
-        "checkedAt": "2026-10-19T23:46:13.596Z"
+        "nextCheckAt": "2026-11-10T01:12:04.278Z",
+        "checkedAt": "2026-10-20T01:12:03.933Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11248052185",
-        "name": "Brothers Family Resturaunt",
+        "key": "san-diego|osm|node|9976242028",
+        "name": "Cake Korner",
         "category": "restaurant",
-        "website": "https://brothersalliedgardens.com/",
+        "website": "https://www.cakekorner.com/menu",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Brothers Family Resturaunt (low-value)",
+          "detail": "Checked 1 page on Cake Korner (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-03T23:46:16.861Z",
-        "checkedAt": "2026-10-19T23:46:13.598Z"
+        "nextCheckAt": "2026-12-04T01:12:05.452Z",
+        "checkedAt": "2026-10-20T01:12:03.985Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079098",
+        "name": "Henry's Pub",
+        "category": "pub",
+        "website": "https://www.henryspub.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Henry's Pub (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-10T01:12:09.640Z",
+        "checkedAt": "2026-10-20T01:12:04.278Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,7 +123,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
+      "event-likely": 2,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -127,11 +135,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "hillcrest": 1,
-      "allied-gardens": 1
+      "little-italy": 1,
+      "miramar": 1,
+      "east-village": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1,
+      "central-core": 2,
       "north-central": 1
     },
     "coverageEquity": {
@@ -196,7 +205,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.26315789473684,
-            "averageEvents": 208.6315789473684,
+            "averageEvents": 208.52631578947367,
             "averageVenues": 17.105263157894736,
             "deficitScore": 53.57105263157895
           },
@@ -240,7 +249,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 675.6363636363636,
+            "averageEvents": 675,
             "averageVenues": 48.81818181818182,
             "deficitScore": 13.659090909090907
           }
@@ -258,68 +267,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-19T23:46:16.876Z",
-    "durationMs": 48745,
+    "failed": 3,
+    "finishedAt": "2026-10-20T01:12:09.643Z",
+    "durationMs": 6145,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 175,
-      "cold": 260,
-      "lowValue": 903,
+      "cold": 261,
+      "lowValue": 902,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 260,
-        "low-value": 903,
+        "cold-sample": 261,
+        "low-value": 902,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-19T23:45:28.311Z",
-        "lastFinishedAt": "2026-10-19T23:45:43.315Z",
-        "lastLatencyMs": 15005,
-        "cooldownUntil": 1792453573315,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-19T23:45:43.316Z",
-        "lastFinishedAt": "2026-10-19T23:45:58.316Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1792453588316,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-19T23:45:58.316Z",
-        "lastFinishedAt": "2026-10-19T23:46:13.316Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1792453603316,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,22 +339,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 260,
-      "lowValueCount": 903,
+      "coldCount": 261,
+      "lowValueCount": 902,
       "laneCounts": {
-        "cold-sample": 260,
+        "cold-sample": 261,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 903
+        "low-value": 902
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 175,
         "needs-website": 824,
-        "cold": 260,
-        "candidate": 864
+        "cold": 261,
+        "candidate": 863
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +395,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
