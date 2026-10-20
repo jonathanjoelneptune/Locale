@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-20T01:12:09.699Z",
+  "generatedAt": "2026-10-20T06:03:01.733Z",
   "run": {
-    "startedAt": "2026-10-20T01:12:03.498Z",
+    "startedAt": "2026-10-20T06:02:29.631Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 2,
       "retry": 175,
-      "cold": 260,
-      "lowValue": 903,
+      "cold": 261,
+      "lowValue": 902,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 260,
-        "low-value": 903,
+        "cold-sample": 261,
+        "low-value": 902,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,52 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079092",
-        "name": "Tropical Savor Bar & Grill",
-        "category": "bar",
-        "website": "https://www.tropicalsavorbarandgrill.com/",
+        "key": "san-diego|osm|node|5131241022",
+        "name": "Fleming's Prime Steakhouse & Wine Bar",
+        "category": "observed-venue",
+        "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-10T06:03:01.321Z",
+        "checkedAt": "2026-10-20T06:03:01.071Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596642072",
+        "name": "Mendocino Farms",
+        "category": "restaurant",
+        "website": "https://www.mendocinofarms.com/location-directory/san-diego/10715-scripps-poway-pkwy-san-diego-california-92131-san-diego-ca-92131",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-19T06:03:01.365Z",
+        "checkedAt": "2026-10-20T06:03:01.069Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|709059097",
+        "name": "AMC Mission Valley 20",
+        "category": "cinema",
+        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-mission-valley-20",
         "attempts": 3,
         "status": "retry",
         "probeLane": "event-likely",
@@ -72,46 +121,8 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-10T01:12:04.278Z",
-        "checkedAt": "2026-10-20T01:12:03.933Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9976242028",
-        "name": "Cake Korner",
-        "category": "restaurant",
-        "website": "https://www.cakekorner.com/menu",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Cake Korner (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T01:12:05.452Z",
-        "checkedAt": "2026-10-20T01:12:03.985Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079098",
-        "name": "Henry's Pub",
-        "category": "pub",
-        "website": "https://www.henryspub.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Henry's Pub (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-10T01:12:09.640Z",
-        "checkedAt": "2026-10-20T01:12:04.278Z"
+        "nextCheckAt": "2026-11-10T06:03:01.674Z",
+        "checkedAt": "2026-10-20T06:03:01.321Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -123,8 +134,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
-      "low-value": 1
+      "low-value": 1,
+      "event-evidence": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -135,13 +147,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "little-italy": 1,
-      "miramar": 1,
-      "east-village": 1
+      "sabre-springs": 1,
+      "east-village": 1,
+      "university-heights": 1
     },
     "probeGroupCounts": {
-      "central-core": 2,
-      "north-central": 1
+      "north-inland": 1,
+      "central-core": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -161,7 +174,7 @@
             "zeroEventAreas": 8,
             "passRate": 0,
             "averageGapScore": 74.93103448275862,
-            "averageEvents": 21.20689655172414,
+            "averageEvents": 21.24137931034483,
             "averageVenues": 2.2758620689655173,
             "deficitScore": 83.98448275862069
           },
@@ -183,7 +196,7 @@
             "zeroEventAreas": 5,
             "passRate": 0.038461538461538464,
             "averageGapScore": 64.65384615384616,
-            "averageEvents": 33.5,
+            "averageEvents": 33.42307692307692,
             "averageVenues": 2.9615384615384617,
             "deficitScore": 77.43653846153846
           },
@@ -194,7 +207,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 51.075,
+            "averageEvents": 50.875,
             "averageVenues": 2.1,
             "deficitScore": 85.47874999999999
           },
@@ -205,7 +218,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.26315789473684,
-            "averageEvents": 208.52631578947367,
+            "averageEvents": 207.3684210526316,
             "averageVenues": 17.105263157894736,
             "deficitScore": 53.57105263157895
           },
@@ -216,7 +229,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.888888888888886,
-            "averageEvents": 208.72222222222223,
+            "averageEvents": 204.5,
             "averageVenues": 14.88888888888889,
             "deficitScore": 45.67777777777778
           },
@@ -227,7 +240,7 @@
             "zeroEventAreas": 13,
             "passRate": 0,
             "averageGapScore": 89.95454545454545,
-            "averageEvents": 7.2727272727272725,
+            "averageEvents": 7.136363636363637,
             "averageVenues": 1.1363636363636365,
             "deficitScore": 92.39318181818182
           },
@@ -238,7 +251,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.583333333333336,
-            "averageEvents": 35.083333333333336,
+            "averageEvents": 34.833333333333336,
             "averageVenues": 3.9166666666666665,
             "deficitScore": 78.92083333333333
           },
@@ -249,8 +262,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 675,
-            "averageVenues": 48.81818181818182,
+            "averageEvents": 668.2727272727273,
+            "averageVenues": 48.18181818181818,
             "deficitScore": 13.659090909090907
           }
         }
@@ -270,65 +283,65 @@
     "probed": 3,
     "promoted": 0,
     "failed": 3,
-    "finishedAt": "2026-10-20T01:12:09.643Z",
-    "durationMs": 6145,
+    "finishedAt": "2026-10-20T06:03:01.684Z",
+    "durationMs": 32053,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 175,
-      "cold": 261,
-      "lowValue": 902,
+      "retry": 174,
+      "cold": 262,
+      "lowValue": 901,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 261,
-        "low-value": 902,
+        "cold-sample": 262,
+        "low-value": 901,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-20T06:02:29.812Z",
+        "lastFinishedAt": "2026-10-20T06:02:30.804Z",
+        "lastLatencyMs": 992,
+        "cooldownUntil": 1792476180803,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-20T06:02:30.804Z",
+        "lastFinishedAt": "2026-10-20T06:02:45.803Z",
+        "lastLatencyMs": 14999,
+        "cooldownUntil": 1792476195803,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-20T06:02:45.803Z",
+        "lastFinishedAt": "2026-10-20T06:03:00.804Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792476210804,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -339,21 +352,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 261,
-      "lowValueCount": 902,
+      "coldCount": 262,
+      "lowValueCount": 901,
       "laneCounts": {
-        "cold-sample": 261,
+        "cold-sample": 262,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 902
+        "low-value": 901
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 175,
+        "retry": 174,
         "needs-website": 824,
-        "cold": 261,
+        "cold": 262,
         "candidate": 863
       },
       "categoryCounts": {
@@ -395,7 +408,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
