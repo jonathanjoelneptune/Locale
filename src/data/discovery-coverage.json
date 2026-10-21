@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-21T01:56:34.150Z",
+  "generatedAt": "2026-10-21T04:33:02.632Z",
   "run": {
-    "startedAt": "2026-10-21T01:56:11.252Z",
+    "startedAt": "2026-10-21T04:32:30.528Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 272,
-      "lowValue": 891,
+      "cold": 273,
+      "lowValue": 890,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 272,
-        "low-value": 891,
+        "cold-sample": 273,
+        "low-value": 890,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14138467101",
-        "name": "Emiliano's",
+        "key": "san-diego|osm|node|13125219289",
+        "name": "Filippi's Pizza Grotto Mission Valley",
         "category": "restaurant",
-        "website": "https://www.emilianosrestaurant.com/",
+        "website": "https://realcheesepizza.com/mission-valley",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Emiliano's (low-value)",
+          "detail": "Checked 1 page on Filippi's Pizza Grotto Mission Valley (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-05T01:56:34.089Z",
-        "checkedAt": "2026-10-21T01:56:11.726Z"
+        "nextCheckAt": "2026-12-05T04:33:02.577Z",
+        "checkedAt": "2026-10-21T04:33:01.534Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-21T01:56:34.103Z",
-    "durationMs": 22851,
+    "finishedAt": "2026-10-21T04:33:02.579Z",
+    "durationMs": 32051,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 273,
-      "lowValue": 890,
+      "cold": 274,
+      "lowValue": 889,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 273,
-        "low-value": 890,
+        "cold-sample": 274,
+        "low-value": 889,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-21T04:32:30.614Z",
+        "lastFinishedAt": "2026-10-21T04:32:31.265Z",
+        "lastLatencyMs": 651,
+        "cooldownUntil": 1792557181265,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-21T04:32:31.265Z",
+        "lastFinishedAt": "2026-10-21T04:32:46.266Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792557196266,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-21T04:32:46.266Z",
+        "lastFinishedAt": "2026-10-21T04:33:01.267Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792557211267,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 273,
-      "lowValueCount": 890,
+      "coldCount": 274,
+      "lowValueCount": 889,
       "laneCounts": {
-        "cold-sample": 273,
+        "cold-sample": 274,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 890
+        "low-value": 889
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 171,
         "needs-website": 824,
-        "cold": 273,
-        "candidate": 855
+        "cold": 274,
+        "candidate": 854
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
