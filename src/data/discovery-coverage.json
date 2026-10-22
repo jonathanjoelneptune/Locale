@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-22T21:56:04.030Z",
+  "generatedAt": "2026-10-22T22:40:12.651Z",
   "run": {
-    "startedAt": "2026-10-22T21:56:03.282Z",
+    "startedAt": "2026-10-22T22:40:09.257Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 171,
+      "retry": 172,
       "cold": 292,
       "lowValue": 871,
       "qualified": 19,
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2609126217",
-        "name": "Pauly's Pizza Joint",
+        "key": "san-diego|osm|node|12815913089",
+        "name": "Peter Piper Pizza",
         "category": "restaurant",
-        "website": "https://paulyspizzajoint.com/",
+        "website": "https://locations.peterpiperpizza.com/ca/nationalcity/3007-highland-blvd",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Peter Piper Pizza (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-25T21:56:03.988Z",
-        "checkedAt": "2026-10-22T21:56:03.616Z"
+        "nextCheckAt": "2026-12-06T22:40:12.604Z",
+        "checkedAt": "2026-10-22T22:40:09.703Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar": 1
+      "national-city": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 40.4,
+            "averageEvents": 40.375,
             "averageVenues": 2.075,
             "deficitScore": 85.47874999999999
           },
@@ -228,23 +228,23 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-22T21:56:03.990Z",
-    "durationMs": 708,
+    "finishedAt": "2026-10-22T22:40:12.612Z",
+    "durationMs": 3355,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 172,
-      "cold": 292,
-      "lowValue": 871,
+      "cold": 293,
+      "lowValue": 870,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 292,
-        "low-value": 871,
+        "cold-sample": 293,
+        "low-value": 870,
         "food-evidence": 10
       }
     },
@@ -297,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 292,
-      "lowValueCount": 871,
+      "coldCount": 293,
+      "lowValueCount": 870,
       "laneCounts": {
-        "cold-sample": 292,
+        "cold-sample": 293,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 871
+        "low-value": 870
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 172,
         "needs-website": 824,
-        "cold": 292,
-        "candidate": 835
+        "cold": 293,
+        "candidate": 834
       },
       "categoryCounts": {
         "nightclub": 8,
