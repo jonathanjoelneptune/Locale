@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-22T17:39:04.284Z",
+  "generatedAt": "2026-10-22T19:24:37.618Z",
   "run": {
-    "startedAt": "2026-10-22T17:39:02.826Z",
+    "startedAt": "2026-10-22T19:23:51.331Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 290,
-      "lowValue": 873,
+      "cold": 291,
+      "lowValue": 872,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 290,
-        "low-value": 873,
+        "cold-sample": 291,
+        "low-value": 872,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.28,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14080833555",
-        "name": "Paradise Kabob",
+        "key": "san-diego|osm|node|14220798945",
+        "name": "Pastalini",
         "category": "restaurant",
-        "website": "https://paradisekabob.com/",
+        "website": "https://pastalini.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Paradise Kabob (low-value)",
+          "detail": "Checked 1 page on Pastalini (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-06T17:39:04.236Z",
-        "checkedAt": "2026-10-22T17:39:03.137Z"
+        "nextCheckAt": "2026-12-06T19:24:37.497Z",
+        "checkedAt": "2026-10-22T19:24:36.680Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -152,7 +163,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 40.65,
+            "averageEvents": 40.55,
             "averageVenues": 2.075,
             "deficitScore": 85.47874999999999
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.583333333333336,
-            "averageEvents": 34.833333333333336,
+            "averageEvents": 34.5,
             "averageVenues": 3.9166666666666665,
             "deficitScore": 78.92083333333333
           },
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-22T17:39:04.238Z",
-    "durationMs": 1412,
+    "finishedAt": "2026-10-22T19:24:37.503Z",
+    "durationMs": 46172,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 291,
-      "lowValue": 872,
+      "cold": 292,
+      "lowValue": 871,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 291,
-        "low-value": 872,
+        "cold-sample": 292,
+        "low-value": 871,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-22T19:23:51.482Z",
+        "lastFinishedAt": "2026-10-22T19:24:06.484Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1792697076484,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-22T19:24:06.484Z",
+        "lastFinishedAt": "2026-10-22T19:24:21.485Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792697091485,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-22T19:24:21.485Z",
+        "lastFinishedAt": "2026-10-22T19:24:36.485Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1792697106485,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 291,
-      "lowValueCount": 872,
+      "coldCount": 292,
+      "lowValueCount": 871,
       "laneCounts": {
-        "cold-sample": 291,
+        "cold-sample": 292,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 872
+        "low-value": 871
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 171,
         "needs-website": 824,
-        "cold": 291,
-        "candidate": 837
+        "cold": 292,
+        "candidate": 836
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
