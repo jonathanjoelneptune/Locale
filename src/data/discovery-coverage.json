@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-22T19:24:37.618Z",
+  "generatedAt": "2026-10-22T21:56:04.030Z",
   "run": {
-    "startedAt": "2026-10-22T19:23:51.331Z",
+    "startedAt": "2026-10-22T21:56:03.282Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 171,
-      "cold": 291,
-      "lowValue": 872,
+      "cold": 292,
+      "lowValue": 871,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 291,
-        "low-value": 872,
+        "cold-sample": 292,
+        "low-value": 871,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.28,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14220798945",
-        "name": "Pastalini",
+        "key": "san-diego|osm|node|2609126217",
+        "name": "Pauly's Pizza Joint",
         "category": "restaurant",
-        "website": "https://pastalini.com/",
+        "website": "https://paulyspizzajoint.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pastalini (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-06T19:24:37.497Z",
-        "checkedAt": "2026-10-22T19:24:36.680Z"
+        "nextCheckAt": "2026-10-25T21:56:03.988Z",
+        "checkedAt": "2026-10-22T21:56:03.616Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -130,7 +119,7 @@
             "zeroEventAreas": 8,
             "passRate": 0,
             "averageGapScore": 75.27586206896552,
-            "averageEvents": 20.93103448275862,
+            "averageEvents": 20.862068965517242,
             "averageVenues": 2.0689655172413794,
             "deficitScore": 84.1051724137931
           },
@@ -151,10 +140,10 @@
             "passing": 1,
             "zeroEventAreas": 5,
             "passRate": 0.038461538461538464,
-            "averageGapScore": 64.65384615384616,
-            "averageEvents": 33.15384615384615,
+            "averageGapScore": 65.03846153846153,
+            "averageEvents": 32.92307692307692,
             "averageVenues": 2.9615384615384617,
-            "deficitScore": 77.43653846153846
+            "deficitScore": 77.57115384615385
           },
           "east-county": {
             "group": "east-county",
@@ -163,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 40.55,
+            "averageEvents": 40.4,
             "averageVenues": 2.075,
             "deficitScore": 85.47874999999999
           },
@@ -174,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.2631578947368421,
             "averageGapScore": 34.31578947368421,
-            "averageEvents": 204.52631578947367,
+            "averageEvents": 203.94736842105263,
             "averageVenues": 17.105263157894736,
             "deficitScore": 53.58947368421053
           },
@@ -185,7 +174,7 @@
             "zeroEventAreas": 13,
             "passRate": 0,
             "averageGapScore": 89.95454545454545,
-            "averageEvents": 7.045454545454546,
+            "averageEvents": 6.909090909090909,
             "averageVenues": 1.1363636363636365,
             "deficitScore": 92.39318181818182
           },
@@ -196,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 63.583333333333336,
-            "averageEvents": 34.5,
+            "averageEvents": 34.083333333333336,
             "averageVenues": 3.9166666666666665,
             "deficitScore": 78.92083333333333
           },
@@ -207,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.77777777777778,
-            "averageEvents": 194.66666666666666,
+            "averageEvents": 194.05555555555554,
             "averageVenues": 15,
             "deficitScore": 45.083333333333336
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 658.4545454545455,
+            "averageEvents": 656.8181818181819,
             "averageVenues": 48.36363636363637,
             "deficitScore": 13.659090909090907
           }
@@ -239,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-22T19:24:37.503Z",
-    "durationMs": 46172,
+    "finishedAt": "2026-10-22T21:56:03.990Z",
+    "durationMs": 708,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 171,
+      "retry": 172,
       "cold": 292,
       "lowValue": 871,
       "qualified": 19,
@@ -262,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-22T19:23:51.482Z",
-        "lastFinishedAt": "2026-10-22T19:24:06.484Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1792697076484,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-22T19:24:06.484Z",
-        "lastFinishedAt": "2026-10-22T19:24:21.485Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1792697091485,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-22T19:24:21.485Z",
-        "lastFinishedAt": "2026-10-22T19:24:36.485Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1792697106485,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -320,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 171,
+        "retry": 172,
         "needs-website": 824,
         "cold": 292,
-        "candidate": 836
+        "candidate": 835
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
