@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-22T10:11:24.496Z",
+  "generatedAt": "2026-10-22T12:29:11.883Z",
   "run": {
-    "startedAt": "2026-10-22T10:11:20.901Z",
+    "startedAt": "2026-10-22T12:28:40.125Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 172,
-      "cold": 286,
-      "lowValue": 877,
+      "cold": 287,
+      "lowValue": 876,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 286,
-        "low-value": 877,
+        "cold-sample": 287,
+        "low-value": 876,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 200.8,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14080833560",
-        "name": "Madurai Kitchen",
+        "key": "san-diego|osm|node|12648523573",
+        "name": "Hinata Sushi",
         "category": "restaurant",
-        "website": "https://maduraikitchenveg.com/",
-        "attempts": 1,
+        "website": "https://hinatasd.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Madurai Kitchen (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-06T10:11:24.443Z",
-        "checkedAt": "2026-10-22T10:11:21.241Z"
+        "nextCheckAt": "2026-11-21T12:29:11.826Z",
+        "checkedAt": "2026-10-22T12:29:11.263Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar": 1
+      "rolando-park": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +163,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 43.8,
+            "averageEvents": 42.3,
             "averageVenues": 2.075,
             "deficitScore": 85.47874999999999
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3888888888888889,
             "averageGapScore": 32.77777777777778,
-            "averageEvents": 194.83333333333334,
+            "averageEvents": 194.66666666666666,
             "averageVenues": 15,
             "deficitScore": 45.083333333333336
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 659.4545454545455,
+            "averageEvents": 658.4545454545455,
             "averageVenues": 48.36363636363637,
             "deficitScore": 13.659090909090907
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-22T10:11:24.445Z",
-    "durationMs": 3544,
+    "finishedAt": "2026-10-22T12:29:11.837Z",
+    "durationMs": 31712,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 172,
-      "cold": 287,
-      "lowValue": 876,
+      "retry": 171,
+      "cold": 288,
+      "lowValue": 875,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 287,
-        "low-value": 876,
+        "cold-sample": 288,
+        "low-value": 875,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-22T12:28:40.315Z",
+        "lastFinishedAt": "2026-10-22T12:28:41.004Z",
+        "lastLatencyMs": 689,
+        "cooldownUntil": 1792672151004,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-22T12:28:41.004Z",
+        "lastFinishedAt": "2026-10-22T12:28:56.005Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792672166005,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-22T12:28:56.005Z",
+        "lastFinishedAt": "2026-10-22T12:29:11.006Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792672181005,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 287,
-      "lowValueCount": 876,
+      "coldCount": 288,
+      "lowValueCount": 875,
       "laneCounts": {
-        "cold-sample": 287,
+        "cold-sample": 288,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 876
+        "low-value": 875
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 172,
+        "retry": 171,
         "needs-website": 824,
-        "cold": 287,
+        "cold": 288,
         "candidate": 840
       },
       "categoryCounts": {
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
