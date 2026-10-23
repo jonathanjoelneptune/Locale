@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-23T11:28:01.475Z",
+  "generatedAt": "2026-10-23T11:58:28.266Z",
   "run": {
-    "startedAt": "2026-10-23T11:27:14.802Z",
+    "startedAt": "2026-10-23T11:58:24.619Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
-      "retry": 171,
-      "cold": 296,
-      "lowValue": 867,
+      "due": 0,
+      "retry": 170,
+      "cold": 297,
+      "lowValue": 866,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 296,
-        "low-value": 867,
+        "cold-sample": 297,
+        "low-value": 866,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.28,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,83 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11192125837",
-        "name": "Mujeres Brew",
-        "category": "brewery",
-        "website": "https://mujeres-brew-house.business.site/",
-        "attempts": 7,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-30T11:28:00.410Z",
-        "checkedAt": "2026-10-23T11:28:00.071Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|961427372",
-        "name": "Taste of the Himalayas",
+        "key": "san-diego|osm|node|6329997932",
+        "name": "Sbicca",
         "category": "restaurant",
-        "website": "https://www.himalayaselcajon.com/",
-        "attempts": 3,
+        "website": "https://sbiccadelmar.com/",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Sbicca (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-22T11:28:00.480Z",
-        "checkedAt": "2026-10-23T11:28:00.411Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11170882537",
-        "name": "Women's Museum of California Education Center",
-        "category": "museum",
-        "website": "https://www.womensmuseumca.org/educationcenter",
-        "attempts": 7,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-30T11:28:01.379Z",
-        "checkedAt": "2026-10-23T11:28:00.480Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168607137",
-        "name": "The Dog Society Cafe, Bar, and Groomers",
-        "category": "bar",
-        "website": "https://dogsocietysd.com/",
-        "attempts": 7,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-30T11:28:01.440Z",
-        "checkedAt": "2026-10-23T11:28:00.073Z"
+        "nextCheckAt": "2026-12-07T11:58:28.217Z",
+        "checkedAt": "2026-10-23T11:58:25.062Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -153,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 3,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -165,15 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "logan-heights": 1,
-      "rolando-park": 1,
-      "granite-hills": 1,
-      "valencia-park": 1
+      "del-mar": 1
     },
     "probeGroupCounts": {
-      "south-bay": 2,
-      "uptown-midcity": 1,
-      "east-county": 1
+      "north-county-coast": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -226,7 +152,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 74.225,
-            "averageEvents": 39.85,
+            "averageEvents": 39.4,
             "averageVenues": 2.075,
             "deficitScore": 85.47874999999999
           },
@@ -281,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.454545454545455,
-            "averageEvents": 647.7272727272727,
+            "averageEvents": 647.2727272727273,
             "averageVenues": 48.18181818181818,
             "deficitScore": 13.659090909090907
           }
@@ -299,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 1,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-10-23T11:28:01.441Z",
-    "durationMs": 46639,
+    "failed": 1,
+    "finishedAt": "2026-10-23T11:58:28.225Z",
+    "durationMs": 3606,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 170,
-      "cold": 297,
-      "lowValue": 866,
+      "cold": 298,
+      "lowValue": 865,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 297,
-        "low-value": 866,
+        "cold-sample": 298,
+        "low-value": 865,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-23T11:27:14.851Z",
-        "lastFinishedAt": "2026-10-23T11:27:29.854Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1792754879854,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-23T11:27:29.854Z",
-        "lastFinishedAt": "2026-10-23T11:27:44.854Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1792754894854,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-23T11:27:44.854Z",
-        "lastFinishedAt": "2026-10-23T11:27:59.855Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1792754909855,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -371,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 297,
-      "lowValueCount": 866,
+      "coldCount": 298,
+      "lowValueCount": 865,
       "laneCounts": {
-        "cold-sample": 297,
+        "cold-sample": 298,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 866
+        "low-value": 865
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 170,
         "needs-website": 824,
-        "cold": 297,
-        "candidate": 832
+        "cold": 298,
+        "candidate": 831
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -427,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
