@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-24T16:12:03.555Z",
+  "generatedAt": "2026-10-24T17:39:10.136Z",
   "run": {
-    "startedAt": "2026-10-24T16:11:50.788Z",
+    "startedAt": "2026-10-24T17:38:24.428Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 173,
-      "cold": 310,
-      "lowValue": 853,
+      "cold": 311,
+      "lowValue": 852,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 310,
-        "low-value": 853,
+        "cold-sample": 311,
+        "low-value": 852,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.3,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14080833561",
-        "name": "Tenkatori",
+        "key": "san-diego|osm|way|97469253",
+        "name": "Texas Roadhouse",
         "category": "restaurant",
-        "website": "https://www.tenkatoriusa.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.texasroadhouse.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Tenkatori (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-08T16:12:03.185Z",
-        "checkedAt": "2026-10-24T16:11:51.268Z"
+        "nextCheckAt": "2026-11-07T17:39:10.088Z",
+        "checkedAt": "2026-10-24T17:39:09.859Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar": 1
+      "downtown-el-cajon": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +163,7 @@
             "zeroEventAreas": 18,
             "passRate": 0,
             "averageGapScore": 75.75,
-            "averageEvents": 35.375,
+            "averageEvents": 35.175,
             "averageVenues": 2.025,
             "deficitScore": 86.0125
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3333333333333333,
             "averageGapScore": 34.166666666666664,
-            "averageEvents": 182.33333333333334,
+            "averageEvents": 182.22222222222223,
             "averageVenues": 14.88888888888889,
             "deficitScore": 48.625
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 10.818181818181818,
-            "averageEvents": 621.7272727272727,
+            "averageEvents": 620.9090909090909,
             "averageVenues": 47.81818181818182,
             "deficitScore": 13.786363636363632
           }
@@ -228,8 +239,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-24T16:12:03.403Z",
-    "durationMs": 12615,
+    "finishedAt": "2026-10-24T17:39:10.095Z",
+    "durationMs": 45667,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-24T17:38:24.604Z",
+        "lastFinishedAt": "2026-10-24T17:38:39.608Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1792863549608,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-24T17:38:39.608Z",
+        "lastFinishedAt": "2026-10-24T17:38:54.609Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792863564609,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-24T17:38:54.609Z",
+        "lastFinishedAt": "2026-10-24T17:39:09.610Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792863579610,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
