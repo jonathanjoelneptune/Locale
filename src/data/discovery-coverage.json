@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-24T05:03:03.337Z",
+  "generatedAt": "2026-10-24T06:22:13.627Z",
   "run": {
-    "startedAt": "2026-10-24T05:03:02.713Z",
+    "startedAt": "2026-10-24T06:22:10.290Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 171,
+      "due": 3,
+      "retry": 172,
       "cold": 307,
       "lowValue": 856,
       "qualified": 19,
@@ -58,22 +58,79 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5133324768",
-        "name": "Waterfront Grill",
-        "category": "restaurant",
-        "website": "https://www.mywaterfrontgrill.com/",
-        "attempts": 1,
+        "key": "san-diego|osm|node|5430484523",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopsd.com/",
+        "attempts": 7,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T05:03:03.273Z",
-        "checkedAt": "2026-10-24T05:03:03.039Z"
+        "nextCheckAt": "2026-10-31T06:22:11.355Z",
+        "checkedAt": "2026-10-24T06:22:10.672Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|365317542",
+        "name": "Numbers",
+        "category": "nightclub",
+        "website": "https://www.numberssd.com/",
+        "attempts": 7,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-31T06:22:12.692Z",
+        "checkedAt": "2026-10-24T06:22:11.355Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1448557328",
+        "name": "Gossip Grill",
+        "category": "observed-venue",
+        "website": "http://www.thegossipgrill.com/",
+        "attempts": 7,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-10-31T06:22:12.835Z",
+        "checkedAt": "2026-10-24T06:22:12.692Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6336944334",
+        "name": "Applebee's",
+        "category": "restaurant",
+        "website": "https://restaurants.applebees.com/en-us/ca/national-city/3030-plaza-bonita-road-79046",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Applebee's (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-08T06:22:13.579Z",
+        "checkedAt": "2026-10-24T06:22:10.625Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +142,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 2,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +155,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "national-city": 1
+      "lincoln-acres": 1,
+      "city-heights": 1,
+      "hillcrest": 2
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "south-bay": 1,
+      "uptown-midcity": 3
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,26 +287,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 4,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-24T05:03:03.275Z",
-    "durationMs": 562,
+    "failed": 4,
+    "finishedAt": "2026-10-24T06:22:13.581Z",
+    "durationMs": 3291,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 172,
-      "cold": 307,
-      "lowValue": 856,
+      "cold": 308,
+      "lowValue": 855,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 307,
-        "low-value": 856,
+        "cold-sample": 308,
+        "low-value": 855,
         "food-evidence": 10
       }
     },
@@ -297,22 +359,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 307,
-      "lowValueCount": 856,
+      "coldCount": 308,
+      "lowValueCount": 855,
       "laneCounts": {
-        "cold-sample": 307,
+        "cold-sample": 308,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 856
+        "low-value": 855
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 172,
         "needs-website": 824,
-        "cold": 307,
-        "candidate": 820
+        "cold": 308,
+        "candidate": 819
       },
       "categoryCounts": {
         "nightclub": 8,
