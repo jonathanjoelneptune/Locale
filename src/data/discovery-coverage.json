@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-24T23:35:31.603Z",
+  "generatedAt": "2026-10-25T01:10:26.844Z",
   "run": {
-    "startedAt": "2026-10-24T23:35:30.926Z",
+    "startedAt": "2026-10-25T01:09:41.348Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 173,
+      "retry": 174,
       "cold": 314,
       "lowValue": 849,
       "qualified": 19,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1119161328",
-        "name": "O'Brien's Boulangerie",
-        "category": "cafe",
-        "website": "https://www.obriensbakerysd.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "key": "san-diego|osm|node|14024384314",
+        "name": "Panda House",
+        "category": "restaurant",
+        "website": "https://www.pandahousespringvalley.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "HTTP 429",
+          "statusCode": 429
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-27T23:35:31.556Z",
-        "checkedAt": "2026-10-24T23:35:31.256Z"
+        "nextCheckAt": "2026-11-24T01:10:26.802Z",
+        "checkedAt": "2026-10-25T01:10:26.674Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1
+      "la-presa": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -119,7 +130,7 @@
             "zeroEventAreas": 9,
             "passRate": 0,
             "averageGapScore": 76.96551724137932,
-            "averageEvents": 19.344827586206897,
+            "averageEvents": 19.275862068965516,
             "averageVenues": 1.9655172413793103,
             "deficitScore": 85.04137931034482
           },
@@ -141,7 +152,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 66.23076923076923,
-            "averageEvents": 31.307692307692307,
+            "averageEvents": 31.192307692307693,
             "averageVenues": 2.9615384615384617,
             "deficitScore": 80.10384615384615
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.3333333333333333,
             "averageGapScore": 34.166666666666664,
-            "averageEvents": 181.5,
+            "averageEvents": 181.61111111111111,
             "averageVenues": 14.833333333333334,
             "deficitScore": 48.625
           },
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-24T23:35:31.558Z",
-    "durationMs": 632,
+    "finishedAt": "2026-10-25T01:10:26.804Z",
+    "durationMs": 45456,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 174,
-      "cold": 314,
-      "lowValue": 849,
+      "retry": 173,
+      "cold": 315,
+      "lowValue": 848,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 314,
-        "low-value": 849,
+        "cold-sample": 315,
+        "low-value": 848,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-25T01:09:41.421Z",
+        "lastFinishedAt": "2026-10-25T01:09:56.424Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1792890626424,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-25T01:09:56.424Z",
+        "lastFinishedAt": "2026-10-25T01:10:11.425Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792890641425,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-25T01:10:11.425Z",
+        "lastFinishedAt": "2026-10-25T01:10:26.427Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1792890656427,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 314,
-      "lowValueCount": 849,
+      "coldCount": 315,
+      "lowValueCount": 848,
       "laneCounts": {
-        "cold-sample": 314,
+        "cold-sample": 315,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 849
+        "low-value": 848
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 174,
+        "retry": 173,
         "needs-website": 824,
-        "cold": 314,
+        "cold": 315,
         "candidate": 811
       },
       "categoryCounts": {
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
