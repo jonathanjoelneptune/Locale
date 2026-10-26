@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-26T04:35:24.577Z",
+  "generatedAt": "2026-10-26T06:15:52.461Z",
   "run": {
-    "startedAt": "2026-10-26T04:35:16.644Z",
+    "startedAt": "2026-10-26T06:15:06.675Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 172,
-      "cold": 324,
-      "lowValue": 839,
+      "cold": 325,
+      "lowValue": 838,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 324,
-        "low-value": 839,
+        "cold-sample": 325,
+        "low-value": 838,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|registry|place_waterbar_172a84ad11",
-        "name": "Waterbar",
-        "category": "observed-venue",
-        "website": "https://www.waterbarsd.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Waterbar (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-16T04:35:19.916Z",
-        "checkedAt": "2026-10-26T04:35:16.864Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168354437",
-        "name": "Carnitas Uruapan",
+        "key": "san-diego|osm|node|12618842901",
+        "name": "Coop's West Texas BBQ",
         "category": "restaurant",
-        "website": "http://ordercarnitasuruapanmesa.com/",
+        "website": "https://www.coopsbbq.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Carnitas Uruapan (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-10T04:35:24.552Z",
-        "checkedAt": "2026-10-26T04:35:16.835Z"
+        "nextCheckAt": "2026-10-29T06:15:52.420Z",
+        "checkedAt": "2026-10-26T06:15:52.118Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +96,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "exploratory": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lemon-grove": 1,
-      "pacific-beach": 1
+      "lemon-grove": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "central-west": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -141,7 +130,7 @@
             "zeroEventAreas": 9,
             "passRate": 0,
             "averageGapScore": 77.51724137931035,
-            "averageEvents": 18.310344827586206,
+            "averageEvents": 18.20689655172414,
             "averageVenues": 1.896551724137931,
             "deficitScore": 85.23448275862069
           },
@@ -163,7 +152,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 67.03846153846153,
-            "averageEvents": 29.76923076923077,
+            "averageEvents": 29.346153846153847,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.38653846153845
           },
@@ -174,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.45,
-            "averageEvents": 33.825,
+            "averageEvents": 33.65,
             "averageVenues": 1.975,
             "deficitScore": 86.7575
           },
@@ -185,8 +174,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 187.6315789473684,
-            "averageVenues": 17.105263157894736,
+            "averageEvents": 185.1578947368421,
+            "averageVenues": 16.94736842105263,
             "deficitScore": 57.589473684210525
           },
           "north-county-inland": {
@@ -196,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 90.5909090909091,
-            "averageEvents": 6.409090909090909,
+            "averageEvents": 6.318181818181818,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.52499999999999
           },
@@ -207,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 65.66666666666667,
-            "averageEvents": 31.083333333333332,
+            "averageEvents": 30.416666666666668,
             "averageVenues": 3.8333333333333335,
             "deficitScore": 79.65
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 170.11111111111111,
+            "averageEvents": 166.94444444444446,
             "averageVenues": 14.777777777777779,
             "deficitScore": 52.166666666666664
           },
@@ -229,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.090909090909092,
-            "averageEvents": 587.3636363636364,
+            "averageEvents": 576.3636363636364,
             "averageVenues": 46.63636363636363,
             "deficitScore": 13.88181818181818
           }
@@ -247,16 +236,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-26T04:35:24.553Z",
-    "durationMs": 7909,
+    "failed": 1,
+    "finishedAt": "2026-10-26T06:15:52.426Z",
+    "durationMs": 45751,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 172,
+      "retry": 173,
       "cold": 325,
       "lowValue": 838,
       "qualified": 19,
@@ -273,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-26T06:15:06.924Z",
+        "lastFinishedAt": "2026-10-26T06:15:21.927Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1792995351927,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-26T06:15:21.927Z",
+        "lastFinishedAt": "2026-10-26T06:15:36.928Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792995366928,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-26T06:15:36.928Z",
+        "lastFinishedAt": "2026-10-26T06:15:51.929Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1792995381929,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -331,10 +320,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 172,
+        "retry": 173,
         "needs-website": 824,
         "cold": 325,
-        "candidate": 802
+        "candidate": 801
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
