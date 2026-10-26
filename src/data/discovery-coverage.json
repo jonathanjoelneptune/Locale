@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-26T01:31:13.008Z",
+  "generatedAt": "2026-10-26T04:35:24.577Z",
   "run": {
-    "startedAt": "2026-10-26T01:31:12.527Z",
+    "startedAt": "2026-10-26T04:35:16.644Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 173,
-      "cold": 323,
-      "lowValue": 840,
+      "due": 1,
+      "retry": 172,
+      "cold": 324,
+      "lowValue": 839,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 323,
-        "low-value": 840,
+        "cold-sample": 324,
+        "low-value": 839,
         "food-evidence": 10
       }
     },
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9556571175",
-        "name": "Ali's Chicken & Waffles",
+        "key": "san-diego|registry|place_waterbar_172a84ad11",
+        "name": "Waterbar",
+        "category": "observed-venue",
+        "website": "https://www.waterbarsd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Waterbar (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-16T04:35:19.916Z",
+        "checkedAt": "2026-10-26T04:35:16.864Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11168354437",
+        "name": "Carnitas Uruapan",
         "category": "restaurant",
-        "website": "https://www.alischickenandwaffles.com/",
-        "attempts": 3,
+        "website": "http://ordercarnitasuruapanmesa.com/",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Carnitas Uruapan (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-25T01:31:12.971Z",
-        "checkedAt": "2026-10-26T01:31:12.776Z"
+        "nextCheckAt": "2026-12-10T04:35:24.552Z",
+        "checkedAt": "2026-10-26T04:35:16.835Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "teralta": 1
+      "lemon-grove": 1,
+      "pacific-beach": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "east-county": 1,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-26T01:31:12.973Z",
-    "durationMs": 446,
+    "failed": 2,
+    "finishedAt": "2026-10-26T04:35:24.553Z",
+    "durationMs": 7909,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 172,
-      "cold": 324,
-      "lowValue": 839,
+      "cold": 325,
+      "lowValue": 838,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 324,
-        "low-value": 839,
+        "cold-sample": 325,
+        "low-value": 838,
         "food-evidence": 10
       }
     },
@@ -297,22 +319,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 324,
-      "lowValueCount": 839,
+      "coldCount": 325,
+      "lowValueCount": 838,
       "laneCounts": {
-        "cold-sample": 324,
+        "cold-sample": 325,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 839
+        "low-value": 838
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 172,
         "needs-website": 824,
-        "cold": 324,
-        "candidate": 803
+        "cold": 325,
+        "candidate": 802
       },
       "categoryCounts": {
         "nightclub": 8,
