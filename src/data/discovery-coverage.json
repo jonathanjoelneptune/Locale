@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-27T19:34:57.379Z",
+  "generatedAt": "2026-10-27T22:07:26.579Z",
   "run": {
-    "startedAt": "2026-10-27T19:34:05.493Z",
+    "startedAt": "2026-10-27T22:07:21.889Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 175,
+      "due": 2,
+      "retry": 176,
       "cold": 337,
       "lowValue": 826,
       "qualified": 19,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.84,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|965704750",
-        "name": "Big Kitchen",
-        "category": "restaurant",
-        "website": "http://www.bigkitchencafe.com/",
-        "attempts": 1,
+        "key": "san-diego|osm|node|596499269",
+        "name": "North Park Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/north-park-library",
+        "attempts": 4,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on North Park Branch San Diego Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-28T19:34:57.331Z",
-        "checkedAt": "2026-10-27T19:34:37.319Z"
+        "nextCheckAt": "2026-11-17T22:07:26.461Z",
+        "checkedAt": "2026-10-27T22:07:22.289Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6568756252",
+        "name": "Curryosity",
+        "category": "restaurant",
+        "website": "https://curryositysd.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Curryosity (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-11T22:07:26.534Z",
+        "checkedAt": "2026-10-27T22:07:22.247Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -107,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "south-park": 1
+      "south-park": 1,
+      "city-heights": 1
     },
     "probeGroupCounts": {
-      "central-core": 1
+      "central-core": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -236,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-27T19:34:57.333Z",
-    "durationMs": 51840,
+    "failed": 2,
+    "finishedAt": "2026-10-27T22:07:26.536Z",
+    "durationMs": 4647,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 176,
-      "cold": 337,
-      "lowValue": 826,
+      "cold": 338,
+      "lowValue": 825,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 337,
-        "low-value": 826,
+        "cold-sample": 338,
+        "low-value": 825,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-27T19:34:05.565Z",
-        "lastFinishedAt": "2026-10-27T19:34:20.570Z",
-        "lastLatencyMs": 15005,
-        "cooldownUntil": 1793129690569,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-27T19:34:20.570Z",
-        "lastFinishedAt": "2026-10-27T19:34:35.570Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793129705570,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-27T19:34:35.570Z",
-        "lastFinishedAt": "2026-10-27T19:34:37.082Z",
-        "lastLatencyMs": 1512,
-        "cooldownUntil": 1793129707082,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -307,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
-      "dueCount": 0,
-      "coldCount": 337,
-      "lowValueCount": 826,
+      "dueCount": 1,
+      "coldCount": 338,
+      "lowValueCount": 825,
       "laneCounts": {
-        "cold-sample": 337,
+        "cold-sample": 338,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 826
+        "low-value": 825
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 176,
         "needs-website": 824,
-        "cold": 337,
-        "candidate": 786
+        "cold": 338,
+        "candidate": 785
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +375,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
