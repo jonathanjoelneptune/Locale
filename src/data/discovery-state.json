@@ -39,13 +39,13 @@
       "coverageAreaSweepVersion": 2,
       "coverageAreaSweeps": {
         "rancho-bernardo": {
-          "lastAttemptAt": "2026-10-26T13:36:10.420Z",
+          "lastAttemptAt": "2026-10-27T05:38:01.143Z",
           "lastCompletedAt": "2026-10-13T07:43:54.393Z",
           "candidateCount": 0,
           "newCount": 0,
-          "attempts": 18,
-          "nextAttemptAt": "2026-10-27T01:36:41.677Z",
-          "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+          "attempts": 19,
+          "nextAttemptAt": "2026-10-27T17:38:46.149Z",
+          "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
         },
         "carmel-mountain-ranch": {
           "lastAttemptAt": "2026-10-26T20:30:41.516Z",
@@ -146,24 +146,24 @@
       "remainingCellCount": 226
     }
   },
-  "lastRunAt": "2026-10-27T00:45:19.687Z",
+  "lastRunAt": "2026-10-27T05:39:08.285Z",
   "lastRun": {
-    "startedAt": "2026-10-27T00:44:01.641Z",
+    "startedAt": "2026-10-27T05:38:00.907Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 9,
+      "due": 16,
       "retry": 173,
-      "cold": 333,
-      "lowValue": 830,
+      "cold": 334,
+      "lowValue": 829,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 333,
-        "low-value": 830,
+        "cold-sample": 334,
+        "low-value": 829,
         "food-evidence": 10
       }
     },
@@ -171,7 +171,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.84,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -201,197 +212,235 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31803256",
-        "name": "Logan Heights Branch San Diego Public Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/logan-heights-library",
+        "key": "san-diego|osm|way|1416351146",
+        "name": "City Heights Swim Center",
+        "category": "sports-centre",
+        "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Logan Heights Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:11.229Z",
-        "checkedAt": "2026-10-27T00:44:02.204Z"
+        "nextCheckAt": "2026-11-17T05:38:49.475Z",
+        "checkedAt": "2026-10-27T05:38:46.477Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317883",
-        "name": "The Office",
-        "category": "bar",
-        "website": "http://theofficebarsd.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on The Office (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:13.542Z",
-        "checkedAt": "2026-10-27T00:44:11.229Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1015687342",
-        "name": "Jamacha Junction",
+        "key": "san-diego|osm|node|5133324768",
+        "name": "Waterfront Grill",
         "category": "restaurant",
-        "website": "https://www.junctionbar-grill.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Jamacha Junction (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-11T00:44:16.938Z",
-        "checkedAt": "2026-10-27T00:44:13.542Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1937204277",
-        "name": "Phil's BBQ",
-        "category": "observed-venue",
-        "website": "https://philsbbq.com/",
-        "attempts": 4,
+        "website": "https://www.mywaterfrontgrill.com/",
+        "attempts": 2,
         "status": "retry",
-        "probeLane": "exploratory",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Phil's BBQ (exploratory)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:17.673Z",
-        "checkedAt": "2026-10-27T00:44:16.938Z"
+        "nextCheckAt": "2026-11-10T05:38:49.615Z",
+        "checkedAt": "2026-10-27T05:38:49.475Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6311881709",
-        "name": "Moonshine Flats",
+        "key": "san-diego|osm|node|9215079111",
+        "name": "Tabac",
         "category": "bar",
-        "website": "https://www.moonshineflats.com/",
+        "website": "https://www.tabachookah.com/",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Moonshine Flats (event-likely)",
+          "detail": "Checked 3 pages on Tabac (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:17.855Z",
-        "checkedAt": "2026-10-27T00:44:02.382Z"
+        "nextCheckAt": "2026-11-17T05:38:55.986Z",
+        "checkedAt": "2026-10-27T05:38:46.479Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13455338201",
-        "name": "Coasterra",
-        "category": "observed-venue",
-        "website": "https://www.coasterra.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Coasterra (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:20.287Z",
-        "checkedAt": "2026-10-27T00:44:17.674Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|13064777620",
-        "name": "Cardellino",
-        "category": "observed-venue",
-        "website": "https://www.cardellinosd.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Cardellino (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:22.043Z",
-        "checkedAt": "2026-10-27T00:44:20.287Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079086",
-        "name": "Trailer Park After Dark",
+        "key": "san-diego|osm|node|3804821757",
+        "name": "Urban Bar & Grill",
         "category": "bar",
-        "website": "https://www.trailerparkafterdark-sandiego.com/",
+        "website": "https://www.urbanbarandgrill.com/",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Trailer Park After Dark (event-likely)",
+          "detail": "Checked 3 pages on Urban Bar & Grill (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:33.452Z",
-        "checkedAt": "2026-10-27T00:44:17.855Z"
+        "nextCheckAt": "2026-11-17T05:38:56.751Z",
+        "checkedAt": "2026-10-27T05:38:55.986Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4284785772",
-        "name": "San Diego Police Museum",
-        "category": "museum",
-        "website": "http://www.sdpolicemuseum.com/THE-MUSEUM.html",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on San Diego Police Museum (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:44:41.227Z",
-        "checkedAt": "2026-10-27T00:44:33.452Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215210435",
-        "name": "Bay City Brewing Co Tasting Room",
+        "key": "san-diego|osm|node|12700512601",
+        "name": "Novo Brazil Brewing",
         "category": "brewery",
-        "website": "https://baycitybrewingco.com/",
+        "website": "https://www.novobrew.com/locations/mission-valley/",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on Bay City Brewing Co Tasting Room (event-likely)",
+          "detail": "Checked 5 pages on Novo Brazil Brewing (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T00:45:19.676Z",
-        "checkedAt": "2026-10-27T00:44:22.043Z"
+        "nextCheckAt": "2026-11-17T05:38:59.605Z",
+        "checkedAt": "2026-10-27T05:38:49.615Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1894048123",
+        "name": "Bencotto",
+        "category": "observed-venue",
+        "website": "https://www.lovebencotto.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Bencotto (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:01.677Z",
+        "checkedAt": "2026-10-27T05:38:59.605Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596322512",
+        "name": "Dunedin New Zealand Eats",
+        "category": "observed-venue",
+        "website": "https://dnp-sd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:02.203Z",
+        "checkedAt": "2026-10-27T05:39:01.677Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31842625",
+        "name": "Original 40 Brewing Company",
+        "category": "observed-venue",
+        "website": "https://original40brewing.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Original 40 Brewing Company (event-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:02.914Z",
+        "checkedAt": "2026-10-27T05:38:56.751Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31806619",
+        "name": "RustiCucina",
+        "category": "observed-venue",
+        "website": "https://www.rusticucina.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on RustiCucina (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:03.849Z",
+        "checkedAt": "2026-10-27T05:39:02.203Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079083",
+        "name": "Gaslamp Tavern",
+        "category": "observed-venue",
+        "website": "https://www.gaslamptavern.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Gaslamp Tavern (event-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:04.040Z",
+        "checkedAt": "2026-10-27T05:39:02.914Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31274621",
+        "name": "San Diego Zoo",
+        "category": "zoo",
+        "website": "https://www.sandiegozoo.org/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on San Diego Zoo (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:05.588Z",
+        "checkedAt": "2026-10-27T05:39:04.041Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3890027002",
+        "name": "Fluxx",
+        "category": "nightclub",
+        "website": "https://www.fluxxsd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Fluxx (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-17T05:39:08.276Z",
+        "checkedAt": "2026-10-27T05:39:03.850Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -405,6 +454,7 @@
     "probeLaneCounts": {
       "event-likely": 6,
       "low-value": 1,
+      "event-evidence": 2,
       "exploratory": 3
     },
     "probeLaneTargets": {
@@ -416,24 +466,20 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "logan-heights": 1,
-      "east-village": 1,
+      "teralta": 1,
+      "east-village": 2,
+      "national-city": 1,
+      "university-heights": 1,
+      "little-italy": 2,
       "city-heights": 1,
-      "el-cajon": 1,
-      "midway": 1,
-      "unmapped:san-diego|osm|node|13455338201": 1,
-      "little-italy": 1,
-      "mission-hills": 1,
-      "cortez-hill": 1,
-      "marina-seaport": 1
+      "uptown": 1,
+      "north-park": 1,
+      "hillcrest": 2
     },
     "probeGroupCounts": {
-      "south-bay": 1,
+      "uptown-midcity": 7,
       "central-core": 4,
-      "uptown-midcity": 2,
-      "east-county": 1,
-      "central-west": 1,
-      "unmapped": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -453,7 +499,7 @@
             "zeroEventAreas": 9,
             "passRate": 0,
             "averageGapScore": 77.72413793103448,
-            "averageEvents": 18,
+            "averageEvents": 17.517241379310345,
             "averageVenues": 1.896551724137931,
             "deficitScore": 85.30689655172412
           },
@@ -475,7 +521,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 67.03846153846153,
-            "averageEvents": 29,
+            "averageEvents": 28.26923076923077,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.38653846153845
           },
@@ -486,7 +532,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.45,
-            "averageEvents": 31.65,
+            "averageEvents": 31.15,
             "averageVenues": 1.975,
             "deficitScore": 86.7575
           },
@@ -497,7 +543,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 183.78947368421052,
+            "averageEvents": 179.6315789473684,
             "averageVenues": 16.94736842105263,
             "deficitScore": 57.589473684210525
           },
@@ -508,7 +554,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 90.5909090909091,
-            "averageEvents": 6.2272727272727275,
+            "averageEvents": 6.045454545454546,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.52499999999999
           },
@@ -519,7 +565,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 65.66666666666667,
-            "averageEvents": 30.083333333333332,
+            "averageEvents": 29.083333333333332,
             "averageVenues": 3.8333333333333335,
             "deficitScore": 79.65
           },
@@ -530,7 +576,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 166.27777777777777,
+            "averageEvents": 158,
             "averageVenues": 14.833333333333334,
             "deficitScore": 52.166666666666664
           },
@@ -541,7 +587,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.090909090909092,
-            "averageEvents": 573.8181818181819,
+            "averageEvents": 552.4545454545455,
             "averageVenues": 46.81818181818182,
             "deficitScore": 13.88181818181818
           }
@@ -559,15 +605,15 @@
         "groups": {}
       }
     },
-    "probed": 10,
+    "probed": 12,
     "promoted": 0,
-    "failed": 10,
-    "finishedAt": "2026-10-27T00:45:19.687Z",
-    "durationMs": 78046,
+    "failed": 12,
+    "finishedAt": "2026-10-27T05:39:08.285Z",
+    "durationMs": 67378,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 5,
       "retry": 173,
       "cold": 334,
       "lowValue": 829,
@@ -585,47 +631,312 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-27T05:38:01.144Z",
+        "lastFinishedAt": "2026-10-27T05:38:16.147Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1793079526147,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-27T05:38:16.147Z",
+        "lastFinishedAt": "2026-10-27T05:38:31.148Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793079541148,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-27T05:38:31.148Z",
+        "lastFinishedAt": "2026-10-27T05:38:46.149Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793079556149,
+        "consecutiveFailures": 1
       }
     ]
   },
-  "lastOverpassRunAt": "2026-10-26T20:31:12.070Z",
+  "lastOverpassRunAt": "2026-10-27T05:38:46.151Z",
   "runHistory": [
+    {
+      "startedAt": "2026-10-27T05:38:00.907Z",
+      "finishedAt": "2026-10-27T05:39:08.285Z",
+      "durationMs": 67378,
+      "discoveryMode": "bootstrap",
+      "probed": 12,
+      "promoted": 0,
+      "failed": 12,
+      "overpassRun": true,
+      "overpassEndpoints": [
+        {
+          "endpoint": "https://overpass-api.de/api/interpreter",
+          "attempts": 1,
+          "successes": 0,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "The operation was aborted due to timeout",
+          "lastStartedAt": "2026-10-27T05:38:01.144Z",
+          "lastFinishedAt": "2026-10-27T05:38:16.147Z",
+          "lastLatencyMs": 15003,
+          "cooldownUntil": 1793079526147,
+          "consecutiveFailures": 1
+        },
+        {
+          "endpoint": "https://overpass.private.coffee/api/interpreter",
+          "attempts": 1,
+          "successes": 0,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "The operation was aborted due to timeout",
+          "lastStartedAt": "2026-10-27T05:38:16.147Z",
+          "lastFinishedAt": "2026-10-27T05:38:31.148Z",
+          "lastLatencyMs": 15001,
+          "cooldownUntil": 1793079541148,
+          "consecutiveFailures": 1
+        },
+        {
+          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+          "attempts": 1,
+          "successes": 0,
+          "failures": 1,
+          "lastStatus": "failed",
+          "lastError": "The operation was aborted due to timeout",
+          "lastStartedAt": "2026-10-27T05:38:31.148Z",
+          "lastFinishedAt": "2026-10-27T05:38:46.149Z",
+          "lastLatencyMs": 15001,
+          "cooldownUntil": 1793079556149,
+          "consecutiveFailures": 1
+        }
+      ],
+      "seededFromRegistry": 0,
+      "seededFromRegionalSweep": 0,
+      "seededFromAreaSweep": 0,
+      "focusAreas": [
+        {
+          "regionId": "san-diego",
+          "id": "rancho-bernardo",
+          "name": "Rancho Bernardo",
+          "group": "north-inland",
+          "gapScore": 100,
+          "equityPriority": 201.84,
+          "status": "failed",
+          "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+        }
+      ],
+      "discoveryCells": [],
+      "queueBefore": {
+        "total": 2251,
+        "withWebsite": 1318,
+        "due": 16,
+        "retry": 173,
+        "cold": 334,
+        "lowValue": 829,
+        "qualified": 19,
+        "needsWebsite": 933,
+        "lanes": {
+          "exploratory": 719,
+          "event-evidence": 243,
+          "event-likely": 116,
+          "cold-sample": 334,
+          "low-value": 829,
+          "food-evidence": 10
+        }
+      },
+      "queueAfter": {
+        "total": 2251,
+        "withWebsite": 1318,
+        "due": 5,
+        "retry": 173,
+        "cold": 334,
+        "lowValue": 829,
+        "qualified": 19,
+        "needsWebsite": 933,
+        "lanes": {
+          "exploratory": 719,
+          "event-evidence": 243,
+          "event-likely": 116,
+          "cold-sample": 334,
+          "low-value": 829,
+          "food-evidence": 10
+        }
+      },
+      "coldMigrated": 0,
+      "probeLaneCounts": {
+        "event-likely": 6,
+        "low-value": 1,
+        "event-evidence": 2,
+        "exploratory": 3
+      },
+      "probeLaneTargets": {
+        "event-likely": 27,
+        "event-evidence": 9,
+        "food-evidence": 4,
+        "exploratory": 6,
+        "low-value": 1,
+        "cold-sample": 1
+      },
+      "probeAreaCounts": {
+        "teralta": 1,
+        "east-village": 2,
+        "national-city": 1,
+        "university-heights": 1,
+        "little-italy": 2,
+        "city-heights": 1,
+        "uptown": 1,
+        "north-park": 1,
+        "hillcrest": 2
+      },
+      "probeGroupCounts": {
+        "uptown-midcity": 7,
+        "central-core": 4,
+        "south-bay": 1
+      },
+      "coverageEquity": {
+        "san-diego": {
+          "measured": 188,
+          "passing": 18,
+          "metroPassRate": 0.096,
+          "zeroEventAreas": 62,
+          "zeroEventRate": 0.33,
+          "groupPassRateSpread": 0.818,
+          "groupGapSpread": 82.5,
+          "equityScore": 19.9,
+          "groups": {
+            "south-bay": {
+              "group": "south-bay",
+              "areas": 29,
+              "passing": 0,
+              "zeroEventAreas": 9,
+              "passRate": 0,
+              "averageGapScore": 77.72413793103448,
+              "averageEvents": 17.517241379310345,
+              "averageVenues": 1.896551724137931,
+              "deficitScore": 85.30689655172412
+            },
+            "north-inland": {
+              "group": "north-inland",
+              "areas": 11,
+              "passing": 0,
+              "zeroEventAreas": 9,
+              "passRate": 0,
+              "averageGapScore": 93.54545454545455,
+              "averageEvents": 0.6363636363636364,
+              "averageVenues": 0.2727272727272727,
+              "deficitScore": 95.92272727272729
+            },
+            "north-central": {
+              "group": "north-central",
+              "areas": 26,
+              "passing": 0,
+              "zeroEventAreas": 5,
+              "passRate": 0,
+              "averageGapScore": 67.03846153846153,
+              "averageEvents": 28.26923076923077,
+              "averageVenues": 2.923076923076923,
+              "deficitScore": 80.38653846153845
+            },
+            "east-county": {
+              "group": "east-county",
+              "areas": 40,
+              "passing": 0,
+              "zeroEventAreas": 20,
+              "passRate": 0,
+              "averageGapScore": 76.45,
+              "averageEvents": 31.15,
+              "averageVenues": 1.975,
+              "deficitScore": 86.7575
+            },
+            "central-west": {
+              "group": "central-west",
+              "areas": 19,
+              "passing": 4,
+              "zeroEventAreas": 2,
+              "passRate": 0.21052631578947367,
+              "averageGapScore": 37.473684210526315,
+              "averageEvents": 179.6315789473684,
+              "averageVenues": 16.94736842105263,
+              "deficitScore": 57.589473684210525
+            },
+            "north-county-inland": {
+              "group": "north-county-inland",
+              "areas": 22,
+              "passing": 0,
+              "zeroEventAreas": 15,
+              "passRate": 0,
+              "averageGapScore": 90.5909090909091,
+              "averageEvents": 6.045454545454546,
+              "averageVenues": 1.0454545454545454,
+              "deficitScore": 93.52499999999999
+            },
+            "north-county-coast": {
+              "group": "north-county-coast",
+              "areas": 12,
+              "passing": 0,
+              "zeroEventAreas": 2,
+              "passRate": 0,
+              "averageGapScore": 65.66666666666667,
+              "averageEvents": 29.083333333333332,
+              "averageVenues": 3.8333333333333335,
+              "deficitScore": 79.65
+            },
+            "uptown-midcity": {
+              "group": "uptown-midcity",
+              "areas": 18,
+              "passing": 5,
+              "zeroEventAreas": 0,
+              "passRate": 0.2777777777777778,
+              "averageGapScore": 35.55555555555556,
+              "averageEvents": 158,
+              "averageVenues": 14.833333333333334,
+              "deficitScore": 52.166666666666664
+            },
+            "central-core": {
+              "group": "central-core",
+              "areas": 11,
+              "passing": 9,
+              "zeroEventAreas": 0,
+              "passRate": 0.8181818181818182,
+              "averageGapScore": 11.090909090909092,
+              "averageEvents": 552.4545454545455,
+              "averageVenues": 46.81818181818182,
+              "deficitScore": 13.88181818181818
+            }
+          }
+        },
+        "chicago": {
+          "measured": 0,
+          "passing": 0,
+          "metroPassRate": 0,
+          "zeroEventAreas": 0,
+          "zeroEventRate": 0,
+          "groupPassRateSpread": 0,
+          "groupGapSpread": 0,
+          "equityScore": 35,
+          "groups": {}
+        }
+      },
+      "sourceDuplicatesAliased": 0,
+      "sourceReferencesRemapped": 0,
+      "sourceRevalidationsQueued": 0,
+      "sourceRevalidationsMissingCandidate": 0,
+      "sourceRevalidated": 0,
+      "sourceInvalidated": 0,
+      "sourceReplaced": 0
+    },
     {
       "startedAt": "2026-10-27T00:44:01.641Z",
       "finishedAt": "2026-10-27T00:45:19.687Z",
@@ -18029,247 +18340,6 @@
               "passRate": 0.8181818181818182,
               "averageGapScore": 10.454545454545455,
               "averageEvents": 662.2727272727273,
-              "averageVenues": 48.36363636363637,
-              "deficitScore": 13.659090909090907
-            }
-          }
-        },
-        "chicago": {
-          "measured": 0,
-          "passing": 0,
-          "metroPassRate": 0,
-          "zeroEventAreas": 0,
-          "zeroEventRate": 0,
-          "groupPassRateSpread": 0,
-          "groupGapSpread": 0,
-          "equityScore": 35,
-          "groups": {}
-        }
-      },
-      "sourceDuplicatesAliased": 0,
-      "sourceReferencesRemapped": 0,
-      "sourceRevalidationsQueued": 0,
-      "sourceRevalidationsMissingCandidate": 0,
-      "sourceRevalidated": 0,
-      "sourceInvalidated": 0,
-      "sourceReplaced": 0
-    },
-    {
-      "startedAt": "2026-10-22T00:34:46.604Z",
-      "finishedAt": "2026-10-22T00:34:51.543Z",
-      "durationMs": 4939,
-      "discoveryMode": "bootstrap",
-      "probed": 1,
-      "promoted": 0,
-      "failed": 1,
-      "overpassRun": false,
-      "overpassEndpoints": [
-        {
-          "endpoint": "https://overpass-api.de/api/interpreter",
-          "attempts": 0,
-          "successes": 0,
-          "failures": 0,
-          "lastStatus": null,
-          "lastError": null,
-          "lastStartedAt": null,
-          "lastFinishedAt": null,
-          "lastLatencyMs": null,
-          "cooldownUntil": 0,
-          "consecutiveFailures": 0
-        },
-        {
-          "endpoint": "https://overpass.private.coffee/api/interpreter",
-          "attempts": 0,
-          "successes": 0,
-          "failures": 0,
-          "lastStatus": null,
-          "lastError": null,
-          "lastStartedAt": null,
-          "lastFinishedAt": null,
-          "lastLatencyMs": null,
-          "cooldownUntil": 0,
-          "consecutiveFailures": 0
-        },
-        {
-          "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-          "attempts": 0,
-          "successes": 0,
-          "failures": 0,
-          "lastStatus": null,
-          "lastError": null,
-          "lastStartedAt": null,
-          "lastFinishedAt": null,
-          "lastLatencyMs": null,
-          "cooldownUntil": 0,
-          "consecutiveFailures": 0
-        }
-      ],
-      "seededFromRegistry": 0,
-      "seededFromRegionalSweep": 0,
-      "seededFromAreaSweep": 0,
-      "focusAreas": [],
-      "discoveryCells": [],
-      "queueBefore": {
-        "total": 2251,
-        "withWebsite": 1318,
-        "due": 0,
-        "retry": 172,
-        "cold": 282,
-        "lowValue": 881,
-        "qualified": 19,
-        "needsWebsite": 933,
-        "lanes": {
-          "exploratory": 719,
-          "event-evidence": 243,
-          "event-likely": 116,
-          "cold-sample": 282,
-          "low-value": 881,
-          "food-evidence": 10
-        }
-      },
-      "queueAfter": {
-        "total": 2251,
-        "withWebsite": 1318,
-        "due": 0,
-        "retry": 172,
-        "cold": 283,
-        "lowValue": 880,
-        "qualified": 19,
-        "needsWebsite": 933,
-        "lanes": {
-          "exploratory": 719,
-          "event-evidence": 243,
-          "event-likely": 116,
-          "cold-sample": 283,
-          "low-value": 880,
-          "food-evidence": 10
-        }
-      },
-      "coldMigrated": 0,
-      "probeLaneCounts": {
-        "low-value": 1
-      },
-      "probeLaneTargets": {
-        "event-likely": 27,
-        "event-evidence": 9,
-        "food-evidence": 4,
-        "exploratory": 6,
-        "low-value": 1,
-        "cold-sample": 1
-      },
-      "probeAreaCounts": {
-        "national-city": 1
-      },
-      "probeGroupCounts": {
-        "south-bay": 1
-      },
-      "coverageEquity": {
-        "san-diego": {
-          "measured": 188,
-          "passing": 22,
-          "metroPassRate": 0.117,
-          "zeroEventAreas": 56,
-          "zeroEventRate": 0.298,
-          "groupPassRateSpread": 0.818,
-          "groupGapSpread": 82.8,
-          "equityScore": 21.8,
-          "groups": {
-            "south-bay": {
-              "group": "south-bay",
-              "areas": 29,
-              "passing": 0,
-              "zeroEventAreas": 8,
-              "passRate": 0,
-              "averageGapScore": 75.27586206896552,
-              "averageEvents": 20.93103448275862,
-              "averageVenues": 2.0689655172413794,
-              "deficitScore": 84.1051724137931
-            },
-            "north-inland": {
-              "group": "north-inland",
-              "areas": 11,
-              "passing": 0,
-              "zeroEventAreas": 8,
-              "passRate": 0,
-              "averageGapScore": 93.27272727272727,
-              "averageEvents": 0.9090909090909091,
-              "averageVenues": 0.36363636363636365,
-              "deficitScore": 94.91818181818181
-            },
-            "north-central": {
-              "group": "north-central",
-              "areas": 26,
-              "passing": 1,
-              "zeroEventAreas": 5,
-              "passRate": 0.038461538461538464,
-              "averageGapScore": 64.65384615384616,
-              "averageEvents": 33.34615384615385,
-              "averageVenues": 2.9615384615384617,
-              "deficitScore": 77.43653846153846
-            },
-            "east-county": {
-              "group": "east-county",
-              "areas": 40,
-              "passing": 0,
-              "zeroEventAreas": 18,
-              "passRate": 0,
-              "averageGapScore": 74.225,
-              "averageEvents": 44.1,
-              "averageVenues": 2.075,
-              "deficitScore": 85.47874999999999
-            },
-            "central-west": {
-              "group": "central-west",
-              "areas": 19,
-              "passing": 5,
-              "zeroEventAreas": 2,
-              "passRate": 0.2631578947368421,
-              "averageGapScore": 34.31578947368421,
-              "averageEvents": 206.31578947368422,
-              "averageVenues": 17.105263157894736,
-              "deficitScore": 53.58947368421053
-            },
-            "north-county-inland": {
-              "group": "north-county-inland",
-              "areas": 22,
-              "passing": 0,
-              "zeroEventAreas": 13,
-              "passRate": 0,
-              "averageGapScore": 89.95454545454545,
-              "averageEvents": 7.136363636363637,
-              "averageVenues": 1.1363636363636365,
-              "deficitScore": 92.39318181818182
-            },
-            "north-county-coast": {
-              "group": "north-county-coast",
-              "areas": 12,
-              "passing": 0,
-              "zeroEventAreas": 2,
-              "passRate": 0,
-              "averageGapScore": 63.583333333333336,
-              "averageEvents": 34.583333333333336,
-              "averageVenues": 3.9166666666666665,
-              "deficitScore": 78.92083333333333
-            },
-            "uptown-midcity": {
-              "group": "uptown-midcity",
-              "areas": 18,
-              "passing": 7,
-              "zeroEventAreas": 0,
-              "passRate": 0.3888888888888889,
-              "averageGapScore": 32.77777777777778,
-              "averageEvents": 199.27777777777777,
-              "averageVenues": 15,
-              "deficitScore": 45.083333333333336
-            },
-            "central-core": {
-              "group": "central-core",
-              "areas": 11,
-              "passing": 9,
-              "zeroEventAreas": 0,
-              "passRate": 0.8181818181818182,
-              "averageGapScore": 10.454545454545455,
-              "averageEvents": 663.7272727272727,
               "averageVenues": 48.36363636363637,
               "deficitScore": 13.659090909090907
             }
