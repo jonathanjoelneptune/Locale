@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-27T22:33:07.988Z",
+  "generatedAt": "2026-10-27T23:56:11.853Z",
   "run": {
-    "startedAt": "2026-10-27T22:33:03.488Z",
+    "startedAt": "2026-10-27T23:55:59.511Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 1,
       "retry": 176,
-      "cold": 338,
-      "lowValue": 825,
+      "cold": 339,
+      "lowValue": 824,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 338,
-        "low-value": 825,
+        "cold-sample": 339,
+        "low-value": 824,
         "food-evidence": 10
       }
     },
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|965699423",
-        "name": "Kindred",
+        "key": "san-diego|osm|node|597013952",
+        "name": "Kingfisher",
         "category": "restaurant",
-        "website": "https://barkindred.com/",
+        "website": "https://kingfishersd.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Kindred (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-11T22:33:04.980Z",
-        "checkedAt": "2026-10-27T22:33:03.817Z"
+        "nextCheckAt": "2026-10-30T23:56:00.470Z",
+        "checkedAt": "2026-10-27T23:55:59.926Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|368170974",
-        "name": "University Heights Branch San Diego Public Library",
+        "key": "san-diego|osm|node|8726804043",
+        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
         "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/university-heights-library",
+        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on University Heights Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T22:33:07.947Z",
-        "checkedAt": "2026-10-27T22:33:03.865Z"
+        "nextCheckAt": "2026-11-17T23:56:11.799Z",
+        "checkedAt": "2026-10-27T23:56:00.048Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,7 +117,7 @@
     },
     "probeAreaCounts": {
       "south-park": 1,
-      "hillcrest": 1
+      "mission-hills": 1
     },
     "probeGroupCounts": {
       "central-core": 1,
@@ -163,7 +163,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 67.03846153846153,
-            "averageEvents": 27.807692307692307,
+            "averageEvents": 27.76923076923077,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.38653846153845
           },
@@ -185,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 177.10526315789474,
+            "averageEvents": 176.73684210526315,
             "averageVenues": 16.94736842105263,
             "deficitScore": 57.589473684210525
           },
@@ -218,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 156.61111111111111,
+            "averageEvents": 156.22222222222223,
             "averageVenues": 14.833333333333334,
             "deficitScore": 52.166666666666664
           },
@@ -229,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 550,
+            "averageEvents": 549.3636363636364,
             "averageVenues": 46.81818181818182,
             "deficitScore": 14.104545454545452
           }
@@ -250,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-10-27T22:33:07.948Z",
-    "durationMs": 4460,
+    "finishedAt": "2026-10-27T23:56:11.805Z",
+    "durationMs": 12294,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
+      "retry": 177,
       "cold": 339,
       "lowValue": 824,
       "qualified": 19,
@@ -331,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 177,
         "needs-website": 824,
         "cold": 339,
-        "candidate": 784
+        "candidate": 783
       },
       "categoryCounts": {
         "nightclub": 8,
