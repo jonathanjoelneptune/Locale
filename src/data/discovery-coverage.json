@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-27T23:56:11.853Z",
+  "generatedAt": "2026-10-28T01:26:14.739Z",
   "run": {
-    "startedAt": "2026-10-27T23:55:59.511Z",
+    "startedAt": "2026-10-28T01:26:07.809Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 176,
+      "due": 0,
+      "retry": 177,
       "cold": 339,
       "lowValue": 824,
       "qualified": 19,
@@ -58,41 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|597013952",
-        "name": "Kingfisher",
+        "key": "san-diego|osm|way|614551651",
+        "name": "La Buona Forchetta",
         "category": "restaurant",
-        "website": "https://kingfishersd.com/",
+        "website": "https://buonaforchettasd.com/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-10-30T23:56:00.470Z",
-        "checkedAt": "2026-10-27T23:55:59.926Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8726804043",
-        "name": "San Diego Public Library, Mission Hills-Hillcrest Branch",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/mission-hills-library",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on San Diego Public Library, Mission Hills-Hillcrest Branch (event-likely)",
+          "detail": "Checked 1 page on La Buona Forchetta (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T23:56:11.799Z",
-        "checkedAt": "2026-10-27T23:56:00.048Z"
+        "nextCheckAt": "2026-12-12T01:26:14.688Z",
+        "checkedAt": "2026-10-28T01:26:08.130Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "south-park": 1,
-      "mission-hills": 1
+      "south-park": 1
     },
     "probeGroupCounts": {
-      "central-core": 1,
-      "uptown-midcity": 1
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,26 +225,26 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-27T23:56:11.805Z",
-    "durationMs": 12294,
+    "failed": 1,
+    "finishedAt": "2026-10-28T01:26:14.690Z",
+    "durationMs": 6881,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 339,
-      "lowValue": 824,
+      "cold": 340,
+      "lowValue": 823,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 339,
-        "low-value": 824,
+        "cold-sample": 340,
+        "low-value": 823,
         "food-evidence": 10
       }
     },
@@ -319,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 339,
-      "lowValueCount": 824,
+      "coldCount": 340,
+      "lowValueCount": 823,
       "laneCounts": {
-        "cold-sample": 339,
+        "cold-sample": 340,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 824
+        "low-value": 823
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 339,
-        "candidate": 783
+        "cold": 340,
+        "candidate": 782
       },
       "categoryCounts": {
         "nightclub": 8,
