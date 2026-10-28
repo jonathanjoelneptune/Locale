@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-28T09:39:24.953Z",
+  "generatedAt": "2026-10-28T13:23:41.000Z",
   "run": {
-    "startedAt": "2026-10-28T09:38:38.795Z",
+    "startedAt": "2026-10-28T13:23:40.382Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 344,
-      "lowValue": 819,
+      "cold": 345,
+      "lowValue": 818,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 344,
-        "low-value": 819,
+        "cold-sample": 345,
+        "low-value": 818,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.84,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11968136142",
-        "name": "Aztec Food Hub",
+        "key": "san-diego|osm|node|12904040501",
+        "name": "So Saap",
         "category": "restaurant",
-        "website": "https://aztecfoodhubsd.com/",
-        "attempts": 1,
+        "website": "https://sosaap.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Aztec Food Hub (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-12T09:39:24.911Z",
-        "checkedAt": "2026-10-28T09:39:24.101Z"
+        "nextCheckAt": "2026-11-27T13:23:40.969Z",
+        "checkedAt": "2026-10-28T13:23:40.584Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -107,7 +96,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "el-cerrito": 1
+      "teralta": 1
     },
     "probeGroupCounts": {
       "uptown-midcity": 1
@@ -163,7 +152,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.45,
-            "averageEvents": 27,
+            "averageEvents": 25.7,
             "averageVenues": 1.975,
             "deficitScore": 86.7575
           },
@@ -207,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 147,
+            "averageEvents": 146.94444444444446,
             "averageVenues": 14.833333333333334,
             "deficitScore": 52.166666666666664
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 527.6363636363636,
+            "averageEvents": 526.5454545454545,
             "averageVenues": 46.81818181818182,
             "deficitScore": 14.104545454545452
           }
@@ -239,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-28T09:39:24.925Z",
-    "durationMs": 46130,
+    "finishedAt": "2026-10-28T13:23:40.971Z",
+    "durationMs": 589,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
-      "cold": 345,
-      "lowValue": 818,
+      "retry": 175,
+      "cold": 346,
+      "lowValue": 817,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 345,
-        "low-value": 818,
+        "cold-sample": 346,
+        "low-value": 817,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-28T09:38:38.952Z",
-        "lastFinishedAt": "2026-10-28T09:38:53.955Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1793180363955,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-28T09:38:53.955Z",
-        "lastFinishedAt": "2026-10-28T09:39:08.955Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793180378955,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-28T09:39:08.955Z",
-        "lastFinishedAt": "2026-10-28T09:39:23.956Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793180393956,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,21 +297,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 345,
-      "lowValueCount": 818,
+      "coldCount": 346,
+      "lowValueCount": 817,
       "laneCounts": {
-        "cold-sample": 345,
+        "cold-sample": 346,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 818
+        "low-value": 817
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 175,
         "needs-website": 824,
-        "cold": 345,
+        "cold": 346,
         "candidate": 778
       },
       "categoryCounts": {
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
