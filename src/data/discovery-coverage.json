@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-28T14:23:41.854Z",
+  "generatedAt": "2026-10-28T16:41:01.844Z",
   "run": {
-    "startedAt": "2026-10-28T14:23:41.305Z",
+    "startedAt": "2026-10-28T16:40:16.312Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 175,
+      "retry": 176,
       "cold": 346,
       "lowValue": 817,
       "qualified": 19,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5721506671",
-        "name": "Bangkok Poco",
+        "key": "san-diego|osm|way|31801136",
+        "name": "Cali Baguette",
         "category": "restaurant",
-        "website": "https://bkkpoco.com/",
+        "website": "https://www.calibaguette.com/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 404",
+          "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-10-29T14:23:41.822Z",
-        "checkedAt": "2026-10-28T14:23:41.604Z"
+        "nextCheckAt": "2026-11-04T16:41:01.803Z",
+        "checkedAt": "2026-10-28T16:41:01.560Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.45,
-            "averageEvents": 25.7,
+            "averageEvents": 25.5,
             "averageVenues": 1.975,
             "deficitScore": 86.7575
           },
@@ -228,13 +239,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-28T14:23:41.829Z",
-    "durationMs": 524,
+    "finishedAt": "2026-10-28T16:41:01.804Z",
+    "durationMs": 45492,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
+      "retry": 177,
       "cold": 346,
       "lowValue": 817,
       "qualified": 19,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-28T16:40:16.368Z",
+        "lastFinishedAt": "2026-10-28T16:40:31.371Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1793205661371,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-28T16:40:31.371Z",
+        "lastFinishedAt": "2026-10-28T16:40:46.372Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793205676372,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-28T16:40:46.372Z",
+        "lastFinishedAt": "2026-10-28T16:41:01.372Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793205691372,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +320,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 177,
         "needs-website": 824,
         "cold": 346,
-        "candidate": 777
+        "candidate": 776
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
