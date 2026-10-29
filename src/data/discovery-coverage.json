@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-29T01:50:56.988Z",
+  "generatedAt": "2026-10-29T05:33:55.028Z",
   "run": {
-    "startedAt": "2026-10-29T01:50:44.821Z",
+    "startedAt": "2026-10-29T05:33:09.363Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 350,
-      "lowValue": 813,
+      "cold": 351,
+      "lowValue": 812,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 350,
-        "low-value": 813,
+        "cold-sample": 351,
+        "low-value": 812,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12756705465",
-        "name": "Santana's",
+        "key": "san-diego|osm|node|9775921581",
+        "name": "Tajima",
         "category": "restaurant",
-        "website": "https://santanasmexfood.com/",
+        "website": "https://tajimasandiego.com/tajima-college-heights/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Santana's (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-13T01:50:56.956Z",
-        "checkedAt": "2026-10-29T01:50:45.038Z"
+        "nextCheckAt": "2026-11-01T05:33:54.967Z",
+        "checkedAt": "2026-10-29T05:33:54.688Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lemon-grove": 1
+      "el-cerrito": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -119,7 +130,7 @@
             "zeroEventAreas": 9,
             "passRate": 0,
             "averageGapScore": 77.72413793103448,
-            "averageEvents": 16.620689655172413,
+            "averageEvents": 16.03448275862069,
             "averageVenues": 1.896551724137931,
             "deficitScore": 85.30689655172412
           },
@@ -141,7 +152,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 67.03846153846153,
-            "averageEvents": 26.73076923076923,
+            "averageEvents": 26.076923076923077,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.38653846153845
           },
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.525,
-            "averageEvents": 23.825,
+            "averageEvents": 23.1,
             "averageVenues": 1.925,
             "deficitScore": 86.78375
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 169.1578947368421,
+            "averageEvents": 164.73684210526315,
             "averageVenues": 16.736842105263158,
             "deficitScore": 57.589473684210525
           },
@@ -174,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 91.22727272727273,
-            "averageEvents": 5.454545454545454,
+            "averageEvents": 5.2727272727272725,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.74772727272727
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 65.66666666666667,
-            "averageEvents": 26.916666666666668,
+            "averageEvents": 26.583333333333332,
             "averageVenues": 3.8333333333333335,
             "deficitScore": 79.65
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 145.72222222222223,
+            "averageEvents": 139.05555555555554,
             "averageVenues": 14.833333333333334,
             "deficitScore": 52.166666666666664
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 523,
+            "averageEvents": 509.54545454545456,
             "averageVenues": 46.81818181818182,
             "deficitScore": 14.104545454545452
           }
@@ -228,13 +239,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-29T01:50:56.958Z",
-    "durationMs": 12137,
+    "finishedAt": "2026-10-29T05:33:54.984Z",
+    "durationMs": 45621,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
+      "retry": 177,
       "cold": 351,
       "lowValue": 812,
       "qualified": 19,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-29T05:33:09.444Z",
+        "lastFinishedAt": "2026-10-29T05:33:24.448Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1793252034448,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-29T05:33:24.448Z",
+        "lastFinishedAt": "2026-10-29T05:33:39.449Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793252049449,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-29T05:33:39.449Z",
+        "lastFinishedAt": "2026-10-29T05:33:54.450Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793252064450,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +320,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 177,
         "needs-website": 824,
         "cold": 351,
-        "candidate": 772
+        "candidate": 771
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
