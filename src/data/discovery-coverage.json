@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-29T15:59:46.539Z",
+  "generatedAt": "2026-10-29T18:24:05.403Z",
   "run": {
-    "startedAt": "2026-10-29T15:59:45.730Z",
+    "startedAt": "2026-10-29T18:23:33.620Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -42,7 +53,7 @@
         "passing": 18,
         "passRate": 0.09574468085106383,
         "severeGapCount": 80,
-        "mediumGapCount": 151
+        "mediumGapCount": 152
       },
       "chicago": {
         "mode": "unmeasured",
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596134829",
-        "name": "Abbey's Real Texas BBQ",
+        "key": "san-diego|osm|node|13463029000",
+        "name": "California Thai Cafe",
         "category": "restaurant",
-        "website": "https://www.abbeystexasbbq.com/",
+        "website": "https://www.californiathaicafe.online/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
@@ -72,8 +83,8 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-12T15:59:46.475Z",
-        "checkedAt": "2026-10-29T15:59:46.056Z"
+        "nextCheckAt": "2026-11-12T18:24:05.366Z",
+        "checkedAt": "2026-10-29T18:24:05.054Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -151,10 +162,10 @@
             "passing": 0,
             "zeroEventAreas": 20,
             "passRate": 0,
-            "averageGapScore": 76.525,
-            "averageEvents": 21.5,
-            "averageVenues": 1.925,
-            "deficitScore": 86.78375
+            "averageGapScore": 76.575,
+            "averageEvents": 20.525,
+            "averageVenues": 1.9,
+            "deficitScore": 86.80125
           },
           "central-west": {
             "group": "central-west",
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 500.27272727272725,
+            "averageEvents": 499.8181818181818,
             "averageVenues": 46.63636363636363,
             "deficitScore": 14.104545454545452
           }
@@ -228,8 +239,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-29T15:59:46.478Z",
-    "durationMs": 748,
+    "finishedAt": "2026-10-29T18:24:05.367Z",
+    "durationMs": 31747,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-29T18:23:33.679Z",
+        "lastFinishedAt": "2026-10-29T18:23:48.681Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793298258681,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-29T18:23:48.681Z",
+        "lastFinishedAt": "2026-10-29T18:24:03.683Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793298273683,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-29T18:24:03.683Z",
+        "lastFinishedAt": "2026-10-29T18:24:04.869Z",
+        "lastLatencyMs": 1186,
+        "cooldownUntil": 1793298274869,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
@@ -362,7 +373,7 @@
         "passing": 18,
         "passRate": 0.09574468085106383,
         "severeGapCount": 80,
-        "mediumGapCount": 151,
+        "mediumGapCount": 152,
         "activeMode": "bootstrap",
         "probeLimit": 12,
         "probeConcurrency": 2,
