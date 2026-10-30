@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-30T02:30:48.213Z",
+  "generatedAt": "2026-10-30T06:29:00.007Z",
   "run": {
-    "startedAt": "2026-10-30T02:30:47.485Z",
+    "startedAt": "2026-10-30T06:28:58.915Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 178,
       "cold": 354,
       "lowValue": 809,
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9850975366",
-        "name": "Tamarindo",
+        "key": "san-diego|osm|node|2651673866",
+        "name": "Ace New York Giant Pizza Bar & Lounge",
         "category": "restaurant",
-        "website": "https://tamarindodelmar.com/",
-        "attempts": 2,
+        "website": "https://acenypizza.com/",
+        "attempts": 8,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-13T02:30:48.171Z",
-        "checkedAt": "2026-10-30T02:30:47.806Z"
+        "nextCheckAt": "2026-11-06T06:28:59.385Z",
+        "checkedAt": "2026-10-30T06:28:59.209Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3732387001",
+        "name": "Champion Field",
+        "category": "restaurant",
+        "website": "http://www.championfield.com/Tierrasanta/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-29T06:28:59.968Z",
+        "checkedAt": "2026-10-30T06:28:59.328Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +104,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "del-mar": 1
+      "winter-gardens": 1,
+      "tierrasanta": 1
     },
     "probeGroupCounts": {
-      "north-county-coast": 1
+      "east-county": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -118,10 +140,10 @@
             "passing": 0,
             "zeroEventAreas": 9,
             "passRate": 0,
-            "averageGapScore": 77.72413793103448,
-            "averageEvents": 15.241379310344827,
+            "averageGapScore": 78,
+            "averageEvents": 14.96551724137931,
             "averageVenues": 1.896551724137931,
-            "deficitScore": 85.30689655172412
+            "deficitScore": 85.40344827586206
           },
           "north-inland": {
             "group": "north-inland",
@@ -141,7 +163,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 67.03846153846153,
-            "averageEvents": 24.884615384615383,
+            "averageEvents": 24.384615384615383,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.38653846153845
           },
@@ -152,7 +174,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 19.325,
+            "averageEvents": 19.075,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -163,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 158,
+            "averageEvents": 155.73684210526315,
             "averageVenues": 16.736842105263158,
             "deficitScore": 57.589473684210525
           },
@@ -174,7 +196,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 91.22727272727273,
-            "averageEvents": 5,
+            "averageEvents": 4.954545454545454,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.74772727272727
           },
@@ -185,7 +207,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 65.66666666666667,
-            "averageEvents": 25.083333333333332,
+            "averageEvents": 25,
             "averageVenues": 3.8333333333333335,
             "deficitScore": 79.65
           },
@@ -196,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 131.11111111111111,
+            "averageEvents": 128.11111111111111,
             "averageVenues": 14.777777777777779,
             "deficitScore": 52.166666666666664
           },
@@ -207,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 485.09090909090907,
+            "averageEvents": 471.90909090909093,
             "averageVenues": 46.63636363636363,
             "deficitScore": 14.104545454545452
           }
@@ -225,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-30T02:30:48.173Z",
-    "durationMs": 688,
+    "failed": 2,
+    "finishedAt": "2026-10-30T06:28:59.977Z",
+    "durationMs": 1062,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 354,
-      "lowValue": 809,
+      "retry": 177,
+      "cold": 355,
+      "lowValue": 808,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 354,
-        "low-value": 809,
+        "cold-sample": 355,
+        "low-value": 808,
         "food-evidence": 10
       }
     },
@@ -297,21 +319,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 354,
-      "lowValueCount": 809,
+      "coldCount": 355,
+      "lowValueCount": 808,
       "laneCounts": {
-        "cold-sample": 354,
+        "cold-sample": 355,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 809
+        "low-value": 808
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 177,
         "needs-website": 824,
-        "cold": 354,
+        "cold": 355,
         "candidate": 767
       },
       "categoryCounts": {
