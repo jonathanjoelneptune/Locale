@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-30T13:25:36.073Z",
+  "generatedAt": "2026-10-30T15:48:10.719Z",
   "run": {
-    "startedAt": "2026-10-30T13:25:32.001Z",
+    "startedAt": "2026-10-30T15:47:51.256Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
+      "due": 0,
       "retry": 177,
-      "cold": 355,
-      "lowValue": 808,
+      "cold": 356,
+      "lowValue": 807,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 355,
-        "low-value": 808,
+        "cold-sample": 356,
+        "low-value": 807,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.84,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,71 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11192125837",
-        "name": "Mujeres Brew",
-        "category": "brewery",
-        "website": "https://mujeres-brew-house.business.site/",
-        "attempts": 8,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-06T13:25:32.820Z",
-        "checkedAt": "2026-10-30T13:25:32.341Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168607137",
-        "name": "The Dog Society Cafe, Bar, and Groomers",
-        "category": "bar",
-        "website": "https://dogsocietysd.com/",
-        "attempts": 8,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-06T13:25:33.837Z",
-        "checkedAt": "2026-10-30T13:25:32.396Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11170882537",
-        "name": "Women's Museum of California Education Center",
-        "category": "museum",
-        "website": "https://www.womensmuseumca.org/educationcenter",
-        "attempts": 8,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-06T13:25:34.107Z",
-        "checkedAt": "2026-10-30T13:25:32.820Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|4848250729",
+        "key": "san-diego|osm|node|6326367361",
         "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/14075/eastlake-parkway-otay-lakes-2295-otay-lakes-rd-116-chula-vista-ca-919151160-us",
+        "website": "https://www.starbucks.com/store-locator/store/11445/la-jolla-shores-torrey-pines-2206-torrey-pines-road-b-la-jolla-ca-920373472-us",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -129,8 +83,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T13:25:36.022Z",
-        "checkedAt": "2026-10-30T13:25:33.837Z"
+        "nextCheckAt": "2026-12-14T15:48:10.654Z",
+        "checkedAt": "2026-10-30T15:48:08.781Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -142,7 +96,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 3,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -154,14 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "logan-heights": 1,
-      "rolando-park": 1,
-      "valencia-park": 1,
-      "eastlake": 1
+      "la-jolla-shores": 1
     },
     "probeGroupCounts": {
-      "south-bay": 3,
-      "uptown-midcity": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -214,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 19.05,
+            "averageEvents": 17.55,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -258,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 128.11111111111111,
+            "averageEvents": 128.05555555555554,
             "averageVenues": 14.777777777777779,
             "deficitScore": 52.166666666666664
           },
@@ -269,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 471.90909090909093,
+            "averageEvents": 471.27272727272725,
             "averageVenues": 46.63636363636363,
             "deficitScore": 14.104545454545452
           }
@@ -287,68 +236,68 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 1,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-10-30T13:25:36.024Z",
-    "durationMs": 4023,
+    "failed": 1,
+    "finishedAt": "2026-10-30T15:48:10.669Z",
+    "durationMs": 19413,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 356,
-      "lowValue": 807,
+      "cold": 357,
+      "lowValue": 806,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 356,
-        "low-value": 807,
+        "cold-sample": 357,
+        "low-value": 806,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-30T15:47:51.456Z",
+        "lastFinishedAt": "2026-10-30T15:47:52.236Z",
+        "lastLatencyMs": 780,
+        "cooldownUntil": 1793375302236,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T15:47:52.236Z",
+        "lastFinishedAt": "2026-10-30T15:48:07.237Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793375317237,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-10-30T15:48:07.237Z",
+        "lastFinishedAt": "2026-10-30T15:48:08.536Z",
+        "lastLatencyMs": 1299,
+        "cooldownUntil": 1793375318536,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -359,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 356,
-      "lowValueCount": 807,
+      "coldCount": 357,
+      "lowValueCount": 806,
       "laneCounts": {
-        "cold-sample": 356,
+        "cold-sample": 357,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 807
+        "low-value": 806
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 356,
-        "candidate": 766
+        "cold": 357,
+        "candidate": 765
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -415,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
