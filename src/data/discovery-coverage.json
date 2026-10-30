@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-30T08:54:26.888Z",
+  "generatedAt": "2026-10-30T13:25:36.073Z",
   "run": {
-    "startedAt": "2026-10-30T08:54:25.990Z",
+    "startedAt": "2026-10-30T13:25:32.001Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 3,
       "retry": 177,
       "cold": 355,
       "lowValue": 808,
@@ -58,22 +58,79 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1119161328",
-        "name": "O'Brien's Boulangerie",
-        "category": "cafe",
-        "website": "https://www.obriensbakerysd.com/",
-        "attempts": 2,
+        "key": "san-diego|osm|node|11192125837",
+        "name": "Mujeres Brew",
+        "category": "brewery",
+        "website": "https://mujeres-brew-house.business.site/",
+        "attempts": 8,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-13T08:54:26.847Z",
-        "checkedAt": "2026-10-30T08:54:26.323Z"
+        "nextCheckAt": "2026-11-06T13:25:32.820Z",
+        "checkedAt": "2026-10-30T13:25:32.341Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11168607137",
+        "name": "The Dog Society Cafe, Bar, and Groomers",
+        "category": "bar",
+        "website": "https://dogsocietysd.com/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T13:25:33.837Z",
+        "checkedAt": "2026-10-30T13:25:32.396Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11170882537",
+        "name": "Women's Museum of California Education Center",
+        "category": "museum",
+        "website": "https://www.womensmuseumca.org/educationcenter",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T13:25:34.107Z",
+        "checkedAt": "2026-10-30T13:25:32.820Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|4848250729",
+        "name": "Starbucks",
+        "category": "cafe",
+        "website": "https://www.starbucks.com/store-locator/store/14075/eastlake-parkway-otay-lakes-2295-otay-lakes-rd-116-chula-vista-ca-919151160-us",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Starbucks (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-14T13:25:36.022Z",
+        "checkedAt": "2026-10-30T13:25:33.837Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +142,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 3,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +154,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1
+      "logan-heights": 1,
+      "rolando-park": 1,
+      "valencia-park": 1,
+      "eastlake": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "south-bay": 3,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,26 +287,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 4,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-30T08:54:26.857Z",
-    "durationMs": 867,
+    "failed": 4,
+    "finishedAt": "2026-10-30T13:25:36.024Z",
+    "durationMs": 4023,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 355,
-      "lowValue": 808,
+      "cold": 356,
+      "lowValue": 807,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 355,
-        "low-value": 808,
+        "cold-sample": 356,
+        "low-value": 807,
         "food-evidence": 10
       }
     },
@@ -297,22 +359,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 355,
-      "lowValueCount": 808,
+      "coldCount": 356,
+      "lowValueCount": 807,
       "laneCounts": {
-        "cold-sample": 355,
+        "cold-sample": 356,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 808
+        "low-value": 807
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 355,
-        "candidate": 767
+        "cold": 356,
+        "candidate": 766
       },
       "categoryCounts": {
         "nightclub": 8,
