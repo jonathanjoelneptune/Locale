@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-30T06:29:00.007Z",
+  "generatedAt": "2026-10-30T08:53:50.275Z",
   "run": {
-    "startedAt": "2026-10-30T06:28:58.915Z",
+    "startedAt": "2026-10-30T08:53:04.120Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 178,
-      "cold": 354,
-      "lowValue": 809,
+      "due": 0,
+      "retry": 177,
+      "cold": 355,
+      "lowValue": 808,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 354,
-        "low-value": 809,
+        "cold-sample": 355,
+        "low-value": 808,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,17 +65,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2651673866",
-        "name": "Ace New York Giant Pizza Bar & Lounge",
-        "category": "restaurant",
-        "website": "https://acenypizza.com/",
-        "attempts": 8,
+        "key": "san-diego|osm|node|9908210877",
+        "name": "Luckie Coffee",
+        "category": "cafe",
+        "website": "https://luckie.coffee/",
+        "attempts": 2,
         "status": "retry",
-        "probeLane": "food-evidence",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,27 +83,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-06T06:28:59.385Z",
-        "checkedAt": "2026-10-30T06:28:59.209Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|3732387001",
-        "name": "Champion Field",
-        "category": "restaurant",
-        "website": "http://www.championfield.com/Tierrasanta/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-29T06:28:59.968Z",
-        "checkedAt": "2026-10-30T06:28:59.328Z"
+        "nextCheckAt": "2026-11-01T08:53:50.229Z",
+        "checkedAt": "2026-10-30T08:53:49.435Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,7 +96,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -116,12 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "winter-gardens": 1,
-      "tierrasanta": 1
+      "poway": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "north-central": 1
+      "north-inland": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 19.075,
+            "averageEvents": 19.05,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -247,11 +236,11 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-10-30T06:28:59.977Z",
-    "durationMs": 1062,
+    "failed": 1,
+    "finishedAt": "2026-10-30T08:53:50.231Z",
+    "durationMs": 46111,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -273,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T08:53:04.199Z",
+        "lastFinishedAt": "2026-10-30T08:53:19.203Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793350429203,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T08:53:19.203Z",
+        "lastFinishedAt": "2026-10-30T08:53:34.203Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793350444203,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T08:53:34.203Z",
+        "lastFinishedAt": "2026-10-30T08:53:49.204Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793350459204,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -375,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
