@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-30T20:39:25.741Z",
+  "generatedAt": "2026-10-30T22:40:05.419Z",
   "run": {
-    "startedAt": "2026-10-30T20:39:22.028Z",
+    "startedAt": "2026-10-30T22:39:32.770Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 358,
-      "lowValue": 805,
+      "cold": 359,
+      "lowValue": 804,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 358,
-        "low-value": 805,
+        "cold-sample": 359,
+        "low-value": 804,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.36,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9206559735",
+        "key": "san-diego|osm|node|10170216904",
         "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/64970-297653/sweetwater-st-george-937-sweetwater-rd-101-spring-valley-ca-919774869-u",
+        "website": "https://www.starbucks.com/store-locator/store/17297/proctor-valley-mt-miguel-2326-proctor-valley-rd-109-chula-vista-ca-91914600",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -72,8 +83,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T20:39:25.691Z",
-        "checkedAt": "2026-10-30T20:39:22.365Z"
+        "nextCheckAt": "2026-12-14T22:40:05.367Z",
+        "checkedAt": "2026-10-30T22:40:03.712Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-presa": 1
+      "eastlake": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 17.15,
+            "averageEvents": 17.05,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 155.73684210526315,
+            "averageEvents": 155.31578947368422,
             "averageVenues": 16.736842105263158,
             "deficitScore": 57.589473684210525
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
             "averageGapScore": 35.55555555555556,
-            "averageEvents": 127.94444444444444,
+            "averageEvents": 127.5,
             "averageVenues": 14.722222222222221,
             "deficitScore": 52.166666666666664
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 470.90909090909093,
+            "averageEvents": 470.1818181818182,
             "averageVenues": 46.45454545454545,
             "deficitScore": 14.104545454545452
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-30T20:39:25.693Z",
-    "durationMs": 3665,
+    "finishedAt": "2026-10-30T22:40:05.369Z",
+    "durationMs": 32599,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 359,
-      "lowValue": 804,
+      "cold": 360,
+      "lowValue": 803,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 359,
-        "low-value": 804,
+        "cold-sample": 360,
+        "low-value": 803,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-10-30T22:39:32.846Z",
+        "lastFinishedAt": "2026-10-30T22:39:33.477Z",
+        "lastLatencyMs": 631,
+        "cooldownUntil": 1793400003477,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T22:39:33.477Z",
+        "lastFinishedAt": "2026-10-30T22:39:48.478Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793400018478,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T22:39:48.478Z",
+        "lastFinishedAt": "2026-10-30T22:40:03.478Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793400033478,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 359,
-      "lowValueCount": 804,
+      "coldCount": 360,
+      "lowValueCount": 803,
       "laneCounts": {
-        "cold-sample": 359,
+        "cold-sample": 360,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 804
+        "low-value": 803
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 359,
-        "candidate": 763
+        "cold": 360,
+        "candidate": 762
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
