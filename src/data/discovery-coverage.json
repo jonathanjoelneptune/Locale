@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-29T22:55:43.283Z",
+  "generatedAt": "2026-10-30T00:47:26.705Z",
   "run": {
-    "startedAt": "2026-10-29T22:55:42.294Z",
+    "startedAt": "2026-10-30T00:46:41.147Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.84,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2609126217",
-        "name": "Pauly's Pizza Joint",
+        "key": "san-diego|osm|node|2576307695",
+        "name": "Poseidon",
         "category": "restaurant",
-        "website": "https://paulyspizzajoint.com/",
+        "website": "https://www.poseidonrestaurant.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
@@ -72,8 +83,8 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-12T22:55:43.222Z",
-        "checkedAt": "2026-10-29T22:55:42.745Z"
+        "nextCheckAt": "2026-11-13T00:47:26.676Z",
+        "checkedAt": "2026-10-30T00:47:26.336Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar": 1
+      "del-mar": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "north-county-coast": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 20.075,
+            "averageEvents": 20.05,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 161.94736842105263,
+            "averageEvents": 161.78947368421052,
             "averageVenues": 16.736842105263158,
             "deficitScore": 57.589473684210525
           },
@@ -228,8 +239,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-29T22:55:43.240Z",
-    "durationMs": 946,
+    "finishedAt": "2026-10-30T00:47:26.677Z",
+    "durationMs": 45530,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T00:46:41.191Z",
+        "lastFinishedAt": "2026-10-30T00:46:56.194Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1793321246194,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T00:46:56.194Z",
+        "lastFinishedAt": "2026-10-30T00:47:11.194Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793321261194,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-30T00:47:11.194Z",
+        "lastFinishedAt": "2026-10-30T00:47:26.194Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793321276194,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
