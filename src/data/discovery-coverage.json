@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-30T15:48:10.719Z",
+  "generatedAt": "2026-10-30T18:48:02.221Z",
   "run": {
-    "startedAt": "2026-10-30T15:47:51.256Z",
+    "startedAt": "2026-10-30T18:47:45.224Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 4,
       "retry": 177,
-      "cold": 356,
-      "lowValue": 807,
+      "cold": 357,
+      "lowValue": 806,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 356,
-        "low-value": 807,
+        "cold-sample": 357,
+        "low-value": 806,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.84,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,14 +54,52 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6326367361",
+        "key": "san-diego|osm|node|9908007843",
+        "name": "Blue Pearl Art",
+        "category": "gallery",
+        "website": "https://www.bluepearlartstudio.com/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T18:47:45.614Z",
+        "checkedAt": "2026-10-30T18:47:45.447Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596649040",
+        "name": "Oggi's Pizza and Brewing Co.",
+        "category": "restaurant",
+        "website": "http://cmr.oggis.com/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T18:47:45.703Z",
+        "checkedAt": "2026-10-30T18:47:45.474Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6645053464",
         "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/11445/la-jolla-shores-torrey-pines-2206-torrey-pines-road-b-la-jolla-ca-920373472-us",
+        "website": "https://www.starbucks.com/store-locator/store/1019172/9th-palm-801-palm-ave-suite-104-imperial-beach-ca-919321518",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -83,8 +110,46 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T15:48:10.654Z",
-        "checkedAt": "2026-10-30T15:48:08.781Z"
+        "nextCheckAt": "2026-12-14T18:47:48.019Z",
+        "checkedAt": "2026-10-30T18:47:45.703Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8793152104",
+        "name": "Central Library Art Gallery",
+        "category": "gallery",
+        "website": "https://www.sandiego.gov/public-library/visualarts",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Central Library Art Gallery",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T18:47:54.233Z",
+        "checkedAt": "2026-10-30T18:47:45.615Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|381012089",
+        "name": "Copley-Price Family YMCA",
+        "category": "sports-centre",
+        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T18:48:02.192Z",
+        "checkedAt": "2026-10-30T18:47:48.019Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,6 +161,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 3,
+      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -107,10 +174,15 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla-shores": 1
+      "teralta": 2,
+      "rancho-penasquitos": 1,
+      "sherman-heights": 1,
+      "otay-mesa-nestor": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "uptown-midcity": 2,
+      "north-inland": 1,
+      "south-bay": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +235,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 76.575,
-            "averageEvents": 17.55,
+            "averageEvents": 17.25,
             "averageVenues": 1.9,
             "deficitScore": 86.80125
           },
@@ -236,68 +308,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 5,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-30T15:48:10.669Z",
-    "durationMs": 19413,
+    "failed": 5,
+    "finishedAt": "2026-10-30T18:48:02.193Z",
+    "durationMs": 16969,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 357,
-      "lowValue": 806,
+      "cold": 358,
+      "lowValue": 805,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 357,
-        "low-value": 806,
+        "cold-sample": 358,
+        "low-value": 805,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-30T15:47:51.456Z",
-        "lastFinishedAt": "2026-10-30T15:47:52.236Z",
-        "lastLatencyMs": 780,
-        "cooldownUntil": 1793375302236,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-30T15:47:52.236Z",
-        "lastFinishedAt": "2026-10-30T15:48:07.237Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793375317237,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-30T15:48:07.237Z",
-        "lastFinishedAt": "2026-10-30T15:48:08.536Z",
-        "lastLatencyMs": 1299,
-        "cooldownUntil": 1793375318536,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +380,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 357,
-      "lowValueCount": 806,
+      "coldCount": 358,
+      "lowValueCount": 805,
       "laneCounts": {
-        "cold-sample": 357,
+        "cold-sample": 358,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 806
+        "low-value": 805
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 357,
-        "candidate": 765
+        "cold": 358,
+        "candidate": 764
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +436,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
