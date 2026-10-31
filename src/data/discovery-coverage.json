@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-31T00:39:33.451Z",
+  "generatedAt": "2026-10-31T01:52:29.552Z",
   "run": {
-    "startedAt": "2026-10-31T00:39:32.614Z",
+    "startedAt": "2026-10-31T01:52:25.703Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 177,
-      "cold": 360,
-      "lowValue": 803,
+      "due": 2,
+      "retry": 176,
+      "cold": 361,
+      "lowValue": 802,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 360,
-        "low-value": 803,
+        "cold-sample": 361,
+        "low-value": 802,
         "food-evidence": 10
       }
     },
@@ -58,22 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12572243201",
-        "name": "Thai Ladle",
-        "category": "restaurant",
-        "website": "https://thailadle.com/",
-        "attempts": 3,
+        "key": "san-diego|osm|node|9215079082",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopgaslamp.com/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-07T01:52:26.678Z",
+        "checkedAt": "2026-10-31T01:52:26.149Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-07T01:52:27.232Z",
+        "checkedAt": "2026-10-31T01:52:26.678Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31819806",
+        "name": "Starbucks",
+        "category": "cafe",
+        "website": "https://www.starbucks.com/store-locator/store/17074/palm-beyer-3320-palm-avenue-san-diego-ca-921541662-us",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Starbucks (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T00:39:33.404Z",
-        "checkedAt": "2026-10-31T00:39:32.956Z"
+        "nextCheckAt": "2026-12-15T01:52:29.504Z",
+        "checkedAt": "2026-10-31T01:52:26.104Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +123,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 2
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +135,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1
+      "otay-mesa-nestor": 1,
+      "cortez-hill": 1,
+      "uptown": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "south-bay": 1,
+      "central-core": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -118,10 +161,10 @@
             "passing": 0,
             "zeroEventAreas": 9,
             "passRate": 0,
-            "averageGapScore": 78,
-            "averageEvents": 14.96551724137931,
+            "averageGapScore": 78.17241379310344,
+            "averageEvents": 14.827586206896552,
             "averageVenues": 1.896551724137931,
-            "deficitScore": 85.40344827586206
+            "deficitScore": 85.46379310344827
           },
           "north-inland": {
             "group": "north-inland",
@@ -151,10 +194,10 @@
             "passing": 0,
             "zeroEventAreas": 20,
             "passRate": 0,
-            "averageGapScore": 76.575,
-            "averageEvents": 17.05,
+            "averageGapScore": 76.625,
+            "averageEvents": 17,
             "averageVenues": 1.9,
-            "deficitScore": 86.80125
+            "deficitScore": 86.81875
           },
           "central-west": {
             "group": "central-west",
@@ -162,10 +205,10 @@
             "passing": 4,
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
-            "averageGapScore": 37.473684210526315,
-            "averageEvents": 155.21052631578948,
+            "averageGapScore": 37.73684210526316,
+            "averageEvents": 154.73684210526315,
             "averageVenues": 16.736842105263158,
-            "deficitScore": 57.589473684210525
+            "deficitScore": 57.68157894736842
           },
           "north-county-inland": {
             "group": "north-county-inland",
@@ -173,10 +216,10 @@
             "passing": 0,
             "zeroEventAreas": 15,
             "passRate": 0,
-            "averageGapScore": 91.22727272727273,
-            "averageEvents": 4.954545454545454,
+            "averageGapScore": 91.31818181818181,
+            "averageEvents": 4.863636363636363,
             "averageVenues": 1.0454545454545454,
-            "deficitScore": 93.74772727272727
+            "deficitScore": 93.77954545454544
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -195,10 +238,10 @@
             "passing": 5,
             "zeroEventAreas": 0,
             "passRate": 0.2777777777777778,
-            "averageGapScore": 35.55555555555556,
-            "averageEvents": 127.5,
+            "averageGapScore": 35.611111111111114,
+            "averageEvents": 127.44444444444444,
             "averageVenues": 14.722222222222221,
-            "deficitScore": 52.166666666666664
+            "deficitScore": 52.18611111111111
           },
           "central-core": {
             "group": "central-core",
@@ -225,26 +268,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-31T00:39:33.406Z",
-    "durationMs": 792,
+    "failed": 3,
+    "finishedAt": "2026-10-31T01:52:29.505Z",
+    "durationMs": 3802,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 361,
-      "lowValue": 802,
+      "cold": 362,
+      "lowValue": 801,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 361,
-        "low-value": 802,
+        "cold-sample": 362,
+        "low-value": 801,
         "food-evidence": 10
       }
     },
@@ -297,22 +340,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 361,
-      "lowValueCount": 802,
+      "coldCount": 362,
+      "lowValueCount": 801,
       "laneCounts": {
-        "cold-sample": 361,
+        "cold-sample": 362,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 802
+        "low-value": 801
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 176,
         "needs-website": 824,
-        "cold": 361,
-        "candidate": 762
+        "cold": 362,
+        "candidate": 761
       },
       "categoryCounts": {
         "nightclub": 8,
