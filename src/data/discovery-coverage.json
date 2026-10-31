@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-31T12:23:17.510Z",
+  "generatedAt": "2026-10-31T13:33:12.248Z",
   "run": {
-    "startedAt": "2026-10-31T12:22:58.266Z",
+    "startedAt": "2026-10-31T13:33:10.731Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
+      "due": 0,
       "retry": 176,
-      "cold": 363,
-      "lowValue": 800,
+      "cold": 364,
+      "lowValue": 799,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 363,
-        "low-value": 800,
+        "cold-sample": 364,
+        "low-value": 799,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.38,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,64 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9506307219",
-        "name": "Fairweather Rooftop Bar",
-        "category": "bar",
-        "website": "https://www.fairweatherbar.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T12:23:16.179Z",
-        "checkedAt": "2026-10-31T12:23:15.937Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|377357190",
-        "name": "Tivoli Bar and Grill",
-        "category": "bar",
-        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
-        "attempts": 8,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-07T12:23:16.390Z",
-        "checkedAt": "2026-10-31T12:23:16.179Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1281884382",
-        "name": "Aroma Thai Restaurant",
+        "key": "san-diego|osm|node|6721094492",
+        "name": "Big Kahuna's",
         "category": "restaurant",
-        "website": "https://www.aromathaiofib.com/",
+        "website": "https://bigkahunasib.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Aroma Thai Restaurant (low-value)",
+          "detail": "Checked 1 page on Big Kahuna's (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T12:23:17.468Z",
-        "checkedAt": "2026-10-31T12:23:15.939Z"
+        "nextCheckAt": "2026-12-15T13:33:12.202Z",
+        "checkedAt": "2026-10-31T13:33:11.053Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -134,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -146,11 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "east-village": 2,
       "imperial-beach": 1
     },
     "probeGroupCounts": {
-      "central-core": 2,
       "south-bay": 1
     },
     "coverageEquity": {
@@ -204,7 +152,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.125,
-            "averageEvents": 16.125,
+            "averageEvents": 15.275,
             "averageVenues": 1.9,
             "deficitScore": 87.34375
           },
@@ -237,8 +185,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 39.888888888888886,
-            "averageEvents": 120.72222222222223,
-            "averageVenues": 14.166666666666666,
+            "averageEvents": 120.55555555555556,
+            "averageVenues": 14.11111111111111,
             "deficitScore": 63.40555555555555
           },
           "north-county-coast": {
@@ -259,8 +207,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 446.54545454545456,
-            "averageVenues": 46.36363636363637,
+            "averageEvents": 445.54545454545456,
+            "averageVenues": 46.18181818181818,
             "deficitScore": 14.199999999999996
           }
         }
@@ -277,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 1,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-10-31T12:23:17.470Z",
-    "durationMs": 19204,
+    "failed": 1,
+    "finishedAt": "2026-10-31T13:33:12.204Z",
+    "durationMs": 1473,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 364,
-      "lowValue": 799,
+      "cold": 365,
+      "lowValue": 798,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 364,
-        "low-value": 799,
+        "cold-sample": 365,
+        "low-value": 798,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-31T12:22:58.411Z",
-        "lastFinishedAt": "2026-10-31T12:22:59.245Z",
-        "lastLatencyMs": 834,
-        "cooldownUntil": 1793449409245,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-31T12:22:59.245Z",
-        "lastFinishedAt": "2026-10-31T12:23:14.247Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1793449424247,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-10-31T12:23:14.247Z",
-        "lastFinishedAt": "2026-10-31T12:23:15.615Z",
-        "lastLatencyMs": 1368,
-        "cooldownUntil": 1793449425615,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -349,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 364,
-      "lowValueCount": 799,
+      "coldCount": 365,
+      "lowValueCount": 798,
       "laneCounts": {
-        "cold-sample": 364,
+        "cold-sample": 365,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 799
+        "low-value": 798
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 176,
         "needs-website": 824,
-        "cold": 364,
-        "candidate": 759
+        "cold": 365,
+        "candidate": 758
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -405,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
