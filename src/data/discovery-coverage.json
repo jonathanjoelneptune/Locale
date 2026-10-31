@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-31T17:53:24.250Z",
+  "generatedAt": "2026-10-31T21:24:15.352Z",
   "run": {
-    "startedAt": "2026-10-31T17:53:23.089Z",
+    "startedAt": "2026-10-31T21:23:29.472Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 176,
-      "cold": 366,
-      "lowValue": 797,
+      "cold": 367,
+      "lowValue": 796,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 366,
-        "low-value": 797,
+        "cold-sample": 367,
+        "low-value": 796,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.86,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11751911469",
-        "name": "Gaetano's Italian Restaurant",
+        "key": "san-diego|osm|node|9206559778",
+        "name": "Godfather's Pizza",
         "category": "restaurant",
-        "website": "https://www.gaetanositalianrestaurant.com/",
-        "attempts": 1,
+        "website": "https://www.godfathers.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Gaetano's Italian Restaurant (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-30T21:24:15.059Z",
+        "checkedAt": "2026-10-31T21:24:14.907Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1741841141",
+        "name": "Trisler's San Diego Wine Bar",
+        "category": "bar",
+        "website": "https://trislers.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T17:53:24.216Z",
-        "checkedAt": "2026-10-31T17:53:23.394Z"
+        "nextCheckAt": "2026-11-05T21:24:15.293Z",
+        "checkedAt": "2026-10-31T21:24:14.909Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "casa-de-oro": 1
+      "la-presa": 1,
+      "mission-valley": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "east-county": 1,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -141,7 +174,7 @@
             "zeroEventAreas": 5,
             "passRate": 0,
             "averageGapScore": 68.46153846153847,
-            "averageEvents": 23.26923076923077,
+            "averageEvents": 23.23076923076923,
             "averageVenues": 2.923076923076923,
             "deficitScore": 80.88461538461539
           },
@@ -163,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 39.63157894736842,
-            "averageEvents": 150.57894736842104,
+            "averageEvents": 150.52631578947367,
             "averageVenues": 16.68421052631579,
             "deficitScore": 58.34473684210526
           },
@@ -174,7 +207,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 91.36363636363636,
-            "averageEvents": 4.7272727272727275,
+            "averageEvents": 4.818181818181818,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.79545454545453
           },
@@ -185,7 +218,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 39.888888888888886,
-            "averageEvents": 120.38888888888889,
+            "averageEvents": 120.22222222222223,
             "averageVenues": 14.11111111111111,
             "deficitScore": 63.40555555555555
           },
@@ -196,7 +229,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 66.66666666666667,
-            "averageEvents": 23.583333333333332,
+            "averageEvents": 23.416666666666668,
             "averageVenues": 3.6666666666666665,
             "deficitScore": 80
           },
@@ -207,8 +240,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 444.3636363636364,
-            "averageVenues": 46.18181818181818,
+            "averageEvents": 444.72727272727275,
+            "averageVenues": 46.54545454545455,
             "deficitScore": 14.199999999999996
           }
         }
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-10-31T17:53:24.219Z",
-    "durationMs": 1130,
+    "failed": 2,
+    "finishedAt": "2026-10-31T21:24:15.302Z",
+    "durationMs": 45830,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
-      "cold": 367,
-      "lowValue": 796,
+      "retry": 175,
+      "cold": 368,
+      "lowValue": 795,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 367,
-        "low-value": 796,
+        "cold-sample": 368,
+        "low-value": 795,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-31T21:23:29.661Z",
+        "lastFinishedAt": "2026-10-31T21:23:44.665Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793481854665,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-31T21:23:44.665Z",
+        "lastFinishedAt": "2026-10-31T21:23:59.666Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793481869666,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-10-31T21:23:59.666Z",
+        "lastFinishedAt": "2026-10-31T21:24:14.666Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793481884666,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +330,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 367,
-      "lowValueCount": 796,
+      "coldCount": 368,
+      "lowValueCount": 795,
       "laneCounts": {
-        "cold-sample": 367,
+        "cold-sample": 368,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 796
+        "low-value": 795
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 175,
         "needs-website": 824,
-        "cold": 367,
+        "cold": 368,
         "candidate": 756
       },
       "categoryCounts": {
@@ -353,7 +386,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
