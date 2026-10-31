@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-10-30T22:40:05.419Z",
+  "generatedAt": "2026-10-31T00:39:33.451Z",
   "run": {
-    "startedAt": "2026-10-30T22:39:32.770Z",
+    "startedAt": "2026-10-31T00:39:32.614Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 359,
-      "lowValue": 804,
+      "cold": 360,
+      "lowValue": 803,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 359,
-        "low-value": 804,
+        "cold-sample": 360,
+        "low-value": 803,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.36,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10170216904",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/17297/proctor-valley-mt-miguel-2326-proctor-valley-rd-109-chula-vista-ca-91914600",
-        "attempts": 1,
+        "key": "san-diego|osm|node|12572243201",
+        "name": "Thai Ladle",
+        "category": "restaurant",
+        "website": "https://thailadle.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:40:05.367Z",
-        "checkedAt": "2026-10-30T22:40:03.712Z"
+        "nextCheckAt": "2026-11-30T00:39:33.404Z",
+        "checkedAt": "2026-10-31T00:39:32.956Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -107,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "eastlake": 1
+      "poway": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "north-inland": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 37.473684210526315,
-            "averageEvents": 155.31578947368422,
+            "averageEvents": 155.21052631578948,
             "averageVenues": 16.736842105263158,
             "deficitScore": 57.589473684210525
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 11.727272727272727,
-            "averageEvents": 470.1818181818182,
+            "averageEvents": 469.54545454545456,
             "averageVenues": 46.45454545454545,
             "deficitScore": 14.104545454545452
           }
@@ -239,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-10-30T22:40:05.369Z",
-    "durationMs": 32599,
+    "finishedAt": "2026-10-31T00:39:33.406Z",
+    "durationMs": 792,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 177,
-      "cold": 360,
-      "lowValue": 803,
+      "retry": 176,
+      "cold": 361,
+      "lowValue": 802,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 360,
-        "low-value": 803,
+        "cold-sample": 361,
+        "low-value": 802,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-10-30T22:39:32.846Z",
-        "lastFinishedAt": "2026-10-30T22:39:33.477Z",
-        "lastLatencyMs": 631,
-        "cooldownUntil": 1793400003477,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-30T22:39:33.477Z",
-        "lastFinishedAt": "2026-10-30T22:39:48.478Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793400018478,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-10-30T22:39:48.478Z",
-        "lastFinishedAt": "2026-10-30T22:40:03.478Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793400033478,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,21 +297,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 360,
-      "lowValueCount": 803,
+      "coldCount": 361,
+      "lowValueCount": 802,
       "laneCounts": {
-        "cold-sample": 360,
+        "cold-sample": 361,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 803
+        "low-value": 802
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 177,
+        "retry": 176,
         "needs-website": 824,
-        "cold": 360,
+        "cold": 361,
         "candidate": 762
       },
       "categoryCounts": {
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
