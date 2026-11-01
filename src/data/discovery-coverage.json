@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-01T00:22:46.226Z",
+  "generatedAt": "2026-11-01T02:28:54.982Z",
   "run": {
-    "startedAt": "2026-11-01T00:22:44.364Z",
+    "startedAt": "2026-11-01T02:28:54.182Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 176,
-      "cold": 368,
-      "lowValue": 795,
+      "cold": 369,
+      "lowValue": 794,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 368,
-        "low-value": 795,
+        "cold-sample": 369,
+        "low-value": 794,
         "food-evidence": 10
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|993521770",
-        "name": "Pizza Hut",
+        "key": "san-diego|osm|node|12729954310",
+        "name": "Fresheria",
         "category": "restaurant",
-        "website": "https://locations.pizzahut.com/ca/spring-valley/9805-campo-rd",
+        "website": "https://www.lafresheria.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pizza Hut (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-16T00:22:46.171Z",
-        "checkedAt": "2026-11-01T00:22:44.700Z"
+        "nextCheckAt": "2026-11-04T02:28:54.905Z",
+        "checkedAt": "2026-11-01T02:28:54.510Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "casa-de-oro": 1
+      "bonita": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -118,10 +118,10 @@
             "passing": 0,
             "zeroEventAreas": 6,
             "passRate": 0,
-            "averageGapScore": 68.57692307692308,
-            "averageEvents": 23.115384615384617,
+            "averageGapScore": 69.15384615384616,
+            "averageEvents": 22.576923076923077,
             "averageVenues": 2.8461538461538463,
-            "deficitScore": 81.30961538461538
+            "deficitScore": 81.51153846153846
           },
           "south-bay": {
             "group": "south-bay",
@@ -129,10 +129,10 @@
             "passing": 0,
             "zeroEventAreas": 9,
             "passRate": 0,
-            "averageGapScore": 79.13793103448276,
-            "averageEvents": 14.172413793103448,
+            "averageGapScore": 79.34482758620689,
+            "averageEvents": 14,
             "averageVenues": 1.896551724137931,
-            "deficitScore": 85.80172413793103
+            "deficitScore": 85.87413793103448
           },
           "north-inland": {
             "group": "north-inland",
@@ -151,10 +151,10 @@
             "passing": 0,
             "zeroEventAreas": 20,
             "passRate": 0,
-            "averageGapScore": 78.125,
-            "averageEvents": 15.025,
+            "averageGapScore": 78.4,
+            "averageEvents": 14.825,
             "averageVenues": 1.9,
-            "deficitScore": 87.34375
+            "deficitScore": 87.44
           },
           "central-west": {
             "group": "central-west",
@@ -162,10 +162,10 @@
             "passing": 4,
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
-            "averageGapScore": 39.73684210526316,
-            "averageEvents": 149.73684210526315,
+            "averageGapScore": 40.63157894736842,
+            "averageEvents": 147.57894736842104,
             "averageVenues": 16.157894736842106,
-            "deficitScore": 58.38157894736842
+            "deficitScore": 58.69473684210526
           },
           "north-county-inland": {
             "group": "north-county-inland",
@@ -184,10 +184,10 @@
             "passing": 2,
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
-            "averageGapScore": 39.888888888888886,
-            "averageEvents": 119.61111111111111,
+            "averageGapScore": 41.44444444444444,
+            "averageEvents": 117.05555555555556,
             "averageVenues": 14.11111111111111,
-            "deficitScore": 63.40555555555555
+            "deficitScore": 63.949999999999996
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -195,10 +195,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 66.66666666666667,
-            "averageEvents": 23.583333333333332,
+            "averageGapScore": 67.58333333333333,
+            "averageEvents": 22.916666666666668,
             "averageVenues": 3.6666666666666665,
-            "deficitScore": 80
+            "deficitScore": 80.32083333333334
           },
           "central-core": {
             "group": "central-core",
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 443,
+            "averageEvents": 436.6363636363636,
             "averageVenues": 46.18181818181818,
             "deficitScore": 14.199999999999996
           }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-01T00:22:46.173Z",
-    "durationMs": 1809,
+    "finishedAt": "2026-11-01T02:28:54.907Z",
+    "durationMs": 725,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 176,
+      "retry": 177,
       "cold": 369,
       "lowValue": 794,
       "qualified": 19,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 176,
+        "retry": 177,
         "needs-website": 824,
         "cold": 369,
-        "candidate": 754
+        "candidate": 753
       },
       "categoryCounts": {
         "nightclub": 8,
