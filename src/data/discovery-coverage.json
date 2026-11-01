@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-01T19:06:16.171Z",
+  "generatedAt": "2026-11-01T21:21:28.181Z",
   "run": {
-    "startedAt": "2026-11-01T19:06:14.554Z",
+    "startedAt": "2026-11-01T21:21:03.147Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 372,
       "lowValue": 791,
       "qualified": 19,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.38,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -42,7 +53,7 @@
         "passing": 15,
         "passRate": 0.0797872340425532,
         "severeGapCount": 80,
-        "mediumGapCount": 157
+        "mediumGapCount": 158
       },
       "chicago": {
         "mode": "unmeasured",
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|7718924379",
-        "name": "Chopstix",
+        "key": "san-diego|osm|way|761929457",
+        "name": "Chuck E. Cheese",
         "category": "restaurant",
-        "website": "https://chopstixno2sd.com/",
+        "website": "https://locations.chuckecheese.com/us/ca/sandiego/9840-hibert-st.",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on Chuck E. Cheese (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-04T19:06:16.113Z",
-        "checkedAt": "2026-11-01T19:06:15.011Z"
+        "nextCheckAt": "2026-12-16T21:21:28.148Z",
+        "checkedAt": "2026-11-01T21:21:20.323Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 146.68421052631578,
+            "averageEvents": 146.1578947368421,
             "averageVenues": 16.05263157894737,
             "deficitScore": 58.87894736842105
           },
@@ -184,10 +195,10 @@
             "passing": 2,
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
-            "averageGapScore": 43.111111111111114,
-            "averageEvents": 114.5,
-            "averageVenues": 13.88888888888889,
-            "deficitScore": 64.53333333333333
+            "averageGapScore": 43.44444444444444,
+            "averageEvents": 113.94444444444444,
+            "averageVenues": 13.666666666666666,
+            "deficitScore": 64.64999999999999
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -195,10 +206,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 67.66666666666667,
+            "averageGapScore": 67.83333333333333,
             "averageEvents": 22.75,
-            "averageVenues": 3.6666666666666665,
-            "deficitScore": 80.35000000000001
+            "averageVenues": 3.5,
+            "deficitScore": 80.40833333333333
           },
           "central-core": {
             "group": "central-core",
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 426.3636363636364,
+            "averageEvents": 425.09090909090907,
             "averageVenues": 45.36363636363637,
             "deficitScore": 14.199999999999996
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-01T19:06:16.127Z",
-    "durationMs": 1573,
+    "finishedAt": "2026-11-01T21:21:28.151Z",
+    "durationMs": 25004,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 372,
-      "lowValue": 791,
+      "cold": 373,
+      "lowValue": 790,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 372,
-        "low-value": 791,
+        "cold-sample": 373,
+        "low-value": 790,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-01T21:21:03.195Z",
+        "lastFinishedAt": "2026-11-01T21:21:03.929Z",
+        "lastLatencyMs": 734,
+        "cooldownUntil": 1793568093929,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-01T21:21:03.929Z",
+        "lastFinishedAt": "2026-11-01T21:21:18.930Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793568108930,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-01T21:21:18.930Z",
+        "lastFinishedAt": "2026-11-01T21:21:20.170Z",
+        "lastLatencyMs": 1240,
+        "cooldownUntil": 1793568110170,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 372,
-      "lowValueCount": 791,
+      "coldCount": 373,
+      "lowValueCount": 790,
       "laneCounts": {
-        "cold-sample": 372,
+        "cold-sample": 373,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 791
+        "low-value": 790
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 372,
-        "candidate": 748
+        "cold": 373,
+        "candidate": 747
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
@@ -362,7 +373,7 @@
         "passing": 15,
         "passRate": 0.0797872340425532,
         "severeGapCount": 80,
-        "mediumGapCount": 157,
+        "mediumGapCount": 158,
         "activeMode": "bootstrap",
         "probeLimit": 12,
         "probeConcurrency": 2,
