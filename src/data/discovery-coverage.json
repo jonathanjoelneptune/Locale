@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-01T09:38:40.314Z",
+  "generatedAt": "2026-11-01T14:13:57.252Z",
   "run": {
-    "startedAt": "2026-11-01T09:38:37.290Z",
+    "startedAt": "2026-11-01T14:13:23.725Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 369,
-      "lowValue": 794,
+      "cold": 370,
+      "lowValue": 793,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 369,
-        "low-value": 794,
+        "cold-sample": 370,
+        "low-value": 793,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.86,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31816699",
-        "name": "Applebee's",
+        "key": "san-diego|osm|node|13706823875",
+        "name": "Bale French Sandwiches",
         "category": "restaurant",
-        "website": "https://restaurants.applebees.com/en-us/ca/san-diego/9480-east-mira-mesa-blvd.-79042",
+        "website": "https://balefrenchsandwiches.twupro.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Applebee's (low-value)",
+          "detail": "Checked 1 page on Bale French Sandwiches (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-16T09:38:40.256Z",
-        "checkedAt": "2026-11-01T09:38:37.660Z"
+        "nextCheckAt": "2026-12-16T14:13:57.202Z",
+        "checkedAt": "2026-11-01T14:13:55.279Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-01T09:38:40.258Z",
-    "durationMs": 2968,
+    "finishedAt": "2026-11-01T14:13:57.204Z",
+    "durationMs": 33479,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 370,
-      "lowValue": 793,
+      "cold": 371,
+      "lowValue": 792,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 370,
-        "low-value": 793,
+        "cold-sample": 371,
+        "low-value": 792,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-01T14:13:23.802Z",
+        "lastFinishedAt": "2026-11-01T14:13:38.806Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793542448806,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-01T14:13:38.806Z",
+        "lastFinishedAt": "2026-11-01T14:13:53.808Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793542463808,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-01T14:13:53.808Z",
+        "lastFinishedAt": "2026-11-01T14:13:55.022Z",
+        "lastLatencyMs": 1214,
+        "cooldownUntil": 1793542465022,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 370,
-      "lowValueCount": 793,
+      "coldCount": 371,
+      "lowValueCount": 792,
       "laneCounts": {
-        "cold-sample": 370,
+        "cold-sample": 371,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 793
+        "low-value": 792
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 370,
-        "candidate": 752
+        "cold": 371,
+        "candidate": 751
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
