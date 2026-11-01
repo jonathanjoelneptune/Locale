@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-01T16:53:55.257Z",
+  "generatedAt": "2026-11-01T18:08:01.031Z",
   "run": {
-    "startedAt": "2026-11-01T16:53:52.367Z",
+    "startedAt": "2026-11-01T18:07:59.873Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 371,
-      "lowValue": 792,
+      "cold": 372,
+      "lowValue": 791,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 371,
-        "low-value": 792,
+        "cold-sample": 372,
+        "low-value": 791,
         "food-evidence": 10
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14220665329",
-        "name": "Breakfast Republic",
+        "key": "san-diego|osm|way|373559311",
+        "name": "Buca di Beppo",
         "category": "restaurant",
-        "website": "https://breakfastrepublic.com/",
+        "website": "https://dineatbuca.com/locations/mira-mesa/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Breakfast Republic (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-16T16:53:55.222Z",
-        "checkedAt": "2026-11-01T16:53:52.738Z"
+        "nextCheckAt": "2026-11-02T18:08:00.979Z",
+        "checkedAt": "2026-11-01T18:08:00.193Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -163,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 146.73684210526315,
+            "averageEvents": 146.68421052631578,
             "averageVenues": 16.05263157894737,
             "deficitScore": 58.87894736842105
           },
@@ -185,7 +185,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.111111111111114,
-            "averageEvents": 114.72222222222223,
+            "averageEvents": 114.5,
             "averageVenues": 13.88888888888889,
             "deficitScore": 64.53333333333333
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 426.45454545454544,
+            "averageEvents": 426.3636363636364,
             "averageVenues": 45.36363636363637,
             "deficitScore": 14.199999999999996
           }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-01T16:53:55.224Z",
-    "durationMs": 2857,
+    "finishedAt": "2026-11-01T18:08:00.982Z",
+    "durationMs": 1109,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 177,
+      "retry": 178,
       "cold": 372,
       "lowValue": 791,
       "qualified": 19,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 177,
+        "retry": 178,
         "needs-website": 824,
         "cold": 372,
-        "candidate": 750
+        "candidate": 749
       },
       "categoryCounts": {
         "nightclub": 8,
