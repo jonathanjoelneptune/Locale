@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-01T21:21:28.181Z",
+  "generatedAt": "2026-11-01T22:43:51.514Z",
   "run": {
-    "startedAt": "2026-11-01T21:21:03.147Z",
+    "startedAt": "2026-11-01T22:43:47.609Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 372,
-      "lowValue": 791,
+      "cold": 373,
+      "lowValue": 790,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 372,
-        "low-value": 791,
+        "cold-sample": 373,
+        "low-value": 790,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.38,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|761929457",
-        "name": "Chuck E. Cheese",
+        "key": "san-diego|osm|node|596143314",
+        "name": "Denny's",
         "category": "restaurant",
-        "website": "https://locations.chuckecheese.com/us/ca/sandiego/9840-hibert-st.",
+        "website": "https://www.dennys.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on Chuck E. Cheese (low-value)",
+          "detail": "Checked 1 page on Denny's (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-16T21:21:28.148Z",
-        "checkedAt": "2026-11-01T21:21:20.323Z"
+        "nextCheckAt": "2026-12-16T22:43:51.463Z",
+        "checkedAt": "2026-11-01T22:43:47.959Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -239,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-01T21:21:28.151Z",
-    "durationMs": 25004,
+    "finishedAt": "2026-11-01T22:43:51.465Z",
+    "durationMs": 3856,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 373,
-      "lowValue": 790,
+      "cold": 374,
+      "lowValue": 789,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 373,
-        "low-value": 790,
+        "cold-sample": 374,
+        "low-value": 789,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-01T21:21:03.195Z",
-        "lastFinishedAt": "2026-11-01T21:21:03.929Z",
-        "lastLatencyMs": 734,
-        "cooldownUntil": 1793568093929,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-01T21:21:03.929Z",
-        "lastFinishedAt": "2026-11-01T21:21:18.930Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793568108930,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-01T21:21:18.930Z",
-        "lastFinishedAt": "2026-11-01T21:21:20.170Z",
-        "lastLatencyMs": 1240,
-        "cooldownUntil": 1793568110170,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 373,
-      "lowValueCount": 790,
+      "coldCount": 374,
+      "lowValueCount": 789,
       "laneCounts": {
-        "cold-sample": 373,
+        "cold-sample": 374,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 790
+        "low-value": 789
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 373,
-        "candidate": 747
+        "cold": 374,
+        "candidate": 746
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +353,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
