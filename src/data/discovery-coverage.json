@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-02T15:46:53.778Z",
+  "generatedAt": "2026-11-02T18:43:12.673Z",
   "run": {
-    "startedAt": "2026-11-02T15:46:07.503Z",
+    "startedAt": "2026-11-02T18:43:09.067Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 179,
-      "cold": 380,
-      "lowValue": 783,
+      "cold": 381,
+      "lowValue": 782,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 380,
-        "low-value": 783,
+        "cold-sample": 381,
+        "low-value": 782,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "carmel-mountain-ranch",
-        "name": "Carmel Mountain Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.38,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1451219558",
-        "name": "Islands",
+        "key": "san-diego|osm|node|596158252",
+        "name": "Mike Hess Brewing",
+        "category": "pub",
+        "website": "https://www.mikehessbrewing.com/north-park/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 502",
+          "statusCode": 502
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-06T18:43:10.269Z",
+        "checkedAt": "2026-11-02T18:43:09.306Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079095",
+        "name": "Metl Bar Restaurant -Gaslamp",
         "category": "restaurant",
-        "website": "https://www.islandsrestaurants.com/",
-        "attempts": 1,
+        "website": "https://metlsd.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Islands (low-value)",
+          "detail": "Checked 1 page on Metl Bar Restaurant -Gaslamp (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-17T15:46:53.728Z",
-        "checkedAt": "2026-11-02T15:46:52.816Z"
+        "nextCheckAt": "2026-12-02T18:43:11.456Z",
+        "checkedAt": "2026-11-02T18:43:10.269Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9366157837",
+        "name": "Pho Olala",
+        "category": "restaurant",
+        "website": "https://phoolala.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-04T18:43:12.636Z",
+        "checkedAt": "2026-11-02T18:43:09.344Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +123,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "event-likely": 1,
+      "low-value": 1,
+      "cold-sample": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -107,10 +136,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar-ranch-north": 1
+      "north-park": 1,
+      "casa-de-oro": 1,
+      "little-italy": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "uptown-midcity": 1,
+      "east-county": 1,
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,7 +196,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.8,
-            "averageEvents": 13.7,
+            "averageEvents": 12.4,
             "averageVenues": 1.9,
             "deficitScore": 87.58
           },
@@ -196,8 +229,8 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.44444444444444,
-            "averageEvents": 107.66666666666667,
-            "averageVenues": 13.444444444444445,
+            "averageEvents": 107.55555555555556,
+            "averageVenues": 13.38888888888889,
             "deficitScore": 64.64999999999999
           },
           "north-county-coast": {
@@ -218,8 +251,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 401.09090909090907,
-            "averageVenues": 44,
+            "averageEvents": 400.27272727272725,
+            "averageVenues": 43.81818181818182,
             "deficitScore": 14.199999999999996
           }
         }
@@ -236,11 +269,11 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-02T15:46:53.730Z",
-    "durationMs": 46227,
+    "failed": 3,
+    "finishedAt": "2026-11-02T18:43:12.638Z",
+    "durationMs": 3571,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -262,42 +295,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-02T15:46:07.581Z",
-        "lastFinishedAt": "2026-11-02T15:46:22.585Z",
-        "lastLatencyMs": 15004,
-        "cooldownUntil": 1793634412585,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-02T15:46:22.585Z",
-        "lastFinishedAt": "2026-11-02T15:46:37.586Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793634427586,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-02T15:46:37.586Z",
-        "lastFinishedAt": "2026-11-02T15:46:52.586Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793634442586,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -364,7 +397,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
