@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-02T20:13:17.864Z",
+  "generatedAt": "2026-11-02T21:59:12.706Z",
   "run": {
-    "startedAt": "2026-11-02T20:13:15.549Z",
+    "startedAt": "2026-11-02T21:58:21.689Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 381,
-      "lowValue": 782,
+      "cold": 382,
+      "lowValue": 781,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 381,
-        "low-value": 782,
+        "cold-sample": 382,
+        "low-value": 781,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.86,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13710010549",
-        "name": "Kappa Sushi",
+        "key": "san-diego|osm|node|3935414972",
+        "name": "Loving Hut",
         "category": "restaurant",
-        "website": "https://kappa-sd.com/",
+        "website": "https://lovinghut.us/sandiego2",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Kappa Sushi (low-value)",
+          "detail": "Checked 1 page on Loving Hut (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-17T20:13:17.766Z",
-        "checkedAt": "2026-11-02T20:13:16.125Z"
+        "nextCheckAt": "2026-12-17T21:59:12.667Z",
+        "checkedAt": "2026-11-02T21:59:06.925Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -119,7 +130,7 @@
             "zeroEventAreas": 6,
             "passRate": 0,
             "averageGapScore": 69.65384615384616,
-            "averageEvents": 21,
+            "averageEvents": 20.846153846153847,
             "averageVenues": 2.8461538461538463,
             "deficitScore": 81.68653846153846
           },
@@ -129,10 +140,10 @@
             "passing": 0,
             "zeroEventAreas": 9,
             "passRate": 0,
-            "averageGapScore": 79.58620689655173,
-            "averageEvents": 13.137931034482758,
+            "averageGapScore": 79.79310344827586,
+            "averageEvents": 13.068965517241379,
             "averageVenues": 1.896551724137931,
-            "deficitScore": 85.95862068965516
+            "deficitScore": 86.03103448275861
           },
           "north-inland": {
             "group": "north-inland",
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.8,
-            "averageEvents": 12.4,
+            "averageEvents": 12.35,
             "averageVenues": 1.9,
             "deficitScore": 87.58
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 139.68421052631578,
+            "averageEvents": 139.10526315789474,
             "averageVenues": 16,
             "deficitScore": 58.87894736842105
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.44444444444444,
-            "averageEvents": 107.55555555555556,
+            "averageEvents": 107.27777777777777,
             "averageVenues": 13.38888888888889,
             "deficitScore": 64.64999999999999
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 67.83333333333333,
-            "averageEvents": 22,
+            "averageEvents": 21.833333333333332,
             "averageVenues": 3.5,
             "deficitScore": 80.40833333333333
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 400.27272727272725,
+            "averageEvents": 399.45454545454544,
             "averageVenues": 43.81818181818182,
             "deficitScore": 14.199999999999996
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-02T20:13:17.802Z",
-    "durationMs": 2253,
+    "finishedAt": "2026-11-02T21:59:12.669Z",
+    "durationMs": 50980,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 382,
-      "lowValue": 781,
+      "cold": 383,
+      "lowValue": 780,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 382,
-        "low-value": 781,
+        "cold-sample": 383,
+        "low-value": 780,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T21:58:21.747Z",
+        "lastFinishedAt": "2026-11-02T21:58:36.749Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793656746749,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T21:58:36.749Z",
+        "lastFinishedAt": "2026-11-02T21:58:51.751Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793656761751,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T21:58:51.751Z",
+        "lastFinishedAt": "2026-11-02T21:59:06.751Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793656776751,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 382,
-      "lowValueCount": 781,
+      "coldCount": 383,
+      "lowValueCount": 780,
       "laneCounts": {
-        "cold-sample": 382,
+        "cold-sample": 383,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 781
+        "low-value": 780
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 382,
-        "candidate": 738
+        "cold": 383,
+        "candidate": 737
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
