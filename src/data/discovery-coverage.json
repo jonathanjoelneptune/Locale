@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-02T09:52:53.334Z",
+  "generatedAt": "2026-11-02T15:46:53.778Z",
   "run": {
-    "startedAt": "2026-11-02T09:52:50.451Z",
+    "startedAt": "2026-11-02T15:46:07.503Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 379,
-      "lowValue": 784,
+      "cold": 380,
+      "lowValue": 783,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 379,
-        "low-value": 784,
+        "cold-sample": 380,
+        "low-value": 783,
         "food-evidence": 10
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "carmel-mountain-ranch",
+        "name": "Carmel Mountain Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.38,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12213153212",
-        "name": "Himalayan Grill",
+        "key": "san-diego|osm|node|1451219558",
+        "name": "Islands",
         "category": "restaurant",
-        "website": "https://www.himalayangrillsd.com/",
+        "website": "https://www.islandsrestaurants.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on Himalayan Grill (low-value)",
+          "detail": "Checked 2 pages on Islands (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-17T09:52:53.280Z",
-        "checkedAt": "2026-11-02T09:52:50.861Z"
+        "nextCheckAt": "2026-12-17T15:46:53.728Z",
+        "checkedAt": "2026-11-02T15:46:52.816Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-02T09:52:53.293Z",
-    "durationMs": 2842,
+    "finishedAt": "2026-11-02T15:46:53.730Z",
+    "durationMs": 46227,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 380,
-      "lowValue": 783,
+      "cold": 381,
+      "lowValue": 782,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 380,
-        "low-value": 783,
+        "cold-sample": 381,
+        "low-value": 782,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T15:46:07.581Z",
+        "lastFinishedAt": "2026-11-02T15:46:22.585Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793634412585,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T15:46:22.585Z",
+        "lastFinishedAt": "2026-11-02T15:46:37.586Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793634427586,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-02T15:46:37.586Z",
+        "lastFinishedAt": "2026-11-02T15:46:52.586Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793634442586,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 380,
-      "lowValueCount": 783,
+      "coldCount": 381,
+      "lowValueCount": 782,
       "laneCounts": {
-        "cold-sample": 380,
+        "cold-sample": 381,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 783
+        "low-value": 782
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 380,
-        "candidate": 740
+        "cold": 381,
+        "candidate": 739
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 9,
         "completed": 7,
         "failed": 2,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
