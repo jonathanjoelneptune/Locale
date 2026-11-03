@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-03T19:51:05.663Z",
+  "generatedAt": "2026-11-03T22:04:39.906Z",
   "run": {
-    "startedAt": "2026-11-03T19:50:44.262Z",
+    "startedAt": "2026-11-03T22:04:08.223Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 179,
       "cold": 392,
       "lowValue": 771,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.38,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|965704750",
-        "name": "Big Kitchen",
+        "key": "san-diego|osm|node|597013952",
+        "name": "Kingfisher",
         "category": "restaurant",
-        "website": "http://www.bigkitchencafe.com/",
+        "website": "https://kingfishersd.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-05T19:51:05.612Z",
-        "checkedAt": "2026-11-03T19:50:44.578Z"
+        "nextCheckAt": "2026-11-17T22:04:39.735Z",
+        "checkedAt": "2026-11-03T22:04:39.563Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8477440717",
+        "name": "Lux Coffee Bar & Roasters",
+        "category": "cafe",
+        "website": "https://www.instagram.com/luxcoffeebar/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-15T22:04:39.858Z",
+        "checkedAt": "2026-11-03T22:04:39.565Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "cold-sample": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "south-park": 1
+      "south-park": 1,
+      "unmapped:san-diego|osm|node|8477440717": 1
     },
     "probeGroupCounts": {
-      "central-core": 1
+      "central-core": 1,
+      "unmapped": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -119,7 +152,7 @@
             "zeroEventAreas": 6,
             "passRate": 0,
             "averageGapScore": 69.65384615384616,
-            "averageEvents": 19.692307692307693,
+            "averageEvents": 19.46153846153846,
             "averageVenues": 2.8461538461538463,
             "deficitScore": 81.68653846153846
           },
@@ -152,7 +185,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.8,
-            "averageEvents": 11.9,
+            "averageEvents": 11.675,
             "averageVenues": 1.9,
             "deficitScore": 87.58
           },
@@ -163,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 134.6315789473684,
+            "averageEvents": 132.94736842105263,
             "averageVenues": 16,
             "deficitScore": 58.87894736842105
           },
@@ -185,7 +218,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.44444444444444,
-            "averageEvents": 102.44444444444444,
+            "averageEvents": 101.88888888888889,
             "averageVenues": 13.38888888888889,
             "deficitScore": 64.64999999999999
           },
@@ -196,7 +229,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 67.83333333333333,
-            "averageEvents": 20.583333333333332,
+            "averageEvents": 20.5,
             "averageVenues": 3.5,
             "deficitScore": 80.40833333333333
           },
@@ -207,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12.727272727272727,
-            "averageEvents": 380.8181818181818,
+            "averageEvents": 379.3636363636364,
             "averageVenues": 43.81818181818182,
             "deficitScore": 14.45454545454545
           }
@@ -225,17 +258,17 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-03T19:51:05.615Z",
-    "durationMs": 21353,
+    "failed": 2,
+    "finishedAt": "2026-11-03T22:04:39.860Z",
+    "durationMs": 31637,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
-      "cold": 392,
+      "retry": 180,
+      "cold": 391,
       "lowValue": 771,
       "qualified": 19,
       "needsWebsite": 933,
@@ -243,50 +276,50 @@
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 392,
+        "cold-sample": 391,
         "low-value": 771,
-        "food-evidence": 10
+        "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-03T22:04:08.298Z",
+        "lastFinishedAt": "2026-11-03T22:04:23.302Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793743493302,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-03T22:04:23.302Z",
+        "lastFinishedAt": "2026-11-03T22:04:38.303Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793743508303,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-03T22:04:38.303Z",
+        "lastFinishedAt": "2026-11-03T22:04:39.335Z",
+        "lastLatencyMs": 1033,
+        "cooldownUntil": 1793743509335,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +330,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 392,
+      "coldCount": 391,
       "lowValueCount": 771,
       "laneCounts": {
-        "cold-sample": 392,
+        "cold-sample": 391,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
-        "food-evidence": 10,
+        "food-evidence": 11,
         "low-value": 771
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 180,
         "needs-website": 824,
-        "cold": 392,
+        "cold": 391,
         "candidate": 728
       },
       "categoryCounts": {
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
