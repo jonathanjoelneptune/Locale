@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-03T06:46:30.561Z",
+  "generatedAt": "2026-11-03T08:37:13.838Z",
   "run": {
-    "startedAt": "2026-11-03T06:45:42.794Z",
+    "startedAt": "2026-11-03T08:37:12.437Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 178,
-      "cold": 386,
-      "lowValue": 777,
+      "cold": 387,
+      "lowValue": 776,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 386,
-        "low-value": 777,
+        "cold-sample": 387,
+        "low-value": 776,
         "food-evidence": 10
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "4s-ranch",
-        "name": "4S Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.38,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596936140",
-        "name": "Murrieta's",
+        "key": "san-diego|osm|way|498782115",
+        "name": "The Whiskey House",
+        "category": "observed-venue",
+        "website": "https://www.thewhiskeyhousesd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-07T08:37:13.382Z",
+        "checkedAt": "2026-11-03T08:37:12.668Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11005188917",
+        "name": "Nishiki Ramen",
         "category": "restaurant",
-        "website": "https://murrietasbonita.com/",
+        "website": "https://www.nishikiramen.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Murrieta's (low-value)",
+          "detail": "Checked 1 page on Nishiki Ramen (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-18T06:46:30.506Z",
-        "checkedAt": "2026-11-03T06:46:28.200Z"
+        "nextCheckAt": "2026-12-18T08:37:13.805Z",
+        "checkedAt": "2026-11-03T08:37:12.634Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -107,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "bonita": 1
+      "miramar-ranch-north": 1,
+      "east-village": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "north-central": 1,
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -130,7 +141,7 @@
             "zeroEventAreas": 6,
             "passRate": 0,
             "averageGapScore": 69.65384615384616,
-            "averageEvents": 20.384615384615383,
+            "averageEvents": 19.923076923076923,
             "averageVenues": 2.8461538461538463,
             "deficitScore": 81.68653846153846
           },
@@ -141,7 +152,7 @@
             "zeroEventAreas": 9,
             "passRate": 0,
             "averageGapScore": 79.79310344827586,
-            "averageEvents": 12.793103448275861,
+            "averageEvents": 12.448275862068966,
             "averageVenues": 1.896551724137931,
             "deficitScore": 86.03103448275861
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.8,
-            "averageEvents": 12.225,
+            "averageEvents": 11.95,
             "averageVenues": 1.9,
             "deficitScore": 87.58
           },
@@ -174,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 138.05263157894737,
+            "averageEvents": 135.26315789473685,
             "averageVenues": 16,
             "deficitScore": 58.87894736842105
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 91.36363636363636,
-            "averageEvents": 4.5,
+            "averageEvents": 4.409090909090909,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 93.79545454545453
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 1,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.44444444444444,
-            "averageEvents": 106.44444444444444,
+            "averageEvents": 103,
             "averageVenues": 13.38888888888889,
             "deficitScore": 64.64999999999999
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 67.83333333333333,
-            "averageEvents": 21.75,
+            "averageEvents": 21,
             "averageVenues": 3.5,
             "deficitScore": 80.40833333333333
           },
@@ -218,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12,
-            "averageEvents": 396.1818181818182,
+            "averageEvents": 381.09090909090907,
             "averageVenues": 43.81818181818182,
             "deficitScore": 14.199999999999996
           }
@@ -236,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-03T06:46:30.517Z",
-    "durationMs": 47723,
+    "failed": 2,
+    "finishedAt": "2026-11-03T08:37:13.807Z",
+    "durationMs": 1370,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 387,
-      "lowValue": 776,
+      "cold": 388,
+      "lowValue": 775,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 387,
-        "low-value": 776,
+        "cold-sample": 388,
+        "low-value": 775,
         "food-evidence": 10
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-03T06:45:42.965Z",
-        "lastFinishedAt": "2026-11-03T06:45:57.968Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1793688387968,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-03T06:45:57.968Z",
-        "lastFinishedAt": "2026-11-03T06:46:12.970Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1793688402970,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-03T06:46:12.970Z",
-        "lastFinishedAt": "2026-11-03T06:46:27.971Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793688417971,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +319,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 387,
-      "lowValueCount": 776,
+      "coldCount": 388,
+      "lowValueCount": 775,
       "laneCounts": {
-        "cold-sample": 387,
+        "cold-sample": 388,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 10,
-        "low-value": 776
+        "low-value": 775
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 178,
         "needs-website": 824,
-        "cold": 387,
-        "candidate": 734
+        "cold": 388,
+        "candidate": 733
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +375,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
