@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-03T16:37:47.970Z",
+  "generatedAt": "2026-11-03T17:42:26.744Z",
   "run": {
-    "startedAt": "2026-11-03T16:37:44.542Z",
+    "startedAt": "2026-11-03T17:42:25.648Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 391,
-      "lowValue": 772,
+      "cold": 392,
+      "lowValue": 771,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 391,
-        "low-value": 772,
+        "cold-sample": 392,
+        "low-value": 771,
         "food-evidence": 10
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11390934869",
-        "name": "Pho Cow Cali Express",
+        "key": "san-diego|osm|node|13956368611",
+        "name": "Public House",
         "category": "restaurant",
-        "website": "https://www.phocowcaliexpress.com/",
+        "website": "https://publichouse131.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pho Cow Cali Express (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-18T16:37:47.917Z",
-        "checkedAt": "2026-11-03T16:37:44.852Z"
+        "nextCheckAt": "2026-11-06T17:42:26.704Z",
+        "checkedAt": "2026-11-03T17:42:25.886Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-03T16:37:47.919Z",
-    "durationMs": 3377,
+    "finishedAt": "2026-11-03T17:42:26.705Z",
+    "durationMs": 1057,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 392,
       "lowValue": 771,
       "qualified": 19,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 179,
         "needs-website": 824,
         "cold": 392,
-        "candidate": 729
+        "candidate": 728
       },
       "categoryCounts": {
         "nightclub": 8,
