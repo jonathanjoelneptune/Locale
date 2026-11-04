@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-04T11:28:40.130Z",
+  "generatedAt": "2026-11-04T15:42:17.368Z",
   "run": {
-    "startedAt": "2026-11-04T11:28:39.418Z",
+    "startedAt": "2026-11-04T15:41:29.905Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 181,
+      "due": 1,
+      "retry": 182,
       "cold": 395,
       "lowValue": 767,
       "qualified": 19,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.5,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,17 +65,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|3299588588",
-        "name": "Shozen BBQ",
+        "key": "san-diego|osm|way|31809315",
+        "name": "California Pizza Kitchen",
         "category": "restaurant",
-        "website": "https://shozenmanpo.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.cpk.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,8 +83,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-05T11:28:40.080Z",
-        "checkedAt": "2026-11-04T11:28:39.724Z"
+        "nextCheckAt": "2026-12-04T15:42:15.854Z",
+        "checkedAt": "2026-11-04T15:42:15.240Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12094427461",
+        "name": "Sombrero Mexican Food",
+        "category": "restaurant",
+        "website": "https://sombreromex.com/location/imperial-beach/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Sombrero Mexican Food (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-19T15:42:17.311Z",
+        "checkedAt": "2026-11-04T15:42:15.242Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +115,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "miramar-ranch-north": 1
+      "carmel-mountain-ranch": 1,
+      "imperial-beach": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "north-inland": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -207,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12.727272727272727,
-            "averageEvents": 356.90909090909093,
+            "averageEvents": 356.45454545454544,
             "averageVenues": 43.81818181818182,
             "deficitScore": 14.45454545454545
           }
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-04T11:28:40.083Z",
-    "durationMs": 665,
+    "failed": 2,
+    "finishedAt": "2026-11-04T15:42:17.312Z",
+    "durationMs": 47407,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 182,
-      "cold": 395,
-      "lowValue": 767,
+      "cold": 396,
+      "lowValue": 766,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 395,
-        "low-value": 767,
+        "cold-sample": 396,
+        "low-value": 766,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-04T15:41:29.999Z",
+        "lastFinishedAt": "2026-11-04T15:41:45.004Z",
+        "lastLatencyMs": 15005,
+        "cooldownUntil": 1793806935004,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-04T15:41:45.004Z",
+        "lastFinishedAt": "2026-11-04T15:42:00.005Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1793806950005,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-04T15:42:00.005Z",
+        "lastFinishedAt": "2026-11-04T15:42:15.007Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793806965007,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +330,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 395,
-      "lowValueCount": 767,
+      "coldCount": 396,
+      "lowValueCount": 766,
       "laneCounts": {
-        "cold-sample": 395,
+        "cold-sample": 396,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 767
+        "low-value": 766
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 182,
         "needs-website": 824,
-        "cold": 395,
-        "candidate": 722
+        "cold": 396,
+        "candidate": 721
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
