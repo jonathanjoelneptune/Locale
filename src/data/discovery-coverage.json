@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-04T15:42:17.368Z",
+  "generatedAt": "2026-11-04T17:15:30.516Z",
   "run": {
-    "startedAt": "2026-11-04T15:41:29.905Z",
+    "startedAt": "2026-11-04T17:15:29.515Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 182,
-      "cold": 395,
-      "lowValue": 767,
+      "cold": 396,
+      "lowValue": 766,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 395,
-        "low-value": 767,
+        "cold-sample": 396,
+        "low-value": 766,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "4s-ranch",
-        "name": "4S Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.5,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31809315",
-        "name": "California Pizza Kitchen",
+        "key": "san-diego|osm|way|31801136",
+        "name": "Cali Baguette",
         "category": "restaurant",
-        "website": "https://www.cpk.com/",
-        "attempts": 4,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.calibaguette.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 404",
+          "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-04T15:42:15.854Z",
-        "checkedAt": "2026-11-04T15:42:15.240Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12094427461",
-        "name": "Sombrero Mexican Food",
-        "category": "restaurant",
-        "website": "https://sombreromex.com/location/imperial-beach/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Sombrero Mexican Food (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-19T15:42:17.311Z",
-        "checkedAt": "2026-11-04T15:42:15.242Z"
+        "nextCheckAt": "2026-12-04T17:15:30.468Z",
+        "checkedAt": "2026-11-04T17:15:29.807Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -127,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-mountain-ranch": 1,
-      "imperial-beach": 1
+      "el-cerrito": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "south-bay": 1
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -258,11 +225,11 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-04T15:42:17.312Z",
-    "durationMs": 47407,
+    "failed": 1,
+    "finishedAt": "2026-11-04T17:15:30.470Z",
+    "durationMs": 955,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -284,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-04T15:41:29.999Z",
-        "lastFinishedAt": "2026-11-04T15:41:45.004Z",
-        "lastLatencyMs": 15005,
-        "cooldownUntil": 1793806935004,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-04T15:41:45.004Z",
-        "lastFinishedAt": "2026-11-04T15:42:00.005Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793806950005,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-04T15:42:00.005Z",
-        "lastFinishedAt": "2026-11-04T15:42:15.007Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1793806965007,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -386,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
