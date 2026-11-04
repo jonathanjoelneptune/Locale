@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-04T17:15:30.516Z",
+  "generatedAt": "2026-11-04T18:49:00.641Z",
   "run": {
-    "startedAt": "2026-11-04T17:15:29.515Z",
+    "startedAt": "2026-11-04T18:48:54.054Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 182,
       "cold": 396,
       "lowValue": 766,
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31801136",
-        "name": "Cali Baguette",
+        "key": "san-diego|osm|node|9366157837",
+        "name": "Pho Olala",
         "category": "restaurant",
-        "website": "https://www.calibaguette.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://phoolala.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-04T17:15:30.468Z",
-        "checkedAt": "2026-11-04T17:15:29.807Z"
+        "nextCheckAt": "2026-12-04T18:48:57.463Z",
+        "checkedAt": "2026-11-04T18:48:54.453Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13375144703",
+        "name": "OB Noodle House & Sake Bar",
+        "category": "restaurant",
+        "website": "https://www.obnoodlehouse.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on OB Noodle House & Sake Bar (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-04T18:49:00.585Z",
+        "checkedAt": "2026-11-04T18:48:54.581Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "cold-sample": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "el-cerrito": 1
+      "casa-de-oro": 1,
+      "ocean-beach": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "east-county": 1,
+      "central-west": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-04T17:15:30.470Z",
-    "durationMs": 955,
+    "failed": 2,
+    "finishedAt": "2026-11-04T18:49:00.598Z",
+    "durationMs": 6544,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 182,
-      "cold": 396,
-      "lowValue": 766,
+      "retry": 181,
+      "cold": 397,
+      "lowValue": 765,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 396,
-        "low-value": 766,
+        "cold-sample": 397,
+        "low-value": 765,
         "food-evidence": 11
       }
     },
@@ -297,21 +319,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 396,
-      "lowValueCount": 766,
+      "coldCount": 397,
+      "lowValueCount": 765,
       "laneCounts": {
-        "cold-sample": 396,
+        "cold-sample": 397,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 766
+        "low-value": 765
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 182,
+        "retry": 181,
         "needs-website": 824,
-        "cold": 396,
+        "cold": 397,
         "candidate": 721
       },
       "categoryCounts": {
