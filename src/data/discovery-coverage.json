@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-05T21:55:18.748Z",
+  "generatedAt": "2026-11-05T23:42:27.500Z",
   "run": {
-    "startedAt": "2026-11-05T21:54:45.713Z",
+    "startedAt": "2026-11-05T23:42:26.769Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 179,
-      "cold": 406,
-      "lowValue": 756,
+      "cold": 407,
+      "lowValue": 755,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 406,
-        "low-value": 756,
+        "cold-sample": 407,
+        "low-value": 755,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "4s-ranch",
-        "name": "4S Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.5,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1741841141",
-        "name": "Trisler's San Diego Wine Bar",
-        "category": "bar",
-        "website": "https://trislers.com/",
-        "attempts": 6,
+        "key": "san-diego|osm|node|4933000862",
+        "name": "Crab Hut",
+        "category": "restaurant",
+        "website": "https://www.crabhutrestaurant.com/",
+        "attempts": 1,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-11T21:55:18.095Z",
-        "checkedAt": "2026-11-05T21:55:17.453Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12239003473",
-        "name": "bibimBOOM!",
-        "category": "restaurant",
-        "website": "https://www.bibimboom.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on bibimBOOM! (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-20T21:55:18.687Z",
-        "checkedAt": "2026-11-05T21:55:17.451Z"
+        "nextCheckAt": "2026-11-08T23:42:27.451Z",
+        "checkedAt": "2026-11-05T23:42:27.088Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -127,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "mira-mesa": 1,
-      "mission-valley": 1
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "central-west": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -196,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 119.52631578947368,
+            "averageEvents": 119.21052631578948,
             "averageVenues": 16,
             "deficitScore": 58.87894736842105
           },
@@ -240,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12.727272727272727,
-            "averageEvents": 332.09090909090907,
+            "averageEvents": 331.6363636363636,
             "averageVenues": 43.63636363636363,
             "deficitScore": 14.45454545454545
           }
@@ -258,16 +225,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-05T21:55:18.698Z",
-    "durationMs": 32985,
+    "failed": 1,
+    "finishedAt": "2026-11-05T23:42:27.453Z",
+    "durationMs": 684,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
+      "retry": 180,
       "cold": 407,
       "lowValue": 755,
       "qualified": 19,
@@ -284,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-05T21:54:45.907Z",
-        "lastFinishedAt": "2026-11-05T21:55:00.910Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1793915730910,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-05T21:55:00.910Z",
-        "lastFinishedAt": "2026-11-05T21:55:15.910Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793915745910,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-05T21:55:15.910Z",
-        "lastFinishedAt": "2026-11-05T21:55:17.215Z",
-        "lastLatencyMs": 1305,
-        "cooldownUntil": 1793915747215,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -342,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 180,
         "needs-website": 824,
         "cold": 407,
-        "candidate": 713
+        "candidate": 712
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
