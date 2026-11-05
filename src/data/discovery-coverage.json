@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-05T10:41:22.097Z",
+  "generatedAt": "2026-11-05T15:31:41.185Z",
   "run": {
-    "startedAt": "2026-11-05T10:41:18.035Z",
+    "startedAt": "2026-11-05T15:31:08.863Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 182,
-      "cold": 402,
-      "lowValue": 760,
+      "cold": 403,
+      "lowValue": 759,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 402,
-        "low-value": 760,
+        "cold-sample": 403,
+        "low-value": 759,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.98,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1429439653",
-        "name": "Amardeen Cafe",
+        "key": "san-diego|osm|node|597081450",
+        "name": "Albert's Fresh Mexican Food",
         "category": "restaurant",
-        "website": "http://amardeencafe.com/",
-        "attempts": 4,
+        "website": "https://albertsmexicanfood.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-05T10:41:18.476Z",
-        "checkedAt": "2026-11-05T10:41:18.337Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11005188916",
-        "name": "Yin Tang Spicy Hot Pot",
-        "category": "restaurant",
-        "website": "https://www.yintangsd.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Yin Tang Spicy Hot Pot (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-20T10:41:22.055Z",
-        "checkedAt": "2026-11-05T10:41:18.366Z"
+        "nextCheckAt": "2026-12-05T15:31:41.138Z",
+        "checkedAt": "2026-11-05T15:31:40.415Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,7 +96,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -116,11 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla-village": 1,
-      "miramar-ranch-north": 1
+      "rancho-san-diego": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -216,10 +206,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 67.83333333333333,
-            "averageEvents": 18.416666666666668,
+            "averageGapScore": 68.33333333333333,
+            "averageEvents": 18.25,
             "averageVenues": 3.5,
-            "deficitScore": 80.40833333333333
+            "deficitScore": 80.58333333333333
           },
           "central-core": {
             "group": "central-core",
@@ -246,68 +236,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-05T10:41:22.057Z",
-    "durationMs": 4022,
+    "failed": 1,
+    "finishedAt": "2026-11-05T15:31:41.140Z",
+    "durationMs": 32277,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 182,
-      "cold": 403,
-      "lowValue": 759,
+      "retry": 181,
+      "cold": 404,
+      "lowValue": 758,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 403,
-        "low-value": 759,
+        "cold-sample": 404,
+        "low-value": 758,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-05T15:31:08.944Z",
+        "lastFinishedAt": "2026-11-05T15:31:23.948Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1793892713948,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-05T15:31:23.948Z",
+        "lastFinishedAt": "2026-11-05T15:31:38.948Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793892728948,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-05T15:31:38.948Z",
+        "lastFinishedAt": "2026-11-05T15:31:40.189Z",
+        "lastLatencyMs": 1241,
+        "cooldownUntil": 1793892730189,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 403,
-      "lowValueCount": 759,
+      "coldCount": 404,
+      "lowValueCount": 758,
       "laneCounts": {
-        "cold-sample": 403,
+        "cold-sample": 404,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 759
+        "low-value": 758
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 182,
+        "retry": 181,
         "needs-website": 824,
-        "cold": 403,
+        "cold": 404,
         "candidate": 714
       },
       "categoryCounts": {
@@ -374,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
