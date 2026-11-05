@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-05T07:16:56.898Z",
+  "generatedAt": "2026-11-05T10:41:22.097Z",
   "run": {
-    "startedAt": "2026-11-05T07:16:32.416Z",
+    "startedAt": "2026-11-05T10:41:18.035Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 1,
-      "retry": 181,
+      "retry": 182,
       "cold": 402,
       "lowValue": 760,
       "qualified": 19,
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13706823874",
-        "name": "Tim Ky Noodle",
+        "key": "san-diego|osm|node|1429439653",
+        "name": "Amardeen Cafe",
         "category": "restaurant",
-        "website": "https://timkynoodlesandiego.bestcafes.online/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "http://amardeencafe.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,27 +72,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-06T07:16:33.219Z",
-        "checkedAt": "2026-11-05T07:16:32.976Z"
+        "nextCheckAt": "2026-12-05T10:41:18.476Z",
+        "checkedAt": "2026-11-05T10:41:18.337Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6396762840",
-        "name": "NiQueTanto",
+        "key": "san-diego|osm|node|11005188916",
+        "name": "Yin Tang Spicy Hot Pot",
         "category": "restaurant",
-        "website": "https://niquetanto.com/",
-        "attempts": 4,
+        "website": "https://www.yintangsd.com/",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "The operation was aborted due to timeout",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Yin Tang Spicy Hot Pot (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-05T07:16:56.838Z",
-        "checkedAt": "2026-11-05T07:16:32.835Z"
+        "nextCheckAt": "2026-12-20T10:41:22.055Z",
+        "checkedAt": "2026-11-05T10:41:18.366Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "otay-mesa": 1,
+      "la-jolla-village": 1,
       "miramar-ranch-north": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "north-central": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -185,7 +184,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.21052631578947367,
             "averageGapScore": 41.1578947368421,
-            "averageEvents": 120.15789473684211,
+            "averageEvents": 120,
             "averageVenues": 16,
             "deficitScore": 58.87894736842105
           },
@@ -250,23 +249,23 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-05T07:16:56.850Z",
-    "durationMs": 24434,
+    "finishedAt": "2026-11-05T10:41:22.057Z",
+    "durationMs": 4022,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 182,
-      "cold": 402,
-      "lowValue": 760,
+      "cold": 403,
+      "lowValue": 759,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 402,
-        "low-value": 760,
+        "cold-sample": 403,
+        "low-value": 759,
         "food-evidence": 11
       }
     },
@@ -319,22 +318,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 402,
-      "lowValueCount": 760,
+      "coldCount": 403,
+      "lowValueCount": 759,
       "laneCounts": {
-        "cold-sample": 402,
+        "cold-sample": 403,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 760
+        "low-value": 759
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 182,
         "needs-website": 824,
-        "cold": 402,
-        "candidate": 715
+        "cold": 403,
+        "candidate": 714
       },
       "categoryCounts": {
         "nightclub": 8,
