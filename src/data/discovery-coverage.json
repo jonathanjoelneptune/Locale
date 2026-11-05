@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-05T02:41:35.299Z",
+  "generatedAt": "2026-11-05T06:43:26.976Z",
   "run": {
-    "startedAt": "2026-11-05T02:41:28.294Z",
+    "startedAt": "2026-11-05T06:42:53.500Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 181,
-      "cold": 400,
-      "lowValue": 762,
+      "cold": 401,
+      "lowValue": 761,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 400,
-        "low-value": 762,
+        "cold-sample": 401,
+        "low-value": 761,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 201.5,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10087436745",
-        "name": "Addy's Bistro",
+        "key": "san-diego|osm|node|12271814430",
+        "name": "Thiên Hương Bánh Cuốn Vietnamese Cuisine",
         "category": "restaurant",
-        "website": "https://addysbistro.com/",
-        "attempts": 4,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-05T02:41:28.733Z",
-        "checkedAt": "2026-11-05T02:41:28.601Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|147001254",
-        "name": "The Tin Fish",
-        "category": "restaurant",
-        "website": "https://www.thetinfishrestaurants.com/",
+        "website": "https://www.thienhuongcali.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on The Tin Fish (low-value)",
+          "detail": "Checked 1 page on Thiên Hương Bánh Cuốn Vietnamese Cuisine (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-20T02:41:35.253Z",
-        "checkedAt": "2026-11-05T02:41:28.644Z"
+        "nextCheckAt": "2026-12-20T06:43:26.912Z",
+        "checkedAt": "2026-11-05T06:43:25.033Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,7 +96,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -116,12 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "rancho-encantada": 1,
-      "imperial-beach": 1
+      "miramar-ranch-north": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "south-bay": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,68 +236,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-05T02:41:35.255Z",
-    "durationMs": 6961,
+    "failed": 1,
+    "finishedAt": "2026-11-05T06:43:26.926Z",
+    "durationMs": 33426,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 181,
-      "cold": 401,
-      "lowValue": 761,
+      "cold": 402,
+      "lowValue": 760,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 401,
-        "low-value": 761,
+        "cold-sample": 402,
+        "low-value": 760,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-05T06:42:53.686Z",
+        "lastFinishedAt": "2026-11-05T06:42:54.803Z",
+        "lastLatencyMs": 1117,
+        "cooldownUntil": 1793861004803,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-05T06:42:54.803Z",
+        "lastFinishedAt": "2026-11-05T06:43:09.803Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1793861019803,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-05T06:43:09.803Z",
+        "lastFinishedAt": "2026-11-05T06:43:24.805Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1793861034805,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 401,
-      "lowValueCount": 761,
+      "coldCount": 402,
+      "lowValueCount": 760,
       "laneCounts": {
-        "cold-sample": 401,
+        "cold-sample": 402,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 761
+        "low-value": 760
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 181,
         "needs-website": 824,
-        "cold": 401,
-        "candidate": 717
+        "cold": 402,
+        "candidate": 716
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
