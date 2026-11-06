@@ -218,7 +218,7 @@ export const SOURCES=[
     id:"eventbrite-san-diego",name:"Eventbrite San Diego",scope:"regional",regions:["san-diego"],adapter:"eventbrite",sourceKind:"platform",
     endpoint:"https://www.eventbrite.com/d/ca--san-diego/events/",refreshHours:6,enabled:false,
     disabledReason:"Needs a stable/authorized ingestion path; do not scrape brittle search HTML"
-  }
+  },
   // Las Vegas Strip: adapters below accept only individually dated event records.
   {id:"vegas-tmobile",name:"T-Mobile Arena",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"venue-umbrella",ownerEntityKind:"place",ownerName:"T-Mobile Arena",endpoint:"https://www.t-mobilearena.com/events",fallbackCenter:{lat:36.1028,lng:-115.1783},refreshHours:6},
   {id:"vegas-resorts-world",name:"Resorts World Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",ownerEntityKind:"place",ownerName:"Resorts World Las Vegas",endpoint:"https://www.rwlasvegas.com/calendar/",fallbackCenter:{lat:36.1331,lng:-115.1650},refreshHours:6},
