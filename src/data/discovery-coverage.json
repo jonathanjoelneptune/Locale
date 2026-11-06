@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-06T07:26:36.516Z",
+  "generatedAt": "2026-11-06T09:46:26.505Z",
   "run": {
-    "startedAt": "2026-11-06T07:25:50.433Z",
+    "startedAt": "2026-11-06T09:46:23.825Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 179,
-      "cold": 409,
-      "lowValue": 753,
+      "due": 1,
+      "retry": 178,
+      "cold": 410,
+      "lowValue": 752,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 409,
-        "low-value": 753,
+        "cold-sample": 410,
+        "low-value": 752,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 201.98,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,36 +54,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12838470251",
-        "name": "Raised by Wolves",
-        "category": "bar",
-        "website": "https://raisedxwolves.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 429",
-          "statusCode": 429
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-20T07:26:35.901Z",
-        "checkedAt": "2026-11-06T07:26:35.706Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|2651673866",
-        "name": "Ace New York Giant Pizza Bar & Lounge",
+        "key": "san-diego|osm|node|1254876429",
+        "name": "Kikuya Sushi",
         "category": "restaurant",
-        "website": "https://acenypizza.com/",
-        "attempts": 9,
-        "status": "retry",
-        "probeLane": "food-evidence",
+        "website": "https://kikuya-sushi.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -102,27 +72,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-13T07:26:36.050Z",
-        "checkedAt": "2026-11-06T07:26:35.902Z"
+        "nextCheckAt": "2026-12-06T09:46:24.328Z",
+        "checkedAt": "2026-11-06T09:46:24.133Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8424238975",
-        "name": "Fresheria",
+        "key": "san-diego|osm|way|735372714",
+        "name": "Starbucks",
         "category": "cafe",
-        "website": "https://lafresheria.com/",
-        "attempts": 3,
+        "website": "https://www.starbucks.com/store-locator/store/87151/palomar-industrial-670-palomar-street-chula-vista-ca-919112607-us",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Starbucks (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-06T07:26:36.467Z",
-        "checkedAt": "2026-11-06T07:26:35.707Z"
+        "nextCheckAt": "2026-12-21T09:46:26.448Z",
+        "checkedAt": "2026-11-06T09:46:24.186Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -134,9 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
-      "low-value": 1,
-      "food-evidence": 1
+      "cold-sample": 1,
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -147,14 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "university-city-utc": 1,
-      "otay-ranch": 1,
-      "winter-gardens": 1
+      "la-jolla-village": 1,
+      "otay-mesa-nestor": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
-      "south-bay": 1,
-      "east-county": 1
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -207,7 +174,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 78.975,
-            "averageEvents": 9.4,
+            "averageEvents": 9.375,
             "averageVenues": 1.9,
             "deficitScore": 87.64125
           },
@@ -280,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 2,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-11-06T07:26:36.469Z",
-    "durationMs": 46036,
+    "failed": 2,
+    "finishedAt": "2026-11-06T09:46:26.450Z",
+    "durationMs": 2625,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 410,
-      "lowValue": 752,
+      "cold": 411,
+      "lowValue": 751,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 410,
-        "low-value": 752,
+        "cold-sample": 411,
+        "low-value": 751,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-06T07:25:50.501Z",
-        "lastFinishedAt": "2026-11-06T07:26:05.505Z",
-        "lastLatencyMs": 15004,
-        "cooldownUntil": 1793949995505,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-06T07:26:05.505Z",
-        "lastFinishedAt": "2026-11-06T07:26:20.506Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1793950010506,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-06T07:26:20.506Z",
-        "lastFinishedAt": "2026-11-06T07:26:35.506Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1793950025506,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -352,22 +319,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 410,
-      "lowValueCount": 752,
+      "coldCount": 411,
+      "lowValueCount": 751,
       "laneCounts": {
-        "cold-sample": 410,
+        "cold-sample": 411,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 752
+        "low-value": 751
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 178,
         "needs-website": 824,
-        "cold": 410,
-        "candidate": 711
+        "cold": 411,
+        "candidate": 710
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -408,7 +375,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
