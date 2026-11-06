@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-06T17:22:48.689Z",
+  "generatedAt": "2026-11-06T19:42:57.201Z",
   "run": {
-    "startedAt": "2026-11-06T17:22:47.900Z",
+    "startedAt": "2026-11-06T19:42:33.849Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 178,
+      "due": 5,
+      "retry": 179,
       "cold": 413,
       "lowValue": 749,
       "qualified": 19,
@@ -41,7 +41,7 @@
         "measured": 188,
         "passing": 15,
         "passRate": 0.0797872340425532,
-        "severeGapCount": 84,
+        "severeGapCount": 85,
         "mediumGapCount": 157
       },
       "chicago": {
@@ -58,22 +58,117 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12099811681",
-        "name": "CAVA",
-        "category": "restaurant",
-        "website": "https://www.cava.com/locations/one-paseo-ca",
-        "attempts": 1,
+        "key": "san-diego|osm|node|9908007843",
+        "name": "Blue Pearl Art",
+        "category": "gallery",
+        "website": "https://www.bluepearlartstudio.com/",
+        "attempts": 9,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-09T17:22:48.652Z",
-        "checkedAt": "2026-11-06T17:22:48.142Z"
+        "nextCheckAt": "2026-11-13T19:42:34.306Z",
+        "checkedAt": "2026-11-06T19:42:34.208Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596649040",
+        "name": "Oggi's Pizza and Brewing Co.",
+        "category": "restaurant",
+        "website": "http://cmr.oggis.com/",
+        "attempts": 9,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-13T19:42:34.383Z",
+        "checkedAt": "2026-11-06T19:42:34.252Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596158252",
+        "name": "Mike Hess Brewing",
+        "category": "pub",
+        "website": "https://www.mikehessbrewing.com/north-park/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 502",
+          "statusCode": 502
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-11T19:42:35.657Z",
+        "checkedAt": "2026-11-06T19:42:34.384Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9908210877",
+        "name": "Luckie Coffee",
+        "category": "cafe",
+        "website": "https://luckie.coffee/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-06T19:42:36.161Z",
+        "checkedAt": "2026-11-06T19:42:35.657Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8793152104",
+        "name": "Central Library Art Gallery",
+        "category": "gallery",
+        "website": "https://www.sandiego.gov/public-library/visualarts",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on Central Library Art Gallery (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-06T19:42:43.707Z",
+        "checkedAt": "2026-11-06T19:42:34.307Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|381012089",
+        "name": "Copley-Price Family YMCA",
+        "category": "sports-centre",
+        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
+        "attempts": 7,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-13T19:42:57.153Z",
+        "checkedAt": "2026-11-06T19:42:36.161Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +180,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 4,
+      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,21 +193,27 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-valley": 1
+      "teralta": 2,
+      "rancho-penasquitos": 1,
+      "sherman-heights": 1,
+      "north-park": 1,
+      "poway": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "uptown-midcity": 3,
+      "north-inland": 2,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
         "measured": 188,
         "passing": 15,
         "metroPassRate": 0.08,
-        "zeroEventAreas": 66,
-        "zeroEventRate": 0.351,
+        "zeroEventAreas": 67,
+        "zeroEventRate": 0.356,
         "groupPassRateSpread": 0.818,
-        "groupGapSpread": 81.5,
-        "equityScore": 18.6,
+        "groupGapSpread": 84.6,
+        "equityScore": 18.5,
         "groups": {
           "north-central": {
             "group": "north-central",
@@ -138,12 +241,12 @@
             "group": "north-inland",
             "areas": 11,
             "passing": 0,
-            "zeroEventAreas": 9,
+            "zeroEventAreas": 10,
             "passRate": 0,
-            "averageGapScore": 94.27272727272727,
-            "averageEvents": 0.36363636363636365,
-            "averageVenues": 0.2727272727272727,
-            "deficitScore": 96.17727272727274
+            "averageGapScore": 97.36363636363636,
+            "averageEvents": 0.2727272727272727,
+            "averageVenues": 0.18181818181818182,
+            "deficitScore": 98.16818181818181
           },
           "east-county": {
             "group": "east-county",
@@ -196,7 +299,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.1111111111111111,
             "averageGapScore": 43.72222222222222,
-            "averageEvents": 82.88888888888889,
+            "averageEvents": 82.83333333333333,
             "averageVenues": 13.666666666666666,
             "deficitScore": 64.19166666666666
           },
@@ -207,7 +310,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.8181818181818182,
             "averageGapScore": 12.727272727272727,
-            "averageEvents": 307.3636363636364,
+            "averageEvents": 306.6363636363636,
             "averageVenues": 43.63636363636363,
             "deficitScore": 14.45454545454545
           }
@@ -225,26 +328,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 6,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-06T17:22:48.654Z",
-    "durationMs": 754,
+    "failed": 6,
+    "finishedAt": "2026-11-06T19:42:57.154Z",
+    "durationMs": 23305,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
-      "cold": 413,
-      "lowValue": 749,
+      "retry": 178,
+      "cold": 414,
+      "lowValue": 748,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 413,
-        "low-value": 749,
+        "cold-sample": 414,
+        "low-value": 748,
         "food-evidence": 11
       }
     },
@@ -297,21 +400,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 413,
-      "lowValueCount": 749,
+      "coldCount": 414,
+      "lowValueCount": 748,
       "laneCounts": {
-        "cold-sample": 413,
+        "cold-sample": 414,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 749
+        "low-value": 748
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 178,
         "needs-website": 824,
-        "cold": 413,
+        "cold": 414,
         "candidate": 707
       },
       "categoryCounts": {
@@ -361,7 +464,7 @@
         "measured": 188,
         "passing": 15,
         "passRate": 0.0797872340425532,
-        "severeGapCount": 84,
+        "severeGapCount": 85,
         "mediumGapCount": 157,
         "activeMode": "bootstrap",
         "probeLimit": 12,
