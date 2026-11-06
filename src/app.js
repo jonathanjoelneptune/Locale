@@ -22,7 +22,7 @@ const initialRegion=getRegion(requestedRegion||localStorage.getItem("locale-regi
 const readSavedAreas=id=>{try{return new Set(JSON.parse(localStorage.getItem("locale-selected-areas:"+id)||"[]"))}catch{return new Set}};
 const selectedAreas=readSavedAreas(initialRegion.id);
 const today=todayKey(new Date(),initialRegion.timeZone);
-const validDate=value=>/^\\d{4}-\\d{2}-\\d{2}$/.test(value||"")&&!Number.isNaN(Date.parse(value+"T12:00:00Z"));
+const validDate=value=>/^\d{4}-\d{2}-\d{2}$/.test(value||"")&&!Number.isNaN(Date.parse(value+"T12:00:00Z"));
 const initialFrom=validDate(initialParams.get("from"))?initialParams.get("from"):today;
 const initialTo=validDate(initialParams.get("to"))&&initialParams.get("to")>=initialFrom?initialParams.get("to"):initialFrom;
 const state={
@@ -48,7 +48,6 @@ const state={
   areasReady:false,
   areaRevision:0,
   events:[],
-  allEvents:[],
   hasFit:false,
   sort:"time",
   listMode:"events",
@@ -672,6 +671,7 @@ async function switchRegion(id){
   state.events=[];
   state.selectedEventId=null;
   state.venueFilter=null;
+  state.listMode="events";
   state.resultScope="nearby";
   state.viewport=null;
   document.querySelector("#radius").value=String(state.radius);

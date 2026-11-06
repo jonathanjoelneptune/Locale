@@ -34,6 +34,8 @@ jobs:
         run: node scripts/check-neighborhood-density.mjs
       - name: Build production artifact
         run: LOCALE_BUILD_ID=ci-test node scripts/build-site.mjs
+      - name: Test Vegas region and timezone behavior
+        run: node --test scripts/vegas-region.test.mjs
       - name: Test registry domain
         run: node --test scripts/registry.test.mjs
       - name: Test event classification

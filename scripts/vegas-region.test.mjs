@@ -9,6 +9,7 @@ test("Vegas Strip region is independent of San Diego and Chicago",()=>{
  const vegas=getRegion("las-vegas");
  assert.equal(vegas.timeZone,"America/Los_Angeles");
  assert.ok(vegas.ingestRadiusMiles<=8);
+ assert.ok(vegas.eventBounds.north<=36.145);
  assert.equal(regionList.length,3);
  assert.notDeepEqual(vegas.center,getRegion("san-diego").center);
 });

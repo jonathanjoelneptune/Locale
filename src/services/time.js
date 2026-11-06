@@ -15,8 +15,11 @@ export function inWindow(event,windowName,now=new Date(),timeZone=null){
 }
 
 export function dateKeyInZone(date,timeZone){
-  if(!timeZone)return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-");
-  return new Intl.DateTimeFormat("en-CA",{timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).format(date).replace(/(\d{2})\/(\d{2})\/(\d{4})/,"$3-$1-$2");
+  const d=date instanceof Date?date:new Date(date);
+  if(!timeZone)return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
+  const parts=new Intl.DateTimeFormat("en-US",{timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
+  const get=type=>parts.find(part=>part.type===type)?.value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
 function localDateFromKey(key){

@@ -26,6 +26,8 @@ export const REGIONS={
     center:{lat:36.1114,lng:-115.1728},
     defaultRadiusMiles:5,
     ingestRadiusMiles:8,
+    // Bounding box intentionally excludes Downtown and the wider valley.
+    eventBounds:{south:36.086,north:36.145,west:-115.189,east:-115.151},
     discoveryCoreRadiusMiles:3,
     discoveryRadiusMiles:6,
     discoveryOuterRadiusMiles:8,
