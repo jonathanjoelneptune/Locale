@@ -28,7 +28,7 @@ function summary(state){
   return `${shortFormatter.format(parseKey(state.dateStart))} – ${shortFormatter.format(parseKey(state.dateEnd))}`;
 }
 
-export function todayKey(now=new Date()){return keyFor(now)}
+export function todayKey(now=new Date(),timeZone=null){if(!timeZone)return keyFor(now);const parts=new Intl.DateTimeFormat("en-US",{timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(now);const get=type=>parts.find(part=>part.type===type)?.value;return `${get("year")}-${get("month")}-${get("day")}`}
 export {addDays};
 
 const QUICK_PRESETS=[

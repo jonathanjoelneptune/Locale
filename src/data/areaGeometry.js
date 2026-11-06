@@ -23,7 +23,10 @@ export const AREA_GROUP_LABELS={
   "north-county-inland":"North County Inland",
   "north-inland":"North Inland",
   "south-bay":"South Bay",
-  "uptown-midcity":"Uptown / Mid-City"
+  "uptown-midcity":"Uptown / Mid-City",
+  "vegas-north":"North Strip",
+  "vegas-central":"Central Strip",
+  "vegas-south":"South Strip"
 };
 
 const JURISDICTION_TYPES={

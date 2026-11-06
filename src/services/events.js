@@ -2,6 +2,7 @@ import {milesBetween} from "./geo.js";
 import {inDateRange,inWindow} from "./time.js";
 import {eventIdentityKey,normalizeEvent} from "../domain/event.js";
 import {eventMatchesSelectedAreas} from "./areas.js";
+import {getRegion} from "../data/regions.js";
 
 const VENUES=[
   {re:/\bpetco park\b/i,lat:32.7076,lng:-117.1570,venue:"PETCO Park"},
@@ -34,13 +35,15 @@ export const hasPreciseLocation=event=>!APPROXIMATE_PRECISIONS.has(event.locatio
 export function eventMatchesTimeAndCategory(event,state){
   const categories=state.categories instanceof Set?state.categories:new Set;
   const categoryOk=!categories.size||categories.has(event.category);
-  const dateOk=state.quickPreset?inWindow(event,state.quickPreset):inDateRange(event,state.dateStart,state.dateEnd);
+  const zone=getRegion(state.regionId).timeZone;
+  const dateOk=state.quickPreset?inWindow(event,state.quickPreset,new Date(),zone):inDateRange(event,state.dateStart,state.dateEnd,zone);
   return categoryOk&&dateOk;
 }
 
 export function filterEvents(events,state){
   const explicitAreas=state.selectedAreaIds instanceof Set&&state.selectedAreaIds.size>0;
   return events
+    .filter(event=>!state.regionId||event.regionId===state.regionId)
     .map(event=>{
       const filterDistance=milesBetween(state.center,event);
       return {...event,_filterDistance:filterDistance,distance:hasPreciseLocation(event)?filterDistance:null};

@@ -219,6 +219,20 @@ export const SOURCES=[
     endpoint:"https://www.eventbrite.com/d/ca--san-diego/events/",refreshHours:6,enabled:false,
     disabledReason:"Needs a stable/authorized ingestion path; do not scrape brittle search HTML"
   }
+  // Las Vegas Strip: adapters below accept only individually dated event records.
+  {id:"vegas-tmobile",name:"T-Mobile Arena",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"venue-umbrella",ownerEntityKind:"place",ownerName:"T-Mobile Arena",endpoint:"https://www.t-mobilearena.com/events",fallbackCenter:{lat:36.1028,lng:-115.1783},refreshHours:6},
+  {id:"vegas-resorts-world",name:"Resorts World Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",ownerEntityKind:"place",ownerName:"Resorts World Las Vegas",endpoint:"https://www.rwlasvegas.com/calendar/",fallbackCenter:{lat:36.1331,lng:-115.1650},refreshHours:6},
+  {id:"vegas-venetian",name:"The Venetian Resort",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",ownerEntityKind:"place",ownerName:"The Venetian",endpoint:"https://www.venetianlasvegas.com/entertainment/event-calendar.html",fallbackCenter:{lat:36.1212,lng:-115.1697},refreshHours:6},
+  {id:"vegas-sphere",name:"Sphere Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"A",coverageLayer:"venue-umbrella",ownerEntityKind:"place",ownerName:"Sphere",endpoint:"https://www.thesphere.com/shows",fallbackCenter:{lat:36.1207,lng:-115.1621},refreshHours:6},
+  {id:"vegas-wynn",name:"Wynn Entertainment",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"B",coverageLayer:"resort",endpoint:"https://www.wynnlasvegas.com/entertainment",fallbackCenter:{lat:36.1268,lng:-115.1655},refreshHours:8},
+  {id:"vegas-fontainebleau",name:"Fontainebleau Entertainment",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"B",coverageLayer:"resort",endpoint:"https://www.fontainebleaulasvegas.com/entertainment/",fallbackCenter:{lat:36.1377,lng:-115.1625},refreshHours:8},
+  {id:"vegas-brooklyn-bowl",name:"Brooklyn Bowl Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"B",coverageLayer:"venue",endpoint:"https://www.brooklynbowl.com/las-vegas",fallbackCenter:{lat:36.1175,lng:-115.1708},refreshHours:8},
+  {id:"vegas-house-of-blues",name:"House of Blues Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"official",acquisitionTier:"B",coverageLayer:"venue",endpoint:"https://www.houseofblues.com/lasvegas",fallbackCenter:{lat:36.0911,lng:-115.1752},refreshHours:8},
+  // Discovery-only until authorized structured ingestion or site-specific validation is complete.
+  {id:"vegas-vegascom",name:"Vegas.com Shows",scope:"regional",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"aggregator",endpoint:"https://www.vegas.com/shows/",enabled:false,disabledReason:"Needs verified date-level extraction and access review"},
+  {id:"vegas-neon",name:"NEON Vegas",scope:"regional",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"aggregator",endpoint:"https://neon.reviewjournal.com/",enabled:false,disabledReason:"Needs verified date-level extraction"},
+  {id:"vegas-discotech",name:"Discotech Las Vegas",scope:"regional",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"aggregator",endpoint:"https://app.discotech.me/las-vegas/events",enabled:false,disabledReason:"Needs dependable authorized date-level ingestion"},
+  {id:"vegas-eventbrite",name:"Eventbrite Las Vegas",scope:"regional",regions:["las-vegas"],adapter:"calendar-links",sourceKind:"platform",endpoint:"https://www.eventbrite.com/d/nv--las-vegas/events/",enabled:false,disabledReason:"Needs approved feed or API access"},
 ];
 
 export function sourceCoversRegion(source,region){

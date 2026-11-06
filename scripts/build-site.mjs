@@ -11,6 +11,16 @@ await cp("diagnostics.html",`${outDir}/diagnostics.html`);
 await cp("styles",`${outDir}/styles`,{recursive:true});
 await cp("src",`${outDir}/src`,{recursive:true});
 
+// Region-specific snapshots keep the browser from downloading the full national catalog.
+const events=JSON.parse(await readFile("src/data/events.json","utf8"));
+const {regionList}=await import("../src/data/regions.js");
+await mkdir(`${outDir}/src/data/events`,{recursive:true});
+for(const region of regionList){
+  const subset=events.filter(event=>event.regionId===region.id);
+  await writeFile(`${outDir}/src/data/events/${region.id}.json`,JSON.stringify(subset));
+}
+
+
 let html=await readFile(`${outDir}/index.html`,"utf8");
 html=html
   .replace("./styles/base.css",`./styles/base.css?v=${build}`)

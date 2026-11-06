@@ -1,6 +1,6 @@
-export function inWindow(event,windowName,now=new Date()){
+export function inWindow(event,windowName,now=new Date(),timeZone=null){
  const start=new Date(event.start),end=event.end?new Date(event.end):start;
- const dayStart=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+ const dayStart=d=>{const key=dateKeyInZone(d,timeZone);return localDateFromKey(key)};
  const add=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
  const today=dayStart(now);
  if(event.timeStatus==="unknown"&&(windowName==="now"||windowName==="tonight"))return false;
@@ -14,12 +14,23 @@ export function inWindow(event,windowName,now=new Date()){
  return true;
 }
 
+export function dateKeyInZone(date,timeZone){
+  if(!timeZone)return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-");
+  return new Intl.DateTimeFormat("en-CA",{timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).format(date).replace(/(\d{2})\/(\d{2})\/(\d{4})/,"$3-$1-$2");
+}
+
 function localDateFromKey(key){
   const [year,month,day]=String(key||"").split("-").map(Number);
   return new Date(year,month-1,day);
 }
 
-export function inDateRange(event,startKey,endKey){
+export function inDateRange(event,startKey,endKey,timeZone=null){
+  if(timeZone){
+    if(!startKey||!endKey)return true;
+    const eventStart=dateKeyInZone(new Date(event.start),timeZone);
+    const eventEnd=dateKeyInZone(new Date(event.end||event.start),timeZone);
+    return eventStart<=endKey&&eventEnd>=startKey;
+  }
   if(!startKey||!endKey)return true;
   const startBoundary=localDateFromKey(startKey);
   const endBoundary=localDateFromKey(endKey);
