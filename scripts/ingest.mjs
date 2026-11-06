@@ -43,6 +43,8 @@ import {REGIONS} from "./regions.mjs";
 import {cellFor} from "./geo-index.mjs";
 import {refineEventCategory} from "./event-classification.mjs";
 import {isPreciseLocation} from "./location-quality.mjs";
+import {isWithinVegasStrip} from "../src/data/vegasStrip.js";
+import {vegasZoukEvents} from "./providers/vegas-zouk.mjs";
 
 const SOURCES=await loadAllSources();
 
@@ -100,7 +102,10 @@ const adapters={
   }),
   "calendar-links":async (region,source)=>calendarLinksEvents({
     endpoint:source.endpoint,sourceName:source.name,sourceId:source.id,
-    fallbackCenter:source.fallbackCenter,maxLinks:30
+    fallbackCenter:source.fallbackCenter||region.center,maxLinks:source.maxLinks||30
+  }),
+  "vegas-zouk":async (region,source)=>vegasZoukEvents({
+    endpoint:source.endpoint,sourceId:source.id,sourceName:source.name,days:60
   }),
   ticketmaster:async region=>ticketmasterEvents({
     apiKey:process.env.TICKETMASTER_API_KEY,
@@ -290,7 +295,7 @@ const similarity=(a,b)=>{
   for(const value of A)if(B.has(value))matches++;
   return matches/Math.max(A.size,B.size);
 };
-const sameEvent=(a,b)=>String(a.start).slice(0,10)===String(b.start).slice(0,10)
+const sameEvent=(a,b)=>a.regionId===b.regionId&&String(a.start).slice(0,10)===String(b.start).slice(0,10)
   &&(a.venueKey&&b.venueKey?a.venueKey===b.venueKey:similarity(a.venue,b.venue)>=.72)
   &&similarity(a.title,b.title)>=.68;
 const provenance=event=>event.sources||[{id:event.sourceId,name:event.source,url:event.sourceUrl||event.url}];
@@ -314,6 +319,9 @@ const merge=(a,b)=>{
 
 const unique=[];
 for(const raw of events){
+  // The Vegas scope is limited to the curated Strip polygon and verified venues.
+  // Never place an unlocated resort event on the map merely because of a fallback center.
+  if(raw.regionId==="las-vegas"&&(!isPreciseLocation(raw)||!isWithinVegasStrip(raw)))continue;
   const event={...raw,category:refineEventCategory(raw),geoCell:cellFor(raw.lat,raw.lng)};
   const matchIndex=unique.findIndex(candidate=>sameEvent(candidate,event));
   if(matchIndex<0){
@@ -394,6 +402,12 @@ for(const region of Object.values(REGIONS)){
 }
 
 await mkdir("src/data",{recursive:true});
+await mkdir("src/data/events",{recursive:true});
+for(const region of Object.values(REGIONS)){
+  const regional=canonicalEvents.filter(event=>event.regionId===region.id);
+  await writeFile(`src/data/events/${region.id}.json`,JSON.stringify(regional,null,2)+"\n");
+  console.log(`Regional snapshot ${region.id}: ${regional.length} events`);
+}
 await writeFile("src/data/events.json",JSON.stringify(canonicalEvents,null,2)+"\n");
 await writeFile("src/data/places.json",JSON.stringify(registry.places,null,2)+"\n");
 await writeFile("src/data/organizers.json",JSON.stringify(registry.organizers,null,2)+"\n");
