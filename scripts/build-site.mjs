@@ -25,6 +25,7 @@ let html=await readFile(`${outDir}/index.html`,"utf8");
 html=html
   .replace("./styles/base.css",`./styles/base.css?v=${build}`)
   .replace("./styles/app.css",`./styles/app.css?v=${build}`)
+  .replace("./styles/regions.css",`./styles/regions.css?v=${build}`)
   .replace("./src/app.js",`./src/app.js?v=${build}`)
   .replace("</head>",`<meta name="locale-build" content="${build}"></head>`);
 await writeFile(`${outDir}/index.html`,html);

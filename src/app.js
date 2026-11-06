@@ -19,12 +19,16 @@ const saved=new Set(JSON.parse(localStorage.getItem("locale-saved")||"[]"));
 const initialParams=new URLSearchParams(location.search);
 const requestedRegion=initialParams.get("region");
 const initialRegion=getRegion(requestedRegion||localStorage.getItem("locale-region")||DEFAULT_REGION_ID);
-const readSavedAreas=id=>{try{return new Set(JSON.parse(localStorage.getItem("locale-selected-areas:"+id)||"[]"))}catch{return new Set}};
+const readSavedAreas=id=>{try{const saved=localStorage.getItem("locale-selected-areas:"+id);const legacy=id===DEFAULT_REGION_ID?localStorage.getItem("locale-selected-areas"):null;return new Set(JSON.parse(saved||legacy||"[]"))}catch{return new Set}};
 const selectedAreas=readSavedAreas(initialRegion.id);
 const today=todayKey(new Date(),initialRegion.timeZone);
 const validDate=value=>/^\d{4}-\d{2}-\d{2}$/.test(value||"")&&!Number.isNaN(Date.parse(value+"T12:00:00Z"));
-const initialFrom=validDate(initialParams.get("from"))?initialParams.get("from"):today;
-const initialTo=validDate(initialParams.get("to"))&&initialParams.get("to")>=initialFrom?initialParams.get("to"):initialFrom;
+const visitDates={start:"2026-11-25",end:"2026-11-28"};
+const defaultDates=id=>id==="las-vegas"&&today<="2026-11-28"?visitDates:{start:today,end:today};
+const readRegionDates=id=>{try{const saved=JSON.parse(localStorage.getItem("locale-dates:"+id)||"null");return validDate(saved?.start)&&validDate(saved?.end)&&saved.end>=saved.start?saved:null}catch{return null}};
+const preferredDates=readRegionDates(initialRegion.id)||defaultDates(initialRegion.id);
+const initialFrom=validDate(initialParams.get("from"))?initialParams.get("from"):preferredDates.start;
+const initialTo=validDate(initialParams.get("to"))&&initialParams.get("to")>=initialFrom?initialParams.get("to"):validDate(initialParams.get("from"))?initialFrom:preferredDates.end;
 const state={
   regionId:initialRegion.id,
   center:{...initialRegion.center},
@@ -232,6 +236,7 @@ function renderSidebarFromState(){
 
 function render(){
   reflectRegionUrl();
+  localStorage.setItem("locale-dates:"+state.regionId,JSON.stringify({start:state.dateStart,end:state.dateEnd}));
   document.querySelector("#dateControls").innerHTML=DateControls(state);
   document.querySelector("#filters").innerHTML=Filters(state);
   document.querySelector("#placeLabel").textContent=state.placeLabel;
@@ -654,6 +659,14 @@ async function switchRegion(id){
   const region=getRegion(id);
   state.regionId=id;
   localStorage.setItem("locale-region",id);
+  const dates=readRegionDates(id)||defaultDates(id);
+  state.dateStart=dates.start;
+  state.dateEnd=dates.end;
+  state.dateMode=dates.start===dates.end?"single":"range";
+  state.quickPreset=null;
+  state.calendarMonth=dates.start.slice(0,7);
+  state.rangeAnchor=null;
+  state.calendarOpen=false;
   state.center={...region.center};
   state.placeLabel=regionLabel(region);
   state.radius=region.defaultRadiusMiles;
