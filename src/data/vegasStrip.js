@@ -3,7 +3,7 @@
 // deliberately excludes Downtown Las Vegas and the wider valley.
 export const VEGAS_STRIP_RING=[
   [
-    -115.1875,
+    -115.1797,
     36.089
   ],
   [
@@ -47,7 +47,7 @@ export const VEGAS_STRIP_RING=[
     36.099
   ],
   [
-    -115.1875,
+    -115.1797,
     36.089
   ]
 ];
