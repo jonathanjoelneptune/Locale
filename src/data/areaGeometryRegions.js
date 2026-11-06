@@ -3,7 +3,14 @@
 // simplified GSHHS intermediate-resolution coastline clipped to Locale's
 // configured San Diego coverage envelope. It prevents generated area cells
 // from extending into the Pacific and follows the major San Diego Bay coast.
+import {VEGAS_STRIP_RING} from "./vegasStrip.js";
+
 export const AREA_GEOMETRY_CONSTRAINTS={
+  "las-vegas":{
+    source:"Locale curated Las Vegas Strip entertainment corridor",
+    landMask:VEGAS_STRIP_RING,
+    overrides:{}
+  },
   "san-diego":{
     source:"GSHHS intermediate-resolution coastline with Locale curated overrides",
     landMask:[

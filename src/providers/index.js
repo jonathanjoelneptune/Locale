@@ -4,9 +4,9 @@ import {dedupe} from "../services/events.js";
 
 const providers=[new LocalProvider()];
 
-export async function loadEvents(){
+export async function loadEvents(regionId){
   const settled=await Promise.allSettled(providers.map(async provider=>{
-    const events=await provider.getEvents();
+    const events=await provider.getEvents(regionId);
     return validateProviderEvents(provider,events);
   }));
   const events=[];

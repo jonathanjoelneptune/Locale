@@ -23,7 +23,10 @@ export const AREA_GROUP_LABELS={
   "north-county-inland":"North County Inland",
   "north-inland":"North Inland",
   "south-bay":"South Bay",
-  "uptown-midcity":"Uptown / Mid-City"
+  "uptown-midcity":"Uptown / Mid-City",
+  "strip-north":"North Strip",
+  "strip-central":"Central Strip",
+  "strip-south":"South Strip"
 };
 
 const JURISDICTION_TYPES={
@@ -45,7 +48,15 @@ const COMMON_ALIASES={
   "la-jolla":["La Jolla San Diego"],
   "barrio-logan":["Barrio Logan San Diego"],
   "ocean-beach":["OB"],
-  "mission-beach":["Mission Beach San Diego"]
+  "mission-beach":["Mission Beach San Diego"],
+  "lv-north-strat":["STRAT","Sahara Las Vegas"],
+  "lv-resorts-world":["Resorts World","Fontainebleau"],
+  "lv-wynn-sphere":["Wynn","Encore","Sphere"],
+  "lv-venetian-linq":["Venetian","Palazzo","LINQ","Harrah’s"],
+  "lv-caesars-bellagio":["Caesars Palace","Bellagio","Cosmopolitan"],
+  "lv-aria-park":["Aria","Park MGM","T-Mobile Arena"],
+  "lv-mgm-excalibur":["MGM Grand","New York New York","Excalibur"],
+  "lv-luxor-mandalay":["Luxor","Mandalay Bay"]
 };
 
 function geometryBounds(geometry){

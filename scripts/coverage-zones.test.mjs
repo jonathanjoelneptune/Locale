@@ -21,7 +21,7 @@ test("San Diego coverage grid preserves broad and granular geography",()=>{
 });
 
 test("coverage grid spans all San Diego operating groups",()=>{
-  const groups=new Set(zones.map(zone=>zone.group));
+  const groups=new Set(zones.filter(zone=>zone.regionId==="san-diego").map(zone=>zone.group));
   assert.deepEqual([...groups].sort(),[
     "central-core","central-west","east-county","north-central","north-county-coast",
     "north-county-inland","north-inland","south-bay","uptown-midcity"

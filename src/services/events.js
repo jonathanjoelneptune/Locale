@@ -2,6 +2,7 @@ import {milesBetween} from "./geo.js";
 import {inDateRange,inWindow} from "./time.js";
 import {eventIdentityKey,normalizeEvent} from "../domain/event.js";
 import {eventMatchesSelectedAreas} from "./areas.js";
+import {isWithinVegasStrip} from "../data/vegasStrip.js";
 
 const VENUES=[
   {re:/\bpetco park\b/i,lat:32.7076,lng:-117.1570,venue:"PETCO Park"},
@@ -46,6 +47,8 @@ export function filterEvents(events,state){
       return {...event,_filterDistance:filterDistance,distance:hasPreciseLocation(event)?filterDistance:null};
     })
     .filter(event=>{
+      if(state.regionId && event.regionId!==state.regionId)return false;
+      if(state.regionId==="las-vegas"&&!isWithinVegasStrip(event))return false;
       const geographyOk=explicitAreas
         ?eventMatchesSelectedAreas(event,state.selectedAreaIds)
         :event._filterDistance<=state.radius;
