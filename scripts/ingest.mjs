@@ -314,6 +314,8 @@ const merge=(a,b)=>{
 
 const unique=[];
 for(const raw of events){
+  const bounds=REGIONS[raw.regionId]?.eventBounds;
+  if(bounds&&!(Number(raw.lat)>=bounds.south&&Number(raw.lat)<=bounds.north&&Number(raw.lng)>=bounds.west&&Number(raw.lng)<=bounds.east))continue;
   const event={...raw,category:refineEventCategory(raw),geoCell:cellFor(raw.lat,raw.lng)};
   const matchIndex=unique.findIndex(candidate=>sameEvent(candidate,event));
   if(matchIndex<0){

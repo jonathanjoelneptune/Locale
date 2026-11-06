@@ -270,9 +270,11 @@ test("SDPL public program pages parse single and recurring branch events",()=>{
 
 test("SDPL aggregator deduplicates programs repeated across city-hosted pages",async()=>{
   const originalFetch=globalThis.fetch;
+  const upcoming=new Date(Date.now()+10*86400000);
+  const upcomingDate=new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"America/Los_Angeles"}).format(upcoming);
   const html=`
     <h3>Dance Party: Code the Beat</h3>
-    <p>October 6, 2026 | 4:00 - 5:30 p.m.</p>
+    <p>${upcomingDate} | 4:00 - 5:30 p.m.</p>
     <p>San Ysidro Library | Ages 8 - 14 | Register Here</p>
     <p>Create animated dance sequences.</p>
   `;
@@ -409,12 +411,14 @@ test("Granicus detail parser extracts coordinates, address, and venue",()=>{
 
 test("Dedicated Granicus adapter filters civic meetings and applies facility hints",async()=>{
   const originalFetch=globalThis.fetch;
+  const upcoming=new Date(Date.now()+10*86400000);
+  const upcomingDate=new Intl.DateTimeFormat("en-US",{month:"2-digit",day:"2-digit",year:"numeric",timeZone:"America/Los_Angeles"}).format(upcoming);
   const listing=`
     <div>1 - 20 of 2 items</div>
     <table>
       <tr><th>Event</th><th>Date/Time</th></tr>
-      <tr><td> <a href="/event/library">TCG Tuesdays</a></td><td>10/06/2026 5:00 PM - 6:30 PM</td></tr>
-      <tr><td> <a href="/event/council">City Council Meeting</a></td><td>10/06/2026 6:00 PM - 8:00 PM</td></tr>
+      <tr><td> <a href="/event/library">TCG Tuesdays</a></td><td>${upcomingDate} 5:00 PM - 6:30 PM</td></tr>
+      <tr><td> <a href="/event/council">City Council Meeting</a></td><td>${upcomingDate} 6:00 PM - 8:00 PM</td></tr>
     </table>
   `;
   globalThis.fetch=async input=>{

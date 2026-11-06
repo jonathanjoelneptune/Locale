@@ -4,9 +4,9 @@ import {dedupe} from "../services/events.js";
 
 const providers=[new LocalProvider()];
 
-export async function loadEvents(){
+export async function loadEvents(regionId=null){
   const settled=await Promise.allSettled(providers.map(async provider=>{
-    const events=await provider.getEvents();
+    const events=await provider.getEvents(regionId);
     return validateProviderEvents(provider,events);
   }));
   const events=[];
@@ -14,5 +14,5 @@ export async function loadEvents(){
     if(result.status==="fulfilled")events.push(...result.value);
     else console.error(`Event provider ${providers[index].id} failed:`,result.reason);
   });
-  return dedupe(events);
+  return dedupe(regionId?events.filter(event=>event.regionId===regionId):events);
 }
