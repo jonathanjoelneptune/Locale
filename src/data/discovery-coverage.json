@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-06T21:43:04.162Z",
+  "generatedAt": "2026-11-06T22:19:36.741Z",
   "run": {
-    "startedAt": "2026-11-06T21:42:54.644Z",
+    "startedAt": "2026-11-06T22:18:51.196Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 414,
-      "lowValue": 748,
+      "cold": 415,
+      "lowValue": 747,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 414,
-        "low-value": 748,
+        "cold-sample": 415,
+        "low-value": 747,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.07,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12920858686",
-        "name": "Culinary Dropout",
+        "key": "san-diego|osm|node|9203979101",
+        "name": "Di Leone's Italian Restaurant",
         "category": "restaurant",
-        "website": "https://www.culinarydropout.com/locations/culinary-dropout-del-mar-ca",
-        "attempts": 1,
+        "website": "https://dileones.net/menu",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Culinary Dropout (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T21:43:04.116Z",
-        "checkedAt": "2026-11-06T21:42:54.949Z"
+        "nextCheckAt": "2026-12-06T22:19:36.692Z",
+        "checkedAt": "2026-11-06T22:19:36.503Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-valley": 1
+      "rancho-san-diego": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-06T21:43:04.118Z",
-    "durationMs": 9474,
+    "finishedAt": "2026-11-06T22:19:36.694Z",
+    "durationMs": 45498,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 415,
-      "lowValue": 747,
+      "retry": 177,
+      "cold": 416,
+      "lowValue": 746,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 415,
-        "low-value": 747,
+        "cold-sample": 416,
+        "low-value": 746,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-06T22:18:51.276Z",
+        "lastFinishedAt": "2026-11-06T22:19:06.279Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794003576279,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-06T22:19:06.279Z",
+        "lastFinishedAt": "2026-11-06T22:19:21.280Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794003591279,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-06T22:19:21.280Z",
+        "lastFinishedAt": "2026-11-06T22:19:36.280Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794003606280,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 415,
-      "lowValueCount": 747,
+      "coldCount": 416,
+      "lowValueCount": 746,
       "laneCounts": {
-        "cold-sample": 415,
+        "cold-sample": 416,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 747
+        "low-value": 746
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 177,
         "needs-website": 824,
-        "cold": 415,
+        "cold": 416,
         "candidate": 706
       },
       "categoryCounts": {
@@ -353,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
