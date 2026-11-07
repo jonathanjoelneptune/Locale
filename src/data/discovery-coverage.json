@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-07T15:52:53.124Z",
+  "generatedAt": "2026-11-07T20:08:28.932Z",
   "run": {
-    "startedAt": "2026-11-07T15:52:51.638Z",
+    "startedAt": "2026-11-07T20:07:57.131Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 178,
-      "cold": 421,
-      "lowValue": 741,
+      "cold": 422,
+      "lowValue": 740,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 421,
-        "low-value": 741,
+        "cold-sample": 422,
+        "low-value": 740,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 202.77,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6568756251",
-        "name": "Seven Seas Roasting Company",
-        "category": "cafe",
-        "website": "https://sevenseasroasting.com/",
-        "attempts": 1,
+        "key": "san-diego|osm|node|2149913857",
+        "name": "Carmel Sushi",
+        "category": "restaurant",
+        "website": "http://www.zipfusion-sd.com/",
+        "attempts": 4,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Seven Seas Roasting Company (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-22T15:52:53.075Z",
-        "checkedAt": "2026-11-07T15:52:51.956Z"
+        "nextCheckAt": "2026-12-07T20:08:28.646Z",
+        "checkedAt": "2026-11-07T20:08:28.483Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|97469253",
+        "name": "Texas Roadhouse",
+        "category": "restaurant",
+        "website": "https://www.texasroadhouse.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-07T20:08:28.898Z",
+        "checkedAt": "2026-11-07T20:08:28.484Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +115,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "south-park": 1
+      "torrey-hills": 1,
+      "downtown-el-cajon": 1
     },
     "probeGroupCounts": {
-      "central-core": 1
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-07T15:52:53.077Z",
-    "durationMs": 1439,
+    "failed": 2,
+    "finishedAt": "2026-11-07T20:08:28.900Z",
+    "durationMs": 31769,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 422,
-      "lowValue": 740,
+      "retry": 177,
+      "cold": 423,
+      "lowValue": 739,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 422,
-        "low-value": 740,
+        "cold-sample": 423,
+        "low-value": 739,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-07T20:07:57.174Z",
+        "lastFinishedAt": "2026-11-07T20:08:12.176Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1794082122176,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-07T20:08:12.176Z",
+        "lastFinishedAt": "2026-11-07T20:08:27.176Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794082137176,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-07T20:08:27.176Z",
+        "lastFinishedAt": "2026-11-07T20:08:28.351Z",
+        "lastLatencyMs": 1175,
+        "cooldownUntil": 1794082138351,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +330,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 422,
-      "lowValueCount": 740,
+      "coldCount": 423,
+      "lowValueCount": 739,
       "laneCounts": {
-        "cold-sample": 422,
+        "cold-sample": 423,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 740
+        "low-value": 739
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 177,
         "needs-website": 824,
-        "cold": 422,
+        "cold": 423,
         "candidate": 699
       },
       "categoryCounts": {
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
