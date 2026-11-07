@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-07T09:09:58.869Z",
+  "generatedAt": "2026-11-07T13:35:06.607Z",
   "run": {
-    "startedAt": "2026-11-07T09:09:55.302Z",
+    "startedAt": "2026-11-07T13:34:33.603Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 177,
-      "cold": 419,
-      "lowValue": 743,
+      "cold": 420,
+      "lowValue": 742,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 419,
-        "low-value": 743,
+        "cold-sample": 420,
+        "low-value": 742,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.25,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6670516969",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/11227/plaza-grove-2230-e-plaza-blvd-national-city-ca-919505160-us",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|1353404055",
+        "name": "Fleming's Prime Steakhouse and Wine Bar",
+        "category": "restaurant",
+        "website": "https://www.flemingssteakhouse.com/locations/ca/la-jolla/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-05T13:35:05.758Z",
+        "checkedAt": "2026-11-07T13:35:05.349Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|377357190",
+        "name": "Tivoli Bar and Grill",
+        "category": "bar",
+        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
+        "attempts": 9,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-22T09:09:58.825Z",
-        "checkedAt": "2026-11-07T09:09:55.541Z"
+        "nextCheckAt": "2026-11-14T13:35:05.970Z",
+        "checkedAt": "2026-11-07T13:35:05.758Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6553896395",
+        "name": "Cafe Madeleine",
+        "category": "cafe",
+        "website": "https://cafemadeleinesd.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-10T13:35:06.553Z",
+        "checkedAt": "2026-11-07T13:35:05.351Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +134,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "food-evidence": 1,
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +147,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "southeastern-san-diego": 1
+      "university-city-utc": 1,
+      "south-park": 1,
+      "east-village": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "north-central": 1,
+      "central-core": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -196,7 +250,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 48.666666666666664,
-            "averageEvents": 77.11111111111111,
+            "averageEvents": 77,
             "averageVenues": 13.61111111111111,
             "deficitScore": 68.97777777777777
           },
@@ -207,7 +261,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.45454545454545453,
             "averageGapScore": 14,
-            "averageEvents": 284.27272727272725,
+            "averageEvents": 283.72727272727275,
             "averageVenues": 43.45454545454545,
             "deficitScore": 34.9
           }
@@ -225,16 +279,16 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-07T09:09:58.827Z",
-    "durationMs": 3525,
+    "failed": 3,
+    "finishedAt": "2026-11-07T13:35:06.563Z",
+    "durationMs": 32960,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 177,
+      "retry": 178,
       "cold": 420,
       "lowValue": 742,
       "qualified": 19,
@@ -251,42 +305,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-07T13:34:33.763Z",
+        "lastFinishedAt": "2026-11-07T13:34:48.766Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794058518766,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-07T13:34:48.766Z",
+        "lastFinishedAt": "2026-11-07T13:35:03.767Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794058533767,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-07T13:35:03.767Z",
+        "lastFinishedAt": "2026-11-07T13:35:05.159Z",
+        "lastLatencyMs": 1392,
+        "cooldownUntil": 1794058535159,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +363,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 177,
+        "retry": 178,
         "needs-website": 824,
         "cold": 420,
-        "candidate": 702
+        "candidate": 701
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +407,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
