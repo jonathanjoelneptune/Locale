@@ -2,6 +2,8 @@ import {EventProvider} from "./provider.js";
 import {normalize} from "../services/events.js";
 
 const BUNDLED_EVENTS="./src/data/events.json";
+const REGIONAL_EVENTS=regionId=>`./src/data/events/${regionId}.json`;
+const REGIONAL_LIVE_EVENTS=regionId=>`https://raw.githubusercontent.com/jonathanjoelneptune/Locale/main/src/data/events/${regionId}.json`;
 const LIVE_EVENTS="https://raw.githubusercontent.com/jonathanjoelneptune/Locale/main/src/data/events.json";
 
 async function fetchEvents(url,timeoutMs){
@@ -25,16 +27,16 @@ async function fetchEvents(url,timeoutMs){
 export class LocalProvider extends EventProvider{
   constructor(){super({id:"locale-bootstrap",name:"Locale bootstrap",kind:"snapshot"})}
 
-  async getEvents(){
+  async getEvents(regionId="san-diego"){
     const production=location.hostname==="jonathanjoelneptune.github.io";
     const sources=production
-      ?[[LIVE_EVENTS,2500],[BUNDLED_EVENTS,4000]]
-      :[[BUNDLED_EVENTS,4000]];
+      ?[[REGIONAL_LIVE_EVENTS(regionId),2500],[REGIONAL_EVENTS(regionId),4000],[LIVE_EVENTS,2500],[BUNDLED_EVENTS,4000]]
+      :[[REGIONAL_EVENTS(regionId),4000],[BUNDLED_EVENTS,4000]];
 
     let lastError;
     for(const [url,timeout] of sources){
       try{
-        return (await fetchEvents(url,timeout)).map(normalize);
+        return (await fetchEvents(url,timeout)).filter(event=>event.regionId===regionId).map(normalize);
       }catch(error){
         lastError=error;
         console.warn("Locale event snapshot fallback:",error);

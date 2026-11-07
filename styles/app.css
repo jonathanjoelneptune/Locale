@@ -2371,3 +2371,11 @@
     max-width:100%;
   }
 }
+
+/* Region selector: compact and visually consistent with the left discovery rail. */
+.region-picker{display:grid;gap:6px;margin:0 0 11px}
+.region-picker label{font-size:9px;font-weight:850;letter-spacing:.09em;color:#547181}
+.region-picker select{display:block;width:100%;height:37px;border:1px solid #aebfc6;border-radius:8px;background:#f4f8f7;color:#183b4a;font-size:12px;font-weight:800;padding:0 11px;cursor:pointer;box-shadow:0 2px 6px #152f3b13}
+.region-picker select:hover{border-color:#168da2;background:#edf5f5}
+.region-picker select:focus-visible{outline:2px solid #168da2;outline-offset:2px}
+@media(max-height:760px) and (min-width:701px){.region-picker{gap:3px;margin-bottom:6px}.region-picker select{height:32px}}

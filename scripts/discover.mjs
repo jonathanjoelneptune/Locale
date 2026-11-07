@@ -1,5 +1,6 @@
 import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {REGIONS} from "./regions.mjs";
+import {isWithinVegasStrip} from "../src/data/vegasStrip.js";
 import {discoverCellPlaces,overpassTelemetrySnapshot} from "./discovery-overpass.mjs";
 import {buildDiscoveryCells,discoveryCellSummary} from "./discovery-grid.mjs";
 import {qualifyDiscoveryCandidate,DISCOVERY_QUALIFIER_VERSION,discoveryIsNonPublicEventUrl} from "./discovery-probe.mjs";
@@ -54,6 +55,8 @@ function baseQueueItem(candidate){
 }
 
 function mergeCandidate(queue,candidate){
+  // A Strip-only region must never promote off-corridor discovered venues.
+  if(candidate.regionId==="las-vegas"&&!isWithinVegasStrip(candidate))return {added:false,item:null};
   let existing=queue.find(item=>item.key===candidate.key);
   if(!existing){
     existing=queue.find(item=>

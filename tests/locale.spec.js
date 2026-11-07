@@ -497,7 +497,7 @@ test("map style changes one visible Leaflet tile layer",async({page})=>{
 test("coverage diagnostics renders comprehensive area and discovery metrics",async({page})=>{
   await page.goto("./diagnostics.html");
   await expect(page.locator("h1")).toHaveText("Operations & Coverage Diagnostics");
-  await expect(page.locator("#regionSelect option")).toHaveCount(2);
+  await expect(page.locator("#regionSelect option")).toHaveCount(3);
   await expect(page.locator("#summaryCards .summary-card")).toHaveCount(6);
   await page.locator("#regionSelect").selectOption("san-diego");
   await expect(page.locator("#neighborhoodRows tr")).toHaveCount(configuredSanDiegoAreaCount);

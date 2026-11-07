@@ -218,7 +218,45 @@ export const SOURCES=[
     id:"eventbrite-san-diego",name:"Eventbrite San Diego",scope:"regional",regions:["san-diego"],adapter:"eventbrite",sourceKind:"platform",
     endpoint:"https://www.eventbrite.com/d/ca--san-diego/events/",refreshHours:6,enabled:false,
     disabledReason:"Needs a stable/authorized ingestion path; do not scrape brittle search HTML"
-  }
+  },
+  // Vegas Strip: active official calendars use dated occurrences only.
+  {id:"lv-resorts-world",name:"Resorts World Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",ownerEntityKind:"place",ownerName:"Resorts World Las Vegas",
+    endpoint:"https://www.rwlasvegas.com/calendar/",fallbackCenter:{lat:36.1343,lng:-115.1648},maxLinks:45,refreshHours:6},
+  {id:"lv-zouk",name:"Zouk Group Las Vegas",scope:"local",regions:["las-vegas"],adapter:"vegas-zouk",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"nightlife",ownerEntityKind:"place",ownerName:"Zouk Nightclub",
+    endpoint:"https://zoukgrouplv.com/events/",fallbackCenter:{lat:36.1334,lng:-115.165},refreshHours:4},
+  {id:"lv-wynn",name:"Wynn and Encore Entertainment",scope:"local",regions:["las-vegas"],adapter:"calendar-links",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",ownerEntityKind:"place",ownerName:"Wynn Las Vegas",
+    endpoint:"https://www.wynnlasvegas.com/entertainment",fallbackCenter:{lat:36.1270,lng:-115.1655},maxLinks:30,refreshHours:6},
+  {id:"lv-tmobile",name:"T-Mobile Arena",scope:"local",regions:["las-vegas"],adapter:"calendar-links",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"arena",ownerEntityKind:"place",ownerName:"T-Mobile Arena",
+    endpoint:"https://www.t-mobilearena.com/events",fallbackCenter:{lat:36.1029,lng:-115.1784},maxLinks:40,refreshHours:6},
+  {id:"lv-brooklyn-bowl",name:"Brooklyn Bowl Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",
+    sourceKind:"official",acquisitionTier:"B",coverageLayer:"venue",ownerEntityKind:"place",ownerName:"Brooklyn Bowl Las Vegas",
+    endpoint:"https://www.brooklynbowl.com/Las-Vegas/",fallbackCenter:{lat:36.1183,lng:-115.1707},maxLinks:40,refreshHours:8},
+  {id:"lv-venetian",name:"Venetian Resort Event Calendar",scope:"local",regions:["las-vegas"],adapter:"jsonld",
+    sourceKind:"official",acquisitionTier:"A",coverageLayer:"resort",endpoint:"https://www.venetianlasvegas.com/entertainment/event-calendar.html",
+    enabled:false,disabledReason:"Calendar rendered client-side; dedicated date-level integration required"},
+  {id:"lv-sphere",name:"Sphere Las Vegas",scope:"local",regions:["las-vegas"],adapter:"jsonld-crawl",
+    sourceKind:"official",acquisitionTier:"B",coverageLayer:"venue",endpoint:"https://thesphere.com/shows",linkPattern:"/shows/",
+    enabled:false,disabledReason:"Residency ranges must be expanded into verified individual performances"},
+  {id:"lv-house-of-blues",name:"House of Blues Las Vegas",scope:"local",regions:["las-vegas"],adapter:"calendar-links",
+    sourceKind:"official",acquisitionTier:"B",coverageLayer:"venue",endpoint:"https://lasvegas.houseofblues.com/shows",
+    enabled:false,disabledReason:"Client-rendered show inventory requires an approved stable feed"},
+  {id:"lv-vegas-com",name:"Vegas.com Shows",scope:"regional",regions:["las-vegas"],adapter:"jsonld",
+    sourceKind:"aggregator",acquisitionTier:"A",coverageLayer:"platform",endpoint:"https://www.vegas.com/shows/",
+    enabled:false,disabledReason:"Aggregate show pages do not establish individual performance dates"},
+  {id:"lv-eventbrite",name:"Eventbrite Las Vegas",scope:"regional",regions:["las-vegas"],adapter:"eventbrite",
+    sourceKind:"platform",acquisitionTier:"A",coverageLayer:"platform",endpoint:"https://www.eventbrite.com/d/nv--las-vegas/events/",
+    enabled:false,disabledReason:"Requires stable authorized date-level access"},
+  {id:"lv-discotech",name:"Discotech Las Vegas",scope:"regional",regions:["las-vegas"],adapter:"jsonld",
+    sourceKind:"platform",acquisitionTier:"B",coverageLayer:"nightlife",endpoint:"https://app.discotech.me/las-vegas/events",
+    enabled:false,disabledReason:"Client-rendered schedule; adapter validation pending"},
+  {id:"lv-neon",name:"NEON Las Vegas",scope:"regional",regions:["las-vegas"],adapter:"jsonld",
+    sourceKind:"aggregator",acquisitionTier:"B",coverageLayer:"citywide",endpoint:"https://neon.reviewjournal.com/",
+    enabled:false,disabledReason:"Needs verified event record extraction rather than undated discovery"}
+
 ];
 
 export function sourceCoversRegion(source,region){

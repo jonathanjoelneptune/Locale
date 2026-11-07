@@ -21,6 +21,12 @@ function localDateFromKey(key){
 
 export function inDateRange(event,startKey,endKey){
   if(!startKey||!endKey)return true;
+  // Source calendars sometimes supply a confirmed date without a performance time.
+  // Date-only values represent that calendar day, not UTC midnight (the prior day in Vegas).
+  if(/^\d{4}-\d{2}-\d{2}$/.test(String(event.start||""))){
+    const endKeyOfEvent=String(event.end||event.start).slice(0,10);
+    return event.start<=endKey&&endKeyOfEvent>=startKey;
+  }
   const startBoundary=localDateFromKey(startKey);
   const endBoundary=localDateFromKey(endKey);
   endBoundary.setDate(endBoundary.getDate()+1);

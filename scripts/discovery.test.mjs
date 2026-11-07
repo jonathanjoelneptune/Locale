@@ -1,4 +1,11 @@
 import test from "node:test";
+const fixtureDay=days=>new Date(Date.now()+days*86400000);
+const fixtureDate=days=>fixtureDay(days).toISOString().slice(0,10);
+const fixtureCompactDate=days=>fixtureDate(days).replaceAll("-","");
+const fixtureDisplayDate=days=>new Intl.DateTimeFormat("en-US",{
+  timeZone:"UTC",weekday:"long",month:"short",day:"numeric",year:"numeric"
+}).format(fixtureDay(days));
+
 import assert from "node:assert/strict";
 import {buildCellOverpassQuery,candidateFromOverpassElement,fetchOverpass} from "./discovery-overpass.mjs";
 import {adaptiveDiscoveryPlan,isOverpassDue} from "./discovery-budget.mjs";
@@ -404,8 +411,8 @@ test("Tribe provider prefers a public iCalendar feed when REST is blocked",async
         "BEGIN:VCALENDAR",
         "BEGIN:VEVENT",
         "UID:fall-show@example",
-        "DTSTART:20261015T190000",
-        "DTEND:20261015T210000",
+        `DTSTART:${fixtureCompactDate(7)}T190000`,
+        `DTEND:${fixtureCompactDate(7)}T210000`,
         "SUMMARY:Fall Show",
         "LOCATION:Example Venue",
         "URL:https://venue.example/event/fall-show",
@@ -574,9 +581,9 @@ test("qualification reports a scope mismatch for a branch backed by a broad orga
         ok:true,status:200,
         json:async()=>({
           events:[
-            {id:1,title:"Local Class",start_date:"2026-10-15T18:00:00-07:00",venue:{venue:"Copley-Price Family YMCA",geo_lat:32.7557,geo_lng:-117.1013}},
-            {id:2,title:"Other Class",start_date:"2026-10-16T18:00:00-07:00",venue:{venue:"Toby Wells YMCA",geo_lat:32.8320,geo_lng:-117.1570}},
-            {id:3,title:"Third Class",start_date:"2026-10-17T18:00:00-07:00",venue:{venue:"McGrath Family YMCA",geo_lat:32.7810,geo_lng:-116.9630}}
+            {id:1,title:"Local Class",start_date:`${fixtureDate(7)}T18:00:00-07:00`,venue:{venue:"Copley-Price Family YMCA",geo_lat:32.7557,geo_lng:-117.1013}},
+            {id:2,title:"Other Class",start_date:`${fixtureDate(8)}T18:00:00-07:00`,venue:{venue:"Toby Wells YMCA",geo_lat:32.8320,geo_lng:-117.1570}},
+            {id:3,title:"Third Class",start_date:`${fixtureDate(9)}T18:00:00-07:00`,venue:{venue:"McGrath Family YMCA",geo_lat:32.7810,geo_lng:-116.9630}}
           ],
           next_rest_url:null
         })
@@ -614,13 +621,13 @@ test("Liberty Station district calendar expands listing links into dated events"
     "https://libertystation.com/do/first-friday":`
       <h1>First Friday Open Studio</h1>
       <h2>Dates and Times</h2>
-      <li>Friday, Oct 2, 2026 5pm - 7pm</li>
+      <li>${fixtureDisplayDate(7)} 5pm - 7pm</li>
       <h2>Location</h2><div>Example Gallery</div><div>2800 Historic Decatur Rd</div>
     `,
     "https://libertystation.com/do/trivia-tuesday":`
       <h1>Trivia Tuesday</h1>
       <h2>Dates and Times</h2>
-      <li>Tuesday, Oct 6, 2026 6pm - 8pm</li>
+      <li>${fixtureDisplayDate(8)} 6pm - 8pm</li>
       <h2>Location</h2><div>Moniker General</div><div>2860 Sims Rd</div>
     `
   };

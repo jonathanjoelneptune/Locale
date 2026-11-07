@@ -33,6 +33,25 @@ export const REGIONS={
     timeZone:"America/Chicago",
     locale:"en-US",
     currency:"USD"
+  },
+  "las-vegas":{
+    id:"las-vegas",
+    name:"Las Vegas Strip",
+    administrativeArea:"NV",
+    countryCode:"US",
+    center:{lat:36.1186,lng:-115.1725},
+    defaultRadiusMiles:5,
+    ingestRadiusMiles:8,
+    discoveryCoreRadiusMiles:3,
+    discoveryRadiusMiles:5,
+    discoveryOuterRadiusMiles:8,
+    discoveryDiningRadiusMiles:5,
+    discoveryPriority:90,
+    defaultZoom:12,
+    featuredDateRange:["2026-11-25","2026-11-28"],
+    timeZone:"America/Los_Angeles",
+    locale:"en-US",
+    currency:"USD"
   }
 };
 

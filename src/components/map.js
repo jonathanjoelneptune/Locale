@@ -220,7 +220,7 @@ export function createMap(el,state,onCenter,onMarker,onMapBackground,onViewportC
     setAreas(features,selectedIds=[]){
       areaFeatures=Array.isArray(features)?features:[];
       selectedAreaIds=selectedIds instanceof Set?new Set(selectedIds):new Set(selectedIds||[]);
-      const signature=`${areaFeatures.length}|${[...selectedAreaIds].sort().join(",")}`;
+      const signature=`${areaFeatures[0]?.properties?.regionId||"none"}|${areaFeatures.length}|${[...selectedAreaIds].sort().join(",")}`;
       if(signature===lastAreaSetSignature)return;
       lastAreaSetSignature=signature;
       renderAreas();
