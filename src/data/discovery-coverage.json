@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-08T16:15:20.038Z",
+  "generatedAt": "2026-11-08T18:27:29.599Z",
   "run": {
-    "startedAt": "2026-11-08T16:15:02.357Z",
+    "startedAt": "2026-11-08T18:27:28.100Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 177,
+      "due": 0,
+      "retry": 178,
       "cold": 431,
       "lowValue": 731,
       "qualified": 19,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 203.25,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10118284472",
-        "name": "Ferny's Mexican Grill",
+        "key": "san-diego|osm|node|13628595758",
+        "name": "Mr. Birriria",
         "category": "restaurant",
-        "website": "https://fernysmexicangrill.com/",
+        "website": "https://www.misterbirria.com/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Mr. Birriria (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-11T16:15:19.715Z",
-        "checkedAt": "2026-11-08T16:15:19.537Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31810379",
-        "name": "Resident Brewing",
-        "category": "brewery",
-        "website": "https://residentbrewing.com/",
-        "attempts": 3,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-08T16:15:19.983Z",
-        "checkedAt": "2026-11-08T16:15:19.539Z"
+        "nextCheckAt": "2026-12-23T18:27:29.564Z",
+        "checkedAt": "2026-11-08T18:27:28.305Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -127,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "santee": 1,
-      "little-italy": 1
+      "santee": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "central-core": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -240,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 266,
+            "averageEvents": 265.54545454545456,
             "averageVenues": 42.36363636363637,
             "deficitScore": 52.60454545454545
           }
@@ -258,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-08T16:15:19.993Z",
-    "durationMs": 17636,
+    "failed": 1,
+    "finishedAt": "2026-11-08T18:27:29.565Z",
+    "durationMs": 1465,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 431,
-      "lowValue": 731,
+      "cold": 432,
+      "lowValue": 730,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 431,
-        "low-value": 731,
+        "cold-sample": 432,
+        "low-value": 730,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-08T16:15:02.553Z",
-        "lastFinishedAt": "2026-11-08T16:15:03.319Z",
-        "lastLatencyMs": 766,
-        "cooldownUntil": 1794154533319,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-08T16:15:03.319Z",
-        "lastFinishedAt": "2026-11-08T16:15:18.320Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794154548320,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-08T16:15:18.320Z",
-        "lastFinishedAt": "2026-11-08T16:15:19.292Z",
-        "lastLatencyMs": 972,
-        "cooldownUntil": 1794154549292,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 431,
-      "lowValueCount": 731,
+      "coldCount": 432,
+      "lowValueCount": 730,
       "laneCounts": {
-        "cold-sample": 431,
+        "cold-sample": 432,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 731
+        "low-value": 730
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 178,
         "needs-website": 824,
-        "cold": 431,
-        "candidate": 690
+        "cold": 432,
+        "candidate": 689
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
