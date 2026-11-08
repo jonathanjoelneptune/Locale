@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-08T14:27:18.518Z",
+  "generatedAt": "2026-11-08T16:15:20.038Z",
   "run": {
-    "startedAt": "2026-11-08T14:27:16.343Z",
+    "startedAt": "2026-11-08T16:15:02.357Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 177,
-      "cold": 430,
-      "lowValue": 732,
+      "cold": 431,
+      "lowValue": 731,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 430,
-        "low-value": 732,
+        "cold-sample": 431,
+        "low-value": 731,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.25,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596527242",
-        "name": "Denny's",
+        "key": "san-diego|osm|node|10118284472",
+        "name": "Ferny's Mexican Grill",
         "category": "restaurant",
-        "website": "https://locations.dennys.com/CA/SANTEE/247287",
+        "website": "https://fernysmexicangrill.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Denny's (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-23T14:27:18.470Z",
-        "checkedAt": "2026-11-08T14:27:16.772Z"
+        "nextCheckAt": "2026-11-11T16:15:19.715Z",
+        "checkedAt": "2026-11-08T16:15:19.537Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31810379",
+        "name": "Resident Brewing",
+        "category": "brewery",
+        "website": "https://residentbrewing.com/",
+        "attempts": 3,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 404",
+          "statusCode": 404
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-08T16:15:19.983Z",
+        "checkedAt": "2026-11-08T16:15:19.539Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "santee": 1
+      "santee": 1,
+      "little-italy": 1
     },
     "probeGroupCounts": {
-      "east-county": 1
+      "east-county": 1,
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,16 +258,16 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-08T14:27:18.482Z",
-    "durationMs": 2139,
+    "failed": 2,
+    "finishedAt": "2026-11-08T16:15:19.993Z",
+    "durationMs": 17636,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 177,
+      "retry": 178,
       "cold": 431,
       "lowValue": 731,
       "qualified": 19,
@@ -251,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-08T16:15:02.553Z",
+        "lastFinishedAt": "2026-11-08T16:15:03.319Z",
+        "lastLatencyMs": 766,
+        "cooldownUntil": 1794154533319,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-08T16:15:03.319Z",
+        "lastFinishedAt": "2026-11-08T16:15:18.320Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794154548320,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-08T16:15:18.320Z",
+        "lastFinishedAt": "2026-11-08T16:15:19.292Z",
+        "lastLatencyMs": 972,
+        "cooldownUntil": 1794154549292,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +342,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 177,
+        "retry": 178,
         "needs-website": 824,
         "cold": 431,
-        "candidate": 691
+        "candidate": 690
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
