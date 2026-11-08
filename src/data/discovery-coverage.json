@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-07T23:52:02.752Z",
+  "generatedAt": "2026-11-08T02:44:54.710Z",
   "run": {
-    "startedAt": "2026-11-07T23:52:01.443Z",
+    "startedAt": "2026-11-08T02:44:22.672Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 177,
-      "cold": 424,
-      "lowValue": 738,
+      "cold": 425,
+      "lowValue": 737,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 424,
-        "low-value": 738,
+        "cold-sample": 425,
+        "low-value": 737,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.25,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31816397",
-        "name": "Oggi's Pizza",
+        "key": "san-diego|osm|node|11203324837",
+        "name": "Pho Royal",
         "category": "restaurant",
-        "website": "https://oggis.com/",
+        "website": "https://www.orderphoroyal.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-08T02:44:54.594Z",
+        "checkedAt": "2026-11-08T02:44:54.089Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|10894567160",
+        "name": "Royal India Delmar",
+        "category": "restaurant",
+        "website": "http://www.royalindiadelmar.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Oggi's Pizza (low-value)",
+          "detail": "Checked 1 page on Royal India Delmar (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-22T23:52:02.704Z",
-        "checkedAt": "2026-11-07T23:52:01.759Z"
+        "nextCheckAt": "2026-12-23T02:44:54.665Z",
+        "checkedAt": "2026-11-08T02:44:54.091Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +115,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,9 +127,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
+      "rolando-park": 1,
       "carmel-valley": 1
     },
     "probeGroupCounts": {
+      "uptown-midcity": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-07T23:52:02.706Z",
-    "durationMs": 1263,
+    "failed": 2,
+    "finishedAt": "2026-11-08T02:44:54.667Z",
+    "durationMs": 31995,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 177,
-      "cold": 425,
-      "lowValue": 737,
+      "cold": 426,
+      "lowValue": 736,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 425,
-        "low-value": 737,
+        "cold-sample": 426,
+        "low-value": 736,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-08T02:44:22.762Z",
+        "lastFinishedAt": "2026-11-08T02:44:37.766Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1794105907766,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-08T02:44:37.766Z",
+        "lastFinishedAt": "2026-11-08T02:44:52.767Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794105922767,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-08T02:44:52.767Z",
+        "lastFinishedAt": "2026-11-08T02:44:53.857Z",
+        "lastLatencyMs": 1090,
+        "cooldownUntil": 1794105923857,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +330,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 425,
-      "lowValueCount": 737,
+      "coldCount": 426,
+      "lowValueCount": 736,
       "laneCounts": {
-        "cold-sample": 425,
+        "cold-sample": 426,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 737
+        "low-value": 736
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 177,
         "needs-website": 824,
-        "cold": 425,
-        "candidate": 697
+        "cold": 426,
+        "candidate": 696
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
