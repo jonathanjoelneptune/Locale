@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-09T15:58:20.102Z",
+  "generatedAt": "2026-11-09T17:29:31.629Z",
   "run": {
-    "startedAt": "2026-11-09T15:58:00.424Z",
+    "startedAt": "2026-11-09T17:29:30.500Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 177,
+      "due": 0,
+      "retry": 178,
       "cold": 439,
       "lowValue": 723,
       "qualified": 19,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "4s-ranch",
-        "name": "4S Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 202.77,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|528160926",
-        "name": "National City Aquatic Center",
-        "category": "sports-centre",
-        "website": "https://www.nationalcityca.gov/city-government/community-services/national-city-aquatic-center",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-07T15:58:18.754Z",
-        "checkedAt": "2026-11-09T15:58:18.108Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12105363831",
-        "name": "Cake de Partie",
+        "key": "san-diego|osm|node|13163692501",
+        "name": "Chaba Thai Kitchen",
         "category": "restaurant",
-        "website": "https://cakedepartie.com/",
+        "website": "http://www.chabathaikitchen.com/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Chaba Thai Kitchen (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-12T15:58:20.034Z",
-        "checkedAt": "2026-11-09T15:58:18.111Z"
+        "nextCheckAt": "2026-12-24T17:29:31.573Z",
+        "checkedAt": "2026-11-09T17:29:30.853Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -127,11 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "chula-vista": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -240,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 240.45454545454547,
+            "averageEvents": 240,
             "averageVenues": 42.36363636363637,
             "deficitScore": 52.60454545454545
           }
@@ -258,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-09T15:58:20.048Z",
-    "durationMs": 19624,
+    "failed": 1,
+    "finishedAt": "2026-11-09T17:29:31.585Z",
+    "durationMs": 1085,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 439,
-      "lowValue": 723,
+      "cold": 440,
+      "lowValue": 722,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 439,
-        "low-value": 723,
+        "cold-sample": 440,
+        "low-value": 722,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-09T15:58:00.508Z",
-        "lastFinishedAt": "2026-11-09T15:58:01.574Z",
-        "lastLatencyMs": 1066,
-        "cooldownUntil": 1794239911574,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-09T15:58:01.574Z",
-        "lastFinishedAt": "2026-11-09T15:58:16.574Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794239926574,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-09T15:58:16.575Z",
-        "lastFinishedAt": "2026-11-09T15:58:17.878Z",
-        "lastLatencyMs": 1303,
-        "cooldownUntil": 1794239927878,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 439,
-      "lowValueCount": 723,
+      "coldCount": 440,
+      "lowValueCount": 722,
       "laneCounts": {
-        "cold-sample": 439,
+        "cold-sample": 440,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 723
+        "low-value": 722
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 178,
         "needs-website": 824,
-        "cold": 439,
-        "candidate": 682
+        "cold": 440,
+        "candidate": 681
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
