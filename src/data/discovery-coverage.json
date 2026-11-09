@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-09T05:58:59.341Z",
+  "generatedAt": "2026-11-09T07:12:48.964Z",
   "run": {
-    "startedAt": "2026-11-09T05:58:27.326Z",
+    "startedAt": "2026-11-09T07:12:47.909Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 436,
-      "lowValue": 726,
+      "retry": 177,
+      "cold": 437,
+      "lowValue": 725,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 436,
-        "low-value": 726,
+        "cold-sample": 437,
+        "low-value": 725,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 203.25,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1005482840",
-        "name": "Gate of Damascus",
+        "key": "san-diego|osm|node|11111055605",
+        "name": "Tuna Sushi",
         "category": "restaurant",
-        "website": "https://www.gateofdamascus.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.tunasushilemongrove.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 429",
+          "statusCode": 429
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-09T05:58:59.281Z",
-        "checkedAt": "2026-11-09T05:58:58.704Z"
+        "nextCheckAt": "2026-11-17T07:12:48.902Z",
+        "checkedAt": "2026-11-09T07:12:48.309Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -107,7 +96,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "bostonia": 1
+      "lemon-grove": 1
     },
     "probeGroupCounts": {
       "east-county": 1
@@ -130,7 +119,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.57692307692308,
-            "averageEvents": 13.038461538461538,
+            "averageEvents": 12.576923076923077,
             "averageVenues": 2.576923076923077,
             "deficitScore": 83.44423076923077
           },
@@ -141,7 +130,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 83.24137931034483,
-            "averageEvents": 7.931034482758621,
+            "averageEvents": 7.827586206896552,
             "averageVenues": 1.6896551724137931,
             "deficitScore": 88.27241379310345
           },
@@ -162,10 +151,10 @@
             "passing": 0,
             "zeroEventAreas": 20,
             "passRate": 0,
-            "averageGapScore": 81,
-            "averageEvents": 7.65,
+            "averageGapScore": 81.2,
+            "averageEvents": 7.425,
             "averageVenues": 1.9,
-            "deficitScore": 88.35
+            "deficitScore": 88.42
           },
           "central-west": {
             "group": "central-west",
@@ -174,8 +163,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 99.94736842105263,
-            "averageVenues": 15.894736842105264,
+            "averageEvents": 97.57894736842105,
+            "averageVenues": 15.736842105263158,
             "deficitScore": 63.52368421052631
           },
           "north-county-inland": {
@@ -196,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 70.16666666666667,
-            "averageEvents": 14.416666666666666,
+            "averageEvents": 13.583333333333334,
             "averageVenues": 3.3333333333333335,
             "deficitScore": 81.22500000000001
           },
@@ -207,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 68.38888888888889,
+            "averageEvents": 65.27777777777777,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -218,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 253.9090909090909,
+            "averageEvents": 240.45454545454547,
             "averageVenues": 42.36363636363637,
             "deficitScore": 52.60454545454545
           }
@@ -239,8 +228,8 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-09T05:58:59.295Z",
-    "durationMs": 31969,
+    "finishedAt": "2026-11-09T07:12:48.915Z",
+    "durationMs": 1006,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -262,42 +251,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-09T05:58:27.517Z",
-        "lastFinishedAt": "2026-11-09T05:58:28.474Z",
-        "lastLatencyMs": 956,
-        "cooldownUntil": 1794203938474,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-09T05:58:28.474Z",
-        "lastFinishedAt": "2026-11-09T05:58:43.476Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1794203953476,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-09T05:58:43.476Z",
-        "lastFinishedAt": "2026-11-09T05:58:58.477Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794203968477,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -364,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
