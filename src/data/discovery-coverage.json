@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-09T01:53:57.560Z",
+  "generatedAt": "2026-11-09T05:58:59.341Z",
   "run": {
-    "startedAt": "2026-11-09T01:53:54.786Z",
+    "startedAt": "2026-11-09T05:58:27.326Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 178,
-      "cold": 435,
-      "lowValue": 727,
+      "cold": 436,
+      "lowValue": 726,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 435,
-        "low-value": 727,
+        "cold-sample": 436,
+        "low-value": 726,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.25,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31817782",
-        "name": "Applebee's",
+        "key": "san-diego|osm|way|1005482840",
+        "name": "Gate of Damascus",
         "category": "restaurant",
-        "website": "https://restaurants.applebees.com/en-us/ca/san-diego/7677-balboa-avenue-79043",
-        "attempts": 1,
+        "website": "https://www.gateofdamascus.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Applebee's (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-24T01:53:57.442Z",
-        "checkedAt": "2026-11-09T01:53:55.059Z"
+        "nextCheckAt": "2026-12-09T05:58:59.281Z",
+        "checkedAt": "2026-11-09T05:58:58.704Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "convoy": 1
+      "bostonia": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -119,7 +130,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.57692307692308,
-            "averageEvents": 13.846153846153847,
+            "averageEvents": 13.038461538461538,
             "averageVenues": 2.576923076923077,
             "deficitScore": 83.44423076923077
           },
@@ -130,7 +141,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 83.24137931034483,
-            "averageEvents": 8.482758620689655,
+            "averageEvents": 7.931034482758621,
             "averageVenues": 1.6896551724137931,
             "deficitScore": 88.27241379310345
           },
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 81,
-            "averageEvents": 8.1,
+            "averageEvents": 7.65,
             "averageVenues": 1.9,
             "deficitScore": 88.35
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 103.94736842105263,
+            "averageEvents": 99.94736842105263,
             "averageVenues": 15.894736842105264,
             "deficitScore": 63.52368421052631
           },
@@ -174,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 92.36363636363636,
-            "averageEvents": 3.1818181818181817,
+            "averageEvents": 3.0454545454545454,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 94.14545454545453
           },
@@ -185,7 +196,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 70.16666666666667,
-            "averageEvents": 14.583333333333334,
+            "averageEvents": 14.416666666666666,
             "averageVenues": 3.3333333333333335,
             "deficitScore": 81.22500000000001
           },
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 71.5,
+            "averageEvents": 68.38888888888889,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 264.3636363636364,
+            "averageEvents": 253.9090909090909,
             "averageVenues": 42.36363636363637,
             "deficitScore": 52.60454545454545
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-09T01:53:57.444Z",
-    "durationMs": 2658,
+    "finishedAt": "2026-11-09T05:58:59.295Z",
+    "durationMs": 31969,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 436,
-      "lowValue": 726,
+      "retry": 177,
+      "cold": 437,
+      "lowValue": 725,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 436,
-        "low-value": 726,
+        "cold-sample": 437,
+        "low-value": 725,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-09T05:58:27.517Z",
+        "lastFinishedAt": "2026-11-09T05:58:28.474Z",
+        "lastLatencyMs": 956,
+        "cooldownUntil": 1794203938474,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-09T05:58:28.474Z",
+        "lastFinishedAt": "2026-11-09T05:58:43.476Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1794203953476,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-09T05:58:43.476Z",
+        "lastFinishedAt": "2026-11-09T05:58:58.477Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794203968477,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 436,
-      "lowValueCount": 726,
+      "coldCount": 437,
+      "lowValueCount": 725,
       "laneCounts": {
-        "cold-sample": 436,
+        "cold-sample": 437,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 726
+        "low-value": 725
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 177,
         "needs-website": 824,
-        "cold": 436,
+        "cold": 437,
         "candidate": 685
       },
       "categoryCounts": {
@@ -353,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
