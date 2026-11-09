@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-09T17:29:31.629Z",
+  "generatedAt": "2026-11-09T20:00:35.337Z",
   "run": {
-    "startedAt": "2026-11-09T17:29:30.500Z",
+    "startedAt": "2026-11-09T20:00:34.246Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 178,
-      "cold": 439,
-      "lowValue": 723,
+      "cold": 440,
+      "lowValue": 722,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 439,
-        "low-value": 723,
+        "cold-sample": 440,
+        "low-value": 722,
         "food-evidence": 11
       }
     },
@@ -58,22 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13163692501",
-        "name": "Chaba Thai Kitchen",
-        "category": "restaurant",
-        "website": "http://www.chabathaikitchen.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|way|744775716",
+        "name": "AMC Fashion Valley 18",
+        "category": "cinema",
+        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-fashion-valley-18",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Chaba Thai Kitchen (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-07T20:00:34.958Z",
+        "checkedAt": "2026-11-09T20:00:34.539Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|108402077",
+        "name": "National City Public Library",
+        "category": "library",
+        "website": "https://www.nationalcityca.gov/government/library/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-07T20:00:35.162Z",
+        "checkedAt": "2026-11-09T20:00:34.572Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13869507211",
+        "name": "Chon Ju Jip",
+        "category": "restaurant",
+        "website": "https://chonjujip.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-24T17:29:31.573Z",
-        "checkedAt": "2026-11-09T17:29:30.853Z"
+        "nextCheckAt": "2026-11-10T20:00:35.299Z",
+        "checkedAt": "2026-11-09T20:00:34.958Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +123,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,9 +135,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
+      "fashion-valley": 1,
+      "national-city": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
+      "central-west": 1,
+      "south-bay": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -225,16 +268,16 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-09T17:29:31.585Z",
-    "durationMs": 1085,
+    "failed": 3,
+    "finishedAt": "2026-11-09T20:00:35.301Z",
+    "durationMs": 1055,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 440,
       "lowValue": 722,
       "qualified": 19,
@@ -309,10 +352,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 179,
         "needs-website": 824,
         "cold": 440,
-        "candidate": 681
+        "candidate": 680
       },
       "categoryCounts": {
         "nightclub": 8,
