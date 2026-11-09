@@ -18,6 +18,25 @@ export const REGIONS={
     locale:"en-US",
     currency:"USD"
   },
+  "las-vegas":{
+    id:"las-vegas",
+    name:"Las Vegas Strip",
+    administrativeArea:"NV",
+    countryCode:"US",
+    center:{lat:36.1114,lng:-115.1728},
+    defaultRadiusMiles:5,
+    ingestRadiusMiles:8,
+    // Bounding box intentionally excludes Downtown and the wider valley.
+    eventBounds:{south:36.086,north:36.145,west:-115.189,east:-115.151},
+    discoveryCoreRadiusMiles:3,
+    discoveryRadiusMiles:6,
+    discoveryOuterRadiusMiles:8,
+    discoveryDiningRadiusMiles:5,
+    discoveryPriority:95,
+    timeZone:"America/Los_Angeles",
+    locale:"en-US",
+    currency:"USD"
+  },
   "chicago":{
     id:"chicago",
     name:"Chicago",

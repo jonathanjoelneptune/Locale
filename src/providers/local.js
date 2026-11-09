@@ -25,16 +25,17 @@ async function fetchEvents(url,timeoutMs){
 export class LocalProvider extends EventProvider{
   constructor(){super({id:"locale-bootstrap",name:"Locale bootstrap",kind:"snapshot"})}
 
-  async getEvents(){
+  async getEvents(regionId=null){
     const production=location.hostname==="jonathanjoelneptune.github.io";
-    const sources=production
-      ?[[LIVE_EVENTS,2500],[BUNDLED_EVENTS,4000]]
-      :[[BUNDLED_EVENTS,4000]];
+    const regional=regionId?`./src/data/events/${encodeURIComponent(regionId)}.json`:null;
+    const sources=regional?[[regional,5000]]:[];
+    if(production)sources.push([LIVE_EVENTS,2500]);
+    sources.push([BUNDLED_EVENTS,4000]);
 
     let lastError;
     for(const [url,timeout] of sources){
       try{
-        return (await fetchEvents(url,timeout)).map(normalize);
+        return (await fetchEvents(url,timeout)).filter(event=>!regionId||event.regionId===regionId).map(normalize);
       }catch(error){
         lastError=error;
         console.warn("Locale event snapshot fallback:",error);

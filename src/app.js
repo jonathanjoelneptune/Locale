@@ -1,4 +1,5 @@
 import {CONFIG} from "./config.js";
+import {getRegion,regionLabel,regionList,DEFAULT_REGION_ID} from "./data/regions.js";
 import {Header} from "./components/header.js";
 import {Filters} from "./components/filters.js";
 import {DateControls,todayKey,addDays} from "./components/dateControls.js";
@@ -15,19 +16,31 @@ import {geocode} from "./services/geocode.js";
 import {ensureLeaflet} from "./services/leaflet.js";
 
 const saved=new Set(JSON.parse(localStorage.getItem("locale-saved")||"[]"));
-const selectedAreas=new Set(JSON.parse(localStorage.getItem("locale-selected-areas")||"[]"));
-const today=todayKey();
+const initialParams=new URLSearchParams(location.search);
+const requestedRegion=initialParams.get("region");
+const initialRegion=getRegion(requestedRegion||localStorage.getItem("locale-region")||DEFAULT_REGION_ID);
+const readSavedAreas=id=>{try{const saved=localStorage.getItem("locale-selected-areas:"+id);const legacy=id===DEFAULT_REGION_ID?localStorage.getItem("locale-selected-areas"):null;return new Set(JSON.parse(saved||legacy||"[]"))}catch{return new Set}};
+const selectedAreas=readSavedAreas(initialRegion.id);
+const today=todayKey(new Date(),initialRegion.timeZone);
+const validDate=value=>/^\d{4}-\d{2}-\d{2}$/.test(value||"")&&!Number.isNaN(Date.parse(value+"T12:00:00Z"));
+const visitDates={start:"2026-11-25",end:"2026-11-28"};
+const defaultDates=id=>id==="las-vegas"&&today<="2026-11-28"?visitDates:{start:today,end:today};
+const readRegionDates=id=>{try{const saved=JSON.parse(localStorage.getItem("locale-dates:"+id)||"null");return validDate(saved?.start)&&validDate(saved?.end)&&saved.end>=saved.start?saved:null}catch{return null}};
+const preferredDates=readRegionDates(initialRegion.id)||defaultDates(initialRegion.id);
+const initialFrom=validDate(initialParams.get("from"))?initialParams.get("from"):preferredDates.start;
+const initialTo=validDate(initialParams.get("to"))&&initialParams.get("to")>=initialFrom?initialParams.get("to"):validDate(initialParams.get("from"))?initialFrom:preferredDates.end;
 const state={
-  center:{...CONFIG.defaultCenter},
-  placeLabel:CONFIG.defaultPlaceLabel,
-  radius:CONFIG.defaultRadiusMiles,
+  regionId:initialRegion.id,
+  center:{...initialRegion.center},
+  placeLabel:regionLabel(initialRegion),
+  radius:initialRegion.defaultRadiusMiles,
   zoom:CONFIG.defaultZoom,
-  dateStart:today,
-  dateEnd:today,
-  dateMode:"single",
+  dateStart:initialFrom,
+  dateEnd:initialTo,
+  dateMode:initialFrom===initialTo?"single":"range",
   quickPreset:null,
   calendarOpen:false,
-  calendarMonth:today.slice(0,7),
+  calendarMonth:initialFrom.slice(0,7),
   rangeAnchor:null,
   categories:new Set,
   selectedAreaIds:selectedAreas,
@@ -51,6 +64,16 @@ const state={
 };
 
 const root=document.querySelector("#app");
+let regionLoadVersion=0;
+const snapshotForRegion=regionId=>loadEvents(regionId);
+function reflectRegionUrl(){
+  const url=new URL(location.href);
+  url.searchParams.set("region",state.regionId);
+  url.searchParams.set("from",state.dateStart);
+  url.searchParams.set("to",state.dateEnd);
+  history.replaceState(null,"",url);
+}
+
 root.innerHTML=`<div id="eventDetailRoot"></div>
 <div id="splash" class="locale-splash"><div class="splash-mark">⌖</div><strong>Locale</strong><span>Finding what’s happening around you…</span></div>
 <div class="shell dual-shell ds-v1">
@@ -71,7 +94,7 @@ root.innerHTML=`<div id="eventDetailRoot"></div>
   <main class="map-stage">
     <div id="map" class="map"></div>
     <button id="useMapCenter" class="search-area-button" type="button">⟳ &nbsp; Search This Area</button>
-    <button id="clearAreaSelectionMap" class="clear-area-map-button" type="button" hidden>Show all San Diego</button>
+    <button id="clearAreaSelectionMap" class="clear-area-map-button" type="button" hidden>Show all areas</button>
     <div class="map-radius-label" id="mapRadiusLabel">${state.radius} miles</div>
     <div class="map-style-picker"><label>MAP</label><select id="mapStyle"><option value="standard">Standard</option><option value="humanitarian">Humanitarian</option><option value="satellite">Satellite</option></select></div>
   </main>
@@ -177,6 +200,7 @@ let areaCountCache={key:"",counts:new Map};
 
 function currentAreaCounts(){
   const key=[
+    state.regionId,
     state.areaRevision,
     state.events.length,
     state.dateStart,
@@ -211,9 +235,13 @@ function renderSidebarFromState(){
 }
 
 function render(){
+  reflectRegionUrl();
+  localStorage.setItem("locale-dates:"+state.regionId,JSON.stringify({start:state.dateStart,end:state.dateEnd}));
   document.querySelector("#dateControls").innerHTML=DateControls(state);
   document.querySelector("#filters").innerHTML=Filters(state);
   document.querySelector("#placeLabel").textContent=state.placeLabel;
+  const select=document.querySelector("#regionSelect");
+  if(select)select.value=state.regionId;
   renderAreaControls();
 
   const areaMode=state.selectedAreaIds.size>0;
@@ -273,7 +301,7 @@ function resetMapScope(){
 }
 
 function persistSelectedAreas(){
-  localStorage.setItem("locale-selected-areas",JSON.stringify([...state.selectedAreaIds]));
+  localStorage.setItem("locale-selected-areas:"+state.regionId,JSON.stringify([...state.selectedAreaIds]));
 }
 
 function setAreaSelection(ids,{fit=true}={}){
@@ -367,7 +395,7 @@ function chooseDate(key){
   render();
 }
 
-function weekendRange(base=todayKey()){
+function weekendRange(base=todayKey(new Date(),getRegion(state.regionId).timeZone)){
   const date=new Date(base+"T12:00:00");
   const dow=date.getDay();
   const daysUntilSaturday=(6-dow+7)%7;
@@ -376,7 +404,7 @@ function weekendRange(base=todayKey()){
 }
 
 function applyQuickPreset(preset){
-  const today=todayKey();
+  const today=todayKey(new Date(),getRegion(state.regionId).timeZone);
   state.quickPreset=preset;
   state.rangeAnchor=null;
   state.calendarOpen=false;
@@ -425,7 +453,7 @@ function bindDiscoveryFilters(){
     render();
   });
   document.querySelector("#todayDate")?.addEventListener("click",()=>{
-    const key=todayKey();
+    const key=todayKey(new Date(),getRegion(state.regionId).timeZone);
     resetMapScope();
     state.quickPreset="today";
     state.dateMode="single";
@@ -617,11 +645,90 @@ function applyMapStyle(value){
 }
 mapStyle.addEventListener("change",event=>applyMapStyle(event.target.value));
 
+
+function selectRegionOptions(){
+  const select=document.querySelector("#regionSelect");
+  select.innerHTML=regionList.map(region=>`<option value="${region.id}">${region.name}${region.administrativeArea?", "+region.administrativeArea:""}</option>`).join("");
+  select.value=state.regionId;
+  select.onchange=event=>switchRegion(event.target.value);
+}
+
+async function switchRegion(id){
+  if(!regionList.some(region=>region.id===id)||id===state.regionId)return;
+  const version=++regionLoadVersion;
+  const region=getRegion(id);
+  state.regionId=id;
+  localStorage.setItem("locale-region",id);
+  const dates=readRegionDates(id)||defaultDates(id);
+  state.dateStart=dates.start;
+  state.dateEnd=dates.end;
+  state.dateMode=dates.start===dates.end?"single":"range";
+  state.quickPreset=null;
+  state.calendarMonth=dates.start.slice(0,7);
+  state.rangeAnchor=null;
+  state.calendarOpen=false;
+  state.center={...region.center};
+  state.placeLabel=regionLabel(region);
+  state.radius=region.defaultRadiusMiles;
+  state.zoom=11;
+  state.hasFit=true;
+  state.selectedAreaIds=readSavedAreas(id);
+  state.areaFeatures=[];
+  state.areaNameById={};
+  state.areaRevision++;
+  state.areasReady=false;
+  state.areaQuery="";
+  state.areaExpanded=false;
+  state.areaFitPending=false;
+  state.categories.clear();
+  state.events=[];
+  state.selectedEventId=null;
+  state.venueFilter=null;
+  state.listMode="events";
+  state.resultScope="nearby";
+  state.viewport=null;
+  document.querySelector("#radius").value=String(state.radius);
+  document.querySelector("#radiusLabel").textContent=state.radius+" miles";
+  document.querySelector("#mapRadiusLabel").textContent=state.radius+" miles";
+  closeEventDetail();
+  mapUI?.setAreas([],[]);
+  mapUI?.setSearchCenter(state.center,{recenter:true,zoom:11});
+  render();
+  await loadRegionData(id,version);
+}
+
+async function loadRegionData(id,version){
+  const [eventResult,areaResult]=await Promise.allSettled([
+    snapshotForRegion(id),loadAreaGeometry({regionId:id})
+  ]);
+  if(version!==regionLoadVersion||state.regionId!==id)return;
+  let events=eventResult.status==="fulfilled"?eventResult.value:[];
+  if(eventResult.status==="rejected")console.error("Region events failed:",eventResult.reason);
+  if(areaResult.status==="fulfilled"){
+    const collection=areaResult.value;
+    state.areaFeatures=collection.features||[];
+    const lookup=createAreaLookup(collection);
+    state.areaNameById=Object.fromEntries([...lookup].map(([key,feature])=>[key,feature.properties?.name||key]));
+    state.selectedAreaIds=new Set([...state.selectedAreaIds].filter(key=>lookup.has(key)));
+    persistSelectedAreas();
+    events=annotateEventsWithAreas(events,collection,{isEligible:hasPreciseLocation});
+  }else{
+    console.error("Region geography failed:",areaResult.reason);
+    state.areaFeatures=[];
+    state.selectedAreaIds=new Set();
+  }
+  state.events=events.filter(event=>event.regionId===id);
+  state.areasReady=true;
+  state.areaRevision++;
+  render();
+}
+
+selectRegionOptions();
 document.querySelector("#placeSearch").addEventListener("keydown",async event=>{
   if(event.key!=="Enter"||!event.target.value.trim())return;
   event.target.disabled=true;
   try{
-    const place=await geocode(event.target.value.trim());
+    const place=await geocode(event.target.value.trim()+", "+getRegion(state.regionId).name+", "+getRegion(state.regionId).administrativeArea);
     if(place){
       if(state.selectedAreaIds.size)clearAreaSelection({renderNow:false});
       state.center={lat:place.lat,lng:place.lng};
@@ -638,35 +745,7 @@ document.querySelector("#placeSearch").addEventListener("keydown",async event=>{
 
 render();
 requestAnimationFrame(()=>document.documentElement.classList.add("locale-ready"));
-Promise.allSettled([
-  loadEvents(),
-  loadAreaGeometry({regionId:CONFIG.defaultRegionId})
-]).then(([eventsResult,areasResult])=>{
-  let events=eventsResult.status==="fulfilled"?eventsResult.value:[];
-  if(eventsResult.status==="rejected")console.error(eventsResult.reason);
-
-  if(areasResult.status==="fulfilled"){
-    const collection=areasResult.value;
-    state.areaFeatures=collection.features||[];
-    const lookup=createAreaLookup(collection);
-    state.areaNameById=Object.fromEntries([...lookup].map(([id,feature])=>[id,feature.properties?.name||id]));
-    state.selectedAreaIds=new Set([...state.selectedAreaIds].filter(id=>lookup.has(id)));
-    persistSelectedAreas();
-    state.areasReady=true;
-    events=annotateEventsWithAreas(events,collection,{isEligible:hasPreciseLocation});
-    state.areaRevision++;
-  }else{
-    console.error(areasResult.reason);
-    state.areasReady=true;
-    state.areaFeatures=[];
-    state.selectedAreaIds=new Set;
-    persistSelectedAreas();
-  }
-
-  state.events=events;
-  render();
-  finishSplash();
-});
+loadRegionData(state.regionId,++regionLoadVersion).finally(finishSplash);
 setTimeout(initMapLater,100);
 
 document.querySelector("#eventDetailRoot").addEventListener("click",event=>{if(event.target.closest("[data-close-detail]"))closeEventDetail()});
