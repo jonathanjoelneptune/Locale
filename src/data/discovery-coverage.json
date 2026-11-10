@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-10T00:06:28.139Z",
+  "generatedAt": "2026-11-10T01:31:28.578Z",
   "run": {
-    "startedAt": "2026-11-10T00:06:26.206Z",
+    "startedAt": "2026-11-10T01:31:25.416Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 179,
-      "cold": 441,
-      "lowValue": 721,
+      "due": 2,
+      "retry": 178,
+      "cold": 442,
+      "lowValue": 720,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 441,
-        "low-value": 721,
+        "cold-sample": 442,
+        "low-value": 720,
         "food-evidence": 11
       }
     },
@@ -58,41 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11111051505",
-        "name": "Lemon Grove Thai Food",
+        "key": "san-diego|osm|node|4550160516",
+        "name": "Crab Hut",
         "category": "restaurant",
-        "website": "https://lemon-grove-thai-food.business.site/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.crabhutrestaurant.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-10T00:06:26.878Z",
-        "checkedAt": "2026-11-10T00:06:26.642Z"
+        "nextCheckAt": "2026-11-13T01:31:26.163Z",
+        "checkedAt": "2026-11-10T01:31:25.829Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1974495839",
-        "name": "Uptown Tavern",
+        "key": "san-diego|osm|node|9215079092",
+        "name": "Tropical Savor Bar & Grill",
         "category": "bar",
-        "website": "https://www.uptowntavernsd.com/",
+        "website": "https://www.tropicalsavorbarandgrill.com/",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-08T01:31:26.237Z",
+        "checkedAt": "2026-11-10T01:31:25.787Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079098",
+        "name": "Henry's Pub",
+        "category": "pub",
+        "website": "https://www.henryspub.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Uptown Tavern (event-likely)",
+          "detail": "Checked 3 pages on Henry's Pub (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-01T00:06:28.093Z",
-        "checkedAt": "2026-11-10T00:06:26.581Z"
+        "nextCheckAt": "2026-12-08T01:31:28.530Z",
+        "checkedAt": "2026-11-10T01:31:26.163Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,7 +123,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
+      "event-likely": 2,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -116,12 +135,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "hillcrest": 1,
-      "lemon-grove": 1
+      "little-italy": 1,
+      "convoy": 1,
+      "east-village": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1,
-      "east-county": 1
+      "central-core": 2,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,16 +267,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-10T00:06:28.095Z",
-    "durationMs": 1889,
+    "failed": 3,
+    "finishedAt": "2026-11-10T01:31:28.532Z",
+    "durationMs": 3116,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 442,
       "lowValue": 720,
       "qualified": 19,
@@ -331,10 +351,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 179,
         "needs-website": 824,
         "cold": 442,
-        "candidate": 679
+        "candidate": 678
       },
       "categoryCounts": {
         "nightclub": 8,
