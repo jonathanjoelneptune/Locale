@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-10T21:26:46.011Z",
+  "generatedAt": "2026-11-10T23:17:54.743Z",
   "run": {
-    "startedAt": "2026-11-10T21:26:43.659Z",
+    "startedAt": "2026-11-10T23:17:53.970Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 449,
-      "lowValue": 713,
+      "cold": 450,
+      "lowValue": 712,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 449,
-        "low-value": 713,
+        "cold-sample": 450,
+        "low-value": 712,
         "food-evidence": 11
       }
     },
@@ -58,22 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8694049629",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/1010327/carmel-valley-del-mar-height-5980-village-way-b-101-san-diego-ca-921302408-us",
+        "key": "san-diego|osm|node|12967158886",
+        "name": "Max's restaurant",
+        "category": "restaurant",
+        "website": "https://www.maxsrestaurantna.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-25T21:26:45.973Z",
-        "checkedAt": "2026-11-10T21:26:43.850Z"
+        "nextCheckAt": "2026-11-13T23:17:54.685Z",
+        "checkedAt": "2026-11-10T23:17:54.277Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,7 +96,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "pacific-highlands-ranch": 1
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
       "north-central": 1
@@ -119,7 +119,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 75.03846153846153,
-            "averageEvents": 11.153846153846153,
+            "averageEvents": 11.038461538461538,
             "averageVenues": 2.576923076923077,
             "deficitScore": 83.95576923076923
           },
@@ -152,7 +152,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 81.575,
-            "averageEvents": 6.75,
+            "averageEvents": 6.7,
             "averageVenues": 1.9,
             "deficitScore": 88.55125
           },
@@ -163,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 91.73684210526316,
+            "averageEvents": 90.94736842105263,
             "averageVenues": 15.736842105263158,
             "deficitScore": 63.52368421052631
           },
@@ -196,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 60.27777777777778,
+            "averageEvents": 59.94444444444444,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -207,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 219.0909090909091,
+            "averageEvents": 218.1818181818182,
             "averageVenues": 41.72727272727273,
             "deficitScore": 52.82727272727273
           }
@@ -228,13 +228,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-10T21:26:45.974Z",
-    "durationMs": 2315,
+    "finishedAt": "2026-11-10T23:17:54.687Z",
+    "durationMs": 717,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
+      "retry": 180,
       "cold": 450,
       "lowValue": 712,
       "qualified": 19,
@@ -309,10 +309,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 180,
         "needs-website": 824,
         "cold": 450,
-        "candidate": 670
+        "candidate": 669
       },
       "categoryCounts": {
         "nightclub": 8,
