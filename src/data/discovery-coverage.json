@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-09T22:39:08.917Z",
+  "generatedAt": "2026-11-10T00:06:28.139Z",
   "run": {
-    "startedAt": "2026-11-09T22:38:36.994Z",
+    "startedAt": "2026-11-10T00:06:26.206Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 179,
-      "cold": 440,
-      "lowValue": 722,
+      "cold": 441,
+      "lowValue": 721,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 440,
-        "low-value": 722,
+        "cold-sample": 441,
+        "low-value": 721,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 203.25,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11350199669",
-        "name": "CoCo Ichibanya",
+        "key": "san-diego|osm|node|11111051505",
+        "name": "Lemon Grove Thai Food",
         "category": "restaurant",
-        "website": "https://ichibanyausa.com/",
-        "attempts": 1,
+        "website": "https://lemon-grove-thai-food.business.site/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on CoCo Ichibanya (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-24T22:39:08.882Z",
-        "checkedAt": "2026-11-09T22:39:07.999Z"
+        "nextCheckAt": "2026-12-10T00:06:26.878Z",
+        "checkedAt": "2026-11-10T00:06:26.642Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1974495839",
+        "name": "Uptown Tavern",
+        "category": "bar",
+        "website": "https://www.uptowntavernsd.com/",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Uptown Tavern (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-01T00:06:28.093Z",
+        "checkedAt": "2026-11-10T00:06:26.581Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,6 +104,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -107,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "convoy": 1
+      "hillcrest": 1,
+      "lemon-grove": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "uptown-midcity": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -236,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-09T22:39:08.891Z",
-    "durationMs": 31897,
+    "failed": 2,
+    "finishedAt": "2026-11-10T00:06:28.095Z",
+    "durationMs": 1889,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
-      "cold": 441,
-      "lowValue": 721,
+      "retry": 178,
+      "cold": 442,
+      "lowValue": 720,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 441,
-        "low-value": 721,
+        "cold-sample": 442,
+        "low-value": 720,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-09T22:38:37.037Z",
-        "lastFinishedAt": "2026-11-09T22:38:37.869Z",
-        "lastLatencyMs": 832,
-        "cooldownUntil": 1794263947869,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-09T22:38:37.869Z",
-        "lastFinishedAt": "2026-11-09T22:38:52.869Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794263962869,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-09T22:38:52.869Z",
-        "lastFinishedAt": "2026-11-09T22:39:07.870Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794263977870,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,21 +319,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 441,
-      "lowValueCount": 721,
+      "coldCount": 442,
+      "lowValueCount": 720,
       "laneCounts": {
-        "cold-sample": 441,
+        "cold-sample": 442,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 721
+        "low-value": 720
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 178,
         "needs-website": 824,
-        "cold": 441,
+        "cold": 442,
         "candidate": 679
       },
       "categoryCounts": {
@@ -364,7 +375,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
