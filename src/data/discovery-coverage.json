@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-10T07:25:34.797Z",
+  "generatedAt": "2026-11-10T09:46:20.544Z",
   "run": {
-    "startedAt": "2026-11-10T07:25:30.541Z",
+    "startedAt": "2026-11-10T09:46:18.953Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 2,
       "retry": 179,
-      "cold": 444,
-      "lowValue": 718,
+      "cold": 445,
+      "lowValue": 717,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 444,
-        "low-value": 718,
+        "cold-sample": 445,
+        "low-value": 717,
         "food-evidence": 11
       }
     },
@@ -41,7 +41,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 91,
+        "severeGapCount": 92,
         "mediumGapCount": 164
       },
       "chicago": {
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5131241022",
-        "name": "Fleming's Prime Steakhouse & Wine Bar",
-        "category": "observed-venue",
-        "website": "https://www.flemingssteakhouse.com/Locations/CA/San-Diego",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-evidence",
+        "key": "san-diego|osm|node|5133324768",
+        "name": "Waterfront Grill",
+        "category": "restaurant",
+        "website": "https://www.mywaterfrontgrill.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,15 +72,15 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-08T07:25:31.439Z",
-        "checkedAt": "2026-11-10T07:25:30.912Z"
+        "nextCheckAt": "2026-12-10T09:46:19.596Z",
+        "checkedAt": "2026-11-10T09:46:19.215Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|709059097",
-        "name": "AMC Mission Valley 20",
-        "category": "cinema",
-        "website": "https://www.amctheatres.com/movie-theatres/san-diego/amc-mission-valley-20",
+        "key": "san-diego|osm|way|611726954",
+        "name": "Marriott Hall",
+        "category": "conference-centre",
+        "website": "https://www.marriott.com/hotels/event-planning/business-meeting/sandt-marriott-marquis-san-diego-marina/",
         "attempts": 4,
         "status": "retry",
         "probeLane": "event-likely",
@@ -91,27 +91,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-08T07:25:31.807Z",
-        "checkedAt": "2026-11-10T07:25:31.439Z"
+        "nextCheckAt": "2026-12-08T09:46:19.788Z",
+        "checkedAt": "2026-11-10T09:46:19.261Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|993510009",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/1005691/campo-bonita-9809-campo-road-spring-valley-ca-919771418-us",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|11748134769",
+        "name": "Topside Terrace Kitchen & Bar",
+        "category": "restaurant",
+        "website": "https://www.hotelrepublicsd.com/dining/topside-terrace-kitchen-bar",
+        "attempts": 4,
+        "status": "retry",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-25T07:25:34.747Z",
-        "checkedAt": "2026-11-10T07:25:30.865Z"
+        "nextCheckAt": "2026-12-08T09:46:20.500Z",
+        "checkedAt": "2026-11-10T09:46:19.596Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -124,8 +124,8 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "low-value": 1,
-      "event-evidence": 1,
-      "event-likely": 1
+      "event-likely": 1,
+      "food-evidence": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -136,14 +136,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "casa-de-oro": 1,
+      "national-city": 1,
       "east-village": 1,
-      "university-heights": 1
+      "little-italy": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "central-core": 1,
-      "uptown-midcity": 1
+      "south-bay": 1,
+      "central-core": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -162,10 +161,10 @@
             "passing": 0,
             "zeroEventAreas": 7,
             "passRate": 0,
-            "averageGapScore": 73.57692307692308,
-            "averageEvents": 11.653846153846153,
+            "averageGapScore": 73.88461538461539,
+            "averageEvents": 11.5,
             "averageVenues": 2.576923076923077,
-            "deficitScore": 83.44423076923077
+            "deficitScore": 83.55192307692307
           },
           "south-bay": {
             "group": "south-bay",
@@ -207,7 +206,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 93.6842105263158,
+            "averageEvents": 93.26315789473684,
             "averageVenues": 15.736842105263158,
             "deficitScore": 63.52368421052631
           },
@@ -217,10 +216,10 @@
             "passing": 0,
             "zeroEventAreas": 15,
             "passRate": 0,
-            "averageGapScore": 92.36363636363636,
-            "averageEvents": 2.8181818181818183,
-            "averageVenues": 1.0454545454545454,
-            "deficitScore": 94.14545454545453
+            "averageGapScore": 92.45454545454545,
+            "averageEvents": 2.772727272727273,
+            "averageVenues": 1,
+            "deficitScore": 94.17727272727272
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -229,7 +228,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 70.83333333333333,
-            "averageEvents": 12.583333333333334,
+            "averageEvents": 12.416666666666666,
             "averageVenues": 3.1666666666666665,
             "deficitScore": 81.45833333333333
           },
@@ -240,7 +239,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 61.55555555555556,
+            "averageEvents": 61.05555555555556,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -251,8 +250,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 224.63636363636363,
-            "averageVenues": 42.36363636363637,
+            "averageEvents": 220.27272727272728,
+            "averageVenues": 41.72727272727273,
             "deficitScore": 52.60454545454545
           }
         }
@@ -272,23 +271,23 @@
     "probed": 3,
     "promoted": 0,
     "failed": 3,
-    "finishedAt": "2026-11-10T07:25:34.749Z",
-    "durationMs": 4208,
+    "finishedAt": "2026-11-10T09:46:20.502Z",
+    "durationMs": 1549,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
-      "cold": 445,
-      "lowValue": 717,
+      "retry": 178,
+      "cold": 446,
+      "lowValue": 716,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 445,
-        "low-value": 717,
+        "cold-sample": 446,
+        "low-value": 716,
         "food-evidence": 11
       }
     },
@@ -341,21 +340,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 445,
-      "lowValueCount": 717,
+      "coldCount": 446,
+      "lowValueCount": 716,
       "laneCounts": {
-        "cold-sample": 445,
+        "cold-sample": 446,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 717
+        "low-value": 716
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 179,
+        "retry": 178,
         "needs-website": 824,
-        "cold": 445,
+        "cold": 446,
         "candidate": 675
       },
       "categoryCounts": {
@@ -405,7 +404,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 91,
+        "severeGapCount": 92,
         "mediumGapCount": 164,
         "activeMode": "bootstrap",
         "probeLimit": 12,
