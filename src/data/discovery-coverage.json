@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-10T15:44:22.287Z",
+  "generatedAt": "2026-11-10T17:49:51.667Z",
   "run": {
-    "startedAt": "2026-11-10T15:44:21.131Z",
+    "startedAt": "2026-11-10T17:49:05.889Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 179,
-      "cold": 446,
-      "lowValue": 716,
+      "retry": 178,
+      "cold": 447,
+      "lowValue": 715,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 446,
-        "low-value": 716,
+        "cold-sample": 447,
+        "low-value": 715,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 202.77,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,17 +65,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2126642451",
-        "name": "Refresh Coffee",
-        "category": "cafe",
-        "website": "http://www.refreshcoffee.co/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|4933000877",
+        "name": "Isshido Ramen",
+        "category": "restaurant",
+        "website": "https://isshido-ramen.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,8 +83,8 @@
           "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-10T15:44:22.240Z",
-        "checkedAt": "2026-11-10T15:44:21.434Z"
+        "nextCheckAt": "2026-11-17T17:49:51.612Z",
+        "checkedAt": "2026-11-10T17:49:51.172Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "rancho-penasquitos": 1
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -228,13 +239,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-10T15:44:22.243Z",
-    "durationMs": 1112,
+    "finishedAt": "2026-11-10T17:49:51.614Z",
+    "durationMs": 45725,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 447,
       "lowValue": 715,
       "qualified": 19,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-10T17:49:05.960Z",
+        "lastFinishedAt": "2026-11-10T17:49:20.963Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794332990963,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-10T17:49:20.963Z",
+        "lastFinishedAt": "2026-11-10T17:49:35.963Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794333005963,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-10T17:49:35.963Z",
+        "lastFinishedAt": "2026-11-10T17:49:50.964Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794333020963,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +320,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 179,
         "needs-website": 824,
         "cold": 447,
-        "candidate": 674
+        "candidate": 673
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
