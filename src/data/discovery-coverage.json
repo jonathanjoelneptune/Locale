@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-10T01:31:28.578Z",
+  "generatedAt": "2026-11-10T02:38:47.339Z",
   "run": {
-    "startedAt": "2026-11-10T01:31:25.416Z",
+    "startedAt": "2026-11-10T02:38:45.138Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
-      "retry": 178,
+      "due": 0,
+      "retry": 179,
       "cold": 442,
       "lowValue": 720,
       "qualified": 19,
@@ -58,60 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4550160516",
-        "name": "Crab Hut",
+        "key": "san-diego|osm|node|12356844832",
+        "name": "District 6 Gastrobar & Kitchen",
         "category": "restaurant",
-        "website": "https://www.crabhutrestaurant.com/",
+        "website": "https://www.district6sd.com/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-13T01:31:26.163Z",
-        "checkedAt": "2026-11-10T01:31:25.829Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079092",
-        "name": "Tropical Savor Bar & Grill",
-        "category": "bar",
-        "website": "https://www.tropicalsavorbarandgrill.com/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-08T01:31:26.237Z",
-        "checkedAt": "2026-11-10T01:31:25.787Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079098",
-        "name": "Henry's Pub",
-        "category": "pub",
-        "website": "https://www.henryspub.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Henry's Pub (event-likely)",
+          "detail": "Checked 2 pages on District 6 Gastrobar & Kitchen (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-08T01:31:28.530Z",
-        "checkedAt": "2026-11-10T01:31:26.163Z"
+        "nextCheckAt": "2026-12-25T02:38:47.294Z",
+        "checkedAt": "2026-11-10T02:38:45.434Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -123,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -135,12 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "little-italy": 1,
-      "convoy": 1,
-      "east-village": 1
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "central-core": 2,
       "north-central": 1
     },
     "coverageEquity": {
@@ -161,7 +119,7 @@
             "zeroEventAreas": 7,
             "passRate": 0,
             "averageGapScore": 73.57692307692308,
-            "averageEvents": 12.423076923076923,
+            "averageEvents": 12.23076923076923,
             "averageVenues": 2.576923076923077,
             "deficitScore": 83.44423076923077
           },
@@ -172,7 +130,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 83.44827586206897,
-            "averageEvents": 7.758620689655173,
+            "averageEvents": 7.620689655172414,
             "averageVenues": 1.6896551724137931,
             "deficitScore": 88.34482758620689
           },
@@ -194,7 +152,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 81.2,
-            "averageEvents": 7.375,
+            "averageEvents": 7.325,
             "averageVenues": 1.9,
             "deficitScore": 88.42
           },
@@ -205,7 +163,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 97.05263157894737,
+            "averageEvents": 96.57894736842105,
             "averageVenues": 15.736842105263158,
             "deficitScore": 63.52368421052631
           },
@@ -216,7 +174,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 92.36363636363636,
-            "averageEvents": 3.0454545454545454,
+            "averageEvents": 2.9545454545454546,
             "averageVenues": 1.0454545454545454,
             "deficitScore": 94.14545454545453
           },
@@ -238,7 +196,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 65.16666666666667,
+            "averageEvents": 65,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -249,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 21.727272727272727,
-            "averageEvents": 239.1818181818182,
+            "averageEvents": 238.72727272727272,
             "averageVenues": 42.36363636363637,
             "deficitScore": 52.60454545454545
           }
@@ -267,26 +225,26 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 1,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-11-10T01:31:28.532Z",
-    "durationMs": 3116,
+    "failed": 1,
+    "finishedAt": "2026-11-10T02:38:47.307Z",
+    "durationMs": 2169,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 442,
-      "lowValue": 720,
+      "cold": 443,
+      "lowValue": 719,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 442,
-        "low-value": 720,
+        "cold-sample": 443,
+        "low-value": 719,
         "food-evidence": 11
       }
     },
@@ -339,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 442,
-      "lowValueCount": 720,
+      "coldCount": 443,
+      "lowValueCount": 719,
       "laneCounts": {
-        "cold-sample": 442,
+        "cold-sample": 443,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 720
+        "low-value": 719
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 442,
-        "candidate": 678
+        "cold": 443,
+        "candidate": 677
       },
       "categoryCounts": {
         "nightclub": 8,
