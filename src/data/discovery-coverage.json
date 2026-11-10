@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-10T17:49:51.667Z",
+  "generatedAt": "2026-11-10T18:35:43.347Z",
   "run": {
-    "startedAt": "2026-11-10T17:49:05.889Z",
+    "startedAt": "2026-11-10T18:35:41.570Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
+      "retry": 179,
       "cold": 447,
       "lowValue": 715,
       "qualified": 19,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "4s-ranch",
-        "name": "4S Ranch",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 202.77,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,26 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4933000877",
-        "name": "Isshido Ramen",
+        "key": "san-diego|osm|way|31817901",
+        "name": "Manna BBQ",
         "category": "restaurant",
-        "website": "https://isshido-ramen.com/",
+        "website": "https://www.mannaheavenbbq.com/new-page-2-1-1-1",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Manna BBQ (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-17T17:49:51.612Z",
-        "checkedAt": "2026-11-10T17:49:51.172Z"
+        "nextCheckAt": "2026-12-25T18:35:43.302Z",
+        "checkedAt": "2026-11-10T18:35:41.884Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -239,65 +228,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-10T17:49:51.614Z",
-    "durationMs": 45725,
+    "finishedAt": "2026-11-10T18:35:43.315Z",
+    "durationMs": 1745,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 447,
-      "lowValue": 715,
+      "cold": 448,
+      "lowValue": 714,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 447,
-        "low-value": 715,
+        "cold-sample": 448,
+        "low-value": 714,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-10T17:49:05.960Z",
-        "lastFinishedAt": "2026-11-10T17:49:20.963Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1794332990963,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-10T17:49:20.963Z",
-        "lastFinishedAt": "2026-11-10T17:49:35.963Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794333005963,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-10T17:49:35.963Z",
-        "lastFinishedAt": "2026-11-10T17:49:50.964Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794333020963,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -308,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 447,
-      "lowValueCount": 715,
+      "coldCount": 448,
+      "lowValueCount": 714,
       "laneCounts": {
-        "cold-sample": 447,
+        "cold-sample": 448,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 715
+        "low-value": 714
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 447,
-        "candidate": 673
+        "cold": 448,
+        "candidate": 672
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -364,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
