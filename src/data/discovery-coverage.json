@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-10T23:41:19.462Z",
+  "generatedAt": "2026-11-11T01:24:39.015Z",
   "run": {
-    "startedAt": "2026-11-10T23:41:09.474Z",
+    "startedAt": "2026-11-11T01:24:07.219Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 450,
-      "lowValue": 712,
+      "cold": 451,
+      "lowValue": 711,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 450,
-        "low-value": 712,
+        "cold-sample": 451,
+        "low-value": 711,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.25,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13765513611",
-        "name": "Menya Ultra",
+        "key": "san-diego|osm|way|31818773",
+        "name": "Mike's Red Tacos",
         "category": "restaurant",
-        "website": "https://www.menya-ultra.com/",
+        "website": "https://www.mikesredtacos.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Menya Ultra (low-value)",
+          "detail": "Checked 1 page on Mike's Red Tacos (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-25T23:41:19.417Z",
-        "checkedAt": "2026-11-10T23:41:09.765Z"
+        "nextCheckAt": "2026-12-26T01:24:38.949Z",
+        "checkedAt": "2026-11-11T01:24:38.067Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -118,10 +129,10 @@
             "passing": 0,
             "zeroEventAreas": 7,
             "passRate": 0,
-            "averageGapScore": 75.03846153846153,
-            "averageEvents": 11.038461538461538,
+            "averageGapScore": 75.3076923076923,
+            "averageEvents": 11,
             "averageVenues": 2.576923076923077,
-            "deficitScore": 83.95576923076923
+            "deficitScore": 84.05
           },
           "south-bay": {
             "group": "south-bay",
@@ -130,7 +141,7 @@
             "zeroEventAreas": 12,
             "passRate": 0,
             "averageGapScore": 83.44827586206897,
-            "averageEvents": 7.137931034482759,
+            "averageEvents": 6.9655172413793105,
             "averageVenues": 1.6896551724137931,
             "deficitScore": 88.34482758620689
           },
@@ -152,7 +163,7 @@
             "zeroEventAreas": 20,
             "passRate": 0,
             "averageGapScore": 81.575,
-            "averageEvents": 6.7,
+            "averageEvents": 6.6,
             "averageVenues": 1.9,
             "deficitScore": 88.55125
           },
@@ -163,7 +174,7 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 90.73684210526316,
+            "averageEvents": 89.89473684210526,
             "averageVenues": 15.736842105263158,
             "deficitScore": 63.52368421052631
           },
@@ -174,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 93.0909090909091,
-            "averageEvents": 2.590909090909091,
+            "averageEvents": 2.409090909090909,
             "averageVenues": 1,
             "deficitScore": 94.39999999999999
           },
@@ -184,10 +195,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 70.83333333333333,
-            "averageEvents": 11.75,
+            "averageGapScore": 71.33333333333333,
+            "averageEvents": 11.666666666666666,
             "averageVenues": 3.1666666666666665,
-            "deficitScore": 81.45833333333333
+            "deficitScore": 81.63333333333334
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -196,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 59.77777777777778,
+            "averageEvents": 59.166666666666664,
             "averageVenues": 13.38888888888889,
             "deficitScore": 70.31944444444444
           },
@@ -207,7 +218,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 218.1818181818182,
+            "averageEvents": 216.36363636363637,
             "averageVenues": 41.72727272727273,
             "deficitScore": 52.82727272727273
           }
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-10T23:41:19.428Z",
-    "durationMs": 9954,
+    "finishedAt": "2026-11-11T01:24:38.965Z",
+    "durationMs": 31746,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 451,
-      "lowValue": 711,
+      "cold": 452,
+      "lowValue": 710,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 451,
-        "low-value": 711,
+        "cold-sample": 452,
+        "low-value": 710,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-11T01:24:07.289Z",
+        "lastFinishedAt": "2026-11-11T01:24:07.863Z",
+        "lastLatencyMs": 574,
+        "cooldownUntil": 1794360277863,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-11T01:24:07.863Z",
+        "lastFinishedAt": "2026-11-11T01:24:22.864Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794360292864,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-11T01:24:22.864Z",
+        "lastFinishedAt": "2026-11-11T01:24:37.864Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794360307864,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 451,
-      "lowValueCount": 711,
+      "coldCount": 452,
+      "lowValueCount": 710,
       "laneCounts": {
-        "cold-sample": 451,
+        "cold-sample": 452,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 711
+        "low-value": 710
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 180,
         "needs-website": 824,
-        "cold": 451,
-        "candidate": 668
+        "cold": 452,
+        "candidate": 667
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
