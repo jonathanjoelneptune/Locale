@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-11T14:00:54.813Z",
+  "generatedAt": "2026-11-11T16:14:36.908Z",
   "run": {
-    "startedAt": "2026-11-11T14:00:19.447Z",
+    "startedAt": "2026-11-11T16:14:34.844Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 180,
-      "cold": 454,
-      "lowValue": 708,
+      "cold": 455,
+      "lowValue": 707,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 454,
-        "low-value": 708,
+        "cold-sample": 455,
+        "low-value": 707,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 203.41,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31801720",
-        "name": "Bivouac Ciderworks",
-        "category": "bar",
-        "website": "https://www.bivouaccider.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-16T14:00:50.811Z",
-        "checkedAt": "2026-11-11T14:00:50.454Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|4234576618",
-        "name": "The Melt",
+        "key": "san-diego|osm|node|12146940542",
+        "name": "Zen Modern Asian Bistro",
         "category": "restaurant",
-        "website": "https://www.themelt.com/",
+        "website": "https://www.zenmodernasian.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on The Melt (low-value)",
+          "detail": "Checked 2 pages on Zen Modern Asian Bistro (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-26T14:00:54.757Z",
-        "checkedAt": "2026-11-11T14:00:50.456Z"
+        "nextCheckAt": "2026-12-26T16:14:36.857Z",
+        "checkedAt": "2026-11-11T16:14:35.149Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -127,11 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "city-heights": 1,
       "carmel-valley": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -240,7 +207,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 198.1818181818182,
+            "averageEvents": 197.27272727272728,
             "averageVenues": 41.63636363636363,
             "deficitScore": 52.82727272727273
           }
@@ -258,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-11T14:00:54.759Z",
-    "durationMs": 35312,
+    "failed": 1,
+    "finishedAt": "2026-11-11T16:14:36.859Z",
+    "durationMs": 2015,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 455,
-      "lowValue": 707,
+      "cold": 456,
+      "lowValue": 706,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 455,
-        "low-value": 707,
+        "cold-sample": 456,
+        "low-value": 706,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-11T14:00:19.513Z",
-        "lastFinishedAt": "2026-11-11T14:00:20.248Z",
-        "lastLatencyMs": 735,
-        "cooldownUntil": 1794405650248,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-11T14:00:20.248Z",
-        "lastFinishedAt": "2026-11-11T14:00:35.250Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1794405665250,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-11T14:00:35.250Z",
-        "lastFinishedAt": "2026-11-11T14:00:50.251Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794405680251,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 455,
-      "lowValueCount": 707,
+      "coldCount": 456,
+      "lowValueCount": 706,
       "laneCounts": {
-        "cold-sample": 455,
+        "cold-sample": 456,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 707
+        "low-value": 706
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 180,
         "needs-website": 824,
-        "cold": 455,
-        "candidate": 664
+        "cold": 456,
+        "candidate": 663
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +353,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
