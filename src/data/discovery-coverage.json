@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-11T19:53:07.248Z",
+  "generatedAt": "2026-11-11T21:14:20.231Z",
   "run": {
-    "startedAt": "2026-11-11T19:53:05.020Z",
+    "startedAt": "2026-11-11T21:13:58.092Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 1,
       "retry": 180,
-      "cold": 456,
-      "lowValue": 706,
+      "cold": 457,
+      "lowValue": 705,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 456,
-        "low-value": 706,
+        "cold-sample": 457,
+        "low-value": 705,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 202.93,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596158252",
-        "name": "Mike Hess Brewing",
-        "category": "pub",
-        "website": "https://www.mikehessbrewing.com/north-park/",
-        "attempts": 6,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 502",
-          "statusCode": 502
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-17T19:53:05.825Z",
-        "checkedAt": "2026-11-11T19:53:05.254Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9574236101",
-        "name": "Scrimshaw Coffee",
+        "key": "san-diego|osm|node|1616177865",
+        "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.scrimshawcoffee.com/",
+        "website": "https://www.starbucks.com/store-locator/store/14116/sdsu-student-union-5500-campenile-dr-san-diego-ca-921829998-us",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Scrimshaw Coffee (low-value)",
+          "detail": "Checked 1 page on Starbucks (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-26T19:53:07.200Z",
-        "checkedAt": "2026-11-11T19:53:05.290Z"
+        "nextCheckAt": "2026-12-26T21:14:18.653Z",
+        "checkedAt": "2026-11-11T21:14:15.181Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1163474971",
+        "name": "Tenth Avenue Arts Center",
+        "category": "arts-centre",
+        "website": "http://www.tenthavenuearts.com/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Tenth Avenue Arts Center (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-11T21:14:20.192Z",
+        "checkedAt": "2026-11-11T21:14:15.179Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "city-heights": 1,
+      "east-village": 1,
       "el-cerrito": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 2
+      "central-core": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -249,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-11T19:53:07.201Z",
-    "durationMs": 2181,
+    "finishedAt": "2026-11-11T21:14:20.194Z",
+    "durationMs": 22102,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 457,
-      "lowValue": 705,
+      "cold": 458,
+      "lowValue": 704,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 457,
-        "low-value": 705,
+        "cold-sample": 458,
+        "low-value": 704,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-11T21:13:58.153Z",
+        "lastFinishedAt": "2026-11-11T21:13:58.789Z",
+        "lastLatencyMs": 636,
+        "cooldownUntil": 1794431668789,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-11T21:13:58.789Z",
+        "lastFinishedAt": "2026-11-11T21:14:13.789Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794431683789,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-11T21:14:13.789Z",
+        "lastFinishedAt": "2026-11-11T21:14:15.002Z",
+        "lastLatencyMs": 1213,
+        "cooldownUntil": 1794431685002,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +330,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 457,
-      "lowValueCount": 705,
+      "coldCount": 458,
+      "lowValueCount": 704,
       "laneCounts": {
-        "cold-sample": 457,
+        "cold-sample": 458,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 705
+        "low-value": 704
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 180,
         "needs-website": 824,
-        "cold": 457,
-        "candidate": 662
+        "cold": 458,
+        "candidate": 661
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
