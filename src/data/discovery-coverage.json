@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-11T05:55:02.076Z",
+  "generatedAt": "2026-11-11T07:10:43.605Z",
   "run": {
-    "startedAt": "2026-11-11T05:55:00.910Z",
+    "startedAt": "2026-11-11T07:10:41.293Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 180,
-      "cold": 452,
-      "lowValue": 710,
+      "cold": 453,
+      "lowValue": 709,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 452,
-        "low-value": 710,
+        "cold-sample": 453,
+        "low-value": 709,
         "food-evidence": 11
       }
     },
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13743754342",
-        "name": "Mokkoji",
+        "key": "san-diego|osm|node|5737498534",
+        "name": "Cafe Seven",
+        "category": "cafe",
+        "website": "http://www.cafesevensd.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-11T07:10:41.820Z",
+        "checkedAt": "2026-11-11T07:10:41.668Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13306104436",
+        "name": "Seasurf Fish Co.",
         "category": "restaurant",
-        "website": "https://mokkojisd.com/",
+        "website": "https://www.seasurffishco.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Mokkoji (low-value)",
+          "detail": "Checked 1 page on Seasurf Fish Co. (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-26T05:55:02.025Z",
-        "checkedAt": "2026-11-11T05:55:01.224Z"
+        "nextCheckAt": "2026-12-26T07:10:43.554Z",
+        "checkedAt": "2026-11-11T07:10:41.697Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +104,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,10 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "mira-mesa": 1
+      "sorrento-valley": 1,
+      "carmel-valley": 1
     },
     "probeGroupCounts": {
-      "north-central": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -109,7 +130,7 @@
         "zeroEventAreas": 68,
         "zeroEventRate": 0.362,
         "groupPassRateSpread": 0.182,
-        "groupGapSpread": 75.9,
+        "groupGapSpread": 76.7,
         "equityScore": 28,
         "groups": {
           "north-central": {
@@ -118,10 +139,10 @@
             "passing": 0,
             "zeroEventAreas": 7,
             "passRate": 0,
-            "averageGapScore": 75.3076923076923,
-            "averageEvents": 11,
-            "averageVenues": 2.576923076923077,
-            "deficitScore": 84.05
+            "averageGapScore": 75.38461538461539,
+            "averageEvents": 10.115384615384615,
+            "averageVenues": 2.5384615384615383,
+            "deficitScore": 84.07692307692308
           },
           "south-bay": {
             "group": "south-bay",
@@ -129,10 +150,10 @@
             "passing": 0,
             "zeroEventAreas": 12,
             "passRate": 0,
-            "averageGapScore": 83.44827586206897,
-            "averageEvents": 6.9655172413793105,
-            "averageVenues": 1.6896551724137931,
-            "deficitScore": 88.34482758620689
+            "averageGapScore": 83.55172413793103,
+            "averageEvents": 6.379310344827586,
+            "averageVenues": 1.6206896551724137,
+            "deficitScore": 88.38103448275862
           },
           "north-inland": {
             "group": "north-inland",
@@ -140,10 +161,10 @@
             "passing": 0,
             "zeroEventAreas": 10,
             "passRate": 0,
-            "averageGapScore": 98.27272727272727,
-            "averageEvents": 0.18181818181818182,
-            "averageVenues": 0.18181818181818182,
-            "deficitScore": 98.48636363636363
+            "averageGapScore": 99.0909090909091,
+            "averageEvents": 0.09090909090909091,
+            "averageVenues": 0.09090909090909091,
+            "deficitScore": 98.77272727272728
           },
           "east-county": {
             "group": "east-county",
@@ -151,10 +172,10 @@
             "passing": 0,
             "zeroEventAreas": 20,
             "passRate": 0,
-            "averageGapScore": 81.575,
-            "averageEvents": 6.6,
+            "averageGapScore": 81.9,
+            "averageEvents": 6.025,
             "averageVenues": 1.9,
-            "deficitScore": 88.55125
+            "deficitScore": 88.66499999999999
           },
           "central-west": {
             "group": "central-west",
@@ -163,8 +184,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 46.1578947368421,
-            "averageEvents": 89.89473684210526,
-            "averageVenues": 15.736842105263158,
+            "averageEvents": 85,
+            "averageVenues": 15.473684210526315,
             "deficitScore": 63.52368421052631
           },
           "north-county-inland": {
@@ -174,7 +195,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 93.0909090909091,
-            "averageEvents": 2.409090909090909,
+            "averageEvents": 2.3636363636363638,
             "averageVenues": 1,
             "deficitScore": 94.39999999999999
           },
@@ -185,7 +206,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 71.33333333333333,
-            "averageEvents": 11.666666666666666,
+            "averageEvents": 11.083333333333334,
             "averageVenues": 3.1666666666666665,
             "deficitScore": 81.63333333333334
           },
@@ -196,8 +217,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
             "averageGapScore": 52.5,
-            "averageEvents": 59.166666666666664,
-            "averageVenues": 13.38888888888889,
+            "averageEvents": 53.94444444444444,
+            "averageVenues": 13.222222222222221,
             "deficitScore": 70.31944444444444
           },
           "central-core": {
@@ -207,8 +228,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 216.36363636363637,
-            "averageVenues": 41.72727272727273,
+            "averageEvents": 198.1818181818182,
+            "averageVenues": 41.63636363636363,
             "deficitScore": 52.82727272727273
           }
         }
@@ -225,26 +246,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-11T05:55:02.027Z",
-    "durationMs": 1117,
+    "failed": 2,
+    "finishedAt": "2026-11-11T07:10:43.567Z",
+    "durationMs": 2274,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 453,
-      "lowValue": 709,
+      "cold": 454,
+      "lowValue": 708,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 453,
-        "low-value": 709,
+        "cold-sample": 454,
+        "low-value": 708,
         "food-evidence": 11
       }
     },
@@ -297,22 +318,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 453,
-      "lowValueCount": 709,
+      "coldCount": 454,
+      "lowValueCount": 708,
       "laneCounts": {
-        "cold-sample": 453,
+        "cold-sample": 454,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 709
+        "low-value": 708
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 180,
         "needs-website": 824,
-        "cold": 453,
-        "candidate": 666
+        "cold": 454,
+        "candidate": 665
       },
       "categoryCounts": {
         "nightclub": 8,
