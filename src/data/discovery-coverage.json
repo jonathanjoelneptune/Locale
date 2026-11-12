@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-12T07:44:40.528Z",
+  "generatedAt": "2026-11-12T10:11:07.435Z",
   "run": {
-    "startedAt": "2026-11-12T07:44:35.117Z",
+    "startedAt": "2026-11-12T10:10:23.984Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 180,
-      "cold": 460,
-      "lowValue": 702,
+      "cold": 461,
+      "lowValue": 701,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 460,
-        "low-value": 702,
+        "cold-sample": 461,
+        "low-value": 701,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "4s-ranch",
+        "name": "4S Ranch",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 202.93,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TypeError fetch failed | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,33 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1396671720",
+        "key": "san-diego|osm|way|498782115",
+        "name": "The Whiskey House",
+        "category": "observed-venue",
+        "website": "https://www.thewhiskeyhousesd.com/",
+        "attempts": 6,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-18T10:11:05.065Z",
+        "checkedAt": "2026-11-12T10:11:04.323Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31810608",
         "name": "Starbucks",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/12569/clairemont-balboa-san-diego-3895-clairemont-drive-san-diego-ca-921175833-us",
+        "website": "https://www.starbucks.com/store-locator/store/1018931/bay-park-3001-clairemont-drive-san-diego-ca-921176802-us",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -72,8 +102,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-27T07:44:40.476Z",
-        "checkedAt": "2026-11-12T07:44:35.512Z"
+        "nextCheckAt": "2026-12-27T10:11:07.379Z",
+        "checkedAt": "2026-11-12T10:11:04.321Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,10 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "bay-ho": 1
+      "bay-ho": 1,
+      "east-village": 1
     },
     "probeGroupCounts": {
-      "central-west": 1
+      "central-west": 1,
+      "central-core": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -225,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-12T07:44:40.478Z",
-    "durationMs": 5361,
+    "failed": 2,
+    "finishedAt": "2026-11-12T10:11:07.381Z",
+    "durationMs": 43397,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 180,
-      "cold": 461,
-      "lowValue": 701,
+      "cold": 462,
+      "lowValue": 700,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 461,
-        "low-value": 701,
+        "cold-sample": 462,
+        "low-value": 700,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-12T10:10:24.066Z",
+        "lastFinishedAt": "2026-11-12T10:10:39.070Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1794478269070,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "fetch failed",
+        "lastStartedAt": "2026-11-12T10:10:39.070Z",
+        "lastFinishedAt": "2026-11-12T10:10:49.087Z",
+        "lastLatencyMs": 10017,
+        "cooldownUntil": 1794478279087,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-12T10:10:49.087Z",
+        "lastFinishedAt": "2026-11-12T10:11:04.089Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1794478294089,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +330,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 461,
-      "lowValueCount": 701,
+      "coldCount": 462,
+      "lowValueCount": 700,
       "laneCounts": {
-        "cold-sample": 461,
+        "cold-sample": 462,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 701
+        "low-value": 700
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 180,
         "needs-website": 824,
-        "cold": 461,
-        "candidate": 658
+        "cold": 462,
+        "candidate": 657
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +386,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
