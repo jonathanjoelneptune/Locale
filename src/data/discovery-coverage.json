@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-12T20:28:18.171Z",
+  "generatedAt": "2026-11-12T23:49:20.190Z",
   "run": {
-    "startedAt": "2026-11-12T20:28:15.217Z",
+    "startedAt": "2026-11-12T23:49:18.378Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 179,
-      "cold": 464,
-      "lowValue": 698,
+      "cold": 465,
+      "lowValue": 697,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 464,
-        "low-value": 698,
+        "cold-sample": 465,
+        "low-value": 697,
         "food-evidence": 11
       }
     },
@@ -58,22 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9270191069",
-        "name": "Starbucks",
-        "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/10329/vons-san-diego-2134-10460-clairemont-m-san-diego-ca-921241320-us",
+        "key": "san-diego|osm|node|9339501290",
+        "name": "Choi's",
+        "category": "restaurant",
+        "website": "https://choisandiego.com/",
+        "attempts": 4,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-12T23:49:19.094Z",
+        "checkedAt": "2026-11-12T23:49:18.876Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13163963838",
+        "name": "Crab Town",
+        "category": "restaurant",
+        "website": "https://www.crabtownlove.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "detail": "Checked 1 page on Crab Town (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-27T20:28:18.114Z",
-        "checkedAt": "2026-11-12T20:28:15.634Z"
+        "nextCheckAt": "2026-12-27T23:49:20.117Z",
+        "checkedAt": "2026-11-12T23:49:19.010Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +104,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "cold-sample": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,9 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "tierrasanta": 1
+      "barrio-logan": 1,
+      "convoy": 1
     },
     "probeGroupCounts": {
+      "south-bay": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -163,8 +185,8 @@
             "zeroEventAreas": 2,
             "passRate": 0.15789473684210525,
             "averageGapScore": 47.68421052631579,
-            "averageEvents": 77.26315789473684,
-            "averageVenues": 14.68421052631579,
+            "averageEvents": 76.94736842105263,
+            "averageVenues": 14.578947368421053,
             "deficitScore": 64.0578947368421
           },
           "north-county-inland": {
@@ -207,8 +229,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 173.0909090909091,
-            "averageVenues": 40.54545454545455,
+            "averageEvents": 172.63636363636363,
+            "averageVenues": 40.09090909090909,
             "deficitScore": 52.82727272727273
           }
         }
@@ -225,26 +247,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 2,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-12T20:28:18.125Z",
-    "durationMs": 2908,
+    "failed": 2,
+    "finishedAt": "2026-11-12T23:49:20.147Z",
+    "durationMs": 1769,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 1,
       "retry": 179,
-      "cold": 465,
-      "lowValue": 697,
+      "cold": 466,
+      "lowValue": 696,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 465,
-        "low-value": 697,
+        "cold-sample": 466,
+        "low-value": 696,
         "food-evidence": 11
       }
     },
@@ -296,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
-      "dueCount": 0,
-      "coldCount": 465,
-      "lowValueCount": 697,
+      "dueCount": 1,
+      "coldCount": 466,
+      "lowValueCount": 696,
       "laneCounts": {
-        "cold-sample": 465,
+        "cold-sample": 466,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 697
+        "low-value": 696
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 465,
-        "candidate": 655
+        "cold": 466,
+        "candidate": 654
       },
       "categoryCounts": {
         "nightclub": 8,
