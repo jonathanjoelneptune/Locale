@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-11T22:44:04.502Z",
+  "generatedAt": "2026-11-12T02:27:41.102Z",
   "run": {
-    "startedAt": "2026-11-11T22:44:01.303Z",
+    "startedAt": "2026-11-12T02:27:40.124Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 180,
-      "cold": 458,
-      "lowValue": 704,
+      "cold": 459,
+      "lowValue": 703,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 458,
-        "low-value": 704,
+        "cold-sample": 459,
+        "low-value": 703,
         "food-evidence": 11
       }
     },
@@ -58,41 +58,22 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|545204577",
-        "name": "The Living Room Cafe",
-        "category": "cafe",
-        "website": "https://livingroomcafe.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on The Living Room Cafe (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-26T22:44:02.408Z",
-        "checkedAt": "2026-11-11T22:44:01.535Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1741841141",
-        "name": "Trisler's San Diego Wine Bar",
-        "category": "bar",
-        "website": "https://trislers.com/",
-        "attempts": 7,
+        "key": "san-diego|osm|node|10118284472",
+        "name": "Ferny's Mexican Grill",
+        "category": "restaurant",
+        "website": "https://fernysmexicangrill.com/",
+        "attempts": 2,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Trisler's San Diego Wine Bar (event-likely)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-11T22:44:04.462Z",
-        "checkedAt": "2026-11-11T22:44:01.571Z"
+        "nextCheckAt": "2026-11-26T02:27:41.045Z",
+        "checkedAt": "2026-11-12T02:27:40.543Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,8 +85,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1,
-      "event-likely": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +96,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "el-cerrito": 1,
-      "mission-valley": 1
+      "santee": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1,
-      "central-west": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,11 +225,11 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-11T22:44:04.464Z",
-    "durationMs": 3161,
+    "failed": 1,
+    "finishedAt": "2026-11-12T02:27:41.056Z",
+    "durationMs": 932,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
