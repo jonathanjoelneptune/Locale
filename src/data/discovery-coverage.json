@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-12T13:06:43.606Z",
+  "generatedAt": "2026-11-12T18:33:15.792Z",
   "run": {
-    "startedAt": "2026-11-12T13:06:42.645Z",
+    "startedAt": "2026-11-12T18:32:39.707Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 180,
-      "cold": 462,
-      "lowValue": 700,
+      "retry": 179,
+      "cold": 463,
+      "lowValue": 699,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 462,
-        "low-value": 700,
+        "cold-sample": 463,
+        "low-value": 699,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.41,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12918577579",
-        "name": "Tacos El Franc",
-        "category": "restaurant",
-        "website": "https://www.tacoselfrancusa.com/location/tacos-el-franc-bonita/",
-        "attempts": 3,
+        "key": "san-diego|osm|way|1563916823",
+        "name": "Industrial Grind Coffee",
+        "category": "cafe",
+        "website": "https://www.industrialgrindcoffee.com/",
+        "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Industrial Grind Coffee (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-12T13:06:43.569Z",
-        "checkedAt": "2026-11-12T13:06:42.860Z"
+        "nextCheckAt": "2026-12-27T18:33:15.738Z",
+        "checkedAt": "2026-11-12T18:33:11.101Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -96,10 +107,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lincoln-acres": 1
+      "tierrasanta": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -228,65 +239,65 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-12T13:06:43.578Z",
-    "durationMs": 933,
+    "finishedAt": "2026-11-12T18:33:15.739Z",
+    "durationMs": 36032,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 179,
-      "cold": 463,
-      "lowValue": 699,
+      "cold": 464,
+      "lowValue": 698,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 463,
-        "low-value": 699,
+        "cold-sample": 464,
+        "low-value": 698,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-12T18:32:39.790Z",
+        "lastFinishedAt": "2026-11-12T18:32:54.795Z",
+        "lastLatencyMs": 15005,
+        "cooldownUntil": 1794508404795,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-12T18:32:54.795Z",
+        "lastFinishedAt": "2026-11-12T18:33:09.795Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794508419795,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-12T18:33:09.796Z",
+        "lastFinishedAt": "2026-11-12T18:33:10.875Z",
+        "lastLatencyMs": 1079,
+        "cooldownUntil": 1794508420875,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -297,22 +308,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 463,
-      "lowValueCount": 699,
+      "coldCount": 464,
+      "lowValueCount": 698,
       "laneCounts": {
-        "cold-sample": 463,
+        "cold-sample": 464,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 699
+        "low-value": 698
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 179,
         "needs-website": 824,
-        "cold": 463,
-        "candidate": 657
+        "cold": 464,
+        "candidate": 656
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
