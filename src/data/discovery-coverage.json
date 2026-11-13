@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-13T07:55:25.295Z",
+  "generatedAt": "2026-11-13T09:53:30.276Z",
   "run": {
-    "startedAt": "2026-11-13T07:55:24.773Z",
+    "startedAt": "2026-11-13T09:52:58.405Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
-      "retry": 177,
+      "due": 0,
+      "retry": 178,
       "cold": 468,
       "lowValue": 694,
       "qualified": 19,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 203.41,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -41,7 +52,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 102,
+        "severeGapCount": 103,
         "mediumGapCount": 164
       },
       "chicago": {
@@ -54,45 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|2651673866",
-        "name": "Ace New York Giant Pizza Bar & Lounge",
-        "category": "restaurant",
-        "website": "https://acenypizza.com/",
-        "attempts": 10,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-20T07:55:25.199Z",
-        "checkedAt": "2026-11-13T07:55:25.088Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9336287893",
-        "name": "Esquina Vintage and Coffee",
+        "key": "san-diego|osm|way|1119161328",
+        "name": "O'Brien's Boulangerie",
         "category": "cafe",
-        "website": "https://www.esquinavintageandcoffee.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.obriensbakerysd.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-14T07:55:25.247Z",
-        "checkedAt": "2026-11-13T07:55:25.139Z"
+        "nextCheckAt": "2026-12-13T09:53:30.229Z",
+        "checkedAt": "2026-11-13T09:53:29.929Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,7 +96,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -116,23 +107,21 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "winter-gardens": 1,
-      "national-city": 1
+      "poway": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "south-bay": 1
+      "north-inland": 1
     },
     "coverageEquity": {
       "san-diego": {
         "measured": 188,
         "passing": 6,
         "metroPassRate": 0.032,
-        "zeroEventAreas": 70,
-        "zeroEventRate": 0.372,
+        "zeroEventAreas": 71,
+        "zeroEventRate": 0.378,
         "groupPassRateSpread": 0.182,
         "groupGapSpread": 76.7,
-        "equityScore": 27.9,
+        "equityScore": 27.8,
         "groups": {
           "south-bay": {
             "group": "south-bay",
@@ -171,12 +160,12 @@
             "group": "east-county",
             "areas": 40,
             "passing": 0,
-            "zeroEventAreas": 21,
+            "zeroEventAreas": 22,
             "passRate": 0,
-            "averageGapScore": 83.825,
-            "averageEvents": 4.325,
-            "averageVenues": 1.55,
-            "deficitScore": 89.58875
+            "averageGapScore": 84.675,
+            "averageEvents": 4.3,
+            "averageVenues": 1.525,
+            "deficitScore": 90.13624999999999
           },
           "central-west": {
             "group": "central-west",
@@ -247,68 +236,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-13T07:55:25.249Z",
-    "durationMs": 476,
+    "failed": 1,
+    "finishedAt": "2026-11-13T09:53:30.239Z",
+    "durationMs": 31834,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 178,
-      "cold": 468,
-      "lowValue": 694,
+      "retry": 177,
+      "cold": 469,
+      "lowValue": 693,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 468,
-        "low-value": 694,
+        "cold-sample": 469,
+        "low-value": 693,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-13T09:52:58.603Z",
+        "lastFinishedAt": "2026-11-13T09:53:13.607Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1794563623607,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-13T09:53:13.607Z",
+        "lastFinishedAt": "2026-11-13T09:53:28.607Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794563638607,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-13T09:53:28.607Z",
+        "lastFinishedAt": "2026-11-13T09:53:29.753Z",
+        "lastLatencyMs": 1146,
+        "cooldownUntil": 1794563639753,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,21 +308,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 468,
-      "lowValueCount": 694,
+      "coldCount": 469,
+      "lowValueCount": 693,
       "laneCounts": {
-        "cold-sample": 468,
+        "cold-sample": 469,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 694
+        "low-value": 693
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 178,
+        "retry": 177,
         "needs-website": 824,
-        "cold": 468,
+        "cold": 469,
         "candidate": 653
       },
       "categoryCounts": {
@@ -375,7 +364,7 @@
         "tracked": 10,
         "completed": 7,
         "failed": 3,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
@@ -383,7 +372,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 102,
+        "severeGapCount": 103,
         "mediumGapCount": 164,
         "activeMode": "bootstrap",
         "probeLimit": 12,
