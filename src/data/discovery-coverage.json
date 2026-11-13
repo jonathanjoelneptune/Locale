@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-13T17:58:23.358Z",
+  "generatedAt": "2026-11-13T20:04:20.965Z",
   "run": {
-    "startedAt": "2026-11-13T17:58:22.437Z",
+    "startedAt": "2026-11-13T20:03:59.503Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
-      "retry": 176,
-      "cold": 471,
-      "lowValue": 691,
+      "due": 3,
+      "retry": 175,
+      "cold": 472,
+      "lowValue": 690,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 471,
-        "low-value": 691,
+        "cold-sample": 472,
+        "low-value": 690,
         "food-evidence": 11
       }
     },
@@ -41,7 +41,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 103,
+        "severeGapCount": 104,
         "mediumGapCount": 164
       },
       "chicago": {
@@ -58,22 +58,79 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|673229809",
-        "name": "La Bella Cafe & Games",
+        "key": "san-diego|osm|node|9908007843",
+        "name": "Blue Pearl Art",
+        "category": "gallery",
+        "website": "https://www.bluepearlartstudio.com/",
+        "attempts": 10,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-20T20:04:00.023Z",
+        "checkedAt": "2026-11-13T20:03:59.886Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596649040",
+        "name": "Oggi's Pizza and Brewing Co.",
         "category": "restaurant",
-        "website": "https://www.labellas.com/",
+        "website": "http://cmr.oggis.com/",
+        "attempts": 10,
+        "status": "retry",
+        "probeLane": "food-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-20T20:04:00.271Z",
+        "checkedAt": "2026-11-13T20:03:59.934Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5870511594",
+        "name": "Spoon House",
+        "category": "restaurant",
+        "website": "https://spoonhouse.business.site/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-13T17:58:23.302Z",
-        "checkedAt": "2026-11-13T17:58:22.852Z"
+        "nextCheckAt": "2026-12-13T20:04:00.868Z",
+        "checkedAt": "2026-11-13T20:04:00.024Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|381012089",
+        "name": "Copley-Price Family YMCA",
+        "category": "sports-centre",
+        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "candidate-scope-mismatch",
+          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-20T20:04:20.916Z",
+        "checkedAt": "2026-11-13T20:04:00.271Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,6 +142,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
+      "food-evidence": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -96,9 +155,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
+      "teralta": 2,
+      "rancho-penasquitos": 1,
       "downtown-chula-vista": 1
     },
     "probeGroupCounts": {
+      "uptown-midcity": 2,
+      "north-inland": 1,
       "south-bay": 1
     },
     "coverageEquity": {
@@ -184,10 +247,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 73.25,
-            "averageEvents": 8.583333333333334,
-            "averageVenues": 2.75,
-            "deficitScore": 82.30416666666667
+            "averageGapScore": 74.33333333333333,
+            "averageEvents": 8.416666666666666,
+            "averageVenues": 2.5833333333333335,
+            "deficitScore": 82.68333333333334
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -207,7 +270,7 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 147.63636363636363,
+            "averageEvents": 146.36363636363637,
             "averageVenues": 37.90909090909091,
             "deficitScore": 52.82727272727273
           }
@@ -225,26 +288,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 4,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-13T17:58:23.314Z",
-    "durationMs": 877,
+    "failed": 4,
+    "finishedAt": "2026-11-13T20:04:20.918Z",
+    "durationMs": 21415,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 175,
-      "cold": 472,
-      "lowValue": 690,
+      "retry": 174,
+      "cold": 473,
+      "lowValue": 689,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 472,
-        "low-value": 690,
+        "cold-sample": 473,
+        "low-value": 689,
         "food-evidence": 11
       }
     },
@@ -297,21 +360,21 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 472,
-      "lowValueCount": 690,
+      "coldCount": 473,
+      "lowValueCount": 689,
       "laneCounts": {
-        "cold-sample": 472,
+        "cold-sample": 473,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 690
+        "low-value": 689
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 175,
+        "retry": 174,
         "needs-website": 824,
-        "cold": 472,
+        "cold": 473,
         "candidate": 652
       },
       "categoryCounts": {
@@ -361,7 +424,7 @@
         "measured": 188,
         "passing": 6,
         "passRate": 0.031914893617021274,
-        "severeGapCount": 103,
+        "severeGapCount": 104,
         "mediumGapCount": 164,
         "activeMode": "bootstrap",
         "probeLimit": 12,
