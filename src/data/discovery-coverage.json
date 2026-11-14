@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-14T14:25:50.284Z",
+  "generatedAt": "2026-11-14T15:43:09.757Z",
   "run": {
-    "startedAt": "2026-11-14T14:25:18.421Z",
+    "startedAt": "2026-11-14T15:43:07.750Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 0,
       "retry": 174,
-      "cold": 479,
-      "lowValue": 683,
+      "cold": 480,
+      "lowValue": 682,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 479,
-        "low-value": 683,
+        "cold-sample": 480,
+        "low-value": 682,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|377357190",
-        "name": "Tivoli Bar and Grill",
-        "category": "bar",
-        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
-        "attempts": 10,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-21T14:25:49.413Z",
-        "checkedAt": "2026-11-14T14:25:49.282Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596370703",
-        "name": "Lemon Grove Cafe",
+        "key": "san-diego|osm|node|14057009420",
+        "name": "Ohana Nutrition",
         "category": "cafe",
-        "website": "http://www.lemongrovecafe.net/",
+        "website": "https://joe.coffee/locations/ca/la-mesa/ohana-nutrition-smoothies-and-teas-la-mesa-32c3a76d-4652-4ea6-823d-bd558c0b843e",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Lemon Grove Cafe (low-value)",
+          "detail": "Checked 1 page on Ohana Nutrition (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-29T14:25:50.166Z",
-        "checkedAt": "2026-11-14T14:25:49.284Z"
+        "nextCheckAt": "2026-12-29T15:43:09.706Z",
+        "checkedAt": "2026-11-14T15:43:08.042Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,7 +85,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -127,11 +96,9 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "east-village": 1,
       "lemon-grove": 1
     },
     "probeGroupCounts": {
-      "central-core": 1,
       "east-county": 1
     },
     "coverageEquity": {
@@ -258,68 +225,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 1,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-14T14:25:50.207Z",
-    "durationMs": 31786,
+    "failed": 1,
+    "finishedAt": "2026-11-14T15:43:09.708Z",
+    "durationMs": 1958,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 174,
-      "cold": 480,
-      "lowValue": 682,
+      "cold": 481,
+      "lowValue": 681,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 480,
-        "low-value": 682,
+        "cold-sample": 481,
+        "low-value": 681,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-14T14:25:18.476Z",
-        "lastFinishedAt": "2026-11-14T14:25:19.109Z",
-        "lastLatencyMs": 633,
-        "cooldownUntil": 1794666349109,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-14T14:25:19.109Z",
-        "lastFinishedAt": "2026-11-14T14:25:34.109Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794666364109,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-14T14:25:34.109Z",
-        "lastFinishedAt": "2026-11-14T14:25:49.109Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794666379109,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,22 +297,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 480,
-      "lowValueCount": 682,
+      "coldCount": 481,
+      "lowValueCount": 681,
       "laneCounts": {
-        "cold-sample": 480,
+        "cold-sample": 481,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 682
+        "low-value": 681
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 174,
         "needs-website": 824,
-        "cold": 480,
-        "candidate": 645
+        "cold": 481,
+        "candidate": 644
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +353,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
