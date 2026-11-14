@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-14T19:24:30.896Z",
+  "generatedAt": "2026-11-14T20:36:15.045Z",
   "run": {
-    "startedAt": "2026-11-14T19:24:28.895Z",
+    "startedAt": "2026-11-14T20:35:29.609Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 174,
-      "cold": 482,
-      "lowValue": 680,
+      "cold": 483,
+      "lowValue": 679,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 482,
-        "low-value": 680,
+        "cold-sample": 483,
+        "low-value": 679,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,26 +65,26 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1370790016",
-        "name": "Starbucks",
+        "key": "san-diego|osm|way|1090901595",
+        "name": "The Hamlett",
         "category": "cafe",
-        "website": "https://www.starbucks.com/store-locator/store/9791-248908/massachusetts-broadway-3520-massachusetts-ave-lemon-grove-ca-919452244-us",
+        "website": "https://www.thehamlett.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Starbucks (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-29T19:24:30.860Z",
-        "checkedAt": "2026-11-14T19:24:29.091Z"
+        "nextCheckAt": "2026-11-15T20:36:14.996Z",
+        "checkedAt": "2026-11-14T20:36:14.907Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -228,13 +239,13 @@
     "probed": 1,
     "promoted": 0,
     "failed": 1,
-    "finishedAt": "2026-11-14T19:24:30.861Z",
-    "durationMs": 1966,
+    "finishedAt": "2026-11-14T20:36:14.998Z",
+    "durationMs": 45389,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
-      "retry": 174,
+      "retry": 175,
       "cold": 483,
       "lowValue": 679,
       "qualified": 19,
@@ -251,42 +262,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-14T20:35:29.681Z",
+        "lastFinishedAt": "2026-11-14T20:35:44.684Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794688574684,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-14T20:35:44.684Z",
+        "lastFinishedAt": "2026-11-14T20:35:59.685Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794688589685,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-14T20:35:59.686Z",
+        "lastFinishedAt": "2026-11-14T20:36:14.687Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794688604687,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -309,10 +320,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 174,
+        "retry": 175,
         "needs-website": 824,
         "cold": 483,
-        "candidate": 642
+        "candidate": 641
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -353,7 +364,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
