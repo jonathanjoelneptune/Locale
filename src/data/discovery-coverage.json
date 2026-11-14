@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-14T01:40:54.201Z",
+  "generatedAt": "2026-11-14T03:13:32.137Z",
   "run": {
-    "startedAt": "2026-11-14T01:40:49.995Z",
+    "startedAt": "2026-11-14T03:13:28.916Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 0,
+      "due": 2,
       "retry": 173,
-      "cold": 475,
-      "lowValue": 687,
+      "cold": 476,
+      "lowValue": 686,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 475,
-        "low-value": 687,
+        "cold-sample": 476,
+        "low-value": 686,
         "food-evidence": 11
       }
     },
@@ -39,8 +39,8 @@
         "mode": "bootstrap",
         "configuredAreaCount": 188,
         "measured": 188,
-        "passing": 6,
-        "passRate": 0.031914893617021274,
+        "passing": 4,
+        "passRate": 0.02127659574468085,
         "severeGapCount": 104,
         "mediumGapCount": 164
       },
@@ -58,22 +58,60 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11391438869",
-        "name": "Ming Ky",
+        "key": "san-diego|osm|node|9215079082",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopgaslamp.com/",
+        "attempts": 10,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-21T03:13:29.652Z",
+        "checkedAt": "2026-11-14T03:13:29.164Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
+        "attempts": 10,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-21T03:13:29.890Z",
+        "checkedAt": "2026-11-14T03:13:29.652Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9530907112",
+        "name": "China China Restaurant",
         "category": "restaurant",
-        "website": "http://www.mihn-ky-chinese.com/",
+        "website": "https://chinabento.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Ming Ky (low-value)",
+          "detail": "Checked 1 page on China China Restaurant (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-29T01:40:54.173Z",
-        "checkedAt": "2026-11-14T01:40:50.182Z"
+        "nextCheckAt": "2026-12-29T03:13:32.103Z",
+        "checkedAt": "2026-11-14T03:13:29.132Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -85,7 +123,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 2
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -96,21 +135,24 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "talmadge": 1
+      "chula-vista": 1,
+      "east-village": 1,
+      "bankers-hill": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 1
+      "south-bay": 1,
+      "central-core": 2
     },
     "coverageEquity": {
       "san-diego": {
         "measured": 188,
-        "passing": 6,
-        "metroPassRate": 0.032,
+        "passing": 4,
+        "metroPassRate": 0.021,
         "zeroEventAreas": 71,
         "zeroEventRate": 0.378,
         "groupPassRateSpread": 0.182,
         "groupGapSpread": 76.7,
-        "equityScore": 27.8,
+        "equityScore": 27.1,
         "groups": {
           "south-bay": {
             "group": "south-bay",
@@ -118,10 +160,10 @@
             "passing": 0,
             "zeroEventAreas": 13,
             "passRate": 0,
-            "averageGapScore": 86.24137931034483,
-            "averageEvents": 4.655172413793103,
+            "averageGapScore": 86.41379310344827,
+            "averageEvents": 4.517241379310345,
             "averageVenues": 1.2413793103448276,
-            "deficitScore": 89.66724137931034
+            "deficitScore": 89.72758620689655
           },
           "north-central": {
             "group": "north-central",
@@ -151,21 +193,21 @@
             "passing": 0,
             "zeroEventAreas": 22,
             "passRate": 0,
-            "averageGapScore": 84.675,
-            "averageEvents": 4.3,
+            "averageGapScore": 84.725,
+            "averageEvents": 4.25,
             "averageVenues": 1.525,
-            "deficitScore": 90.13624999999999
+            "deficitScore": 90.15375
           },
           "central-west": {
             "group": "central-west",
             "areas": 19,
-            "passing": 3,
+            "passing": 1,
             "zeroEventAreas": 2,
-            "passRate": 0.15789473684210525,
-            "averageGapScore": 47.68421052631579,
-            "averageEvents": 71.10526315789474,
+            "passRate": 0.05263157894736842,
+            "averageGapScore": 48.26315789473684,
+            "averageEvents": 70.52631578947368,
             "averageVenues": 14.368421052631579,
-            "deficitScore": 64.0578947368421
+            "deficitScore": 70.05000000000001
           },
           "north-county-inland": {
             "group": "north-county-inland",
@@ -174,7 +216,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 93.31818181818181,
-            "averageEvents": 1.6818181818181819,
+            "averageEvents": 1.5909090909090908,
             "averageVenues": 0.7727272727272727,
             "deficitScore": 94.47954545454544
           },
@@ -195,10 +237,10 @@
             "passing": 1,
             "zeroEventAreas": 0,
             "passRate": 0.05555555555555555,
-            "averageGapScore": 53.27777777777778,
-            "averageEvents": 41,
+            "averageGapScore": 53.333333333333336,
+            "averageEvents": 40.833333333333336,
             "averageVenues": 11.944444444444445,
-            "deficitScore": 70.59166666666667
+            "deficitScore": 70.61111111111111
           },
           "central-core": {
             "group": "central-core",
@@ -207,8 +249,8 @@
             "zeroEventAreas": 0,
             "passRate": 0.18181818181818182,
             "averageGapScore": 22.363636363636363,
-            "averageEvents": 146,
-            "averageVenues": 37.90909090909091,
+            "averageEvents": 145,
+            "averageVenues": 37.54545454545455,
             "deficitScore": 52.82727272727273
           }
         }
@@ -225,26 +267,26 @@
         "groups": {}
       }
     },
-    "probed": 1,
+    "probed": 3,
     "promoted": 0,
-    "failed": 1,
-    "finishedAt": "2026-11-14T01:40:54.174Z",
-    "durationMs": 4179,
+    "failed": 3,
+    "finishedAt": "2026-11-14T03:13:32.105Z",
+    "durationMs": 3189,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 173,
-      "cold": 476,
-      "lowValue": 686,
+      "cold": 477,
+      "lowValue": 685,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 476,
-        "low-value": 686,
+        "cold-sample": 477,
+        "low-value": 685,
         "food-evidence": 11
       }
     },
@@ -297,22 +339,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 476,
-      "lowValueCount": 686,
+      "coldCount": 477,
+      "lowValueCount": 685,
       "laneCounts": {
-        "cold-sample": 476,
+        "cold-sample": 477,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 686
+        "low-value": 685
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 173,
         "needs-website": 824,
-        "cold": 476,
-        "candidate": 650
+        "cold": 477,
+        "candidate": 649
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -359,8 +401,8 @@
         "mode": "bootstrap",
         "configuredAreaCount": 188,
         "measured": 188,
-        "passing": 6,
-        "passRate": 0.031914893617021274,
+        "passing": 4,
+        "passRate": 0.02127659574468085,
         "severeGapCount": 104,
         "mediumGapCount": 164,
         "activeMode": "bootstrap",
