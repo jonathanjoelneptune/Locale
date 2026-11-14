@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-14T11:28:17.035Z",
+  "generatedAt": "2026-11-14T14:25:50.284Z",
   "run": {
-    "startedAt": "2026-11-14T11:28:12.662Z",
+    "startedAt": "2026-11-14T14:25:18.421Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 3,
+      "due": 1,
       "retry": 174,
-      "cold": 478,
-      "lowValue": 684,
+      "cold": 479,
+      "lowValue": 683,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 478,
-        "low-value": 684,
+        "cold-sample": 479,
+        "low-value": 683,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,14 +65,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5430484523",
-        "name": "Coin-Op Game Room",
+        "key": "san-diego|osm|way|377357190",
+        "name": "Tivoli Bar and Grill",
         "category": "bar",
-        "website": "https://coinopsd.com/",
+        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
         "attempts": 10,
         "status": "retry",
         "probeLane": "event-likely",
@@ -72,65 +83,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-21T11:28:13.597Z",
-        "checkedAt": "2026-11-14T11:28:12.881Z"
+        "nextCheckAt": "2026-11-21T14:25:49.413Z",
+        "checkedAt": "2026-11-14T14:25:49.282Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317542",
-        "name": "Numbers",
-        "category": "nightclub",
-        "website": "https://www.numberssd.com/",
-        "attempts": 10,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-21T11:28:13.931Z",
-        "checkedAt": "2026-11-14T11:28:13.597Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1448557328",
-        "name": "Gossip Grill",
-        "category": "observed-venue",
-        "website": "http://www.thegossipgrill.com/",
-        "attempts": 10,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-21T11:28:14.071Z",
-        "checkedAt": "2026-11-14T11:28:13.931Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11174700638",
-        "name": "Elevated coffee & confections",
+        "key": "san-diego|osm|node|596370703",
+        "name": "Lemon Grove Cafe",
         "category": "cafe",
-        "website": "https://www.elevatedcnc.com/",
+        "website": "http://www.lemongrovecafe.net/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Elevated coffee & confections (low-value)",
+          "detail": "Checked 1 page on Lemon Grove Cafe (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-29T11:28:16.871Z",
-        "checkedAt": "2026-11-14T11:28:12.911Z"
+        "nextCheckAt": "2026-12-29T14:25:50.166Z",
+        "checkedAt": "2026-11-14T14:25:49.284Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -142,9 +115,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
-      "low-value": 1,
-      "exploratory": 1
+      "event-likely": 1,
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -155,13 +127,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "city-heights": 1,
-      "lemon-grove": 1,
-      "north-park": 1,
-      "hillcrest": 1
+      "east-village": 1,
+      "lemon-grove": 1
     },
     "probeGroupCounts": {
-      "uptown-midcity": 3,
+      "central-core": 1,
       "east-county": 1
     },
     "coverageEquity": {
@@ -169,8 +139,8 @@
         "measured": 188,
         "passing": 0,
         "metroPassRate": 0,
-        "zeroEventAreas": 76,
-        "zeroEventRate": 0.404,
+        "zeroEventAreas": 77,
+        "zeroEventRate": 0.41,
         "groupPassRateSpread": 0,
         "groupGapSpread": 59,
         "equityScore": 28.9,
@@ -212,12 +182,12 @@
             "group": "east-county",
             "areas": 40,
             "passing": 0,
-            "zeroEventAreas": 23,
+            "zeroEventAreas": 24,
             "passRate": 0,
-            "averageGapScore": 86.925,
-            "averageEvents": 3.525,
-            "averageVenues": 1.35,
-            "deficitScore": 91.17375
+            "averageGapScore": 87.025,
+            "averageEvents": 3.475,
+            "averageVenues": 1.3,
+            "deficitScore": 91.45875
           },
           "central-west": {
             "group": "central-west",
@@ -259,7 +229,7 @@
             "zeroEventAreas": 0,
             "passRate": 0,
             "averageGapScore": 60.22222222222222,
-            "averageEvents": 34.888888888888886,
+            "averageEvents": 34.833333333333336,
             "averageVenues": 11.277777777777779,
             "deficitScore": 76.07777777777778
           },
@@ -270,7 +240,7 @@
             "zeroEventAreas": 0,
             "passRate": 0,
             "averageGapScore": 41,
-            "averageEvents": 123.9090909090909,
+            "averageEvents": 123.63636363636364,
             "averageVenues": 36,
             "deficitScore": 69.35
           }
@@ -288,68 +258,68 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 2,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-11-14T11:28:16.872Z",
-    "durationMs": 4210,
+    "failed": 2,
+    "finishedAt": "2026-11-14T14:25:50.207Z",
+    "durationMs": 31786,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 0,
       "retry": 174,
-      "cold": 479,
-      "lowValue": 683,
+      "cold": 480,
+      "lowValue": 682,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 479,
-        "low-value": 683,
+        "cold-sample": 480,
+        "low-value": 682,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-14T14:25:18.476Z",
+        "lastFinishedAt": "2026-11-14T14:25:19.109Z",
+        "lastLatencyMs": 633,
+        "cooldownUntil": 1794666349109,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-14T14:25:19.109Z",
+        "lastFinishedAt": "2026-11-14T14:25:34.109Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794666364109,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-14T14:25:34.109Z",
+        "lastFinishedAt": "2026-11-14T14:25:49.109Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1794666379109,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -360,22 +330,22 @@
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
       "dueCount": 0,
-      "coldCount": 479,
-      "lowValueCount": 683,
+      "coldCount": 480,
+      "lowValueCount": 682,
       "laneCounts": {
-        "cold-sample": 479,
+        "cold-sample": 480,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 683
+        "low-value": 682
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 174,
         "needs-website": 824,
-        "cold": 479,
-        "candidate": 646
+        "cold": 480,
+        "candidate": 645
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -416,7 +386,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
