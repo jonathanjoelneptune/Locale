@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-15T10:40:21.242Z",
+  "generatedAt": "2026-11-15T14:40:19.579Z",
   "run": {
-    "startedAt": "2026-11-15T10:39:33.839Z",
+    "startedAt": "2026-11-15T14:40:17.918Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 2,
+      "due": 3,
       "retry": 174,
-      "cold": 485,
-      "lowValue": 677,
+      "cold": 486,
+      "lowValue": 676,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 485,
-        "low-value": 677,
+        "cold-sample": 486,
+        "low-value": 676,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9968736670",
-        "name": "Daboba",
-        "category": "cafe",
-        "website": "https://dabobasantee.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Daboba (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-30T10:40:20.250Z",
-        "checkedAt": "2026-11-15T10:40:19.019Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|544065389",
-        "name": "Mainstream Bar & Grill",
+        "key": "san-diego|osm|node|11168791637",
+        "name": "Riviera Supper Club and Turquoise Room",
         "category": "restaurant",
-        "website": "https://www.mainstreampoway.net/",
+        "website": "https://www.rivierasupperclub.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 4 pages on Mainstream Bar & Grill (cold-sample)",
+          "detail": "Checked 2 pages on Riviera Supper Club and Turquoise Room (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T10:40:21.214Z",
-        "checkedAt": "2026-11-15T10:40:19.017Z"
+        "nextCheckAt": "2026-12-15T14:40:19.417Z",
+        "checkedAt": "2026-11-15T14:40:18.210Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13628856282",
+        "name": "Gillespie Field Café",
+        "category": "cafe",
+        "website": "https://www.gillespiecafe.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Gillespie Field Café (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-30T14:40:19.540Z",
+        "checkedAt": "2026-11-15T14:40:18.325Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1,
+      "lemon-grove": 1,
       "santee": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "east-county": 1
+      "east-county": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -142,7 +130,7 @@
         "zeroEventAreas": 83,
         "zeroEventRate": 0.441,
         "groupPassRateSpread": 0,
-        "groupGapSpread": 43.1,
+        "groupGapSpread": 41.2,
         "equityScore": 28.4,
         "groups": {
           "south-bay": {
@@ -195,10 +183,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 59.73684210526316,
+            "averageGapScore": 59.26315789473684,
             "averageEvents": 62.1578947368421,
             "averageVenues": 13.736842105263158,
-            "deficitScore": 76.96052631578948
+            "deficitScore": 76.79473684210527
           },
           "north-county-inland": {
             "group": "north-county-inland",
@@ -228,10 +216,10 @@
             "passing": 0,
             "zeroEventAreas": 0,
             "passRate": 0,
-            "averageGapScore": 65.77777777777777,
-            "averageEvents": 30.11111111111111,
-            "averageVenues": 10.777777777777779,
-            "deficitScore": 78.02222222222221
+            "averageGapScore": 66.11111111111111,
+            "averageEvents": 29.88888888888889,
+            "averageVenues": 10.61111111111111,
+            "deficitScore": 78.13888888888889
           },
           "central-core": {
             "group": "central-core",
@@ -239,10 +227,10 @@
             "passing": 0,
             "zeroEventAreas": 0,
             "passRate": 0,
-            "averageGapScore": 56.90909090909091,
-            "averageEvents": 108.45454545454545,
-            "averageVenues": 34.18181818181818,
-            "deficitScore": 74.91818181818181
+            "averageGapScore": 58.81818181818182,
+            "averageEvents": 106.9090909090909,
+            "averageVenues": 33.09090909090909,
+            "deficitScore": 75.58636363636364
           }
         }
       },
@@ -261,65 +249,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-15T10:40:21.215Z",
-    "durationMs": 47376,
+    "finishedAt": "2026-11-15T14:40:19.550Z",
+    "durationMs": 1632,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 1,
+      "due": 2,
       "retry": 174,
-      "cold": 486,
-      "lowValue": 676,
+      "cold": 487,
+      "lowValue": 675,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 486,
-        "low-value": 676,
+        "cold-sample": 487,
+        "low-value": 675,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-15T10:39:33.882Z",
-        "lastFinishedAt": "2026-11-15T10:39:48.885Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1794739218884,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-15T10:39:48.885Z",
-        "lastFinishedAt": "2026-11-15T10:40:03.886Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794739233886,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-15T10:40:03.886Z",
-        "lastFinishedAt": "2026-11-15T10:40:18.886Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794739248886,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +317,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 19,
       "needsWebsiteCount": 824,
-      "dueCount": 1,
-      "coldCount": 486,
-      "lowValueCount": 676,
+      "dueCount": 2,
+      "coldCount": 487,
+      "lowValueCount": 675,
       "laneCounts": {
-        "cold-sample": 486,
+        "cold-sample": 487,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 676
+        "low-value": 675
       },
       "statusCounts": {
         "qualified": 19,
         "retry": 174,
         "needs-website": 824,
-        "cold": 486,
-        "candidate": 639
+        "cold": 487,
+        "candidate": 638
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +374,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
