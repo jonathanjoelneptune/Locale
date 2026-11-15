@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-15T14:40:19.579Z",
+  "generatedAt": "2026-11-15T17:26:25.022Z",
   "run": {
-    "startedAt": "2026-11-15T14:40:17.918Z",
+    "startedAt": "2026-11-15T17:26:06.380Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 3,
       "retry": 174,
-      "cold": 486,
-      "lowValue": 676,
+      "cold": 487,
+      "lowValue": 675,
       "qualified": 19,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 486,
-        "low-value": 676,
+        "cold-sample": 487,
+        "low-value": 675,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168791637",
-        "name": "Riviera Supper Club and Turquoise Room",
+        "key": "san-diego|osm|node|2104968795",
+        "name": "Kaffee Meister - Santee Coffeehouse",
+        "category": "cafe",
+        "website": "https://www.kaffeemeister.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-16T17:26:24.561Z",
+        "checkedAt": "2026-11-15T17:26:24.132Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12714938772",
+        "name": "Buffalo Wild Wings",
         "category": "restaurant",
-        "website": "https://www.rivierasupperclub.com/",
+        "website": "https://www.buffalowildwings.com/locations/us/ca/chula-vista/555-broadway/sports-bar-862/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Riviera Supper Club and Turquoise Room (cold-sample)",
+          "detail": "Checked 1 page on Buffalo Wild Wings (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T14:40:19.417Z",
-        "checkedAt": "2026-11-15T14:40:18.210Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|13628856282",
-        "name": "Gillespie Field Café",
-        "category": "cafe",
-        "website": "https://www.gillespiecafe.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Gillespie Field Café (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-30T14:40:19.540Z",
-        "checkedAt": "2026-11-15T14:40:18.325Z"
+        "nextCheckAt": "2026-12-15T17:26:24.980Z",
+        "checkedAt": "2026-11-15T17:26:24.130Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "lemon-grove": 1,
+      "downtown-chula-vista": 1,
       "santee": 1
     },
     "probeGroupCounts": {
-      "east-county": 2
+      "south-bay": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -184,8 +196,8 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 59.26315789473684,
-            "averageEvents": 62.1578947368421,
-            "averageVenues": 13.736842105263158,
+            "averageEvents": 62.05263157894737,
+            "averageVenues": 13.631578947368421,
             "deficitScore": 76.79473684210527
           },
           "north-county-inland": {
@@ -217,8 +229,8 @@
             "zeroEventAreas": 0,
             "passRate": 0,
             "averageGapScore": 66.11111111111111,
-            "averageEvents": 29.88888888888889,
-            "averageVenues": 10.61111111111111,
+            "averageEvents": 29.833333333333332,
+            "averageVenues": 10.555555555555555,
             "deficitScore": 78.13888888888889
           },
           "central-core": {
@@ -228,8 +240,8 @@
             "zeroEventAreas": 0,
             "passRate": 0,
             "averageGapScore": 58.81818181818182,
-            "averageEvents": 106.9090909090909,
-            "averageVenues": 33.09090909090909,
+            "averageEvents": 106.63636363636364,
+            "averageVenues": 32.81818181818182,
             "deficitScore": 75.58636363636364
           }
         }
@@ -249,13 +261,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-15T14:40:19.550Z",
-    "durationMs": 1632,
+    "finishedAt": "2026-11-15T17:26:24.982Z",
+    "durationMs": 18602,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 2,
-      "retry": 174,
+      "retry": 175,
       "cold": 487,
       "lowValue": 675,
       "qualified": 19,
@@ -272,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-15T17:26:06.447Z",
+        "lastFinishedAt": "2026-11-15T17:26:07.442Z",
+        "lastLatencyMs": 995,
+        "cooldownUntil": 1794763597442,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-15T17:26:07.442Z",
+        "lastFinishedAt": "2026-11-15T17:26:22.444Z",
+        "lastLatencyMs": 15002,
+        "cooldownUntil": 1794763612444,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-15T17:26:22.444Z",
+        "lastFinishedAt": "2026-11-15T17:26:23.922Z",
+        "lastLatencyMs": 1478,
+        "cooldownUntil": 1794763613922,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -330,10 +342,10 @@
       },
       "statusCounts": {
         "qualified": 19,
-        "retry": 174,
+        "retry": 175,
         "needs-website": 824,
         "cold": 487,
-        "candidate": 638
+        "candidate": 637
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +386,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
