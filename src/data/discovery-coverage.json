@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-16T00:17:33.984Z",
+  "generatedAt": "2026-11-16T01:48:29.805Z",
   "run": {
-    "startedAt": "2026-11-16T00:16:49.848Z",
+    "startedAt": "2026-11-16T01:48:25.932Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 17,
+      "due": 15,
       "retry": 175,
       "cold": 489,
       "lowValue": 673,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,64 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1090901595",
-        "name": "The Hamlett",
-        "category": "cafe",
-        "website": "https://www.thehamlett.com/",
+        "key": "san-diego|osm|node|12729954310",
+        "name": "Fresheria",
+        "category": "restaurant",
+        "website": "https://www.lafresheria.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-18T00:17:21.695Z",
-        "checkedAt": "2026-11-16T00:17:21.615Z"
+        "nextCheckAt": "2026-11-30T01:48:26.910Z",
+        "checkedAt": "2026-11-16T01:48:26.499Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8477440717",
-        "name": "Lux Coffee Bar & Roasters",
-        "category": "cafe",
-        "website": "https://www.instagram.com/luxcoffeebar/",
-        "attempts": 4,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 429",
-          "statusCode": 429
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-30T00:17:22.208Z",
-        "checkedAt": "2026-11-16T00:17:21.695Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9284416967",
-        "name": "369 Ramen. Poke. Chinese.",
+        "key": "san-diego|osm|way|31807207",
+        "name": "94th Aero Sqaudron",
         "category": "restaurant",
-        "website": "https://www.369ramenpokechinese.com/",
+        "website": "https://www.94thsandiego.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on 369 Ramen. Poke. Chinese. (cold-sample)",
+          "detail": "Checked 3 pages on 94th Aero Sqaudron (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-14T00:17:33.918Z",
-        "checkedAt": "2026-11-16T00:17:21.613Z"
+        "nextCheckAt": "2027-02-14T01:48:29.715Z",
+        "checkedAt": "2026-11-16T01:48:26.346Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -135,8 +105,7 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "cold-sample": 1,
-      "low-value": 1,
-      "food-evidence": 1
+      "low-value": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -147,14 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "poway": 1,
-      "lemon-grove": 1,
-      "unmapped:san-diego|osm|node|8477440717": 1
+      "serra-mesa": 1,
+      "bonita": 1
     },
     "probeGroupCounts": {
-      "north-inland": 1,
-      "east-county": 1,
-      "unmapped": 1
+      "central-west": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -173,10 +140,10 @@
             "passing": 0,
             "zeroEventAreas": 18,
             "passRate": 0,
-            "averageGapScore": 91.06896551724138,
-            "averageEvents": 3.4827586206896552,
-            "averageVenues": 0.9310344827586207,
-            "deficitScore": 93.08103448275862
+            "averageGapScore": 91.17241379310344,
+            "averageEvents": 3.4482758620689653,
+            "averageVenues": 0.896551724137931,
+            "deficitScore": 93.11724137931034
           },
           "north-central": {
             "group": "north-central",
@@ -218,7 +185,7 @@
             "zeroEventAreas": 2,
             "passRate": 0,
             "averageGapScore": 59.26315789473684,
-            "averageEvents": 61.421052631578945,
+            "averageEvents": 61.36842105263158,
             "averageVenues": 13.31578947368421,
             "deficitScore": 76.79473684210527
           },
@@ -280,15 +247,15 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 2,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-11-16T00:17:33.930Z",
-    "durationMs": 44082,
+    "failed": 2,
+    "finishedAt": "2026-11-16T01:48:29.757Z",
+    "durationMs": 3825,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 15,
+      "due": 14,
       "retry": 175,
       "cold": 489,
       "lowValue": 673,
@@ -306,42 +273,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-16T00:16:50.080Z",
-        "lastFinishedAt": "2026-11-16T00:17:05.084Z",
-        "lastLatencyMs": 15004,
-        "cooldownUntil": 1794788255083,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-16T00:17:05.084Z",
-        "lastFinishedAt": "2026-11-16T00:17:20.083Z",
-        "lastLatencyMs": 14999,
-        "cooldownUntil": 1794788270083,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-16T00:17:20.083Z",
-        "lastFinishedAt": "2026-11-16T00:17:21.393Z",
-        "lastLatencyMs": 1310,
-        "cooldownUntil": 1794788271393,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -351,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 15,
+      "dueCount": 14,
       "coldCount": 489,
       "lowValueCount": 673,
       "laneCounts": {
@@ -408,7 +375,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
