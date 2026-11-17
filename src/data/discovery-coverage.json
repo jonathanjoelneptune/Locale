@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-16T22:26:53.486Z",
+  "generatedAt": "2026-11-17T01:01:29.125Z",
   "run": {
-    "startedAt": "2026-11-16T22:26:31.601Z",
+    "startedAt": "2026-11-17T01:00:11.396Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 105,
-      "retry": 173,
+      "due": 120,
+      "retry": 174,
       "cold": 495,
       "lowValue": 667,
       "qualified": 20,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.08,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,178 +65,235 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|564506501",
-        "name": "Chili's",
+        "key": "san-diego|osm|node|9854580284",
+        "name": "Delhi Kitchen",
         "category": "restaurant",
-        "website": "https://chilis.com/",
+        "website": "http://www.delhikitchen.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Chili's (cold-sample)",
+          "detail": "Checked 1 page on Delhi Kitchen (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-14T22:26:33.132Z",
-        "checkedAt": "2026-11-16T22:26:31.936Z"
+        "nextCheckAt": "2027-02-15T01:00:59.856Z",
+        "checkedAt": "2026-11-17T01:00:56.657Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1974496732",
-        "name": "Hillcrest Brewing Company",
-        "category": "pub",
-        "website": "https://hillcrestbrewingcompany.com/",
+        "key": "san-diego|osm|node|368171206",
+        "name": "Mountain View-Beckwourth Branch San Diego City Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/mountain-view-beckwourth-library",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Hillcrest Brewing Company (event-likely)",
+          "detail": "Checked 5 pages on Mountain View-Beckwourth Branch San Diego City Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:35.051Z",
-        "checkedAt": "2026-11-16T22:26:33.132Z"
+        "nextCheckAt": "2026-12-15T01:01:00.973Z",
+        "checkedAt": "2026-11-17T01:00:56.656Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317957",
-        "name": "Patrick's Gaslamp Pub",
+        "key": "san-diego|osm|node|5102239721",
+        "name": "Seven Grand",
         "category": "bar",
-        "website": "https://www.patricksgaslamppub.com/",
+        "website": "https://www.sevengrandbars.com/sd",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Patrick's Gaslamp Pub (event-likely)",
+          "detail": "Checked 4 pages on Seven Grand (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:38.283Z",
-        "checkedAt": "2026-11-16T22:26:35.051Z"
+        "nextCheckAt": "2026-12-15T01:01:03.044Z",
+        "checkedAt": "2026-11-17T01:00:59.856Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8526800424",
-        "name": "Elijah's Restaurant & Catering",
-        "category": "restaurant",
-        "website": "https://www.elijahsrestaurant.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-19T22:26:38.503Z",
-        "checkedAt": "2026-11-16T22:26:38.283Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317516",
-        "name": "Part Time Lover",
+        "key": "san-diego|osm|node|597046679",
+        "name": "Taste and Thirst",
         "category": "bar",
-        "website": "https://www.parttimeloverhifi.com/",
+        "website": "https://www.tasteandthirst.com/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Part Time Lover (event-likely)",
+          "detail": "Checked 3 pages on Taste and Thirst (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:40.296Z",
-        "checkedAt": "2026-11-16T22:26:38.503Z"
+        "nextCheckAt": "2026-12-15T01:01:04.700Z",
+        "checkedAt": "2026-11-17T01:01:00.973Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13242236001",
-        "name": "Gaslamp BBQ",
+        "key": "san-diego|osm|node|3247113141",
+        "name": "Steamy Piggy",
+        "category": "observed-venue",
+        "website": "https://www.steamypiggy.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Steamy Piggy (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:05.744Z",
+        "checkedAt": "2026-11-17T01:01:03.044Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1937204277",
+        "name": "Phil's BBQ",
+        "category": "observed-venue",
+        "website": "https://philsbbq.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Phil's BBQ (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:08.683Z",
+        "checkedAt": "2026-11-17T01:01:05.744Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|566471399",
+        "name": "Casa Gabriela",
+        "category": "observed-venue",
+        "website": "https://www.casagabrielalamesa.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Casa Gabriela (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:10.841Z",
+        "checkedAt": "2026-11-17T01:01:04.700Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13455338201",
+        "name": "Coasterra",
+        "category": "observed-venue",
+        "website": "https://www.coasterra.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Coasterra (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:12.552Z",
+        "checkedAt": "2026-11-17T01:01:08.683Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13064777620",
+        "name": "Cardellino",
+        "category": "observed-venue",
+        "website": "https://www.cardellinosd.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Cardellino (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:14.097Z",
+        "checkedAt": "2026-11-17T01:01:12.552Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|337091790",
+        "name": "Coronado Public Library",
+        "category": "library",
+        "website": "https://www.coronadolibrary.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 4 pages on Coronado Public Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:19.411Z",
+        "checkedAt": "2026-11-17T01:01:10.841Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3253158572",
+        "name": "Ototo Sushi Co.",
+        "category": "observed-venue",
+        "website": "https://www.ototosushico.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Ototo Sushi Co. (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T01:01:20.907Z",
+        "checkedAt": "2026-11-17T01:01:19.411Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215079099",
+        "name": "Ginger’s",
         "category": "bar",
-        "website": "http://gaslampbbqca.com/",
+        "website": "http://www.gingersgaslamp.com/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Gaslamp BBQ (event-likely)",
+          "detail": "Checked 3 pages on Ginger’s (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:41.555Z",
-        "checkedAt": "2026-11-16T22:26:40.296Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|2429717886",
-        "name": "Art Produce",
-        "category": "gallery",
-        "website": "http://artproduce.org/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Art Produce (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:42.440Z",
-        "checkedAt": "2026-11-16T22:26:41.555Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6838146385",
-        "name": "Navy Base San Diego Theater",
-        "category": "cinema",
-        "website": "https://www.navymwr.org/programs/motion-pictures/theaters?id=fa01c38d-22f6-4875-a986-184e294c208d",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Navy Base San Diego Theater (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:53.285Z",
-        "checkedAt": "2026-11-16T22:26:31.899Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|79288741",
-        "name": "San Diego Natural History Museum",
-        "category": "museum",
-        "website": "https://www.sdnhm.org/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on San Diego Natural History Museum (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-14T22:26:53.450Z",
-        "checkedAt": "2026-11-16T22:26:42.440Z"
+        "nextCheckAt": "2026-12-15T01:01:29.083Z",
+        "checkedAt": "2026-11-17T01:01:14.097Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -237,9 +305,9 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 7,
+      "event-likely": 5,
       "cold-sample": 1,
-      "low-value": 1
+      "exploratory": 6
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -251,21 +319,27 @@
     },
     "probeAreaCounts": {
       "national-city": 1,
-      "rancho-penasquitos": 1,
-      "hillcrest": 1,
+      "carmel-mountain-ranch": 1,
+      "city-heights": 1,
       "cortez-hill": 1,
       "convoy": 1,
-      "city-heights": 1,
+      "downtown-la-mesa": 1,
+      "mission-bay": 1,
+      "unmapped:san-diego|osm|node|13455338201": 1,
+      "coronado": 1,
+      "hillcrest": 1,
       "east-village": 1,
-      "cherokee-point": 1,
-      "balboa-park": 1
+      "kearny-mesa": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
+      "south-bay": 2,
       "north-inland": 1,
-      "uptown-midcity": 3,
-      "central-core": 3,
-      "north-central": 1
+      "uptown-midcity": 2,
+      "central-core": 2,
+      "north-central": 2,
+      "east-county": 1,
+      "central-west": 1,
+      "unmapped": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -391,15 +465,15 @@
         "groups": {}
       }
     },
-    "probed": 9,
+    "probed": 12,
     "promoted": 0,
-    "failed": 9,
-    "finishedAt": "2026-11-16T22:26:53.451Z",
-    "durationMs": 21850,
+    "failed": 12,
+    "finishedAt": "2026-11-17T01:01:29.084Z",
+    "durationMs": 77688,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
+      "due": 108,
       "retry": 174,
       "cold": 495,
       "lowValue": 667,
@@ -417,42 +491,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-17T01:00:11.450Z",
+        "lastFinishedAt": "2026-11-17T01:00:26.453Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794877256453,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-17T01:00:26.453Z",
+        "lastFinishedAt": "2026-11-17T01:00:41.454Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794877271454,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-17T01:00:41.454Z",
+        "lastFinishedAt": "2026-11-17T01:00:56.455Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794877286455,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -462,7 +536,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 97,
+      "dueCount": 108,
       "coldCount": 495,
       "lowValueCount": 667,
       "laneCounts": {
@@ -519,7 +593,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
