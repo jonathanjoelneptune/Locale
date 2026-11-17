@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-17T11:01:58.220Z",
+  "generatedAt": "2026-11-17T13:23:16.119Z",
   "run": {
-    "startedAt": "2026-11-17T11:01:55.485Z",
+    "startedAt": "2026-11-17T13:22:14.625Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 103,
+      "due": 119,
       "retry": 172,
-      "cold": 499,
-      "lowValue": 663,
+      "cold": 500,
+      "lowValue": 662,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 499,
-        "low-value": 663,
+        "cold-sample": 500,
+        "low-value": 662,
         "food-evidence": 11
       }
     },
@@ -58,41 +58,231 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8923591019",
-        "name": "El Pollo Grill Bonita",
-        "category": "restaurant",
-        "website": "https://www.elpollogrill.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|way|31840107",
+        "name": "City Heights-Weingart Branch San Diego City Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/city-heights-weingart-library-and-performance-annex",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on El Pollo Grill Bonita (low-value)",
+          "detail": "Checked 5 pages on City Heights-Weingart Branch San Diego City Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-01T11:01:56.565Z",
-        "checkedAt": "2026-11-17T11:01:55.775Z"
+        "nextCheckAt": "2026-12-15T13:22:17.262Z",
+        "checkedAt": "2026-11-17T13:22:14.934Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31818541",
-        "name": "Olive Garden",
+        "key": "san-diego|osm|node|12122614067",
+        "name": "Rakiraki Ramen & Tsukemen",
         "category": "restaurant",
-        "website": "https://www.olivegarden.com/",
+        "website": "https://www.rakirakiramen.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 6 pages on Olive Garden (cold-sample)",
+          "detail": "Checked 1 page on Rakiraki Ramen & Tsukemen (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-15T11:01:58.069Z",
-        "checkedAt": "2026-11-17T11:01:55.730Z"
+        "nextCheckAt": "2027-02-15T13:22:27.670Z",
+        "checkedAt": "2026-11-17T13:22:14.890Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13125190184",
+        "name": "Filippi's Pizza Grotto Kearny Mesa",
+        "category": "restaurant",
+        "website": "https://realcheesepizza.com/kearny-mesa",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Filippi's Pizza Grotto Kearny Mesa (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-01T13:22:28.937Z",
+        "checkedAt": "2026-11-17T13:22:27.670Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6635562870",
+        "name": "Yard House",
+        "category": "observed-venue",
+        "website": "https://www.yardhouse.com/locations/ca/san-diego/san-diego-mission-valley-mall/8363",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-17T13:22:29.877Z",
+        "checkedAt": "2026-11-17T13:22:28.937Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9215210417",
+        "name": "San Diego Musical Theatre",
+        "category": "theatre",
+        "website": "https://www.sdmt.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on San Diego Musical Theatre (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:22:56.634Z",
+        "checkedAt": "2026-11-17T13:22:17.262Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31809565",
+        "name": "The Tipsy Crow",
+        "category": "observed-venue",
+        "website": "https://thetipsycrow.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-evidence",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on The Tipsy Crow (event-evidence)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:22:57.651Z",
+        "checkedAt": "2026-11-17T13:22:29.877Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|25965018",
+        "name": "USS Midway Museum",
+        "category": "museum",
+        "website": "https://www.midway.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 6 pages on USS Midway Museum (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:02.216Z",
+        "checkedAt": "2026-11-17T13:22:57.651Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|541654693",
+        "name": "Let's Play! San Diego Indoor Soccer",
+        "category": "sports-centre",
+        "website": "https://www.letsplaysoccer.com/facilities/13",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Let's Play! San Diego Indoor Soccer (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:02.220Z",
+        "checkedAt": "2026-11-17T13:22:56.634Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|registry|place_double-deuce_bf5947de03",
+        "name": "Double Deuce",
+        "category": "observed-venue",
+        "website": "https://doubledeucesd.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Double Deuce (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:03.175Z",
+        "checkedAt": "2026-11-17T13:23:02.216Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31841162",
+        "name": "San Diego Chinese Historical Museum",
+        "category": "museum",
+        "website": "https://sdchm.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on San Diego Chinese Historical Museum (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:03.380Z",
+        "checkedAt": "2026-11-17T13:23:03.175Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9607389522",
+        "name": "Gaslamp Museum at the Davis-Horton House",
+        "category": "museum",
+        "website": "https://www.gaslampmuseum.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Gaslamp Museum at the Davis-Horton House (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:03.542Z",
+        "checkedAt": "2026-11-17T13:23:02.220Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11060509647",
+        "name": "Hasta Mañana Cantina",
+        "category": "observed-venue",
+        "website": "https://hastamananacantina.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Hasta Mañana Cantina (exploratory)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T13:23:16.079Z",
+        "checkedAt": "2026-11-17T13:23:03.380Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -105,7 +295,10 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "cold-sample": 1,
-      "low-value": 1
+      "event-likely": 6,
+      "low-value": 1,
+      "exploratory": 3,
+      "event-evidence": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -116,12 +309,20 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "carmel-mountain-ranch": 1,
-      "chula-vista": 1
+      "rancho-penasquitos": 1,
+      "teralta": 1,
+      "east-village": 4,
+      "convoy": 1,
+      "university-heights": 1,
+      "cortez-hill": 2,
+      "north-park": 1,
+      "little-italy": 1
     },
     "probeGroupCounts": {
       "north-inland": 1,
-      "south-bay": 1
+      "uptown-midcity": 3,
+      "central-core": 7,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,26 +448,26 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 12,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-17T11:01:58.098Z",
-    "durationMs": 2613,
+    "failed": 12,
+    "finishedAt": "2026-11-17T13:23:16.082Z",
+    "durationMs": 61457,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 102,
+      "due": 108,
       "retry": 172,
-      "cold": 500,
-      "lowValue": 662,
+      "cold": 501,
+      "lowValue": 661,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 500,
-        "low-value": 662,
+        "cold-sample": 501,
+        "low-value": 661,
         "food-evidence": 11
       }
     },
@@ -318,23 +519,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 102,
-      "coldCount": 500,
-      "lowValueCount": 662,
+      "dueCount": 108,
+      "coldCount": 501,
+      "lowValueCount": 661,
       "laneCounts": {
-        "cold-sample": 500,
+        "cold-sample": 501,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 662
+        "low-value": 661
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 172,
         "needs-website": 824,
-        "cold": 500,
-        "candidate": 626
+        "cold": 501,
+        "candidate": 625
       },
       "categoryCounts": {
         "nightclub": 8,
