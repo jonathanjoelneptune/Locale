@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-17T13:23:16.119Z",
+  "generatedAt": "2026-11-17T14:48:36.590Z",
   "run": {
-    "startedAt": "2026-11-17T13:22:14.625Z",
+    "startedAt": "2026-11-17T14:47:40.032Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 119,
+      "due": 110,
       "retry": 172,
-      "cold": 500,
-      "lowValue": 662,
+      "cold": 501,
+      "lowValue": 661,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 500,
-        "low-value": 662,
+        "cold-sample": 501,
+        "low-value": 661,
         "food-evidence": 11
       }
     },
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "rancho-bernardo",
+        "name": "Rancho Bernardo",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.08,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,183 +65,12 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31840107",
-        "name": "City Heights-Weingart Branch San Diego City Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/city-heights-weingart-library-and-performance-annex",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on City Heights-Weingart Branch San Diego City Library (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:22:17.262Z",
-        "checkedAt": "2026-11-17T13:22:14.934Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12122614067",
-        "name": "Rakiraki Ramen & Tsukemen",
-        "category": "restaurant",
-        "website": "https://www.rakirakiramen.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Rakiraki Ramen & Tsukemen (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-15T13:22:27.670Z",
-        "checkedAt": "2026-11-17T13:22:14.890Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|13125190184",
-        "name": "Filippi's Pizza Grotto Kearny Mesa",
-        "category": "restaurant",
-        "website": "https://realcheesepizza.com/kearny-mesa",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Filippi's Pizza Grotto Kearny Mesa (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-01T13:22:28.937Z",
-        "checkedAt": "2026-11-17T13:22:27.670Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6635562870",
-        "name": "Yard House",
-        "category": "observed-venue",
-        "website": "https://www.yardhouse.com/locations/ca/san-diego/san-diego-mission-valley-mall/8363",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-17T13:22:29.877Z",
-        "checkedAt": "2026-11-17T13:22:28.937Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215210417",
-        "name": "San Diego Musical Theatre",
-        "category": "theatre",
-        "website": "https://www.sdmt.org/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 7 pages on San Diego Musical Theatre (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:22:56.634Z",
-        "checkedAt": "2026-11-17T13:22:17.262Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31809565",
-        "name": "The Tipsy Crow",
-        "category": "observed-venue",
-        "website": "https://thetipsycrow.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on The Tipsy Crow (event-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:22:57.651Z",
-        "checkedAt": "2026-11-17T13:22:29.877Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|25965018",
-        "name": "USS Midway Museum",
-        "category": "museum",
-        "website": "https://www.midway.org/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 6 pages on USS Midway Museum (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:02.216Z",
-        "checkedAt": "2026-11-17T13:22:57.651Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|541654693",
-        "name": "Let's Play! San Diego Indoor Soccer",
-        "category": "sports-centre",
-        "website": "https://www.letsplaysoccer.com/facilities/13",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Let's Play! San Diego Indoor Soccer (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:02.220Z",
-        "checkedAt": "2026-11-17T13:22:56.634Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|registry|place_double-deuce_bf5947de03",
-        "name": "Double Deuce",
-        "category": "observed-venue",
-        "website": "https://doubledeucesd.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Double Deuce (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:03.175Z",
-        "checkedAt": "2026-11-17T13:23:02.216Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31841162",
-        "name": "San Diego Chinese Historical Museum",
+        "key": "san-diego|osm|way|362339141",
+        "name": "San Diego Chinese Historical Museum - Sun Yat Sen Memorial Extension",
         "category": "museum",
         "website": "https://sdchm.org/",
         "attempts": 5,
@@ -239,50 +79,107 @@
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on San Diego Chinese Historical Museum (event-likely)",
+          "detail": "Checked 3 pages on San Diego Chinese Historical Museum - Sun Yat Sen Memorial Extension (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:03.380Z",
-        "checkedAt": "2026-11-17T13:23:03.175Z"
+        "nextCheckAt": "2026-12-15T14:48:11.880Z",
+        "checkedAt": "2026-11-17T14:48:11.415Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9607389522",
-        "name": "Gaslamp Museum at the Davis-Horton House",
-        "category": "museum",
-        "website": "https://www.gaslampmuseum.org/",
+        "key": "san-diego|osm|node|368171005",
+        "name": "Oak Park Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/oak-park-library",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Gaslamp Museum at the Davis-Horton House (event-likely)",
+          "detail": "Checked 5 pages on Oak Park Branch San Diego Public Library (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:03.542Z",
-        "checkedAt": "2026-11-17T13:23:02.220Z"
+        "nextCheckAt": "2026-12-15T14:48:16.518Z",
+        "checkedAt": "2026-11-17T14:48:11.881Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11060509647",
-        "name": "Hasta Mañana Cantina",
+        "key": "san-diego|osm|node|2253805508",
+        "name": "Flama Llama",
+        "category": "restaurant",
+        "website": "https://www.flamallama.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Flama Llama (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-01T14:48:17.815Z",
+        "checkedAt": "2026-11-17T14:48:16.518Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596016694",
+        "name": "Rice Chicken",
+        "category": "restaurant",
+        "website": "https://www.ricechickensd.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Rice Chicken (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-15T14:48:29.141Z",
+        "checkedAt": "2026-11-17T14:48:11.413Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|3804220367",
+        "name": "Dansooz Cycle Studio",
+        "category": "sports-centre",
+        "website": "https://m.facebook.com/dansooz",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on Dansooz Cycle Studio (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T14:48:30.500Z",
+        "checkedAt": "2026-11-17T14:48:29.141Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5831142732",
+        "name": "The Smoking Gun",
         "category": "observed-venue",
-        "website": "https://hastamananacantina.com/",
+        "website": "https://www.thesmokinggunsd.com/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Hasta Mañana Cantina (exploratory)",
+          "detail": "Checked 2 pages on The Smoking Gun (exploratory)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T13:23:16.079Z",
-        "checkedAt": "2026-11-17T13:23:03.380Z"
+        "nextCheckAt": "2026-12-15T14:48:36.539Z",
+        "checkedAt": "2026-11-17T14:48:17.815Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -295,10 +192,9 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "cold-sample": 1,
-      "event-likely": 6,
+      "event-likely": 3,
       "low-value": 1,
-      "exploratory": 3,
-      "event-evidence": 1
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -310,18 +206,14 @@
     },
     "probeAreaCounts": {
       "rancho-penasquitos": 1,
-      "teralta": 1,
-      "east-village": 4,
-      "convoy": 1,
-      "university-heights": 1,
-      "cortez-hill": 2,
-      "north-park": 1,
-      "little-italy": 1
+      "east-village": 3,
+      "oak-park": 1,
+      "convoy": 1
     },
     "probeGroupCounts": {
       "north-inland": 1,
-      "uptown-midcity": 3,
-      "central-core": 7,
+      "central-core": 3,
+      "uptown-midcity": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -448,68 +340,68 @@
         "groups": {}
       }
     },
-    "probed": 12,
+    "probed": 6,
     "promoted": 0,
-    "failed": 12,
-    "finishedAt": "2026-11-17T13:23:16.082Z",
-    "durationMs": 61457,
+    "failed": 6,
+    "finishedAt": "2026-11-17T14:48:36.541Z",
+    "durationMs": 56509,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 108,
+      "due": 105,
       "retry": 172,
-      "cold": 501,
-      "lowValue": 661,
+      "cold": 502,
+      "lowValue": 660,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 501,
-        "low-value": 661,
+        "cold-sample": 502,
+        "low-value": 660,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-17T14:47:40.124Z",
+        "lastFinishedAt": "2026-11-17T14:47:55.127Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1794926905127,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-17T14:47:55.127Z",
+        "lastFinishedAt": "2026-11-17T14:48:10.128Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1794926920128,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-17T14:48:10.128Z",
+        "lastFinishedAt": "2026-11-17T14:48:11.108Z",
+        "lastLatencyMs": 980,
+        "cooldownUntil": 1794926921108,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -519,23 +411,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 108,
-      "coldCount": 501,
-      "lowValueCount": 661,
+      "dueCount": 105,
+      "coldCount": 502,
+      "lowValueCount": 660,
       "laneCounts": {
-        "cold-sample": 501,
+        "cold-sample": 502,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 661
+        "low-value": 660
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 172,
         "needs-website": 824,
-        "cold": 501,
-        "candidate": 625
+        "cold": 502,
+        "candidate": 624
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -576,7 +468,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
