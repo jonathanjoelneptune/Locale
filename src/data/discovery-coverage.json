@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-17T21:21:35.804Z",
+  "generatedAt": "2026-11-17T23:04:49.156Z",
   "run": {
-    "startedAt": "2026-11-17T21:20:48.594Z",
+    "startedAt": "2026-11-17T23:04:39.770Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 106,
-      "retry": 172,
-      "cold": 504,
-      "lowValue": 658,
+      "due": 108,
+      "retry": 171,
+      "cold": 505,
+      "lowValue": 657,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 504,
-        "low-value": 658,
-        "food-evidence": 11
+        "cold-sample": 505,
+        "food-evidence": 11,
+        "low-value": 657
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,52 +54,14 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4786922289",
-        "name": "Takka Sushi Bar & Grill",
+        "key": "san-diego|osm|node|597013952",
+        "name": "Kingfisher",
         "category": "restaurant",
-        "website": "https://foodeist.com/place/takka-sushi-bar",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Takka Sushi Bar & Grill (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-17T21:21:35.250Z",
-        "checkedAt": "2026-11-17T21:21:33.843Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596158252",
-        "name": "Mike Hess Brewing",
-        "category": "pub",
-        "website": "https://www.mikehessbrewing.com/north-park/",
-        "attempts": 7,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 502",
-          "statusCode": 502
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-24T21:21:35.612Z",
-        "checkedAt": "2026-11-17T21:21:33.845Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596134829",
-        "name": "Abbey's Real Texas BBQ",
-        "category": "restaurant",
-        "website": "https://www.abbeystexasbbq.com/",
+        "website": "https://kingfishersd.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -121,8 +72,46 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-17T21:21:35.753Z",
-        "checkedAt": "2026-11-17T21:21:35.250Z"
+        "nextCheckAt": "2026-12-17T23:04:40.552Z",
+        "checkedAt": "2026-11-17T23:04:40.232Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9359626181",
+        "name": "The Original Pancake House",
+        "category": "restaurant",
+        "website": "https://ophpoway.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on The Original Pancake House (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-15T23:04:44.835Z",
+        "checkedAt": "2026-11-17T23:04:40.158Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|596499269",
+        "name": "North Park Branch San Diego Public Library",
+        "category": "library",
+        "website": "https://www.sandiego.gov/public-library/locations/north-park-library",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 5 pages on North Park Branch San Diego Public Library (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T23:04:49.120Z",
+        "checkedAt": "2026-11-17T23:04:40.552Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -135,8 +124,8 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "cold-sample": 1,
-      "event-likely": 1,
-      "low-value": 1
+      "low-value": 1,
+      "event-likely": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -147,14 +136,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "santee": 1,
-      "city-heights": 1,
-      "miramar": 1
+      "poway": 1,
+      "south-park": 1,
+      "city-heights": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "uptown-midcity": 1,
-      "north-central": 1
+      "north-inland": 1,
+      "central-core": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,10 +239,10 @@
             "passing": 0,
             "zeroEventAreas": 2,
             "passRate": 0,
-            "averageGapScore": 61.473684210526315,
-            "averageEvents": 47.8421052631579,
-            "averageVenues": 10.210526315789474,
-            "deficitScore": 77.56842105263158
+            "averageGapScore": 61.526315789473685,
+            "averageEvents": 47.63157894736842,
+            "averageVenues": 10,
+            "deficitScore": 77.58684210526316
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -261,10 +250,10 @@
             "passing": 0,
             "zeroEventAreas": 0,
             "passRate": 0,
-            "averageGapScore": 66.72222222222223,
-            "averageEvents": 17.666666666666668,
-            "averageVenues": 8.277777777777779,
-            "deficitScore": 78.35277777777777
+            "averageGapScore": 66.88888888888889,
+            "averageEvents": 17.5,
+            "averageVenues": 8.11111111111111,
+            "deficitScore": 78.41111111111111
           }
         }
       },
@@ -283,65 +272,65 @@
     "probed": 3,
     "promoted": 0,
     "failed": 3,
-    "finishedAt": "2026-11-17T21:21:35.755Z",
-    "durationMs": 47161,
+    "finishedAt": "2026-11-17T23:04:49.122Z",
+    "durationMs": 9352,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 104,
-      "retry": 171,
-      "cold": 505,
-      "lowValue": 657,
+      "due": 106,
+      "retry": 170,
+      "cold": 506,
+      "lowValue": 656,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 505,
+        "cold-sample": 506,
         "food-evidence": 11,
-        "low-value": 657
+        "low-value": 656
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T21:20:48.648Z",
-        "lastFinishedAt": "2026-11-17T21:21:03.651Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1794950493651,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T21:21:03.651Z",
-        "lastFinishedAt": "2026-11-17T21:21:18.652Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794950508652,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T21:21:18.652Z",
-        "lastFinishedAt": "2026-11-17T21:21:33.653Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794950523653,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -351,22 +340,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 104,
-      "coldCount": 505,
-      "lowValueCount": 657,
+      "dueCount": 106,
+      "coldCount": 506,
+      "lowValueCount": 656,
       "laneCounts": {
-        "cold-sample": 505,
+        "cold-sample": 506,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 657
+        "low-value": 656
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 171,
+        "retry": 170,
         "needs-website": 824,
-        "cold": 505,
+        "cold": 506,
         "candidate": 622
       },
       "categoryCounts": {
@@ -408,7 +397,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
