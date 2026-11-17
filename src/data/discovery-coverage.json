@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-17T08:32:04.576Z",
+  "generatedAt": "2026-11-17T09:00:52.502Z",
   "run": {
-    "startedAt": "2026-11-17T08:30:41.924Z",
+    "startedAt": "2026-11-17T09:00:08.882Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 120,
-      "retry": 174,
-      "cold": 497,
-      "lowValue": 665,
+      "due": 109,
+      "retry": 173,
+      "cold": 498,
+      "lowValue": 664,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 497,
-        "low-value": 665,
+        "cold-sample": 498,
+        "low-value": 664,
         "food-evidence": 11
       }
     },
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,235 +54,159 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6757875547",
-        "name": "Luna Grill",
+        "key": "san-diego|osm|node|9311519594",
+        "name": "Oi Asian Fusion",
         "category": "restaurant",
-        "website": "https://locations.lunagrill.com/luna-grill-f44656b3fdce",
+        "website": "https://www.oiasianfusionsd.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Luna Grill (cold-sample)",
+          "detail": "Checked 1 page on Oi Asian Fusion (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-15T08:31:28.284Z",
-        "checkedAt": "2026-11-17T08:31:27.234Z"
+        "nextCheckAt": "2027-02-15T09:00:10.728Z",
+        "checkedAt": "2026-11-17T09:00:09.375Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31803078",
-        "name": "Paradise Hills Branch San Diego Public Library",
-        "category": "library",
-        "website": "https://www.sandiego.gov/public-library/locations/paradise-hills-library",
+        "key": "san-diego|osm|way|1416351146",
+        "name": "City Heights Swim Center",
+        "category": "sports-centre",
+        "website": "https://www.sandiego.gov/pools/city-heights-swim-center",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Paradise Hills Branch San Diego Public Library (event-likely)",
+          "detail": "Checked 5 pages on City Heights Swim Center (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:30.820Z",
-        "checkedAt": "2026-11-17T08:31:27.233Z"
+        "nextCheckAt": "2026-12-15T09:00:14.472Z",
+        "checkedAt": "2026-11-17T09:00:09.517Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11111055605",
-        "name": "Tuna Sushi",
-        "category": "restaurant",
-        "website": "https://www.tunasushilemongrove.com/",
+        "key": "san-diego|osm|node|12737932052",
+        "name": "Cafe X: By Any Beans Necessary",
+        "category": "cafe",
+        "website": "https://www.byanybeans.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 429",
-          "statusCode": 429
+          "detail": "HTTP 404",
+          "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-17T08:31:31.003Z",
-        "checkedAt": "2026-11-17T08:31:30.820Z"
+        "nextCheckAt": "2026-12-17T09:00:15.030Z",
+        "checkedAt": "2026-11-17T09:00:14.472Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079111",
-        "name": "Tabac",
-        "category": "bar",
-        "website": "https://www.tabachookah.com/",
+        "key": "san-diego|osm|way|31274621",
+        "name": "San Diego Zoo",
+        "category": "zoo",
+        "website": "https://www.sandiegozoo.org/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Tabac (event-likely)",
+          "detail": "Checked 3 pages on San Diego Zoo (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:32.719Z",
-        "checkedAt": "2026-11-17T08:31:28.285Z"
+        "nextCheckAt": "2026-12-15T09:00:15.877Z",
+        "checkedAt": "2026-11-17T09:00:15.030Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|3804821757",
-        "name": "Urban Bar & Grill",
-        "category": "bar",
-        "website": "https://www.urbanbarandgrill.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Urban Bar & Grill (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:33.878Z",
-        "checkedAt": "2026-11-17T08:31:32.719Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12700512601",
-        "name": "Novo Brazil Brewing",
-        "category": "brewery",
-        "website": "https://www.novobrew.com/locations/mission-valley/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 5 pages on Novo Brazil Brewing (event-likely)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:41.907Z",
-        "checkedAt": "2026-11-17T08:31:31.003Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31842625",
-        "name": "Original 40 Brewing Company",
+        "key": "san-diego|osm|way|1207407694",
+        "name": "LandShark Bar & Grill",
         "category": "observed-venue",
-        "website": "https://original40brewing.com/",
+        "website": "https://www.margaritavilleresorts.com/margaritaville-hotel-san-diego/eat-drink/landshark-bar-grill",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-evidence",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Original 40 Brewing Company (event-evidence)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:42.138Z",
-        "checkedAt": "2026-11-17T08:31:33.878Z"
+        "nextCheckAt": "2026-12-17T09:00:16.129Z",
+        "checkedAt": "2026-11-17T09:00:15.877Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1894048123",
-        "name": "Bencotto",
+        "key": "san-diego|registry|place_whiskey-girl_f883db9e07",
+        "name": "Whiskey Girl",
         "category": "observed-venue",
-        "website": "https://www.lovebencotto.com/",
+        "website": "https://whiskeygirl.com/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Bencotto (exploratory)",
+          "detail": "Checked 5 pages on Whiskey Girl (exploratory)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:43.667Z",
-        "checkedAt": "2026-11-17T08:31:41.907Z"
+        "nextCheckAt": "2026-12-15T09:00:17.323Z",
+        "checkedAt": "2026-11-17T09:00:16.129Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31806619",
-        "name": "RustiCucina",
-        "category": "observed-venue",
-        "website": "https://www.rusticucina.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on RustiCucina (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:43.944Z",
-        "checkedAt": "2026-11-17T08:31:42.138Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596322512",
-        "name": "Dunedin New Zealand Eats",
-        "category": "observed-venue",
-        "website": "https://dnp-sd.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Dunedin New Zealand Eats (exploratory)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:45.022Z",
-        "checkedAt": "2026-11-17T08:31:43.667Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079083",
-        "name": "Gaslamp Tavern",
-        "category": "observed-venue",
-        "website": "https://www.gaslamptavern.com/",
-        "attempts": 5,
-        "status": "retry",
-        "probeLane": "event-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Gaslamp Tavern (event-evidence)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:31:47.436Z",
-        "checkedAt": "2026-11-17T08:31:43.945Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|3890027002",
-        "name": "Fluxx",
+        "key": "san-diego|osm|node|9215079085",
+        "name": "Onyx Room Nightclub",
         "category": "nightclub",
-        "website": "https://www.fluxxsd.com/",
+        "website": "https://www.onyxroom.com/",
         "attempts": 5,
         "status": "retry",
         "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on Fluxx (event-likely)",
+          "detail": "Checked 3 pages on Onyx Room Nightclub (event-likely)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-15T08:32:04.528Z",
-        "checkedAt": "2026-11-17T08:31:45.022Z"
+        "nextCheckAt": "2026-12-15T09:00:40.496Z",
+        "checkedAt": "2026-11-17T09:00:10.728Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1075932489",
+        "name": "Rady Shell",
+        "category": "theatre",
+        "website": "https://www.theshell.org/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 7 pages on Rady Shell (event-likely)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-15T09:00:52.436Z",
+        "checkedAt": "2026-11-17T09:00:17.323Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -305,11 +218,11 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 5,
       "cold-sample": 1,
+      "event-likely": 4,
       "low-value": 1,
-      "event-evidence": 2,
-      "exploratory": 3
+      "event-evidence": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -320,23 +233,18 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "paradise-hills": 1,
-      "poway": 1,
-      "east-village": 2,
-      "lemon-grove": 1,
-      "university-heights": 1,
+      "carmel-mountain-ranch": 1,
+      "teralta": 1,
       "cortez-hill": 2,
-      "city-heights": 1,
-      "bankers-hill": 1,
+      "barrio-logan": 1,
       "hillcrest": 1,
-      "north-park": 1
+      "east-village": 2
     },
     "probeGroupCounts": {
-      "south-bay": 1,
       "north-inland": 1,
-      "central-core": 5,
-      "east-county": 1,
-      "uptown-midcity": 4
+      "uptown-midcity": 2,
+      "central-core": 4,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -462,68 +370,68 @@
         "groups": {}
       }
     },
-    "probed": 12,
+    "probed": 8,
     "promoted": 0,
-    "failed": 12,
-    "finishedAt": "2026-11-17T08:32:04.529Z",
-    "durationMs": 82605,
+    "failed": 8,
+    "finishedAt": "2026-11-17T09:00:52.451Z",
+    "durationMs": 43569,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 109,
-      "retry": 173,
-      "cold": 498,
-      "lowValue": 664,
+      "due": 102,
+      "retry": 172,
+      "cold": 499,
+      "lowValue": 663,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 498,
-        "low-value": 664,
+        "cold-sample": 499,
+        "low-value": 663,
         "food-evidence": 11
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T08:30:41.990Z",
-        "lastFinishedAt": "2026-11-17T08:30:56.993Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1794904286993,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T08:30:56.994Z",
-        "lastFinishedAt": "2026-11-17T08:31:11.994Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1794904301994,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-17T08:31:11.994Z",
-        "lastFinishedAt": "2026-11-17T08:31:26.995Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1794904316995,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -533,22 +441,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 109,
-      "coldCount": 498,
-      "lowValueCount": 664,
+      "dueCount": 102,
+      "coldCount": 499,
+      "lowValueCount": 663,
       "laneCounts": {
-        "cold-sample": 498,
+        "cold-sample": 499,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 664
+        "low-value": 663
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 173,
+        "retry": 172,
         "needs-website": 824,
-        "cold": 498,
+        "cold": 499,
         "candidate": 627
       },
       "categoryCounts": {
@@ -590,7 +498,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
