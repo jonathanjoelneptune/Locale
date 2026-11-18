@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-18T20:55:08.903Z",
+  "generatedAt": "2026-11-18T22:16:01.308Z",
   "run": {
-    "startedAt": "2026-11-18T20:54:47.900Z",
+    "startedAt": "2026-11-18T22:15:53.037Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 110,
       "retry": 170,
-      "cold": 509,
-      "lowValue": 653,
+      "cold": 510,
+      "lowValue": 652,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 509,
+        "cold-sample": 510,
         "food-evidence": 11,
-        "low-value": 653
+        "low-value": 652
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "rancho-bernardo",
-        "name": "Rancho Bernardo",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.08,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13194703144",
-        "name": "Paris Sandwiches",
+        "key": "san-diego|osm|node|12356857923",
+        "name": "Pista House",
         "category": "restaurant",
-        "website": "https://www.orderparissandwiches.com/",
+        "website": "https://www.pistahousesd.com/",
         "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Paris Sandwiches (low-value)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-02T20:55:07.246Z",
-        "checkedAt": "2026-11-18T20:55:05.096Z"
+        "nextCheckAt": "2026-11-21T22:15:53.555Z",
+        "checkedAt": "2026-11-18T22:15:53.385Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6722517112",
-        "name": "The Nautilus Tavern",
+        "key": "san-diego|osm|node|11168785338",
+        "name": "Wild Thyme Bar & Grill",
         "category": "restaurant",
-        "website": "https://nautilustavern.com/",
-        "attempts": 2,
+        "website": "https://wildthymesd.com/",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on The Nautilus Tavern (cold-sample)",
+          "detail": "Checked 1 page on Wild Thyme Bar & Grill (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-16T20:55:08.868Z",
-        "checkedAt": "2026-11-18T20:55:05.095Z"
+        "nextCheckAt": "2026-12-18T22:16:01.264Z",
+        "checkedAt": "2026-11-18T22:15:53.344Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,11 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "windansea": 1,
+      "el-cerrito": 1,
       "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "uptown-midcity": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -227,10 +217,10 @@
             "passing": 0,
             "zeroEventAreas": 3,
             "passRate": 0,
-            "averageGapScore": 65.21052631578948,
-            "averageEvents": 41.10526315789474,
-            "averageVenues": 8,
-            "deficitScore": 79.40263157894738
+            "averageGapScore": 65.26315789473684,
+            "averageEvents": 40.8421052631579,
+            "averageVenues": 7.947368421052632,
+            "deficitScore": 79.42105263157895
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -260,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-18T20:55:08.871Z",
-    "durationMs": 20971,
+    "finishedAt": "2026-11-18T22:16:01.266Z",
+    "durationMs": 8229,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 109,
-      "retry": 170,
+      "retry": 171,
       "cold": 510,
       "lowValue": 652,
       "qualified": 20,
@@ -283,42 +273,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-18T20:54:47.986Z",
-        "lastFinishedAt": "2026-11-18T20:54:48.667Z",
-        "lastLatencyMs": 681,
-        "cooldownUntil": 1795035318667,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-18T20:54:48.667Z",
-        "lastFinishedAt": "2026-11-18T20:55:03.667Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795035333667,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-18T20:55:03.667Z",
-        "lastFinishedAt": "2026-11-18T20:55:04.936Z",
-        "lastLatencyMs": 1269,
-        "cooldownUntil": 1795035334936,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -341,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 170,
+        "retry": 171,
         "needs-website": 824,
         "cold": 510,
-        "candidate": 618
+        "candidate": 617
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -385,7 +375,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
