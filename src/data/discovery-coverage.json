@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-18T09:01:25.332Z",
+  "generatedAt": "2026-11-18T14:00:01.391Z",
   "run": {
-    "startedAt": "2026-11-18T09:01:13.287Z",
+    "startedAt": "2026-11-18T13:59:39.798Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 105,
+      "due": 107,
       "retry": 169,
       "cold": 508,
       "lowValue": 654,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31808652",
-        "name": "Diamond Palace",
-        "category": "restaurant",
-        "website": "https://www.diamondpalaceusa.com/",
-        "attempts": 2,
+        "key": "san-diego|osm|way|498782115",
+        "name": "The Whiskey House",
+        "category": "observed-venue",
+        "website": "https://www.thewhiskeyhousesd.com/",
+        "attempts": 7,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "exploratory",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-02T09:01:13.811Z",
-        "checkedAt": "2026-11-18T09:01:13.574Z"
+        "nextCheckAt": "2026-11-25T13:59:57.890Z",
+        "checkedAt": "2026-11-18T13:59:57.086Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1375126832",
-        "name": "Ciccia Osteria",
+        "key": "san-diego|osm|node|13125764860",
+        "name": "Filippi's Pizza Grotto Jamul",
         "category": "restaurant",
-        "website": "https://cicciasandiego.com/",
+        "website": "https://realcheesepizza.com/jamul",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Filippi's Pizza Grotto Jamul (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-02T13:59:58.971Z",
+        "checkedAt": "2026-11-18T13:59:57.890Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1479849503",
+        "name": "Doggos Gus",
+        "category": "restaurant",
+        "website": "https://doggosgus.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Ciccia Osteria (cold-sample)",
+          "detail": "Checked 1 page on Doggos Gus (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-16T09:01:25.290Z",
-        "checkedAt": "2026-11-18T09:01:13.538Z"
+        "nextCheckAt": "2027-02-16T14:00:01.334Z",
+        "checkedAt": "2026-11-18T13:59:57.084Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -105,6 +135,7 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "cold-sample": 1,
+      "exploratory": 1,
       "low-value": 1
     },
     "probeLaneTargets": {
@@ -117,11 +148,13 @@
     },
     "probeAreaCounts": {
       "barrio-logan": 1,
-      "colina-del-sol": 1
+      "east-village": 1,
+      "jamul": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
-      "uptown-midcity": 1
+      "central-core": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -247,68 +280,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-18T09:01:25.292Z",
-    "durationMs": 12005,
+    "failed": 3,
+    "finishedAt": "2026-11-18T14:00:01.347Z",
+    "durationMs": 21549,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 104,
+      "due": 105,
       "retry": 169,
-      "cold": 508,
-      "lowValue": 654,
+      "cold": 509,
+      "lowValue": 653,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 508,
+        "cold-sample": 509,
         "food-evidence": 11,
-        "low-value": 654
+        "low-value": 653
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-18T13:59:39.996Z",
+        "lastFinishedAt": "2026-11-18T13:59:40.850Z",
+        "lastLatencyMs": 854,
+        "cooldownUntil": 1795010410850,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-18T13:59:40.850Z",
+        "lastFinishedAt": "2026-11-18T13:59:55.851Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795010425851,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-18T13:59:55.851Z",
+        "lastFinishedAt": "2026-11-18T13:59:56.857Z",
+        "lastLatencyMs": 1006,
+        "cooldownUntil": 1795010426857,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +351,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 104,
-      "coldCount": 508,
-      "lowValueCount": 654,
+      "dueCount": 105,
+      "coldCount": 509,
+      "lowValueCount": 653,
       "laneCounts": {
-        "cold-sample": 508,
+        "cold-sample": 509,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 654
+        "low-value": 653
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 169,
         "needs-website": 824,
-        "cold": 508,
-        "candidate": 621
+        "cold": 509,
+        "candidate": 620
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +408,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
