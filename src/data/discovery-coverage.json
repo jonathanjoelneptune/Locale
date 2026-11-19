@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-19T17:15:52.785Z",
+  "generatedAt": "2026-11-19T21:00:07.105Z",
   "run": {
-    "startedAt": "2026-11-19T17:15:52.045Z",
+    "startedAt": "2026-11-19T20:59:34.021Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 107,
+      "due": 108,
       "retry": 173,
       "cold": 513,
       "lowValue": 649,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,17 +65,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4933000862",
-        "name": "Crab Hut",
+        "key": "san-diego|osm|node|12618842901",
+        "name": "Coop's West Texas BBQ",
         "category": "restaurant",
-        "website": "https://www.crabhutrestaurant.com/",
-        "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "website": "https://www.coopsbbq.com/",
+        "attempts": 3,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,15 +83,15 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-03T17:15:52.698Z",
-        "checkedAt": "2026-11-19T17:15:52.406Z"
+        "nextCheckAt": "2026-12-19T21:00:05.985Z",
+        "checkedAt": "2026-11-19T21:00:05.669Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12397642459",
+        "key": "san-diego|osm|way|940229190",
         "name": "Denny's",
         "category": "restaurant",
-        "website": "https://locations.dennys.com/CA/SAN-DIEGO/200891",
+        "website": "https://locations.dennys.com/CA/SAN-YSIDRO/248745",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
@@ -91,8 +102,8 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-17T17:15:52.728Z",
-        "checkedAt": "2026-11-19T17:15:52.361Z"
+        "nextCheckAt": "2027-02-17T21:00:07.061Z",
+        "checkedAt": "2026-11-19T21:00:05.667Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "otay-mesa-nestor": 1,
-      "mira-mesa": 1
+      "san-ysidro": 1,
+      "lemon-grove": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
-      "north-central": 1
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -163,8 +174,8 @@
             "zeroEventAreas": 1,
             "passRate": 0,
             "averageGapScore": 61.27272727272727,
-            "averageEvents": 22.90909090909091,
-            "averageVenues": 20.272727272727273,
+            "averageEvents": 22,
+            "averageVenues": 19.363636363636363,
             "deficitScore": 77.35454545454544
           },
           "north-county-coast": {
@@ -218,7 +229,7 @@
             "zeroEventAreas": 4,
             "passRate": 0,
             "averageGapScore": 68.47368421052632,
-            "averageEvents": 35.473684210526315,
+            "averageEvents": 34.8421052631579,
             "averageVenues": 7.2105263157894735,
             "deficitScore": 81.07105263157895
           },
@@ -250,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-19T17:15:52.730Z",
-    "durationMs": 685,
+    "finishedAt": "2026-11-19T21:00:07.063Z",
+    "durationMs": 33042,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 106,
-      "retry": 173,
-      "cold": 513,
-      "lowValue": 649,
+      "due": 107,
+      "retry": 172,
+      "cold": 514,
+      "lowValue": 648,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 513,
+        "cold-sample": 514,
         "food-evidence": 11,
-        "low-value": 649
+        "low-value": 648
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-19T20:59:34.097Z",
+        "lastFinishedAt": "2026-11-19T20:59:49.100Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795122019100,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-19T20:59:49.100Z",
+        "lastFinishedAt": "2026-11-19T21:00:04.100Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795122034100,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-19T21:00:04.100Z",
+        "lastFinishedAt": "2026-11-19T21:00:05.472Z",
+        "lastLatencyMs": 1372,
+        "cooldownUntil": 1795122035472,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +329,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 106,
-      "coldCount": 513,
-      "lowValueCount": 649,
+      "dueCount": 107,
+      "coldCount": 514,
+      "lowValueCount": 648,
       "laneCounts": {
-        "cold-sample": 513,
+        "cold-sample": 514,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 649
+        "low-value": 648
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 173,
+        "retry": 172,
         "needs-website": 824,
-        "cold": 513,
+        "cold": 514,
         "candidate": 612
       },
       "categoryCounts": {
@@ -375,7 +386,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
