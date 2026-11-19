@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-19T22:23:08.681Z",
+  "generatedAt": "2026-11-19T23:36:38.708Z",
   "run": {
-    "startedAt": "2026-11-19T22:23:07.873Z",
+    "startedAt": "2026-11-19T23:36:37.302Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 108,
-      "retry": 172,
-      "cold": 514,
-      "lowValue": 648,
+      "retry": 173,
+      "cold": 513,
+      "lowValue": 649,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 514,
+        "cold-sample": 513,
         "food-evidence": 11,
-        "low-value": 648
+        "low-value": 649
       }
     },
     "seededFromRegistry": 0,
@@ -58,10 +58,10 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13765513610",
-        "name": "Golden Chopsticks",
+        "key": "san-diego|osm|node|4933000877",
+        "name": "Isshido Ramen",
         "category": "restaurant",
-        "website": "https://www.goldenchopsticks.org/",
+        "website": "https://isshido-ramen.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
@@ -72,27 +72,27 @@
           "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-19T22:23:08.491Z",
-        "checkedAt": "2026-11-19T22:23:08.088Z"
+        "nextCheckAt": "2026-12-19T23:36:38.112Z",
+        "checkedAt": "2026-11-19T23:36:37.597Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|218923462",
-        "name": "Jalisco Cafe",
+        "key": "san-diego|osm|node|596836707",
+        "name": "American Pizza Manufacturing",
         "category": "restaurant",
-        "website": "http://www.jaliscocafe.com/",
+        "website": "https://www.americanpizzamfg.com/",
         "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on American Pizza Manufacturing (cold-sample)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-03T22:23:08.649Z",
-        "checkedAt": "2026-11-19T22:23:08.062Z"
+        "nextCheckAt": "2027-02-17T23:36:38.662Z",
+        "checkedAt": "2026-11-19T23:36:37.561Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "otay-mesa-nestor": 1,
+      "windansea": 1,
       "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
-      "north-central": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,8 +249,8 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-19T22:23:08.651Z",
-    "durationMs": 778,
+    "finishedAt": "2026-11-19T23:36:38.664Z",
+    "durationMs": 1362,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
