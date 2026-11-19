@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-19T21:00:07.105Z",
+  "generatedAt": "2026-11-19T22:23:08.681Z",
   "run": {
-    "startedAt": "2026-11-19T20:59:34.021Z",
+    "startedAt": "2026-11-19T22:23:07.873Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 108,
-      "retry": 173,
-      "cold": 513,
-      "lowValue": 649,
+      "retry": 172,
+      "cold": 514,
+      "lowValue": 648,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 513,
+        "cold-sample": 514,
         "food-evidence": 11,
-        "low-value": 649
+        "low-value": 648
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "poway",
-        "name": "Poway",
-        "group": "north-inland",
-        "gapScore": 100,
-        "equityPriority": 204.32,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,17 +54,36 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12618842901",
-        "name": "Coop's West Texas BBQ",
+        "key": "san-diego|osm|node|13765513610",
+        "name": "Golden Chopsticks",
         "category": "restaurant",
-        "website": "https://www.coopsbbq.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "website": "https://www.goldenchopsticks.org/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 404",
+          "statusCode": 404
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-19T22:23:08.491Z",
+        "checkedAt": "2026-11-19T22:23:08.088Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|218923462",
+        "name": "Jalisco Cafe",
+        "category": "restaurant",
+        "website": "http://www.jaliscocafe.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -83,27 +91,8 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-19T21:00:05.985Z",
-        "checkedAt": "2026-11-19T21:00:05.669Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|940229190",
-        "name": "Denny's",
-        "category": "restaurant",
-        "website": "https://locations.dennys.com/CA/SAN-YSIDRO/248745",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Denny's (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-17T21:00:07.061Z",
-        "checkedAt": "2026-11-19T21:00:05.667Z"
+        "nextCheckAt": "2026-12-03T22:23:08.649Z",
+        "checkedAt": "2026-11-19T22:23:08.062Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "san-ysidro": 1,
-      "lemon-grove": 1
+      "otay-mesa-nestor": 1,
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
       "south-bay": 1,
-      "east-county": 1
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -174,8 +163,8 @@
             "zeroEventAreas": 1,
             "passRate": 0,
             "averageGapScore": 61.27272727272727,
-            "averageEvents": 22,
-            "averageVenues": 19.363636363636363,
+            "averageEvents": 21.272727272727273,
+            "averageVenues": 19,
             "deficitScore": 77.35454545454544
           },
           "north-county-coast": {
@@ -228,10 +217,10 @@
             "passing": 0,
             "zeroEventAreas": 4,
             "passRate": 0,
-            "averageGapScore": 68.47368421052632,
-            "averageEvents": 34.8421052631579,
-            "averageVenues": 7.2105263157894735,
-            "deficitScore": 81.07105263157895
+            "averageGapScore": 68.52631578947368,
+            "averageEvents": 34.63157894736842,
+            "averageVenues": 7,
+            "deficitScore": 81.08947368421053
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -261,65 +250,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-19T21:00:07.063Z",
-    "durationMs": 33042,
+    "finishedAt": "2026-11-19T22:23:08.651Z",
+    "durationMs": 778,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 107,
-      "retry": 172,
-      "cold": 514,
-      "lowValue": 648,
+      "retry": 173,
+      "cold": 513,
+      "lowValue": 649,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 514,
+        "cold-sample": 513,
         "food-evidence": 11,
-        "low-value": 648
+        "low-value": 649
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-19T20:59:34.097Z",
-        "lastFinishedAt": "2026-11-19T20:59:49.100Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795122019100,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-19T20:59:49.100Z",
-        "lastFinishedAt": "2026-11-19T21:00:04.100Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795122034100,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-19T21:00:04.100Z",
-        "lastFinishedAt": "2026-11-19T21:00:05.472Z",
-        "lastLatencyMs": 1372,
-        "cooldownUntil": 1795122035472,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -330,21 +319,21 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 107,
-      "coldCount": 514,
-      "lowValueCount": 648,
+      "coldCount": 513,
+      "lowValueCount": 649,
       "laneCounts": {
-        "cold-sample": 514,
+        "cold-sample": 513,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 648
+        "low-value": 649
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 172,
+        "retry": 173,
         "needs-website": 824,
-        "cold": 514,
+        "cold": 513,
         "candidate": 612
       },
       "categoryCounts": {
@@ -386,7 +375,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
