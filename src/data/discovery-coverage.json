@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-19T23:36:38.708Z",
+  "generatedAt": "2026-11-19T23:45:01.924Z",
   "run": {
-    "startedAt": "2026-11-19T23:36:37.302Z",
+    "startedAt": "2026-11-19T23:44:40.512Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 108,
+      "due": 107,
       "retry": 173,
       "cold": 513,
       "lowValue": 649,
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|4933000877",
-        "name": "Isshido Ramen",
+        "key": "san-diego|osm|node|12967158886",
+        "name": "Max's restaurant",
         "category": "restaurant",
-        "website": "https://isshido-ramen.com/",
+        "website": "https://www.maxsrestaurantna.com/",
         "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-19T23:36:38.112Z",
-        "checkedAt": "2026-11-19T23:36:37.597Z"
+        "nextCheckAt": "2026-12-03T23:44:41.147Z",
+        "checkedAt": "2026-11-19T23:44:40.886Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596836707",
-        "name": "American Pizza Manufacturing",
+        "key": "san-diego|osm|node|5026707146",
+        "name": "Caribbean Taste",
         "category": "restaurant",
-        "website": "https://www.americanpizzamfg.com/",
+        "website": "https://caribbeantaste.top/",
         "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on American Pizza Manufacturing (cold-sample)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-17T23:36:38.662Z",
-        "checkedAt": "2026-11-19T23:36:37.561Z"
+        "nextCheckAt": "2026-11-21T23:45:01.872Z",
+        "checkedAt": "2026-11-19T23:44:40.839Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "windansea": 1,
+      "encanto": 1,
       "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "south-bay": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -216,10 +217,10 @@
             "passing": 0,
             "zeroEventAreas": 4,
             "passRate": 0,
-            "averageGapScore": 68.52631578947368,
-            "averageEvents": 34.63157894736842,
-            "averageVenues": 7,
-            "deficitScore": 81.08947368421053
+            "averageGapScore": 68.57894736842105,
+            "averageEvents": 34.473684210526315,
+            "averageVenues": 6.842105263157895,
+            "deficitScore": 81.10789473684211
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -249,24 +250,24 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-19T23:36:38.664Z",
-    "durationMs": 1362,
+    "finishedAt": "2026-11-19T23:45:01.874Z",
+    "durationMs": 21362,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 107,
-      "retry": 173,
-      "cold": 513,
-      "lowValue": 649,
+      "due": 106,
+      "retry": 174,
+      "cold": 512,
+      "lowValue": 650,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 513,
+        "cold-sample": 512,
         "food-evidence": 11,
-        "low-value": 649
+        "low-value": 650
       }
     },
     "overpassEndpoints": [
@@ -317,22 +318,22 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 107,
-      "coldCount": 513,
-      "lowValueCount": 649,
+      "dueCount": 106,
+      "coldCount": 512,
+      "lowValueCount": 650,
       "laneCounts": {
-        "cold-sample": 513,
+        "cold-sample": 512,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 649
+        "low-value": 650
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 173,
+        "retry": 174,
         "needs-website": 824,
-        "cold": 513,
+        "cold": 512,
         "candidate": 612
       },
       "categoryCounts": {
