@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-19T00:12:49.218Z",
+  "generatedAt": "2026-11-19T03:24:36.570Z",
   "run": {
-    "startedAt": "2026-11-19T00:12:37.811Z",
+    "startedAt": "2026-11-19T03:23:48.890Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 109,
       "retry": 171,
-      "cold": 510,
-      "lowValue": 652,
+      "cold": 511,
+      "lowValue": 651,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 510,
+        "cold-sample": 511,
         "food-evidence": 11,
-        "low-value": 652
+        "low-value": 651
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "poway",
+        "name": "Poway",
+        "group": "north-inland",
+        "gapScore": 100,
+        "equityPriority": 204.32,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13628848196",
-        "name": "Fonda del Barrio",
+        "key": "san-diego|osm|node|13765513607",
+        "name": "Sayulitas",
         "category": "restaurant",
-        "website": "https://fondadelbarrio.com/",
+        "website": "https://sayulitaseats.com/sayulitasmexicanfoodmiramesa",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-22T03:24:34.663Z",
+        "checkedAt": "2026-11-19T03:24:34.378Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|14125740832",
+        "name": "Hudson & Nash",
+        "category": "restaurant",
+        "website": "https://www.hudsonandnashsd.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Fonda del Barrio (cold-sample)",
+          "detail": "Checked 6 pages on Hudson & Nash (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-17T00:12:41.245Z",
-        "checkedAt": "2026-11-19T00:12:38.008Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12239476169",
-        "name": "Rakiraki Ramen",
-        "category": "restaurant",
-        "website": "https://rakirakiramen.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Rakiraki Ramen (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-03T00:12:49.186Z",
-        "checkedAt": "2026-11-19T00:12:38.038Z"
+        "nextCheckAt": "2027-02-17T03:24:36.534Z",
+        "checkedAt": "2026-11-19T03:24:34.377Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -163,7 +174,7 @@
             "zeroEventAreas": 1,
             "passRate": 0,
             "averageGapScore": 59.90909090909091,
-            "averageEvents": 41.09090909090909,
+            "averageEvents": 40.45454545454545,
             "averageVenues": 21.272727272727273,
             "deficitScore": 76.87727272727273
           },
@@ -217,10 +228,10 @@
             "passing": 0,
             "zeroEventAreas": 3,
             "passRate": 0,
-            "averageGapScore": 65.26315789473684,
-            "averageEvents": 40.8421052631579,
-            "averageVenues": 7.947368421052632,
-            "deficitScore": 79.42105263157895
+            "averageGapScore": 65.3157894736842,
+            "averageEvents": 40.421052631578945,
+            "averageVenues": 7.7894736842105265,
+            "deficitScore": 79.43947368421053
           },
           "uptown-midcity": {
             "group": "uptown-midcity",
@@ -250,13 +261,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-19T00:12:49.188Z",
-    "durationMs": 11377,
+    "finishedAt": "2026-11-19T03:24:36.537Z",
+    "durationMs": 47647,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 108,
-      "retry": 171,
+      "retry": 172,
       "cold": 511,
       "lowValue": 651,
       "qualified": 20,
@@ -273,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-19T03:23:49.219Z",
+        "lastFinishedAt": "2026-11-19T03:24:04.222Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795058674222,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-19T03:24:04.222Z",
+        "lastFinishedAt": "2026-11-19T03:24:19.222Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795058689222,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-19T03:24:19.222Z",
+        "lastFinishedAt": "2026-11-19T03:24:34.222Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795058704222,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -331,10 +342,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 171,
+        "retry": 172,
         "needs-website": 824,
         "cold": 511,
-        "candidate": 616
+        "candidate": 615
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +386,7 @@
         "tracked": 11,
         "completed": 7,
         "failed": 4,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
