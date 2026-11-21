@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-21T09:47:10.626Z",
+  "generatedAt": "2026-11-21T11:37:10.114Z",
   "run": {
-    "startedAt": "2026-11-21T09:46:21.043Z",
+    "startedAt": "2026-11-21T11:37:08.389Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
+      "due": 99,
       "retry": 178,
-      "cold": 520,
-      "lowValue": 642,
+      "cold": 521,
+      "lowValue": 641,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 520,
+        "cold-sample": 521,
         "food-evidence": 11,
-        "low-value": 642
+        "low-value": 641
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,102 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596812044",
-        "name": "Wet Stone Wine Bar & Cafe",
+        "key": "san-diego|osm|node|365317542",
+        "name": "Numbers",
+        "category": "nightclub",
+        "website": "https://www.numberssd.com/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T11:37:09.115Z",
+        "checkedAt": "2026-11-21T11:37:08.592Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5430484523",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopsd.com/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T11:37:09.205Z",
+        "checkedAt": "2026-11-21T11:37:08.564Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|13971623076",
+        "name": "CAVA",
         "category": "restaurant",
-        "website": "https://www.wetstonewinebar.com/",
+        "website": "https://cava.com/locations/la-jolla-ca",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-24T11:37:09.603Z",
+        "checkedAt": "2026-11-21T11:37:09.115Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1448557328",
+        "name": "Gossip Grill",
+        "category": "observed-venue",
+        "website": "http://www.thegossipgrill.com/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T11:37:09.771Z",
+        "checkedAt": "2026-11-21T11:37:09.603Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12050133668",
+        "name": "Camellia Rd Tea Bar",
+        "category": "cafe",
+        "website": "https://www.camelliard.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Wet Stone Wine Bar & Cafe (cold-sample)",
+          "detail": "Checked 1 page on Camellia Rd Tea Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T09:47:08.214Z",
-        "checkedAt": "2026-11-21T09:47:06.326Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12849736050",
-        "name": "Candor",
-        "category": "restaurant",
-        "website": "https://dinecandor.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Candor (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-05T09:47:10.584Z",
-        "checkedAt": "2026-11-21T09:47:06.328Z"
+        "nextCheckAt": "2026-12-21T11:37:10.083Z",
+        "checkedAt": "2026-11-21T11:37:09.205Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,8 +161,10 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
+      "low-value": 1,
       "cold-sample": 1,
-      "low-value": 1
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -127,12 +175,15 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "cortez-hill": 1,
-      "la-jolla": 1
+      "mission-valley": 1,
+      "hillcrest": 2,
+      "university-city-utc": 1,
+      "convoy": 1
     },
     "probeGroupCounts": {
-      "central-core": 1,
-      "north-central": 1
+      "central-west": 1,
+      "uptown-midcity": 2,
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -142,7 +193,7 @@
         "zeroEventAreas": 163,
         "zeroEventRate": 0.867,
         "groupPassRateSpread": 0,
-        "groupGapSpread": 13.9,
+        "groupGapSpread": 14.2,
         "equityScore": 22,
         "groups": {
           "south-bay": {
@@ -151,10 +202,10 @@
             "passing": 0,
             "zeroEventAreas": 28,
             "passRate": 0,
-            "averageGapScore": 99.96551724137932,
+            "averageGapScore": 99.93103448275862,
             "averageEvents": 0.034482758620689655,
             "averageVenues": 0.034482758620689655,
-            "deficitScore": 99.64310344827587
+            "deficitScore": 99.63103448275862
           },
           "north-central": {
             "group": "north-central",
@@ -195,10 +246,10 @@
             "passing": 0,
             "zeroEventAreas": 15,
             "passRate": 0,
-            "averageGapScore": 86.10526315789474,
+            "averageGapScore": 85.78947368421052,
             "averageEvents": 29.473684210526315,
             "averageVenues": 2.0526315789473686,
-            "deficitScore": 93.03157894736842
+            "deficitScore": 92.92105263157895
           },
           "central-core": {
             "group": "central-core",
@@ -258,16 +309,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 5,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-21T09:47:10.586Z",
-    "durationMs": 49543,
+    "failed": 5,
+    "finishedAt": "2026-11-21T11:37:10.085Z",
+    "durationMs": 1696,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
-      "retry": 178,
+      "due": 95,
+      "retry": 179,
       "cold": 521,
       "lowValue": 641,
       "qualified": 20,
@@ -284,42 +335,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T09:46:21.123Z",
-        "lastFinishedAt": "2026-11-21T09:46:36.126Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795254426126,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T09:46:36.126Z",
-        "lastFinishedAt": "2026-11-21T09:46:51.127Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795254441127,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T09:46:51.127Z",
-        "lastFinishedAt": "2026-11-21T09:47:06.127Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795254456127,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,7 +380,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 96,
+      "dueCount": 95,
       "coldCount": 521,
       "lowValueCount": 641,
       "laneCounts": {
@@ -342,10 +393,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 178,
+        "retry": 179,
         "needs-website": 824,
         "cold": 521,
-        "candidate": 599
+        "candidate": 598
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +437,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
