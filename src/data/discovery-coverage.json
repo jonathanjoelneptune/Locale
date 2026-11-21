@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-21T17:30:55.577Z",
+  "generatedAt": "2026-11-21T19:03:29.203Z",
   "run": {
-    "startedAt": "2026-11-21T17:30:36.481Z",
+    "startedAt": "2026-11-21T19:03:24.847Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
-      "retry": 179,
+      "due": 96,
+      "retry": 180,
       "cold": 522,
       "lowValue": 640,
       "qualified": 20,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 502 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,64 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|377357190",
-        "name": "Tivoli Bar and Grill",
-        "category": "bar",
-        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
-        "attempts": 11,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T17:30:54.256Z",
-        "checkedAt": "2026-11-21T17:30:54.079Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9409191235",
-        "name": "China Express",
+        "key": "san-diego|osm|node|1363888065",
+        "name": "Aladdin Cafe",
         "category": "restaurant",
-        "website": "https://www.chinaexpresssandiego.com/",
-        "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 429",
-          "statusCode": 429
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-23T17:30:54.496Z",
-        "checkedAt": "2026-11-21T17:30:54.080Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12105361184",
-        "name": "MNGO Dessert & Coffee Bar",
-        "category": "cafe",
-        "website": "https://www.mngocafe.com/",
-        "attempts": 3,
+        "website": "https://aladdincafe.com/",
+        "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on MNGO Dessert & Coffee Bar (cold-sample)",
+          "detail": "Checked 1 page on Aladdin Cafe (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T17:30:55.525Z",
-        "checkedAt": "2026-11-21T17:30:54.256Z"
+        "nextCheckAt": "2027-02-19T19:03:26.857Z",
+        "checkedAt": "2026-11-21T19:03:25.090Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5517976101",
+        "name": "City Tacos Village Taqueria",
+        "category": "restaurant",
+        "website": "https://citytacossd.com/locations-la-mesa",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on City Tacos Village Taqueria (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-05T19:03:29.153Z",
+        "checkedAt": "2026-11-21T19:03:25.056Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -134,7 +104,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -147,13 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "gaslamp": 1,
-      "kearny-mesa": 1,
-      "convoy": 1
+      "la-mesa": 1,
+      "kearny-mesa": 1
     },
     "probeGroupCounts": {
-      "central-core": 1,
-      "north-central": 2
+      "east-county": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -205,10 +173,10 @@
             "passing": 0,
             "zeroEventAreas": 10,
             "passRate": 0,
-            "averageGapScore": 98.66666666666667,
-            "averageEvents": 0.7777777777777778,
+            "averageGapScore": 98.27777777777777,
+            "averageEvents": 0.8333333333333334,
             "averageVenues": 0.6111111111111112,
-            "deficitScore": 95.08888888888889
+            "deficitScore": 94.95277777777777
           },
           "central-west": {
             "group": "central-west",
@@ -217,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 85.78947368421052,
-            "averageEvents": 29.473684210526315,
+            "averageEvents": 29.05263157894737,
             "averageVenues": 2.0526315789473686,
             "deficitScore": 92.92105263157895
           },
@@ -227,10 +195,10 @@
             "passing": 0,
             "zeroEventAreas": 3,
             "passRate": 0,
-            "averageGapScore": 95.9090909090909,
-            "averageEvents": 4.2727272727272725,
+            "averageGapScore": 94.45454545454545,
+            "averageEvents": 4.454545454545454,
             "averageVenues": 2.1818181818181817,
-            "deficitScore": 91.29545454545455
+            "deficitScore": 90.78636363636365
           },
           "north-county-coast": {
             "group": "north-county-coast",
@@ -279,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 2,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-11-21T17:30:55.542Z",
-    "durationMs": 19061,
+    "failed": 2,
+    "finishedAt": "2026-11-21T19:03:29.165Z",
+    "durationMs": 4318,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
+      "due": 95,
       "retry": 180,
-      "cold": 522,
-      "lowValue": 640,
+      "cold": 523,
+      "lowValue": 639,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 522,
+        "cold-sample": 523,
         "food-evidence": 11,
-        "low-value": 640
+        "low-value": 639
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-21T17:30:36.655Z",
-        "lastFinishedAt": "2026-11-21T17:30:37.611Z",
-        "lastLatencyMs": 956,
-        "cooldownUntil": 1795282267611,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass.private.coffee/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-21T17:30:37.611Z",
-        "lastFinishedAt": "2026-11-21T17:30:38.923Z",
-        "lastLatencyMs": 1312,
-        "cooldownUntil": 1795282268923,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T17:30:38.923Z",
-        "lastFinishedAt": "2026-11-21T17:30:53.924Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795282283924,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -350,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 96,
-      "coldCount": 522,
-      "lowValueCount": 640,
+      "dueCount": 95,
+      "coldCount": 523,
+      "lowValueCount": 639,
       "laneCounts": {
-        "cold-sample": 522,
+        "cold-sample": 523,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 640
+        "low-value": 639
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 180,
         "needs-website": 824,
-        "cold": 522,
-        "candidate": 596
+        "cold": 523,
+        "candidate": 595
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -407,7 +375,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
