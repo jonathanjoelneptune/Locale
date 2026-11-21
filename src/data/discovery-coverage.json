@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-21T22:27:08.728Z",
+  "generatedAt": "2026-11-21T23:46:03.122Z",
   "run": {
-    "startedAt": "2026-11-21T22:26:58.787Z",
+    "startedAt": "2026-11-21T23:44:53.746Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
+      "due": 97,
       "retry": 180,
-      "cold": 523,
-      "lowValue": 639,
+      "cold": 524,
+      "lowValue": 638,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 523,
+        "cold-sample": 524,
         "food-evidence": 11,
-        "low-value": 639
+        "low-value": 638
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31804248",
-        "name": "All That Shabu",
+        "key": "san-diego|osm|node|13937529746",
+        "name": "Crispy Chicken n' Tomato",
         "category": "restaurant",
-        "website": "https://www.allthatshabu.com/",
+        "website": "https://clairemont.crispychicken.store/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-22T23:45:25.449Z",
+        "checkedAt": "2026-11-21T23:45:25.311Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|14062451238",
+        "name": "BoujieMana",
+        "category": "restaurant",
+        "website": "https://boujiemana.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on All That Shabu (cold-sample)",
+          "detail": "Checked 3 pages on BoujieMana (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-19T22:26:59.879Z",
-        "checkedAt": "2026-11-21T22:26:59.026Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12552082012",
-        "name": "Cove House",
-        "category": "restaurant",
-        "website": "https://www.covehouselajolla.com/;https://www.covehouselajolla.com/about-us/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Cove House (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-05T22:27:08.681Z",
-        "checkedAt": "2026-11-21T22:26:58.992Z"
+        "nextCheckAt": "2027-02-19T23:46:03.074Z",
+        "checkedAt": "2026-11-21T23:45:25.313Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,8 +127,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla": 1,
-      "mira-mesa": 1
+      "kearny-mesa": 2
     },
     "probeGroupCounts": {
       "north-central": 2
@@ -184,7 +194,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 85.78947368421052,
-            "averageEvents": 28.42105263157895,
+            "averageEvents": 28,
             "averageVenues": 2.0526315789473686,
             "deficitScore": 92.92105263157895
           },
@@ -206,7 +216,7 @@
             "zeroEventAreas": 10,
             "passRate": 0,
             "averageGapScore": 99.83333333333333,
-            "averageEvents": 1,
+            "averageEvents": 0.8333333333333334,
             "averageVenues": 0.16666666666666666,
             "deficitScore": 98.27499999999999
           },
@@ -249,13 +259,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-21T22:27:08.683Z",
-    "durationMs": 9896,
+    "finishedAt": "2026-11-21T23:46:03.076Z",
+    "durationMs": 69330,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 95,
-      "retry": 180,
+      "due": 96,
+      "retry": 181,
       "cold": 524,
       "lowValue": 638,
       "qualified": 20,
@@ -272,42 +282,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-21T23:44:53.805Z",
+        "lastFinishedAt": "2026-11-21T23:45:08.808Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795304738808,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-21T23:45:08.808Z",
+        "lastFinishedAt": "2026-11-21T23:45:23.808Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795304753808,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-21T23:45:23.808Z",
+        "lastFinishedAt": "2026-11-21T23:45:25.153Z",
+        "lastLatencyMs": 1345,
+        "cooldownUntil": 1795304755153,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -317,7 +327,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 95,
+      "dueCount": 96,
       "coldCount": 524,
       "lowValueCount": 638,
       "laneCounts": {
@@ -330,10 +340,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 180,
+        "retry": 181,
         "needs-website": 824,
         "cold": 524,
-        "candidate": 594
+        "candidate": 593
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +384,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
