@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-21T02:45:13.570Z",
+  "generatedAt": "2026-11-21T03:25:28.670Z",
   "run": {
-    "startedAt": "2026-11-21T02:44:38.734Z",
+    "startedAt": "2026-11-21T03:25:25.559Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 99,
+      "due": 100,
       "retry": 177,
-      "cold": 518,
-      "lowValue": 644,
+      "cold": 519,
+      "lowValue": 643,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 518,
+        "cold-sample": 519,
         "food-evidence": 11,
-        "low-value": 644
+        "low-value": 643
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TypeError fetch failed | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,83 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5746612575",
-        "name": "Rosemarie's Buns & Brew",
+        "key": "san-diego|osm|node|9215079082",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopgaslamp.com/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T03:25:26.414Z",
+        "checkedAt": "2026-11-21T03:25:25.976Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9074779446",
+        "name": "TJ Oyster Bar",
         "category": "restaurant",
-        "website": "https://rosemariesburgers.com/",
+        "website": "https://www.tjoyster.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Rosemarie's Buns & Brew (cold-sample)",
+          "detail": "Checked 1 page on TJ Oyster Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T02:44:56.645Z",
-        "checkedAt": "2026-11-21T02:44:55.693Z"
+        "nextCheckAt": "2026-12-21T03:25:27.059Z",
+        "checkedAt": "2026-11-21T03:25:26.107Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168555193",
-        "name": "Bubba’s Smokehouse BBQ",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T03:25:27.293Z",
+        "checkedAt": "2026-11-21T03:25:27.060Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1499576363",
+        "name": "Buga Korean BBQ",
         "category": "restaurant",
-        "website": "https://www.bubbassmokehousebbq.com/",
+        "website": "https://www.bugabbq.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Bubba’s Smokehouse BBQ (low-value)",
+          "detail": "Checked 2 pages on Buga Korean BBQ (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-05T02:45:13.526Z",
-        "checkedAt": "2026-11-21T02:44:55.694Z"
+        "nextCheckAt": "2027-01-05T03:25:28.612Z",
+        "checkedAt": "2026-11-21T03:25:26.414Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,6 +142,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
       "cold-sample": 1,
       "low-value": 1
     },
@@ -127,11 +155,14 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "ocean-beach": 1,
-      "la-jolla": 1
+      "cortez-hill": 1,
+      "bonita": 1,
+      "kearny-mesa": 1,
+      "balboa-park": 1
     },
     "probeGroupCounts": {
-      "central-west": 1,
+      "central-core": 2,
+      "south-bay": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -151,10 +182,10 @@
             "passing": 0,
             "zeroEventAreas": 28,
             "passRate": 0,
-            "averageGapScore": 99.93103448275862,
-            "averageEvents": 0.06896551724137931,
+            "averageGapScore": 99.96551724137932,
+            "averageEvents": 0.034482758620689655,
             "averageVenues": 0.034482758620689655,
-            "deficitScore": 99.63103448275862
+            "deficitScore": 99.64310344827587
           },
           "north-central": {
             "group": "north-central",
@@ -258,68 +289,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 4,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-21T02:45:13.530Z",
-    "durationMs": 34796,
+    "failed": 4,
+    "finishedAt": "2026-11-21T03:25:28.626Z",
+    "durationMs": 3067,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 97,
       "retry": 177,
-      "cold": 519,
-      "lowValue": 643,
+      "cold": 520,
+      "lowValue": 642,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 519,
+        "cold-sample": 520,
         "food-evidence": 11,
-        "low-value": 643
+        "low-value": 642
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "fetch failed",
-        "lastStartedAt": "2026-11-21T02:44:38.863Z",
-        "lastFinishedAt": "2026-11-21T02:44:39.274Z",
-        "lastLatencyMs": 411,
-        "cooldownUntil": 1795229109274,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T02:44:39.274Z",
-        "lastFinishedAt": "2026-11-21T02:44:54.276Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1795229124276,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-21T02:44:54.276Z",
-        "lastFinishedAt": "2026-11-21T02:44:55.566Z",
-        "lastLatencyMs": 1290,
-        "cooldownUntil": 1795229125566,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +360,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 98,
-      "coldCount": 519,
-      "lowValueCount": 643,
+      "dueCount": 97,
+      "coldCount": 520,
+      "lowValueCount": 642,
       "laneCounts": {
-        "cold-sample": 519,
+        "cold-sample": 520,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 643
+        "low-value": 642
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 177,
         "needs-website": 824,
-        "cold": 519,
-        "candidate": 602
+        "cold": 520,
+        "candidate": 601
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +417,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
