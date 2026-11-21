@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-21T11:39:21.538Z",
+  "generatedAt": "2026-11-21T17:30:55.577Z",
   "run": {
-    "startedAt": "2026-11-21T11:39:16.033Z",
+    "startedAt": "2026-11-21T17:30:36.481Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 95,
+      "due": 98,
       "retry": 179,
-      "cold": 521,
-      "lowValue": 641,
+      "cold": 522,
+      "lowValue": 640,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 521,
+        "cold-sample": 522,
         "food-evidence": 11,
-        "low-value": 641
+        "low-value": 640
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: HTTP 502 | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|462068994",
-        "name": "Chin's Szechwan",
-        "category": "restaurant",
-        "website": "https://govisitchins.com/menus.php",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|way|377357190",
+        "name": "Tivoli Bar and Grill",
+        "category": "bar",
+        "website": "https://tivoli-bar-and-grill.restaurants-world.net/",
+        "attempts": 11,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Chin's Szechwan (low-value)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-05T11:39:17.171Z",
-        "checkedAt": "2026-11-21T11:39:16.299Z"
+        "nextCheckAt": "2026-11-28T17:30:54.256Z",
+        "checkedAt": "2026-11-21T17:30:54.079Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12161250230",
-        "name": "Ko-Li Bar",
+        "key": "san-diego|osm|node|9409191235",
+        "name": "China Express",
+        "category": "restaurant",
+        "website": "https://www.chinaexpresssandiego.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-23T17:30:54.496Z",
+        "checkedAt": "2026-11-21T17:30:54.080Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12105361184",
+        "name": "MNGO Dessert & Coffee Bar",
         "category": "cafe",
-        "website": "https://www.sandiegoyakyudori.com/page/ko-li",
+        "website": "https://www.mngocafe.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Ko-Li Bar (cold-sample)",
+          "detail": "Checked 1 page on MNGO Dessert & Coffee Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T11:39:21.500Z",
-        "checkedAt": "2026-11-21T11:39:16.346Z"
+        "nextCheckAt": "2026-12-21T17:30:55.525Z",
+        "checkedAt": "2026-11-21T17:30:54.256Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,6 +134,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 1,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -116,10 +147,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla": 1,
+      "gaslamp": 1,
+      "kearny-mesa": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
+      "central-core": 1,
       "north-central": 2
     },
     "coverageEquity": {
@@ -246,16 +279,16 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-21T11:39:21.504Z",
-    "durationMs": 5471,
+    "failed": 3,
+    "finishedAt": "2026-11-21T17:30:55.542Z",
+    "durationMs": 19061,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 94,
-      "retry": 179,
+      "due": 96,
+      "retry": 180,
       "cold": 522,
       "lowValue": 640,
       "qualified": 20,
@@ -272,42 +305,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-21T17:30:36.655Z",
+        "lastFinishedAt": "2026-11-21T17:30:37.611Z",
+        "lastLatencyMs": 956,
+        "cooldownUntil": 1795282267611,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass.private.coffee/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-21T17:30:37.611Z",
+        "lastFinishedAt": "2026-11-21T17:30:38.923Z",
+        "lastLatencyMs": 1312,
+        "cooldownUntil": 1795282268923,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-21T17:30:38.923Z",
+        "lastFinishedAt": "2026-11-21T17:30:53.924Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795282283924,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -317,7 +350,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 94,
+      "dueCount": 96,
       "coldCount": 522,
       "lowValueCount": 640,
       "laneCounts": {
@@ -330,10 +363,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 179,
+        "retry": 180,
         "needs-website": 824,
         "cold": 522,
-        "candidate": 597
+        "candidate": 596
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +407,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
