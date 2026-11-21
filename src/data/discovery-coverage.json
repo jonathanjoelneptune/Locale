@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-21T03:25:28.670Z",
+  "generatedAt": "2026-11-21T07:43:30.380Z",
   "run": {
-    "startedAt": "2026-11-21T03:25:25.559Z",
+    "startedAt": "2026-11-21T07:43:25.900Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 100,
+      "due": 98,
       "retry": 177,
-      "cold": 519,
-      "lowValue": 643,
+      "cold": 520,
+      "lowValue": 642,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 519,
+        "cold-sample": 520,
         "food-evidence": 11,
-        "low-value": 643
+        "low-value": 642
       }
     },
     "seededFromRegistry": 0,
@@ -58,13 +58,13 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079082",
-        "name": "Coin-Op Game Room",
-        "category": "bar",
-        "website": "https://coinopgaslamp.com/",
-        "attempts": 11,
+        "key": "san-diego|osm|node|6722529197",
+        "name": "Café Milano",
+        "category": "restaurant",
+        "website": "https://www.cafemilanolajolla.com/",
+        "attempts": 1,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -72,65 +72,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-28T03:25:26.414Z",
-        "checkedAt": "2026-11-21T03:25:25.976Z"
+        "nextCheckAt": "2026-11-22T07:43:26.589Z",
+        "checkedAt": "2026-11-21T07:43:26.153Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9074779446",
-        "name": "TJ Oyster Bar",
+        "key": "san-diego|osm|way|350398727",
+        "name": "Serrano's Street Tacos & Bar",
         "category": "restaurant",
-        "website": "https://www.tjoyster.com/",
+        "website": "https://serranostacossd.com/",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on TJ Oyster Bar (cold-sample)",
+          "detail": "Checked 1 page on Serrano's Street Tacos & Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T03:25:27.059Z",
-        "checkedAt": "2026-11-21T03:25:26.107Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|28824905",
-        "name": "Reuben H. Fleet Science Center",
-        "category": "museum",
-        "website": "https://www.rhfleet.org/",
-        "attempts": 11,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T03:25:27.293Z",
-        "checkedAt": "2026-11-21T03:25:27.060Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1499576363",
-        "name": "Buga Korean BBQ",
-        "category": "restaurant",
-        "website": "https://www.bugabbq.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Buga Korean BBQ (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-05T03:25:28.612Z",
-        "checkedAt": "2026-11-21T03:25:26.414Z"
+        "nextCheckAt": "2026-12-21T07:43:30.345Z",
+        "checkedAt": "2026-11-21T07:43:26.120Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -142,7 +104,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
       "cold-sample": 1,
       "low-value": 1
     },
@@ -156,13 +117,10 @@
     },
     "probeAreaCounts": {
       "cortez-hill": 1,
-      "bonita": 1,
-      "kearny-mesa": 1,
-      "balboa-park": 1
+      "la-jolla": 1
     },
     "probeGroupCounts": {
-      "central-core": 2,
-      "south-bay": 1,
+      "central-core": 1,
       "north-central": 1
     },
     "coverageEquity": {
@@ -173,7 +131,7 @@
         "zeroEventAreas": 163,
         "zeroEventRate": 0.867,
         "groupPassRateSpread": 0,
-        "groupGapSpread": 14.2,
+        "groupGapSpread": 13.9,
         "equityScore": 22,
         "groups": {
           "south-bay": {
@@ -226,10 +184,10 @@
             "passing": 0,
             "zeroEventAreas": 15,
             "passRate": 0,
-            "averageGapScore": 85.78947368421052,
+            "averageGapScore": 86.10526315789474,
             "averageEvents": 29.473684210526315,
             "averageVenues": 2.0526315789473686,
-            "deficitScore": 92.92105263157895
+            "deficitScore": 93.03157894736842
           },
           "central-core": {
             "group": "central-core",
@@ -289,16 +247,16 @@
         "groups": {}
       }
     },
-    "probed": 4,
+    "probed": 2,
     "promoted": 0,
-    "failed": 4,
-    "finishedAt": "2026-11-21T03:25:28.626Z",
-    "durationMs": 3067,
+    "failed": 2,
+    "finishedAt": "2026-11-21T07:43:30.347Z",
+    "durationMs": 4447,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 97,
-      "retry": 177,
+      "retry": 178,
       "cold": 520,
       "lowValue": 642,
       "qualified": 20,
@@ -373,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 177,
+        "retry": 178,
         "needs-website": 824,
         "cold": 520,
-        "candidate": 601
+        "candidate": 600
       },
       "categoryCounts": {
         "nightclub": 8,
