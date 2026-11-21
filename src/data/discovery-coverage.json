@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-21T11:37:10.114Z",
+  "generatedAt": "2026-11-21T11:39:21.538Z",
   "run": {
-    "startedAt": "2026-11-21T11:37:08.389Z",
+    "startedAt": "2026-11-21T11:39:16.033Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 99,
-      "retry": 178,
+      "due": 95,
+      "retry": 179,
       "cold": 521,
       "lowValue": 641,
       "qualified": 20,
@@ -58,98 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|365317542",
-        "name": "Numbers",
-        "category": "nightclub",
-        "website": "https://www.numberssd.com/",
-        "attempts": 11,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T11:37:09.115Z",
-        "checkedAt": "2026-11-21T11:37:08.592Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|5430484523",
-        "name": "Coin-Op Game Room",
-        "category": "bar",
-        "website": "https://coinopsd.com/",
-        "attempts": 11,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-28T11:37:09.205Z",
-        "checkedAt": "2026-11-21T11:37:08.564Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|13971623076",
-        "name": "CAVA",
+        "key": "san-diego|osm|node|462068994",
+        "name": "Chin's Szechwan",
         "category": "restaurant",
-        "website": "https://cava.com/locations/la-jolla-ca",
+        "website": "https://govisitchins.com/menus.php",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-11-24T11:37:09.603Z",
-        "checkedAt": "2026-11-21T11:37:09.115Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|1448557328",
-        "name": "Gossip Grill",
-        "category": "observed-venue",
-        "website": "http://www.thegossipgrill.com/",
-        "attempts": 11,
-        "status": "retry",
-        "probeLane": "exploratory",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Chin's Szechwan (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-28T11:37:09.771Z",
-        "checkedAt": "2026-11-21T11:37:09.603Z"
+        "nextCheckAt": "2027-01-05T11:39:17.171Z",
+        "checkedAt": "2026-11-21T11:39:16.299Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12050133668",
-        "name": "Camellia Rd Tea Bar",
+        "key": "san-diego|osm|node|12161250230",
+        "name": "Ko-Li Bar",
         "category": "cafe",
-        "website": "https://www.camelliard.com/",
+        "website": "https://www.sandiegoyakyudori.com/page/ko-li",
         "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Camellia Rd Tea Bar (cold-sample)",
+          "detail": "Checked 1 page on Ko-Li Bar (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-21T11:37:10.083Z",
-        "checkedAt": "2026-11-21T11:37:09.205Z"
+        "nextCheckAt": "2026-12-21T11:39:21.500Z",
+        "checkedAt": "2026-11-21T11:39:16.346Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -161,10 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 2,
       "low-value": 1,
-      "cold-sample": 1,
-      "exploratory": 1
+      "cold-sample": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -175,14 +116,10 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "mission-valley": 1,
-      "hillcrest": 2,
-      "university-city-utc": 1,
+      "la-jolla": 1,
       "convoy": 1
     },
     "probeGroupCounts": {
-      "central-west": 1,
-      "uptown-midcity": 2,
       "north-central": 2
     },
     "coverageEquity": {
@@ -309,27 +246,27 @@
         "groups": {}
       }
     },
-    "probed": 5,
+    "probed": 2,
     "promoted": 0,
-    "failed": 5,
-    "finishedAt": "2026-11-21T11:37:10.085Z",
-    "durationMs": 1696,
+    "failed": 2,
+    "finishedAt": "2026-11-21T11:39:21.504Z",
+    "durationMs": 5471,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 95,
+      "due": 94,
       "retry": 179,
-      "cold": 521,
-      "lowValue": 641,
+      "cold": 522,
+      "lowValue": 640,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 521,
+        "cold-sample": 522,
         "food-evidence": 11,
-        "low-value": 641
+        "low-value": 640
       }
     },
     "overpassEndpoints": [
@@ -380,23 +317,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 95,
-      "coldCount": 521,
-      "lowValueCount": 641,
+      "dueCount": 94,
+      "coldCount": 522,
+      "lowValueCount": 640,
       "laneCounts": {
-        "cold-sample": 521,
+        "cold-sample": 522,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 641
+        "low-value": 640
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 179,
         "needs-website": 824,
-        "cold": 521,
-        "candidate": 598
+        "cold": 522,
+        "candidate": 597
       },
       "categoryCounts": {
         "nightclub": 8,
