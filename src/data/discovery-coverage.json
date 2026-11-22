@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-22T10:13:08.470Z",
+  "generatedAt": "2026-11-22T12:35:25.837Z",
   "run": {
-    "startedAt": "2026-11-22T10:12:54.568Z",
+    "startedAt": "2026-11-22T12:34:52.929Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 98,
       "retry": 183,
-      "cold": 525,
-      "lowValue": 637,
+      "cold": 526,
+      "lowValue": 636,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 525,
+        "cold-sample": 526,
         "food-evidence": 11,
-        "low-value": 637
+        "low-value": 636
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11950673451",
-        "name": "DRIFT La Jolla",
+        "key": "san-diego|osm|way|960955776",
+        "name": "Marieta's",
         "category": "restaurant",
-        "website": "https://www.driftlajolla.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on DRIFT La Jolla (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-06T10:12:55.670Z",
-        "checkedAt": "2026-11-22T10:12:54.870Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596424512",
-        "name": "K Sandwiches",
-        "category": "restaurant",
-        "website": "https://www.ksandwiches.com/",
+        "website": "https://www.marietasrestaurantlamesaca.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on K Sandwiches (cold-sample)",
+          "detail": "Checked 1 page on Marieta's (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-20T10:13:08.387Z",
-        "checkedAt": "2026-11-22T10:12:54.911Z"
+        "nextCheckAt": "2027-02-20T12:35:25.239Z",
+        "checkedAt": "2026-11-22T12:35:24.619Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|273607369",
+        "name": "Egglet",
+        "category": "restaurant",
+        "website": "https://egglet.menu11.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Egglet (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-06T12:35:25.725Z",
+        "checkedAt": "2026-11-22T12:35:24.617Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,10 +128,11 @@
     },
     "probeAreaCounts": {
       "university-city-utc": 1,
-      "kearny-mesa": 1
+      "la-mesa": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -249,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-22T10:13:08.425Z",
-    "durationMs": 13857,
+    "finishedAt": "2026-11-22T12:35:25.803Z",
+    "durationMs": 32874,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 97,
       "retry": 183,
-      "cold": 526,
-      "lowValue": 636,
+      "cold": 527,
+      "lowValue": 635,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 526,
+        "cold-sample": 527,
         "food-evidence": 11,
-        "low-value": 636
+        "low-value": 635
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-22T12:34:53.177Z",
+        "lastFinishedAt": "2026-11-22T12:35:08.180Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795350938179,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-22T12:35:08.180Z",
+        "lastFinishedAt": "2026-11-22T12:35:23.180Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795350953180,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-22T12:35:23.180Z",
+        "lastFinishedAt": "2026-11-22T12:35:24.462Z",
+        "lastLatencyMs": 1282,
+        "cooldownUntil": 1795350954462,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +330,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 97,
-      "coldCount": 526,
-      "lowValueCount": 636,
+      "coldCount": 527,
+      "lowValueCount": 635,
       "laneCounts": {
-        "cold-sample": 526,
+        "cold-sample": 527,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 636
+        "low-value": 635
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 183,
         "needs-website": 824,
-        "cold": 526,
-        "candidate": 589
+        "cold": 527,
+        "candidate": 588
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -371,10 +383,10 @@
       },
       "coverageAreaSweeps": {
         "version": 2,
-        "tracked": 12,
+        "tracked": 13,
         "completed": 7,
-        "failed": 5,
-        "sweptThisRun": 0
+        "failed": 6,
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
