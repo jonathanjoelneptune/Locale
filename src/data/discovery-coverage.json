@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-22T19:59:44.167Z",
+  "generatedAt": "2026-11-22T20:59:48.110Z",
   "run": {
-    "startedAt": "2026-11-22T19:59:10.132Z",
+    "startedAt": "2026-11-22T20:59:27.105Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 96,
       "retry": 183,
-      "cold": 529,
-      "lowValue": 633,
+      "cold": 530,
+      "lowValue": 632,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 529,
+        "cold-sample": 530,
         "food-evidence": 11,
-        "low-value": 633
+        "low-value": 632
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,17 +54,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|31801720",
-        "name": "Bivouac Ciderworks",
-        "category": "bar",
-        "website": "https://www.bivouaccider.com/",
-        "attempts": 7,
+        "key": "san-diego|osm|way|1444401403",
+        "name": "Farmer's Table",
+        "category": "restaurant",
+        "website": "https://myfarmerstable.com/locations/la-mesa/",
+        "attempts": 1,
         "status": "retry",
-        "probeLane": "event-likely",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -83,46 +72,27 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-29T19:59:42.127Z",
-        "checkedAt": "2026-11-22T19:59:41.556Z"
+        "nextCheckAt": "2026-11-23T20:59:28.452Z",
+        "checkedAt": "2026-11-22T20:59:27.363Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1291885227",
-        "name": "Eureka!",
+        "key": "san-diego|osm|node|8655916445",
+        "name": "Pho Kitchen",
         "category": "restaurant",
-        "website": "https://eurekarestaurantgroup.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Eureka! (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-06T19:59:42.511Z",
-        "checkedAt": "2026-11-22T19:59:41.558Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|6654145963",
-        "name": "Nanay's Best BBQ",
-        "category": "restaurant",
-        "website": "https://nanaysbestbbqgo.twupro.com/",
+        "website": "https://phokitchenusa.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Nanay's Best BBQ (cold-sample)",
+          "detail": "Checked 1 page on Pho Kitchen (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-20T19:59:44.107Z",
-        "checkedAt": "2026-11-22T19:59:42.127Z"
+        "nextCheckAt": "2027-02-20T20:59:48.062Z",
+        "checkedAt": "2026-11-22T20:59:27.498Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -134,7 +104,6 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 1,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -147,13 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "mission-valley": 1,
-      "university-city-utc": 1,
+      "la-mesa": 1,
       "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "central-west": 1,
-      "north-central": 2
+      "east-county": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -279,16 +247,16 @@
         "groups": {}
       }
     },
-    "probed": 3,
+    "probed": 2,
     "promoted": 0,
-    "failed": 3,
-    "finishedAt": "2026-11-22T19:59:44.125Z",
-    "durationMs": 33993,
+    "failed": 2,
+    "finishedAt": "2026-11-22T20:59:48.077Z",
+    "durationMs": 20972,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
-      "retry": 183,
+      "due": 95,
+      "retry": 184,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -305,42 +273,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-22T19:59:10.354Z",
-        "lastFinishedAt": "2026-11-22T19:59:11.397Z",
-        "lastLatencyMs": 1043,
-        "cooldownUntil": 1795377581397,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-22T19:59:11.397Z",
-        "lastFinishedAt": "2026-11-22T19:59:26.399Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1795377596399,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-22T19:59:26.399Z",
-        "lastFinishedAt": "2026-11-22T19:59:41.400Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795377611399,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -350,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 96,
+      "dueCount": 95,
       "coldCount": 530,
       "lowValueCount": 632,
       "laneCounts": {
@@ -363,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 183,
+        "retry": 184,
         "needs-website": 824,
         "cold": 530,
-        "candidate": 585
+        "candidate": 584
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -407,7 +375,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
