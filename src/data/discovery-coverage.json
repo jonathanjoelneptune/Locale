@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-22T02:35:34.645Z",
+  "generatedAt": "2026-11-22T06:29:30.482Z",
   "run": {
-    "startedAt": "2026-11-22T02:35:33.907Z",
+    "startedAt": "2026-11-22T06:28:57.366Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 98,
-      "retry": 181,
-      "cold": 524,
-      "lowValue": 638,
+      "retry": 183,
+      "cold": 523,
+      "lowValue": 639,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 524,
+        "cold-sample": 523,
         "food-evidence": 11,
-        "low-value": 638
+        "low-value": 639
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9301845244",
-        "name": "Del Sushi",
+        "key": "san-diego|osm|node|12838470249",
+        "name": "Din Tai Fung",
         "category": "restaurant",
-        "website": "https://delsushi.com/ucsd/",
+        "website": "https://dtf.com/en/locations/san-diego",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Din Tai Fung (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-25T02:35:34.532Z",
-        "checkedAt": "2026-11-22T02:35:34.158Z"
+        "nextCheckAt": "2027-01-06T06:29:30.223Z",
+        "checkedAt": "2026-11-22T06:29:28.758Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9185141931",
-        "name": "China 1968",
+        "key": "san-diego|osm|node|6654145960",
+        "name": "Indian Tandoor",
         "category": "restaurant",
-        "website": "https://www.china1968elcajon.com/",
+        "website": "http://www.theindiantandoor.com/",
         "attempts": 2,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 429",
-          "statusCode": 429
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Indian Tandoor (cold-sample)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T02:35:34.595Z",
-        "checkedAt": "2026-11-22T02:35:34.202Z"
+        "nextCheckAt": "2027-02-20T06:29:30.449Z",
+        "checkedAt": "2026-11-22T06:29:28.759Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,11 +128,10 @@
     },
     "probeAreaCounts": {
       "university-city-utc": 1,
-      "el-cajon": 1
+      "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "east-county": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,65 +260,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-22T02:35:34.597Z",
-    "durationMs": 690,
+    "finishedAt": "2026-11-22T06:29:30.451Z",
+    "durationMs": 33085,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 97,
       "retry": 183,
-      "cold": 523,
-      "lowValue": 639,
+      "cold": 524,
+      "lowValue": 638,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 523,
+        "cold-sample": 524,
         "food-evidence": 11,
-        "low-value": 639
+        "low-value": 638
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-22T06:28:57.410Z",
+        "lastFinishedAt": "2026-11-22T06:29:12.413Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795328982413,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-22T06:29:12.413Z",
+        "lastFinishedAt": "2026-11-22T06:29:27.414Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795328997414,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-22T06:29:27.414Z",
+        "lastFinishedAt": "2026-11-22T06:29:28.630Z",
+        "lastLatencyMs": 1216,
+        "cooldownUntil": 1795328998630,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,22 +329,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 97,
-      "coldCount": 523,
-      "lowValueCount": 639,
+      "coldCount": 524,
+      "lowValueCount": 638,
       "laneCounts": {
-        "cold-sample": 523,
+        "cold-sample": 524,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 639
+        "low-value": 638
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 183,
         "needs-website": 824,
-        "cold": 523,
-        "candidate": 592
+        "cold": 524,
+        "candidate": 591
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +385,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
