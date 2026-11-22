@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-21T23:46:03.122Z",
+  "generatedAt": "2026-11-22T02:35:34.645Z",
   "run": {
-    "startedAt": "2026-11-21T23:44:53.746Z",
+    "startedAt": "2026-11-22T02:35:33.907Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
-      "retry": 180,
+      "due": 98,
+      "retry": 181,
       "cold": 524,
       "lowValue": 638,
       "qualified": 20,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13937529746",
-        "name": "Crispy Chicken n' Tomato",
+        "key": "san-diego|osm|node|9301845244",
+        "name": "Del Sushi",
         "category": "restaurant",
-        "website": "https://clairemont.crispychicken.store/",
+        "website": "https://delsushi.com/ucsd/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-22T23:45:25.449Z",
-        "checkedAt": "2026-11-21T23:45:25.311Z"
+        "nextCheckAt": "2026-11-25T02:35:34.532Z",
+        "checkedAt": "2026-11-22T02:35:34.158Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14062451238",
-        "name": "BoujieMana",
+        "key": "san-diego|osm|node|9185141931",
+        "name": "China 1968",
         "category": "restaurant",
-        "website": "https://boujiemana.com/",
+        "website": "https://www.china1968elcajon.com/",
         "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "status": "retry",
+        "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 3 pages on BoujieMana (cold-sample)",
-          "statusCode": null
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-19T23:46:03.074Z",
-        "checkedAt": "2026-11-21T23:45:25.313Z"
+        "nextCheckAt": "2026-11-30T02:35:34.595Z",
+        "checkedAt": "2026-11-22T02:35:34.202Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,10 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "kearny-mesa": 2
+      "university-city-utc": 1,
+      "el-cajon": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "north-central": 1,
+      "east-county": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -259,65 +250,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-21T23:46:03.076Z",
-    "durationMs": 69330,
+    "finishedAt": "2026-11-22T02:35:34.597Z",
+    "durationMs": 690,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
-      "retry": 181,
-      "cold": 524,
-      "lowValue": 638,
+      "due": 97,
+      "retry": 183,
+      "cold": 523,
+      "lowValue": 639,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 524,
+        "cold-sample": 523,
         "food-evidence": 11,
-        "low-value": 638
+        "low-value": 639
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T23:44:53.805Z",
-        "lastFinishedAt": "2026-11-21T23:45:08.808Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795304738808,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-21T23:45:08.808Z",
-        "lastFinishedAt": "2026-11-21T23:45:23.808Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795304753808,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
-        "lastStartedAt": "2026-11-21T23:45:23.808Z",
-        "lastFinishedAt": "2026-11-21T23:45:25.153Z",
-        "lastLatencyMs": 1345,
-        "cooldownUntil": 1795304755153,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -327,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 96,
-      "coldCount": 524,
-      "lowValueCount": 638,
+      "dueCount": 97,
+      "coldCount": 523,
+      "lowValueCount": 639,
       "laneCounts": {
-        "cold-sample": 524,
+        "cold-sample": 523,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 638
+        "low-value": 639
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 181,
+        "retry": 183,
         "needs-website": 824,
-        "cold": 524,
-        "candidate": 593
+        "cold": 523,
+        "candidate": 592
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -384,7 +375,7 @@
         "tracked": 12,
         "completed": 7,
         "failed": 5,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
