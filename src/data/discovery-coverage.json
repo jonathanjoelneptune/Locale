@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-22T20:59:48.110Z",
+  "generatedAt": "2026-11-22T22:42:14.321Z",
   "run": {
-    "startedAt": "2026-11-22T20:59:27.105Z",
+    "startedAt": "2026-11-22T22:42:13.688Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 96,
-      "retry": 183,
+      "retry": 184,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -58,41 +58,41 @@
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|1444401403",
-        "name": "Farmer's Table",
+        "key": "san-diego|osm|node|8596194563",
+        "name": "Taste of the Himalayas",
         "category": "restaurant",
-        "website": "https://myfarmerstable.com/locations/la-mesa/",
+        "website": "https://www.tasteofthehimalayassd.com/",
+        "attempts": 2,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 429",
+          "statusCode": 429
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-30T22:42:14.178Z",
+        "checkedAt": "2026-11-22T22:42:13.888Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|448043311",
+        "name": "Fresheria",
+        "category": "restaurant",
+        "website": "https://www.lafresheria.com/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-23T20:59:28.452Z",
-        "checkedAt": "2026-11-22T20:59:27.363Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8655916445",
-        "name": "Pho Kitchen",
-        "category": "restaurant",
-        "website": "https://phokitchenusa.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pho Kitchen (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-20T20:59:48.062Z",
-        "checkedAt": "2026-11-22T20:59:27.498Z"
+        "nextCheckAt": "2026-11-25T22:42:14.288Z",
+        "checkedAt": "2026-11-22T22:42:13.857Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-mesa": 1,
-      "mira-mesa": 1
+      "la-jolla": 1,
+      "university-city-utc": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "north-central": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -207,7 +206,7 @@
             "zeroEventAreas": 10,
             "passRate": 0,
             "averageGapScore": 99.83333333333333,
-            "averageEvents": 0.8333333333333334,
+            "averageEvents": 0.6666666666666666,
             "averageVenues": 0.16666666666666666,
             "deficitScore": 98.27499999999999
           },
@@ -250,24 +249,24 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-22T20:59:48.077Z",
-    "durationMs": 20972,
+    "finishedAt": "2026-11-22T22:42:14.290Z",
+    "durationMs": 602,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 95,
-      "retry": 184,
-      "cold": 530,
-      "lowValue": 632,
+      "retry": 186,
+      "cold": 529,
+      "lowValue": 633,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 530,
+        "cold-sample": 529,
         "food-evidence": 11,
-        "low-value": 632
+        "low-value": 633
       }
     },
     "overpassEndpoints": [
@@ -319,22 +318,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 95,
-      "coldCount": 530,
-      "lowValueCount": 632,
+      "coldCount": 529,
+      "lowValueCount": 633,
       "laneCounts": {
-        "cold-sample": 530,
+        "cold-sample": 529,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 632
+        "low-value": 633
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 184,
+        "retry": 186,
         "needs-website": 824,
-        "cold": 530,
-        "candidate": 584
+        "cold": 529,
+        "candidate": 583
       },
       "categoryCounts": {
         "nightclub": 8,
