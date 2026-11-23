@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-23T09:41:36.913Z",
+  "generatedAt": "2026-11-23T14:22:09.456Z",
   "run": {
-    "startedAt": "2026-11-23T09:41:34.154Z",
+    "startedAt": "2026-11-23T14:21:35.471Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 95,
-      "retry": 187,
+      "retry": 188,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|596246527",
-        "name": "Havana Kitchen",
+        "key": "san-diego|osm|way|1559414652",
+        "name": "Trade Restaurant & Lounge",
         "category": "restaurant",
-        "website": "https://www.havanakitchenca.com/",
-        "attempts": 1,
+        "website": "https://www.hotelrepublicsd.com/dining/trade-restaurant-lounge",
+        "attempts": 2,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 404",
-          "statusCode": 404
+          "detail": "HTTP 403",
+          "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T09:41:35.233Z",
-        "checkedAt": "2026-11-23T09:41:34.444Z"
+        "nextCheckAt": "2026-12-07T14:22:08.873Z",
+        "checkedAt": "2026-11-23T14:22:07.414Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|10616570758",
-        "name": "Urbane Cafe",
+        "key": "san-diego|osm|node|1429439654",
+        "name": "Urbn Sushi",
         "category": "restaurant",
-        "website": "https://urbanecafe.com/location/mira-mesa/",
+        "website": "https://urbnsushi.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Urbane Cafe (cold-sample)",
+          "detail": "Checked 3 pages on Urbn Sushi (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-21T09:41:36.856Z",
-        "checkedAt": "2026-11-23T09:41:34.492Z"
+        "nextCheckAt": "2027-02-21T14:22:09.391Z",
+        "checkedAt": "2026-11-23T14:22:07.416Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +127,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla": 1,
-      "mira-mesa": 1
+      "cortez-hill": 1,
+      "university-city-utc": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "central-core": 1,
+      "north-central": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -249,8 +261,8 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-23T09:41:36.858Z",
-    "durationMs": 2704,
+    "finishedAt": "2026-11-23T14:22:09.409Z",
+    "durationMs": 33938,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
@@ -272,42 +284,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-23T14:21:35.549Z",
+        "lastFinishedAt": "2026-11-23T14:21:50.552Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795443740552,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-23T14:21:50.552Z",
+        "lastFinishedAt": "2026-11-23T14:22:05.552Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795443755552,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-23T14:22:05.552Z",
+        "lastFinishedAt": "2026-11-23T14:22:07.208Z",
+        "lastLatencyMs": 1656,
+        "cooldownUntil": 1795443757208,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -374,7 +386,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
