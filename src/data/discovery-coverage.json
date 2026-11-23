@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-23T03:56:08.418Z",
+  "generatedAt": "2026-11-23T09:41:36.913Z",
   "run": {
-    "startedAt": "2026-11-23T03:55:22.457Z",
+    "startedAt": "2026-11-23T09:41:34.154Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 95,
-      "retry": 186,
+      "retry": 187,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "el-cajon",
-        "name": "El Cajon",
-        "group": "east-county",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|566470644",
-        "name": "Hacienda Cazadores",
+        "key": "san-diego|osm|node|596246527",
+        "name": "Havana Kitchen",
         "category": "restaurant",
-        "website": "https://www.haciendacazadores.com/",
+        "website": "https://www.havanakitchenca.com/",
         "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
+          "detail": "HTTP 404",
+          "statusCode": 404
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-24T03:56:08.087Z",
-        "checkedAt": "2026-11-23T03:56:07.849Z"
+        "nextCheckAt": "2026-11-30T09:41:35.233Z",
+        "checkedAt": "2026-11-23T09:41:34.444Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13744028271",
-        "name": "The Poke Co.",
+        "key": "san-diego|osm|node|10616570758",
+        "name": "Urbane Cafe",
         "category": "restaurant",
-        "website": "https://thepokeco.com/",
+        "website": "https://urbanecafe.com/location/mira-mesa/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on The Poke Co. (cold-sample)",
+          "detail": "Checked 1 page on Urbane Cafe (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-21T03:56:08.356Z",
-        "checkedAt": "2026-11-23T03:56:07.851Z"
+        "nextCheckAt": "2027-02-21T09:41:36.856Z",
+        "checkedAt": "2026-11-23T09:41:34.492Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-mesa": 1,
+      "la-jolla": 1,
       "mira-mesa": 1
     },
     "probeGroupCounts": {
-      "east-county": 1,
-      "north-central": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -196,7 +184,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 86.3157894736842,
-            "averageEvents": 27.57894736842105,
+            "averageEvents": 27.36842105263158,
             "averageVenues": 2.0526315789473686,
             "deficitScore": 93.10526315789473
           },
@@ -261,13 +249,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-23T03:56:08.372Z",
-    "durationMs": 45915,
+    "finishedAt": "2026-11-23T09:41:36.858Z",
+    "durationMs": 2704,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 94,
-      "retry": 187,
+      "retry": 188,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -284,42 +272,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-23T03:55:22.641Z",
-        "lastFinishedAt": "2026-11-23T03:55:37.644Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795406167644,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-23T03:55:37.644Z",
-        "lastFinishedAt": "2026-11-23T03:55:52.645Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795406182645,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-23T03:55:52.645Z",
-        "lastFinishedAt": "2026-11-23T03:56:07.645Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795406197645,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -342,10 +330,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 187,
+        "retry": 188,
         "needs-website": 824,
         "cold": 530,
-        "candidate": 581
+        "candidate": 580
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +374,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
