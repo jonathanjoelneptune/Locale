@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-24T11:40:43.291Z",
+  "generatedAt": "2026-11-24T14:09:45.646Z",
   "run": {
-    "startedAt": "2026-11-24T11:40:38.957Z",
+    "startedAt": "2026-11-24T14:08:56.307Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 101,
       "retry": 189,
-      "cold": 532,
-      "lowValue": 630,
+      "cold": 533,
+      "lowValue": 629,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 532,
+        "cold-sample": 533,
         "food-evidence": 11,
-        "low-value": 630
+        "low-value": 629
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|5425635510",
-        "name": "Ambrogio15",
+        "key": "san-diego|osm|node|12128718611",
+        "name": "Hongdae Dakgalbi",
         "category": "restaurant",
-        "website": "https://www.ambrogio15.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Ambrogio15 (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-22T11:40:43.185Z",
-        "checkedAt": "2026-11-24T11:40:39.483Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11120955006",
-        "name": "Hokkaido Ramen Santouka",
-        "category": "restaurant",
-        "website": "https://www.santouka.co.jp/en/shop-foreign/usa/foreign01-005",
+        "website": "https://hongdaedakgalbi.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Hokkaido Ramen Santouka (low-value)",
+          "detail": "Checked 4 pages on Hongdae Dakgalbi (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-08T11:40:43.229Z",
-        "checkedAt": "2026-11-24T11:40:39.342Z"
+        "nextCheckAt": "2027-01-08T14:09:44.655Z",
+        "checkedAt": "2026-11-24T14:09:41.593Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|6327910653",
+        "name": "Blaze Pizza",
+        "category": "restaurant",
+        "website": "https://blazepizza.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Blaze Pizza (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-22T14:09:45.596Z",
+        "checkedAt": "2026-11-24T14:09:41.595Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,10 +128,11 @@
     },
     "probeAreaCounts": {
       "convoy": 1,
-      "bird-rock": 1
+      "otay-ranch": 1
     },
     "probeGroupCounts": {
-      "north-central": 2
+      "north-central": 1,
+      "south-bay": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -249,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-24T11:40:43.247Z",
-    "durationMs": 4290,
+    "finishedAt": "2026-11-24T14:09:45.599Z",
+    "durationMs": 49292,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 100,
       "retry": 189,
-      "cold": 533,
-      "lowValue": 629,
+      "cold": 534,
+      "lowValue": 628,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 533,
+        "cold-sample": 534,
         "food-evidence": 11,
-        "low-value": 629
+        "low-value": 628
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T14:08:56.383Z",
+        "lastFinishedAt": "2026-11-24T14:09:11.387Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1795529381387,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T14:09:11.387Z",
+        "lastFinishedAt": "2026-11-24T14:09:26.388Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795529396388,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T14:09:26.388Z",
+        "lastFinishedAt": "2026-11-24T14:09:41.389Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795529411389,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +330,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 100,
-      "coldCount": 533,
-      "lowValueCount": 629,
+      "coldCount": 534,
+      "lowValueCount": 628,
       "laneCounts": {
-        "cold-sample": 533,
+        "cold-sample": 534,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 629
+        "low-value": 628
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 189,
         "needs-website": 824,
-        "cold": 533,
-        "candidate": 576
+        "cold": 534,
+        "candidate": 575
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +386,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
