@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-23T21:59:20.595Z",
+  "generatedAt": "2026-11-24T00:23:17.062Z",
   "run": {
-    "startedAt": "2026-11-23T21:58:47.807Z",
+    "startedAt": "2026-11-24T00:23:14.499Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
+      "due": 98,
       "retry": 188,
       "cold": 530,
       "lowValue": 632,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "el-cajon",
-        "name": "El Cajon",
-        "group": "east-county",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,15 +54,15 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9215079088",
-        "name": "VYBZ Kitchen & Lounge",
+        "key": "san-diego|osm|node|11152022105",
+        "name": "Himalayan Cuisine",
         "category": "restaurant",
-        "website": "https://www.vybzsd.com/",
-        "attempts": 2,
+        "website": "https://www.himalayancuisineone.com/",
+        "attempts": 1,
         "status": "retry",
         "probeLane": "low-value",
         "revalidationSourceId": null,
@@ -83,27 +72,27 @@
           "statusCode": 403
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-07T21:59:19.305Z",
-        "checkedAt": "2026-11-23T21:59:18.808Z"
+        "nextCheckAt": "2026-11-27T00:23:14.964Z",
+        "checkedAt": "2026-11-24T00:23:14.778Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|6722520088",
-        "name": "Verdes El Ranchero",
-        "category": "restaurant",
-        "website": "http://www.verdeselranchero.com/",
-        "attempts": 2,
+        "key": "san-diego|osm|way|1430103454",
+        "name": "Zoo Brew",
+        "category": "cafe",
+        "website": "https://zoo.sandiegozoo.org/dining",
+        "attempts": 3,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Verdes El Ranchero (cold-sample)",
+          "detail": "Checked 2 pages on Zoo Brew (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-21T21:59:20.546Z",
-        "checkedAt": "2026-11-23T21:59:18.810Z"
+        "nextCheckAt": "2026-12-24T00:23:17.014Z",
+        "checkedAt": "2026-11-24T00:23:14.823Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "cortez-hill": 1,
-      "la-jolla": 1
+      "la-mesa": 1,
+      "hillcrest": 1
     },
     "probeGroupCounts": {
-      "central-core": 1,
-      "north-central": 1
+      "east-county": 1,
+      "uptown-midcity": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -261,13 +250,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-23T21:59:20.564Z",
-    "durationMs": 32757,
+    "finishedAt": "2026-11-24T00:23:17.016Z",
+    "durationMs": 2517,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 96,
-      "retry": 188,
+      "due": 97,
+      "retry": 189,
       "cold": 530,
       "lowValue": 632,
       "qualified": 20,
@@ -284,42 +273,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-23T21:58:47.973Z",
-        "lastFinishedAt": "2026-11-23T21:58:48.692Z",
-        "lastLatencyMs": 719,
-        "cooldownUntil": 1795471158692,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-23T21:58:48.692Z",
-        "lastFinishedAt": "2026-11-23T21:59:03.693Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795471173693,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-23T21:59:03.693Z",
-        "lastFinishedAt": "2026-11-23T21:59:18.694Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795471188694,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,7 +318,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 96,
+      "dueCount": 97,
       "coldCount": 530,
       "lowValueCount": 632,
       "laneCounts": {
@@ -342,10 +331,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 188,
+        "retry": 189,
         "needs-website": 824,
         "cold": 530,
-        "candidate": 580
+        "candidate": 579
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +375,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
