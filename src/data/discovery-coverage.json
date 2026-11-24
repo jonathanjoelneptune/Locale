@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-24T18:54:49.841Z",
+  "generatedAt": "2026-11-24T21:34:47.785Z",
   "run": {
-    "startedAt": "2026-11-24T18:54:46.730Z",
+    "startedAt": "2026-11-24T21:33:22.981Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 101,
+      "due": 102,
       "retry": 189,
-      "cold": 535,
-      "lowValue": 627,
+      "cold": 536,
+      "lowValue": 626,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 535,
+        "cold-sample": 536,
         "food-evidence": 11,
-        "low-value": 627
+        "low-value": 626
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12125747092",
-        "name": "Imperial Mandarin",
+        "key": "san-diego|osm|node|12105306854",
+        "name": "Itacho Sushi",
         "category": "restaurant",
-        "website": "http://www.imperial-mandarin.com/",
+        "website": "https://www.itachosushi.us/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Imperial Mandarin (low-value)",
+          "detail": "Checked 1 page on Itacho Sushi (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-08T18:54:48.494Z",
-        "checkedAt": "2026-11-24T18:54:47.117Z"
+        "nextCheckAt": "2027-01-08T21:34:09.534Z",
+        "checkedAt": "2026-11-24T21:34:08.180Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|109689658",
-        "name": "Applebee's",
+        "key": "san-diego|osm|node|596158252",
+        "name": "Mike Hess Brewing",
+        "category": "pub",
+        "website": "https://www.mikehessbrewing.com/north-park/",
+        "attempts": 8,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 502",
+          "statusCode": 502
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-01T21:34:10.103Z",
+        "checkedAt": "2026-11-24T21:34:08.178Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9366452611",
+        "name": "Beach Hut Deli",
         "category": "restaurant",
-        "website": "https://restaurants.applebees.com/en-us/ca/el-cajon/2508-jamacha-79045",
+        "website": "https://beachhutdeli.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Applebee's (cold-sample)",
+          "detail": "Checked 1 page on Beach Hut Deli (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-22T18:54:49.782Z",
-        "checkedAt": "2026-11-24T18:54:47.223Z"
+        "nextCheckAt": "2027-02-22T21:34:47.745Z",
+        "checkedAt": "2026-11-24T21:34:09.534Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,6 +134,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 1,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -116,10 +147,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
+      "mission-valley": 1,
       "convoy": 1,
       "rancho-san-diego": 1
     },
     "probeGroupCounts": {
+      "central-west": 1,
       "north-central": 1,
       "east-county": 1
     },
@@ -247,68 +280,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-24T18:54:49.797Z",
-    "durationMs": 3067,
+    "failed": 3,
+    "finishedAt": "2026-11-24T21:34:47.747Z",
+    "durationMs": 84766,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 100,
       "retry": 189,
-      "cold": 536,
-      "lowValue": 626,
+      "cold": 537,
+      "lowValue": 625,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 536,
+        "cold-sample": 537,
         "food-evidence": 11,
-        "low-value": 626
+        "low-value": 625
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T21:33:23.030Z",
+        "lastFinishedAt": "2026-11-24T21:33:38.033Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795556048033,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T21:33:38.033Z",
+        "lastFinishedAt": "2026-11-24T21:33:53.033Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795556063033,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-24T21:33:53.034Z",
+        "lastFinishedAt": "2026-11-24T21:34:08.034Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795556078034,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,22 +352,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 100,
-      "coldCount": 536,
-      "lowValueCount": 626,
+      "coldCount": 537,
+      "lowValueCount": 625,
       "laneCounts": {
-        "cold-sample": 536,
+        "cold-sample": 537,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 626
+        "low-value": 625
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 189,
         "needs-website": 824,
-        "cold": 536,
-        "candidate": 573
+        "cold": 537,
+        "candidate": 572
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +408,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
