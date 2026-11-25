@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-25T10:21:48.177Z",
+  "generatedAt": "2026-11-25T12:50:03.517Z",
   "run": {
-    "startedAt": "2026-11-25T10:21:46.188Z",
+    "startedAt": "2026-11-25T12:49:31.195Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 99,
+      "due": 98,
       "retry": 189,
-      "cold": 541,
-      "lowValue": 621,
+      "cold": 542,
+      "lowValue": 620,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 541,
+        "cold-sample": 542,
         "food-evidence": 11,
-        "low-value": 621
+        "low-value": 620
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12125692375",
-        "name": "Kanpai BBQ & Shabu",
+        "key": "san-diego|osm|node|13724446470",
+        "name": "Hawaiian Fresh Seafood",
         "category": "restaurant",
-        "website": "https://kanpaibbqsd.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Kanpai BBQ & Shabu (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-09T10:21:47.223Z",
-        "checkedAt": "2026-11-25T10:21:46.348Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9236941443",
-        "name": "Happy Time Mediterranean Restaurant",
-        "category": "restaurant",
-        "website": "https://www.happytimesd.com/",
+        "website": "https://www.hawaiianfreshseafood.com/the-market-at-hfs",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Happy Time Mediterranean Restaurant (cold-sample)",
+          "detail": "Checked 1 page on Hawaiian Fresh Seafood (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-23T10:21:48.148Z",
-        "checkedAt": "2026-11-25T10:21:46.377Z"
+        "nextCheckAt": "2027-02-23T12:50:03.411Z",
+        "checkedAt": "2026-11-25T12:50:02.465Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|12128677335",
+        "name": "Karami Ramen",
+        "category": "restaurant",
+        "website": "https://www.karamiramen.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Karami Ramen (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-09T12:50:03.468Z",
+        "checkedAt": "2026-11-25T12:50:02.463Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,11 +128,10 @@
     },
     "probeAreaCounts": {
       "convoy": 1,
-      "rancho-san-diego": 1
+      "sorrento-valley": 1
     },
     "probeGroupCounts": {
-      "north-central": 1,
-      "east-county": 1
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -250,65 +260,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-25T10:21:48.150Z",
-    "durationMs": 1962,
+    "finishedAt": "2026-11-25T12:50:03.470Z",
+    "durationMs": 32275,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 97,
       "retry": 189,
-      "cold": 542,
-      "lowValue": 620,
+      "cold": 543,
+      "lowValue": 619,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 542,
+        "cold-sample": 543,
         "food-evidence": 11,
-        "low-value": 620
+        "low-value": 619
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-25T12:49:31.251Z",
+        "lastFinishedAt": "2026-11-25T12:49:46.254Z",
+        "lastLatencyMs": 15003,
+        "cooldownUntil": 1795611016254,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-25T12:49:46.254Z",
+        "lastFinishedAt": "2026-11-25T12:50:01.255Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795611031255,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-25T12:50:01.255Z",
+        "lastFinishedAt": "2026-11-25T12:50:02.310Z",
+        "lastLatencyMs": 1055,
+        "cooldownUntil": 1795611032310,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +328,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 98,
-      "coldCount": 542,
-      "lowValueCount": 620,
+      "dueCount": 97,
+      "coldCount": 543,
+      "lowValueCount": 619,
       "laneCounts": {
-        "cold-sample": 542,
+        "cold-sample": 543,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 620
+        "low-value": 619
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 189,
         "needs-website": 824,
-        "cold": 542,
-        "candidate": 567
+        "cold": 543,
+        "candidate": 566
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +385,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
