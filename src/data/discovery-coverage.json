@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-25T19:32:09.694Z",
+  "generatedAt": "2026-11-25T20:05:47.110Z",
   "run": {
-    "startedAt": "2026-11-25T19:31:18.402Z",
+    "startedAt": "2026-11-25T20:05:45.681Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 97,
       "retry": 189,
-      "cold": 544,
-      "lowValue": 618,
+      "cold": 545,
+      "lowValue": 617,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 544,
+        "cold-sample": 545,
         "food-evidence": 11,
-        "low-value": 618
+        "low-value": 617
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "el-cajon",
-        "name": "El Cajon",
-        "group": "east-county",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|7134768826",
-        "name": "Luna Grill",
+        "key": "san-diego|osm|node|12105361194",
+        "name": "Kitakata Ramen Ban Nai",
         "category": "restaurant",
-        "website": "https://locations.lunagrill.com/luna-grill-e09db7a47093",
+        "website": "https://www.ramenbannai.com/",
+        "attempts": 1,
+        "status": "retry",
+        "probeLane": "low-value",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-11-28T20:05:46.789Z",
+        "checkedAt": "2026-11-25T20:05:46.172Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|8855429774",
+        "name": "Madras Cafe",
+        "category": "restaurant",
+        "website": "https://madrascafesd.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Luna Grill (cold-sample)",
+          "detail": "Checked 1 page on Madras Cafe (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-23T19:32:04.346Z",
-        "checkedAt": "2026-11-25T19:32:03.693Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11837782237",
-        "name": "Kawaii Sushi",
-        "category": "restaurant",
-        "website": "http://kawaiisushisd.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Kawaii Sushi (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-09T19:32:09.639Z",
-        "checkedAt": "2026-11-25T19:32:03.692Z"
+        "nextCheckAt": "2027-02-23T20:05:47.073Z",
+        "checkedAt": "2026-11-25T20:05:46.310Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,11 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-mesa": 1,
-      "rancho-san-diego": 1
+      "convoy": 1,
+      "sorrento-valley": 1
     },
     "probeGroupCounts": {
-      "east-county": 2
+      "north-central": 2
     },
     "coverageEquity": {
       "san-diego": {
@@ -260,13 +249,13 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-25T19:32:09.641Z",
-    "durationMs": 51239,
+    "finishedAt": "2026-11-25T20:05:47.077Z",
+    "durationMs": 1396,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
-      "retry": 189,
+      "due": 96,
+      "retry": 190,
       "cold": 545,
       "lowValue": 617,
       "qualified": 20,
@@ -283,42 +272,42 @@
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-25T19:31:18.486Z",
-        "lastFinishedAt": "2026-11-25T19:31:33.490Z",
-        "lastLatencyMs": 15004,
-        "cooldownUntil": 1795635123490,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-25T19:31:33.490Z",
-        "lastFinishedAt": "2026-11-25T19:31:48.490Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795635138490,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-25T19:31:48.490Z",
-        "lastFinishedAt": "2026-11-25T19:32:03.490Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795635153490,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -328,7 +317,7 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 97,
+      "dueCount": 96,
       "coldCount": 545,
       "lowValueCount": 617,
       "laneCounts": {
@@ -341,10 +330,10 @@
       },
       "statusCounts": {
         "qualified": 20,
-        "retry": 189,
+        "retry": 190,
         "needs-website": 824,
         "cold": 545,
-        "candidate": 564
+        "candidate": 563
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -385,7 +374,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
