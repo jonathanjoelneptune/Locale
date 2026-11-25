@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-25T01:31:46.190Z",
+  "generatedAt": "2026-11-25T04:32:40.411Z",
   "run": {
-    "startedAt": "2026-11-25T01:31:40.760Z",
+    "startedAt": "2026-11-25T04:32:03.630Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 100,
       "retry": 189,
-      "cold": 538,
-      "lowValue": 624,
+      "cold": 539,
+      "lowValue": 623,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 538,
+        "cold-sample": 539,
         "food-evidence": 11,
-        "low-value": 624
+        "low-value": 623
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|109689667",
-        "name": "Denny's",
+        "key": "san-diego|osm|node|7134786991",
+        "name": "Dickey's Barbecue Pit",
         "category": "restaurant",
-        "website": "https://locations.dennys.com/CA/EL-CAJON/247375",
+        "website": "https://www.dickeys.com/locations/California/El-Cajon/el-cajon",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Denny's (cold-sample)",
+          "detail": "Checked 1 page on Dickey's Barbecue Pit (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-23T01:31:41.372Z",
-        "checkedAt": "2026-11-25T01:31:41.050Z"
+        "nextCheckAt": "2027-02-23T04:32:36.698Z",
+        "checkedAt": "2026-11-25T04:32:34.951Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14016801200",
-        "name": "Joey",
+        "key": "san-diego|osm|node|12105386351",
+        "name": "Jomaru Korean Hot Pot",
         "category": "restaurant",
-        "website": "https://joeyrestaurants.com/location/joey-la-jolla",
+        "website": "https://jomaruusa.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Joey (low-value)",
+          "detail": "Checked 1 page on Jomaru Korean Hot Pot (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-09T01:31:46.122Z",
-        "checkedAt": "2026-11-25T01:31:40.974Z"
+        "nextCheckAt": "2027-01-09T04:32:40.369Z",
+        "checkedAt": "2026-11-25T04:32:34.950Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,7 +127,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "university-city-utc": 1,
+      "convoy": 1,
       "rancho-san-diego": 1
     },
     "probeGroupCounts": {
@@ -185,7 +196,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 86.3157894736842,
-            "averageEvents": 26.105263157894736,
+            "averageEvents": 25.105263157894736,
             "averageVenues": 2.0526315789473686,
             "deficitScore": 93.10526315789473
           },
@@ -250,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-25T01:31:46.139Z",
-    "durationMs": 5379,
+    "finishedAt": "2026-11-25T04:32:40.371Z",
+    "durationMs": 36741,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 99,
       "retry": 189,
-      "cold": 539,
-      "lowValue": 623,
+      "cold": 540,
+      "lowValue": 622,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 539,
+        "cold-sample": 540,
         "food-evidence": 11,
-        "low-value": 623
+        "low-value": 622
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-25T04:32:03.686Z",
+        "lastFinishedAt": "2026-11-25T04:32:04.796Z",
+        "lastLatencyMs": 1110,
+        "cooldownUntil": 1795581154796,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-25T04:32:04.796Z",
+        "lastFinishedAt": "2026-11-25T04:32:19.795Z",
+        "lastLatencyMs": 14999,
+        "cooldownUntil": 1795581169795,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-25T04:32:19.795Z",
+        "lastFinishedAt": "2026-11-25T04:32:34.795Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795581184795,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -319,22 +330,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 99,
-      "coldCount": 539,
-      "lowValueCount": 623,
+      "coldCount": 540,
+      "lowValueCount": 622,
       "laneCounts": {
-        "cold-sample": 539,
+        "cold-sample": 540,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 623
+        "low-value": 622
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 189,
         "needs-website": 824,
-        "cold": 539,
-        "candidate": 570
+        "cold": 540,
+        "candidate": 569
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +386,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
