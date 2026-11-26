@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-25T23:23:01.776Z",
+  "generatedAt": "2026-11-26T02:45:24.310Z",
   "run": {
-    "startedAt": "2026-11-25T23:22:58.712Z",
+    "startedAt": "2026-11-26T02:45:05.175Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 96,
       "retry": 190,
-      "cold": 546,
-      "lowValue": 616,
+      "cold": 547,
+      "lowValue": 615,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 546,
+        "cold-sample": 547,
         "food-evidence": 11,
-        "low-value": 616
+        "low-value": 615
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9099457017",
-        "name": "Punjabi Tandoor",
+        "key": "san-diego|osm|node|2243563126",
+        "name": "Kumi Sushi Grill",
         "category": "restaurant",
-        "website": "https://www.orderpunjabitandoormorehouse.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Punjabi Tandoor (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-23T23:22:59.906Z",
-        "checkedAt": "2026-11-25T23:22:59.218Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|12105390478",
-        "name": "Kuchi Sushi",
-        "category": "restaurant",
-        "website": "https://sushikuchi.com/",
+        "website": "https://kumisushigrill.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Kuchi Sushi (low-value)",
+          "detail": "Checked 1 page on Kumi Sushi Grill (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-09T23:23:01.716Z",
-        "checkedAt": "2026-11-25T23:22:59.078Z"
+        "nextCheckAt": "2027-01-10T02:45:23.270Z",
+        "checkedAt": "2026-11-26T02:45:22.626Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|31815980",
+        "name": "Ruth's Chris Steak House",
+        "category": "restaurant",
+        "website": "https://www.ruthschris.com/locations/ca/san-diego/del-mar/7323",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Ruth's Chris Steak House (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-24T02:45:24.264Z",
+        "checkedAt": "2026-11-26T02:45:22.628Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -117,7 +128,7 @@
     },
     "probeAreaCounts": {
       "convoy": 1,
-      "sorrento-valley": 1
+      "carmel-valley": 1
     },
     "probeGroupCounts": {
       "north-central": 2
@@ -249,65 +260,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-25T23:23:01.731Z",
-    "durationMs": 3019,
+    "finishedAt": "2026-11-26T02:45:24.266Z",
+    "durationMs": 19091,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
       "due": 95,
       "retry": 190,
-      "cold": 547,
-      "lowValue": 615,
+      "cold": 548,
+      "lowValue": 614,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 547,
+        "cold-sample": 548,
         "food-evidence": 11,
-        "low-value": 615
+        "low-value": 614
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-26T02:45:05.255Z",
+        "lastFinishedAt": "2026-11-26T02:45:06.108Z",
+        "lastLatencyMs": 853,
+        "cooldownUntil": 1795661136108,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T02:45:06.108Z",
+        "lastFinishedAt": "2026-11-26T02:45:21.109Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795661151109,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-26T02:45:21.109Z",
+        "lastFinishedAt": "2026-11-26T02:45:22.418Z",
+        "lastLatencyMs": 1309,
+        "cooldownUntil": 1795661152418,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,22 +329,22 @@
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
       "dueCount": 95,
-      "coldCount": 547,
-      "lowValueCount": 615,
+      "coldCount": 548,
+      "lowValueCount": 614,
       "laneCounts": {
-        "cold-sample": 547,
+        "cold-sample": 548,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 615
+        "low-value": 614
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 190,
         "needs-website": 824,
-        "cold": 547,
-        "candidate": 561
+        "cold": 548,
+        "candidate": 560
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -374,7 +385,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
