@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-26T08:55:29.377Z",
+  "generatedAt": "2026-11-26T12:12:26.208Z",
   "run": {
-    "startedAt": "2026-11-26T08:54:56.699Z",
+    "startedAt": "2026-11-26T12:12:24.923Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 94,
+      "due": 95,
       "retry": 190,
-      "cold": 549,
-      "lowValue": 613,
+      "cold": 550,
+      "lowValue": 612,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 549,
+        "cold-sample": 550,
         "food-evidence": 11,
-        "low-value": 613
+        "low-value": 612
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "el-cajon",
-        "name": "El Cajon",
-        "group": "east-county",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9366452608",
-        "name": "Tappi Sushi & Grill",
+        "key": "san-diego|osm|node|9181471361",
+        "name": "Baba Kabob Poway",
         "category": "restaurant",
-        "website": "https://www.tappisushi.com/",
+        "website": "https://babakabobsd.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Tappi Sushi & Grill (cold-sample)",
+          "detail": "Checked 1 page on Baba Kabob Poway (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-24T08:55:28.716Z",
-        "checkedAt": "2026-11-26T08:55:27.759Z"
+        "nextCheckAt": "2027-02-24T12:12:26.061Z",
+        "checkedAt": "2026-11-26T12:12:25.172Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14084519352",
-        "name": "Lark and Owl",
+        "key": "san-diego|osm|node|273607070",
+        "name": "Leucadia Pizzeria & Italian Restaurant",
         "category": "restaurant",
-        "website": "https://www.larkowlmenu.com/",
+        "website": "https://leucadiapizza.com/utc",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Lark and Owl (low-value)",
+          "detail": "Checked 1 page on Leucadia Pizzeria & Italian Restaurant (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-10T08:55:29.320Z",
-        "checkedAt": "2026-11-26T08:55:27.757Z"
+        "nextCheckAt": "2027-01-10T12:12:26.172Z",
+        "checkedAt": "2026-11-26T12:12:25.105Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -127,12 +116,12 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "la-jolla": 1,
-      "rancho-san-diego": 1
+      "university-city-utc": 1,
+      "poway": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
-      "east-county": 1
+      "north-inland": 1
     },
     "coverageEquity": {
       "san-diego": {
@@ -261,65 +250,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-26T08:55:29.322Z",
-    "durationMs": 32623,
+    "finishedAt": "2026-11-26T12:12:26.179Z",
+    "durationMs": 1256,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 93,
+      "due": 94,
       "retry": 190,
-      "cold": 550,
-      "lowValue": 612,
+      "cold": 551,
+      "lowValue": 611,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 550,
+        "cold-sample": 551,
         "food-evidence": 11,
-        "low-value": 612
+        "low-value": 611
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "https://overpass-api.de/api/interpreter returned 502",
-        "lastStartedAt": "2026-11-26T08:54:56.773Z",
-        "lastFinishedAt": "2026-11-26T08:54:57.564Z",
-        "lastLatencyMs": 791,
-        "cooldownUntil": 1795683327564,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-26T08:54:57.564Z",
-        "lastFinishedAt": "2026-11-26T08:55:12.564Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795683342564,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-26T08:55:12.564Z",
-        "lastFinishedAt": "2026-11-26T08:55:27.564Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795683357564,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 93,
-      "coldCount": 550,
-      "lowValueCount": 612,
+      "dueCount": 94,
+      "coldCount": 551,
+      "lowValueCount": 611,
       "laneCounts": {
-        "cold-sample": 550,
+        "cold-sample": 551,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 612
+        "low-value": 611
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 190,
         "needs-website": 824,
-        "cold": 550,
-        "candidate": 558
+        "cold": 551,
+        "candidate": 557
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +375,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
