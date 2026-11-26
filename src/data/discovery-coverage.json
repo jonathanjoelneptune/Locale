@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-26T05:01:42.304Z",
+  "generatedAt": "2026-11-26T08:55:29.377Z",
   "run": {
-    "startedAt": "2026-11-26T05:01:36.020Z",
+    "startedAt": "2026-11-26T08:54:56.699Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 95,
+      "due": 94,
       "retry": 190,
-      "cold": 548,
-      "lowValue": 614,
+      "cold": 549,
+      "lowValue": 613,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 548,
+        "cold-sample": 549,
         "food-evidence": 11,
-        "low-value": 614
+        "low-value": 613
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12728256024",
-        "name": "La Sinaloense",
+        "key": "san-diego|osm|node|9366452608",
+        "name": "Tappi Sushi & Grill",
         "category": "restaurant",
-        "website": "https://www.lasinaloenserestaurant.com/",
-        "attempts": 1,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on La Sinaloense (low-value)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-01-10T05:01:38.142Z",
-        "checkedAt": "2026-11-26T05:01:36.238Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|8851530501",
-        "name": "Sahara",
-        "category": "restaurant",
-        "website": "https://saharasd.com/",
+        "website": "https://www.tappisushi.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Sahara (cold-sample)",
+          "detail": "Checked 1 page on Tappi Sushi & Grill (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-24T05:01:42.261Z",
-        "checkedAt": "2026-11-26T05:01:36.301Z"
+        "nextCheckAt": "2027-02-24T08:55:28.716Z",
+        "checkedAt": "2026-11-26T08:55:27.759Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|14084519352",
+        "name": "Lark and Owl",
+        "category": "restaurant",
+        "website": "https://www.larkowlmenu.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Lark and Owl (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-10T08:55:29.320Z",
+        "checkedAt": "2026-11-26T08:55:27.757Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,11 +127,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "chula-vista": 1,
+      "la-jolla": 1,
       "rancho-san-diego": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
+      "north-central": 1,
       "east-county": 1
     },
     "coverageEquity": {
@@ -250,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-26T05:01:42.263Z",
-    "durationMs": 6243,
+    "finishedAt": "2026-11-26T08:55:29.322Z",
+    "durationMs": 32623,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 94,
+      "due": 93,
       "retry": 190,
-      "cold": 549,
-      "lowValue": 613,
+      "cold": 550,
+      "lowValue": 612,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 549,
+        "cold-sample": 550,
         "food-evidence": 11,
-        "low-value": 613
+        "low-value": 612
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-26T08:54:56.773Z",
+        "lastFinishedAt": "2026-11-26T08:54:57.564Z",
+        "lastLatencyMs": 791,
+        "cooldownUntil": 1795683327564,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T08:54:57.564Z",
+        "lastFinishedAt": "2026-11-26T08:55:12.564Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795683342564,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T08:55:12.564Z",
+        "lastFinishedAt": "2026-11-26T08:55:27.564Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795683357564,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +329,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 94,
-      "coldCount": 549,
-      "lowValueCount": 613,
+      "dueCount": 93,
+      "coldCount": 550,
+      "lowValueCount": 612,
       "laneCounts": {
-        "cold-sample": 549,
+        "cold-sample": 550,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 613
+        "low-value": 612
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 190,
         "needs-website": 824,
-        "cold": 549,
-        "candidate": 559
+        "cold": 550,
+        "candidate": 558
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +386,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
