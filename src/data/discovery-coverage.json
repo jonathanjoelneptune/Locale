@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-26T12:12:26.208Z",
+  "generatedAt": "2026-11-26T15:11:55.283Z",
   "run": {
-    "startedAt": "2026-11-26T12:12:24.923Z",
+    "startedAt": "2026-11-26T15:11:05.353Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 95,
+      "due": 94,
       "retry": 190,
-      "cold": 550,
-      "lowValue": 612,
+      "cold": 551,
+      "lowValue": 611,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 550,
+        "cold-sample": 551,
         "food-evidence": 11,
-        "low-value": 612
+        "low-value": 611
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "convoy",
+        "name": "Convoy District",
+        "group": "north-central",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|9181471361",
-        "name": "Baba Kabob Poway",
+        "key": "san-diego|osm|node|5869689455",
+        "name": "Bongiorno's New York Pizza",
         "category": "restaurant",
-        "website": "https://babakabobsd.com/",
+        "website": "https://www.bongiornospizzapoway.com/index.html",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Baba Kabob Poway (cold-sample)",
+          "detail": "Checked 1 page on Bongiorno's New York Pizza (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-24T12:12:26.061Z",
-        "checkedAt": "2026-11-26T12:12:25.172Z"
+        "nextCheckAt": "2027-02-24T15:11:53.156Z",
+        "checkedAt": "2026-11-26T15:11:50.637Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|273607070",
-        "name": "Leucadia Pizzeria & Italian Restaurant",
+        "key": "san-diego|osm|node|2685634296",
+        "name": "Liuyishou Hot Pot",
         "category": "restaurant",
-        "website": "https://leucadiapizza.com/utc",
+        "website": "https://www.liuyishouna.com/sandiego",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Leucadia Pizzeria & Italian Restaurant (low-value)",
+          "detail": "Checked 2 pages on Liuyishou Hot Pot (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-10T12:12:26.172Z",
-        "checkedAt": "2026-11-26T12:12:25.105Z"
+        "nextCheckAt": "2027-01-10T15:11:55.232Z",
+        "checkedAt": "2026-11-26T15:11:50.635Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -116,7 +127,7 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "university-city-utc": 1,
+      "convoy": 1,
       "poway": 1
     },
     "probeGroupCounts": {
@@ -250,65 +261,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-26T12:12:26.179Z",
-    "durationMs": 1256,
+    "finishedAt": "2026-11-26T15:11:55.234Z",
+    "durationMs": 49881,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 94,
+      "due": 93,
       "retry": 190,
-      "cold": 551,
-      "lowValue": 611,
+      "cold": 552,
+      "lowValue": 610,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 551,
+        "cold-sample": 552,
         "food-evidence": 11,
-        "low-value": 611
+        "low-value": 610
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T15:11:05.429Z",
+        "lastFinishedAt": "2026-11-26T15:11:20.433Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1795705910433,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T15:11:20.433Z",
+        "lastFinishedAt": "2026-11-26T15:11:35.434Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795705925434,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-26T15:11:35.434Z",
+        "lastFinishedAt": "2026-11-26T15:11:50.434Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795705940434,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +329,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 94,
-      "coldCount": 551,
-      "lowValueCount": 611,
+      "dueCount": 93,
+      "coldCount": 552,
+      "lowValueCount": 610,
       "laneCounts": {
-        "cold-sample": 551,
+        "cold-sample": 552,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 611
+        "low-value": 610
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 190,
         "needs-website": 824,
-        "cold": 551,
-        "candidate": 557
+        "cold": 552,
+        "candidate": 556
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +386,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
