@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-27T04:04:29.211Z",
+  "generatedAt": "2026-11-27T05:16:15.786Z",
   "run": {
-    "startedAt": "2026-11-27T04:03:43.146Z",
+    "startedAt": "2026-11-27T05:16:11.994Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
-      "retry": 190,
+      "due": 97,
+      "retry": 191,
       "cold": 554,
       "lowValue": 608,
       "qualified": 20,
@@ -24,18 +24,7 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|12125717403",
-        "name": "Matoi",
+        "key": "san-diego|osm|node|12125726225",
+        "name": "Mekong Cuisine Lao & Thai",
         "category": "restaurant",
-        "website": "https://www.matoisandiego.com/",
+        "website": "https://www.mekongsandiego.com/",
         "attempts": 1,
-        "status": "retry",
-        "probeLane": "low-value",
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Mekong Cuisine Lao & Thai (low-value)",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T04:04:28.678Z",
-        "checkedAt": "2026-11-27T04:04:28.511Z"
+        "nextCheckAt": "2027-01-11T05:16:13.353Z",
+        "checkedAt": "2026-11-27T05:16:12.269Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13125773980",
-        "name": "Filippi's Pizza Grotto Poway",
+        "key": "san-diego|osm|node|5282924756",
+        "name": "Hamburger Factory",
         "category": "restaurant",
-        "website": "https://realcheesepizza.com/poway",
+        "website": "https://www.hamburgerfactory.com/",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Filippi's Pizza Grotto Poway (cold-sample)",
+          "detail": "Checked 3 pages on Hamburger Factory (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-25T04:04:29.144Z",
-        "checkedAt": "2026-11-27T04:04:28.513Z"
+        "nextCheckAt": "2027-02-25T05:16:15.739Z",
+        "checkedAt": "2026-11-27T05:16:12.313Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -196,7 +185,7 @@
             "zeroEventAreas": 15,
             "passRate": 0,
             "averageGapScore": 86.3157894736842,
-            "averageEvents": 23.210526315789473,
+            "averageEvents": 22.36842105263158,
             "averageVenues": 2.0526315789473686,
             "deficitScore": 93.10526315789473
           },
@@ -261,65 +250,65 @@
     "probed": 2,
     "promoted": 0,
     "failed": 2,
-    "finishedAt": "2026-11-27T04:04:29.157Z",
-    "durationMs": 46011,
+    "finishedAt": "2026-11-27T05:16:15.741Z",
+    "durationMs": 3747,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
+      "due": 96,
       "retry": 191,
-      "cold": 554,
-      "lowValue": 608,
+      "cold": 555,
+      "lowValue": 607,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 554,
+        "cold-sample": 555,
         "food-evidence": 11,
-        "low-value": 608
+        "low-value": 607
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T04:03:43.311Z",
-        "lastFinishedAt": "2026-11-27T04:03:58.315Z",
-        "lastLatencyMs": 15004,
-        "cooldownUntil": 1795752268315,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T04:03:58.315Z",
-        "lastFinishedAt": "2026-11-27T04:04:13.316Z",
-        "lastLatencyMs": 15001,
-        "cooldownUntil": 1795752283316,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T04:04:13.316Z",
-        "lastFinishedAt": "2026-11-27T04:04:28.316Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795752298316,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 97,
-      "coldCount": 554,
-      "lowValueCount": 608,
+      "dueCount": 96,
+      "coldCount": 555,
+      "lowValueCount": 607,
       "laneCounts": {
-        "cold-sample": 554,
+        "cold-sample": 555,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 608
+        "low-value": 607
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 191,
         "needs-website": 824,
-        "cold": 554,
-        "candidate": 553
+        "cold": 555,
+        "candidate": 552
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +375,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
