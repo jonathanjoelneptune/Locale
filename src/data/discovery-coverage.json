@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-27T08:08:08.069Z",
+  "generatedAt": "2026-11-27T13:43:21.763Z",
   "run": {
-    "startedAt": "2026-11-27T08:08:05.771Z",
+    "startedAt": "2026-11-27T13:43:01.547Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
-      "retry": 191,
+      "due": 101,
+      "retry": 192,
       "cold": 555,
       "lowValue": 607,
       "qualified": 20,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: HTTP 502 | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,45 +65,64 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|13971623081",
-        "name": "Mendocino Farms",
+        "key": "san-diego|osm|node|2651673866",
+        "name": "Ace New York Giant Pizza Bar & Lounge",
         "category": "restaurant",
-        "website": "https://www.mendocinofarms.com/location-directory/san-diego/8795-villa-la-jolla-dr-la-jolla-ca-92037",
-        "attempts": 1,
+        "website": "https://acenypizza.com/",
+        "attempts": 12,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "food-evidence",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
-          "detail": "HTTP 403",
-          "statusCode": 403
+          "detail": "fetch failed",
+          "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-30T08:08:06.331Z",
-        "checkedAt": "2026-11-27T08:08:06.052Z"
+        "nextCheckAt": "2026-12-04T13:43:18.521Z",
+        "checkedAt": "2026-11-27T13:43:18.457Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14081094380",
-        "name": "Harney",
+        "key": "san-diego|osm|node|2087943954",
+        "name": "Hawaiian Fresh Seafood",
         "category": "restaurant",
-        "website": "https://harneypoway.com/",
+        "website": "https://www.hawaiianfreshseafood.com/poway",
         "attempts": 2,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Harney (cold-sample)",
+          "detail": "Checked 1 page on Hawaiian Fresh Seafood (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-25T08:08:08.017Z",
-        "checkedAt": "2026-11-27T08:08:06.097Z"
+        "nextCheckAt": "2027-02-25T13:43:20.360Z",
+        "checkedAt": "2026-11-27T13:43:18.521Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|11958760995",
+        "name": "Menya Ultra",
+        "category": "restaurant",
+        "website": "https://menya-ultra.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Menya Ultra (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-11T13:43:21.728Z",
+        "checkedAt": "2026-11-27T13:43:18.456Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -105,6 +135,7 @@
     "coldMigrated": 0,
     "probeLaneCounts": {
       "low-value": 1,
+      "food-evidence": 1,
       "cold-sample": 1
     },
     "probeLaneTargets": {
@@ -117,10 +148,12 @@
     },
     "probeAreaCounts": {
       "university-city-utc": 1,
+      "bostonia": 1,
       "poway": 1
     },
     "probeGroupCounts": {
       "north-central": 1,
+      "east-county": 1,
       "north-inland": 1
     },
     "coverageEquity": {
@@ -247,68 +280,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 3,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-27T08:08:08.019Z",
-    "durationMs": 2248,
+    "failed": 3,
+    "finishedAt": "2026-11-27T13:43:21.730Z",
+    "durationMs": 20183,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 97,
+      "due": 99,
       "retry": 192,
-      "cold": 555,
-      "lowValue": 607,
+      "cold": 556,
+      "lowValue": 606,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 555,
+        "cold-sample": 556,
         "food-evidence": 11,
-        "low-value": 607
+        "low-value": 606
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://overpass-api.de/api/interpreter returned 502",
+        "lastStartedAt": "2026-11-27T13:43:01.601Z",
+        "lastFinishedAt": "2026-11-27T13:43:02.210Z",
+        "lastLatencyMs": 609,
+        "cooldownUntil": 1795787012210,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-27T13:43:02.210Z",
+        "lastFinishedAt": "2026-11-27T13:43:17.210Z",
+        "lastLatencyMs": 15000,
+        "cooldownUntil": 1795787027210,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "https://maps.mail.ru/osm/tools/overpass/api/interpreter returned 504",
+        "lastStartedAt": "2026-11-27T13:43:17.210Z",
+        "lastFinishedAt": "2026-11-27T13:43:18.301Z",
+        "lastLatencyMs": 1091,
+        "cooldownUntil": 1795787028301,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +351,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 97,
-      "coldCount": 555,
-      "lowValueCount": 607,
+      "dueCount": 99,
+      "coldCount": 556,
+      "lowValueCount": 606,
       "laneCounts": {
-        "cold-sample": 555,
+        "cold-sample": 556,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 607
+        "low-value": 606
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 192,
         "needs-website": 824,
-        "cold": 555,
-        "candidate": 551
+        "cold": 556,
+        "candidate": 550
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +408,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
