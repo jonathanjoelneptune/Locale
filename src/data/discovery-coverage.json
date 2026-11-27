@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-27T21:40:34.254Z",
+  "generatedAt": "2026-11-27T22:36:55.132Z",
   "run": {
-    "startedAt": "2026-11-27T21:39:29.707Z",
+    "startedAt": "2026-11-27T22:36:53.683Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 107,
+      "due": 100,
       "retry": 192,
-      "cold": 558,
-      "lowValue": 604,
+      "cold": 559,
+      "lowValue": 603,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 558,
+        "cold-sample": 559,
         "food-evidence": 11,
-        "low-value": 604
+        "low-value": 603
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,159 +54,45 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|11192125837",
-        "name": "Mujeres Brew",
-        "category": "brewery",
-        "website": "https://mujeres-brew-house.business.site/",
-        "attempts": 12,
-        "status": "retry",
-        "probeLane": "event-likely",
+        "key": "san-diego|osm|node|11116601624",
+        "name": "Ju Feng Yuan Dumpling Cafe",
+        "category": "restaurant",
+        "website": "https://www.jfydumplingcafe.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Ju Feng Yuan Dumpling Cafe (cold-sample)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:16.117Z",
-        "checkedAt": "2026-11-27T21:40:15.127Z"
+        "nextCheckAt": "2027-02-25T22:36:54.802Z",
+        "checkedAt": "2026-11-27T22:36:53.876Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|1363888063",
-        "name": "Mom Kitchen - Hong Kong Cafe",
+        "key": "san-diego|osm|node|12067034133",
+        "name": "Musashiya",
         "category": "restaurant",
-        "website": "https://usmomkitchen.com/",
+        "website": "https://www.musashiyasd.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Mom Kitchen - Hong Kong Cafe (low-value)",
+          "detail": "Checked 1 page on Musashiya (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-11T21:40:17.074Z",
-        "checkedAt": "2026-11-27T21:40:16.117Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|1204976227",
-        "name": "Brigantine Seafood & Oyster Bar",
-        "category": "restaurant",
-        "website": "https://www.brigantine.com/",
-        "attempts": 3,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 2 pages on Brigantine Seafood & Oyster Bar (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-27T21:40:18.640Z",
-        "checkedAt": "2026-11-27T21:40:17.074Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|596649040",
-        "name": "Oggi's Pizza and Brewing Co.",
-        "category": "restaurant",
-        "website": "http://cmr.oggis.com/",
-        "attempts": 12,
-        "status": "retry",
-        "probeLane": "food-evidence",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:18.761Z",
-        "checkedAt": "2026-11-27T21:40:18.640Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11170882537",
-        "name": "Women's Museum of California Education Center",
-        "category": "museum",
-        "website": "https://www.womensmuseumca.org/educationcenter",
-        "attempts": 12,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:19.140Z",
-        "checkedAt": "2026-11-27T21:40:18.761Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|9908007843",
-        "name": "Blue Pearl Art",
-        "category": "gallery",
-        "website": "https://www.bluepearlartstudio.com/",
-        "attempts": 12,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:19.196Z",
-        "checkedAt": "2026-11-27T21:40:19.140Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|node|11168607137",
-        "name": "The Dog Society Cafe, Bar, and Groomers",
-        "category": "bar",
-        "website": "https://dogsocietysd.com/",
-        "attempts": 12,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "website-fetch-failed",
-          "detail": "fetch failed",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:22.974Z",
-        "checkedAt": "2026-11-27T21:40:15.128Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|381012089",
-        "name": "Copley-Price Family YMCA",
-        "category": "sports-centre",
-        "website": "https://www.ymcasd.org/locations/copley-price-family-ymca",
-        "attempts": 10,
-        "status": "retry",
-        "probeLane": "event-likely",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "candidate-scope-mismatch",
-          "detail": "Found event data, but it did not belong to Copley-Price Family YMCA",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2026-12-04T21:40:34.210Z",
-        "checkedAt": "2026-11-27T21:40:19.196Z"
+        "nextCheckAt": "2027-01-11T22:36:55.104Z",
+        "checkedAt": "2026-11-27T22:36:53.847Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -229,10 +104,8 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
-      "event-likely": 5,
       "low-value": 1,
-      "cold-sample": 1,
-      "food-evidence": 1
+      "cold-sample": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -243,20 +116,11 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "barrio-logan": 1,
-      "rolando": 1,
-      "kearny-mesa": 1,
-      "solana-beach": 1,
-      "rancho-penasquitos": 1,
-      "southeastern-san-diego": 1,
-      "north-park": 1,
-      "talmadge": 1
+      "convoy": 1,
+      "poway": 1
     },
     "probeGroupCounts": {
-      "south-bay": 2,
-      "uptown-midcity": 3,
       "north-central": 1,
-      "north-county-coast": 1,
       "north-inland": 1
     },
     "coverageEquity": {
@@ -383,68 +247,68 @@
         "groups": {}
       }
     },
-    "probed": 8,
+    "probed": 2,
     "promoted": 0,
-    "failed": 8,
-    "finishedAt": "2026-11-27T21:40:34.214Z",
-    "durationMs": 64507,
+    "failed": 2,
+    "finishedAt": "2026-11-27T22:36:55.106Z",
+    "durationMs": 1423,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 100,
+      "due": 99,
       "retry": 192,
-      "cold": 559,
-      "lowValue": 603,
+      "cold": 560,
+      "lowValue": 602,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 559,
+        "cold-sample": 560,
         "food-evidence": 11,
-        "low-value": 603
+        "low-value": 602
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T21:39:29.966Z",
-        "lastFinishedAt": "2026-11-27T21:39:44.969Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795815614969,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T21:39:44.969Z",
-        "lastFinishedAt": "2026-11-27T21:39:59.969Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795815629969,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-27T21:39:59.969Z",
-        "lastFinishedAt": "2026-11-27T21:40:14.971Z",
-        "lastLatencyMs": 15002,
-        "cooldownUntil": 1795815644971,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -454,23 +318,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 100,
-      "coldCount": 559,
-      "lowValueCount": 603,
+      "dueCount": 99,
+      "coldCount": 560,
+      "lowValueCount": 602,
       "laneCounts": {
-        "cold-sample": 559,
+        "cold-sample": 560,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 603
+        "low-value": 602
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 192,
         "needs-website": 824,
-        "cold": 559,
-        "candidate": 547
+        "cold": 560,
+        "candidate": 546
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -511,7 +375,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
