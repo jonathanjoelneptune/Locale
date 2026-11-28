@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-28T01:29:15.245Z",
+  "generatedAt": "2026-11-28T04:13:05.508Z",
   "run": {
-    "startedAt": "2026-11-28T01:28:54.839Z",
+    "startedAt": "2026-11-28T04:12:13.199Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 99,
-      "retry": 192,
+      "due": 100,
+      "retry": 193,
       "cold": 560,
       "lowValue": 602,
       "qualified": 20,
@@ -24,7 +24,18 @@
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [],
+    "focusAreas": [
+      {
+        "regionId": "san-diego",
+        "id": "el-cajon",
+        "name": "El Cajon",
+        "group": "east-county",
+        "gapScore": 100,
+        "equityPriority": 206,
+        "status": "failed",
+        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
+      }
+    ],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -54,36 +65,17 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": false,
+    "overpassRun": true,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|way|546280446",
-        "name": "Pho Ca Dao",
-        "category": "restaurant",
-        "website": "http://thephocadaogrill.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
-        "revalidationSourceId": null,
-        "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Pho Ca Dao (cold-sample)",
-          "statusCode": null
-        },
-        "sourceId": null,
-        "nextCheckAt": "2027-02-26T01:28:55.783Z",
-        "checkedAt": "2026-11-28T01:28:55.160Z"
-      },
-      {
-        "regionId": "san-diego",
-        "key": "san-diego|osm|way|31844349",
-        "name": "Mystic Grill",
-        "category": "restaurant",
-        "website": "https://www.mygiovannis.com/",
-        "attempts": 1,
+        "key": "san-diego|osm|node|9215079082",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopgaslamp.com/",
+        "attempts": 12,
         "status": "retry",
-        "probeLane": "low-value",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
           "reason": "website-fetch-failed",
@@ -91,8 +83,65 @@
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2026-11-29T01:29:15.193Z",
-        "checkedAt": "2026-11-28T01:28:55.116Z"
+        "nextCheckAt": "2026-12-05T04:12:59.121Z",
+        "checkedAt": "2026-11-28T04:12:58.526Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|1257032373",
+        "name": "Nishiki Ramen",
+        "category": "restaurant",
+        "website": "https://nishikiramen.com/",
+        "attempts": 1,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 1 page on Nishiki Ramen (low-value)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-01-12T04:12:59.463Z",
+        "checkedAt": "2026-11-28T04:12:58.528Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|way|28824905",
+        "name": "Reuben H. Fleet Science Center",
+        "category": "museum",
+        "website": "https://www.rhfleet.org/",
+        "attempts": 12,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-05T04:12:59.843Z",
+        "checkedAt": "2026-11-28T04:12:59.463Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9179215678",
+        "name": "Poway Social House",
+        "category": "restaurant",
+        "website": "https://powaysocialhouse.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 2 pages on Poway Social House (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-26T04:13:05.447Z",
+        "checkedAt": "2026-11-28T04:12:59.121Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -104,6 +153,7 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 2,
       "low-value": 1,
       "cold-sample": 1
     },
@@ -116,10 +166,13 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "kearny-mesa": 1,
-      "poway": 1
+      "cortez-hill": 1,
+      "convoy": 1,
+      "poway": 1,
+      "balboa-park": 1
     },
     "probeGroupCounts": {
+      "central-core": 2,
       "north-central": 1,
       "north-inland": 1
     },
@@ -247,68 +300,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 4,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-28T01:29:15.195Z",
-    "durationMs": 20356,
+    "failed": 4,
+    "finishedAt": "2026-11-28T04:13:05.464Z",
+    "durationMs": 52265,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 97,
       "retry": 193,
-      "cold": 560,
-      "lowValue": 602,
+      "cold": 561,
+      "lowValue": 601,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 560,
+        "cold-sample": 561,
         "food-evidence": 11,
-        "low-value": 602
+        "low-value": 601
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-28T04:12:13.283Z",
+        "lastFinishedAt": "2026-11-28T04:12:28.287Z",
+        "lastLatencyMs": 15004,
+        "cooldownUntil": 1795839178287,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-28T04:12:28.287Z",
+        "lastFinishedAt": "2026-11-28T04:12:43.288Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795839193288,
+        "consecutiveFailures": 1
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 0,
+        "attempts": 1,
         "successes": 0,
-        "failures": 0,
-        "lastStatus": null,
-        "lastError": null,
-        "lastStartedAt": null,
-        "lastFinishedAt": null,
-        "lastLatencyMs": null,
-        "cooldownUntil": 0,
-        "consecutiveFailures": 0
+        "failures": 1,
+        "lastStatus": "failed",
+        "lastError": "The operation was aborted due to timeout",
+        "lastStartedAt": "2026-11-28T04:12:43.288Z",
+        "lastFinishedAt": "2026-11-28T04:12:58.289Z",
+        "lastLatencyMs": 15001,
+        "cooldownUntil": 1795839208289,
+        "consecutiveFailures": 1
       }
     ]
   },
@@ -318,23 +371,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 98,
-      "coldCount": 560,
-      "lowValueCount": 602,
+      "dueCount": 97,
+      "coldCount": 561,
+      "lowValueCount": 601,
       "laneCounts": {
-        "cold-sample": 560,
+        "cold-sample": 561,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 602
+        "low-value": 601
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 193,
         "needs-website": 824,
-        "cold": 560,
-        "candidate": 545
+        "cold": 561,
+        "candidate": 544
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -375,7 +428,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 0
+        "sweptThisRun": 1
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
