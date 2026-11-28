@@ -1,41 +1,30 @@
 {
-  "generatedAt": "2026-11-28T10:22:46.725Z",
+  "generatedAt": "2026-11-28T13:29:46.388Z",
   "run": {
-    "startedAt": "2026-11-28T10:21:58.619Z",
+    "startedAt": "2026-11-28T13:29:43.280Z",
     "queueBefore": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 99,
+      "due": 102,
       "retry": 193,
-      "cold": 562,
-      "lowValue": 600,
+      "cold": 563,
+      "lowValue": 599,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 562,
+        "cold-sample": 563,
         "food-evidence": 11,
-        "low-value": 600
+        "low-value": 599
       }
     },
     "seededFromRegistry": 0,
     "seededFromRegionalSweep": 0,
     "seededFromAreaSweep": 0,
     "sweptRegionId": null,
-    "focusAreas": [
-      {
-        "regionId": "san-diego",
-        "id": "convoy",
-        "name": "Convoy District",
-        "group": "north-central",
-        "gapScore": 100,
-        "equityPriority": 206,
-        "status": "failed",
-        "error": "All Overpass endpoints failed: https://overpass-api.de/api/interpreter: TimeoutError The operation was aborted due to timeout | https://overpass.private.coffee/api/interpreter: TimeoutError The operation was aborted due to timeout | https://maps.mail.ru/osm/tools/overpass/api/interpreter: TimeoutError The operation was aborted due to timeout"
-      }
-    ],
+    "focusAreas": [],
     "discoveryMode": "bootstrap",
     "discoveryBudget": {
       "probeLimit": 12,
@@ -65,45 +54,121 @@
         "mediumGapCount": 0
       }
     },
-    "overpassRun": true,
+    "overpassRun": false,
     "probeResults": [
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|14021159374",
-        "name": "Tahkrai Thai",
-        "category": "restaurant",
-        "website": "https://takhraithai.com/",
-        "attempts": 2,
-        "status": "cold",
-        "probeLane": "cold-sample",
+        "key": "san-diego|osm|node|365317542",
+        "name": "Numbers",
+        "category": "nightclub",
+        "website": "https://www.numberssd.com/",
+        "attempts": 12,
+        "status": "retry",
+        "probeLane": "event-likely",
         "revalidationSourceId": null,
         "result": {
-          "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on Tahkrai Thai (cold-sample)",
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-02-26T10:22:44.981Z",
-        "checkedAt": "2026-11-28T10:22:43.834Z"
+        "nextCheckAt": "2026-12-05T13:29:44.214Z",
+        "checkedAt": "2026-11-28T13:29:43.800Z"
       },
       {
         "regionId": "san-diego",
-        "key": "san-diego|osm|node|8923600488",
-        "name": "NY Pizzeria",
+        "key": "san-diego|osm|node|9506307219",
+        "name": "Fairweather Rooftop Bar",
+        "category": "bar",
+        "website": "https://www.fairweatherbar.com/",
+        "attempts": 5,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "HTTP 403",
+          "statusCode": 403
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-28T13:29:44.420Z",
+        "checkedAt": "2026-11-28T13:29:44.214Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|5430484523",
+        "name": "Coin-Op Game Room",
+        "category": "bar",
+        "website": "https://coinopsd.com/",
+        "attempts": 12,
+        "status": "retry",
+        "probeLane": "event-likely",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-05T13:29:44.470Z",
+        "checkedAt": "2026-11-28T13:29:43.683Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|2769548446",
+        "name": "Oi Shiba",
         "category": "restaurant",
-        "website": "https://www.nypizzeriacompany.com/",
+        "website": "https://www.oishiba.com/",
         "attempts": 1,
         "status": "cold",
         "probeLane": "cold-sample",
         "revalidationSourceId": null,
         "result": {
           "reason": "no-supported-calendar",
-          "detail": "Checked 1 page on NY Pizzeria (low-value)",
+          "detail": "Checked 1 page on Oi Shiba (low-value)",
           "statusCode": null
         },
         "sourceId": null,
-        "nextCheckAt": "2027-01-12T10:22:46.676Z",
-        "checkedAt": "2026-11-28T10:22:43.832Z"
+        "nextCheckAt": "2027-01-12T13:29:45.208Z",
+        "checkedAt": "2026-11-28T13:29:44.420Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|1448557328",
+        "name": "Gossip Grill",
+        "category": "observed-venue",
+        "website": "http://www.thegossipgrill.com/",
+        "attempts": 12,
+        "status": "retry",
+        "probeLane": "exploratory",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "website-fetch-failed",
+          "detail": "fetch failed",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2026-12-05T13:29:45.305Z",
+        "checkedAt": "2026-11-28T13:29:45.208Z"
+      },
+      {
+        "regionId": "san-diego",
+        "key": "san-diego|osm|node|9908210874",
+        "name": "The Hop Stop",
+        "category": "restaurant",
+        "website": "https://thehopstopsd.com/",
+        "attempts": 2,
+        "status": "cold",
+        "probeLane": "cold-sample",
+        "revalidationSourceId": null,
+        "result": {
+          "reason": "no-supported-calendar",
+          "detail": "Checked 3 pages on The Hop Stop (cold-sample)",
+          "statusCode": null
+        },
+        "sourceId": null,
+        "nextCheckAt": "2027-02-26T13:29:46.347Z",
+        "checkedAt": "2026-11-28T13:29:44.470Z"
       }
     ],
     "sourceDuplicatesAliased": 0,
@@ -115,8 +180,10 @@
     "sourceReplaced": 0,
     "coldMigrated": 0,
     "probeLaneCounts": {
+      "event-likely": 3,
       "low-value": 1,
-      "cold-sample": 1
+      "cold-sample": 1,
+      "exploratory": 1
     },
     "probeLaneTargets": {
       "event-likely": 27,
@@ -127,11 +194,17 @@
       "cold-sample": 1
     },
     "probeAreaCounts": {
-      "chula-vista": 1,
+      "mission-valley": 1,
+      "hillcrest": 2,
+      "gaslamp": 1,
+      "convoy": 1,
       "poway": 1
     },
     "probeGroupCounts": {
-      "south-bay": 1,
+      "central-west": 1,
+      "uptown-midcity": 2,
+      "central-core": 1,
+      "north-central": 1,
       "north-inland": 1
     },
     "coverageEquity": {
@@ -258,68 +331,68 @@
         "groups": {}
       }
     },
-    "probed": 2,
+    "probed": 6,
     "promoted": 0,
-    "failed": 2,
-    "finishedAt": "2026-11-28T10:22:46.678Z",
-    "durationMs": 48059,
+    "failed": 6,
+    "finishedAt": "2026-11-28T13:29:46.350Z",
+    "durationMs": 3070,
     "queueAfter": {
       "total": 2251,
       "withWebsite": 1318,
-      "due": 98,
+      "due": 97,
       "retry": 193,
-      "cold": 563,
-      "lowValue": 599,
+      "cold": 564,
+      "lowValue": 598,
       "qualified": 20,
       "needsWebsite": 933,
       "lanes": {
         "exploratory": 719,
         "event-evidence": 243,
         "event-likely": 116,
-        "cold-sample": 563,
+        "cold-sample": 564,
         "food-evidence": 11,
-        "low-value": 599
+        "low-value": 598
       }
     },
     "overpassEndpoints": [
       {
         "endpoint": "https://overpass-api.de/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-28T10:21:58.676Z",
-        "lastFinishedAt": "2026-11-28T10:22:13.679Z",
-        "lastLatencyMs": 15003,
-        "cooldownUntil": 1795861363679,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://overpass.private.coffee/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-28T10:22:13.679Z",
-        "lastFinishedAt": "2026-11-28T10:22:28.679Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795861378679,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       },
       {
         "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-        "attempts": 1,
+        "attempts": 0,
         "successes": 0,
-        "failures": 1,
-        "lastStatus": "failed",
-        "lastError": "The operation was aborted due to timeout",
-        "lastStartedAt": "2026-11-28T10:22:28.679Z",
-        "lastFinishedAt": "2026-11-28T10:22:43.679Z",
-        "lastLatencyMs": 15000,
-        "cooldownUntil": 1795861393679,
-        "consecutiveFailures": 1
+        "failures": 0,
+        "lastStatus": null,
+        "lastError": null,
+        "lastStartedAt": null,
+        "lastFinishedAt": null,
+        "lastLatencyMs": null,
+        "cooldownUntil": 0,
+        "consecutiveFailures": 0
       }
     ]
   },
@@ -329,23 +402,23 @@
       "withWebsiteCount": 1318,
       "qualifiedCount": 20,
       "needsWebsiteCount": 824,
-      "dueCount": 98,
-      "coldCount": 563,
-      "lowValueCount": 599,
+      "dueCount": 97,
+      "coldCount": 564,
+      "lowValueCount": 598,
       "laneCounts": {
-        "cold-sample": 563,
+        "cold-sample": 564,
         "event-evidence": 207,
         "event-likely": 116,
         "exploratory": 646,
         "food-evidence": 11,
-        "low-value": 599
+        "low-value": 598
       },
       "statusCounts": {
         "qualified": 20,
         "retry": 193,
         "needs-website": 824,
-        "cold": 563,
-        "candidate": 542
+        "cold": 564,
+        "candidate": 541
       },
       "categoryCounts": {
         "nightclub": 8,
@@ -386,7 +459,7 @@
         "tracked": 13,
         "completed": 7,
         "failed": 6,
-        "sweptThisRun": 1
+        "sweptThisRun": 0
       },
       "adaptiveDiscovery": {
         "mode": "bootstrap",
